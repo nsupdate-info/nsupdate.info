@@ -17,8 +17,12 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        'django',
+        'django<1.6',
         'dnspython',
+        'south',
+        'django-bootstrap-form',
+        'django-registration',
+        'django-debug-toolbar',  #for dev
     ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
