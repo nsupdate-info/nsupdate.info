@@ -7,7 +7,7 @@ from main.models import *
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ['fqdn', 'comment', ]
+        fields = ['fqdn', 'comment', 'update_secret']
 
     def __init__(self, user, *args, **kwargs):
         super(HostForm, self).__init__(*args, **kwargs)
@@ -17,6 +17,7 @@ class HostForm(forms.ModelForm):
         self.clean()
         host = Host(fqdn=self.cleaned_data['fqdn'],
                     comment=self.cleaned_data['comment'],
+                    update_secret=self.cleaned_data['update_secret'],
                     created_by=user)
         host.save()
         # TODO: Update NS with self.cleaned_data['ipv4addr']

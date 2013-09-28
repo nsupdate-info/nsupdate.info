@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from main.forms import *
 
 class HomeView(TemplateView):
@@ -14,6 +15,7 @@ class HomeView(TemplateView):
         context['nav_home'] = True
         return context
 
+@login_required
 def OverviewView(request):
     context = {}
     context['nav_overview'] = True
