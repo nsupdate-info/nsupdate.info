@@ -30,21 +30,3 @@ class OverviewView(TemplateView):
                 host.save()
             context['HostForm'] = form
         return context
-
-
-def signup(request):
-    if not request.user.is_authenticated():
-        context = {}
-        context['form'] = SignupForm()
-        if request.method == "POST":
-            cf = SignupForm(request.POST)
-            if cf.is_valid():
-                u = cf.create_user()
-                u.save()
-                context["success"] = _("User created! Check your Inbox for an Activtion Email")
-                context['form'] = LoginForm(request.POST)
-                return render(request, "login.html", context)
-            context['form'] =  cf
-        return render(request, "signup.html", context)
-    else:
-        return redirect('/')
