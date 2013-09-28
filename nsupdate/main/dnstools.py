@@ -13,20 +13,6 @@ import dns.tsig
 import dns.tsigkeyring
 
 
-SERVER = settings.SERVER
-BASEDOMAIN = settings.BASEDOMAIN
-
-NONEXISTING_HOST = settings.NONEXISTING_HOST
-WWW_HOST = settings.WWW_HOST
-WWW_IPV4_HOST = settings.WWW_IPV4_HOST
-WWW_IPV6_HOST = settings.WWW_IPV6_HOST
-WWW_IPV4_IP = settings.WWW_IPV4_IP
-WWW_IPV6_IP = settings.WWW_IPV6_IP
-
-UPDATE_ALGO = settings.UPDATE_ALGO
-UPDATE_KEY = settings.UPDATE_KEY
-
-
 class SameIpError(ValueError):
     """
     raised if an IP address is already present in DNS and and update was
@@ -66,8 +52,8 @@ def query_ns(qname, rdtype):
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
-    resolver.nameservers = [SERVER, ]
-    resolver.search = [dns.name.from_text(BASEDOMAIN), ]
+    resolver.nameservers = [settings.SERVER, ]
+    resolver.search = [dns.name.from_text(settings.BASEDOMAIN), ]
     answer = resolver.query(qname, rdtype)
     return str(list(answer)[0])
 
@@ -107,8 +93,8 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     assert action in ['add', 'del', 'upd', ]
     origin, name = parse_name(fqdn, origin)
     upd = dns.update.Update(origin,
-                            keyring=dns.tsigkeyring.from_text({BASEDOMAIN+'.': UPDATE_KEY}),
-                            keyalgorithm=UPDATE_ALGO)
+                            keyring=dns.tsigkeyring.from_text({settings.BASEDOMAIN+'.': settings.UPDATE_KEY}),
+                            keyalgorithm=settings.UPDATE_ALGO)
     if action == 'add':
         assert ipaddr is not None
         upd.add(name, ttl, rdtype, ipaddr)
@@ -117,5 +103,5 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     elif action == 'upd':
         assert ipaddr is not None
         upd.replace(name, ttl, rdtype, ipaddr)
-    response = dns.query.tcp(upd, SERVER)
+    response = dns.query.tcp(upd, settings.SERVER)
     return response

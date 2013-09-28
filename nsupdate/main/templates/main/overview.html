@@ -5,33 +5,38 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <h1>Host List</h1>
+            <h3>Host List</h3>
             <table class="table">
-            <tr><th>domain</th><th>last update</th><th>comment</th></tr>
+            <tr><th>domain</th><th>last update</th><th>comment</th><th>action</th></tr>
             {% for host in Hosts %}
-                <tr><td><b>{{ host.fqdn }}</b>.nsupdate.info</td> <td>{{ host.last_update|date }}</td> <td>{{ host.comment }}</td></tr>
+                <tr>
+                    <td><b>{{ host.fqdn }}</b></td>
+                    <td>{{ host.last_update|date }}</td>
+                    <td>{{ host.comment }}</td>
+                    <td><a href="{% url 'host-view' host.pk %}"><span class="glyphicon glyphicon-edit"></span></a>
+                </tr>
             {% empty %}
                 <tr>No hosts yet.</tr>
             {% endfor %}
             </table>
-
-            <div style="display: none">
-                <img src="//{{ WWW_IPV4_HOST }}/updateip" />
-                <img src="//{{ WWW_IPV6_HOST }}/updateip" />
-            </div>
         </div>
-        <h1>New host</h1>
+        <h3>New host</h3>
          <div class="col-lg-4">
             <form method="post" action="">
                 {% csrf_token %}
                 {{ HostForm|bootstrap }}
-                <label>IPv4</label>
-                <input type='text' name='ipv4addr' class="form-control ipv4adr" placeholder="can't find IP" value="{{session.ipv4}}"> </br >
-                <label>IPv6</label>
-                <input type='text' name='ipv6addr' class="form-control ipv6adr" placeholder="can't find IP" value="{{session.ipv6}}"> </br>
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
-    
+    </div>
+    <div class="row">
+        <h3>Information</h3>
+        <b>your IPv4:</b> <span class="ipv4adr">{{session.ipv4}}</span> </br>
+        <b>your IPv6:</b> <span class="ipv6adr">{{session.ipv6}}</span>
+    </div>
+    <div style="display: none">
+        <img src="//{{ WWW_IPV4_HOST }}/updateip" />
+        <img src="//{{ WWW_IPV6_HOST }}/updateip" />
+    </div>
 
 {% endblock %}

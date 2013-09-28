@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <div class="row">
+        <h3>Edit Host</h3>
+         <div class="col-lg-4">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ HostForm|bootstrap }}
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    
+
+{% endblock %}
