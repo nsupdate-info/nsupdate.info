@@ -2,7 +2,6 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.conf import settings
-import json
 
 
 class HomeView(TemplateView):
@@ -26,7 +25,5 @@ class OverviewView(TemplateView):
 
 
 def MyIpView(request):
-    return HttpResponse(
-        json.dumps({'ip': request.META['REMOTE_ADDR']}),
-        content_type="application/json")
+    return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
 
