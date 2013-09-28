@@ -14,6 +14,15 @@ class HomeView(TemplateView):
         return context
 
 
+class PasswordChangeView(TemplateView):
+    template_name = "registration/password_change.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PasswordChangeView, self).get_context_data(*args, **kwargs)
+        context['nav_change_password'] = True
+        return context
+
+
 class OverviewView(TemplateView):
     template_name = "main/overview.html"
 
@@ -29,3 +38,13 @@ def MyIpView(request):
     return HttpResponse(
         json.dumps({'ip': request.META['REMOTE_ADDR']}),
         content_type="application/json")
+
+
+class UserProfileView(TemplateView):
+    template_name = "main/user_profile.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserProfileView, self).get_context_data(*args, **kwargs)
+        context['nav_user_profile'] = True
+        return context
+

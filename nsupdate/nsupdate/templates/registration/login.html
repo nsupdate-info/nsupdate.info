@@ -1,5 +1,5 @@
 {% extends "registration/registration_base.html" %}
-{% load i18n %}
+{% load i18n %}{% load bootstrap %}
 {% url 'auth_password_reset' as auth_pwd_reset_url %}
 {% url 'registration_register' as register_url%}
 {% block title %}{% trans "Login" %}{% endblock %}
@@ -8,23 +8,18 @@
 {% if form.errors %}
 <p>{% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}</p>
 {% endif %}
+<div class="row">
+  <div class="col-lg-4">
+    <form method="post" action="{% url 'auth_login' %}">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+    <p>{% blocktrans %}<a href="{{ auth_pwd_reset_url }}">Forgot</a> your password?
+        <a href="{{ register_url }}">Need an account</a>?{% endblocktrans %}</p>
 
-<form method="post" action="{% url 'auth_login' %}">{% csrf_token %}
-<table>
-<tr>
-    <td>{% trans form.username.label_tag %}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{% trans form.password.label_tag %}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-<p>{% blocktrans %}<a href="{{ auth_pwd_reset_url }}">Forgot</a> your password?
-    <a href="{{ register_url }}">Need an account</a>?{% endblocktrans %}</p>
-
-<input type="submit" value="{% trans "login" %}" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+    <button type="submit" class="btn btn-primary">{% trans "login" %}</button>
+    <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+</div>
 
 {% endblock %}
