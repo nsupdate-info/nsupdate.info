@@ -1,0 +1,2 @@
+-r all.txt
+django-debug-toolbar
