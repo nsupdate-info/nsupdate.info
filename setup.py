@@ -1,6 +1,6 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-with open('README.md') as f:
+with open('README.rst') as f:
     readme_content = f.read()
 
 setup(
@@ -12,7 +12,16 @@ setup(
     author_email='info@nsupdate.info',
     description='A dynamic DNS update service',
     long_description=readme_content,
-    packages=['nsupdate'],
+    keywords="dyndns ddns dynamic dns django",
+    packages=find_packages(exclude=['_tests', ]),
+    package_data={
+        'nsupdate.nsupdate.static': ['*', ],
+        'nsupdate.nsupdate.templates': ['*', ],
+        'nsupdate.main.static': ['*', ],
+        'nsupdate.main.templates': ['*', ],
+        'nsupdate.accounts.static': ['*', ],
+        'nsupdate.accounts.templates': ['*', ],
+    },
     include_package_data=True,
     zip_safe=False,
     platforms='any',
