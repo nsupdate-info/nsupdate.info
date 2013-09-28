@@ -22,7 +22,12 @@ setup(
         'south',
         'django-bootstrap-form',
         'django-registration',
-        'django-debug-toolbar',  #for dev
+        # packages only needed for development:
+        'django-debug-toolbar',
+        'pytest',
+        'pytest-django',
+        'pytest-pep8',
+        'sphinx',
     ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',

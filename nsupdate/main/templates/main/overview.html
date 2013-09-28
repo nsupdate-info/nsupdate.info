@@ -4,8 +4,8 @@
 
     <script>
 
-        getIp = function(protocol) {
-            $.getJSON('http://www.ip'+protocol+'.nsupdate.info/myip?callback=?','',function(json_data){
+        getIp = function(domain,protocol) {
+            $.getJSON('http://'+domain+'/myip?callback=?','',function(json_data){
                 $(".ip"+protocol+"adr").val(json_data.ip);
             }).fail(function() {
                 $(".ip"+protocol+"adr").val("no ip"+protocol+" address found");
@@ -13,8 +13,8 @@
         }
 
         $(document).ready(function() {
-            getIp('v4');
-            getIp('v6');
+            getIp('{{ ipv4 }}','v4');
+            getIp('{{ ipv6 }}','v6');
         });
 
     </script>
