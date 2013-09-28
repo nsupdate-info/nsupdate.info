@@ -8,8 +8,8 @@ from api.views import (
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name="home"),
-    url(r'^overview/$', OverviewView, name='overview'),
-    url(r'^host/(?P<pk>\w+)$', HostView, name='host-view'),
+    url(r'^overview/$', OverviewView.as_view(), name='overview'),
+    url(r'^host/(?P<pk>\d+)/$', HostView, name='host_view'),
     url(r'^myip$', MyIpView),
     url(r'^updateip$', UpdateIpView),
     url(r'^nic/update$', NicUpdateView),
