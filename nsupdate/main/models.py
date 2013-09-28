@@ -4,6 +4,7 @@ from django.forms import ModelForm
 
 
 class Host(models.Model):
+    """TODO: hash update_secret"""
     fqdn = models.CharField(max_length=256)
     update_secret = models.CharField(max_length=256)
     comment = models.CharField(max_length=256,default='')
@@ -14,6 +15,7 @@ class Host(models.Model):
 
     def __unicode__(self):
         return u"%s (%s)" % (self.fqdn, self.created_by)
+
 
 
 class HostForm(ModelForm):

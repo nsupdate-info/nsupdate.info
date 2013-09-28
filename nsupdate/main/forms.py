@@ -13,6 +13,13 @@ class HostForm(forms.ModelForm):
         super(HostForm, self).__init__(*args, **kwargs)
         self.created_by = user
 
+    def save(self, user, commit=True):
+        instance = super(HostForm, self).save(commit=False)
+        instance.created_by = user
+        if commit:
+            instance.save()
+        return instance
+
     def create_host(self, user):
         self.clean()
         host = Host(fqdn=self.cleaned_data['fqdn'],
