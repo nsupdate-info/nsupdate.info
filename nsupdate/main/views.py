@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.conf import settings
+from main.forms import *
 
 class HomeView(TemplateView):
     template_name = "base.html"
@@ -21,5 +22,29 @@ class OverviewView(TemplateView):
         context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
         context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
         context['session'] = self.request.session
+        context['HostForm'] = HostForm(self.request.POST)
+        if self.request.method == "POST":
+            form = HostForm(self.request.POST)
+            if form.is_valid():
+                host = form.create_host()
+                host.save()
+            context['HostForm'] = form
         return context
 
+
+def signup(request):
+    if not request.user.is_authenticated():
+        context = {}
+        context['form'] = SignupForm()
+        if request.method == "POST":
+            cf = SignupForm(request.POST)
+            if cf.is_valid():
+                u = cf.create_user()
+                u.save()
+                context["success"] = _("User created! Check your Inbox for an Activtion Email")
+                context['form'] = LoginForm(request.POST)
+                return render(request, "login.html", context)
+            context['form'] =  cf
+        return render(request, "signup.html", context)
+    else:
+        return redirect('/')
