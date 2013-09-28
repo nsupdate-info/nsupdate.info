@@ -3,7 +3,6 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.conf import settings
 
-
 class HomeView(TemplateView):
     template_name = "base.html"
 
@@ -19,11 +18,7 @@ class OverviewView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(OverviewView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
-        context['ipv4'] = settings.WWW_IPV4_HOST
-        context['ipv6'] = settings.WWW_IPV6_HOST
+        context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
+        context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
         return context
-
-
-def MyIpView(request):
-    return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
 

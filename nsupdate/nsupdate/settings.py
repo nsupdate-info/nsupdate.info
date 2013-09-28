@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'south',
     'nsupdate',
     'accounts',
+    'api',
     'main',
     'bootstrapform',
     'registration',
