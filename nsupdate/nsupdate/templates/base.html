@@ -50,8 +50,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="container content">
+ 
+        <div class="container content wrap">
             {% block content %}
                 <div class="row" style="background-color: #DDDDDD">
                     <div class="col-sm-4" style="text-align: center">
@@ -96,6 +96,19 @@
                 </div>
 
             {% endblock %}
+        </div>
+
+        <div class="footer">
+            <div class="container">
+            <p class="text-muted credit">
+                Sourcecode available at <a href="https://github.com/asmaps/nsupdate.info">GitHub</a>
+                -
+                Developed by <a href="https://github.com/asmaps/">Arne Schauf</a>, 
+                <a href="https://github.com/Samuirai/">Fabian Faessler</a>, 
+                <a href="https://github.com/ThomasWaldmann/">Thomas Waldmann</a>
+                during the <a href="http://djangodash.com/teams/c4/nsupdateinfo/">Django Dash 2013</a>
+            </p>
+            </div>
         </div>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
