@@ -1,2 +1,4 @@
 django==1.5.4
 south
+django-bootstrap-form
+django-registration

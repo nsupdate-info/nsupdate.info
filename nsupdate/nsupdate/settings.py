@@ -124,6 +124,8 @@ INSTALLED_APPS = (
     'south',
     'nsupdate',
     'main',
+    'bootstrapform',
+    'registration',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,3 +156,10 @@ LOGGING = {
         },
     }
 }
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
