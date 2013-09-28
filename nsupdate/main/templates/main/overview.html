@@ -5,8 +5,7 @@
     <script>
 
         getIp = function(protocol) {
-            $.get("http://www.ip"+protocol+".nsupdate.info/myip", function(raw_data){
-                json_data = JSON.parse(raw_data)
+            $.getJSON('http://www.ip'+protocol+'.nsupdate.info/myip?callback=?','',function(json_data){
                 $(".ip"+protocol+"adr").val(json_data.ip);
             }).fail(function() {
                 $(".ip"+protocol+"adr").val("no ip"+protocol+" address found");
