@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from django.views.generic import TemplateView
+from main.views import HomeView
 
 urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name="base.html")),
+    url(r'^$', HomeView.as_view(), name="home"),
 )
