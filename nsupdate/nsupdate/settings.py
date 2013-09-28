@@ -169,15 +169,30 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'stderr': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'stderr'
         }
     },
     'loggers': {
+        'api.views': {
+            'handlers': ['stderr', ],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', ],
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+    },
+    'formatters': {
+        'stderr': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s'
+        },
+    },
 }
 
 ACCOUNT_ACTIVATION_DAYS = 7
