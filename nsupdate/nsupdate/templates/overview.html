@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <script>
+
+        getIp = function(protocol) {
+            $.get("http://www.ip"+protocol+".nsupdate.info/myip", function(raw_data){
+                json_data = JSON.parse(raw_data)
+                $(".ip"+protocol+"adr").val(json_data.ip);
+            }).fail(function() {
+                $(".ip"+protocol+"adr").val("no ip"+protocol+" address found");
+            });
+        }
+
+        $(document).ready(function() {
+            getIp('v4');
+            getIp('v6');
+        });
+
+    </script>
+
+    <h1>Overview</h1>
+    <p>
+        Ajax request to retrieve the ipv4/ipv6 remote address. The URL www.*.nsupdate.info is used for the call, so this will fail for the dev server. TODO: dev environment
+    </p>
+    IPv4: <input type='text' class="form-control ipv4adr" placeholder="loading ip..."> </br >
+    IPv6: <input type='text' class="form-control ipv6adr" placeholder="loading ip...">
+{% endblock %}
