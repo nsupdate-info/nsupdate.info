@@ -20,5 +20,6 @@ class OverviewView(TemplateView):
         context['nav_overview'] = True
         context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
         context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
+        context['session'] = self.request.session
         return context
 
