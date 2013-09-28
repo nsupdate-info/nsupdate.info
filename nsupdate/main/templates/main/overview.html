@@ -8,12 +8,12 @@
             <h3>Host List</h3>
             <table class="table">
             <tr><th>domain</th><th>last update</th><th>comment</th><th>action</th></tr>
-            {% for host in Hosts %}
+            {% for host in hosts %}
                 <tr>
                     <td><b>{{ host.fqdn }}</b></td>
                     <td>{{ host.last_update|date }}</td>
                     <td>{{ host.comment }}</td>
-                    <td><a href="{% url 'host-view' host.pk %}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <td><a href="{% url 'host_view' host.pk %}"><span class="glyphicon glyphicon-edit"></span></a>
                 </tr>
             {% empty %}
                 <tr>No hosts yet.</tr>
@@ -24,7 +24,7 @@
          <div class="col-lg-4">
             <form method="post" action="">
                 {% csrf_token %}
-                {{ HostForm|bootstrap }}
+                {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
