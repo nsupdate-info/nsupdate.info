@@ -1,0 +1,26 @@
+{% load i18n %}
+{% comment %}
+This template is used for the html alternative of the activation email
+if you use a django-registration backend that looks for it. e.g.
+https://github.com/huseyinyilmaz/django-registration-extended-backend
+{% endcomment %}
+{% url 'registration_activate' activation_key as activation_key_url %}
+{% blocktrans with sitename=site.name sitedomain=site.domain%}<body>
+<h3>Account registration for {{ sitename }}</h3>
+<p>
+You (or someone pretending to be you) have asked to register an account at
+<b>{{ sitename }}</b>.<br/>
+If this wasn't you, please ignore this email and your address will be removed
+from our records.
+</p>
+<p>
+To activate this account, please click the following link within the next 
+<b>{{ expiration_days }}</b> days:<br/>
+<a href="http://{{ sitedomain }}{{ activation_key_url }}">http://{{ sitedomain }}{{  activation_key_url }}</a>
+</p>
+<p>
+Sincerely,<br/>
+{{ sitename }} Management
+</p>
+</body>
+{% endblocktrans %}
