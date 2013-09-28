@@ -24,7 +24,7 @@ def UpdateIpView(request):
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
     request.session[key] = ipaddr
-    image_data = open(settings.STATIC_ROOT+"/1px.gif", "rb").read()
+    image_data = open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb").read()
     return HttpResponse(image_data, mimetype="image/png")
 
 
