@@ -8,6 +8,7 @@ from django.conf import settings
 from main.forms import *
 from main.models import Host
 import dns.inet
+import os
 
 from main.dnstools import update, SameIpError
 
@@ -21,7 +22,8 @@ def UpdateIpView(request):
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
     request.session[key] = ipaddr
-    return HttpResponse('OK', content_type="text/plain")
+    image_data = open(settings.STATIC_ROOT+"/1px.gif", "rb").read()
+    return HttpResponse(image_data, mimetype="image/png")
 
 
 def basic_challenge(realm, content='Authorization Required'):
