@@ -31,4 +31,3 @@ class PasswordChangeView(TemplateView):
         context = super(PasswordChangeView, self).get_context_data(*args, **kwargs)
         context['nav_change_password'] = True
         return context
-

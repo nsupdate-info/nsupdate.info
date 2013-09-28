@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^account/', include('accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -15,5 +16,4 @@ from django.conf import settings
 
 if settings.DEBUG:
     urlpatterns += patterns('django.contrib.staticfiles.views',
-        url(r'^static/(?P<path>.*)$', 'serve'),
-    )
+                            url(r'^static/(?P<path>.*)$', 'serve'), )

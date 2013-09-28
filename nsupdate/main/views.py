@@ -55,6 +55,7 @@ class OverviewView(CreateView):
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
 
+
 class HostView(UpdateView):
     model = Host
     template_name = "main/host.html"
@@ -63,7 +64,7 @@ class HostView(UpdateView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(HostView, self).dispatch(*args, **kwargs)
-    
+
     def get_success_url(self):
         return reverse('overview')
 
@@ -78,7 +79,7 @@ class HostView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(HostView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied() #or Http404
+            raise PermissionDenied()  # or Http404
         return obj
 
     def get_context_data(self, *args, **kwargs):
@@ -86,6 +87,7 @@ class HostView(UpdateView):
         context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
+
 
 class DeleteHostView(DeleteView):
     model = Host
@@ -95,11 +97,11 @@ class DeleteHostView(DeleteView):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeleteHostView, self).dispatch(*args, **kwargs)
-    
+
     def get_object(self, *args, **kwargs):
         obj = super(DeleteHostView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied() #or Http404
+            raise PermissionDenied()  # or Http404
         return obj
 
     def get_success_url(self):
@@ -110,5 +112,3 @@ class DeleteHostView(DeleteView):
         context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
-
-

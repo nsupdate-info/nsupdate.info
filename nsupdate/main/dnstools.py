@@ -93,7 +93,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     assert action in ['add', 'del', 'upd', ]
     origin, name = parse_name(fqdn, origin)
     upd = dns.update.Update(origin,
-                            keyring=dns.tsigkeyring.from_text({settings.BASEDOMAIN+'.': settings.UPDATE_KEY}),
+                            keyring=dns.tsigkeyring.from_text({settings.BASEDOMAIN + '.': settings.UPDATE_KEY}),
                             keyalgorithm=settings.UPDATE_ALGO)
     if action == 'add':
         assert ipaddr is not None
