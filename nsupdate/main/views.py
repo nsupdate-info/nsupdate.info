@@ -13,13 +13,6 @@ from django.core.urlresolvers import reverse
 from main.forms import HostForm
 from main.models import Host
 
-def create_context(request):
-    context = {}
-    context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
-    context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
-    context['session'] = request.session
-    return context
-
 
 class HomeView(TemplateView):
     template_name = "base.html"

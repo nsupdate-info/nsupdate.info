@@ -121,6 +121,7 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
+    'nsupdate.context_processors.add_settings',
 )
 
 ROOT_URLCONF = 'nsupdate.urls'
@@ -203,3 +204,4 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
