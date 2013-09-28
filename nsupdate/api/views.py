@@ -5,6 +5,8 @@ logger = logging.getLogger(__name__)
 
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.auth.hashers import check_password
+
 from main.forms import *
 from main.models import Host
 import dns.inet
@@ -61,10 +63,16 @@ def check_auth(username, password):
     :param password: update password
     :return: True if authenticated, False otherwise.
     """
-    # in our case username == fqdn
-    hosts = Host.objects.filter(fqdn=username, update_secret=password)
-    assert len(hosts) < 2
-    return bool(hosts)
+    fqdn = username
+    hosts = Host.objects.filter(fqdn=fqdn)
+    num_hosts = len(hosts)
+    if num_hosts == 0:
+        return False
+    if num_hosts > 1:
+        logging.error("fqdn %s has multiple entries" % fqdn)
+        return False
+    password_hash = hosts[0].update_secret
+    return check_password(password, password_hash)
 
 
 def Response(content):

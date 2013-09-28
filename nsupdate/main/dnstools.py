@@ -27,7 +27,7 @@ def update(fqdn, ipaddr, ttl=60):
         current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
         ok = ipaddr != current_ipaddr
-    except dns.resolver.NXDOMAIN:
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         # no dns entry yet, ok
         ok = True
     if ok:
