@@ -14,10 +14,8 @@ def MyIpView(request):
 def UpdateIpView(request):
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
-    if af == dns.inet.AF_INET:
-        request.session['ipv4'] = ipaddr
-    else:
-        request.session['ipv6'] = ipaddr
+    key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
+    request.session[key] = ipaddr
     return HttpResponse('OK', content_type="text/plain")
 
 
