@@ -41,8 +41,7 @@ def OverviewView(request):
 
         context['HostForm'] = form
     return render(request, "main/overview.html", context)
-<<<<<<< HEAD
-=======
+
 
 @login_required
 def HostView(request,pk=None):
@@ -58,4 +57,4 @@ def HostView(request,pk=None):
             host = form.save(request.user)
         context['HostForm'] = form
     return render(request, "main/host.html", context)
->>>>>>> 3b2fa9008fe6aa3d20e7b3ae9504fadedb4165c4
+
