@@ -1,5 +1,16 @@
 {% extends "base.html" %}
+{% load bootstrap %}
 
 {% block content %}
 <h1>Hi, {{ request.user.username }}</h1>
+<h3>Your data:</h3>
+<div class="row">
+  <div class="col-lg-4">
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
