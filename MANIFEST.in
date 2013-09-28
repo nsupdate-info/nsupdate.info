@@ -1,5 +1,13 @@
-include README.md LICENSE AUTHORS
+include README.rst LICENSE AUTHORS
+include setup.cfg setup.py
 recursive-include docs *
 recursive-exclude docs *.pyc
 recursive-exclude docs *.pyo
+recursive-include nsupdate/nsupdate/static *
+recursive-include nsupdate/nsupdate/templates *
+recursive-include nsupdate/main/static *
+recursive-include nsupdate/main/templates *
+recursive-include nsupdate/accounts/static *
+recursive-include nsupdate/accounts/templates *
 prune docs/_build
+

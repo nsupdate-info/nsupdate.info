@@ -6,3 +6,5 @@ local_settings.py
 .cache/
 *.sqlite
 *.egg-info
+dist/
+
