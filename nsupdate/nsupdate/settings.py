@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'nsupdate',
+    'accounts',
     'main',
     'bootstrapform',
     'registration',
