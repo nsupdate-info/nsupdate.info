@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from main.forms import *
+from main.forms import HostForm
+from main.models import Host
 
 class HomeView(TemplateView):
     template_name = "base.html"

@@ -2,7 +2,7 @@
 
 from django import forms
 from django.contrib.auth.models import User
-from main.models import * 
+from main.models import Host
 
 class HostForm(forms.ModelForm):
     class Meta:
