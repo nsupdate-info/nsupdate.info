@@ -22,8 +22,6 @@ DATABASES = {
     }
 }
 
-
-
 SERVER = '85.10.192.104'  # ns1.thinkmo.de (master / dynamic upd server for nsupdate.info)
 BASEDOMAIN = 'nsupdate.info'
 
@@ -37,8 +35,6 @@ WWW_IPV6_IP = '2001:41d0:8:e00e::1'
 #not implemented here. not sure waht to do with it
 #UPDATE_ALGO = dns.tsig.HMAC_SHA512
 UPDATE_KEY = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
-
-
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts

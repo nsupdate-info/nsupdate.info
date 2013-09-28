@@ -26,7 +26,9 @@ class OverviewView(TemplateView):
 
 
 def MyIpView(request):
-    return HttpResponse(json.dumps({'ip':request.META['REMOTE_ADDR']}), content_type="application/json")
+    return HttpResponse(
+        json.dumps({'ip': request.META['REMOTE_ADDR']}),
+        content_type="application/json")
 
 
 class UserProfileView(TemplateView):
@@ -45,4 +47,3 @@ class PasswordChangeView(TemplateView):
         context = super(PasswordChangeView, self).get_context_data(*args, **kwargs)
         context['nav_change_password'] = True
         return context
-
