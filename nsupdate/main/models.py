@@ -5,9 +5,9 @@ from django.forms import ModelForm
 
 class Host(models.Model):
     """TODO: hash update_secret"""
-    fqdn = models.CharField(max_length=256)
+    fqdn = models.CharField(max_length=256,unique=True)
     update_secret = models.CharField(max_length=256)
-    comment = models.CharField(max_length=256,default='')
+    comment = models.CharField(max_length=256,default='',blank=True, null=True)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

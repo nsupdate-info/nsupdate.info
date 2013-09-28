@@ -23,8 +23,8 @@
             {% endfor %}
             </table>
         </div>
-        <h3>New host</h3>
-         <div class="col-lg-4">
+        <div class="col-lg-4">
+            <h3>New host</h3>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
@@ -33,13 +33,11 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-lg-12">
         <h3>Information</h3>
         <b>your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> </br>
         <b>your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
-    </div>
-    <div style="display: none">
-        <img src="//{{ WWW_IPV4_HOST }}/updateip" />
-        <img src="//{{ WWW_IPV6_HOST }}/updateip" />
+        </div>
     </div>
 
 {% endblock %}

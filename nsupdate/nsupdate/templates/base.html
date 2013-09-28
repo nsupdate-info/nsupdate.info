@@ -51,15 +51,19 @@
             </div>
         </div>
         <div class="container content wrap">
-            <div id="message_box">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="message_box">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             {% block content %}
                 <div class="row" style="background-color: #DDDDDD">
@@ -88,16 +92,16 @@
                 <hr>
                 <div class="row">
                       <div class="container">                        
-                        {% if session.ipv4 and session.ipv6 %}
+                        {% if request.session.ipv4 and request.session.ipv6 %}
                             <p>We think this are your IPs:</p>
-                        {% elif session.ipv4 or session.ipv6 %}
+                        {% elif request.session.ipv4 or request.session.ipv6 %}
                             <p>We think this is your IP:</p>
                         {% endif %}
 
-                        {% if session.ipv4 %}
-                            <h1>{{session.ipv4}}</h1>
-                        {% elif session.ipv6 %}
-                            <h1>{{session.ipv6}}</h1>
+                        {% if request.session.ipv4 %}
+                            <h1>{{request.session.ipv4}}</h1>
+                        {% elif request.session.ipv6 %}
+                            <h1>{{request.session.ipv4}}</h1>
                         {% else %}
                             <h1>HeyHo!</h1>
                         {% endif %}
@@ -119,6 +123,11 @@
             </p>
             </div>
         </div>
+
+            <div style="display: none">
+                <img src="//{{ WWW_IPV4_HOST }}/updateip" />
+                <img src="//{{ WWW_IPV6_HOST }}/updateip" />
+            </div>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     </body>
