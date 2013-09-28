@@ -13,7 +13,7 @@ import dns.tsig
 import dns.tsigkeyring
 
 
-SERVER = settings.SERVER  # ns1.thinkmo.de (master / dynamic upd server for nsupdate.info)
+SERVER = settings.SERVER
 BASEDOMAIN = settings.BASEDOMAIN
 
 NONEXISTING_HOST = settings.NONEXISTING_HOST
@@ -23,7 +23,7 @@ WWW_IPV6_HOST = settings.WWW_IPV6_HOST
 WWW_IPV4_IP = settings.WWW_IPV4_IP
 WWW_IPV6_IP = settings.WWW_IPV6_IP
 
-UPDATE_ALGO = dns.tsig.HMAC_SHA512
+UPDATE_ALGO = settings.UPDATE_ALGO
 UPDATE_KEY = settings.UPDATE_KEY
 
 

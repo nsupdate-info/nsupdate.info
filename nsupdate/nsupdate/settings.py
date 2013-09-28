@@ -1,5 +1,6 @@
 # Django settings for nsupdate project.
 import django.conf.global_settings as DEFAULT_SETTINGS
+import dns.tsig
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -32,8 +33,9 @@ WWW_IPV6_HOST = 'www.ipv6.' + BASEDOMAIN
 WWW_IPV4_IP = '178.32.221.14'
 WWW_IPV6_IP = '2001:41d0:8:e00e::1'
 
-#not implemented here. not sure waht to do with it
-#UPDATE_ALGO = dns.tsig.HMAC_SHA512
+BAD_AGENTS = set()  # useragent blacklist for /nic/update service
+
+UPDATE_ALGO = dns.tsig.HMAC_SHA512
 UPDATE_KEY = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
