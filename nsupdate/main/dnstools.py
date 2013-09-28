@@ -1,4 +1,4 @@
-s"""
+"""
 Misc. DNS related code: query, dynamic update, etc.
 """
 
