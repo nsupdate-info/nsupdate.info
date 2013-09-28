@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from django.http import HttpResponse
 from django.conf import settings
+from django.shortcuts import render
 from main.forms import *
 
 class HomeView(TemplateView):
@@ -12,20 +14,22 @@ class HomeView(TemplateView):
         context['nav_home'] = True
         return context
 
+def OverviewView(request):
+    context = {}
+    context['nav_overview'] = True
+    context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
+    context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
+    context['session'] = request.session
+    context['HostForm'] = HostForm(request.user)
+    context['Hosts'] = Host.objects.filter(created_by=request.user)
+    if request.method == "POST":
+        print "POST"
+        form = HostForm(request.user,request.POST)
+        print form
+        if form.is_valid():
+            print "valid"
+            host = form.create_host(request.user)
+            host.save()
 
-class OverviewView(TemplateView):
-    template_name = "main/overview.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(OverviewView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
-        context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
-        context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
-        context['session'] = self.request.session
-        context['HostForm'] = HostForm(self.request.POST)
-        if self.request.method == "POST":
-            form = HostForm(self.request.POST)
-            if form.is_valid():
-                host = form.create_host()
-                host.save()
-        return context
+        context['HostForm'] = form
+    return render(request, "main/overview.html", context)
