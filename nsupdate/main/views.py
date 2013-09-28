@@ -12,4 +12,4 @@ class HomeView(TemplateView):
         return context
 
 def MyIpView(request):
-	return HttpResponse(json.dumps({'ip':request.META['REMOTE_ADDR']}), content_type="application/json")
+    return HttpResponse(json.dumps({'ip':request.META['REMOTE_ADDR']}), content_type="application/json")
