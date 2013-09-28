@@ -12,7 +12,7 @@ class HomeView(TemplateView):
         return context
 
 class OverviewView(TemplateView):
-    template_name = "overview.html"
+    template_name = "main/overview.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super(OverviewView, self).get_context_data(*args, **kwargs)
