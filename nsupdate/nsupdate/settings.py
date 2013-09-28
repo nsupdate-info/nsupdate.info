@@ -1,4 +1,5 @@
 # Django settings for nsupdate project.
+import django.conf.global_settings as DEFAULT_SETTINGS
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -102,6 +103,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'nsupdate.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -158,6 +163,8 @@ LOGGING = {
 }
 
 ACCOUNT_ACTIVATION_DAYS = 7
+
+LOGIN_REDIRECT_URL = '/account/profile/'
 
 try:
     from .local_settings import *

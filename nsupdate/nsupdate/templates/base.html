@@ -29,8 +29,20 @@
                     <ul class="nav navbar-nav">
                         <li{% if nav_home %} class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
                         <li{% if nav_overview %} class="active"{% endif %}><a href="{% url 'overview' %}">Overview</a></li>
-                        <li{% if nav_about %} class="active"{% endif %}><a href="#about">About</a></li>
-                        <li{% if nav_contact %} class="active"{% endif %}><a href="#contact">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        {% if not request.user.is_authenticated %}
+                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'auth_login' %}">Login</a></li>
+                        {% else %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'account_profile' %}">Profile</a></li>
+                                    <li><a href="{% url 'password_change' %}">Change password</a></li>
+                                    <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
