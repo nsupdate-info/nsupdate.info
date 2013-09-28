@@ -12,13 +12,6 @@ from django.core.urlresolvers import reverse
 from main.forms import HostForm
 from main.models import Host
 
-def create_context(request):
-    context = {}
-    context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
-    context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
-    context['session'] = request.session
-    return context
-
 
 class HomeView(TemplateView):
     template_name = "base.html"
@@ -57,7 +50,7 @@ class OverviewView(CreateView):
 
 @login_required
 def HostView(request,pk=None):
-    context = create_context(request)
+    context = {}
     context['nav_overview'] = True
     context['HostForm'] = HostForm(request.user,instance=get_object_or_404(Host, pk=pk, created_by=request.user))
     if request.method == "POST":

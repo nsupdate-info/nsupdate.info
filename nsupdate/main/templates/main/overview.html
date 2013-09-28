@@ -31,8 +31,8 @@
     </div>
     <div class="row">
         <h3>Information</h3>
-        <b>your IPv4:</b> <span class="ipv4adr">{{session.ipv4}}</span> </br>
-        <b>your IPv6:</b> <span class="ipv6adr">{{session.ipv6}}</span>
+        <b>your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> </br>
+        <b>your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
     </div>
     <div style="display: none">
         <img src="//{{ WWW_IPV4_HOST }}/updateip" />
