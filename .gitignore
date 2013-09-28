@@ -5,3 +5,4 @@ local_settings.py
 .idea/
 .cache/
 *.sqlite
+*.egg-info
