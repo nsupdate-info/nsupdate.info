@@ -53,6 +53,7 @@ class HostView(UpdateView):
     model = Host
     template_name = "main/host.html"
     form_class = HostForm
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(HostView, self).dispatch(*args, **kwargs)
@@ -67,6 +68,12 @@ class HostView(UpdateView):
         messages.add_message(self.request, messages.SUCCESS, 'Host updated.')
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_object(self, *args, **kwargs):
+        obj = super(HostView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied() #or Http404
+        return obj
+
     def get_context_data(self, *args, **kwargs):
         context = super(HostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
@@ -77,10 +84,17 @@ class DeleteHostView(DeleteView):
     model = Host
     template_name = "main/delete_host.html"
     form_class = HostForm
+
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DeleteHostView, self).dispatch(*args, **kwargs)
     
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteHostView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied() #or Http404
+        return obj
+
     def get_success_url(self):
         return reverse('overview')
 
