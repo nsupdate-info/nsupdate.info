@@ -3,6 +3,8 @@ Misc. DNS related code: query, dynamic update, etc.
 """
 
 from django.conf import settings
+
+import dns.inet
 import dns.name
 import dns.resolver
 import dns.query
@@ -23,6 +25,32 @@ WWW_IPV6_IP = settings.WWW_IPV6_IP
 
 UPDATE_ALGO = dns.tsig.HMAC_SHA512
 UPDATE_KEY = settings.UPDATE_KEY
+
+
+class SameIpError(ValueError):
+    """
+    raised if an IP address is already present in DNS and and update was
+    requested, but is not needed.
+    """
+
+
+def update(fqdn, ipaddr, ttl=60):
+    af = dns.inet.af_for_address(ipaddr)
+    rdtype = 'A' if af == dns.inet.AF_INET else 'AAAA'
+    try:
+        current_ipaddr = query_ns(fqdn, rdtype)
+        # check if ip really changed
+        ok = ipaddr != current_ipaddr
+    except dns.resolver.NXDOMAIN:
+        # no dns entry yet, ok
+        ok = True
+    if ok:
+        # only send an update if the ip really changed as the update
+        # causes write I/O on the nameserver and also traffic to the
+        # dns slaves (they get a notify if we update the zone).
+        update_ns(fqdn, rdtype, ipaddr, action='upd', ttl=ttl)
+    else:
+        raise SameIpError
 
 
 def query_ns(qname, rdtype):
