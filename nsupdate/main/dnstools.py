@@ -2,6 +2,7 @@
 Misc. DNS related code: query, dynamic update, etc.
 """
 
+from django.conf import settings
 import dns.name
 import dns.resolver
 import dns.query
@@ -10,18 +11,18 @@ import dns.tsig
 import dns.tsigkeyring
 
 
-SERVER = '85.10.192.104'  # ns1.thinkmo.de (master / dynamic upd server for nsupdate.info)
-BASEDOMAIN = 'nsupdate.info'
+SERVER = settings.SERVER  # ns1.thinkmo.de (master / dynamic upd server for nsupdate.info)
+BASEDOMAIN = settings.BASEDOMAIN
 
-NONEXISTING_HOST = 'nonexisting.' + BASEDOMAIN
-WWW_HOST = 'www.' + BASEDOMAIN
-WWW_IPV4_HOST = 'www.ipv4.' + BASEDOMAIN
-WWW_IPV6_HOST = 'www.ipv6.' + BASEDOMAIN
-WWW_IPV4_IP = '178.32.221.14'
-WWW_IPV6_IP = '2001:41d0:8:e00e::1'
+NONEXISTING_HOST = settings.NONEXISTING_HOST
+WWW_HOST = settings.WWW_HOST
+WWW_IPV4_HOST = settings.WWW_IPV4_HOST
+WWW_IPV6_HOST = settings.WWW_IPV6_HOST
+WWW_IPV4_IP = settings.WWW_IPV4_IP
+WWW_IPV6_IP = settings.WWW_IPV6_IP
 
 UPDATE_ALGO = dns.tsig.HMAC_SHA512
-UPDATE_KEY = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
+UPDATE_KEY = settings.UPDATE_KEY
 
 
 def query_ns(qname, rdtype):
