@@ -4,9 +4,9 @@ Tests for dnstools module.
 
 import pytest
 
-from nsupdate.main.dnstools import (query_ns, parse_name, update_ns,
-                                    BASEDOMAIN, NONEXISTING_HOST, WWW_HOST, WWW_IPV4_HOST, WWW_IPV4_IP,
-                                    WWW_IPV6_HOST, WWW_IPV6_IP, )
+from ..dnstools import (query_ns, parse_name, update_ns,
+                        BASEDOMAIN, NONEXISTING_HOST,
+                        WWW_HOST, WWW_IPV4_HOST, WWW_IPV4_IP, WWW_IPV6_HOST, WWW_IPV6_IP, )
 
 from dns.resolver import NXDOMAIN
 
