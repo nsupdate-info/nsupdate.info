@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+
+    <div class="row">
+        
+         <div class="col-lg-4">
+            <h3>Delete Host <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </form>
+        </div>
+    </div>
+    
+
+{% endblock %}

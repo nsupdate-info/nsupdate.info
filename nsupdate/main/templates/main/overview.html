@@ -13,7 +13,10 @@
                     <td><b>{{ host.fqdn }}</b></td>
                     <td>{{ host.last_update|date }}</td>
                     <td>{{ host.comment }}</td>
-                    <td><a href="{% url 'host_view' host.pk %}"><span class="glyphicon glyphicon-edit"></span></a>
+                    <td>
+                        <a href="{% url 'host' host.pk %}"><i class="icon icon-pencil"></i> edit</a> |
+                        <a href="{% url 'delete_host' host.pk %}"><i class="icon icon-remove"></i> delete</a>
+                    </td>
                 </tr>
             {% empty %}
                 <tr>No hosts yet.</tr>

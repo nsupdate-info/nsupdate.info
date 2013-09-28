@@ -4,14 +4,16 @@
 {% block content %}
 
     <div class="row">
-        <h3>Edit Host</h3>
+        
          <div class="col-lg-4">
+            <h3>Edit Host <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
             <form method="post" action="">
                 {% csrf_token %}
-                {{ HostForm|bootstrap }}
+                {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
+    </div>
     
 
 {% endblock %}
