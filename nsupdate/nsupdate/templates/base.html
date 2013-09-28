@@ -10,6 +10,8 @@
         <title>{% block title %}nsupdate.info{% endblock %}</title>
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -48,8 +50,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="container content">
+        <div class="container content wrap">
             <div id="message_box">
                 {% if messages %}
                     {% for message in messages %}
@@ -61,10 +62,62 @@
                 {% endif %}
             </div>
             {% block content %}
-            <h1>Heyho!</h1>
-            <p>Welcome to the base template. Extend this template in all other
-            templates and override the content block</p>
+                <div class="row" style="background-color: #DDDDDD">
+                    <div class="col-sm-4" style="text-align: center">
+                        <h1><i class="icon-globe icon-4x"></i></h1>
+                        <h3>World wide web</h3>
+                        <p>
+                            nsupdate.info is an <a href="https://github.com/asmaps/nsupdate.info">open-source</a> DynDNS service with IPv4 and IPv6 support.
+                        </p>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center">
+                        <h1><i class="icon-cogs icon-4x"></i></h1>
+                        <h3>Awesomeness</h3>
+                        <p>
+                            Powered by python, the magical pony django and a stupid three columned icon landing page.
+                        </p>
+                    </div>
+                    <div class="col-sm-4" style="text-align: center">
+                        <h1><i class="icon-trophy icon-4x"></i></h1>
+                        <h3>Lies</h3>
+                        <p>
+                            nsupdate.info is winner of the <a href="http://djangodash.com">Django-Dash</a> 2013 with the highest score in the history of the competition.
+                        </p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                      <div class="container">                        
+                        {% if session.ipv4 and session.ipv6 %}
+                            <p>We think this are your IPs:</p>
+                        {% elif session.ipv4 or session.ipv6 %}
+                            <p>We think this is your IP:</p>
+                        {% endif %}
+
+                        {% if session.ipv4 %}
+                            <h1>{{session.ipv4}}</h1>
+                        {% elif session.ipv6 %}
+                            <h1>{{session.ipv6}}</h1>
+                        {% else %}
+                            <h1>HeyHo!</h1>
+                        {% endif %}
+                    </div>
+                </div>
+
             {% endblock %}
+        </div>
+
+        <div class="footer">
+            <div class="container">
+            <p class="text-muted credit">
+                Sourcecode available at <a href="https://github.com/asmaps/nsupdate.info">GitHub</a>
+                -
+                Developed by <a href="https://github.com/asmaps/">Arne Schauf</a>, 
+                <a href="https://github.com/Samuirai/">Fabian Faessler</a>, 
+                <a href="https://github.com/ThomasWaldmann/">Thomas Waldmann</a>
+                during the <a href="http://djangodash.com/teams/c4/nsupdateinfo/">Django Dash 2013</a>
+            </p>
+            </div>
         </div>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
