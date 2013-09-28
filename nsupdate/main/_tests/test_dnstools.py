@@ -13,9 +13,6 @@ from dns.resolver import NXDOMAIN
 
 class TestQuery(object):
     def test_queries_ok(self):
-        """
-        check some simple dns lookups
-        """
         assert query_ns(WWW_IPV4_HOST, 'A') == WWW_IPV4_IP  # v4 ONLY
         assert query_ns(WWW_IPV6_HOST, 'AAAA') == WWW_IPV6_IP  # v6 ONLY
         assert query_ns(WWW_HOST, 'A') == WWW_IPV4_IP  # v4 and v6, query v4
@@ -30,9 +27,6 @@ class TestQuery(object):
 
 class TestUpdate(object):
     def test_parse1(self):
-        """
-        check fqdn parsing
-        """
         origin, relname = parse_name('foo.' + BASEDOMAIN)
         assert str(origin) == BASEDOMAIN + '.'
         assert str(relname) == 'foo'
