@@ -1,6 +1,7 @@
 # Django settings for nsupdate project.
 import django.conf.global_settings as DEFAULT_SETTINGS
 import dns.tsig
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -83,6 +84,10 @@ STATIC_ROOT = ''
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -200,7 +205,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-LOGIN_REDIRECT_URL = '/account/profile/'
+LOGIN_REDIRECT_URL = '/overview/'
 
 try:
     from .local_settings import *

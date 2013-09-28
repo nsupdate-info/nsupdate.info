@@ -7,8 +7,10 @@ from django.conf import settings
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.hashers import make_password
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
+import dns.inet
 
 from main.forms import HostForm
 from main.models import Host
@@ -19,8 +21,11 @@ class HomeView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
-        context.update(create_context(self.request))
         context['nav_home'] = True
+        ipaddr = self.request.META['REMOTE_ADDR']
+        af = dns.inet.af_for_address(ipaddr)
+        key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
+        self.request.session[key] = ipaddr
         return context
 
 
@@ -39,6 +44,7 @@ class OverviewView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
         return HttpResponseRedirect(self.get_success_url())
@@ -64,6 +70,7 @@ class HostView(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host updated.')
         return HttpResponseRedirect(self.get_success_url())
