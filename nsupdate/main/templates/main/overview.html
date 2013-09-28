@@ -8,12 +8,8 @@
     IPv6: <input type='text' class="form-control ipv6adr" placeholder="can't find IP" value="{{session.ipv6}}">
 
     <div style="display: none">
-        {% if not session.ipv4 %}
-            <img src="//{{ WWW_IPV4_HOST }}/updateip" />
-        {% endif %}
-        {% if not session.ipv6 %}
-            <img src="//{{ WWW_IPV6_HOST }}/updateip" />
-        {% endif %}
+        <img src="//{{ WWW_IPV4_HOST }}/updateip" />
+        <img src="//{{ WWW_IPV6_HOST }}/updateip" />
     </div>
 
     {{ HostForm }}

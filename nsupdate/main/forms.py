@@ -9,3 +9,10 @@ class HostForm(forms.ModelForm):
         model = Host
         fields = ['fqdn', 'comment', ]
 
+    def create_host(self):
+        self.clean()
+        host = Host(fqdn=self.cleaned_data['fqdn'],
+                    comment=self.cleaned_data['comment'])
+        host.save()
+        return host
+

@@ -28,5 +28,4 @@ class OverviewView(TemplateView):
             if form.is_valid():
                 host = form.create_host()
                 host.save()
-            context['HostForm'] = form
         return context
