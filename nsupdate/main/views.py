@@ -14,15 +14,6 @@ class HomeView(TemplateView):
         return context
 
 
-class PasswordChangeView(TemplateView):
-    template_name = "registration/password_change.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(PasswordChangeView, self).get_context_data(*args, **kwargs)
-        context['nav_change_password'] = True
-        return context
-
-
 class OverviewView(TemplateView):
     template_name = "main/overview.html"
 
@@ -45,3 +36,13 @@ class UserProfileView(TemplateView):
         context = super(UserProfileView, self).get_context_data(*args, **kwargs)
         context['nav_user_profile'] = True
         return context
+
+
+class PasswordChangeView(TemplateView):
+    template_name = "registration/password_change.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PasswordChangeView, self).get_context_data(*args, **kwargs)
+        context['nav_change_password'] = True
+        return context
+
