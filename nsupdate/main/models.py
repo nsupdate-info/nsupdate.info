@@ -14,7 +14,7 @@ class Host(models.Model):
     created_by = models.ForeignKey(User)
 
     def __unicode__(self):
-        return u"%s (%s)" % (self.fqdn, self.created_by)
+        return u"%s - %s" % (self.fqdn, self.comment)
 
 
 
