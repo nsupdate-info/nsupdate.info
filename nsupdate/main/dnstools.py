@@ -68,9 +68,13 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     """
     update our master server
 
-    :param qname: the name to update
-    :param rdtype: the record type
+    :param fqdn: the fully qualified domain name to update (str)
+    :param rdtype: the record type (default: 'A') (str)
+    :param ipaddr: ip address (v4 or v6), if needed (str)
+    :param origin: the origin zone to update (default; autodetect) (str)
     :param action: 'add', 'del' or 'upd'
+    :param ttl: time to live for the added/updated resource, default 60s (int)
+    :return: dns response
     """
     assert action in ['add', 'del', 'upd', ]
     origin, name = parse_name(fqdn, origin)
