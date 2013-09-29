@@ -58,7 +58,7 @@ def basic_authenticate(auth):
     return username, password
 
 
-def check_auth(username, password):
+def check_api_auth(username, password):
     """
     Check username and password against our database.
 
@@ -76,6 +76,24 @@ def check_auth(username, password):
         return False
     password_hash = hosts[0].update_secret
     return check_password(password, password_hash)
+
+
+def check_session_auth(user, hostname):
+    """
+    Check our database whether the hostname is owned by the user.
+
+    :param user: django user object
+    :param hostname: fqdn
+    :return: True if hostname is owned by this user, False otherwise.
+    """
+    hosts = Host.objects.filter(fqdn=hostname, created_by=user)
+    num_hosts = len(hosts)
+    if num_hosts == 0:
+        return False
+    if num_hosts > 1:
+        logging.error("fqdn %s has multiple entries" % fqdn)
+        return False
+    return True
 
 
 def Response(content):
@@ -107,7 +125,7 @@ def NicUpdateView(request):
         logger.warning('%s - received no auth' % (hostname, ))
         return basic_challenge("authenticate to update DNS", 'noauth')
     username, password = basic_authenticate(auth)
-    if not check_auth(username, password):
+    if not check_api_auth(username, password):
         logger.info('%s - received bad credentials, username: %s' % (hostname, username, ))
         return basic_challenge("authenticate to update DNS", 'badauth')
     if hostname is None:
@@ -120,6 +138,32 @@ def NicUpdateView(request):
     if agent in settings.BAD_AGENTS:
         logger.info('%s - received update from bad user agent %s' % (hostname, agent, ))
         return Response('badagent')
+    return _update(hostname, ipaddr)
+
+
+@login_required
+def AuthorizedNicUpdateView(request):
+    """
+    similar to NicUpdateView, but the client is not a router or other dyndns client,
+    but the admin browser who is currently logged into the nsupdate.info site.
+
+    Example URLs:
+
+    https://supdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+    """
+    hostname = request.GET.get('hostname')
+    if hostname is None:
+        return Response('nohost')
+    if not check_session_auth(request.user, hostname):
+        logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
+        return Response('nohost')
+    ipaddr = request.GET.get('myip')
+    if ipaddr is None:
+        ipaddr = request.META.get('REMOTE_ADDR')
+    return _update(hostname, ipaddr)
+
+
+def _update(hostname, ipaddr):
     ipaddr = str(ipaddr)  # XXX bug in dnspython: crashes if ipaddr is unicode, wants a str!
     try:
         update(hostname, ipaddr)
