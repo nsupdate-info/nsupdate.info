@@ -4,7 +4,7 @@ Tests for dnstools module.
 
 import pytest
 
-from ..dnstools import update, query_ns, parse_name, update_ns, SameIpError
+from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
 from django.conf import settings
 BASEDOMAIN = settings.BASEDOMAIN
 
@@ -22,9 +22,64 @@ class TestIntelligentUpdater(object):
             pass
         # first update with this IP, should work without issue:
         update(host, ip)
+        assert query_ns(host, 'A') == ip
         with pytest.raises(SameIpError):
             # trying to update again with same IP should raise
             update(host, ip)
+
+
+class TestIntelligentAdder(object):
+    def test_double_add_same(self):
+        host, ip = 'test0.' + settings.BASEDOMAIN, '1.2.3.4'
+        # make sure the host is not there
+        try:
+            update_ns(host, 'A', action='del')
+        except NXDOMAIN:
+            # it is ok if it was never there
+            pass
+        # first add with this IP, should work without issue:
+        add(host, ip)
+        assert query_ns(host, 'A') == ip
+        with pytest.raises(SameIpError):
+            # trying to add again with same IP should raise
+            add(host, ip)
+
+    def test_double_add_different(self):
+        host, ip = 'test0.' + settings.BASEDOMAIN, '1.2.3.4'
+        # make sure the host is not there
+        try:
+            update_ns(host, 'A', action='del')
+        except NXDOMAIN:
+            # it is ok if it was never there
+            pass
+        # first add with this IP, should work without issue:
+        add(host, ip)
+        assert query_ns(host, 'A') == ip
+        different_ip = '4.3.2.1'
+        # trying to add again with same IP should raise
+        add(host, different_ip)  # internally triggers an update
+        assert query_ns(host, 'A') == different_ip
+
+
+class TestIntelligentDeleter(object):
+    def test_delete(self):
+        host, ip = 'test0.' + settings.BASEDOMAIN, '1.2.3.4'
+        # make sure the host is there
+        update_ns(host, 'A', ip, action='add')
+        delete(host)
+        # make sure it is gone
+        with pytest.raises(NXDOMAIN):
+            query_ns(host, 'A')
+
+    def test_double_delete(self):
+        host = 'test0.' + settings.BASEDOMAIN
+        # make sure the host is not there
+        try:
+            update_ns(host, 'A', action='del')
+        except NXDOMAIN:
+            # it is ok if it was never there
+            pass
+        delete(host)  # hmm, this doesn't raise NXDOMAIN!?
 
 
 class TestQuery(object):
