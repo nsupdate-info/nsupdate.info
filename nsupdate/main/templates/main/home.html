@@ -29,14 +29,14 @@
 <div class="row">
       <div class="container">
         {% if request.session.ipv4 %}
-            <h1>Your IPv4 address:&nbsp;&nbsp;&nbsp;{{request.session.ipv4}}</h1>
+            <h1>Your IPv4 address: {{request.session.ipv4}}</h1>
         {% else %}
-            <h1>Your IPv4 address:&nbsp;&nbsp;&nbsp;unknown</h1>
+            <h1>Your IPv4 address: unknown</h1>
         {% endif %}
         {% if request.session.ipv6 %}
-            <h1>Your IPv6 address:&nbsp;&nbsp;&nbsp;{{request.session.ipv6}}</h1>
+            <h1>Your IPv6 address: {{request.session.ipv6}}</h1>
         {% else %}
-            <h1>Your IPv6 address:&nbsp;&nbsp;&nbsp;unknown</h1>
+            <h1>Your IPv6 address: unknown</h1>
         {% endif %}
     </div>
 </div>
