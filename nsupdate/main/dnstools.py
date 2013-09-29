@@ -106,7 +106,7 @@ def update(fqdn, ipaddr, ttl=60):
         raise SameIpError
 
 
-def query_ns(qname, rdtype):
+def query_ns(qname, rdtype, origin=None):
     """
     query a dns name from our master server
 
@@ -116,11 +116,14 @@ def query_ns(qname, rdtype):
     :type rdtype: int or str
     :return: IP (as str)
     """
+    origin, name = parse_name(qname, origin)
+    origin_str = str(origin)
+    nameserver = get_ns_info(origin_str)[0]
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
-    resolver.nameservers = [settings.SERVER, ]
-    resolver.search = [dns.name.from_text(settings.BASEDOMAIN), ]
+    resolver.nameservers = [nameserver, ]
+    resolver.search = []  # was: [dns.name.from_text(settings.BASEDOMAIN), ]
     answer = resolver.query(qname, rdtype)
     return str(list(answer)[0])
 
@@ -145,6 +148,21 @@ def parse_name(fqdn, origin=None):
     return origin, rel_name
 
 
+def get_ns_info(origin):
+    """
+    Get the master nameserver for the <origin> zone, the key needed
+    to update the zone and the key algorithm used.
+
+    :param origin: zone we are dealing with, must be with trailing dot
+    :return: master nameserver, update key
+    """
+    # later look this up from Domain model: domain+'.': nameserver_ip, nameserver_update_key
+    ns_info = {
+        settings.BASEDOMAIN + '.': (settings.SERVER, settings.UPDATE_KEY, settings.UPDATE_ALGO),
+    }
+    return ns_info[origin]
+
+
 def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     """
     update our master server
@@ -159,9 +177,11 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     """
     assert action in ['add', 'del', 'upd', ]
     origin, name = parse_name(fqdn, origin)
+    origin_str = str(origin)
+    nameserver, key, algo = get_ns_info(origin_str)
     upd = dns.update.Update(origin,
-                            keyring=dns.tsigkeyring.from_text({settings.BASEDOMAIN + '.': settings.UPDATE_KEY}),
-                            keyalgorithm=settings.UPDATE_ALGO)
+                            keyring=dns.tsigkeyring.from_text({origin_str: key}),
+                            keyalgorithm=algo)
     if action == 'add':
         assert ipaddr is not None
         upd.add(name, ttl, rdtype, ipaddr)
@@ -170,5 +190,5 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     elif action == 'upd':
         assert ipaddr is not None
         upd.replace(name, ttl, rdtype, ipaddr)
-    response = dns.query.tcp(upd, settings.SERVER)
+    response = dns.query.tcp(upd, nameserver)
     return response
