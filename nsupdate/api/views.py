@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 
-from main.models import Host
+from main.models import Host, ProxyUser
 import dns.inet
 import os
 
@@ -19,11 +19,19 @@ def MyIpView(request):
     return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
 
 
-def DetectIpView(request):
+def DetectIpView(request, secret=None):
+
+    user = ProxyUser.objects.get(secret=secret)
+    print user
+
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
-    key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
-    request.session[key] = ipaddr
+    if af == dns.inet.AF_INET:
+        request.user.ipv4 = ipaddr
+    else:
+        request.user.ipv6 = ipaddr
+    request.user.ipv4 = ipaddr
+
     with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
         image_data = f.read()
     return HttpResponse(image_data, mimetype="image/png")

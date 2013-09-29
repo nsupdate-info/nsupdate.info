@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 from django.forms import ModelForm
 from django.conf import settings
+from django.contrib.auth.hashers import make_password
 
 
 class Host(models.Model):
@@ -22,3 +23,6 @@ class ProxyUser(AbstractUser):
     ipv4 = models.GenericIPAddressField(protocol='IPv4', blank=True, null=True)
     ipv6 = models.GenericIPAddressField(protocol='IPv6', blank=True, null=True)
     secret = models.CharField(max_length=256, default='', blank=True, null=True)
+
+    def create_secret(self):
+        self.secret = self.make_random_password()+self.username

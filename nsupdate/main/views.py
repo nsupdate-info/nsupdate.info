@@ -15,7 +15,6 @@ import dns.inet
 from main.forms import HostForm
 from main.models import Host
 
-
 class HomeView(TemplateView):
     template_name = "base.html"
 
