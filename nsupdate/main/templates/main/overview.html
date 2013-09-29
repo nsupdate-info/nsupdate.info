@@ -6,11 +6,13 @@
         <div class="col-lg-8">
             <h3>Host List</h3>
             <table class="table">
-            <tr><th>domain</th><th>last update</th><th>comment</th><th>action</th></tr>
+            <tr><th>domain</th><th>last update</th><th>IPv4</th><th>IPv6</th><th>comment</th><th>action</th></tr>
             {% for host in hosts %}
                 <tr>
                     <td><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></td>
-                    <td>{{ host.last_update|date }}</td>
+                    <td>{{ host.last_update|timesince }}</td>
+                    <td>{{ host.getIPv4 }}</td>
+                    <td>{{ host.getIPv6 }}</td>
                     <td>{{ host.comment }}</td>
                     <td>
                         <a href="{% url 'host_view' host.pk %}"><i class="icon icon-pencil"></i> edit</a> |

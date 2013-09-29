@@ -78,6 +78,12 @@ class Host(models.Model):
         return Host.objects.filter(
             subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
 
+    def getIPv4(self):
+        return dnstools.query(self.get_fqdn(), 'A')
+
+    def getIPv6(self):
+        return dnstools.query(self.get_fqdn(), 'AAAA')
+
     def generate_secret(self):
         # note: we use a quick hasher for the update_secret as expensive
         # more modern hashes might put too much load on the servers. also
