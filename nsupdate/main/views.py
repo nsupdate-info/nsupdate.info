@@ -16,7 +16,7 @@ from main.forms import HostForm
 from main.models import Host
 
 class HomeView(TemplateView):
-    template_name = "base.html"
+    template_name = "main/home.html"
 
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)

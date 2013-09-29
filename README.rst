@@ -1,9 +1,13 @@
 About nsupdate.info
 ===================
 
-www.nsupdate.info is a free dynamic dns service.
+nsupdate.info is the idea of a really simple single purpose dynamic dns service.
+Unlike other dynamic dns services its intention is that you do not
+have to click a link every 30 days to keep your domain enabled or other jokes
+like this.
 
-nsupdate.info is also the name of the software used to implement it.
+nsupdate.info is is intended to be self hostable, but there will most probably
+be a free service on http://www.nsupdate.info/
 
 
 Installation
@@ -22,12 +26,11 @@ Clone the repo and cd into::
     cd nsupdate
 
 
-Then install the requirements (either "dev" or just "all" for production)::
+Then install the requirements::
 
-    pip install -r requirements.d/all.txt
-    # or for dev
-    pip install -r requirements.d/dev.
+    pip install -e .
 
 
 From time to time execute this again to install the newest dependencies.
+Maybe in future there will be a PyPi package to install directly with pip.
 
