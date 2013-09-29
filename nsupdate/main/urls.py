@@ -9,6 +9,6 @@ urlpatterns = patterns(
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
     url(r'^host/(?P<pk>\d+)/delete/$', DeleteHostView.as_view(), name='delete_host'),
     url(r'^myip$', MyIpView),
-    url(r'^detectip$', DetectIpView),
+    url(r'^detectip/$', DetectIpView),
     url(r'^nic/update$', NicUpdateView),
 )
