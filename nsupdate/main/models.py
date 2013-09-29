@@ -1,11 +1,7 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User, AbstractUser
-=======
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from django.contrib.auth.models import User
->>>>>>> ebcbc5ed4aeeac29b73d095e8d6478f23440717a
 from django.forms import ModelForm
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
