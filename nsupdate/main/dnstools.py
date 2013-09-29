@@ -123,7 +123,7 @@ def query_ns(qname, rdtype, origin=None):
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
-    resolver.search = []  # was: [dns.name.from_text(settings.BASEDOMAIN), ]
+    resolver.search = [dns.name.from_text(settings.BASEDOMAIN), ]
     answer = resolver.query(qname, rdtype)
     return str(list(answer)[0])
 
