@@ -56,6 +56,7 @@ class Host(models.Model):
         max_length=256, default='', blank=True, null=True)
 
     last_update = models.DateTimeField(auto_now=True)
+    last_api_update = models.DateTimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='hosts')
