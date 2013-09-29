@@ -87,7 +87,7 @@ def check_api_auth(username, password):
     :return: True if authenticated, False otherwise.
     """
     fqdn = username
-    hosts = Host.objects.filter(fqdn=fqdn)
+    hosts = Host.filter_by_fqdn(fqdn)
     num_hosts = len(hosts)
     if num_hosts == 0:
         return False
@@ -106,7 +106,8 @@ def check_session_auth(user, hostname):
     :param hostname: fqdn
     :return: True if hostname is owned by this user, False otherwise.
     """
-    hosts = Host.objects.filter(fqdn=hostname, created_by=user)
+    fqdn = hostname
+    hosts = Host.filter_by_fqdn(fqdn, created_by=user)
     num_hosts = len(hosts)
     if num_hosts == 0:
         return False

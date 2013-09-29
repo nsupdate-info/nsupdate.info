@@ -21,7 +21,7 @@
             <h3>Update Nameserver Entry</h3>
             Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.
             <form method="get" action="{% url 'nic_update_authorized' %}">
-                <input type="hidden" name="hostname" value="{{ host.fqdn }}">
+                <input type="hidden" name="hostname" value="{{ host.get_fqdn }}">
                 <div class="form-group">
                     <label>IPv4 or IPv6</label>
                     <input class="form-control" type="text" name="myip" placeholder="Enter IP">

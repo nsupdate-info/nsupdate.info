@@ -67,7 +67,16 @@ class Host(models.Model):
         unique_together = (('subdomain', 'domain'),)
 
     def get_fqdn(self):
-        return self.subdomain+'.'+self.domain.domain
+        return '%s.%s' % (self.subdomain, self.domain.domain)
+
+    @classmethod
+    def filter_by_fqdn(cls, fqdn, **kwargs):
+        # Assuming subdomain has no dots (.) the fqdn is split at the first dot
+        splitted = fqdn.split('.', 1)
+        if not len(splitted) == 2:
+            raise NotImplemented("FQDN has to contain a dot")
+        return Host.objects.filter(
+            subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
 
 
 def post_delete_host(sender, **kwargs):
