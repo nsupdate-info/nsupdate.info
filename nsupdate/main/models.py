@@ -87,7 +87,7 @@ class Host(models.Model):
 
     def getIPv6(self):
         try:
-            return dnstools.query_ns(self.get_fqdn(), 'A')
+            return dnstools.query_ns(self.get_fqdn(), 'AAAA')
         except dns.resolver.NXDOMAIN:
             return ''
 
