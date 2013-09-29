@@ -6,7 +6,7 @@
         <div class="col-lg-9">
             <h3>Host List</h3>
             <table class="table">
-            <tr><th>domain</th><th>last update</th><th>IPv4</th><th>IPv6</th><th>comment</th><th>action</th></tr>
+            <tr><th>domain</th><th>last IP update</th><th>IPv4</th><th>IPv6</th><th>comment</th><th>action</th></tr>
             {% for host in hosts %}
                 <tr>
                     <td><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></td>
