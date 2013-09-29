@@ -41,6 +41,9 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'account_profile' %}">Profile</a></li>
                                     <li><a href="{% url 'password_change' %}">Change password</a></li>
+                                    {% if request.user.is_staff %}
+                                        <li><a href="/admin/">Admin</a></li>
+                                    {% endif %}
                                     <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                                 </ul>
                             </li>
@@ -65,48 +68,7 @@
                 </div>
             </div>
             {% block content %}
-                <div class="row" style="background-color: #DDDDDD">
-                    <div class="col-sm-4" style="text-align: center">
-                        <h1><i class="icon-globe icon-4x"></i></h1>
-                        <h3>World Wide Web</h3>
-                        <p>
-                            nsupdate.info is a free and <a href="https://github.com/asmaps/nsupdate.info">open-source</a> dynamic DNS service with IPv4 and IPv6 support.
-                        </p>
-                    </div>
-                    <div class="col-sm-4" style="text-align: center">
-                        <h1><i class="icon-cogs icon-4x"></i></h1>
-                        <h3>Awesomeness</h3>
-                        <p>
-                            Powered by python, the magical django pony and a stupid three columned icon landing page.
-                        </p>
-                    </div>
-                    <div class="col-sm-4" style="text-align: center">
-                        <h1><i class="icon-trophy icon-4x"></i></h1>
-                        <h3>The Throphy Is A Lie</h3>
-                        <p>
-                            nsupdate.info is winner of the <a href="http://djangodash.com">Django-Dash</a> 2013 with the highest score in the history of the competition.
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                      <div class="container">                        
-                        {% if request.session.ipv4 and request.session.ipv6 %}
-                            <p>We think this are your IPs:</p>
-                        {% elif request.session.ipv4 or request.session.ipv6 %}
-                            <p>We think this is your IP:</p>
-                        {% endif %}
-
-                        {% if request.session.ipv4 %}
-                            <h1>{{request.session.ipv4}}</h1>
-                        {% elif request.session.ipv6 %}
-                            <h1>{{request.session.ipv4}}</h1>
-                        {% else %}
-                            <h1>HeyHo!</h1>
-                        {% endif %}
-                    </div>
-                </div>
-
+                Here goes the content.
             {% endblock %}
         </div>
 
