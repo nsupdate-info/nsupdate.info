@@ -33,7 +33,7 @@ class Domain(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(User, blank=True, null=True)
 
     def __unicode__(self):
         return u"%s" % (self.domain, )
