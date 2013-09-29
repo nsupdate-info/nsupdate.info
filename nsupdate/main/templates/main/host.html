@@ -29,11 +29,11 @@
                     <label>IPv4 or IPv6</label>
                     <input class="form-control" type="text" id="myip" name="myip" placeholder="use remote address">
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host()">DNS Update</button> <span id="update_result"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host('{{ host.get_fqdn }}')">DNS Update</button> <span id="update_result"></span>
             <script>
-                update_host = function() {
+                update_host = function(host) {
                     $('#update_result').text('updating...');
-                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myip').val(), hostname: "{{ host.get_fqdn }}" } )
+                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myip').val(), hostname: host } )
                       .done(function( data ) {
                         $('#update_result').text(data);
                       }).fail(function( data ) {

@@ -88,13 +88,13 @@ class Host(models.Model):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'A')
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-            return '-'
+            return ''
 
     def getIPv6(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'AAAA')
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-            return '-'
+            return ''
 
     def poke(self):
         self.last_api_update = datetime.now()
