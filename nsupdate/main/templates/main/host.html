@@ -23,7 +23,7 @@
             <form method="get" action="{% url 'nic_update_authorized' %}">
                 <input type="hidden" name="hostname" value="{{ host.fqdn }}">
                 <div class="form-group">
-                    <label>IPv4 or IPv6</kabel>
+                    <label>IPv4 or IPv6</label>
                     <input class="form-control" type="text" name="myip" placeholder="Enter IP">
                 </div>
                 <button type="submit" class="btn btn-primary">DNS Update</button>
