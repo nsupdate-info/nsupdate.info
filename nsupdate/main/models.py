@@ -8,7 +8,10 @@ import re
 
 
 class BlacklistedDomain(models.Model):
-    domain = models.CharField(max_length=256, unique=True, help_text='Blacklisted domain. Evaluated as regex (search).')
+    domain = models.CharField(
+        max_length=256,
+        unique=True,
+        help_text='Blacklisted domain. Evaluated as regex (search).')
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -41,7 +44,7 @@ class Host(models.Model):
     subdomain = models.CharField(max_length=256, validators=[
         RegexValidator(
             regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
-            message='Invalid subdomain: only letters, digits and dashes are allowed'
+            message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
         ),
         domain_blacklist_validator])
     domain = models.ForeignKey(Domain)
