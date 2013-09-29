@@ -3,9 +3,13 @@
 {% load bootstrap %}
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 {% block content %}
+<div class="row">
+  <div class="col-lg-4">
     <h1>Register new account</h1>
     <form method='post' action=''>{% csrf_token %}
         {{ form|bootstrap }}
         <button type="submit" class="btn btn-primary">{% trans "Send activation email" %}</button>
     </form>
+  </div>
+</div>
 {% endblock %}
