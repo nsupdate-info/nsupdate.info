@@ -3,57 +3,27 @@
 
 {% block content %}
 <h1>Help / FAQ</h1>
-    <h2>Standards used?</h2>
-    <p>
-        We use:
-        <ul>
-            <li>Frontend Update-API: dyndns2 protocol
-                <ul>
-                    <li><a href="http://dyn.com/support/developers/api/">dyndns2 api description on dyn.com</a></li>
-                    <li><a href="http://www.noip.com/integrate/">dyndns2 api description on noip.com</a></li>
-                </ul>
-            </li>
-            <li>Backend: dynamic DNS update (see <a href="http://www.ietf.org/rfc/rfc2136.txt">RFC2136</a>)</li>
-        </ul>
-    </p>
-    <h2>Easy update URLs</h2>
-    <p>
-        Explanation of parameters:
-        <ul>
-            <li>hostname: your fully qualified hostname, something like example.nsupdate.info</li>
-            <li>yoursecret: the secret you have configured for this hostname</li>
-            <li>IP addresses: we use the v4 and v6 localhost addresses in the examples, but
-                of course you need to use your real public IP instead of that.
-            </li>
-        </ul>
-        For browser / interactive use (will ask for username (give your hostname) and password (give yoursecret)):
-        <ul>
-            <li>http://nsupdate.info/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>http://ipv4.nsupdate.info/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>http://ipv6.nsupdate.info/nic/update   (updates hostname to point to remote ipv6 address)</li>
-        </ul>
-        For browser / interactive use (give http basic auth username and password in URL):
-        <ul>
-            <li>http://hostname:yoursecret@nsupdate.info/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>http://hostname:yoursecret@ipv4.nsupdate.info/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>http://hostname:yoursecret@ipv6.nsupdate.info/nic/update   (updates hostname to point to remote ipv6 address)</li>
-        </ul>
-        For browser / interactive use as above, but manually specifying the IP address:
-        <ul>
-            <li>http://hostname:yoursecret@nsupdate.info/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
-            <li>http://hostname:yoursecret@nsupdate.info/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
-        </ul>
-        For routers or other dyndns2 compatible clients:
-        <ul>
-            <li>They must send a http basic auth header with hostname / yoursecret.</li>
-            <li>They must send a GET request to our server: nsupdate.info, path: /nic/update</li>
-            <li>We support http on port 80 (and soon also https on port 443).</li>
-            <li>URL args (all are optional):
-                <ul>
-                    <li>myip=127.0.0.1 or myip=::1  (if not given: autodetect from remote_addr)</li>
-                    <li>hostname=hostname (if not given: autodetect from http basic auth)</li>
-                </ul>
-            </li>
-        </ul>
-    </p>
+<div class="row">
+    <div class="col-lg-5">
+        <div class="well">
+            <h2>Standards used?</h2>
+            We use:
+            <ul>
+                <li>Frontend Update-API: dyndns2 protocol
+                    <ul>
+                        <li><a href="http://dyn.com/support/developers/api/">dyndns2 api description on dyn.com</a></li>
+                        <li><a href="http://www.noip.com/integrate/">dyndns2 api description on noip.com</a></li>
+                    </ul>
+                </li>
+                <li>Backend: dynamic DNS update (see <a href="http://www.ietf.org/rfc/rfc2136.txt">RFC2136</a>)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="well">
+            <h3>How to configure your router?</h3>
+            {% include "main/includes/tabbed_router_configuration.html" with host=object %}
+        </div>
+    </div>
+</div>
 {% endblock %}
