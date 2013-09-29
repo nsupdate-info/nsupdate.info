@@ -127,6 +127,7 @@ class HostView(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
+        context['remote_addr'] = self.request.META['REMOTE_ADDR']
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
 
