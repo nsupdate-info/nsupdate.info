@@ -15,7 +15,7 @@ class BlacklistedDomain(models.Model):
     created_by = models.ForeignKey(User, blank=True, null=True)
 
     def __unicode__(self):
-        return u"%s" % (self.domain)
+        return u"%s" % (self.domain, )
 
 
 def domain_blacklist_validator(value):
@@ -33,7 +33,7 @@ class Domain(models.Model):
     created_by = models.ForeignKey(User)
 
     def __unicode__(self):
-        return u"%s" % (self.domain)
+        return u"%s" % (self.domain, )
 
 
 class Host(models.Model):
