@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+from django.views.generic import TemplateView
 from main.views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView)
 from api.views import (
@@ -8,6 +9,8 @@ urlpatterns = patterns(
     '',
     url(r'^$', HomeView.as_view(), name="home"),
     url(r'^about/$', AboutView.as_view(), name="about"),
+    url(r'^legal/$',
+        TemplateView.as_view(template_name='main/legal.html'), name="legal"),
     url(r'^help/$', HelpView.as_view(), name="help"),
     url(r'^overview/$', OverviewView.as_view(), name='overview'),
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),

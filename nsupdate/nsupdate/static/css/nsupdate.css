@@ -1,3 +1,7 @@
+body {
+    padding-top: 70px;
+}
+
 html, body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
@@ -13,14 +17,10 @@ html, body {
   padding: 0 0 60px;
 }
 
-.content {
-    margin-top: 70px;
-}
-
 .footer {
   height: 50px;
   padding: 15px;
+  margin-top: 70px;
   background-color: #ddd;
 }
-
 
