@@ -31,9 +31,9 @@ SERVER = '85.10.192.104'  # ns1.thinkmo.de (master / dynamic upd server for nsup
 BASEDOMAIN = 'nsupdate.info'
 
 NONEXISTING_HOST = 'nonexisting.' + BASEDOMAIN
-WWW_HOST = 'www.' + BASEDOMAIN
-WWW_IPV4_HOST = 'www.ipv4.' + BASEDOMAIN
-WWW_IPV6_HOST = 'www.ipv6.' + BASEDOMAIN
+WWW_HOST = BASEDOMAIN
+WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN
+WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN
 WWW_IPV4_IP = '178.32.221.14'
 WWW_IPV6_IP = '2001:41d0:8:e00e::1'
 
