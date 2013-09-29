@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from main.views import HomeView, OverviewView, HostView, DeleteHostView
 from api.views import MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView
 

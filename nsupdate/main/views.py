@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView, CreateView
-from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
@@ -14,6 +11,7 @@ import dns.inet
 
 from main.forms import HostForm
 from main.models import Host
+
 
 class HomeView(TemplateView):
     template_name = "main/home.html"
@@ -28,7 +26,7 @@ class HomeView(TemplateView):
         key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
         s[key] = ipaddr
         s.save()
-        
+
         return context
 
 
