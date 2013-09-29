@@ -24,14 +24,19 @@ def DetectIpView(request, secret=None):
 
     s = SessionStore(session_key=secret)
 
+
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
     s[key] = ipaddr
     s.save()
-    with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
-        image_data = f.read()
-    return HttpResponse(image_data, mimetype="image/png")
+    #with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
+    #    image_data = f.read()
+    #return HttpResponse(image_data, mimetype="image/png")
+    out = ipaddr+'\n'+str(request.session)+'\n'+str(s)+'\n'+str(request.session.session_key)+'\n'+str(s.session_key)+'\n'+key
+    out += '\n'+request.session.get('ipv4','')+' | '+request.session.get('ipv6','')
+    out += '\n'+s.get('ipv4','')+' | '+s.get('ipv6','')
+    return HttpResponse(out, mimetype="text/plain")
 
 
 def basic_challenge(realm, content='Authorization Required'):
