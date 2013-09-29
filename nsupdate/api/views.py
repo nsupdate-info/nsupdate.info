@@ -191,7 +191,7 @@ def AuthorizedNicUpdateView(request):
         logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
         return Response('nohost')
     ipaddr = request.GET.get('myip')
-    if ipaddr is None:
+    if not ipaddr:
         ipaddr = request.META.get('REMOTE_ADDR')
     return _update(hostname, ipaddr)
 
