@@ -22,16 +22,13 @@ def MyIpView(request):
 
 def DetectIpView(request, secret=None):
 
-    try:
-        s = SessionStore(session_key=secret)
-    except SessionStore.DoesNotExist:
-        s = request.session
+    s = SessionStore(session_key=secret)
 
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
     s[key] = ipaddr
-
+    s.save()
     with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
         image_data = f.read()
     return HttpResponse(image_data, mimetype="image/png")
