@@ -27,7 +27,8 @@
 </div>
 <hr>
 <div class="row">
-      <div class="container">                        
+      <div class="container">             
+        <h1>HeyHo!</h1>           
         {% if request.session.ipv4 and request.session.ipv6 %}
             <p>We think this are your IPs:</p>
         {% elif request.session.ipv4 or request.session.ipv6 %}
@@ -36,10 +37,9 @@
 
         {% if request.session.ipv4 %}
             <h1>{{request.session.ipv4}}</h1>
-        {% elif request.session.ipv6 %}
-            <h1>{{request.session.ipv4}}</h1>
-        {% else %}
-            <h1>HeyHo!</h1>
+        {% endif %}
+        {% if request.session.ipv6 %}
+            <h1>{{request.session.ipv6}}</h1>
         {% endif %}
     </div>
 </div>
