@@ -24,6 +24,7 @@
         <div  class="col-lg-4">
             <h3>Update Nameserver Entry</h3>
             <p>Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.</p>
+
             <form method="get" action="{% url 'nic_update_authorized' %}">
                 <input type="hidden" name="hostname" value="{{ host.get_fqdn }}">
                 <div class="form-group">
@@ -32,6 +33,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary">DNS Update</button>
             </form>
+
+            <p>Or use this url, for example as a bookmark: <br><a href="{% url 'nic_update_authorized' %}?hostname={{ host.get_fqdn }}&myip={{ remote_addr }}">Right Click &rarr; Copy Link Address</a></p>
         </div>
     </div>
     <hr>
