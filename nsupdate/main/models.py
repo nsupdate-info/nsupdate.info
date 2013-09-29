@@ -18,7 +18,8 @@ class Domain(models.Model):
 class Host(models.Model):
     """TODO: hash update_secret on save (if not already hashed)"""
     #fqdn = models.CharField(max_length=256, unique=True, verbose_name="Fully qualified domain name")
-    subdomain = models.CharField(max_length=256)
+    subdomain = models.CharField(max_length=256, validators=[
+        RegexValidator(regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$', message='Invalid subdomain: only letters, digits and dashes are allowed')])
     domain = models.ForeignKey(Domain)
     update_secret = models.CharField(max_length=256)
     comment = models.CharField(max_length=256, default='', blank=True, null=True)
