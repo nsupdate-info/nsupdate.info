@@ -10,7 +10,7 @@
             {% for host in hosts %}
                 <tr>
                     <td><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></td>
-                    <td>{{ host.last_update|timesince }}</td>
+                    <td>{{ host.last_api_update|timesince }}</td>
                     <td>{{ host.getIPv4 }}</td>
                     <td>{{ host.getIPv6 }}</td>
                     <td>{{ host.comment }}</td>
