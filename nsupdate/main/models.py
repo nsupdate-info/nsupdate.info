@@ -12,7 +12,7 @@ class BlacklistedDomain(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(User, blank=True, null=True)
 
     def __unicode__(self):
         return u"%s" % (self.domain)
@@ -20,6 +20,7 @@ class BlacklistedDomain(models.Model):
 
 def domain_blacklist_validator(value):
     for bd in BlacklistedDomain.objects.all():
+        print bd.domain
         if re.search(bd.domain, value):
             raise ValidationError(u'This domain is not allowed')
 
@@ -39,7 +40,11 @@ class Host(models.Model):
     """TODO: hash update_secret on save (if not already hashed)"""
     #fqdn = models.CharField(max_length=256, unique=True, verbose_name="Fully qualified domain name")
     subdomain = models.CharField(max_length=256, validators=[
-        RegexValidator(regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$', message='Invalid subdomain: only letters, digits and dashes are allowed')])
+        RegexValidator(
+            regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
+            message='Invalid subdomain: only letters, digits and dashes are allowed'
+        ),
+        domain_blacklist_validator])
     domain = models.ForeignKey(Domain)
     update_secret = models.CharField(max_length=256)
     comment = models.CharField(max_length=256, default='', blank=True, null=True)
