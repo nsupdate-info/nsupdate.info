@@ -47,17 +47,21 @@
     <hr>
     <div class="row">
         <div class="col-lg-6">
-        <h3>General Information</h3>
-        <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4-only and a IPv6-only host and we can associate those with your session.
-           If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using IPv6 and vice versa.</p>
-        <b>Your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
-        <b>Your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
+            <div class="well well-sm">
+                <h3>General Information</h3>
+                <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4-only and a IPv6-only host and we can associate those with your session.
+                   If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using IPv6 and vice versa.</p>
+                <b>Your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
+                <b>Your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
+            </div>
         </div>
         <div class="col-lg-6">
-        <h3>Host Information</h3>
-        <p>This information comes directly from the name server and shows the current IPs set for your host.</p>
-        <b>Host IPv4:</b> <span class="ipv4adr">{{ host.getIPv4 }}</span> <br>
-        <b>Host IPv6:</b> <span class="ipv6adr">{{ host.getIPv6 }}</span>
+            <div class="well well-sm">
+                <h3>Host Information</h3>
+                <p>This information comes directly from the name server and shows the current IPs set for your host.</p>
+                <b>Host IPv4:</b> <span class="ipv4adr">{{ host.getIPv4 }}</span> <br>
+                <b>Host IPv6:</b> <span class="ipv6adr">{{ host.getIPv6 }}</span>
+            </div>
         </div>
     </div>
 
