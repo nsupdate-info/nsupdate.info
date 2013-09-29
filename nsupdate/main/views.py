@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView, CreateView
-from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.conf import settings
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
+from django.core.exceptions import PermissionDenied
 import dns.inet
 
 from main.forms import HostForm
@@ -44,7 +42,10 @@ class OverviewView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
-        self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
+        self.object.update_secret = make_password(
+            self.object.update_secret,
+            hasher='sha1'
+        )
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
         return HttpResponseRedirect(self.get_success_url())
@@ -71,7 +72,10 @@ class HostView(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
-        self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
+        self.object.update_secret = make_password(
+            self.object.update_secret,
+            hasher='sha1'
+        )
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host updated.')
         return HttpResponseRedirect(self.get_success_url())
