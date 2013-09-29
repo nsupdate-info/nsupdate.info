@@ -1,11 +1,9 @@
 {% extends "registration/registration_base.html" %}
 {% load i18n %}
-{% url 'auth_login' as auth_login_url %}
-{% block title %}{% trans "Activation complete" %}{% endblock %}
+{% block title %}Activation complete{% endblock %}
 {% block content %}
-{% blocktrans %}
-Thanks, activation complete!  You may now <a href='{{ auth_login_url }}'>login</a> using the username and password you set at registration.
-{% endblocktrans %}
+<h1>Thanks, activation complete!</h1>
+<p>You may now <a href="{% url 'auth_login' %}">login</a> using the username and password you set at registration.</p>
 {% endblock %}
 
 
