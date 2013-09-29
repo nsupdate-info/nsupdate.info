@@ -32,6 +32,7 @@ def DetectIpView(request, secret=None):
     into the client's session.
 
     :param request: django request object
+    :param secret: session key used to find the correct session w/o session cookie
     :return: HttpResponse object
     """
     # we do not have the session as usual, as this is a different host,
@@ -116,7 +117,12 @@ def check_session_auth(user, hostname):
 
 
 def Response(content):
-    """shortcut for plaintext response"""
+    """
+    shortcut for plaintext response
+
+    :param content: plain text content for the response
+    :return: HttpResonse object
+    """
     return HttpResponse(content, content_type='text/plain')
 
 
