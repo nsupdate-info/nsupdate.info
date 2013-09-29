@@ -198,6 +198,14 @@ def AuthorizedNicUpdateView(request):
 
 def _update(hostname, ipaddr):
     ipaddr = str(ipaddr)  # XXX bug in dnspython: crashes if ipaddr is unicode, wants a str!
+    hosts = Host.filter_by_fqdn(hostname)
+    num_hosts = len(hosts)
+    if num_hosts == 0:
+        return False
+    if num_hosts > 1:
+        logging.error("fqdn %s has multiple entries" % hostname)
+        return False
+    hosts[0].poke()
     try:
         update(hostname, ipaddr)
         logger.info('%s - received good update -> ip: %s' % (hostname, ipaddr, ))

@@ -34,6 +34,21 @@
             </form>
         </div>
     </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-6">
+        <h3>General Information</h3>
+        <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4 and IPv6 domain and we can associate those with your session. If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using your IPv6 and vice versa.</p>
+        <b>your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
+        <b>your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
+        </div>
+        <div class="col-lg-6">
+        <h3>Host Information</h3>
+        <p>This information comes directly from the name server and shows the current IPs set for your domain.</p>
+        <b>Host IPv4:</b> <span class="ipv4adr">{{ host.getIPv4 }}</span> <br>
+        <b>Host IPv6:</b> <span class="ipv6adr">{{ host.getIPv6 }}</span>
+        </div>
+    </div>
     
 
 {% endblock %}

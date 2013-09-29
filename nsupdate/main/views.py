@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 import dns.inet
+import dnstools
 
 from main.forms import CreateHostForm, EditHostForm
 from main.models import Host
@@ -88,6 +89,7 @@ class OverviewView(CreateView):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
         self.object.save()
+        dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'])
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
         return HttpResponseRedirect(self.get_success_url())
 
@@ -152,3 +154,21 @@ class DeleteHostView(DeleteView):
         context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
+
+
+def RobotsTxtView(request):
+    """
+    Dynamically serve robots.txt content.
+    If you like, you can optimize this by statically serving this by your web server.
+
+    :param request: django request object
+    :return: HttpResponse object
+    """
+    content = """\
+User-agent: *
+Crawl-delay: 10
+Disallow: /accounts/
+Disallow: /myip/
+Disallow: /nic/update/
+"""
+    return HttpResponse(content, content_type="text/plain")

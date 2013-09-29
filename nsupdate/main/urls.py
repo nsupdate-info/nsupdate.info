@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 from main.views import (
-    HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView)
+    HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView,
+    RobotsTxtView, )
 from api.views import (
     MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
 
@@ -23,4 +24,5 @@ urlpatterns = patterns(
     url(r'^nic/update$', NicUpdateView),
     url(r'^nic/update_authorized$',
         AuthorizedNicUpdateView, name='nic_update_authorized'),
+    url(r'^robots.txt$', RobotsTxtView),
 )

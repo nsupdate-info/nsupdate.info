@@ -3,14 +3,16 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <h3>Host List</h3>
             <table class="table">
-            <tr><th>domain</th><th>last update</th><th>comment</th><th>action</th></tr>
+            <tr><th>domain</th><th>last IP update</th><th>IPv4</th><th>IPv6</th><th>comment</th><th>action</th></tr>
             {% for host in hosts %}
                 <tr>
                     <td><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></td>
-                    <td>{{ host.last_update|date }}</td>
+                    <td>{{ host.last_update|timesince }}</td>
+                    <td>{{ host.getIPv4 }}</td>
+                    <td>{{ host.getIPv6 }}</td>
                     <td>{{ host.comment }}</td>
                     <td>
                         <a href="{% url 'host_view' host.pk %}"><i class="icon icon-pencil"></i> edit</a> |
@@ -22,7 +24,7 @@
             {% endfor %}
             </table>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <h3>New Host</h3>
             <form method="post" action="">
                 {% csrf_token %}
@@ -31,9 +33,11 @@
             </form>
         </div>
     </div>
+    <hr>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
         <h3>Information</h3>
+        <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4 and IPv6 domain and we can associate those with your session. If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using your IPv6 and vice versa.</p>
         <b>your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
         <b>your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
         </div>
