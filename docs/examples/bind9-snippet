@@ -1,0 +1,18 @@
+// configuration snippet for bind 9 nameserver (put it into /etc/bind9/named.conf )
+
+key "nsupdate.info." {
+    // must be same algorithm as in the nsupdate/nsupdate/settings.py
+    algorithm hmac-sha512;
+    // the secret is just a shared secret in base64-encoding, you don't need
+    // to use a special tool to create it. Some random in base64 encoding should
+    // be OK.
+    secret "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==";
+};
+
+zone nsupdate.info {
+        type master;
+        // bind9 needs write permissions into that directory and into that file:
+        file "/etc/bind/zones/nsupdate.info";
+        // everyone who has that key may update this zone:
+        allow-update { key "nsupdate.info."; };
+};
