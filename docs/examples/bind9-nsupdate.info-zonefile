@@ -1,0 +1,20 @@
+$ORIGIN .
+$TTL 3600       ; 1 hour
+nsupdate.info           IN SOA  ns1.thinkmo.de. root.thinkmo.de. (
+                                2013093117 ; serial
+                                7200       ; refresh (2 hours)
+                                1800       ; retry (30 minutes)
+                                604800     ; expire (1 week)
+                                60         ; minimum (1 minute)
+                                )
+                        NS      ns1.thinkmo.de.
+                        NS      ns3.thinkmo.de.
+                        A       178.32.221.14
+                        AAAA    2001:41d0:8:e00e::1
+                        MX      10 mx.thinkmo.de.
+$ORIGIN nsupdate.info.
+$TTL 3600       ; 1 hour
+www                     A       178.32.221.14
+                        AAAA    2001:41d0:8:e00e::1
+ipv4                    A       178.32.221.14
+ipv6                    AAAA    2001:41d0:8:e00e::1
