@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_delete
 from django.contrib.auth.hashers import make_password
 from main import dnstools
 
@@ -96,4 +96,4 @@ def post_delete_host(sender, **kwargs):
     obj = kwargs['instance']
     dnstools.delete(obj.get_fqdn())
 
-post_save.connect(post_delete_host, sender=Host)
+post_delete.connect(post_delete_host, sender=Host)
