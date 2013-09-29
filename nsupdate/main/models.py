@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
+from django.db.models.signals import post_save
+from main import dnstools
 
 import re
 
@@ -63,3 +65,13 @@ class Host(models.Model):
 
     class Meta:
         unique_together = (('subdomain', 'domain'),)
+
+    def get_fqdn(self):
+        return self.subdomain.self.domain.domain
+
+
+def post_delete_host(sender, **kwargs):
+    obj = kwargs['instance']
+    dnstools.delete(obj.get_fqdn())
+
+post_save.connect(post_delete_host, sender=Host)
