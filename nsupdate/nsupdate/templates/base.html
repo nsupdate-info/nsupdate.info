@@ -36,6 +36,7 @@
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         {% if not request.user.is_authenticated %}
+                            <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}">Register</a></li>
                             <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'auth_login' %}">Login</a></li>
                         {% else %}
                             <li class="dropdown">
