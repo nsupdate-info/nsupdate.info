@@ -1,0 +1,61 @@
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#generic" data-toggle="tab">Generic</a></li>
+    <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="generic">
+        <h4>Generic configuration hints</h4>
+        <hr>
+        Your router/script needs to call the following url for IPv4-Updates:
+        <div class="well well-sm">
+            http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@nsupdate.info/nic/update
+        </div>
+        for IPv6-Updates:
+        <div class="well well-sm">
+            http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv6.nsupdate.info/nic/update
+        </div>
+        The IPs will be determined automatically.
+        <hr>
+        Briefly your router/script has to do the following steps:
+        <ul>
+            <li>visit http://(ipv6.)nsupdate.info/nic/update</li>
+            <li>Do HTTP BasicAuth with:
+                <ul>
+                    <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
+                    <li>Password: {{ update_secret|default:"&lt;your secret&gt;" }}</li>
+                </ul>
+            </li>
+            <li>The response will look like this:
+                <ul>
+                    <li>"good &lt;your fqdn&gt;" (new IP accepted)</li>
+                    <li>"nochg &lt;your fqdn&gt;" (IP accepted, but did not change since last update)</li>
+                    <li>redirect (Code 401)  (Incorrect or no authentication data)</li>
+                </ul>
+        </ul>
+    </div>
+    <div class="tab-pane" id="avm">
+        <h4>Fritz!Box 7390 (and maybe others):</h4>
+        <hr>
+        <h5>Go to:</h5>
+        <div class="well well-sm">
+            Internet <i class="icon-long-arrow-right"></i>
+            Permit Access <i class="icon-long-arrow-right"></i>
+            Dynamic DNS
+        </div>
+        <h5>Enter the following data</h5>
+        <table class="table">
+            <thead><th>Setting</th><th>Value</th></thead>
+            <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
+            <tr><td>Update-URL</td><td>http://nsupdate.info/nic/update</td></tr>
+            <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
+            <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
+        </table>
+        <h5>For IPv6</h5>
+        Set Update-URL to the following (two links, separated by space)
+        <div class="well well-sm">
+            http://nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update
+        </div>
+    </div>
+</div>
