@@ -1,0 +1,62 @@
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#generic" data-toggle="tab">Generic</a></li>
+    <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="generic">
+        <h4>Generic configuration hints</h4>
+        <hr>
+        Your router/script needs to call the following url for IPv4-Updates:
+        <div class="well well-sm">
+            <a href="http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update</a>
+        </div>
+        For IPv6-Updates:
+        <div class="well well-sm">
+            <a href="http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update</a>
+        </div>
+        The IPs will be determined automatically.
+        <hr>
+        Briefly your router/script has to do the following steps:
+        <ul>
+            <li>visit http://ipv4.nsupdate.info/nic/update (to update A (IPv4) record)</li>
+            <li>visit http://ipv6.nsupdate.info/nic/update (to update AAAA (IPv6) record)</li>
+            <li>Do HTTP BasicAuth with:
+                <ul>
+                    <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
+                    <li>Password: {{ update_secret|default:"&lt;your secret&gt;" }}</li>
+                </ul>
+            </li>
+            <li>The response will look like this:
+                <ul>
+                    <li>"good &lt;your fqdn&gt;" <i class="icon-long-arrow-right"></i> new IP accepted</li>
+                    <li>"nochg &lt;your fqdn&gt;" <i class="icon-long-arrow-right"></i> IP accepted, but did not change since last update</li>
+                    <li>Code 401: Authorization Required <i class="icon-long-arrow-right"></i> Incorrect or no authentication data</li>
+                </ul>
+        </ul>
+    </div>
+    <div class="tab-pane" id="avm">
+        <h4>Fritz!Box 7390 (and maybe others):</h4>
+        <hr>
+        <h5>Go to:</h5>
+        <div class="well well-sm">
+            Internet <i class="icon-long-arrow-right"></i>
+            Permit Access <i class="icon-long-arrow-right"></i>
+            Dynamic DNS
+        </div>
+        <h5>Enter the following data</h5>
+        <table class="table">
+            <thead><th>Setting</th><th>Value</th></thead>
+            <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
+            <tr><td>Update-URL</td><td>http://nsupdate.info/nic/update</td></tr>
+            <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
+            <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
+        </table>
+        <h5>If you also have IPv6 (Dual Stack)</h5>
+        Set Update-URL to the following (two links, separated by space)
+        <div class="well well-sm">
+            http://ipv4.nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update
+        </div>
+    </div>
+</div>

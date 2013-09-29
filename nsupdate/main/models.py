@@ -34,6 +34,9 @@ def domain_blacklist_validator(value):
 
 class Domain(models.Model):
     domain = models.CharField(max_length=256, unique=True)
+    nameserver_ip = models.IPAddressField(max_length=256,
+        help_text="An IP where the nsupdates for this domain will be sent to")
+    nameserver_update_key = models.CharField(max_length=256)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

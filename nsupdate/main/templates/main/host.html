@@ -6,8 +6,8 @@
     <div class="row">
         
         <div class="col-lg-4">
-            <h3>Edit Horst <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
-            <p>You can only change the comment. If you want to have another domain name, you have to delete this host and create a new one.</p>
+            <h3>Edit Host <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
+            <p>You can only change the comment. If you want to have another host name, you have to delete this host and create a new one.</p>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
@@ -16,15 +16,14 @@
         </div>
         <div  class="col-lg-4">
             <h3>Generate new secret</h3>
-            <p>We store your update secret hashed, so if you forgot or lost it you have to create a new one.</p>
+            <p>We store your update secret salted and hashed, so if you forget or lose it you will have to create a new one.</p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Generate New</button>
             </form>
         </div>
         <div  class="col-lg-4">
             <h3>Update Nameserver Entry</h3>
-            <p>Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.</p>
-
+            <p>Usually you configure your router to follow the dyndns2 protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.</p>
             <form method="get" action="{% url 'nic_update_authorized' %}">
                 <input type="hidden" name="hostname" value="{{ host.get_fqdn }}">
                 <div class="form-group">
@@ -41,17 +40,17 @@
     <div class="row">
         <div class="col-lg-6">
         <h3>General Information</h3>
-        <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4 and IPv6 domain and we can associate those with your session. If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using your IPv6 and vice versa.</p>
-        <b>your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
-        <b>your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
+        <p>We try to get your IP addresses through a trick. We host two fake images on a IPv4-only and a IPv6-only host and we can associate those with your session.
+           If we find an IP address, we will update this information accordingly. This allows us to get your IPv4 address even when you are using IPv6 and vice versa.</p>
+        <b>Your IPv4:</b> <span class="ipv4adr">{{ request.session.ipv4 }}</span> <br>
+        <b>Your IPv6:</b> <span class="ipv6adr">{{ request.session.ipv6 }}</span>
         </div>
         <div class="col-lg-6">
         <h3>Host Information</h3>
-        <p>This information comes directly from the name server and shows the current IPs set for your domain.</p>
+        <p>This information comes directly from the name server and shows the current IPs set for your host.</p>
         <b>Host IPv4:</b> <span class="ipv4adr">{{ host.getIPv4 }}</span> <br>
         <b>Host IPv6:</b> <span class="ipv6adr">{{ host.getIPv6 }}</span>
         </div>
     </div>
-    
 
 {% endblock %}
