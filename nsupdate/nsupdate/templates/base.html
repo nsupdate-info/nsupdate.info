@@ -30,6 +30,8 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li{% if nav_home %} class="active"{% endif %}><a href="{% url 'home' %}">Home</a></li>
+                        <li{% if nav_about %} class="active"{% endif %}><a href="{% url 'about' %}">About</a></li>
+                        <li{% if nav_help %} class="active"{% endif %}><a href="{% url 'help' %}">Help</a></li>
                         <li{% if nav_overview %} class="active"{% endif %}><a href="{% url 'overview' %}">Overview</a></li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
