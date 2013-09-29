@@ -67,7 +67,7 @@ class Host(models.Model):
         unique_together = (('subdomain', 'domain'),)
 
     def get_fqdn(self):
-        return self.subdomain.self.domain.domain
+        return self.subdomain+'.'+self.domain.domain
 
 
 def post_delete_host(sender, **kwargs):
