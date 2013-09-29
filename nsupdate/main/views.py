@@ -14,6 +14,15 @@ from main.forms import HostForm
 from main.models import Host
 
 
+class AboutView(TemplateView):
+    template_name = "main/about.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AboutView, self).get_context_data(*args, **kwargs)
+        context['nav_about'] = True
+        return context
+
+
 class HomeView(TemplateView):
     template_name = "main/home.html"
 
