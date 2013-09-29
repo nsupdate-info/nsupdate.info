@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from main.views import HomeView, OverviewView, HostView, DeleteHostView
-from api.views import MyIpView, DetectIpView, NicUpdateView
+from api.views import MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView
+
 
 urlpatterns = patterns(
     '',
@@ -11,4 +12,5 @@ urlpatterns = patterns(
     url(r'^myip$', MyIpView),
     url(r'^detectip/$', DetectIpView),
     url(r'^nic/update$', NicUpdateView),
+    url(r'^nic/update_authorized$', AuthorizedNicUpdateView),
 )
