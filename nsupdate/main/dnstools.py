@@ -21,6 +21,15 @@ class SameIpError(ValueError):
 
 
 def update(fqdn, ipaddr, ttl=60):
+    """
+    intelligent dns updater - first does a lookup on the master server to find
+    the current ip and only sends a dynamic update if we have a different ip.
+
+    :param fqdn: fully qualified domain name (str)
+    :param ipaddr: new ip address
+    :param ttl: time to live, default 60s (int)
+    :raises: SameIpError if new and old IP is the same
+    """
     af = dns.inet.af_for_address(ipaddr)
     rdtype = 'A' if af == dns.inet.AF_INET else 'AAAA'
     try:
