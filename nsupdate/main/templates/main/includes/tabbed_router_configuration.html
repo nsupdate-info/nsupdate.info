@@ -1,11 +1,12 @@
 <ul class="nav nav-tabs" id="myTab">
-    <li class="active"><a href="#generic" data-toggle="tab">Generic</a></li>
+    <li class="active"><a href="#generic" data-toggle="tab">General</a></li>
     <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
+    <li><a href="#browser" data-toggle="tab">Browser</a></li>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane active" id="generic">
-        <h4>Generic configuration hints</h4>
+        <h4>General configuration hints</h4>
         <hr>
         Your router/script needs to call the following url for IPv4-Updates:
         <div class="well well-sm">
@@ -34,6 +35,18 @@
                     <li>Code 401: Authorization Required <i class="icon-long-arrow-right"></i> Incorrect or no authentication data</li>
                 </ul>
         </ul>
+        For routers or other dyndns2 compatible clients:
+        <ul>
+            <li>They must send a http basic auth header with hostname / yoursecret.</li>
+            <li>They must send a GET request to our server: nsupdate.info, path: /nic/update</li>
+            <li>We support http on port 80 (and soon also https on port 443).</li>
+            <li>URL args (all are optional):
+                <ul>
+                    <li>myip=127.0.0.1 or myip=::1  (if not given: autodetect from remote_addr)</li>
+                    <li>hostname=hostname (if not given: autodetect from http basic auth)</li>
+                </ul>
+            </li>
+        </ul>
     </div>
     <div class="tab-pane" id="avm">
         <h4>Fritz!Box 7390 (and maybe others):</h4>
@@ -49,8 +62,8 @@
             <thead><th>Setting</th><th>Value</th></thead>
             <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
             <tr><td>Update-URL</td><td>http://nsupdate.info/nic/update</td></tr>
-            <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
-            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
+            <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
         <h5>If you also have IPv6 (Dual Stack)</h5>
@@ -58,5 +71,37 @@
         <div class="well well-sm">
             http://ipv4.nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update
         </div>
+    </div>
+    <div class="tab-pane" id="browser">
+        <h4>Easy update URLs</h4>
+        Explanation of parameters:
+        <ul>
+            {% if not host %}
+                <li>&lt;your hostname&gt;: your fully qualified hostname, something like example.nsupdate.info</li>
+            {% endif %}
+            {% if not update_secret %}
+                <li>&lt;your secret&gt;: the secret you have configured for this hostname</li>
+            {% endif %}
+            <li>IP addresses: we use the v4 and v6 localhost addresses in the examples, but
+                of course you need to use your real public IP instead of that.
+            </li>
+        </ul>
+        For browser / interactive use (will ask for username (give your hostname) and password (give yoursecret)):
+        <ul>
+            <li>http://nsupdate.info/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>http://ipv4.nsupdate.info/nic/update   (updates hostname to point to remote ipv4 address)</li>
+            <li>http://ipv6.nsupdate.info/nic/update   (updates hostname to point to remote ipv6 address)</li>
+        </ul>
+        For browser / interactive use (give http basic auth username and password in URL):
+        <ul>
+            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@nsupdate.info/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update   (updates hostname to point to remote ipv4 address)</li>
+            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv6.nsupdate.info/nic/update   (updates hostname to point to remote ipv6 address)</li>
+        </ul>
+        For browser / interactive use as above, but manually specifying the IP address:
+        <ul>
+            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@nsupdate.info/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
+            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@nsupdate.info/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
+        </ul>
     </div>
 </div>
