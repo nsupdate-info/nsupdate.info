@@ -7,21 +7,25 @@
         
         <div class="col-lg-4">
             <h3>Edit Horst <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
-            Edit your host information.
+            <p>You can only change the comment. If you want to have another domain name, you have to delete this host and create a new one.</p>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
-        <div  class="col-lg-1">
-
+        <div  class="col-lg-4">
+            <h3>Generate new secret</h3>
+            <p>We store your update secret hashed, so if you forgot or lost it you have to create a new one.</p>
+            <form action="{% url 'generate_secret_view' host.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">Generate New</button>
+            </form>
         </div>
         <div  class="col-lg-4">
             <h3>Update Nameserver Entry</h3>
-            Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.
+            <p>Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.</p>
             <form method="get" action="{% url 'nic_update_authorized' %}">
-                <input type="hidden" name="hostname" value="{{ host.fqdn }}">
+                <input type="hidden" name="hostname" value="{{ host.get_fqdn }}">
                 <div class="form-group">
                     <label>IPv4 or IPv6</label>
                     <input class="form-control" type="text" name="myip" placeholder="Enter IP">

@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db.models.signals import post_save
+from django.contrib.auth.hashers import make_password
 from main import dnstools
 
 import re
@@ -25,7 +26,6 @@ class BlacklistedDomain(models.Model):
 
 def domain_blacklist_validator(value):
     for bd in BlacklistedDomain.objects.all():
-        print bd.domain
         if re.search(bd.domain, value):
             raise ValidationError(u'This domain is not allowed')
 
@@ -68,6 +68,19 @@ class Host(models.Model):
 
     def get_fqdn(self):
         return self.subdomain+'.'+self.domain.domain
+
+    def generate_secret(self):
+        # note: we use a quick hasher for the update_secret as expensive
+        # more modern hashes might put too much load on the servers. also
+        # many update clients might use http without ssl, so it is not too
+        # secure anyway.
+        secret = User.objects.make_random_password()
+        self.update_secret = make_password(
+            secret,
+            hasher='sha1'
+        )
+        self.save()
+        return secret
 
 
 def post_delete_host(sender, **kwargs):

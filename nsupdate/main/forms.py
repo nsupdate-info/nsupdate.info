@@ -3,7 +3,13 @@ from django import forms
 from main.models import Host
 
 
-class HostForm(forms.ModelForm):
+class CreateHostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ['subdomain', 'domain', 'comment', 'update_secret']
+        fields = ['subdomain', 'domain', 'comment']
+
+
+class EditHostForm(forms.ModelForm):
+    class Meta:
+        model = Host
+        fields = ['comment']

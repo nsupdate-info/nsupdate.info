@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 from main.views import (
-    HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView)
+    HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView)
 from api.views import (
     MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
 
@@ -14,6 +14,7 @@ urlpatterns = patterns(
     url(r'^help/$', HelpView.as_view(), name="help"),
     url(r'^overview/$', OverviewView.as_view(), name='overview'),
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
+    url(r'^generate_secret/(?P<pk>\d+)/$', GenerateSecretView.as_view(), name='generate_secret_view'),
     url(r'^host/(?P<pk>\d+)/delete/$',
         DeleteHostView.as_view(), name='delete_host'),
     url(r'^myip$', MyIpView),
