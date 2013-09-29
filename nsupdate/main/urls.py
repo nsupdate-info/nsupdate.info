@@ -12,5 +12,5 @@ urlpatterns = patterns(
     url(r'^myip$', MyIpView),
     url(r'^detectip/$', DetectIpView),
     url(r'^nic/update$', NicUpdateView),
-    url(r'^nic/update_authorized$', AuthorizedNicUpdateView),
+    url(r'^nic/update_authorized$', AuthorizedNicUpdateView, name='nic_update_authorized'),
 )

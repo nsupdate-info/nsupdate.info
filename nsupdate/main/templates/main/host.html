@@ -5,12 +5,28 @@
 
     <div class="row">
         
-         <div class="col-lg-4">
+        <div class="col-lg-4">
             <h3>Edit Horst <small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
+            Edit your host information.
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+        <div  class="col-lg-1">
+
+        </div>
+        <div  class="col-lg-4">
+            <h3>Update Nameserver Entry</h3>
+            Usually you configure your router to follow the dyndns protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.
+            <form method="get" action="{% url 'nic_update_authorized' %}">
+                <input type="hidden" name="hostname" value="{{ host.fqdn }}">
+                <div class="form-group">
+                    <label>IPv4 or IPv6</kabel>
+                    <input class="form-control" type="text" name="myip" placeholder="Enter IP">
+                </div>
+                <button type="submit" class="btn btn-primary">DNS Update</button>
             </form>
         </div>
     </div>
