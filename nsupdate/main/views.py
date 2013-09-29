@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 import dns.inet
+import dnstools
 
 from main.forms import CreateHostForm, EditHostForm
 from main.models import Host
@@ -88,6 +89,7 @@ class OverviewView(CreateView):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
         self.object.save()
+        dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'])
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
         return HttpResponseRedirect(self.get_success_url())
 
