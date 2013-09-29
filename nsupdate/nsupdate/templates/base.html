@@ -96,12 +96,6 @@
             </p>
             </div>
         </div>
-
-            <div style="display: none">
-                <img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" />
-                <img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" />
-            </div>
-
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         {% if ENABLE_PIWIK_PRODUCTION %}
             <!-- Piwik -->
@@ -123,5 +117,16 @@
             </script>
             <!-- End Piwik Code -->
         {% endif %}
+        <div style="display: none">
+            <img id="v4_img" />
+            <img id="v6_img" />
+            <script type="text/javascript">
+                function insert_src() {
+                    $('#v4_img').attr('src', "//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/");
+                    $('#v6_img').attr('src', "//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/");
+                };
+                $(setTimeout("insert_src()", 1000));
+            </script>
+        </div>
     </body>
 </html>
