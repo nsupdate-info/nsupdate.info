@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.forms import ModelForm
+from django.conf import settings
 
 
 class Host(models.Model):
@@ -11,9 +12,13 @@ class Host(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts')
 
     def __unicode__(self):
         return u"%s - %s" % (self.fqdn, self.comment)
 
 
+class ProxyUser(AbstractUser):
+    ipv4 = models.GenericIPAddressField(protocol='IPv4', blank=True, null=True)
+    ipv6 = models.GenericIPAddressField(protocol='IPv6', blank=True, null=True)
+    secret = models.CharField(max_length=256, default='', blank=True, null=True)
