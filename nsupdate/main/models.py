@@ -7,6 +7,7 @@ from django.db.models.signals import post_delete
 from django.contrib.auth.hashers import make_password
 from main import dnstools
 import dns.resolver
+from datetime import datetime
 
 import re
 
@@ -83,14 +84,18 @@ class Host(models.Model):
     def getIPv4(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'A')
-        except dns.resolver.NXDOMAIN:
-            return ''
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return '-'
 
     def getIPv6(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'AAAA')
-        except dns.resolver.NXDOMAIN:
-            return ''
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return '-'
+
+    def poke(self):
+        self.last_api_update = datetime.now()
+        self.save()
 
     def generate_secret(self):
         # note: we use a quick hasher for the update_secret as expensive
