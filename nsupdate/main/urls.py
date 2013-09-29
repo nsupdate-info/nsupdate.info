@@ -3,7 +3,7 @@ from main.views import (
     HomeView, OverviewView, HostView, DeleteHostView,
 )
 from api.views import (
-    MyIpView, UpdateIpView, NicUpdateView
+    MyIpView, DetectIpView, NicUpdateView
 )
 
 urlpatterns = patterns('',
@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
     url(r'^host/(?P<pk>\d+)/delete/$', DeleteHostView.as_view(), name='delete_host'),
     url(r'^myip$', MyIpView),
-    url(r'^updateip$', UpdateIpView),
+    url(r'^detectip$', DetectIpView),
     url(r'^nic/update$', NicUpdateView),
 )

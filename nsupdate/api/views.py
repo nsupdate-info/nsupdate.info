@@ -6,8 +6,8 @@ logger = logging.getLogger(__name__)
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.decorators import login_required
 
-from main.forms import *
 from main.models import Host
 import dns.inet
 import os
@@ -19,7 +19,7 @@ def MyIpView(request):
     return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
 
 
-def UpdateIpView(request):
+def DetectIpView(request):
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
