@@ -20,10 +20,14 @@ class HomeView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['nav_home'] = True
+
+        s = self.request.session
         ipaddr = self.request.META['REMOTE_ADDR']
         af = dns.inet.af_for_address(ipaddr)
         key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
-        self.request.session[key] = ipaddr
+        s[key] = ipaddr
+        s.save()
+
         return context
 
 
@@ -42,6 +46,7 @@ class OverviewView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        # see comment in HostView about the quick hasher:
         self.object.update_secret = make_password(
             self.object.update_secret,
             hasher='sha1'
@@ -72,6 +77,10 @@ class HostView(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        # note: we use a quick hasher for the update_secret as expensive
+        # more modern hashes might put too much load on the servers. also
+        # many update clients might use http without ssl, so it is not too
+        # secure anyway.
         self.object.update_secret = make_password(
             self.object.update_secret,
             hasher='sha1'

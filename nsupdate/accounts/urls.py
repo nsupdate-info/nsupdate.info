@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from accounts.views import UserProfileView
 
 from django.contrib.auth.views import password_change

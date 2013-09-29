@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
+from django.contrib.sessions.backends.db import SessionStore
 
 from main.models import Host
 import dns.inet
@@ -16,14 +17,32 @@ from main.dnstools import update, SameIpError
 
 
 def MyIpView(request):
+    """
+    return the IP address (can be v4 or v6) of the client requesting this view.
+
+    :param request: django request object
+    :return: HttpResponse object
+    """
     return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
 
 
-def DetectIpView(request):
+def DetectIpView(request, secret=None):
+    """
+    Put the IP address (can be v4 or v6) of the client requesting this view
+    into the client's session.
+
+    :param request: django request object
+    :return: HttpResponse object
+    """
+    # we do not have the session as usual, as this is a different host,
+    # so the session cookie is not received here - thus we access it via
+    # the secret:
+    s = SessionStore(session_key=secret)
     ipaddr = request.META['REMOTE_ADDR']
     af = dns.inet.af_for_address(ipaddr)
     key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
-    request.session[key] = ipaddr
+    s[key] = ipaddr
+    s.save()
     with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
         image_data = f.read()
     return HttpResponse(image_data, mimetype="image/png")
@@ -97,6 +116,7 @@ def check_session_auth(user, hostname):
 
 
 def Response(content):
+    """shortcut for plaintext response"""
     return HttpResponse(content, content_type='text/plain')
 
 
@@ -118,6 +138,9 @@ def NicUpdateView(request):
     a query parameter, you can also give the hostname (then it won't use
     the username from http basic auth as the fqdn:
     https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+
+    :param request: django request object
+    :return: HttpResponse object
     """
     hostname = request.GET.get('hostname')
     auth = request.META.get('HTTP_AUTHORIZATION')
@@ -150,6 +173,9 @@ def AuthorizedNicUpdateView(request):
     Example URLs:
 
     https://supdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+
+    :param request: django request object
+    :return: HttpResponse object
     """
     hostname = request.GET.get('hostname')
     if hostname is None:

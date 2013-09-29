@@ -1,4 +1,7 @@
-# Django settings for nsupdate project.
+"""
+Django settings for nsupdate project
+"""
+
 import django.conf.global_settings as DEFAULT_SETTINGS
 import dns.tsig
 import os
@@ -75,18 +78,16 @@ MEDIA_ROOT = ''
 # Examples: "http://example.com/media/", "http://media.example.com/"
 MEDIA_URL = ''
 
-# Absolute path to the directory static files should be collected to.
-# Don't put anything in this directory yourself; store your static files
-# in apps' "static/" subdirectories and in STATICFILES_DIRS.
-# Example: "/var/www/example.com/static/"
-STATIC_ROOT = ''
-
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/var/www/example.com/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Additional locations of static files
