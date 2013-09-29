@@ -87,13 +87,13 @@ class Host(models.Model):
     def getIPv4(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'A')
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers):
             return ''
 
     def getIPv6(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'AAAA')
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers):
             return ''
 
     def poke(self):
