@@ -6,6 +6,7 @@ from django.conf import settings
 from django.db.models.signals import post_delete
 from django.contrib.auth.hashers import make_password
 from main import dnstools
+import dns.resolver
 
 import re
 
@@ -79,10 +80,16 @@ class Host(models.Model):
             subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
 
     def getIPv4(self):
-        return dnstools.query(self.get_fqdn(), 'A')
+        try:
+            return dnstools.query_ns(self.get_fqdn(), 'A')
+        except dns.resolver.NXDOMAIN:
+            return ''
 
     def getIPv6(self):
-        return dnstools.query(self.get_fqdn(), 'AAAA')
+        try:
+            return dnstools.query_ns(self.get_fqdn(), 'A')
+        except dns.resolver.NXDOMAIN:
+            return ''
 
     def generate_secret(self):
         # note: we use a quick hasher for the update_secret as expensive

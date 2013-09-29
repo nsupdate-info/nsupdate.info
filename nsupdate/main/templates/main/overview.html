@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-9">
             <h3>Host List</h3>
             <table class="table">
             <tr><th>domain</th><th>last update</th><th>IPv4</th><th>IPv6</th><th>comment</th><th>action</th></tr>
@@ -24,7 +24,7 @@
             {% endfor %}
             </table>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-3">
             <h3>New Host</h3>
             <form method="post" action="">
                 {% csrf_token %}
