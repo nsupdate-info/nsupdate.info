@@ -124,8 +124,8 @@
         </div>
 
             <div style="display: none">
-                <img src="//{{ WWW_IPV4_HOST }}/detectip" />
-                <img src="//{{ WWW_IPV6_HOST }}/detectip" />
+                <img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" />
+                <img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" />
             </div>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

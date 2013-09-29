@@ -21,10 +21,13 @@ class HomeView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['nav_home'] = True
+
+        s = self.request.session
         ipaddr = self.request.META['REMOTE_ADDR']
         af = dns.inet.af_for_address(ipaddr)
         key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
-        self.request.session[key] = ipaddr
+        s[key] = ipaddr
+
         return context
 
 
