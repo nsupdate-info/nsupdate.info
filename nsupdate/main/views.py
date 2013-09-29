@@ -27,7 +27,8 @@ class HomeView(TemplateView):
         af = dns.inet.af_for_address(ipaddr)
         key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
         s[key] = ipaddr
-
+        s.save()
+        
         return context
 
 
