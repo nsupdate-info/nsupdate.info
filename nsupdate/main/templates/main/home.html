@@ -6,11 +6,12 @@
 
   <div class="jumbotron">
       <div class="container">
+        <h4>Your IP is:</h4>
         {% if request.session.ipv4 %}
                 <h1>{{request.session.ipv4}}</h1>
         {% endif %}
         {% if request.session.ipv6 %}
-            <h1>{{request.session.ipv6}}</h1>
+            <h2>{{request.session.ipv6}}</h2>
         {% endif %}
         <p>Free and Open Source Dynamic DNS service for you. Developed in under 48h for the <a href="http://djangodash.com/">Django-Dash 2013</a>.</p>
         <p>
