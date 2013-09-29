@@ -46,6 +46,7 @@ class OverviewView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        # see comment in HostView about the quick hasher:
         self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
@@ -73,6 +74,10 @@ class HostView(UpdateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
+        # note: we use a quick hasher for the update_secret as expensive
+        # more modern hashes might put too much load on the servers. also
+        # many update clients might use http without ssl, so it is not too
+        # secure anyway.
         self.object.update_secret = make_password(self.object.update_secret, hasher='sha1')
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Host updated.')

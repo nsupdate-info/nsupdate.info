@@ -39,7 +39,6 @@ class Domain(models.Model):
 
 
 class Host(models.Model):
-    """TODO: hash update_secret on save (if not already hashed)"""
     #fqdn = models.CharField(max_length=256, unique=True, verbose_name="Fully qualified domain name")
     subdomain = models.CharField(max_length=256, validators=[
         RegexValidator(
@@ -48,7 +47,7 @@ class Host(models.Model):
         ),
         domain_blacklist_validator])
     domain = models.ForeignKey(Domain)
-    update_secret = models.CharField(max_length=256)
+    update_secret = models.CharField(max_length=256)  # gets hashed on save
     comment = models.CharField(max_length=256, default='', blank=True, null=True)
 
     last_update = models.DateTimeField(auto_now=True)
@@ -60,4 +59,3 @@ class Host(models.Model):
 
     class Meta:
         unique_together = (('subdomain', 'domain'),)
-
