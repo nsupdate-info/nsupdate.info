@@ -6,4 +6,4 @@ from main.models import Host
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ['fqdn', 'comment', 'update_secret']
+        fields = ['subdomain', 'domain', 'comment', 'update_secret']

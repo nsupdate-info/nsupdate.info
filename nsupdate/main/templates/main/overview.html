@@ -10,7 +10,7 @@
             <tr><th>domain</th><th>last update</th><th>comment</th><th>action</th></tr>
             {% for host in hosts %}
                 <tr>
-                    <td><b>{{ host.fqdn }}</b></td>
+                    <td><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></td>
                     <td>{{ host.last_update|date }}</td>
                     <td>{{ host.comment }}</td>
                     <td>
