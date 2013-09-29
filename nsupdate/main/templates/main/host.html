@@ -15,7 +15,7 @@
             </form>
         </div>
         <div  class="col-lg-4">
-            <h3>Generate new secret</h3>
+            <h3>Generate New Secret</h3>
             <p>We store your update secret salted and hashed, so if you forget or lose it you will have to create a new one.</p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Generate New</button>

@@ -1,8 +1,31 @@
 {% extends "base.html" %}
 {% load bootstrap %}
+{% load static %}
+
+{% block header %}
+
+  <div class="jumbotron">
+      <div class="container">
+        {% if request.session.ipv4 %}
+                <h1>{{request.session.ipv4}}</h1>
+        {% endif %}
+        {% if request.session.ipv6 %}
+            <h1>{{request.session.ipv6}}</h1>
+        {% endif %}
+        <p>Free and Open Source Dynamic DNS service for you. Developed in under 48h for the <a href="http://djangodash.com/">Django-Dash 2013</a>.</p>
+        <p>
+<iframe src="http://ghbtns.com/github-btn.html?user=asmaps&repo=nsupdate.info&type=watch&count=true"
+  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+        </p>
+      </div>
+    </div>
+
+
+{% endblock %}
 
 {% block content %}
-<div class="row" style="background-color: #DDDDDD">
+
+<div class="row">
     <div class="col-sm-4" style="text-align: center">
         <h1><i class="icon-globe icon-3x"></i></h1>
         <h3>World Wide Web</h3>
@@ -27,17 +50,54 @@
 </div>
 <hr>
 <div class="row">
-      <div class="container">
-        {% if request.session.ipv4 %}
-            <h1>Your IPv4 address: {{request.session.ipv4}}</h1>
-        {% else %}
-            <h1>Your IPv4 address: unknown</h1>
-        {% endif %}
-        {% if request.session.ipv6 %}
-            <h1>Your IPv6 address: {{request.session.ipv6}}</h1>
-        {% else %}
-            <h1>Your IPv6 address: unknown</h1>
-        {% endif %}
+        <div class="col-lg-3">
+
+            <div class="well well-sm">
+                <h3>We had a lot of fun</h3>
+                <p>
+                    <i class="icon icon-ok"></i> Open-Source<br>
+                    <i class="icon icon-ok"></i> Easy to use<br>
+                    <i class="icon icon-ok"></i> Fast and Awesome<br>
+                    <i class="icon icon-ok"></i> Funny List<br>
+                    <i class="icon icon-ok"></i> Built in 48h<br>
+                    <i class="icon icon-ok"></i> Probably no Bugs<br>
+                </p>
+                <p>Follow the white rabbit...</p>
+            </div>
+
+
+        </div>
+        <div class="col-lg-3">
+
+            <div class="well well-sm">
+                <h3>Another List</h3>
+                <p>
+                    I have no idea what I am doing.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well well-sm">
+                <h3>Screenshots</h3>
+                <a id="screenshots_url" href="{% static 'screenshots/overview.png' %}">
+                    <img id="screenshots" src="{% static 'screenshots/overview.png' %}" class="img-responsive" alt="Responsive image">
+                </a>
+                <script>
+                var id = 0;
+                var srcs = Array("{% static 'screenshots/hostview.png' %}","{% static 'screenshots/help.png' %}","{% static 'screenshots/overview.png' %}","{% static 'screenshots/generatesecret.png' %}");
+                setInterval(function(){
+                    $('#screenshots').attr('src', srcs[id]);
+                    $('#screenshots_url').attr('href', srcs[id]);
+                    id += 1;
+                    if(id>=srcs.length) {
+                        id=0;
+                    }
+                },5000);
+                    
+                </script>
+            </div>
+        </div>
     </div>
-</div>
+
+<hr>
 {% endblock %}
