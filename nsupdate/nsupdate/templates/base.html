@@ -38,6 +38,9 @@
                         <li{% if nav_about %} class="active"{% endif %}>
                             <a href="{% url 'about' %}">About</a>
                         </li>
+                        <li{% if nav_help %} class="active"{% endif %}>
+                            <a href="{% url 'help' %}">Help</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         {% if not request.user.is_authenticated %}

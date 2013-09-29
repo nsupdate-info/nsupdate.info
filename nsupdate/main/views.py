@@ -40,6 +40,24 @@ class HomeView(TemplateView):
         return context
 
 
+class HelpView(TemplateView):
+    template_name = "main/help.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(HelpView, self).get_context_data(*args, **kwargs)
+        context['nav_help'] = True
+        return context
+
+
+class AboutView(TemplateView):
+    template_name = "main/about.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AboutView, self).get_context_data(*args, **kwargs)
+        context['nav_about'] = True
+        return context
+
+
 class OverviewView(CreateView):
     model = Host
     template_name = "main/overview.html"
