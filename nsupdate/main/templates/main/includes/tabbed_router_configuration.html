@@ -9,17 +9,18 @@
         <hr>
         Your router/script needs to call the following url for IPv4-Updates:
         <div class="well well-sm">
-            http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@nsupdate.info/nic/update
+            <a href="http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update</a>
         </div>
-        for IPv6-Updates:
+        For IPv6-Updates:
         <div class="well well-sm">
-            http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv6.nsupdate.info/nic/update
+            <a href="http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update</a>
         </div>
         The IPs will be determined automatically.
         <hr>
         Briefly your router/script has to do the following steps:
         <ul>
-            <li>visit http://(ipv6.)nsupdate.info/nic/update</li>
+            <li>visit http://ipv4.nsupdate.info/nic/update (to update A (IPv4) record)</li>
+            <li>visit http://ipv6.nsupdate.info/nic/update (to update AAAA (IPv6) record)</li>
             <li>Do HTTP BasicAuth with:
                 <ul>
                     <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
@@ -28,9 +29,9 @@
             </li>
             <li>The response will look like this:
                 <ul>
-                    <li>"good &lt;your fqdn&gt;" (new IP accepted)</li>
-                    <li>"nochg &lt;your fqdn&gt;" (IP accepted, but did not change since last update)</li>
-                    <li>redirect (Code 401)  (Incorrect or no authentication data)</li>
+                    <li>"good &lt;your fqdn&gt;" <i class="icon-long-arrow-right"></i> new IP accepted</li>
+                    <li>"nochg &lt;your fqdn&gt;" <i class="icon-long-arrow-right"></i> IP accepted, but did not change since last update</li>
+                    <li>Code 401: Authorization Required <i class="icon-long-arrow-right"></i> Incorrect or no authentication data</li>
                 </ul>
         </ul>
     </div>
@@ -52,10 +53,10 @@
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
-        <h5>For IPv6</h5>
+        <h5>If you also have IPv6 (Dual Stack)</h5>
         Set Update-URL to the following (two links, separated by space)
         <div class="well well-sm">
-            http://nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update
+            http://ipv4.nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update
         </div>
     </div>
 </div>
