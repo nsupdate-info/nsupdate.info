@@ -8,11 +8,11 @@
     <div class="tab-pane active" id="generic">
         <h4>General configuration hints</h4>
         <hr>
-        Your router/script needs to call the following url for IPv4-Updates:
+        Your router/script needs to call the following URL for IPv4 updates:
         <div class="well well-sm">
             <a href="http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update</a>
         </div>
-        For IPv6-Updates:
+        For IPv6 updates:
         <div class="well well-sm">
             <a href="http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update</a>
         </div>
@@ -22,7 +22,7 @@
         <ul>
             <li>visit http://ipv4.nsupdate.info/nic/update (to update A (IPv4) record)</li>
             <li>visit http://ipv6.nsupdate.info/nic/update (to update AAAA (IPv6) record)</li>
-            <li>Do HTTP BasicAuth with:
+            <li>Do HTTP Basic Auth with:
                 <ul>
                     <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
                     <li>Password: {{ update_secret|default:"&lt;your secret&gt;" }}</li>
@@ -50,7 +50,7 @@
         </ul>
     </div>
     <div class="tab-pane" id="avm">
-        <h4>Fritz!Box 7390 (and maybe others):</h4>
+        <h4>Fritz!Box 6360, 7390 and maybe others:</h4>
         <hr>
         <h5>Go to:</h5>
         <div class="well well-sm">
@@ -67,7 +67,7 @@
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
-        <h5>If you also have IPv6 (Dual Stack)</h5>
+        <h5>If you have IPv4 and IPv6</h5>
         Set Update-URL to the following (two URLs, separated by one space)
         <div class="well well-sm">http://ipv4.nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update</div>
     </div>
