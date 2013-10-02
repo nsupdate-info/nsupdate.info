@@ -179,7 +179,7 @@ def AuthorizedNicUpdateView(request):
 
     Example URLs:
 
-    https://supdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+    https://nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
     :param request: django request object
     :return: HttpResponse object
