@@ -6,8 +6,8 @@ Unlike other dynamic dns services its intention is that you do not
 have to click a link every 30 days to keep your domain enabled or other jokes
 like this.
 
-nsupdate.info is is intended to be self hostable, but there will most probably
-be a free service on http://www.nsupdate.info/
+nsupdate.info is is intended to be self hostable, but there is also a free
+service on http://nsupdate.info/
 
 
 Installation
@@ -22,7 +22,7 @@ installation (here with virtualenvwrapper)::
 
 Clone the repo and cd into::
 
-    git clone git@github.com:asmaps/nsupdate.info.git nsupdate
+    git clone git@github.com:nsupdate-info/nsupdate.info.git nsupdate
     cd nsupdate
 
 
@@ -33,4 +33,3 @@ Then install the requirements::
 
 From time to time execute this again to install the newest dependencies.
 Maybe in future there will be a PyPi package to install directly with pip.
-

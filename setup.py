@@ -10,7 +10,7 @@ with open('README.rst') as f:
 setup(
     name='nsupdate',
     version='0.0.1a0',
-    url='http://github.com/asmaps/nsupdate.info/',
+    url='http://github.com/nsupdate-info/nsupdate.info/',
     license='BSD',
     author='The nsupdate.info Team (see AUTHORS)',
     author_email='info@nsupdate.info',
