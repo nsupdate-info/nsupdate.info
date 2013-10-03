@@ -8,8 +8,20 @@
 <div class="tab-content">
     <div class="tab-pane active" id="generic">
         <h4>General configuration hints</h4>
+        <p>
+            Usually, you should configure one system on your network to update the DNS.
+            This can be either your router or a host on your network and it will run some software
+            called the update client.
+        </p>
+        <p>
+            We have some specific configuration hints for some devices and update clients,
+            please see the tabs above. If you don't find yours there, use the generic hints below.
+        </p>
         <hr>
-        Your router/script needs to call the following URL for IPv4 updates:
+        <p>
+            Your update client needs to access the following URLs to update the DNS:
+        </p>
+        For IPv4 updates:
         <div class="well well-sm">
             <a href="http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@ipv4.nsupdate.info/nic/update</a>
         </div>
@@ -17,35 +29,39 @@
         <div class="well well-sm">
             <a href="http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update">http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@ipv6.nsupdate.info/nic/update</a>
         </div>
-        The IPs will be determined automatically.
+        The IPs will be determined automatically using the remote address our service is seeing
+        (see below for more details).
         <hr>
-        Briefly your router/script has to do the following steps:
+        <p>
+            Your update client has to do the following steps:
+        </p>
         <ul>
-            <li>visit http://ipv4.nsupdate.info/nic/update (to update A (IPv4) record)</li>
-            <li>visit http://ipv6.nsupdate.info/nic/update (to update AAAA (IPv6) record)</li>
             <li>Do HTTP Basic Auth with:
                 <ul>
                     <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
                     <li>Password: {{ update_secret|default:"&lt;your secret&gt;" }}</li>
                 </ul>
             </li>
-            <li>The response will look like this:
+            <li>Send a http GET request to:
                 <ul>
-                    <li>"good &lt;your ip&gt;" <i class="icon-long-arrow-right"></i> new IP accepted</li>
-                    <li>"nochg &lt;your ip&gt;" <i class="icon-long-arrow-right"></i> IP accepted, but did not change since last update</li>
-                    <li>Code 401: Authorization Required <i class="icon-long-arrow-right"></i> Incorrect or no authentication data</li>
+                    <li>http://ipv4.nsupdate.info/nic/update  (to update IPv4 A record in DNS)</li>
+                    <li>http://ipv6.nsupdate.info/nic/update  (to update IPv6 AAAA record in DNS)</li>
+                    <li>We support http on port 80 (and soon also https on port 443).</li>
                 </ul>
             </li>
-        </ul>
-        For routers or other dyndns2 compatible clients:
-        <ul>
-            <li>They must send a http basic auth header with hostname / yoursecret.</li>
-            <li>They must send a GET request to our server: nsupdate.info, path: /nic/update</li>
-            <li>We support http on port 80 (and soon also https on port 443).</li>
-            <li>URL args (all are optional):
+            <li>Optionally, we support some URL arguments:
                 <ul>
-                    <li>myip=127.0.0.1 or myip=::1  (if not given: autodetect from remote_addr)</li>
-                    <li>hostname=hostname (if not given: autodetect from http basic auth)</li>
+                    <li>myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
+                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)
+                    </li>
+                    <li>hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} (if not given: autodetect from http basic auth)</li>
+                </ul>
+            </li>
+            <li>The response status and content will be:
+                <ul>
+                    <li>Status 200 and "good &lt;your ip&gt;" <i class="icon-long-arrow-right"></i> new IP accepted</li>
+                    <li>Status 200 and "nochg &lt;your ip&gt;" <i class="icon-long-arrow-right"></i> IP accepted, but did not change since last update</li>
+                    <li>Status 401: Authorization Required <i class="icon-long-arrow-right"></i> Incorrect authentication or no http basic auth header received</li>
                 </ul>
             </li>
         </ul>
