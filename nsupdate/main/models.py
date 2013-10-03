@@ -70,7 +70,7 @@ class Host(models.Model):
         return u"%s.%s - %s" % (
             self.subdomain, self.domain.domain, self.comment)
 
-    class Meta:
+    class Meta(object):
         unique_together = (('subdomain', 'domain'),)
 
     def get_fqdn(self):
