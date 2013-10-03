@@ -4,11 +4,13 @@ Tests for dnstools module.
 
 import pytest
 
-from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
-from django.conf import settings
-BASEDOMAIN = settings.BASEDOMAIN
-
 from dns.resolver import NXDOMAIN
+
+from django.conf import settings
+
+from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
+
+BASEDOMAIN = settings.BASEDOMAIN
 
 
 class TestIntelligentUpdater(object):

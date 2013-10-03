@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+import dns.inet
+
 from django.views.generic import TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
@@ -7,7 +10,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
-import dns.inet
+
 import dnstools
 
 from main.forms import CreateHostForm, EditHostForm

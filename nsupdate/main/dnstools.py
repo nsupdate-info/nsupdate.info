@@ -4,8 +4,6 @@ Misc. DNS related code: query, dynamic update, etc.
 Usually, higher level code wants to call the add/update/delete functions.
 """
 
-from django.conf import settings
-
 import dns.inet
 import dns.name
 import dns.resolver
@@ -13,6 +11,8 @@ import dns.query
 import dns.update
 import dns.tsig
 import dns.tsigkeyring
+
+from django.conf import settings
 
 
 class SameIpError(ValueError):

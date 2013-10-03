@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
+from django.contrib.auth.views import password_change
+
 from accounts.views import UserProfileView
 
-from django.contrib.auth.views import password_change
 
 urlpatterns = patterns(
     '',

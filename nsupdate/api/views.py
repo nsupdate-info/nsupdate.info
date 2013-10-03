@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 import logging
 logger = logging.getLogger(__name__)
+
+import dns.inet
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -10,9 +14,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 
 from main.models import Host
-import dns.inet
-import os
-
 from main.dnstools import update, SameIpError
 
 

@@ -2,9 +2,9 @@
 Django settings for nsupdate project
 """
 
-import django.conf.global_settings as DEFAULT_SETTINGS
-import dns.tsig
 import os
+import dns.tsig
+import django.conf.global_settings as DEFAULT_SETTINGS
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG

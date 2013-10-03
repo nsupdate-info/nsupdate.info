@@ -1,3 +1,8 @@
+import re
+from datetime import datetime
+
+import dns.resolver
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -5,11 +10,8 @@ from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db.models.signals import post_delete
 from django.contrib.auth.hashers import make_password
-from main import dnstools
-import dns.resolver
-from datetime import datetime
 
-import re
+from main import dnstools
 
 
 class BlacklistedDomain(models.Model):
