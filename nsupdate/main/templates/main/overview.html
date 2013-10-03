@@ -57,14 +57,15 @@
                 <h3>Your current IPs</h3>
                 <p><b>Your IPv4:</b> <span class="ipv4addr">{{ request.session.ipv4 }}</span></p>
                 <p><b>Your IPv6:</b> <span class="ipv6addr">{{ request.session.ipv6 }}</span></p>
-                <p>Note: We try to get your IP addresses through a trick, by hosting two fake images:
-                   <ol>
-                       <li>on a IPv4-only server</li>
-                       <li>on a IPv6-only server</li>
-                   </ol>
-                   That way we can detect your IPs when your browser tries to load the images and
-                   associate them with your session.
-                   If we detected an IP address, we will update this information accordingly.
+                <p>Note: We try to get your IP addresses through a trick, by hosting two fake images:</p>
+                <ol>
+                    <li>on a IPv4-only server</li>
+                    <li>on a IPv6-only server</li>
+                </ol>
+                <p>
+                That way we can detect your IPs when your browser tries to load the images and
+                associate them with your session.
+                If we detected an IP address, we will update this information accordingly.
                 </p>
             </div>
         </div>
