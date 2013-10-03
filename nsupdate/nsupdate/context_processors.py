@@ -8,6 +8,6 @@ def add_settings(request):
     context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
     try:
         context['ENABLE_PIWIK_PRODUCTION'] = settings.ENABLE_PIWIK_PRODUCTION
-    except:
+    except AttributeError:
         pass
     return context
