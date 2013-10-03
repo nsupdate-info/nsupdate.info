@@ -6,17 +6,15 @@
 
   <div class="jumbotron">
       <div class="container">
-        <h4>Your IP is:</h4>
+        <h4>Your IP(s):</h4>
         {% if request.session.ipv4 %}
                 <h1>{{request.session.ipv4}}</h1>
         {% endif %}
         {% if request.session.ipv6 %}
             <h2>{{request.session.ipv6}}</h2>
         {% endif %}
-        <p>nsupdate.info, the Free and Open Source Dynamic DNS service for you.</p>
         <p>
-<iframe src="http://ghbtns.com/github-btn.html?user=nsupdate-info&repo=nsupdate.info&type=watch&count=true"
-  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+            nsupdate.info - the Dynamic DNS service you waited for.
         </p>
       </div>
     </div>
@@ -29,16 +27,25 @@
 <div class="row">
     <div class="col-sm-4" style="text-align: center">
         <h1><i class="icon-globe icon-3x"></i></h1>
-        <h3>World Wide Web</h3>
+        <h3>Free and Open Source</h3>
         <p>
-            nsupdate.info is a <a href="https://github.com/nsupdate-info/nsupdate.info">free and open-source</a> dynamic DNS service with IPv4 and IPv6 support.
+            nsupdate.info is a free service<br>
+            and also<br>
+            free and open-source software.
+        </p>
+        <p>
+            <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>
+            &nbsp;
+            <iframe src="http://ghbtns.com/github-btn.html?user=nsupdate-info&repo=nsupdate.info&type=watch&count=true"
+            allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
         </p>
     </div>
     <div class="col-sm-4" style="text-align: center">
         <h1><i class="icon-cogs icon-3x"></i></h1>
         <h3>Awesomeness</h3>
         <p>
-            Powered by Python, the magical Django Pony and a stupid three columned icon landing page.
+            Empowered by Python and the magical Django Pony,<br>
+            we love to write clean and secure code.
         </p>
     </div>
     <div class="col-sm-4" style="text-align: center">
@@ -54,24 +61,25 @@
         <div class="col-lg-3">
 
             <div class="well well-sm">
-                <h3>We had a lot of fun</h3>
+                <h3>Features</h3>
                 <p>
-                    <i class="icon icon-ok"></i> Free and Open-Source<br>
                     <i class="icon icon-ok"></i> Easy to use<br>
-                    <i class="icon icon-ok"></i> Fast and Awesome<br>
-                    <i class="icon icon-ok"></i> Probably no Bugs :)<br>
+                    <i class="icon icon-ok"></i> IP v4 and v6 support<br>
+                    <i class="icon icon-ok"></i> No spam, no nagging, no crap<br>
+                    <i class="icon icon-ok"></i> Free and Open-Source<br>
                 </p>
             </div>
-
-
         </div>
         <div class="col-lg-3">
 
             <div class="well well-sm">
                 <h3>DjangoDash 2013</h3>
                 <p>
-                     This software / service was developed in under 48h for the
-                    <a href="http://djangodash.com/">Django-Dash 2013</a>.
+                     This software <a href="http://djangodash.com/teams/c4/nsupdateinfo/">was developed</a> in under
+                    48h for the <a href="http://djangodash.com/">Django-Dash 2013</a>.
+                </p>
+                <p>
+                    We had a lot of fun!
                 </p>
             </div>
         </div>
