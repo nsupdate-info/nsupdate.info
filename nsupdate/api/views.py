@@ -5,8 +5,6 @@ import os
 import logging
 logger = logging.getLogger(__name__)
 
-import dns.inet
-
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
@@ -14,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 
 from main.models import Host
-from main.dnstools import update, SameIpError
+from main.dnstools import update, SameIpError, check_ip
 
 
 def Response(content):
@@ -51,8 +49,7 @@ def DetectIpView(request, secret=None):
     # the secret:
     s = SessionStore(session_key=secret)
     ipaddr = request.META['REMOTE_ADDR']
-    af = dns.inet.af_for_address(ipaddr)
-    key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
+    key = check_ip(ipaddr)
     s[key] = ipaddr
     s.save()
     with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:

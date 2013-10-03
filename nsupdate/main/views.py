@@ -57,10 +57,9 @@ class HomeView(TemplateView):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['nav_home'] = True
 
-        s = self.request.session
         ipaddr = self.request.META['REMOTE_ADDR']
-        af = dns.inet.af_for_address(ipaddr)
-        key = 'ipv4' if af == dns.inet.AF_INET else 'ipv6'
+        key = dnstools.check_ip(ipaddr)
+        s = self.request.session
         s[key] = ipaddr
         s.save()
 

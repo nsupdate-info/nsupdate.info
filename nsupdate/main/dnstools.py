@@ -22,15 +22,19 @@ class SameIpError(ValueError):
     """
 
 
-def get_rdtype(ipaddr):
+def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     """
-    Get the record type 'A' or 'AAAA' for this ipaddr.
+    Check if a string is a valid ip address and also
+    determine the kind of the address (address family).
+    Return first key for v4, second key for v6.
 
-    :param ipaddr: ip address v4 or v6 (str)
-    :return: 'A' or 'AAAA'
+    :param ipaddr: ip address, v4 or v6, str
+    :param keys: 2-tuple (v4key, v6key)
+    :return: v4key or v6key
+    :raises: ValueError if the ip is invalid
     """
     af = dns.inet.af_for_address(ipaddr)
-    return 'A' if af == dns.inet.AF_INET else 'AAAA'
+    return keys[af == dns.inet.AF_INET6]
 
 
 def add(fqdn, ipaddr, ttl=60):
@@ -44,7 +48,7 @@ def add(fqdn, ipaddr, ttl=60):
     :param ttl: time to live, default 60s (int)
     :raises: SameIpError if new and old IP is the same
     """
-    rdtype = get_rdtype(ipaddr)
+    rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
         current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
@@ -89,7 +93,7 @@ def update(fqdn, ipaddr, ttl=60):
     :param ttl: time to live, default 60s (int)
     :raises: SameIpError if new and old IP is the same
     """
-    rdtype = get_rdtype(ipaddr)
+    rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
         current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
