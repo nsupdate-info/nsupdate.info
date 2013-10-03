@@ -197,7 +197,9 @@ def AuthorizedNicUpdateView(request):
 
 
 def _update(hostname, ipaddr):
-    ipaddr = str(ipaddr)  # XXX bug in dnspython: crashes if ipaddr is unicode, wants a str!
+    ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
+                          # https://github.com/rthalley/dnspython/issues/41
+                          # TODO: reproduce and submit traceback to issue 41
     hosts = Host.filter_by_fqdn(hostname)
     num_hosts = len(hosts)
     if num_hosts == 0:
