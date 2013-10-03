@@ -48,7 +48,6 @@ class Domain(models.Model):
 
 
 class Host(models.Model):
-    """TODO: hash update_secret on save (if not already hashed)"""
     subdomain = models.CharField(max_length=256, validators=[
         RegexValidator(
             regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
