@@ -17,6 +17,16 @@ from main.models import Host
 from main.dnstools import update, SameIpError
 
 
+def Response(content):
+    """
+    shortcut for text/plain HttpResponse
+
+    :param content: plain text content for the response
+    :return: HttpResonse object
+    """
+    return HttpResponse(content, content_type='text/plain')
+
+
 def MyIpView(request):
     """
     return the IP address (can be v4 or v6) of the client requesting this view.
@@ -24,7 +34,7 @@ def MyIpView(request):
     :param request: django request object
     :return: HttpResponse object
     """
-    return HttpResponse(request.META['REMOTE_ADDR'], content_type="text/plain")
+    return Response(request.META['REMOTE_ADDR'])
 
 
 def DetectIpView(request, secret=None):
@@ -58,7 +68,7 @@ def basic_challenge(realm, content='Authorization Required'):
     :param content: request body content
     :return: HttpResponse object
     """
-    response = HttpResponse(content, content_type="text/plain")
+    response = Response(content)
     response['WWW-Authenticate'] = 'Basic realm="%s"' % (realm, )
     response.status_code = 401
     return response
@@ -116,16 +126,6 @@ def check_session_auth(user, hostname):
         logging.error("fqdn %s has multiple entries" % fqdn)
         return False
     return True
-
-
-def Response(content):
-    """
-    shortcut for plaintext response
-
-    :param content: plain text content for the response
-    :return: HttpResonse object
-    """
-    return HttpResponse(content, content_type='text/plain')
 
 
 def NicUpdateView(request):
