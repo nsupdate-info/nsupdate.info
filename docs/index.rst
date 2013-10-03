@@ -12,6 +12,7 @@ Welcome to nsupdate.info's documentation!
    intro
    user
    admin
+   security
 
 
 Indices and tables
