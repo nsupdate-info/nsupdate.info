@@ -90,10 +90,10 @@
                 </a>
                 <script>
                 var idx = 0;
-                var images = new Array("{% static 'screenshots/hostview.png' %}",
-                                       "{% static 'screenshots/help.png' %}",
-                                       "{% static 'screenshots/overview.png' %}",
-                                       "{% static 'screenshots/generatesecret.png' %}");
+                var images = ["{% static 'screenshots/hostview.png' %}",
+                              "{% static 'screenshots/help.png' %}",
+                              "{% static 'screenshots/overview.png' %}",
+                              "{% static 'screenshots/generatesecret.png' %}"];
                 setInterval(function(){
                     $('#screenshot_link').attr('href', images[idx]);
                     $('#screenshot_image').attr('src', images[idx]);
