@@ -12,7 +12,7 @@ class UserProfileView(UpdateView):
     fields = ['first_name', 'last_name']
     form_class = UserProfileForm
 
-    def get_object(self):
+    def get_object(self, queryset=None):
         return self.request.user
 
     def get_success_url(self):
