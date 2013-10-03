@@ -47,6 +47,7 @@ def add(fqdn, ipaddr, ttl=60):
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
     :raises: SameIpError if new and old IP is the same
+    :raises: ValueError if ipaddr is no valid ip address string
     """
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
@@ -92,6 +93,7 @@ def update(fqdn, ipaddr, ttl=60):
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
     :raises: SameIpError if new and old IP is the same
+    :raises: ValueError if ipaddr is no valid ip address string
     """
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
