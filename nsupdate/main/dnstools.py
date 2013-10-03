@@ -114,6 +114,8 @@ def query_ns(qname, rdtype, origin=None):
     :type qname: dns.name.Name object or str
     :param rdtype: the query type
     :type rdtype: int or str
+    :param origin: origin zone
+    :type origin: str or None
     :return: IP (as str)
     """
     origin, name = parse_name(qname, origin)
