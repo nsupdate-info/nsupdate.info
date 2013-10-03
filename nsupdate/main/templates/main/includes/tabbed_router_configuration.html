@@ -1,6 +1,7 @@
 <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a href="#generic" data-toggle="tab">General</a></li>
     <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
+    <li><a href="#ddclient" data-toggle="tab">ddclient</a></li>
     <li><a href="#browser" data-toggle="tab">Browser</a></li>
 </ul>
 
@@ -70,6 +71,20 @@
         <h5>If you have IPv4 and IPv6</h5>
         Set Update-URL to the following (two URLs, separated by one space)
         <div class="well well-sm">http://ipv4.nsupdate.info/nic/update http://ipv6.nsupdate.info/nic/update</div>
+    </div>
+    <div class="tab-pane" id="ddclient">
+        <h4>ddclient</h4>
+        <p>
+            ddclient is a popular dyndns update daemon on Linux.
+        </p>
+        <pre># /etc/ddclient.conf
+protocol=dyndns2
+use=web, web=http://nsupdate.info/myip
+server=nsupdate.info
+login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+password='{{ update_secret|default:"&lt;your secret&gt;" }}'
+{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+</pre>
     </div>
     <div class="tab-pane" id="browser">
         <h4>Easy update URLs</h4>
