@@ -1,2 +1,6 @@
 -r all.txt
 django-debug-toolbar
+pytest
+pytest-django
+pytest-pep8
+Sphinx

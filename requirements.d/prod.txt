@@ -1,0 +1,3 @@
+-r all.txt
+psycopg2
+gunicorn
