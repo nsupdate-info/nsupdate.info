@@ -75,3 +75,31 @@ XSS protection
 ==============
 
 Django's templating engine html-escapes inputs by default.
+
+
+Cookies
+=======
+
+The software ("as is") uses these cookies:
+
+* "csrftoken" (host-only, for CSRF protection)
+* "sessionid" (host-only, to keep the session when you have logged-in to the
+  web interface)
+
+
+Be careful with domain cookies
+------------------------------
+
+The software ("as is") does not use any domain cookies.
+
+In case you modify the software, please be extremely cautious with domain
+cookies and in case of doubt, do rather not use them.
+
+If you use domain cookies (like for ".yourservice.net", the leading dot
+makes it a domain cookie), all hosts in that domain would be able to read
+and write these cookies. Your site (at e.g. www.yourservice.net), but also
+users' sites (like attacker.yourservice.net).
+
+Obviously, this might lead to security issues with stealing, modifying and
+faking domain cookies.
+
