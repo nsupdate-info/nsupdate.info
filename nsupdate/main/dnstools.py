@@ -37,7 +37,7 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     return keys[af == dns.inet.AF_INET6]
 
 
-def add(fqdn, ipaddr, ttl=60):
+def add(fqdn, ipaddr, ttl=60, origin=None):
     """
     intelligent dns adder - first does a lookup on the master server to find
     the current ip and only sends an 'add' if there is no such entry.
@@ -46,12 +46,13 @@ def add(fqdn, ipaddr, ttl=60):
     :param fqdn: fully qualified domain name (str)
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
+    :param origin: origin zone (optional, str)
     :raises: SameIpError if new and old IP is the same
     :raises: ValueError if ipaddr is no valid ip address string
     """
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
-        current_ipaddr = query_ns(fqdn, rdtype)
+        current_ipaddr = query_ns(fqdn, rdtype, origin=origin)
         # check if ip really changed
         ok = ipaddr != current_ipaddr
         action = 'upd'
@@ -63,17 +64,18 @@ def add(fqdn, ipaddr, ttl=60):
         # only send an add/update if the ip really changed as the update
         # causes write I/O on the nameserver and also traffic to the
         # dns slaves (they get a notify if we update the zone).
-        update_ns(fqdn, rdtype, ipaddr, action=action, ttl=ttl)
+        update_ns(fqdn, rdtype, ipaddr, action=action, ttl=ttl, origin=origin)
     else:
         raise SameIpError
 
 
-def delete(fqdn, rdtype=None):
+def delete(fqdn, rdtype=None, origin=None):
     """
     dns deleter
 
     :param fqdn: fully qualified domain name (str)
     :param rdtype: 'A', 'AAAA' or None (deletes 'A' and 'AAAA')
+    :param origin: origin zone (optional, str)
     """
     if rdtype is not None:
         assert rdtype in ['A', 'AAAA', ]
@@ -81,10 +83,10 @@ def delete(fqdn, rdtype=None):
     else:
         rdtypes = ['A', 'AAAA']
     for rdtype in rdtypes:
-        update_ns(fqdn, rdtype, action='del')
+        update_ns(fqdn, rdtype, action='del', origin=origin)
 
 
-def update(fqdn, ipaddr, ttl=60):
+def update(fqdn, ipaddr, ttl=60, origin=None):
     """
     intelligent dns updater - first does a lookup on the master server to find
     the current ip and only sends a dynamic update if we have a different ip.
@@ -92,12 +94,13 @@ def update(fqdn, ipaddr, ttl=60):
     :param fqdn: fully qualified domain name (str)
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
+    :param origin: origin zone (optional, str)
     :raises: SameIpError if new and old IP is the same
     :raises: ValueError if ipaddr is no valid ip address string
     """
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
-        current_ipaddr = query_ns(fqdn, rdtype)
+        current_ipaddr = query_ns(fqdn, rdtype, origin=origin)
         # check if ip really changed
         ok = ipaddr != current_ipaddr
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
@@ -107,7 +110,7 @@ def update(fqdn, ipaddr, ttl=60):
         # only send an update if the ip really changed as the update
         # causes write I/O on the nameserver and also traffic to the
         # dns slaves (they get a notify if we update the zone).
-        update_ns(fqdn, rdtype, ipaddr, action='upd', ttl=ttl)
+        update_ns(fqdn, rdtype, ipaddr, action='upd', ttl=ttl, origin=origin)
     else:
         raise SameIpError
 
