@@ -162,7 +162,7 @@ def get_ns_info(origin):
     to update the zone and the key algorithm used.
 
     :param origin: zone we are dealing with, must be with trailing dot
-    :return: master nameserver, update key
+    :return: master nameserver, update key, update algo
     """
     # later look this up from Domain model: domain+'.': nameserver_ip, nameserver_update_key
     ns_info = {
