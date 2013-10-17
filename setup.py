@@ -19,12 +19,21 @@ setup(
     keywords="dyndns ddns dynamic dns django",
     packages=find_packages(exclude=['_tests', ]),
     package_data={
-        'nsupdate.static': ['*', ],
-        'nsupdate.templates': ['*', ],
-        'nsupdate.main.static': ['*', ],
-        'nsupdate.main.templates': ['*', ],
-        'nsupdate.accounts.static': ['*', ],
-        'nsupdate.accounts.templates': ['*', ],
+        'nsupdate': [
+            'static/*.gif',
+            'static/*.html',
+            'static/css/*',
+            'static/screenshots/*',
+            'templates/*',
+        ],
+        'nsupdate.accounts': [
+            'templates/accounts/*.html',
+            'templates/registration/*.html',
+        ],
+        'nsupdate.main': [
+            'templates/main/*.html',
+            'templates/main/includes/*',
+        ],
     },
     include_package_data=True,
     zip_safe=False,
