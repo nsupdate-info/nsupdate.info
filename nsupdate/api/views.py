@@ -52,9 +52,7 @@ def DetectIpView(request, secret=None):
     key = check_ip(ipaddr)
     s[key] = ipaddr
     s.save()
-    with open(os.path.join(settings.STATIC_ROOT, "1px.gif"), "rb") as f:
-        image_data = f.read()
-    return HttpResponse(image_data, mimetype="image/png")
+    return HttpResponse(status=204)
 
 
 def basic_challenge(realm, content='Authorization Required'):

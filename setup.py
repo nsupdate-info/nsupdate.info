@@ -20,7 +20,6 @@ setup(
     packages=find_packages(exclude=['_tests', ]),
     package_data={
         'nsupdate': [
-            'static/*.gif',
             'static/*.html',
             'static/css/*',
             'static/screenshots/*',
