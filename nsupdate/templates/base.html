@@ -103,8 +103,8 @@
         </div>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <div style="display: none">
-            <img id="v4_img" />
-            <img id="v6_img" />
+            <img id="v4_img" alt="fake image used for ip v4 address detection" />
+            <img id="v6_img" alt="fake image used for ip v6 address detection" />
             <script type="text/javascript">
                 function insert_src() {
                     $('#v4_img').attr('src', "//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/");
