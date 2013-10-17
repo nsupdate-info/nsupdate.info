@@ -4,11 +4,6 @@ Tests for api package.
 
 import pytest
 
-# TODO XXX experiencing ImportErrors all the time. somehow project package structure is borked.
-# what is the usual, working, project structure for a testable django / pytest.django project?
-
-pytest.skip("doesn't work due to ImportErrors....")
-
 
 def test_myip(client):
     response = client.get('/myip')
