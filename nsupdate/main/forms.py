@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from main.models import Host
+from .models import Host
 
 
 class CreateHostForm(forms.ModelForm):

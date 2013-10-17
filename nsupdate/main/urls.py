@@ -1,10 +1,10 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
-from main.views import (
+from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView,
     RobotsTxtView, )
-from api.views import (
+from ..api.views import (
     MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
 
 

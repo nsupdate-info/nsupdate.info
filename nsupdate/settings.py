@@ -151,9 +151,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'nsupdate',
-    'accounts',
-    'api',
-    'main',
+    'nsupdate.accounts',
+    'nsupdate.api',
+    'nsupdate.main',
     'bootstrapform',
     'registration',
 )
@@ -184,7 +184,7 @@ LOGGING = {
         }
     },
     'loggers': {
-        'api.views': {
+        'nsupdate.api.views': {
             'handlers': ['stderr', ],
             'level': 'DEBUG',
             'propagate': True,

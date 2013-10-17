@@ -11,8 +11,8 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 
-from main.models import Host
-from main.dnstools import update, SameIpError, check_ip
+from ..main.models import Host
+from ..main.dnstools import update, SameIpError, check_ip
 
 
 def Response(content):

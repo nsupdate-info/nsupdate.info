@@ -13,8 +13,8 @@ from django.core.exceptions import PermissionDenied
 
 import dnstools
 
-from main.forms import CreateHostForm, EditHostForm
-from main.models import Host
+from .forms import CreateHostForm, EditHostForm
+from .models import Host
 
 
 class GenerateSecretView(UpdateView):

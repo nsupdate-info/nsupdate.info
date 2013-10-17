@@ -6,9 +6,9 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^account/', include('accounts.urls')),
+    url(r'^account/', include('nsupdate.accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('main.urls')),
+    url(r'^', include('nsupdate.main.urls')),
 )
 
 from django.conf import settings

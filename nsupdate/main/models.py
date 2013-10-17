@@ -11,7 +11,7 @@ from django.conf import settings
 from django.db.models.signals import post_delete
 from django.contrib.auth.hashers import make_password
 
-from main import dnstools
+from . import dnstools
 
 
 class BlacklistedDomain(models.Model):
