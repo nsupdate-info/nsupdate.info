@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="nsupdate.info team">
 
-        <title>{% block title %}nsupdate.info{% endblock %}</title>
+        <title>{% block title %}{{ WWW_HOST }}{% endblock %}</title>
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
@@ -25,7 +25,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{% url 'home' %}"><span style="color: #00ba00">⬥</span> nsupdate.info</a>
+                    <a class="navbar-brand" href="{% url 'home' %}"><span style="color: #00ba00">&#x2B25;</span> {{ WWW_HOST }}</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
