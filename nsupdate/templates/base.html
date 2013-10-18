@@ -32,9 +32,11 @@
                         <li{% if nav_home %} class="active"{% endif %}>
                             <a href="{% url 'home' %}">Home</a>
                         </li>
+                        {% if request.user.is_authenticated %}
                         <li{% if nav_overview %} class="active"{% endif %}>
                             <a href="{% url 'overview' %}">Overview</a>
                         </li>
+                        {% endif %}
                         <li{% if nav_about %} class="active"{% endif %}>
                             <a href="{% url 'about' %}">About</a>
                         </li>
