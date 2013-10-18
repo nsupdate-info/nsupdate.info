@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Your Domains</h3>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Domain</th>
+                    <th>Nameserver IP</th>
+                    <th>Update key</th>
+                    <th>Algorithm</th>
+                    <th>Public?</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for domain in domains %}
+                <tr>
+                    <td><b>{{ domain.domain }}</b></td>
+                    <td>{{ domain.nameserver_ip }}</td>
+                    <td>{{ domain.nameserver_update_key }}</td>
+                    <td>{{ domain.get_nameserver_update_algorithm_display }}</td>
+                    <td>{{ domain.available_for_everyone|yesno }}</td>
+                    <td>
+                        <a href="{% url 'delete_domain' domain.pk %}"><i class="icon icon-remove"></i> delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="6">No domains yet.</td></tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="well well-sm">
+                <h3>Add a new Domain</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="well well-sm">
+                <h3>Help</h3>
+                <p>Here you can add new domains (zones) which you control (and this is only useful if you
+                   have some own zone which you can update automatically).</p>
+                <p>You need to configure the primary master nameserver of the zone so it accepts dynamic updates
+                   if the correct update key is presented (which is just a shared secret between the nameserver
+                   and this service).
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

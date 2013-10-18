@@ -43,6 +43,7 @@ setup(
         'south',
         'django-bootstrap-form',
         'django-registration',
+        'django-extensions',
         # packages only needed for development:
         'django-debug-toolbar',
         'pytest',

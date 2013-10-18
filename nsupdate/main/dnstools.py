@@ -4,6 +4,9 @@ Misc. DNS related code: query, dynamic update, etc.
 Usually, higher level code wants to call the add/update/delete functions.
 """
 
+import logging
+logger = logging.getLogger(__name__)
+
 import dns.inet
 import dns.name
 import dns.resolver
@@ -167,11 +170,10 @@ def get_ns_info(origin):
     :param origin: zone we are dealing with, must be with trailing dot
     :return: master nameserver, update key, update algo
     """
-    # later look this up from Domain model: domain+'.': nameserver_ip, nameserver_update_key
-    ns_info = {
-        settings.BASEDOMAIN + '.': (settings.SERVER, settings.UPDATE_KEY, settings.UPDATE_ALGO),
-    }
-    return ns_info[origin]
+    from .models import Domain
+    d = Domain.objects.get(domain=origin.rstrip('.'))
+    algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
+    return d.nameserver_ip, d.nameserver_update_key, algorithm
 
 
 def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
@@ -201,5 +203,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     elif action == 'upd':
         assert ipaddr is not None
         upd.replace(name, ttl, rdtype, ipaddr)
+    logger.debug("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
+                 action, name, origin, rdtype, ipaddr))
     response = dns.query.tcp(upd, nameserver)
     return response

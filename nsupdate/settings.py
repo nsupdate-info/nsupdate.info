@@ -27,7 +27,6 @@ DATABASES = {
     }
 }
 
-SERVER = '85.10.192.104'  # ns1.thinkmo.de (master / dynamic upd server for nsupdate.info)
 BASEDOMAIN = 'nsupdate.info'
 
 NONEXISTING_HOST = 'nonexisting.' + BASEDOMAIN
@@ -38,9 +37,6 @@ WWW_IPV4_IP = '178.32.221.14'
 WWW_IPV6_IP = '2001:41d0:8:e00e::1'
 
 BAD_AGENTS = set()  # useragent blacklist for /nic/update service
-
-UPDATE_ALGO = dns.tsig.HMAC_SHA512
-UPDATE_KEY = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -156,6 +152,7 @@ INSTALLED_APPS = (
     'nsupdate.main',
     'bootstrapform',
     'registration',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -185,6 +182,11 @@ LOGGING = {
     },
     'loggers': {
         'nsupdate.api.views': {
+            'handlers': ['stderr', ],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'nsupdate.main.dnstools': {
             'handlers': ['stderr', ],
             'level': 'DEBUG',
             'propagate': True,

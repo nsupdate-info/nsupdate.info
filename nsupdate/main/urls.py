@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView,
-    RobotsTxtView, )
+    RobotsTxtView, DomainOverwievView, DeleteDomainView)
 from ..api.views import (
     MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
 
@@ -20,6 +20,10 @@ urlpatterns = patterns(
     url(r'^generate_secret/(?P<pk>\d+)/$', GenerateSecretView.as_view(), name='generate_secret_view'),
     url(r'^host/(?P<pk>\d+)/delete/$',
         DeleteHostView.as_view(), name='delete_host'),
+    url(r'^domain_overview/$',
+        DomainOverwievView.as_view(), name='domain_overview'),
+    url(r'^domain/(?P<pk>\d+)/delete/$',
+        DeleteDomainView.as_view(), name='delete_domain'),
     url(r'^myip$', MyIpView),
     url(r'^detectip/$', DetectIpView),
     url(r'^detectip/(?P<secret>\w+)/$', DetectIpView),

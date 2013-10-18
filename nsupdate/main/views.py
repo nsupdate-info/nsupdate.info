@@ -2,6 +2,7 @@
 
 import dns.inet
 
+from django.db.models import Q
 from django.views.generic import TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,8 +14,8 @@ from django.core.exceptions import PermissionDenied
 
 import dnstools
 
-from .forms import CreateHostForm, EditHostForm
-from .models import Host
+from .forms import CreateHostForm, EditHostForm, CreateDomainForm
+from .models import Host, Domain
 
 
 class GenerateSecretView(UpdateView):
@@ -87,11 +88,17 @@ class OverviewView(CreateView):
     def get_success_url(self):
         return reverse('generate_secret_view', args=(self.object.pk,))
 
+    def get_form(self, form_class):
+        form = super(OverviewView, self).get_form(form_class)
+        form.fields['domain'].queryset = Domain.objects.filter(
+            Q(created_by=self.request.user) | Q(available_for_everyone=True))
+        return form
+
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.created_by = self.request.user
         self.object.save()
-        dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'])
+        dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'], origin=self.object.domain.domain)
         messages.add_message(self.request, messages.SUCCESS, 'Host added.')
         return HttpResponseRedirect(self.get_success_url())
 
@@ -136,8 +143,7 @@ class HostView(UpdateView):
 
 class DeleteHostView(DeleteView):
     model = Host
-    template_name = "main/delete_host.html"
-    form_class = EditHostForm
+    template_name = "main/delete_object.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -157,6 +163,52 @@ class DeleteHostView(DeleteView):
         context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
+
+
+class DomainOverwievView(CreateView):
+    model = Domain
+    template_name = "main/domain_overview.html"
+    form_class = CreateDomainForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DomainOverwievView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('domain_overview')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.created_by = self.request.user
+        self.object.save()
+        messages.add_message(self.request, messages.SUCCESS, 'Domain added.')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(
+            DomainOverwievView, self).get_context_data(*args, **kwargs)
+        context['nav_domains'] = True
+        context['domains'] = Domain.objects.filter(
+            created_by=self.request.user)
+        return context
+
+
+class DeleteDomainView(DeleteView):
+    model = Domain
+    template_name = "main/delete_object.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DeleteDomainView, self).dispatch(*args, **kwargs)
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteDomainView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_success_url(self):
+        return reverse('domain_overview')
 
 
 def RobotsTxtView(request):

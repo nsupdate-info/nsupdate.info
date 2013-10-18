@@ -3,6 +3,7 @@ Tests for dnstools module.
 """
 
 import pytest
+pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN
 

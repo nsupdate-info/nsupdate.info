@@ -34,12 +34,25 @@ def domain_blacklist_validator(value):
             raise ValidationError(u'This domain is not allowed')
 
 
+UPDATE_ALGORITHMS = (
+    ('HMAC_SHA512', 'HMAC_SHA512'),
+    ('HMAC_SHA384', 'HMAC_SHA384'),
+    ('HMAC_SHA256', 'HMAC_SHA256'),
+    ('HMAC_SHA224', 'HMAC_SHA224'),
+    ('HMAC_SHA1', 'HMAC_SHA1'),
+    ('HMAC_MD5', 'HMAC_MD5'),
+)
+
+
 class Domain(models.Model):
     domain = models.CharField(max_length=256, unique=True)
     nameserver_ip = models.GenericIPAddressField(
         max_length=256,
-        help_text="An IP where the nsupdates for this domain will be sent to")
+        help_text="IP where the dynamic updates for this domain will be sent to")
     nameserver_update_key = models.CharField(max_length=256)
+    nameserver_update_algorithm = models.CharField(
+        max_length=256, default='HMAC_SHA512', choices=UPDATE_ALGORITHMS)
+    available_for_everyone = models.BooleanField(default=False)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -88,14 +101,14 @@ class Host(models.Model):
 
     def getIPv4(self):
         try:
-            return dnstools.query_ns(self.get_fqdn(), 'A')
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers):
+            return dnstools.query_ns(self.get_fqdn(), 'A', origin=self.domain.domain)
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout):
             return ''
 
     def getIPv6(self):
         try:
-            return dnstools.query_ns(self.get_fqdn(), 'AAAA')
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers):
+            return dnstools.query_ns(self.get_fqdn(), 'AAAA', origin=self.domain.domain)
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout):
             return ''
 
     def poke(self):
@@ -118,6 +131,6 @@ class Host(models.Model):
 
 def post_delete_host(sender, **kwargs):
     obj = kwargs['instance']
-    dnstools.delete(obj.get_fqdn())
+    dnstools.delete(obj.get_fqdn(), origin=obj.domain.domain)
 
 post_delete.connect(post_delete_host, sender=Host)
