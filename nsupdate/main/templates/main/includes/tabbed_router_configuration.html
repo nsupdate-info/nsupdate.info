@@ -88,6 +88,13 @@
         <h5>If you have IPv4 and IPv6</h5>
         Set Update-URL to the following (two URLs, separated by one space)
         <div class="well well-sm">http://{{ WWW_IPV4_HOST }}/nic/update http://{{ WWW_IPV6_HOST }}/nic/update</div>
+        <h5>Forcing a dynamic DNS update</h5>
+        If you want to force a dynamic update for testing purposes, you can do it like this:
+        <ul>
+            <li>disable dynamic DNS, apply</li>
+            <li>enable dynamic DNS, apply</li>
+            <li>(now the Fritz!Box sends an update, it might be "good" or "nochg" depending on whether we already have that IP in DNS)</li>
+        </ul>
     </div>
     <div class="tab-pane" id="ddwrt">
         <h4>DD-WRT (tested with v24)</h4>
