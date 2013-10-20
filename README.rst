@@ -1,35 +1,27 @@
 About nsupdate.info
 ===================
 
-nsupdate.info is the idea of a really simple single purpose dynamic dns service.
-Unlike other dynamic dns services its intention is that you do not
-have to click a link every 30 days to keep your domain enabled or other jokes
-like this.
+http://nsupdate.info is a free dynamic dns service.
 
-nsupdate.info is is intended to be self hostable, but there is also a free
-service on http://nsupdate.info/
+nsupdate.info is also the name of the software used to implement it.
+If you like, you can use it to host the service on your own server.
 
 
-Installation
-============
+Features
+========
 
-If you haven't already done create and change to a virtualenv for the
-installation (here with virtualenvwrapper)::
-
-    mkvirtualenv nsupdate
-    workon nsupdate
-
-
-Clone the repo and cd into::
-
-    git clone git@github.com:nsupdate-info/nsupdate.info.git nsupdate
-    cd nsupdate
-
-
-Then install the requirements::
-
-    pip install -e .
-
-
-From time to time execute this again to install the newest dependencies.
-Maybe in future there will be a PyPi package to install directly with pip.
+* Frontend: Dynamic DNS updates via dyndns2 protocol (like supported
+  by many DSL/cable routers and client software).
+* Backend: Uses DYNAMIC DNS UPDATE protocol (RFC 2136) to update compatible
+  nameservers like BIND, PowerDNS and others (the nameserver itself is NOT
+  included).
+* Easy and simple web interface.
+* Multiple Hosts per user
+* Add own domains / nameservers (public or only for yourself)
+* Supports IP v4 and v6
+* Manual IP updates via web interface
+* Shows time since last update via api
+* Made with security in mind
+* No nagging, no spamming, trying to not annoy users
+* Free and Open Source Software
+* Made with Python and Django
