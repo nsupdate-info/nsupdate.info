@@ -2,28 +2,16 @@
 {% load bootstrap %}
 
 {% block content %}
-<h1>Help / FAQ</h1>
+<h1>Documentation</h1>
+    We have nice documentation for service users and administrators there:
+
+    <a href="//nsupdateinfo.readthedocs.org/">nsupdate.info docs on ReadTheDocs.org</a>
+
+<h1>Configuration Help</h1>
 <div class="row">
-    <div class="col-lg-5">
-        <div class="well">
-            <h2>Standards used?</h2>
-            We use:
-            <ul>
-                <li>Frontend Update-API: dyndns2 protocol
-                    <ul>
-                        <li><a href="http://dyn.com/support/developers/api/">dyndns2 api description on dyn.com</a></li>
-                        <li><a href="http://www.noip.com/integrate/">dyndns2 api description on noip.com</a></li>
-                    </ul>
-                </li>
-                <li>Backend: dynamic DNS update (see <a href="http://www.ietf.org/rfc/rfc2136.txt">RFC2136</a>)</li>
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <div class="well">
-            <h3>How to configure automated dynamic DNS updates?</h3>
-            {% include "main/includes/tabbed_router_configuration.html" with host=object %}
-        </div>
+    <div class="well">
+        <h3>How to configure automated dynamic DNS updates?</h3>
+        {% include "main/includes/tabbed_router_configuration.html" with host=object %}
     </div>
 </div>
 {% endblock %}

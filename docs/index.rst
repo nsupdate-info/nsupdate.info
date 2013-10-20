@@ -12,6 +12,7 @@ Welcome to nsupdate.info's documentation!
    intro
    user
    admin
+   standards
    security
 
 
