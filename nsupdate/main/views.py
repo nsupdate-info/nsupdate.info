@@ -222,8 +222,11 @@ def RobotsTxtView(request):
     content = """\
 User-agent: *
 Crawl-delay: 10
+Disallow: /account/
 Disallow: /accounts/
+Disallow: /admin/
 Disallow: /myip/
 Disallow: /nic/update/
+Disallow: /overview/
 """
     return HttpResponse(content, content_type="text/plain")
