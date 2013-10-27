@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import dns.inet
-
 from django.db.models import Q
 from django.views.generic import TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView

@@ -27,7 +27,6 @@ import dns.update
 import dns.tsig
 import dns.tsigkeyring
 
-from django.conf import settings
 from django.utils.timezone import now
 
 

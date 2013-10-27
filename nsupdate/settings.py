@@ -3,7 +3,6 @@ Django settings for nsupdate project
 """
 
 import os
-import dns.tsig
 import django.conf.global_settings as DEFAULT_SETTINGS
 
 # Use a unique, long, random, secret string here.

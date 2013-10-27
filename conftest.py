@@ -30,7 +30,7 @@ from django.utils.translation import activate
 
 # Note: fixture must be "function" scope (default), see https://github.com/pelme/pytest_django/issues/33
 @pytest.fixture(autouse=True)
-def db_init(db):
+def db_init(db):  # note: db is a predefined fixture and required here to have the db available
     """
     Init the database contents for testing, so we have a service domain, ...
     """
