@@ -203,7 +203,8 @@ def _update(hostname, ipaddr):
     if num_hosts > 1:
         logging.error("fqdn %s has multiple entries" % hostname)
         return False
-    hosts[0].poke()
+    kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
+    hosts[0].poke(kind)
     try:
         update(hostname, ipaddr)
         logger.info('%s - received good update -> ip: %s' % (hostname, ipaddr, ))
