@@ -45,18 +45,27 @@ UPDATE_ALGORITHMS = (
 
 
 class Domain(models.Model):
-    domain = models.CharField(max_length=256, unique=True)
+    domain = models.CharField(
+        max_length=256, unique=True,
+        help_text="Name of the zone where dynamic hosts may get added")
     nameserver_ip = models.GenericIPAddressField(
         max_length=256,
-        help_text="IP where the dynamic updates for this domain will be sent to")
-    nameserver_update_key = models.CharField(max_length=256)
+        help_text="IP where the dynamic DNS updates for this zone will be sent to")
+    nameserver_update_key = models.CharField(
+        max_length=256,
+        help_text="Shared secret that allows updating this zone (base64 encoded)")
     nameserver_update_algorithm = models.CharField(
         max_length=256, default='HMAC_SHA512', choices=UPDATE_ALGORITHMS)
-    # public means that this domain/nameserver is available for everybody
-    public = models.BooleanField(default=False)
+    public = models.BooleanField(
+        default=False,
+        help_text="Check to allow any user to add dynamic hosts to this zone - "
+                  "if not checked, we'll only allow the owner to add hosts")
     # available means "nameserver for domain operating and reachable" -
     # gets set to False if we have trouble reaching the nameserver
-    available = models.BooleanField(default=True)
+    available = models.BooleanField(
+        default=True,
+        help_text="Check if nameserver is available/reachable - "
+                  "if not checked, we'll pause querying/updating this nameserver for a while")
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
