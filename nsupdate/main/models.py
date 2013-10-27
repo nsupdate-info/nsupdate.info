@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from django.utils.timezone import now
 
 import dns.resolver
 
@@ -118,7 +118,7 @@ class Host(models.Model):
             return 'error'
 
     def poke(self):
-        self.last_api_update = datetime.now()
+        self.last_api_update = now()
         self.save()
 
     def generate_secret(self):
