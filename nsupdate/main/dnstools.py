@@ -4,6 +4,18 @@ Misc. DNS related code: query, dynamic update, etc.
 Usually, higher level code wants to call the add/update/delete functions.
 """
 
+# time to wait for dns name resolving [s]
+RESOLVER_TIMEOUT = 5.0
+
+# time to wait for dns name updating [s]
+UPDATE_TIMEOUT = 20.0
+
+# time after we retry to reach a previously unreachable ns [s]
+UNAVAILABLE_RETRY = 300.0
+
+
+from datetime import timedelta
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -16,12 +28,20 @@ import dns.tsig
 import dns.tsigkeyring
 
 from django.conf import settings
+from django.utils.timezone import now
 
 
 class SameIpError(ValueError):
     """
     raised if an IP address is already present in DNS and and update was
     requested, but is not needed.
+    """
+
+
+class NameServerNotAvailable(Exception):
+    """
+    raised if some nameserver was flagged as not available,
+    but we tried using it.
     """
 
 
@@ -128,7 +148,7 @@ def query_ns(qname, rdtype, origin=None):
     :type rdtype: int or str
     :param origin: origin zone
     :type origin: str or None
-    :return: IP (as str)
+    :return: IP (as str) or "-" if ns is not available
     """
     origin, name = parse_name(qname, origin)
     origin_str = str(origin)
@@ -138,8 +158,16 @@ def query_ns(qname, rdtype, origin=None):
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
     resolver.search = [dns.name.from_text(settings.BASEDOMAIN), ]
-    answer = resolver.query(qname, rdtype)
-    return str(list(answer)[0])
+    resolver.lifetime = RESOLVER_TIMEOUT
+    try:
+        answer = resolver.query(qname, rdtype)
+        ip = str(list(answer)[0])
+        return ip
+    except (dns.resolver.Timeout, dns.resolver.NoNameservers):  # socket.error also?
+        logger.warning("timeout when querying for name '%s' in zone '%s' with rdtype '%s'." % (
+                       name, origin, rdtype))
+        set_ns_availability(origin, False)
+        raise
 
 
 def parse_name(fqdn, origin=None):
@@ -169,9 +197,20 @@ def get_ns_info(origin):
 
     :param origin: zone we are dealing with, must be with trailing dot
     :return: master nameserver, update key, update algo
+    :raises: NameServerNotAvailable if ns was flagged unavailable in the db
     """
     from .models import Domain
-    d = Domain.objects.get(domain=origin.rstrip('.'))
+    domain = origin.rstrip('.')
+    d = Domain.objects.get(domain=domain)
+    if not d.available:
+        if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
+            # if there are troubles with a nameserver, we set available=False
+            # and stop trying working with that nameserver for a while
+            raise NameServerNotAvailable("nameserver for domain %s at IP %s was flagged unavailable" % (
+                                         domain, d.nameserver_ip, ))
+        else:
+            # retry timeout is over, set it available again
+            set_ns_availability(origin, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
     return d.nameserver_ip, d.nameserver_update_key, algorithm
 
@@ -205,5 +244,31 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
         upd.replace(name, ttl, rdtype, ipaddr)
     logger.debug("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
                  action, name, origin, rdtype, ipaddr))
-    response = dns.query.tcp(upd, nameserver)
-    return response
+    try:
+        response = dns.query.tcp(upd, nameserver, timeout=UPDATE_TIMEOUT)
+        return response
+    except dns.exception.Timeout:
+        logger.warning("timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
+                       action, name, origin, rdtype, ipaddr))
+        set_ns_availability(origin, False)
+        raise
+
+
+def set_ns_availability(domain, available):
+    """
+    Set availability of the master nameserver for <domain>.
+
+    As each Timeout takes quite a while, we want to avoid it.
+
+    :param domain: domain object or string, may end with "."
+    :param available: True/False for availability of ns
+    """
+    from .models import Domain
+    domain = str(domain).rstrip('.')
+    d = Domain.objects.get(domain=domain)
+    d.available = available
+    d.save()
+    if available:
+        logger.info("set zone '%s' to available" % domain)
+    else:
+        logger.warning("set zone '%s' to unavailable" % domain)

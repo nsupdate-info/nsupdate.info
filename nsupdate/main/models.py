@@ -52,7 +52,11 @@ class Domain(models.Model):
     nameserver_update_key = models.CharField(max_length=256)
     nameserver_update_algorithm = models.CharField(
         max_length=256, default='HMAC_SHA512', choices=UPDATE_ALGORITHMS)
+    # XXX rename available_for_everyone to public
     available_for_everyone = models.BooleanField(default=False)
+    # available means "nameserver for domain operating and reachable" -
+    # gets set to False if we have trouble reaching the nameserver
+    available = models.BooleanField(default=True)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -102,14 +106,16 @@ class Host(models.Model):
     def getIPv4(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'A', origin=self.domain.domain)
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout):
-            return ''
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
+                dnstools.NameServerNotAvailable):
+            return 'error'
 
     def getIPv6(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'AAAA', origin=self.domain.domain)
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout):
-            return ''
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
+                dnstools.NameServerNotAvailable):
+            return 'error'
 
     def poke(self):
         self.last_api_update = datetime.now()
