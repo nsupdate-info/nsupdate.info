@@ -55,7 +55,7 @@
                 }
                 update_host_v6 = function(host) {
                     $('#update_result_v6').text('updating...');
-                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myipv4').val(), hostname: host } )
+                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myipv6').val(), hostname: host } )
                       .done(function( data ) {
                         $('#update_result_v6').text(data);
                       }).fail(function( data ) {
