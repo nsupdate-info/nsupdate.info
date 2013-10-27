@@ -6,6 +6,9 @@ import os
 import dns.tsig
 import django.conf.global_settings as DEFAULT_SETTINGS
 
+# Use a unique, long, random, secret string here.
+SECRET_KEY = 'this is for sure not secret, but good enough for running the unit tests'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -28,13 +31,9 @@ DATABASES = {
 }
 
 BASEDOMAIN = 'nsupdate.info'
-
-NONEXISTING_HOST = 'nonexisting.' + BASEDOMAIN
 WWW_HOST = BASEDOMAIN
 WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN
 WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN
-WWW_IPV4_IP = '178.32.221.14'
-WWW_IPV6_IP = '2001:41d0:8:e00e::1'
 
 BAD_AGENTS = set()  # useragent blacklist for /nic/update service
 
@@ -100,9 +99,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'iwlqlh4mrwe6j+f(e8qb)^muiq2^=!v+h#_s9**6wghpd_&bg8'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

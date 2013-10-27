@@ -157,7 +157,7 @@ def query_ns(qname, rdtype, origin=None):
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
-    resolver.search = [dns.name.from_text(settings.BASEDOMAIN), ]
+    resolver.search = [dns.name.from_text('nsupdate.info'), ]  # FIXME: should work with empty list
     resolver.lifetime = RESOLVER_TIMEOUT
     try:
         answer = resolver.query(qname, rdtype)
