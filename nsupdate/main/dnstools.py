@@ -151,17 +151,20 @@ def query_ns(qname, rdtype, origin=None):
     :return: IP (as str) or "-" if ns is not available
     """
     origin, name = parse_name(qname, origin)
+    fqdn = name + origin
+    assert fqdn.is_absolute()
     origin_str = str(origin)
     nameserver = get_ns_info(origin_str)[0]
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
-    resolver.search = [dns.name.from_text('nsupdate.info'), ]  # FIXME: should work with empty list
+    resolver.search = []
     resolver.lifetime = RESOLVER_TIMEOUT
     try:
-        answer = resolver.query(qname, rdtype)
+        answer = resolver.query(fqdn, rdtype)
         ip = str(list(answer)[0])
+        logger.debug("query: %s answer: %s" % (fqdn.to_text(), ip))
         return ip
     except (dns.resolver.Timeout, dns.resolver.NoNameservers):  # socket.error also?
         logger.warning("timeout when querying for name '%s' in zone '%s' with rdtype '%s'." % (
