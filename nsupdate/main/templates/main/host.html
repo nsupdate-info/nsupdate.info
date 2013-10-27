@@ -13,6 +13,13 @@
                 {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
+            <h3>Delete Host</h3>
+            <p>
+                Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret.
+            </p>
+            <form method="get" action="{% url 'delete_host' host.pk %}">
+                <button type="submit" class="btn btn-primary">Delete host {{ host.get_fqdn }}</button>
+            </form>
         </div>
         <div  class="col-lg-4">
             <h3>Generate New Secret</h3>
