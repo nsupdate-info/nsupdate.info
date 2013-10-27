@@ -10,14 +10,13 @@
             {% for host in hosts %}
                 <tr>
                     <td><a href="{% url 'host_view' host.pk %}"><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></a></td>
-                    <td id="last{{ host.pk }}">{{ host.last_api_update|timesince }}</td>
+                    <td>{{ host.last_api_update|timesince }}</td>
                     <td>{{ host.getIPv4 }}</td>
                     <td>{{ host.getIPv6 }}</td>
                     <td>{{ host.comment }}</td>
                     <td>
                         <a href="{% url 'host_view' host.pk %}"><i class="icon icon-pencil"></i> edit</a> |
-                        <a href="{% url 'delete_host' host.pk %}"><i class="icon icon-remove"></i> delete</a> | 
-                        <a href="#" onclick="update_host('{{ host.get_fqdn }}',{{ host.pk }})"><i class="icon icon-refresh"></i> update</a>
+                        <a href="{% url 'delete_host' host.pk %}"><i class="icon icon-remove"></i> delete</a>
                     </td>
                 </tr>
             {% empty %}
@@ -25,19 +24,6 @@
             {% endfor %}
             </table>
         </div>
-
-        <script>
-            update_host = function(host,pk) {
-                $('#update_result').text('updating...');
-                $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myip').val(), hostname: host } )
-                  .done(function( data ) {
-                    $('#last'+pk).text("0 minutes");
-                  }).fail(function( data ) {
-                    $('#last'+pk).text("error updating");
-                  });
-            }
-        </script>
-        
     </div>
     <hr>
 
