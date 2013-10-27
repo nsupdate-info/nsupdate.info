@@ -23,25 +23,42 @@
         </div>
         <div  class="col-lg-4">
             <h3>Update Nameserver Entry</h3>
-            <p>Usually you configure your router to follow the dyndns2 protocol. But if you know what you are doing, and you want to update it by hand, you can do it here.<br>If you don't specify an IP address, we use your remote address.</p>
-            
+            <p>Usually you configure your router to follow the dyndns2 protocol.
+               But if you know what you are doing, and you want to update it by hand, you can do it here.
+               <br>
+               We populated the input fields with your current remote IP addresses which we detected.
+            </p>
                 <div class="form-group">
-                    <label>IPv4 or IPv6</label>
-                    <input class="form-control" type="text" id="myip" name="myip" placeholder="use remote address">
+                    <label>Set new IPv4 address</label>
+                    <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host('{{ host.get_fqdn }}')">DNS Update</button> <span id="update_result"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">Apply</button> <span id="update_result_v4"></span>
+                <p></p>
+                <div class="form-group">
+                    <label>Set new IPv6 address</label>
+                    <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="give new ipv6 address" value="{{ request.session.ipv6 }}" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">Apply</button> <span id="update_result_v6"></span>
             <script>
-                update_host = function(host) {
-                    $('#update_result').text('updating...');
-                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myip').val(), hostname: host } )
+                update_host_v4 = function(host) {
+                    $('#update_result_v4').text('updating...');
+                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myipv4').val(), hostname: host } )
                       .done(function( data ) {
-                        $('#update_result').text(data);
+                        $('#update_result_v4').text(data);
                       }).fail(function( data ) {
-                        $('#update_result').text('error');
+                        $('#update_result_v4').text('error');
+                      });
+                }
+                update_host_v6 = function(host) {
+                    $('#update_result_v6').text('updating...');
+                    $.get( "{% url 'nic_update_authorized' %}", { myip: $('#myipv4').val(), hostname: host } )
+                      .done(function( data ) {
+                        $('#update_result_v6').text(data);
+                      }).fail(function( data ) {
+                        $('#update_result_v6').text('error');
                       });
                 }
             </script>
-            <p>Or use this url to set the ip via url: <br><a href="{% url 'nic_update_authorized' %}?hostname={{ host.get_fqdn }}">Right Click &rarr; Copy Link Address</a></p>
         </div>
     </div>
     <hr>
