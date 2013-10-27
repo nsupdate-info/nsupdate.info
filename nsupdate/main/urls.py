@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView,
-    RobotsTxtView, DomainOverwievView, DeleteDomainView)
+    RobotsTxtView, DomainOverwievView, DeleteDomainView, ScreenshotsView)
 from ..api.views import (
     MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
 
@@ -15,6 +15,7 @@ urlpatterns = patterns(
     url(r'^legal/$',
         TemplateView.as_view(template_name='main/legal.html'), name="legal"),
     url(r'^help/$', HelpView.as_view(), name="help"),
+    url(r'^screenshots/$', ScreenshotsView.as_view(), name="screenshots"),
     url(r'^overview/$', OverviewView.as_view(), name='overview'),
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
     url(r'^generate_secret/(?P<pk>\d+)/$', GenerateSecretView.as_view(), name='generate_secret_view'),

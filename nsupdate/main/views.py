@@ -76,6 +76,15 @@ class HelpView(TemplateView):
         return context
 
 
+class ScreenshotsView(TemplateView):
+    template_name = "main/screenshots.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ScreenshotsView, self).get_context_data(*args, **kwargs)
+        context['nav_help'] = True
+        return context
+
+
 class OverviewView(CreateView):
     model = Host
     template_name = "main/overview.html"

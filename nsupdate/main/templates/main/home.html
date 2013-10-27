@@ -2,10 +2,9 @@
 {% load bootstrap %}
 {% load static %}
 
-{% block header %}
-
-  <div class="jumbotron">
-      <div class="container">
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
         <h4>Your IP(s):</h4>
         {% if request.session.ipv4 %}
                 <h1>{{request.session.ipv4}}</h1>
@@ -16,12 +15,7 @@
         <p>
             nsupdate.info - the Dynamic DNS service you waited for.
         </p>
-      </div>
-   </div>
-
-{% endblock %}
-
-{% block content %}
+    </div>
 
 <div class="row">
     <div class="col-sm-4" style="text-align: center">
@@ -51,44 +45,5 @@
         </p>
     </div>
 </div>
-<hr>
-<div class="row">
-        <div class="col-lg-3">
-
-            <div class="well well-sm">
-                <h3>Features</h3>
-                <p>
-                    <i class="icon icon-ok"></i> Easy to use<br>
-                    <i class="icon icon-ok"></i> IP v4 and v6 support<br>
-                    <i class="icon icon-ok"></i> No spam, no nagging, no crap<br>
-                    <i class="icon icon-ok"></i> Free and Open-Source<br>
-                </p>
-            </div>
-        </div>
-        <div class="col-lg-9">
-            <div class="well well-sm">
-                <h3>Screenshots</h3>
-                <a id="screenshot_link" href="{% static 'screenshots/overview.png' %}">
-                    <img id="screenshot_image" src="{% static 'screenshots/overview.png' %}" class="img-responsive" alt="Responsive image">
-                </a>
-                <script>
-                var idx = 0;
-                var images = ["{% static 'screenshots/hostview.png' %}",
-                              "{% static 'screenshots/help.png' %}",
-                              "{% static 'screenshots/overview.png' %}",
-                              "{% static 'screenshots/generatesecret.png' %}"];
-                setInterval(function(){
-                    $('#screenshot_link').attr('href', images[idx]);
-                    $('#screenshot_image').attr('src', images[idx]);
-                    idx += 1;
-                    if(idx >= images.length) {
-                        idx = 0;
-                    }
-                }, 5000);
-                </script>
-            </div>
-        </div>
-    </div>
-
-<hr>
+</div>
 {% endblock %}
