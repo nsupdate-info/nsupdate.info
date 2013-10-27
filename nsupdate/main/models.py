@@ -52,8 +52,8 @@ class Domain(models.Model):
     nameserver_update_key = models.CharField(max_length=256)
     nameserver_update_algorithm = models.CharField(
         max_length=256, default='HMAC_SHA512', choices=UPDATE_ALGORITHMS)
-    # XXX rename available_for_everyone to public
-    available_for_everyone = models.BooleanField(default=False)
+    # public means that this domain/nameserver is available for everybody
+    public = models.BooleanField(default=False)
     # available means "nameserver for domain operating and reachable" -
     # gets set to False if we have trouble reaching the nameserver
     available = models.BooleanField(default=True)

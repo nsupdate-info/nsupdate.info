@@ -14,7 +14,7 @@ def db_init(db):
                           nameserver_ip='85.10.192.104',
                           nameserver_update_algorithm='HMAC_SHA512',
                           nameserver_update_key='YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==',
-                          available_for_everyone=True)
+                          public=True)
 
 
 def pytest_runtest_setup(item):

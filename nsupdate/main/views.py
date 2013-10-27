@@ -91,7 +91,7 @@ class OverviewView(CreateView):
     def get_form(self, form_class):
         form = super(OverviewView, self).get_form(form_class)
         form.fields['domain'].queryset = Domain.objects.filter(
-            Q(created_by=self.request.user) | Q(available_for_everyone=True))
+            Q(created_by=self.request.user) | Q(public=True))
         return form
 
     def form_valid(self, form):
