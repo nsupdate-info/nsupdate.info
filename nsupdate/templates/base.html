@@ -58,7 +58,7 @@
                                     {% if request.user.is_staff %}
                                         <li><a href="/admin/">Admin</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                                    <li><a href="{% url 'auth_logout' %}?next={% url 'auth_login' %}">Logout</a></li>
                                 </ul>
                             </li>
                         {% endif %}
