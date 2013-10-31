@@ -2,8 +2,7 @@
 {% load bootstrap %}
 
 {% block content %}
-<h1>Hi, {{ request.user.username }}</h1>
-<h3>Your data:</h3>
+<h1>User Profile of {{ request.user.username }}</h1>
 <div class="row">
   <div class="col-lg-4">
     <form method="post" action="">

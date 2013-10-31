@@ -9,7 +9,7 @@ from .forms import UserProfileForm
 class UserProfileView(UpdateView):
     template_name = "accounts/user_profile.html"
     model = User
-    fields = ['first_name', 'last_name']
+    fields = ['first_name', 'last_name', 'email']
     form_class = UserProfileForm
 
     def get_object(self, queryset=None):
