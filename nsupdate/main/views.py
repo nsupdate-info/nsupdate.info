@@ -247,7 +247,7 @@ def CsrfFailureView(request, reason):
     :return: HttpResponse object
     """
     if reason == "CSRF cookie not set.":
-        content ="""\
+        content = """\
 This site needs cookies (for CSRF protection, for keeping your session after login).
 
 Please enable cookies in your browser (or otherwise make sure the CSRF cookie can be set).

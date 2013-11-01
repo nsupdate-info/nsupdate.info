@@ -50,7 +50,7 @@ def DetectIpView(request, secret=None):
     ipaddr = request.META['REMOTE_ADDR']
     key = check_ip(ipaddr)
     s[key] = ipaddr
-    s[key+'_timestamp'] = now()
+    s[key + '_timestamp'] = now()
     logger.debug("detected %s: %s" % (key, ipaddr))
     s.save()
     return HttpResponse(status=204)
