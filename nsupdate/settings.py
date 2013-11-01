@@ -186,8 +186,9 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        # this is the toplevel handler for all request processing:
         'django.request': {
-            'handlers': ['mail_admins', ],
+            'handlers': ['mail_admins', 'stderr'],
             'level': 'ERROR',
             'propagate': True,
         },
