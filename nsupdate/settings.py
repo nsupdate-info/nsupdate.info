@@ -34,6 +34,10 @@ WWW_HOST = BASEDOMAIN
 WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN
 WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN
 
+# for debugging IP detection on localhost
+#WWW_IPV4_HOST = 'localhost:8000'
+#WWW_IPV6_HOST = 'ip6-localhost:8000'
+
 BAD_AGENTS = set()  # useragent blacklist for /nic/update service
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -119,6 +123,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
     'nsupdate.context_processors.add_settings',
+    'nsupdate.context_processors.remove_stale_ips',
 )
 
 ROOT_URLCONF = 'nsupdate.urls'
