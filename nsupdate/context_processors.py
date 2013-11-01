@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import logging
+logger = logging.getLogger(__name__)
+
 from datetime import timedelta
 
 from django.conf import settings
@@ -28,7 +31,9 @@ def remove_stale_ips(request):
         try:
             timestamp = s[timestamp_key]
         except KeyError:
-            pass
+            # should be always there, initialize it:
+            s[key] = ''
+            s[timestamp_key] = t_now
         else:
             try:
                 stale = timestamp + timedelta(seconds=MAX_IP_AGE) < t_now
@@ -37,7 +42,7 @@ def remove_stale_ips(request):
                 del s[timestamp_key]
             else:
                 if stale:
-                    print "ts: %s now: %s - killing %s (was: %s)" % (timestamp, t_now, key, s[key])
+                    logger.debug("ts: %s now: %s - killing stale %s (was: %s)" % (timestamp, t_now, key, s[key]))
                     # kill the IP, it is not up-to-date any more
                     # note: it is used to fill form fields, so set it to empty string
                     s[key] = ''
