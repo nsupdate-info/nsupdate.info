@@ -237,3 +237,30 @@ Disallow: /nic/update/
 Disallow: /overview/
 """
     return HttpResponse(content, content_type="text/plain")
+
+
+def CsrfFailureView(request, reason):
+    """
+    Django's CSRF middleware's builtin view doesn't tell the user that he needs to have cookies enabled.
+
+    :param request: django request object
+    :return: HttpResponse object
+    """
+    if reason == "CSRF cookie not set.":
+        content ="""\
+This site needs cookies (for CSRF protection, for keeping your session after login).
+
+Please enable cookies in your browser (or otherwise make sure the CSRF cookie can be set).
+""" % dict(reason=reason)
+        status = 200
+    else:
+        content = """\
+%(reason)s
+
+CSRF verification failure.
+
+Either you are trying to access this site in 'unusual' ways (then please stop doing that), or
+you found an issue in the code (then please file an issue for this and tell how you got here).
+""" % dict(reason=reason)
+        status = 403
+    return HttpResponse(content, status=status, content_type="text/plain")
