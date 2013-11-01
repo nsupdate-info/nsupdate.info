@@ -209,9 +209,17 @@ CSRF_FAILURE_VIEW = 'nsupdate.main.views.CsrfFailureView'
 
 # Settings for CSRF cookie.
 CSRF_COOKIE_NAME = 'csrftoken'
-CSRF_COOKIE_DOMAIN = None
 CSRF_COOKIE_PATH = '/'
 CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_HTTPONLY = False
+
+# Settings for session cookie.
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_COOKIE_PATH = '/'
+SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 14 * 24 * 3600 # 2 weeks, in seconds
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 
 try:
