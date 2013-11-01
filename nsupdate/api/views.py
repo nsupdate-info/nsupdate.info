@@ -3,6 +3,8 @@
 import logging
 logger = logging.getLogger(__name__)
 
+import json
+
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth.hashers import check_password
@@ -54,6 +56,23 @@ def DetectIpView(request, secret=None):
     logger.debug("detected %s: %s" % (key, ipaddr))
     s.save()
     return HttpResponse(status=204)
+
+
+def AjaxGetIps(request):
+    """
+    Get the IP addresses of the client from the session via AJAX
+    (so we don't need to reload the view in case we just invalidated stale IPs
+    and triggered new detection).
+
+    :param request: django request object
+    :return: HttpResponse object
+    """
+    response = dict(
+        ipv4=request.session['ipv4'],
+        ipv6=request.session['ipv6'],
+    )
+    logger.debug("ajax_get_ips response: %r" % (response, ))
+    return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 def basic_challenge(realm, content='Authorization Required'):

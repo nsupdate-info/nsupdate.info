@@ -102,17 +102,34 @@
         <div style="display: none">
             {% if not request.session.ipv4 %}
                 <img id="v4_img" alt="fake image used for ip v4 address detection" />
+                <script type="text/javascript">
+                    function insert_src_v4() {
+                        $('#v4_img').attr('src', "//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/");
+                    };
+                    $(setTimeout("insert_src_v4()", 1000));
+                    function insert_ip_v4() {
+                        $.getJSON("{%  url 'ajax_get_ips' %}")
+                        .done(function(data) {
+                            $('#ipv4').text(data['ipv4']);
+                        });
+                    };
+                    $(setTimeout("insert_ip_v4()", 2000));
+                </script>
             {% endif %}
             {% if not request.session.ipv6 %}
                 <img id="v6_img" alt="fake image used for ip v6 address detection" />
-            {% endif %}
-            {% if not request.session.ipv4 or not request.session.ipv6 %}
                 <script type="text/javascript">
-                    function insert_src() {
-                        $('#v4_img').attr('src', "//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/");
+                    function insert_src_v6() {
                         $('#v6_img').attr('src', "//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/");
                     };
-                    $(setTimeout("insert_src()", 1000));
+                    $(setTimeout("insert_src_v6()", 1000));
+                    function insert_ip_v6() {
+                        $.getJSON("{%  url 'ajax_get_ips' %}")
+                        .done(function(data) {
+                            $('#ipv6').text(data['ipv6']);
+                        });
+                    };
+                    $(setTimeout("insert_ip_v6()", 2000));
                 </script>
             {% endif %}
         </div>

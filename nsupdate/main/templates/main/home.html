@@ -6,12 +6,9 @@
 <div class="container">
     <div class="jumbotron">
         <h4>Your IP(s):</h4>
-        {% if request.session.ipv4 %}
-                <h1>{{request.session.ipv4}}</h1>
-        {% endif %}
-        {% if request.session.ipv6 %}
-            <h3>{{request.session.ipv6}}</h3>
-        {% endif %}
+        <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
+        <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
+        <br>
         <p>
             nsupdate.info - the Dynamic DNS service you waited for.
         </p>

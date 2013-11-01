@@ -5,7 +5,7 @@ from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, HelpView, GenerateSecretView,
     RobotsTxtView, DomainOverwievView, DeleteDomainView, ScreenshotsView)
 from ..api.views import (
-    MyIpView, DetectIpView, NicUpdateView, AuthorizedNicUpdateView)
+    MyIpView, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView)
 
 
 urlpatterns = patterns(
@@ -28,6 +28,7 @@ urlpatterns = patterns(
     url(r'^myip$', MyIpView),
     url(r'^detectip/$', DetectIpView),
     url(r'^detectip/(?P<secret>\w+)/$', DetectIpView),
+    url(r'^ajax_get_ips/$', AjaxGetIps, name="ajax_get_ips"),
     url(r'^nic/update$', NicUpdateView),
     url(r'^nic/update_authorized$',
         AuthorizedNicUpdateView, name='nic_update_authorized'),

@@ -36,12 +36,8 @@
         <div class="col-lg-8">
             <div class="well well-sm">
                 <h3>Your current IPs</h3>
-                {%  if request.session.ipv4 %}
-                <p><b>IPv4:</b> <span class="ipv4addr">{{ request.session.ipv4 }}</span> (seen {{request.session.ipv4_timestamp|timesince}} ago)</p>
-                {%  endif %}
-                {%  if request.session.ipv6 %}
-                <p><b>IPv6:</b> <span class="ipv6addr">{{ request.session.ipv6 }}</span> (seen {{request.session.ipv6_timestamp|timesince}} ago)</p>
-                {% endif %}
+                <p><b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span></p>
+                <p><b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span></p>
                 <p>Note: We try to get your IP addresses through a trick, by hosting two fake images:</p>
                 <ol>
                     <li>on a IPv4-only server</li>
