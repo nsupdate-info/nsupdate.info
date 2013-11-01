@@ -254,6 +254,9 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
                        action, name, origin, rdtype, ipaddr))
         set_ns_availability(origin, False)
         raise
+    except dns.tsig.PeerBadSignature:
+        logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin_str, ))
+        set_ns_availability(origin, False)
 
 
 def set_ns_availability(domain, available):
