@@ -8,3 +8,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta(object):
         model = User
         fields = ['first_name', 'last_name', 'email']
+        widgets = {
+            'email': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+        }

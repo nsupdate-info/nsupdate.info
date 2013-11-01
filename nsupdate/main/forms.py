@@ -8,6 +8,9 @@ class CreateHostForm(forms.ModelForm):
     class Meta(object):
         model = Host
         fields = ['subdomain', 'domain', 'comment']
+        widgets = {
+            'subdomain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+        }
 
 
 class EditHostForm(forms.ModelForm):
@@ -20,3 +23,6 @@ class CreateDomainForm(forms.ModelForm):
     class Meta(object):
         model = Domain
         exclude = ['created_by']
+        widgets = {
+            'domain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+        }

@@ -39,7 +39,7 @@
                     <label for="current_ipv4">Current IPv4 address from master nameserver</label>
                     <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.getIPv4 }}" disabled>
                     <label for="myipv4">Set new IPv4 address</label>
-                    <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required>
+                    <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required autofocus>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">Apply</button> <span id="update_result_v4"></span>
                 <p></p>
