@@ -103,11 +103,21 @@ class OverviewView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.created_by = self.request.user
-        self.object.save()
-        dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'], origin=self.object.domain.domain)
-        messages.add_message(self.request, messages.SUCCESS, 'Host added.')
-        return HttpResponseRedirect(self.get_success_url())
+        try:
+            dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'], origin=self.object.domain.domain)
+        except dnstools.Timeout:
+            # XXX should be ERROR, but ERROR is white on web ui!?
+            success, level, msg = False, messages.WARNING, 'Timeout - communicating to name server failed.'
+        except dnstools.NameServerNotAvailable:
+            # XXX should be ERROR, but ERROR is white on web ui!?
+            success, level, msg = False, messages.WARNING, 'Name server unavailable.'
+        else:
+            self.object.created_by = self.request.user
+            self.object.save()
+            success, level, msg = True, messages.SUCCESS, 'Host added.'
+        messages.add_message(self.request,  level, msg)
+        url = self.get_success_url() if success else reverse('overview')
+        return HttpResponseRedirect(url)
 
     def get_context_data(self, *args, **kwargs):
         context = super(OverviewView, self).get_context_data(*args, **kwargs)

@@ -30,6 +30,9 @@ import dns.tsigkeyring
 from django.utils.timezone import now
 
 
+Timeout = dns.resolver.Timeout
+
+
 class SameIpError(ValueError):
     """
     raised if an IP address is already present in DNS and and update was
