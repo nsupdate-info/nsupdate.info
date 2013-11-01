@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
-from django.db.models.signals import post_delete
+from django.db.models.signals import pre_delete
 from django.contrib.auth.hashers import make_password
 
 from . import dnstools
@@ -82,7 +82,7 @@ class Host(models.Model):
             message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
         ),
         domain_blacklist_validator])
-    domain = models.ForeignKey(Domain)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
     update_secret = models.CharField(max_length=256)  # gets hashed on save
     comment = models.CharField(
         max_length=256, default='', blank=True, null=True)
@@ -148,8 +148,12 @@ class Host(models.Model):
         return secret
 
 
-def post_delete_host(sender, **kwargs):
+def pre_delete_host(sender, **kwargs):
     obj = kwargs['instance']
-    dnstools.delete(obj.get_fqdn(), origin=obj.domain.domain)
+    try:
+        dnstools.delete(obj.get_fqdn(), origin=obj.domain.domain)
+    except (dnstools.Timeout, dnstools.NameServerNotAvailable):
+        # well, we tried to clean up, but we didn't reach the nameserver
+        pass
 
-post_delete.connect(post_delete_host, sender=Host)
+pre_delete.connect(pre_delete_host, sender=Host)
