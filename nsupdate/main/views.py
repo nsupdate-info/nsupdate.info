@@ -86,15 +86,6 @@ class HomeView(TemplateView):
         return context
 
 
-class HelpView(TemplateView):
-    template_name = "main/help.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(HelpView, self).get_context_data(*args, **kwargs)
-        context['nav_help'] = True
-        return context
-
-
 class ScreenshotsView(TemplateView):
     template_name = "main/screenshots.html"
 
