@@ -56,7 +56,7 @@ class GenerateNSSecretView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenerateNSSecretView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
+        context['nav_domain_overview'] = True
         context['shared_secret'] = self.object.generate_ns_secret()
         context['domains'] = Domain.objects.filter(created_by=self.request.user)
         messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
@@ -78,13 +78,11 @@ class HomeView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['nav_home'] = True
-
         ipaddr = self.request.META['REMOTE_ADDR']
         key = dnstools.check_ip(ipaddr)
         s = self.request.session
         s[key] = ipaddr
         s.save()
-
         return context
 
 
@@ -102,7 +100,7 @@ class ScreenshotsView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ScreenshotsView, self).get_context_data(*args, **kwargs)
-        context['nav_help'] = True
+        context['nav_about'] = True
         return context
 
 
@@ -227,7 +225,7 @@ class DomainOverwievView(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super(
             DomainOverwievView, self).get_context_data(*args, **kwargs)
-        context['nav_domains'] = True
+        context['nav_domain_overview'] = True
         context['domains'] = Domain.objects.filter(
             created_by=self.request.user)
         return context
@@ -259,7 +257,7 @@ class DomainView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DomainView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
+        context['nav_domain_overview'] = True
         context['domains'] = Domain.objects.filter(created_by=self.request.user)
         return context
 
@@ -280,6 +278,12 @@ class DeleteDomainView(DeleteView):
 
     def get_success_url(self):
         return reverse('domain_overview')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DeleteDomainView, self).get_context_data(*args, **kwargs)
+        context['nav_domain_overview'] = True
+        context['domains'] = Domain.objects.filter(created_by=self.request.user)
+        return context
 
 
 def RobotsTxtView(request):

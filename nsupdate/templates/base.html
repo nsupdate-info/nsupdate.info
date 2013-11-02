@@ -34,7 +34,10 @@
                         </li>
                         {% if request.user.is_authenticated %}
                         <li{% if nav_overview %} class="active"{% endif %}>
-                            <a href="{% url 'overview' %}">Overview</a>
+                            <a href="{% url 'overview' %}">Hosts</a>
+                        </li>
+                        <li{% if nav_domain_overview %} class="active"{% endif %}>
+                            <a href="{% url 'domain_overview' %}">Domains</a>
                         </li>
                         {% endif %}
                         <li{% if nav_about %} class="active"{% endif %}>
@@ -54,7 +57,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'account_profile' %}">Profile</a></li>
                                     <li><a href="{% url 'password_change' %}">Change password</a></li>
-                                    <li><a href="{% url 'domain_overview' %}">Own Domains</a></li>
                                     {% if request.user.is_staff %}
                                         <li><a href="/admin/">Admin</a></li>
                                     {% endif %}
