@@ -239,6 +239,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 AUTHENTICATION_BACKENDS = (
     'social.backends.amazon.AmazonOAuth2',
     'social.backends.bitbucket.BitbucketOAuth',
+    'social.backends.disqus.DisqusOAuth2',
     'social.backends.dropbox.DropboxOAuth',
     'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOAuth2',
