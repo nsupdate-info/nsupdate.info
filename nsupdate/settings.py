@@ -15,6 +15,9 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+# sender address for e.g. user activation emails
+DEFAULT_FROM_EMAIL = "your_email@example.com"
+
 MANAGERS = ADMINS
 
 DATABASES = {
