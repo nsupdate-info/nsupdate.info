@@ -237,8 +237,14 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 # python-social-auth settings
 
 AUTHENTICATION_BACKENDS = (
+    'social.backends.amazon.AmazonOAuth2',
+    'social.backends.bitbucket.BitbucketOAuth',
+    'social.backends.dropbox.DropboxOAuth',
     'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOAuth2',
+    'social.backends.reddit.RedditOAuth2',
+    'social.backends.soundcloud.SoundcloudOAuth2',
+    'social.backends.stackoverflow.StackoverflowOAuth2',
     'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )

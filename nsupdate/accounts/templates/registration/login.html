@@ -20,9 +20,9 @@
     <div>
         Login with:
         <ul>
-            <li><a href="{% url 'social:begin' 'github' %}">GitHub</a></li>
-            <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google</a></li>
-            {#  no ipv6 support :-| <li><a href="{% url 'social:begin' 'twitter' %}">Twitter</a></li> #}
+            {% for backend in backends.backends %}
+                <li><a href="{% url 'social:begin' backend %}">{{ backend }}</a></li>
+            {% endfor %}
         </ul>
     </div>
   </div>
