@@ -13,19 +13,15 @@
                     <th>Available?</th>
                     <th>Nameserver IP</th>
                     <th>Algorithm</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             {% for domain in domains %}
                 <tr>
-                    <td rowspan="2" style="vertical-align: middle"><b>{{ domain.domain }}</b></td>
+                    <td rowspan="2" style="vertical-align: middle"><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
                     <td>{{ domain.public|yesno }}</td>
                     <td>{{ domain.available|yesno }}</td>
                     <td>{{ domain.nameserver_ip }}</td>
                     <td>{{ domain.get_nameserver_update_algorithm_display }}</td>
-                    <td rowspan="2" style="vertical-align: middle">
-                        <a href="{% url 'delete_domain' domain.pk %}"><i class="icon icon-remove"></i> delete</a>
-                    </td>
                 </tr>
                 <tr>
                     <td colspan="4">Key: {{ domain.nameserver_update_key }}</td>

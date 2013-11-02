@@ -26,3 +26,9 @@ class CreateDomainForm(forms.ModelForm):
         widgets = {
             'domain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
+
+
+class EditDomainForm(forms.ModelForm):
+    class Meta(object):
+        model = Domain
+        fields = ['nameserver_ip', 'public', 'available', 'nameserver_update_algorithm', 'nameserver_update_key']

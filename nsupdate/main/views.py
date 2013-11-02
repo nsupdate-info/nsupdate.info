@@ -12,7 +12,7 @@ from django.core.exceptions import PermissionDenied
 
 import dnstools
 
-from .forms import CreateHostForm, EditHostForm, CreateDomainForm
+from .forms import CreateHostForm, EditHostForm, CreateDomainForm, EditDomainForm
 from .models import Host, Domain
 
 
@@ -37,6 +37,29 @@ class GenerateSecretView(UpdateView):
         context['update_secret'] = self.object.generate_secret()
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         messages.add_message(self.request, messages.SUCCESS, 'Host secret created.')
+        return context
+
+
+class GenerateNSSecretView(UpdateView):
+    model = Domain
+    template_name = "main/generate_ns_secret.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(GenerateNSSecretView, self).dispatch(*args, **kwargs)
+
+    def get_object(self, *args, **kwargs):
+        obj = super(GenerateNSSecretView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GenerateNSSecretView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        context['shared_secret'] = self.object.generate_ns_secret()
+        context['domains'] = Domain.objects.filter(created_by=self.request.user)
+        messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
         return context
 
 
@@ -207,6 +230,37 @@ class DomainOverwievView(CreateView):
         context['nav_domains'] = True
         context['domains'] = Domain.objects.filter(
             created_by=self.request.user)
+        return context
+
+
+class DomainView(UpdateView):
+    model = Domain
+    template_name = "main/domain.html"
+    form_class = EditDomainForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DomainView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('domain_overview')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        messages.add_message(self.request, messages.SUCCESS, 'Domain updated.')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DomainView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DomainView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        context['domains'] = Domain.objects.filter(created_by=self.request.user)
         return context
 
 

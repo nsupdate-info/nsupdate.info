@@ -1,5 +1,5 @@
 import re
-from django.utils.timezone import now
+import base64
 
 import dns.resolver
 
@@ -10,6 +10,7 @@ from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db.models.signals import pre_delete
 from django.contrib.auth.hashers import make_password
+from django.utils.timezone import now
 
 from . import dnstools
 
@@ -74,6 +75,23 @@ class Domain(models.Model):
     def __unicode__(self):
         return u"%s" % (self.domain, )
 
+    def generate_ns_secret(self):
+        secret = User.objects.make_random_password(length=64)  # 512 bits
+        self.nameserver_update_key = key = base64.b64encode(secret)
+        self.nameserver_update_algorithm = 'HMAC_SHA512'
+        self.save()
+        return key
+
+    def get_bind9_algorithm(self):
+        mapping = {
+            'HMAC_SHA512': 'hmac-sha512',
+            'HMAC_SHA384': 'hmac-sha384',
+            'HMAC_SHA256': 'hmac-sha256',
+            'HMAC_SHA224': 'hmac-sha224',
+            'HMAC_SHA1': 'hmac-sha1',
+            'HMAC_MD5': 'hmac-md5',
+        }
+        return mapping.get(self.nameserver_update_algorithm)
 
 class Host(models.Model):
     subdomain = models.CharField(max_length=256, validators=[
