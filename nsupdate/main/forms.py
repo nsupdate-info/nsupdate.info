@@ -31,4 +31,5 @@ class CreateDomainForm(forms.ModelForm):
 class EditDomainForm(forms.ModelForm):
     class Meta(object):
         model = Domain
-        fields = ['nameserver_ip', 'public', 'available', 'nameserver_update_algorithm', 'nameserver_update_key']
+        fields = ['comment', 'nameserver_ip', 'public', 'available',
+                  'nameserver_update_algorithm', 'nameserver_update_key']

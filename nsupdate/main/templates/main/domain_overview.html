@@ -12,6 +12,7 @@
                     <th>Public?</th>
                     <th>Available?</th>
                     <th>Nameserver IP</th>
+                    <th>Comment</th>
                 </tr>
             </thead>
             {% for domain in domains %}
@@ -20,6 +21,7 @@
                     <td>{{ domain.public|yesno }}</td>
                     <td>{{ domain.available|yesno }}</td>
                     <td>{{ domain.nameserver_ip }}</td>
+                    <td>{{ domain.comment }}</td>
                 </tr>
             {% empty %}
                 <tr><td colspan="4">No domains yet.</td></tr>

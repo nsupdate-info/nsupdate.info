@@ -67,6 +67,8 @@ class Domain(models.Model):
         default=True,
         help_text="Check if nameserver is available/reachable - "
                   "if not checked, we'll pause querying/updating this nameserver for a while")
+    comment = models.CharField(
+        max_length=256, default='', blank=True, null=True)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -92,6 +94,7 @@ class Domain(models.Model):
             'HMAC_MD5': 'hmac-md5',
         }
         return mapping.get(self.nameserver_update_algorithm)
+
 
 class Host(models.Model):
     subdomain = models.CharField(max_length=256, validators=[
