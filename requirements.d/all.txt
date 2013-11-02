@@ -4,3 +4,4 @@ django-bootstrap-form
 django-registration
 South
 django-extensions
+python-social-auth

@@ -17,6 +17,14 @@
     <button type="submit" class="btn btn-primary">login</button>
     <input type="hidden" name="next" value="{{ next }}" />
     </form>
+    <div>
+        Login with:
+        <ul>
+            <li><a href="{% url 'social:begin' 'github' %}">GitHub</a></li>
+            <li><a href="{% url 'social:begin' 'google-oauth2' %}">Google</a></li>
+            <li><a href="{% url 'social:begin' 'twitter' %}">Twitter</a></li>
+        </ul>
+    </div>
   </div>
 </div>
 

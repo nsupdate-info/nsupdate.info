@@ -44,6 +44,7 @@ setup(
         'django-bootstrap-form',
         'django-registration',
         'django-extensions',
+        'python-social-auth',
         # packages only needed for development:
         'django-debug-toolbar',
         'pytest',
