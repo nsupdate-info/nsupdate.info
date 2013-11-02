@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h3>{{ domain.domain }} <br><small><a href="{% url 'domain_overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
+        <div class="col-lg-8">
+            <h3>Edit Domain</h3>
+            <p>You can't change the domain name. If you want to have another domain name, you have to delete this domain and create a new one.</p>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+        <div class="col-lg-4">
+            <h3>Delete Domain</h3>
+            <p>
+                Deleting a domain is not undoable. If you need it back, you'll have to add it again and configure a new shared secret.
+            </p>
+            <form method="get" action="{% url 'delete_domain' domain.pk %}">
+                <button type="submit" class="btn btn-primary">Delete domain {{ domain.domain }}</button>
+            </form>
+            <h3>Generate New Secret</h3>
+            <p>You can generate a new shared secret here. If you do so, you have to put it into your nameserver config also.
+               We'll show you an example config...</p>
+            <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">Generate New</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

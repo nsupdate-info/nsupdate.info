@@ -12,22 +12,17 @@
                     <th>Public?</th>
                     <th>Available?</th>
                     <th>Nameserver IP</th>
-                    <th>Algorithm</th>
                 </tr>
             </thead>
             {% for domain in domains %}
                 <tr>
-                    <td rowspan="2" style="vertical-align: middle"><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
+                    <td><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
                     <td>{{ domain.public|yesno }}</td>
                     <td>{{ domain.available|yesno }}</td>
                     <td>{{ domain.nameserver_ip }}</td>
-                    <td>{{ domain.get_nameserver_update_algorithm_display }}</td>
-                </tr>
-                <tr>
-                    <td colspan="4">Key: {{ domain.nameserver_update_key }}</td>
                 </tr>
             {% empty %}
-                <tr><td colspan="6">No domains yet.</td></tr>
+                <tr><td colspan="4">No domains yet.</td></tr>
             {% endfor %}
             </table>
         </div>
