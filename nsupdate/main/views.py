@@ -299,10 +299,14 @@ User-agent: *
 Crawl-delay: 10
 Disallow: /account/
 Disallow: /accounts/
+Disallow: /login/
 Disallow: /admin/
 Disallow: /myip/
 Disallow: /nic/update/
 Disallow: /overview/
+Disallow: /domain_overview/
+Disallow: /host/
+Disallow: /domain/
 """
     return HttpResponse(content, content_type="text/plain")
 
