@@ -264,8 +264,8 @@ SOCIAL_AUTH_LOGIN_URL = '/accounts/login/'
 #    Used to redirect new registered users, will be used in place of SOCIAL_AUTH_LOGIN_REDIRECT_URL if defined.
 
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/account/profile/'
-#    Like SOCIAL_AUTH_NEW_USER_REDIRECT_URL but for new associated accounts (user is already logged in). Used in place of
-#    SOCIAL_AUTH_LOGIN_REDIRECT_URL
+#    Like SOCIAL_AUTH_NEW_USER_REDIRECT_URL but for new associated accounts (user is already logged in).
+#    Used in place of SOCIAL_AUTH_LOGIN_REDIRECT_URL.
 
 SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account/profile'
 #    The user will be redirected to this URL when a social account is disconnected

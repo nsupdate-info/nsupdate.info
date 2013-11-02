@@ -115,7 +115,7 @@ class OverviewView(CreateView):
             self.object.created_by = self.request.user
             self.object.save()
             success, level, msg = True, messages.SUCCESS, 'Host added.'
-        messages.add_message(self.request,  level, msg)
+        messages.add_message(self.request, level, msg)
         url = self.get_success_url() if success else reverse('overview')
         return HttpResponseRedirect(url)
 
