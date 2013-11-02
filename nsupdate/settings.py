@@ -33,6 +33,7 @@ DATABASES = {
 }
 
 BASEDOMAIN = 'nsupdate.info'
+SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
 WWW_HOST = BASEDOMAIN
 WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN
 WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN

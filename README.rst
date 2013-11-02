@@ -1,10 +1,13 @@
 About nsupdate.info
 ===================
 
-http://nsupdate.info is a free dynamic dns service.
+https://nsupdate.info is a free dynamic dns service.
 
 nsupdate.info is also the name of the software used to implement it.
 If you like, you can use it to host the service on your own server.
+
+The software project lives at:
+https://github.com/nsupdate-info/nsupdate.info
 
 
 Features

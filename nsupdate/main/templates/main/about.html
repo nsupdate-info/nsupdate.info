@@ -2,20 +2,23 @@
 {% load bootstrap %}
 
 {% block content %}
-<h1>About the nsupdate.info service</h1>
+<h1>About the {{ WWW_HOST }} service</h1>
     <h2>What's this?</h2>
         <p>
-            nsupdate.info is a dynamic dns service.
+            {{ WWW_HOST }} is a dynamic dns service.
         </p>
         <p>
             You usually need it so your router (or other dyndns2-compatible
             client) can update a hostname, so you don't need to know or find
             out your current IP address.
         </p>
-    <h2>Screenshots?</h2>
+    <h2>Screenshots and Documentation?</h2>
         <p>
             We made some
             <a href="{% url 'screenshots' %}">screenshots</a>
+            and
+            <a href="http://nsupdateinfo.readthedocs.org/"
+               title="Open docs in new window" target="_blank">Documentation</a>
             for you so you can see what you get without having to create an account first.
         </p>
     <h2>Why another one?</h2>
@@ -49,27 +52,9 @@
         This is a free service, there are no warranties. If it breaks, it breaks.
     </p>
 
-<h1>About the nsupdate.info software project</h1>
-    <h2>Where does the project live?</h2>
-    The <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>.
-
-    <h2>Found some issue or want to help?</h2>
-    <p>
-        Feedback and help is welcome. Please use github to file issues to the
-        issue tracker or contribute changes (either do a pull request [preferred]
-        or attach a patch to an issue).
-    </p>
-    <h2>Who developed the software?</h2>
-        <p>
-            <a href="https://github.com/asmaps/">Arne Schauf</a>,
-            <a href="https://github.com/Samuirai/">Fabian Faessler</a> and
-            <a href="https://github.com/ThomasWaldmann/">Thomas Waldmann</a>
-            developed the initial version of the nsupdate.info software in 48h in the DjangoDash 2013 contest.
-        </p>
-
 <h1>Contact</h1>
     <p>
-        info AT nsupdate DOT info
+        {{ SERVICE_CONTACT }}
     </p>
 
 {% endblock %}

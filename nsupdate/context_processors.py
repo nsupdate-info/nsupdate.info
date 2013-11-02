@@ -16,6 +16,7 @@ def add_settings(request):
     context['WWW_HOST'] = settings.WWW_HOST
     context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
     context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
+    context['SERVICE_CONTACT'] = settings.SERVICE_CONTACT  # about view
     return context
 
 
