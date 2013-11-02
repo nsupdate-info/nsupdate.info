@@ -166,13 +166,14 @@ def NicUpdateView(request):
     :return: HttpResponse object
     """
     hostname = request.GET.get('hostname')
+    agent = request.META.get('HTTP_USER_AGENT', 'unknown')
     auth = request.META.get('HTTP_AUTHORIZATION')
     if auth is None:
-        logger.warning('%s - received no auth' % (hostname, ))
+        logger.warning('%s - received no auth [ua: %s]' % (hostname, agent, ))
         return basic_challenge("authenticate to update DNS", 'noauth')
     username, password = basic_authenticate(auth)
     if not check_api_auth(username, password):
-        logger.info('%s - received bad credentials, username: %s' % (hostname, username, ))
+        logger.info('%s - received bad credentials, username: %s [ua: %s]' % (hostname, username, agent, ))
         return basic_challenge("authenticate to update DNS", 'badauth')
     if hostname is None:
         # as we use update_username == hostname, we can fall back to that:
@@ -180,11 +181,10 @@ def NicUpdateView(request):
     ipaddr = request.GET.get('myip')
     if ipaddr is None:
         ipaddr = request.META.get('REMOTE_ADDR')
-    agent = request.META.get('HTTP_USER_AGENT')
     if agent in settings.BAD_AGENTS:
-        logger.info('%s - received update from bad user agent %s' % (hostname, agent, ))
+        logger.info('%s - received update from bad user agent [ua: %s]' % (hostname, agent, ))
         return Response('badagent')
-    return _update(hostname, ipaddr)
+    return _update(hostname, ipaddr, agent)
 
 
 @login_required
@@ -200,6 +200,7 @@ def AuthorizedNicUpdateView(request):
     :param request: django request object
     :return: HttpResponse object
     """
+    agent = request.META.get('HTTP_USER_AGENT', 'unknown')
     hostname = request.GET.get('hostname')
     if hostname is None:
         return Response('nohost')
@@ -209,10 +210,10 @@ def AuthorizedNicUpdateView(request):
     ipaddr = request.GET.get('myip')
     if not ipaddr:
         ipaddr = request.META.get('REMOTE_ADDR')
-    return _update(hostname, ipaddr)
+    return _update(hostname, ipaddr, agent)
 
 
-def _update(hostname, ipaddr):
+def _update(hostname, ipaddr, agent='unknown'):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
@@ -227,8 +228,8 @@ def _update(hostname, ipaddr):
     hosts[0].poke(kind)
     try:
         update(hostname, ipaddr)
-        logger.info('%s - received good update -> ip: %s' % (hostname, ipaddr, ))
+        logger.info('%s - received good update -> ip: %s [ua: %s]' % (hostname, ipaddr, agent))
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s' % (hostname, ipaddr, ))
+        logger.warning('%s - received no-change update, ip: %s [ua: %s]' % (hostname, ipaddr, agent))
         return Response('nochg %s' % ipaddr)
