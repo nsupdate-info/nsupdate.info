@@ -108,12 +108,12 @@
             </div>
         </div>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <div style="display: none">
+        <div id="ip_detection" style="display: none">
             {% if not request.session.ipv4 %}
-                <img id="v4_img" alt="fake image used for ip v4 address detection" />
                 <script type="text/javascript">
                     function insert_src_v4() {
-                        $('#v4_img').attr('src', "//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/");
+                        $('#ip_detection').add(
+                            '<img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" >');
                     };
                     $(setTimeout("insert_src_v4()", 1000));
                     function insert_ip_v4() {
@@ -126,10 +126,10 @@
                 </script>
             {% endif %}
             {% if not request.session.ipv6 %}
-                <img id="v6_img" alt="fake image used for ip v6 address detection" />
                 <script type="text/javascript">
                     function insert_src_v6() {
-                        $('#v6_img').attr('src', "//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/");
+                        $('#ip_detection').add(
+                            '<img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" >');
                     };
                     $(setTimeout("insert_src_v6()", 1000));
                     function insert_ip_v6() {
