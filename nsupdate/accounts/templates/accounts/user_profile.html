@@ -15,17 +15,20 @@
     </div>
     <div class="col-lg-6">
         <h1>Associate with remote Account</h1>
-        <ul>
-            {% for backend in backends.not_associated %}
-                <li><a href="{% url 'social:begin' backend %}">{{ backend }}</a></li>
-            {% endfor %}
-        </ul>
+        {% for backend in backends.not_associated %}
+            <form method="get" action="{% url 'social:begin' backend %}"
+                  style="display: inline-block;">
+                <button type="submit" class="btn btn-xs btn-success">{{ backend }}</button>
+            </form>
+        {% endfor %}
         <h1>Deassociate from remote Account</h1>
-        <ul>
-            {% for socauth in backends.associated %}
-                <li><a href="{% url 'social:disconnect_individual' socauth.provider socauth.pk %}">{{ socauth.provider }}</a></li>
-            {% endfor %}
-        </ul>
+        {% for socauth in backends.associated %}
+            <form method="post" action="{% url 'social:disconnect_individual' socauth.provider socauth.pk %}"
+                  style="display: inline-block;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-xs btn-danger">{{ socauth.provider }}</button>
+            </form>
+        {% endfor %}
     </div>
     <div class="col-lg-1">
     </div>
