@@ -120,7 +120,7 @@
                     function insert_img_ipv4() {
                         $('#ip_detection').add(
                             '<img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" >');
-                    };
+                    }
                     $(setTimeout("insert_img_ipv4()", 1000));
                 </script>
             {% endif %}
@@ -129,7 +129,7 @@
                     function insert_img_ipv6() {
                         $('#ip_detection').add(
                             '<img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" >');
-                    };
+                    }
                     $(setTimeout("insert_img_ipv6()", 1000));
                 </script>
             {% endif %}
@@ -141,7 +141,7 @@
                             $('#ipv4').text(data['ipv4']);
                             $('#ipv6').text(data['ipv6']);
                         });
-                    };
+                    }
                     $(setTimeout("insert_ips()", 2000));
                 </script>
             {% endif %}
