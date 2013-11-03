@@ -2,6 +2,10 @@
 {% load bootstrap %}
 {% load static %}
 
+{% block html_head %}
+{% include "main/includes/home_html_head.html" %}
+{% endblock %}
+
 {% block content %}
     {% include "main/includes/home_top.html" %}
     <div class="jumbotron">
