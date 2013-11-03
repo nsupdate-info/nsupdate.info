@@ -165,6 +165,7 @@ def NicUpdateView(request):
     :param request: django request object
     :return: HttpResponse object
     """
+    ssl = request.is_secure()
     hostname = request.GET.get('hostname')
     agent = request.META.get('HTTP_USER_AGENT', 'unknown')
     auth = request.META.get('HTTP_AUTHORIZATION')
@@ -184,7 +185,7 @@ def NicUpdateView(request):
     if agent in settings.BAD_AGENTS:
         logger.info('%s - received update from bad user agent [ua: %s]' % (hostname, agent, ))
         return Response('badagent')
-    return _update(hostname, ipaddr, agent)
+    return _update(hostname, ipaddr, agent, ssl)
 
 
 @login_required
@@ -200,6 +201,7 @@ def AuthorizedNicUpdateView(request):
     :param request: django request object
     :return: HttpResponse object
     """
+    ssl = request.is_secure()
     agent = request.META.get('HTTP_USER_AGENT', 'unknown')
     hostname = request.GET.get('hostname')
     if hostname is None:
@@ -210,10 +212,10 @@ def AuthorizedNicUpdateView(request):
     ipaddr = request.GET.get('myip')
     if not ipaddr:
         ipaddr = request.META.get('REMOTE_ADDR')
-    return _update(hostname, ipaddr, agent)
+    return _update(hostname, ipaddr, agent, ssl)
 
 
-def _update(hostname, ipaddr, agent='unknown'):
+def _update(hostname, ipaddr, agent='unknown', ssl=False):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
@@ -225,11 +227,11 @@ def _update(hostname, ipaddr, agent='unknown'):
         logging.error("fqdn %s has multiple entries" % hostname)
         return False
     kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
-    hosts[0].poke(kind)
+    hosts[0].poke(kind, ssl)
     try:
         update(hostname, ipaddr)
-        logger.info('%s - received good update -> ip: %s [ua: %s]' % (hostname, ipaddr, agent))
+        logger.info('%s - received good update -> ip: %s [ssl: %r ua: %s]' % (hostname, ipaddr, ssl, agent))
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s [ua: %s]' % (hostname, ipaddr, agent))
+        logger.warning('%s - received no-change update, ip: %s [ssl: %r ua: %s]' % (hostname, ipaddr, ssl, agent))
         return Response('nochg %s' % ipaddr)

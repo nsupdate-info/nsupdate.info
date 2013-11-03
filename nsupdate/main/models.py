@@ -109,8 +109,12 @@ class Host(models.Model):
         max_length=256, default='', blank=True, null=True)
 
     last_update = models.DateTimeField(auto_now=True)
+    # when we received the last update for v4/v6 addr
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(blank=True, null=True)
+    # how we received the last update for v4/v6 addr
+    ssl_update_ipv4 = models.BooleanField()
+    ssl_update_ipv6 = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name='hosts')
@@ -148,11 +152,13 @@ class Host(models.Model):
                 dnstools.NameServerNotAvailable):
             return 'error'
 
-    def poke(self, kind):
+    def poke(self, kind, ssl):
         if kind == 'ipv4':
             self.last_update_ipv4 = now()
+            self.ssl_update_ipv4 = ssl
         else:
             self.last_update_ipv6 = now()
+            self.ssl_update_ipv6 = ssl
         self.save()
 
     def generate_secret(self):
