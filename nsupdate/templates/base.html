@@ -39,6 +39,9 @@
                         <li{% if nav_domain_overview %} class="active"{% endif %}>
                             <a href="{% url 'domain_overview' %}">Domains</a>
                         </li>
+                        <li{% if nav_status %} class="active"{% endif %}>
+                            <a href="{% url 'status' %}">Status</a>
+                        </li>
                         {% endif %}
                         <li{% if nav_about %} class="active"{% endif %}>
                             <a href="{% url 'about' %}">About</a>

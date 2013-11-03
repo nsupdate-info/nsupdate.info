@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 
+from datetime import timedelta
+
 from django.db.models import Q
 from django.views.generic import TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
+from django.utils.timezone import now
 
 import dnstools
 
@@ -92,6 +96,43 @@ class ScreenshotsView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(ScreenshotsView, self).get_context_data(*args, **kwargs)
         context['nav_about'] = True
+        return context
+
+
+class StatusView(TemplateView):
+    template_name = "main/status.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(
+            StatusView, self).get_context_data(*args, **kwargs)
+        context['nav_status'] = True
+        context['domains_total'] = Domain.objects.count()
+        context['domains_unavailable'] = Domain.objects.filter(available=False).count()
+        context['domains_public'] = Domain.objects.filter(public=True).count()
+        context['hosts_total'] = Host.objects.count()
+        t_now = now()
+        before_2d = t_now - timedelta(hours=48)
+        before_2w = t_now - timedelta(days=14)
+        before_2m = t_now - timedelta(days=61)
+        before_2y = t_now - timedelta(days=730)
+        context['hosts_ipv4_2d'] = Host.objects.filter(last_update_ipv4__gt=before_2d).count()
+        context['hosts_ipv6_2d'] = Host.objects.filter(last_update_ipv6__gt=before_2d).count()
+        context['hosts_ipv4_2w'] = Host.objects.filter(last_update_ipv4__gt=before_2w).count()
+        context['hosts_ipv6_2w'] = Host.objects.filter(last_update_ipv6__gt=before_2w).count()
+        context['hosts_ipv4_2m'] = Host.objects.filter(last_update_ipv4__gt=before_2m).count()
+        context['hosts_ipv6_2m'] = Host.objects.filter(last_update_ipv6__gt=before_2m).count()
+        context['hosts_ipv4_2y'] = Host.objects.filter(last_update_ipv4__gt=before_2y).count()
+        context['hosts_ipv6_2y'] = Host.objects.filter(last_update_ipv6__gt=before_2y).count()
+        context['users_total'] = User.objects.count()
+        context['users_active'] = User.objects.filter(is_active=True).count()
+        context['users_created_2d'] = User.objects.filter(date_joined__gt=before_2d).count()
+        context['users_loggedin_2d'] = User.objects.filter(last_login__gt=before_2d).count()
+        context['users_created_2w'] = User.objects.filter(date_joined__gt=before_2w).count()
+        context['users_loggedin_2w'] = User.objects.filter(last_login__gt=before_2w).count()
+        context['users_created_2m'] = User.objects.filter(date_joined__gt=before_2m).count()
+        context['users_loggedin_2m'] = User.objects.filter(last_login__gt=before_2m).count()
+        context['users_created_2y'] = User.objects.filter(date_joined__gt=before_2y).count()
+        context['users_loggedin_2y'] = User.objects.filter(last_login__gt=before_2y).count()
         return context
 
 
@@ -300,6 +341,7 @@ Disallow: /overview/
 Disallow: /domain_overview/
 Disallow: /host/
 Disallow: /domain/
+Disallow: /status/
 """
     return HttpResponse(content, content_type="text/plain")
 
