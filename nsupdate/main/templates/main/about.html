@@ -2,59 +2,97 @@
 {% load bootstrap %}
 
 {% block content %}
-<h1>About the {{ WWW_HOST }} service</h1>
-    <h2>What's this?</h2>
-        <p>
-            {{ WWW_HOST }} is a dynamic dns service.
-        </p>
-        <p>
-            You usually need it so your router (or other dyndns2-compatible
-            client) can update a hostname, so you don't need to know or find
-            out your current IP address.
-        </p>
-    <h2>Screenshots and Documentation?</h2>
-        <p>
-            We made some
-            <a href="{% url 'screenshots' %}">screenshots</a>
-            and
-            <a href="http://nsupdateinfo.readthedocs.org/"
-               title="Open docs in new window" target="_blank">Documentation</a>
-            for you so you can see what you get without having to create an account first.
-        </p>
-    <h2>Why another one?</h2>
-        <p>
-            We wanted a simple, usable, secure and free dynamic dns service.
-            That is not nagging its users with advertisements, spam, having
-            to log in regularly or cancelling his hosts after a short time of non-usage.
-            That is not hiding the few free features almost undiscoverably between
-            a ton of features that are only for paying users.
-        </p>
-
-<h1>Fair use of the service</h1>
-    <p>
-        The only thing we expect from you is fair use of this service:
-    </p>
-    <ul>
-        <li>Don't abuse the service in any way.</li>
-        <li>Don't update your hosts too often.</li>
-        <li>Don't do updates if your IP did not change.</li>
-        <li>Don't create lots of users or lots of hosts.</li>
-        <li>Don't use the service for any illegal or otherwise questionable purpose.</li>
-        <li>Don't spam us via e-mail.</li>
-    </ul>
-    <p>
-        We reserve the right to remove any account or hostname(s) that are
-        related to unfair use of the service - at any time and without prior notice.
-    </p>
-
-<h1>No warranties</h1>
-    <p>
-        This is a free service, there are no warranties. If it breaks, it breaks.
-    </p>
-
-<h1>Contact</h1>
-    <p>
-        {{ SERVICE_CONTACT }}
-    </p>
-
+<div class="container">
+    <div class="row">
+        <h1>About the {{ WWW_HOST }} service</h1>
+        <div class="col-lg-4">
+            <h2>What's this?</h2>
+            <p>
+                {{ WWW_HOST }} is a <b>dynamic dns service</b>.
+            </p>
+            <p>
+                You usually need it so your router (or other dyndns2-compatible
+                client) can update a hostname, so you don't need to know or find
+                out your current IP address.
+            </p>
+            <p>
+                {{ WWW_HOST }} is <b>simple, usable, free, friendly, secure and respects your privacy</b>.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Why another one?</h2>
+            <p>
+                As far as we know, there was no service yet that is <em>not</em>:
+                <ul>
+                    <li>nagging its users to make a paid subscription</li>
+                    <li>annoying its users with advertisements or spam</li>
+                    <li>cancelling hosts or accounts after a short period of non-usage</li>
+                    <li>hiding the few free features almost undiscoverably
+                        between a ton of commercial-only features</li>
+                </ul>
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2>How is it?</h2>
+            <p>
+                See <a href="{% url 'screenshots' %}">Screenshots</a> and
+                <a href="http://nsupdateinfo.readthedocs.org/"
+                   title="Open docs in new window" target="_blank">Documentation</a>.
+            </p>
+            <p>
+                So you can see what you get without having to create an account first.
+            </p>
+            <p>If you are interested in the software project, have a look at the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>Fair use of the service</h2>
+            <p>
+                The only thing we expect from you is fair use of this service:
+            </p>
+            <ul>
+                <li>Don't abuse the service in any way.</li>
+                <li>Don't update your hosts too often.</li>
+                <li>Don't do updates if your IP did not change.</li>
+                <li>Don't create lots of users or lots of hosts.</li>
+                <li>Don't use the service for any illegal or otherwise questionable purpose.</li>
+                <li>Don't spam us via e-mail.</li>
+            </ul>
+            <p>
+                We reserve the right to remove any account or hostname(s) that are
+                related to unfair use of the service - at any time and without prior notice.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2>No warranties</h2>
+            <p>
+                This is free software and a free service, there are no warranties.
+            </p>
+            <p>
+                If it breaks, it breaks.
+            </p>
+        </div>
+        <div class="col-lg-4">
+            <h2>Service Contact</h2>
+            <p>
+                {{ SERVICE_CONTACT }}
+            </p>
+            <p>
+                Before contacting us via E-Mail, please read the docs, they exist for a reason.
+            </p>
+            <h2>Software Project Contact</h2>
+            <p>
+                Visit the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a> to:
+                <ul>
+                    <li>file issues on the issue tracker for bugs, ideas, patches.</li>
+                    <li>create pull requests for your contributions.</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}
