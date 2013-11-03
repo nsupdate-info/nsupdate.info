@@ -3,11 +3,13 @@
 {% load static %}
 
 {% block content %}
+    {% include "main/includes/home_top.html" %}
     <div class="jumbotron">
         <h4>Your current IP(s):</h4>
         <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
         <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
     </div>
+    {% include "main/includes/home_middle.html" %}
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
             <h1>{{ WWW_HOST }} &mdash; the Dynamic DNS service you waited for.</h1>
@@ -39,4 +41,5 @@
             </p>
         </div>
     </div>
+    {% include "main/includes/home_bottom.html" %}
 {% endblock %}
