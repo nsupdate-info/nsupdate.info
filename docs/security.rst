@@ -10,6 +10,20 @@ Use https for the web interface as well as for the update client (if possible).
 Otherwise, your username / password (FQDN / update secret) will be transmitted
 in clear text (unencrypted).
 
+The web interface will warn you if you use it via http. If WE_HAVE_SSL is
+set to True, it will suggest you better use the https site and link there.
+
+Additionally, the service administrator can implement a redirect from the
+http to the https site within the webserver configuration for the WWW_HOST.
+The redirect should **not** be implemented for WWW_IPV4_HOST and WWW_IPV6_HOST
+as it is unknown whether all update clients can deal with a redirect.
+
+For the router / update client configuration examples we show when creating a
+update secret, we use update URLs with https: (and we also tell why it might
+not work).
+
+On the hosts overview page, we show whether we received the last update via SSL.
+
 
 Passwords / Secrets / Keys
 ==========================
@@ -63,6 +77,8 @@ so we would need the unlocked key of that encryption mechanism on the same machi
 Make sure no unauthorized person gets that key or he/she will be able to update
 ANY record in the respective zone / nameserver directly (without going over
 nsupdate.info software / service).
+
+We support creating random update keys, so you don't need an extra tool for this.
 
 
 CSRF protection
