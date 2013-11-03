@@ -68,8 +68,8 @@ def AjaxGetIps(request):
     :return: HttpResponse object
     """
     response = dict(
-        ipv4=request.session['ipv4'],
-        ipv6=request.session['ipv6'],
+        ipv4=request.session.get('ipv4', ''),
+        ipv6=request.session.get('ipv6', ''),
     )
     logger.debug("ajax_get_ips response: %r" % (response, ))
     return HttpResponse(json.dumps(response), content_type='application/json')
