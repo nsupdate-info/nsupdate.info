@@ -84,6 +84,10 @@
                                 {% if WE_HAVE_SSL %}
                                     Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.
                                 {% endif %}
+                                {% if COOKIE_SECURE %}
+                                    At least some of the required cookies will only work on the secure https site,
+                                    expect malfunctioning on the http site.
+                                {% endif %}
                             </div>
                         {% endif %}
                         {% if messages %}
