@@ -122,12 +122,29 @@
             ddclient is a popular dyndns update daemon on Linux.
         </p>
         <pre># /etc/ddclient.conf
+
+# this will update your ipv4 address to the address
+# the web service sees requests coming from:
 protocol=dyndns2
-use=web, web=http://{{ WWW_HOST }}/myip
-server={{ WWW_HOST }}
+use=web, web=http://{{ WWW_IPV4_HOST }}/myip
+ssl=yes  # yes = use https for updates
+server={{ WWW_IPV4_HOST }}
 login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+
+# ddclient releases <= 3.8.1 do not support ipv6,
+# but there is a patch for ipv6 from Eduardo Trapani.
+# using such a patched ddclient, the following should work:
+#
+# this will update your ipv6 address to the interface address:
+#protocol=dyndns2
+#usev6=if, if=eth0
+#ssl=yes  # yes = use https for updates
+#server={{ WWW_IPV6_HOST }}
+#login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+#password='{{ update_secret|default:"&lt;your secret&gt;" }}'
+#{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 </pre>
     </div>
     <div class="tab-pane" id="browser">
