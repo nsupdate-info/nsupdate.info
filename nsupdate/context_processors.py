@@ -3,10 +3,9 @@
 import logging
 logger = logging.getLogger(__name__)
 
-from datetime import timedelta
+import time
 
 from django.conf import settings
-from django.utils.timezone import now
 
 MAX_IP_AGE = 180  # seconds
 
@@ -27,7 +26,7 @@ def remove_stale_ips(request):
     """
     # XXX is a context processor is the right place for this?
     s = request.session
-    t_now = now()
+    t_now = int(time.time())
     for key in ['ipv4', 'ipv6', ]:
         timestamp_key = "%s_timestamp" % key
         try:
@@ -38,7 +37,7 @@ def remove_stale_ips(request):
             s[timestamp_key] = t_now
         else:
             try:
-                stale = timestamp + timedelta(seconds=MAX_IP_AGE) < t_now
+                stale = timestamp + MAX_IP_AGE < t_now
             except (ValueError, TypeError):
                 # invalid timestamp in session
                 del s[timestamp_key]

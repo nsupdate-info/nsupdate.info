@@ -38,7 +38,7 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        'django<1.6',
+        'django >1.5.3, <1.6', # 1.5.3 has the session serializer configurable
         'dnspython',
         'south',
         'django-bootstrap-form',

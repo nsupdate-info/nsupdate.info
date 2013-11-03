@@ -3,6 +3,7 @@
 import logging
 logger = logging.getLogger(__name__)
 
+import time
 import json
 
 from django.http import HttpResponse
@@ -10,7 +11,6 @@ from django.conf import settings
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
-from django.utils.timezone import now
 
 from ..main.models import Host
 from ..main.dnstools import update, SameIpError, check_ip
@@ -52,7 +52,7 @@ def DetectIpView(request, secret=None):
     ipaddr = request.META['REMOTE_ADDR']
     key = check_ip(ipaddr)
     s[key] = ipaddr
-    s[key + '_timestamp'] = now()
+    s[key + '_timestamp'] = int(time.time())
     logger.debug("detected %s: %s" % (key, ipaddr))
     s.save()
     return HttpResponse(status=204)

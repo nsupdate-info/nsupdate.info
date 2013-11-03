@@ -119,3 +119,17 @@ users' sites (like attacker.yourservice.net).
 Obviously, this might lead to security issues with stealing, modifying and
 faking domain cookies.
 
+
+Sessions
+========
+
+We use Django's more safe JSONSerializer to serialize session data.
+For Django >=1.5.3, the serializer is configurable.
+For Django >=1.6 json will be the default rather than the less safe pickle format.
+
+
+Django's SECRET_KEY
+===================
+
+Well, it needs to be secret, so don't just keep the value from our settings.py,
+but define a really secret one in your local_settings.py.
