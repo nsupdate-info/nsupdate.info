@@ -102,6 +102,9 @@ The software ("as is") uses these cookies:
 * "sessionid" (host-only, to keep the session when you have logged-in to the
   web interface)
 
+If you have set WE_HAVE_SSL to True (because you run the software on a https
+site), you should also set *_COOKIE_SECURE to True to avoid the cookies getting
+transmitted via http.
 
 Be careful with domain cookies
 ------------------------------
