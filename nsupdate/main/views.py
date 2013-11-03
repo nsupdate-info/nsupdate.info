@@ -217,8 +217,10 @@ class DomainOverwievView(CreateView):
         context = super(
             DomainOverwievView, self).get_context_data(*args, **kwargs)
         context['nav_domain_overview'] = True
-        context['domains'] = Domain.objects.filter(
+        context['your_domains'] = Domain.objects.filter(
             created_by=self.request.user)
+        context['public_domains'] = Domain.objects.filter(
+            public=True).exclude(created_by=self.request.user)
         return context
 
 

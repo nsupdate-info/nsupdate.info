@@ -4,7 +4,7 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
-            <h3>Your Domains</h3>
+            <h3>Domains (yours first, then public)</h3>
             <table class="table">
             <thead>
                 <tr>
@@ -15,7 +15,7 @@
                     <th>Comment</th>
                 </tr>
             </thead>
-            {% for domain in domains %}
+            {% for domain in your_domains %}
                 <tr>
                     <td><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
                     <td>{{ domain.public|yesno }}</td>
@@ -24,7 +24,18 @@
                     <td>{{ domain.comment }}</td>
                 </tr>
             {% empty %}
-                <tr><td colspan="4">No domains yet.</td></tr>
+                <tr><td colspan="5">No domains from you yet.</td></tr>
+            {% endfor %}
+            {% for domain in public_domains %}
+                <tr>
+                    <td>{{ domain.domain }}</td>
+                    <td>{{ domain.public|yesno }}</td>
+                    <td>{{ domain.available|yesno }}</td>
+                    <td>{{ domain.nameserver_ip }}</td>
+                    <td>{{ domain.comment }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5">No public domains from other users yet.</td></tr>
             {% endfor %}
             </table>
         </div>
