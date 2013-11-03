@@ -3,12 +3,11 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <div class="jumbotron">
-        <h4>Your current IP(s):</h4>
-        <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
-        <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
-    </div>
+<div class="jumbotron">
+    <h4>Your current IP(s):</h4>
+    <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
+    <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
+</div>
 
 <div class="row">
     <div class="col-sm-12" style="text-align: center">
@@ -40,6 +39,5 @@
             we love to write clean and secure code.
         </p>
     </div>
-</div>
 </div>
 {% endblock %}

@@ -2,7 +2,6 @@
 {% load bootstrap %}
 
 {% block content %}
-<div class="container">
     <div class="row">
         <h3>{{ domain.domain }} <br><small><a href="{% url 'domain_overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
         <div class="col-lg-8">
@@ -30,5 +29,4 @@
             </form>
         </div>
     </div>
-</div>
 {% endblock %}

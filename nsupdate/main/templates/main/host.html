@@ -2,7 +2,6 @@
 {% load bootstrap %}
 
 {% block content %}
-<div class="container">
     <div class="row">
         <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="icon-double-angle-left"></i> back to overview</a></small></h3>
         <div class="col-lg-4">
@@ -72,5 +71,4 @@
             </script>
         </div>
     </div>
-</div>
 {% endblock %}
