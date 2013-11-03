@@ -3,41 +3,40 @@
 {% load static %}
 
 {% block content %}
-<div class="jumbotron">
-    <h4>Your current IP(s):</h4>
-    <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
-    <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
-</div>
-
-<div class="row">
-    <div class="col-sm-12" style="text-align: center">
-        <h1>{{ WWW_HOST }} &mdash; the Dynamic DNS service you waited for.</h1>
+    <div class="jumbotron">
+        <h4>Your current IP(s):</h4>
+        <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
+        <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
     </div>
-    <div class="col-sm-4" style="text-align: center">
-        <h1><i class="icon-thumbs-up-alt icon-3x"></i></h1>
-        <h3>Free and Nice</h3>
-        <p>
-            {{ WWW_HOST }} is a free service.<br>
-            Also, we won't annoy you with ads or spam.
-        </p>
+    <div class="row">
+        <div class="col-sm-12" style="text-align: center">
+            <h1>{{ WWW_HOST }} &mdash; the Dynamic DNS service you waited for.</h1>
+        </div>
+        <div class="col-sm-4" style="text-align: center">
+            <h1><i class="icon-thumbs-up-alt icon-3x"></i></h1>
+            <h3>Free and Nice</h3>
+            <p>
+                {{ WWW_HOST }} is a free service.<br>
+                Also, we won't annoy you with ads or spam.
+            </p>
+        </div>
+        <div class="col-sm-4" style="text-align: center">
+            <h1><i class="icon-code icon-3x"></i></h1>
+            <h3>Free and Open Source</h3>
+            <p>
+                nsupdate.info is free and open-source software.
+            </p>
+            <p>
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>
+            </p>
+        </div>
+        <div class="col-sm-4" style="text-align: center">
+            <h1><i class="icon-heart-empty icon-3x"></i></h1>
+            <h3>Awesome Code</h3>
+            <p>
+                Empowered by Python and Django,<br>
+                we love to write clean and secure code.
+            </p>
+        </div>
     </div>
-    <div class="col-sm-4" style="text-align: center">
-        <h1><i class="icon-code icon-3x"></i></h1>
-        <h3>Free and Open Source</h3>
-        <p>
-            nsupdate.info is free and open-source software.
-        </p>
-        <p>
-            <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>
-        </p>
-    </div>
-    <div class="col-sm-4" style="text-align: center">
-        <h1><i class="icon-heart-empty icon-3x"></i></h1>
-        <h3>Awesome Code</h3>
-        <p>
-            Empowered by Python and Django,<br>
-            we love to write clean and secure code.
-        </p>
-    </div>
-</div>
 {% endblock %}
