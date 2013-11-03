@@ -25,6 +25,28 @@ not work).
 On the hosts overview page, we show whether we received the last update via SSL.
 
 
+Login with remote vs. local Account
+===================================
+
+If you use a already existing remote account to log in into our service, you
+don't need to create a local profile (with username, E-Mail and password).
+
+That way, we need to store less information about you - especially no password
+hash (and you also don't need to create a new password just for our service).
+So, this is a little more safe if you just consider our service.
+
+BUT: If you use some external service to log in, you of course need to trust
+them for this purpose as *they* are telling "yes, this is really you".
+
+Also, if you cancel the account on that external service and you don't have
+a local profile (login, E-Mail, password) with us, you will be unable to log
+in afterwards or recover access to your hosts/domains.
+
+So maybe the best way is to first create a local profile (username, E-Mail,
+password), then log in and associate your other remote accounts with that
+local profile.
+
+
 Passwords / Secrets / Keys
 ==========================
 
