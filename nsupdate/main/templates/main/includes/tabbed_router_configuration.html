@@ -18,17 +18,26 @@
             We have some specific configuration hints for some devices and update clients,
             please see the tabs above. If you don't find yours there, use the generic hints below.
         </p>
+        <p>
+            <b>Important note about security and compatibility</b>:
+            For update URLs, we always give the https (not: http) URL as that will use an encrypted connection
+            to transfer your data (including your update secret). Depending on your update client (router firmware or
+            PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.
+            So, if it does not work, you have the choice of using a different update client and/or a different service,
+            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>
+            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>
+        </p>
         <hr>
         <p>
             Your update client needs to access the following URLs to update the DNS:
         </p>
         For IPv4 updates:
         <div class="well well-sm">
-            <a href="http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">http://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
+            <a href="https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
         </div>
         For IPv6 updates:
         <div class="well well-sm">
-            <a href="http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">http://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
+            <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
         </div>
         The IPs will be determined automatically using the remote address our service is seeing
         (see below for more details).
@@ -45,9 +54,8 @@
             </li>
             <li>Send a http GET request to:
                 <ul>
-                    <li>http://{{ WWW_IPV4_HOST }}/nic/update  (to update IPv4 A record in DNS)</li>
-                    <li>http://{{ WWW_IPV6_HOST }}/nic/update  (to update IPv6 AAAA record in DNS)</li>
-                    <li>We support http on port 80 (and soon also https on port 443).</li>
+                    <li>https://{{ WWW_IPV4_HOST }}/nic/update  (to update IPv4 A record in DNS)</li>
+                    <li>https://{{ WWW_IPV6_HOST }}/nic/update  (to update IPv6 AAAA record in DNS)</li>
                 </ul>
             </li>
             <li>Optionally, we support some URL arguments:
@@ -80,14 +88,14 @@
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
-            <tr><td>Update-URL</td><td>http://{{ WWW_HOST }}/nic/update</td></tr>
+            <tr><td>Update-URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
             <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
         <h5>If you have IPv4 and IPv6</h5>
         Set Update-URL to the following (two URLs, separated by one space)
-        <div class="well well-sm">http://{{ WWW_IPV4_HOST }}/nic/update http://{{ WWW_IPV6_HOST }}/nic/update</div>
+        <div class="well well-sm">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
         <h5>Forcing a dynamic DNS update</h5>
         If you want to force a dynamic update for testing purposes, you can do it like this:
         <ul>
@@ -97,7 +105,7 @@
         </ul>
     </div>
     <div class="tab-pane" id="ddwrt">
-        <h4>DD-WRT (tested with v24)</h4>
+        <h4>DD-WRT</h4>
         <h5>Go to:</h5>
         <div class="well well-sm">
             Setup <i class="icon-long-arrow-right"></i>
@@ -107,14 +115,11 @@
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>DDNS Service</td><td>Custom</td></tr>
-            <tr><td>DYNDNS Server</td><td>{{ WWW_HOST }}</td></tr>
+            <tr><td>DYNDNS Server</td><td>{{ WWW_IPV4_HOST }}</td></tr>
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
-            <tr><td>Host Name</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
+            <tr><td>Host Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
         </table>
-        Please note: Some router models may have a problem with
-        http<strong>s</strong> (SSL), so you'll have to use http
-        (without "s", no SSL) within the "Host Name" field.
     </div>
     <div class="tab-pane" id="ddclient">
         <h4>ddclient</h4>
@@ -163,20 +168,20 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
         </ul>
         For browser / interactive use (will ask for username (give your hostname) and password (give yoursecret)):
         <ul>
-            <li>http://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>http://{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>http://{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
+            <li>https://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>https://{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
+            <li>https://{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
         </ul>
         For browser / interactive use (give http basic auth username and password in URL):
         <ul>
-            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
         </ul>
         For browser / interactive use as above, but manually specifying the IP address:
         <ul>
-            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
-            <li>http://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
         </ul>
     </div>
 </div>
