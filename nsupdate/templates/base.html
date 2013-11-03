@@ -14,6 +14,7 @@
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        {% include "includes/base_head.html" %}
     </head>
 
     <body>
@@ -150,5 +151,6 @@
                 </script>
             {% endif %}
         </div>
+        {% include "includes/base_body.html" %}
     </body>
 </html>
