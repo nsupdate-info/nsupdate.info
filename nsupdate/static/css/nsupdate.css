@@ -14,12 +14,13 @@ html, body {
   /* Negative indent footer by its height */
   margin: 0 auto -120px;
   /* Pad bottom by footer height */
-  padding: 0 4px 60px;
+  padding-bottom: 60px;
 }
 
 .footer {
   height: 60px;
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   margin-top: 60px;
   background-color: #ddd;
 }
