@@ -350,6 +350,7 @@ Disallow: /domain_overview/
 Disallow: /host/
 Disallow: /domain/
 Disallow: /status/
+Disallow: /ajax_get_ips/
 """
     return HttpResponse(content, content_type="text/plain")
 
