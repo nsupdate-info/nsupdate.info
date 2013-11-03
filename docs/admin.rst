@@ -2,8 +2,8 @@
 Administrating the service
 ==========================
 
-Installation
-============
+Installation (for development/testing)
+======================================
 
 Create and activate a virtualenv for the installation (here with virtualenvwrapper)::
 
@@ -31,6 +31,37 @@ To create and initialize the database, use::
 To start the development server::
 
     python manage.py runserver
+
+
+Installation (for production)
+=============================
+
+You usually will use a production webserver like apache or nginx (not the
+builtin "runserver"). Please consult the webserver docs how to configure it
+and how to run django apps (wsgi apps) with it.
+
+As soon as you switch off DEBUG, Django won't serve static files any more,
+thus you need to arrange /static/ file serving by your web server.
+
+We assume here that you configured your web server to serve /static/ URL from
+/srv/nsupdate.info/htdocs/static/ directory.
+
+Django helps you to put all the static files into that directory, you just need
+to configure STATIC_ROOT for that::
+
+    STATIC_ROOT = '/srv/nsupdate.info/htdocs/static'
+
+And then, run this::
+
+    umask 0022  # make sure group and others keep r and x, but not w
+    python manage.py collectstatic
+
+This will copy all the static files into STATIC_ROOT.
+
+Now, you must set DEBUG=False so it doesn't leak information from tracebacks
+to the outside world.
+
+Make sure your static files really work.
 
 
 Configuration
