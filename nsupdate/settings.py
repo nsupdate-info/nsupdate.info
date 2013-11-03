@@ -32,6 +32,7 @@ DATABASES = {
     }
 }
 
+WE_HAVE_SSL = True  # True if you run a https site also, suggest that site to users if they work on the http site.
 BASEDOMAIN = 'nsupdate.info'
 SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
 WWW_HOST = BASEDOMAIN
