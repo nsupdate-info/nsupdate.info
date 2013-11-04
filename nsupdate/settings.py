@@ -8,22 +8,23 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 # Use a unique, long, random, secret string here.
 SECRET_KEY = 'this is for sure not secret, but good enough for running the unit tests'
 
+# set this to False for production (see the docs for important hints)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
 
 # sender address for e.g. user activation emails
 DEFAULT_FROM_EMAIL = "your_email@example.com"
 
+# admins will get traceback emails
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+)
 MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'nsupdate.sqlite',                      # Or path to database file if using sqlite3.
+        'NAME': 'nsupdate.sqlite',               # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -164,9 +165,9 @@ INSTALLED_APPS = (
     'django_extensions',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
+# A sample logging configuration.
+# Sends an email to the site admins on every HTTP 500 error when DEBUG=False.
+# Do some stderr logging for some views.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
