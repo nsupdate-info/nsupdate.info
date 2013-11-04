@@ -5,7 +5,7 @@ from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
     RobotsTxtView, DomainOverwievView, DomainView, DeleteDomainView, ScreenshotsView, StatusView)
 from ..api.views import (
-    MyIpView, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView)
+    myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView)
 
 
 urlpatterns = patterns(
@@ -25,12 +25,12 @@ urlpatterns = patterns(
     url(r'^domain_overview/$', DomainOverwievView.as_view(), name='domain_overview'),
     url(r'^domain/(?P<pk>\d+)/delete/$', DeleteDomainView.as_view(), name='delete_domain'),
     # internal use by the web ui
-    url(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView),
-    url(r'^ajax_get_ips/$', AjaxGetIps, name="ajax_get_ips"),
-    url(r'^nic/update_authorized$', AuthorizedNicUpdateView, name='nic_update_authorized'),
+    url(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView.as_view()),
+    url(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),
+    url(r'^nic/update_authorized$', AuthorizedNicUpdateView.as_view(), name='nic_update_authorized'),
     # api (for update clients)
-    url(r'^myip$', MyIpView),
-    url(r'^nic/update$', NicUpdateView),
+    url(r'^myip$', myip_view),
+    url(r'^nic/update$', NicUpdateView.as_view()),
     # for bots
-    url(r'^robots.txt$', RobotsTxtView),
+    url(r'^robots.txt$', RobotsTxtView.as_view()),
 )

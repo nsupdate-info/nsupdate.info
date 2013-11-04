@@ -3,7 +3,7 @@
 from datetime import timedelta
 
 from django.db.models import Q
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import View, TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -328,7 +328,7 @@ class DeleteDomainView(DeleteView):
         return context
 
 
-def RobotsTxtView(request):
+class RobotsTxtView(View):
     """
     Dynamically serve robots.txt content.
     If you like, you can optimize this by statically serving this by your web server.
@@ -336,7 +336,8 @@ def RobotsTxtView(request):
     :param request: django request object
     :return: HttpResponse object
     """
-    content = """\
+    def get(self, request):
+        content = """\
 User-agent: *
 Crawl-delay: 10
 Disallow: /account/
@@ -352,10 +353,10 @@ Disallow: /domain/
 Disallow: /status/
 Disallow: /ajax_get_ips/
 """
-    return HttpResponse(content, content_type="text/plain")
+        return HttpResponse(content, content_type="text/plain")
 
 
-def CsrfFailureView(request, reason):
+def csrf_failure_view(request, reason):
     """
     Django's CSRF middleware's builtin view doesn't tell the user that he needs to have cookies enabled.
 

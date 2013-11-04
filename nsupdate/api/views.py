@@ -8,9 +8,11 @@ import json
 
 from django.http import HttpResponse
 from django.conf import settings
+from django.views.generic.base import View
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
+from django.utils.decorators import method_decorator
 
 from ..main.models import Host
 from ..main.dnstools import update, SameIpError, check_ip
@@ -26,53 +28,57 @@ def Response(content):
     return HttpResponse(content, content_type='text/plain')
 
 
-def MyIpView(request):
+def myip_view(request):
     """
     return the IP address (can be v4 or v6) of the client requesting this view.
 
     :param request: django request object
     :return: HttpResponse object
     """
+    # Note: keeping this as a function-based view, as it is frequently used -
+    # maybe it is slightly more efficient than class-based.
     return Response(request.META['REMOTE_ADDR'])
 
 
-def DetectIpView(request, sessionid):
-    """
-    Put the IP address (can be v4 or v6) of the client requesting this view
-    into the client's session.
+class DetectIpView(View):
+    def get(self, request, sessionid):
+        """
+        Put the IP address (can be v4 or v6) of the client requesting this view
+        into the client's session.
 
-    :param request: django request object
-    :param sessionid: sessionid from url used to find the correct session w/o session cookie
-    :return: HttpResponse object
-    """
-    # we do not have the session as usual, as this is a different host,
-    # so the session cookie is not received here - thus we access it via
-    # the sessionid:
-    s = SessionStore(session_key=sessionid)
-    ipaddr = request.META['REMOTE_ADDR']
-    key = check_ip(ipaddr)
-    s[key] = ipaddr
-    s[key + '_timestamp'] = int(time.time())
-    logger.debug("detected %s: %s" % (key, ipaddr))
-    s.save()
-    return HttpResponse(status=204)
+        :param request: django request object
+        :param sessionid: sessionid from url used to find the correct session w/o session cookie
+        :return: HttpResponse object
+        """
+        # we do not have the session as usual, as this is a different host,
+        # so the session cookie is not received here - thus we access it via
+        # the sessionid:
+        s = SessionStore(session_key=sessionid)
+        ipaddr = request.META['REMOTE_ADDR']
+        key = check_ip(ipaddr)
+        s[key] = ipaddr
+        s[key + '_timestamp'] = int(time.time())
+        logger.debug("detected %s: %s" % (key, ipaddr))
+        s.save()
+        return HttpResponse(status=204)
 
 
-def AjaxGetIps(request):
-    """
-    Get the IP addresses of the client from the session via AJAX
-    (so we don't need to reload the view in case we just invalidated stale IPs
-    and triggered new detection).
+class AjaxGetIps(View):
+    def get(self, request):
+        """
+        Get the IP addresses of the client from the session via AJAX
+        (so we don't need to reload the view in case we just invalidated stale IPs
+        and triggered new detection).
 
-    :param request: django request object
-    :return: HttpResponse object
-    """
-    response = dict(
-        ipv4=request.session.get('ipv4', ''),
-        ipv6=request.session.get('ipv6', ''),
-    )
-    logger.debug("ajax_get_ips response: %r" % (response, ))
-    return HttpResponse(json.dumps(response), content_type='application/json')
+        :param request: django request object
+        :return: HttpResponse object
+        """
+        response = dict(
+            ipv4=request.session.get('ipv4', ''),
+            ipv6=request.session.get('ipv6', ''),
+        )
+        logger.debug("ajax_get_ips response: %r" % (response, ))
+        return HttpResponse(json.dumps(response), content_type='application/json')
 
 
 def basic_challenge(realm, content='Authorization Required'):
@@ -143,76 +149,82 @@ def check_session_auth(user, hostname):
     return True
 
 
-def NicUpdateView(request):
-    """
-    dyndns2 compatible /nic/update API.
+class NicUpdateView(View):
+    def get(self, request):
+        """
+        dyndns2 compatible /nic/update API.
 
-    Example URLs:
+        Example URLs:
 
-    Will request username (fqdn) and password (secret) from user,
-    for interactive testing / updating:
-    https://nsupdate.info/nic/update
+        Will request username (fqdn) and password (secret) from user,
+        for interactive testing / updating:
+        https://nsupdate.info/nic/update
 
-    You can put it also into the url, so the browser will automatically
-    send the http basic auth with the request:
-    https://fqdn:secret@nsupdate.info/nic/update
+        You can put it also into the url, so the browser will automatically
+        send the http basic auth with the request:
+        https://fqdn:secret@nsupdate.info/nic/update
 
-    If the request does not come from the correct IP, you can give it as
-    a query parameter, you can also give the hostname (then it won't use
-    the username from http basic auth as the fqdn:
-    https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+        If the request does not come from the correct IP, you can give it as
+        a query parameter, you can also give the hostname (then it won't use
+        the username from http basic auth as the fqdn:
+        https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
-    :param request: django request object
-    :return: HttpResponse object
-    """
-    ssl = request.is_secure()
-    hostname = request.GET.get('hostname')
-    agent = request.META.get('HTTP_USER_AGENT', 'unknown')
-    auth = request.META.get('HTTP_AUTHORIZATION')
-    if auth is None:
-        logger.warning('%s - received no auth [ua: %s]' % (hostname, agent, ))
-        return basic_challenge("authenticate to update DNS", 'noauth')
-    username, password = basic_authenticate(auth)
-    if not check_api_auth(username, password):
-        logger.info('%s - received bad credentials, username: %s [ua: %s]' % (hostname, username, agent, ))
-        return basic_challenge("authenticate to update DNS", 'badauth')
-    if hostname is None:
-        # as we use update_username == hostname, we can fall back to that:
-        hostname = username
-    ipaddr = request.GET.get('myip')
-    if ipaddr is None:
-        ipaddr = request.META.get('REMOTE_ADDR')
-    if agent in settings.BAD_AGENTS:
-        logger.info('%s - received update from bad user agent [ua: %s]' % (hostname, agent, ))
-        return Response('badagent')
-    return _update(hostname, ipaddr, agent, ssl)
+        :param request: django request object
+        :return: HttpResponse object
+        """
+        ssl = request.is_secure()
+        hostname = request.GET.get('hostname')
+        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
+        auth = request.META.get('HTTP_AUTHORIZATION')
+        if auth is None:
+            logger.warning('%s - received no auth [ua: %s]' % (hostname, agent, ))
+            return basic_challenge("authenticate to update DNS", 'noauth')
+        username, password = basic_authenticate(auth)
+        if not check_api_auth(username, password):
+            logger.info('%s - received bad credentials, username: %s [ua: %s]' % (hostname, username, agent, ))
+            return basic_challenge("authenticate to update DNS", 'badauth')
+        if hostname is None:
+            # as we use update_username == hostname, we can fall back to that:
+            hostname = username
+        ipaddr = request.GET.get('myip')
+        if ipaddr is None:
+            ipaddr = request.META.get('REMOTE_ADDR')
+        if agent in settings.BAD_AGENTS:
+            logger.info('%s - received update from bad user agent [ua: %s]' % (hostname, agent, ))
+            return Response('badagent')
+        return _update(hostname, ipaddr, agent, ssl)
 
 
-@login_required
-def AuthorizedNicUpdateView(request):
-    """
-    similar to NicUpdateView, but the client is not a router or other dyndns client,
-    but the admin browser who is currently logged into the nsupdate.info site.
+class AuthorizedNicUpdateView(View):
 
-    Example URLs:
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AuthorizedNicUpdateView, self).dispatch(*args, **kwargs)
 
-    https://nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+    def get(self, request):
+        """
+        similar to NicUpdateView, but the client is not a router or other dyndns client,
+        but the admin browser who is currently logged into the nsupdate.info site.
 
-    :param request: django request object
-    :return: HttpResponse object
-    """
-    ssl = request.is_secure()
-    agent = request.META.get('HTTP_USER_AGENT', 'unknown')
-    hostname = request.GET.get('hostname')
-    if hostname is None:
-        return Response('nohost')
-    if not check_session_auth(request.user, hostname):
-        logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
-        return Response('nohost')
-    ipaddr = request.GET.get('myip')
-    if not ipaddr:
-        ipaddr = request.META.get('REMOTE_ADDR')
-    return _update(hostname, ipaddr, agent, ssl)
+        Example URLs:
+
+        https://nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
+
+        :param request: django request object
+        :return: HttpResponse object
+        """
+        ssl = request.is_secure()
+        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
+        hostname = request.GET.get('hostname')
+        if hostname is None:
+            return Response('nohost')
+        if not check_session_auth(request.user, hostname):
+            logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
+            return Response('nohost')
+        ipaddr = request.GET.get('myip')
+        if not ipaddr:
+            ipaddr = request.META.get('REMOTE_ADDR')
+        return _update(hostname, ipaddr, agent, ssl)
 
 
 def _update(hostname, ipaddr, agent='unknown', ssl=False):

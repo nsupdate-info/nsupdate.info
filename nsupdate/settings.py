@@ -221,7 +221,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_REDIRECT_URL = '/overview/'
 
-CSRF_FAILURE_VIEW = 'nsupdate.main.views.CsrfFailureView'
+CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 
 # Settings for CSRF cookie.
 CSRF_COOKIE_NAME = 'csrftoken'
