@@ -138,14 +138,14 @@ class Host(models.Model):
         return Host.objects.filter(
             subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
 
-    def getIPv4(self):
+    def get_ipv4(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'A', origin=self.domain.domain)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
                 dnstools.NameServerNotAvailable):
             return 'error'
 
-    def getIPv6(self):
+    def get_ipv6(self):
         try:
             return dnstools.query_ns(self.get_fqdn(), 'AAAA', origin=self.domain.domain)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,

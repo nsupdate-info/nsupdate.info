@@ -36,7 +36,7 @@
             </p>
                 <div class="form-group">
                     <label for="current_ipv4">Current IPv4 address from master nameserver</label>
-                    <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.getIPv4 }}" disabled>
+                    <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.get_ipv4 }}" disabled>
                     <label for="myipv4">Set new IPv4 address</label>
                     <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required autofocus>
                 </div>
@@ -44,7 +44,7 @@
                 <p></p>
                 <div class="form-group">
                     <label for="current_ipv6">Current IPv6 address from master nameserver</label>
-                    <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.getIPv6 }}" disabled>
+                    <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.get_ipv6 }}" disabled>
                     <label for="myipv6">Set new IPv6 address</label>
                     <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="give new ipv6 address" value="{{ request.session.ipv6 }}" required>
                 </div>
