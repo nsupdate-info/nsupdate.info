@@ -25,8 +25,7 @@ urlpatterns = patterns(
     url(r'^domain_overview/$', DomainOverwievView.as_view(), name='domain_overview'),
     url(r'^domain/(?P<pk>\d+)/delete/$', DeleteDomainView.as_view(), name='delete_domain'),
     # internal use by the web ui
-    url(r'^detectip/$', DetectIpView),  # XXX for what is this used WITHOUT a secret?
-    url(r'^detectip/(?P<secret>\w+)/$', DetectIpView),
+    url(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView),
     url(r'^ajax_get_ips/$', AjaxGetIps, name="ajax_get_ips"),
     url(r'^nic/update_authorized$', AuthorizedNicUpdateView, name='nic_update_authorized'),
     # api (for update clients)

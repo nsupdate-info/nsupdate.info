@@ -36,19 +36,19 @@ def MyIpView(request):
     return Response(request.META['REMOTE_ADDR'])
 
 
-def DetectIpView(request, secret=None):
+def DetectIpView(request, sessionid):
     """
     Put the IP address (can be v4 or v6) of the client requesting this view
     into the client's session.
 
     :param request: django request object
-    :param secret: session key used to find the correct session w/o session cookie
+    :param sessionid: sessionid from url used to find the correct session w/o session cookie
     :return: HttpResponse object
     """
     # we do not have the session as usual, as this is a different host,
     # so the session cookie is not received here - thus we access it via
-    # the secret:
-    s = SessionStore(session_key=secret)
+    # the sessionid:
+    s = SessionStore(session_key=sessionid)
     ipaddr = request.META['REMOTE_ADDR']
     key = check_ip(ipaddr)
     s[key] = ipaddr
