@@ -357,6 +357,15 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    In this case foo field's value will be stored when user follows this link
 #    <a href="{% url socialauth_begin 'github' %}?foo=bar">...</a>.
 
+# we need slightly different classes for bootstrap3 than the default ones
+from django.contrib.messages import constants
+MESSAGE_TAGS = {
+    constants.DEBUG: '',
+    constants.INFO: 'alert-info',
+    constants.SUCCESS: 'alert-success',
+    constants.WARNING: 'alert-warning',
+    constants.ERROR: 'alert-danger',
+}
 
 try:
     from .local_settings import *
