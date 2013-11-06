@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li{% if nav_home %} class="active"{% endif %}>
-                            <a href="{% url 'home' %}">Home</a>
+                            <a href="{% url 'home' %}"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
                         {% if request.user.is_authenticated %}
                         <li{% if nav_overview %} class="active"{% endif %}>
@@ -46,27 +46,27 @@
                         </li>
                         {% endif %}
                         <li{% if nav_about %} class="active"{% endif %}>
-                            <a href="{% url 'about' %}">About</a>
+                            <a href="{% url 'about' %}"><i class="fa fa-comment fa-fw"></i> About</a>
                         </li>
                         <li>
                             <a href="http://nsupdateinfo.readthedocs.org/"
-                               class="navbar-link" title="Open docs in new window" target="_blank">Documentation</a>
+                               class="navbar-link" title="Open docs in new window" target="_blank"><i class="fa fa-eye fa-fw"></i> Documentation</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         {% if not request.user.is_authenticated %}
-                            <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}">Register</a></li>
-                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'auth_login' %}">Login</a></li>
+                            <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}"><i class="fa fa-asterisk fa-fw"></i> Register</a></li>
+                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'auth_login' %}"><i class="fa fa-sign-in fa-fw"></i> Login</a></li>
                         {% else %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }} <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {{ request.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{% url 'account_profile' %}">Profile</a></li>
-                                    <li><a href="{% url 'password_change' %}">Change password</a></li>
+                                    <li><a href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> Profile</a></li>
+                                    <li><a href="{% url 'password_change' %}"><i class="fa fa-key fa-fw"></i> Change password</a></li>
                                     {% if request.user.is_staff %}
-                                        <li><a href="/admin/">Admin</a></li>
+                                        <li><a href="/admin/"><i class="fa fa-wrench fa-fw"></i> Admin</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'auth_logout' %}?next={% url 'auth_login' %}">Logout</a></li>
+                                    <li><a href="{% url 'auth_logout' %}?next={% url 'auth_login' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                                 </ul>
                             </li>
                         {% endif %}
