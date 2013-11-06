@@ -119,7 +119,10 @@ def check_api_auth(username, password):
     :return: True if authenticated, False otherwise.
     """
     fqdn = username
-    hosts = Host.filter_by_fqdn(fqdn)
+    try:
+        hosts = Host.filter_by_fqdn(fqdn)
+    except NotImplementedError:
+        return False
     num_hosts = len(hosts)
     if num_hosts == 0:
         return False
