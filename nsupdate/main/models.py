@@ -35,14 +35,21 @@ def domain_blacklist_validator(value):
             raise ValidationError(u'This domain is not allowed')
 
 
-UPDATE_ALGORITHMS = (
-    ('HMAC_SHA512', 'HMAC_SHA512'),
-    ('HMAC_SHA384', 'HMAC_SHA384'),
-    ('HMAC_SHA256', 'HMAC_SHA256'),
-    ('HMAC_SHA224', 'HMAC_SHA224'),
-    ('HMAC_SHA1', 'HMAC_SHA1'),
-    ('HMAC_MD5', 'HMAC_MD5'),
-)
+from collections import namedtuple
+UpdateAlgorithm = namedtuple("update_algorithm", "bitlength bind_name")
+
+UPDATE_ALGORITHM_DEFAULT = 'HMAC_SHA512'
+UPDATE_ALGORITHMS = {
+    # dnspython_name -> UpdateAlgorithm namedtuple
+    'HMAC_SHA512': UpdateAlgorithm(512, 'hmac-sha512', ),
+    'HMAC_SHA384': UpdateAlgorithm(384, 'hmac-sha384', ),
+    'HMAC_SHA256': UpdateAlgorithm(256, 'hmac-sha256', ),
+    'HMAC_SHA224': UpdateAlgorithm(224, 'hmac-sha224', ),
+    'HMAC_SHA1': UpdateAlgorithm(160, 'hmac-sha1', ),
+    'HMAC_MD5': UpdateAlgorithm(128, 'hmac-md5', ),
+}
+
+UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
 class Domain(models.Model):
@@ -56,7 +63,7 @@ class Domain(models.Model):
         max_length=256,
         help_text="Shared secret that allows updating this zone (base64 encoded)")
     nameserver_update_algorithm = models.CharField(
-        max_length=256, default='HMAC_SHA512', choices=UPDATE_ALGORITHMS)
+        max_length=256, default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES)
     public = models.BooleanField(
         default=False,
         help_text="Check to allow any user to add dynamic hosts to this zone - "
@@ -78,22 +85,15 @@ class Domain(models.Model):
         return u"%s" % (self.domain, )
 
     def generate_ns_secret(self):
-        secret = User.objects.make_random_password(length=64)  # 512 bits
+        algorithm = self.nameserver_update_algorithm
+        bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
+        secret = User.objects.make_random_password(length=bitlength / 8)
         self.nameserver_update_key = key = base64.b64encode(secret)
-        self.nameserver_update_algorithm = 'HMAC_SHA512'
         self.save()
         return key
 
     def get_bind9_algorithm(self):
-        mapping = {
-            'HMAC_SHA512': 'hmac-sha512',
-            'HMAC_SHA384': 'hmac-sha384',
-            'HMAC_SHA256': 'hmac-sha256',
-            'HMAC_SHA224': 'hmac-sha224',
-            'HMAC_SHA1': 'hmac-sha1',
-            'HMAC_MD5': 'hmac-md5',
-        }
-        return mapping.get(self.nameserver_update_algorithm)
+        return UPDATE_ALGORITHMS.get(self.nameserver_update_algorithm).bind_name
 
 
 class Host(models.Model):
