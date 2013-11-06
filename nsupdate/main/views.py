@@ -167,11 +167,9 @@ class OverviewView(CreateView):
         try:
             dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'], origin=self.object.domain.domain)
         except dnstools.Timeout:
-            # XXX should be ERROR, but ERROR is white on web ui!?
-            success, level, msg = False, messages.WARNING, 'Timeout - communicating to name server failed.'
+            success, level, msg = False, messages.ERROR, 'Timeout - communicating to name server failed.'
         except dnstools.NameServerNotAvailable:
-            # XXX should be ERROR, but ERROR is white on web ui!?
-            success, level, msg = False, messages.WARNING, 'Name server unavailable.'
+            success, level, msg = False, messages.ERROR, 'Name server unavailable.'
         else:
             self.object.created_by = self.request.user
             self.object.save()
