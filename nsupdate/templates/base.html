@@ -36,13 +36,13 @@
                         </li>
                         {% if request.user.is_authenticated %}
                         <li{% if nav_overview %} class="active"{% endif %}>
-                            <a href="{% url 'overview' %}">Hosts</a>
+                            <a href="{% url 'overview' %}"><i class="fa fa-list fa-fw"></i> Hosts</a>
                         </li>
                         <li{% if nav_domain_overview %} class="active"{% endif %}>
-                            <a href="{% url 'domain_overview' %}">Domains</a>
+                            <a href="{% url 'domain_overview' %}"><i class="fa fa-list fa-fw"></i> Domains</a>
                         </li>
                         <li{% if nav_status %} class="active"{% endif %}>
-                            <a href="{% url 'status' %}">Status</a>
+                            <a href="{% url 'status' %}"><i class="fa fa-list fa-fw"></i> Status</a>
                         </li>
                         {% endif %}
                         <li{% if nav_about %} class="active"{% endif %}>
