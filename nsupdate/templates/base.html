@@ -121,6 +121,25 @@
         </div>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
         <div id="ip_detection" style="display: none">
+            {% comment %}
+               Why IP detection it is implemented as it is
+               -------------------------------------------
+               a) we use javascript to insert the img tags after the document (DOM) is ready.
+                  if we just have them in the html from the beginning, the browser would be visibly
+                  "loading" until both "images" are loaded or timed out (if e.g. you don't have ip v6).
+                  not nice.
+               b) we use fake img tags because doing it with jQuery.get() would be cross-domain:
+                  WWW_HOST -> WWW_IPV4_HOST
+                  WWW_HOST -> WWW_IPV6_HOST
+               c) yes, the setTimeout is rather unpretty and might not work for slow connections
+                  (when loading the images take more than that timeout), making the IPs appear not
+                  on the current view, but when the next view is loaded (or the current one reloaded).
+                  if you have a better idea, this is something to improve.
+               d) we detect both ipv4 and v6 in the same way. this could be optimized to use the
+                  REMOTE_ADDR we have from the view's http request and then only detect the other
+                  kind of ip using the fake img approach.
+                  OTOH, doing both IPs the same way is nicer as it is more symmetric.
+            {% endcomment %}
             {% if not request.session.ipv4 or not request.session.ipv6 %}
                 <script type="text/javascript">
                 $(document).ready(function() {
