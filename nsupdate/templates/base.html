@@ -121,26 +121,17 @@
         </div>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
         <div id="ip_detection" style="display: none">
-            {% if not request.session.ipv4 %}
-                <script type="text/javascript">
-                    function insert_img_ipv4() {
-                        $('#ip_detection').add(
-                            '<img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" >');
-                    }
-                    $(setTimeout("insert_img_ipv4()", 1000));
-                </script>
-            {% endif %}
-            {% if not request.session.ipv6 %}
-                <script type="text/javascript">
-                    function insert_img_ipv6() {
-                        $('#ip_detection').add(
-                            '<img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" >');
-                    }
-                    $(setTimeout("insert_img_ipv6()", 1000));
-                </script>
-            {% endif %}
             {% if not request.session.ipv4 or not request.session.ipv6 %}
                 <script type="text/javascript">
+                $(document).ready(function() {
+                    {% if not request.session.ipv4 %}
+                        $('#ip_detection').add(
+                            '<img src="//{{ WWW_IPV4_HOST }}/detectip/{{ request.session.session_key }}/" >');
+                    {% endif %}
+                    {% if not request.session.ipv6 %}
+                        $('#ip_detection').add(
+                            '<img src="//{{ WWW_IPV6_HOST }}/detectip/{{ request.session.session_key }}/" >');
+                    {% endif %}
                     function insert_ips() {
                         $.getJSON("{%  url 'ajax_get_ips' %}")
                         .done(function(data) {
@@ -148,7 +139,8 @@
                             $('#ipv6').text(data['ipv6']);
                         });
                     }
-                    $(setTimeout("insert_ips()", 2000));
+                    setTimeout(insert_ips, 1000);
+                });
                 </script>
             {% endif %}
         </div>
