@@ -63,6 +63,11 @@ to the outside world.
 
 Make sure your static files really work.
 
+Since version 1.6, Django has a nice deployment checklist (make sure stuff
+applies to the django version YOU use):
+
+https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+
 
 Configuration
 =============
@@ -89,6 +94,7 @@ Users who are in the "staff" group (like the one initially created when creating
 admin interface (see "Admin" in the same menu as "Logout").
 
 But be careful, the Django admin lets you do all sorts of stuff, admins are allowed to shoot themselves.
+Only give Django admin access ("staff" group membership) to highly trusted admins of the service.
 
 
 Software updates / upgrades

@@ -21,10 +21,12 @@ Features
 * Easy and simple web interface.
 * Multiple Hosts per user
 * Add own domains / nameservers (public or only for yourself)
-* Supports IP v4 and v6
+* Supports IP v4 and v6, SSL.
+* Login with local or remote accounts (google, github, bitbucket, ...
+  accounts - everything supported by python-social-auth package)
 * Manual IP updates via web interface
-* Shows time since last update via api
+* Shows time since last update via api, whether it used SSL or not
 * Made with security in mind
-* No nagging, no spamming, trying to not annoy users
+* No nagging, no spamming - trying not to annoy users
 * Free and Open Source Software
 * Made with Python and Django

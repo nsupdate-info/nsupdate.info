@@ -15,6 +15,9 @@ The initial version of the nsupdate.info software was developed in 48h in the Dj
 Project site
 ============
 
+Source code repository, issue tracker (bugs, ideas about enhancements, todo,
+feedback, ...), link to documentation is all there:
+
 https://github.com/nsupdate-info/nsupdate.info
 
 

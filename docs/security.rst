@@ -89,12 +89,12 @@ update client also.
 Nameserver Update Key (backend, RFC 2136)
 -----------------------------------------
 
-We currently store this key (which is basically a base64 encoded shared secret)
-"as is".
+We currently store this key (which is basically a base64 encoded shared secret,
+one per dynamic zone) "as is" into the database ("Domain" records there).
 
 This is somehow critical, but also hard to do better - encryption would only
 help very little here as we would need to decrypt the update key before using it,
-so we would need the unlocked key of that encryption mechanism on the same machine.
+so we would need the unlocked decryption key on the same machine.
 
 Make sure no unauthorized person gets that key or he/she will be able to update
 ANY record in the respective zone / nameserver directly (without going over
