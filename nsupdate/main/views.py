@@ -90,15 +90,6 @@ class HomeView(TemplateView):
         return context
 
 
-class ScreenshotsView(TemplateView):
-    template_name = "main/screenshots.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(ScreenshotsView, self).get_context_data(*args, **kwargs)
-        context['nav_about'] = True
-        return context
-
-
 class StatusView(TemplateView):
     template_name = "main/status.html"
 

@@ -22,7 +22,6 @@ setup(
         'nsupdate': [
             'static/*.html',
             'static/css/*',
-            'static/screenshots/*',
             'templates/*',
         ],
         'nsupdate.accounts': [
