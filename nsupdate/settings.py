@@ -5,12 +5,19 @@ Django settings for nsupdate project
 import os
 import django.conf.global_settings as DEFAULT_SETTINGS
 
-# Use a unique, long, random, secret string here.
-SECRET_KEY = 'this is for sure not secret, but good enough for running the unit tests'
-
 # set this to False for production (see the docs for important hints)
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+# To make this work, put a unique, long, random, secret string into your environment.
+# E.g. in ~/.bashrc: export SECRET_KEY="..."
+try:
+    SECRET_KEY = os.environ['SECRET_KEY']
+except KeyError:
+    # if there is no SECRET_KEY in the environment, it will be just undefined and
+    # Django will refuse running - except if you define it somehow else later (e.g. in
+    # a local_settings.py file that imports this file).
+    pass
 
 # sender address for e.g. user activation emails
 DEFAULT_FROM_EMAIL = "your_email@example.com"
