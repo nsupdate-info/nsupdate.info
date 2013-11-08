@@ -75,7 +75,9 @@ class Domain(models.Model):
         help_text="Check if nameserver is available/reachable - "
                   "if not checked, we'll pause querying/updating this nameserver for a while")
     comment = models.CharField(
-        max_length=256, default='', blank=True, null=True)
+        max_length=256, default='', blank=True, null=True,
+        help_text="Some arbitrary comment about your domain. "
+                  "If your domain is public, the comment will be also publicly shown.")
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -102,11 +104,13 @@ class Host(models.Model):
             regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
             message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
         ),
-        domain_blacklist_validator])
+        domain_blacklist_validator],
+        help_text="The name of your host.")
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
     update_secret = models.CharField(max_length=256)  # gets hashed on save
     comment = models.CharField(
-        max_length=256, default='', blank=True, null=True)
+        max_length=256, default='', blank=True, null=True,
+        help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
 
     last_update = models.DateTimeField(auto_now=True)
     # when we received the last update for v4/v6 addr
