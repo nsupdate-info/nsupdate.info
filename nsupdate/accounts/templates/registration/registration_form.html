@@ -4,8 +4,37 @@
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-lg-4">
-    <h1>Register new account</h1>
+  <div class="col-lg-5">
+    <h2>No registration required for testing</h2>
+    <p>
+        You can easily test the service and see what you get.
+    </p>
+    <p>
+        Just directly log in as:
+    </p>
+    <ul>
+        <li>username: test</li>
+        <li>password: test</li>
+    </ul>
+    <p>
+        <b>Note:</b> if that doesn't work, the service administrator did not set up
+        the test account yet or discontinued offering it. In that case, you can
+        still just register a new account.
+    </p>
+    <h2>test account is <b>only</b> for testing</h2>
+    <p>
+        Any data (hosts, domains, ...) entered using the test account might be removed
+        at any time and without prior notice.
+    </p>
+    <p>
+        So if you'ld like your stuff to stay, please register for a regular account after
+        finishing your initial evaluation.
+    </p>
+  </div>
+  <div class="col-lg-1">
+  </div>
+  <div class="col-lg-6">
+    <h2>Register new account</h2>
     <form method='post' action=''>{% csrf_token %}
         {{ form|bootstrap }}
         <button type="submit" class="btn btn-primary">{% trans "Send activation email" %}</button>
