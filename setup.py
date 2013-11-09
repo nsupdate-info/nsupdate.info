@@ -4,12 +4,14 @@ setup for nsupdate package
 
 from setuptools import setup, find_packages
 
+from nsupdate import version
+
 with open('README.rst') as f:
     readme_content = f.read()
 
 setup(
     name='nsupdate',
-    version='0.0.1a0',
+    version=str(version),
     url='http://github.com/nsupdate-info/nsupdate.info/',
     license='BSD',
     author='The nsupdate.info Team (see AUTHORS)',
