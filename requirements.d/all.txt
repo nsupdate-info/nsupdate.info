@@ -1,5 +1,5 @@
 dnspython
-django==1.5.4
+django==1.5.5
 django-bootstrap-form
 django-registration
 South
