@@ -44,27 +44,30 @@ class RequestInfo(object):
                 return None
         return eval('self.%s' % (name))
 
-    def _get_attrs(self, obj):
+    def _get_attrs(self, obj, excluded=None):
+        if excluded is None:
+            excluded = set()
         attrs = []
         for attr in dir(obj):
-            try:
-                if not attr.startswith('_') and \
-                        not callable(getattr(obj, attr)):
-                    attrs.append(attr)
-            except AttributeError:
-                pass
+            if attr not in excluded:
+                try:
+                    if not attr.startswith('_') and \
+                            not callable(getattr(obj, attr)):
+                        attrs.append(attr)
+                except AttributeError:
+                    pass
         return attrs
 
     def __iter__(self):
         keys = ['request.host']
-        keys.extend(['request.%s' % (a) for a in
-                     self._get_attrs(self.request)])
-        keys.extend(['request.session.%s' % (a) for a in
-                     self._get_attrs(self.request.session)])
-        keys.extend(['request.user.%s' % (a) for a in
-                     self._get_attrs(self.request.user)])
-        keys.extend(['request.meta.%s' % (a.lower()) for a in
-                     self.request.META.keys()])
+        keys.extend(['request.%s' % (a, )
+                     for a in self._get_attrs(self.request, set(['raw_post_data', ]))])
+        keys.extend(['request.session.%s' % (a, )
+                     for a in self._get_attrs(self.request.session)])
+        keys.extend(['request.user.%s' % (a, )
+                     for a in self._get_attrs(self.request.user)])
+        keys.extend(['request.meta.%s' % (a.lower(), )
+                     for a in self.request.META.keys()])
         return keys.__iter__()
 
 
