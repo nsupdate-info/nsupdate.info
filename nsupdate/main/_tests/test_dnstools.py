@@ -7,20 +7,25 @@ from test_settings import *
 
 pytestmark = pytest.mark.django_db
 
-from dns.resolver import NXDOMAIN
+from dns.resolver import NXDOMAIN, NoAnswer
 
 from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
 
 
-class TestIntelligentUpdater(object):
-    def test_double_update(self):
-        host, ip = 'test0.' + BASEDOMAIN, '1.2.3.4'
-        # make sure the host is not there
+def remove_records(host, records=('A', 'AAAA', )):
+    # make sure the records are not there
+    for record in records:
         try:
-            update_ns(host, 'A', action='del')
-        except NXDOMAIN:
+            update_ns(host, record, action='del')
+        except (NXDOMAIN, NoAnswer):
             # it is ok if it was never there
             pass
+
+
+class TestIntelligentUpdater(object):
+    def test_double_update(self):
+        host, ip = TEST_HOST, '1.2.3.4'
+        remove_records(host)
         # first update with this IP, should work without issue:
         update(host, ip)
         assert query_ns(host, 'A') == ip
@@ -31,13 +36,8 @@ class TestIntelligentUpdater(object):
 
 class TestIntelligentAdder(object):
     def test_double_add_same(self):
-        host, ip = 'test0.' + BASEDOMAIN, '1.2.3.4'
-        # make sure the host is not there
-        try:
-            update_ns(host, 'A', action='del')
-        except NXDOMAIN:
-            # it is ok if it was never there
-            pass
+        host, ip = TEST_HOST, '1.2.3.4'
+        remove_records(host)
         # first add with this IP, should work without issue:
         add(host, ip)
         assert query_ns(host, 'A') == ip
@@ -46,13 +46,8 @@ class TestIntelligentAdder(object):
             add(host, ip)
 
     def test_double_add_different(self):
-        host, ip = 'test0.' + BASEDOMAIN, '1.2.3.4'
-        # make sure the host is not there
-        try:
-            update_ns(host, 'A', action='del')
-        except NXDOMAIN:
-            # it is ok if it was never there
-            pass
+        host, ip = TEST_HOST, '1.2.3.4'
+        remove_records(host)
         # first add with this IP, should work without issue:
         add(host, ip)
         assert query_ns(host, 'A') == ip
@@ -64,7 +59,7 @@ class TestIntelligentAdder(object):
 
 class TestIntelligentDeleter(object):
     def test_delete(self):
-        host, ip = 'test0.' + BASEDOMAIN, '1.2.3.4'
+        host, ip = TEST_HOST, '1.2.3.4'
         # make sure the host is there
         update_ns(host, 'A', ip, action='add')
         delete(host)
@@ -73,13 +68,8 @@ class TestIntelligentDeleter(object):
             query_ns(host, 'A')
 
     def test_double_delete(self):
-        host = 'test0.' + BASEDOMAIN
-        # make sure the host is not there
-        try:
-            update_ns(host, 'A', action='del')
-        except NXDOMAIN:
-            # it is ok if it was never there
-            pass
+        host = TEST_HOST
+        remove_records(host)
         delete(host)  # hmm, this doesn't raise NXDOMAIN!?
 
 
@@ -99,14 +89,14 @@ class TestQuery(object):
 
 class TestUpdate(object):
     def test_parse1(self):
-        origin, relname = parse_name('foo.' + BASEDOMAIN)
+        origin, relname = parse_name('test.' + BASEDOMAIN)
         assert str(origin) == BASEDOMAIN + '.'
-        assert str(relname) == 'foo'
+        assert str(relname) == 'test'
 
     def test_parse2(self):
-        origin, relname = parse_name('foo.bar.' + BASEDOMAIN)
+        origin, relname = parse_name('foo.test.' + BASEDOMAIN)
         assert str(origin) == BASEDOMAIN + '.'
-        assert str(relname) == 'foo.bar'
+        assert str(relname) == 'foo.test'
 
     def test_parse_with_origin(self):
         origin, relname = parse_name('foo.bar.baz.org', 'bar.baz.org')
@@ -114,7 +104,8 @@ class TestUpdate(object):
         assert str(relname) == 'foo'
 
     def test_add_del_v4(self):
-        host, ip = 'test1.' + BASEDOMAIN, '1.1.1.1'
+        host, ip = TEST_HOST, '1.1.1.1'
+        remove_records(host)
         response = update_ns(host, 'A', ip, action='add', ttl=60)
         print response
         assert query_ns(host, 'A') == ip
@@ -124,18 +115,19 @@ class TestUpdate(object):
             query_ns(host, 'A') == ip
 
     def test_update_v4(self):
-        host, ip = 'test2.' + BASEDOMAIN, '2.2.2.2'
+        host, ip = TEST_HOST, '2.2.2.2'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
         print response
         assert query_ns(host, 'A') == ip
 
-        host, ip = 'test2.' + BASEDOMAIN, '3.3.3.3'
+        host, ip = TEST_HOST, '3.3.3.3'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
         print response
         assert query_ns(host, 'A') == ip
 
     def test_add_del_v6(self):
-        host, ip = 'test3.' + BASEDOMAIN, '::1'
+        host, ip = TEST_HOST, '::1'
+        remove_records(host)
         response = update_ns(host, 'AAAA', ip, action='add', ttl=60)
         print response
         assert query_ns(host, 'AAAA') == ip
@@ -145,23 +137,23 @@ class TestUpdate(object):
             query_ns(host, 'AAAA') == ip
 
     def test_update_v6(self):
-        host, ip = 'test4.' + BASEDOMAIN, '::2'
+        host, ip = TEST_HOST, '::2'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
         print response
         assert query_ns(host, 'AAAA') == ip
 
-        host, ip = 'test4.' + BASEDOMAIN, '::3'
+        host, ip = TEST_HOST, '::3'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
         print response
         assert query_ns(host, 'AAAA') == ip
 
     def test_update_mixed(self):
-        host4, ip4 = 'test5.' + BASEDOMAIN, '4.4.4.4'
+        host4, ip4 = TEST_HOST, '4.4.4.4'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
         print response
         assert query_ns(host4, 'A') == ip4
 
-        host6, ip6 = 'test5.' + BASEDOMAIN, '::4'
+        host6, ip6 = TEST_HOST, '::4'
         response = update_ns(host6, 'AAAA', ip6, action='upd', ttl=60)
         print response
         assert query_ns(host6, 'AAAA') == ip6
@@ -169,7 +161,7 @@ class TestUpdate(object):
         # make sure the v4 is unchanged
         assert query_ns(host4, 'A') == ip4
 
-        host4, ip4 = 'test5.' + BASEDOMAIN, '5.5.5.5'
+        host4, ip4 = TEST_HOST, '5.5.5.5'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
         print response
         assert query_ns(host4, 'A') == ip4
