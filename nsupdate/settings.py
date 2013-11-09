@@ -193,11 +193,21 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'stderr'
+        },
+        'stderr_request': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'stderr_request'
         }
     },
     'loggers': {
         'nsupdate.api.views': {
-            'handlers': ['stderr', ],
+            'handlers': ['stderr_request', ],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'nsupdate.main.views': {
+            'handlers': ['stderr_request', ],
             'level': 'DEBUG',
             'propagate': True,
         },
@@ -215,6 +225,9 @@ LOGGING = {
     },
     'formatters': {
         'stderr': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s',
+        },
+        'stderr_request': {
             'format': '[%(asctime)s] %(levelname)s %(message)s '
                       '[ip: %(request.META.REMOTE_ADDR)s, ua: "%(request.META.HTTP_USER_AGENT)s"]',
         },

@@ -22,6 +22,7 @@ Based on code from (but heavily modified/refactored):
 """
 
 import logging
+from collections import defaultdict
 
 from django.http.request import HttpRequest
 
@@ -71,14 +72,31 @@ def _build_request_info(request):
     """
     build a dictionary with extra information extracted from request object
 
-    :param request: django HttpRequest object
+    :param request: django HttpRequest object or None
     :return: dict names: values
     """
-    d = _get_elementdict(request.META, "request.META.")
-    d.update(_get_attrdict(request, "request.", ['raw_post_data', ]))
-    d.update(_get_attrdict(request.session, "request.session."))
-    d.update(_get_attrdict(request.user, "request.user."))
+    # we avoid KeyErrors in case we have a logging format string using
+    # placeholders that are not available (either because they are not in
+    # request or because we have no request)
+    d = defaultdict(lambda: None)
+    if request:
+        d.update(_get_elementdict(request.META, "request.META."))
+        d.update(_get_attrdict(request, "request.", ['raw_post_data', ]))
+        d.update(_get_attrdict(request.session, "request.session."))
+        d.update(_get_attrdict(request.user, "request.user."))
     return d
+
+
+def get_logger(name, request=None):
+    """
+    get a logger providing extra information from request,
+    use this if the decorator is not practicable.
+
+    :param name: name of the logger
+    :param request: django's HttpRequest object
+    :return: logger instance
+    """
+    return logging.LoggerAdapter(logging.getLogger(name), _build_request_info(request))
 
 
 def logger(name):
@@ -96,11 +114,7 @@ def logger(name):
                     request = arg
                     break
             if 'logger' not in kwargs:
-                l = logging.getLogger(name)
-                if request is None:
-                    kwargs['logger'] = l
-                else:
-                    kwargs['logger'] = logging.LoggerAdapter(l, _build_request_info(request))
+                kwargs['logger'] = get_logger(name, request)
             return func(*args, **kwargs)
         return caller
     return wrap
