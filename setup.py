@@ -20,17 +20,20 @@ setup(
     packages=find_packages(exclude=['_tests', ]),
     package_data={
         'nsupdate': [
+            'templates/*.html',
+            'templates/includes/*.html',
             'static/*.html',
-            'static/css/*',
-            'templates/*',
+            'static/*.png',
+            'static/css/*.css',
         ],
         'nsupdate.accounts': [
             'templates/accounts/*.html',
             'templates/registration/*.html',
+            'templates/registration/*.txt',
         ],
         'nsupdate.main': [
             'templates/main/*.html',
-            'templates/main/includes/*',
+            'templates/main/includes/*.html',
         ],
     },
     include_package_data=True,
