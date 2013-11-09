@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 from django.utils.decorators import method_decorator
 
+from ..utils import log
 from ..main.models import Host
 from ..main.dnstools import update, SameIpError, check_ip
 
@@ -28,7 +29,8 @@ def Response(content):
     return HttpResponse(content, content_type='text/plain')
 
 
-def myip_view(request):
+@log.logger(__name__)
+def myip_view(request, logger=None):
     """
     return the IP address (can be v4 or v6) of the client requesting this view.
 
@@ -37,11 +39,14 @@ def myip_view(request):
     """
     # Note: keeping this as a function-based view, as it is frequently used -
     # maybe it is slightly more efficient than class-based.
-    return Response(request.META['REMOTE_ADDR'])
+    ipaddr = request.META['REMOTE_ADDR']
+    logger.debug("detected remote ip address: %s" % ipaddr)
+    return Response(ipaddr)
 
 
 class DetectIpView(View):
-    def get(self, request, sessionid):
+    @log.logger(__name__)
+    def get(self, request, sessionid, logger=None):
         """
         Put the IP address (can be v4 or v6) of the client requesting this view
         into the client's session.
@@ -58,13 +63,14 @@ class DetectIpView(View):
         key = check_ip(ipaddr)
         s[key] = ipaddr
         s[key + '_timestamp'] = int(time.time())
-        logger.debug("detected %s: %s" % (key, ipaddr))
+        logger.debug("detected remote %s address: %s for session %s" % (key, ipaddr, sessionid))
         s.save()
         return HttpResponse(status=204)
 
 
 class AjaxGetIps(View):
-    def get(self, request):
+    @log.logger(__name__)
+    def get(self, request, logger=None):
         """
         Get the IP addresses of the client from the session via AJAX
         (so we don't need to reload the view in case we just invalidated stale IPs
@@ -127,7 +133,7 @@ def check_api_auth(username, password):
     if num_hosts == 0:
         return False
     if num_hosts > 1:
-        logging.error("fqdn %s has multiple entries" % fqdn)
+        logger.error("fqdn %s has multiple entries" % fqdn)
         return False
     password_hash = hosts[0].update_secret
     return check_password(password, password_hash)
@@ -147,13 +153,14 @@ def check_session_auth(user, hostname):
     if num_hosts == 0:
         return False
     if num_hosts > 1:
-        logging.error("fqdn %s has multiple entries" % fqdn)
+        logger.error("fqdn %s has multiple entries" % fqdn)
         return False
     return True
 
 
 class NicUpdateView(View):
-    def get(self, request):
+    @log.logger(__name__)
+    def get(self, request, logger=None):
         """
         dyndns2 compatible /nic/update API.
 
@@ -180,11 +187,11 @@ class NicUpdateView(View):
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
-            logger.warning('%s - received no auth [ua: %s]' % (hostname, agent, ))
+            logger.warning('%s - received no auth' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'noauth')
         username, password = basic_authenticate(auth)
         if not check_api_auth(username, password):
-            logger.info('%s - received bad credentials, username: %s [ua: %s]' % (hostname, username, agent, ))
+            logger.info('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         if hostname is None:
             # as we use update_username == hostname, we can fall back to that:
@@ -193,9 +200,9 @@ class NicUpdateView(View):
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
         if agent in settings.BAD_AGENTS:
-            logger.info('%s - received update from bad user agent [ua: %s]' % (hostname, agent, ))
+            logger.info('%s - received update from bad user agent' % (hostname, ))
             return Response('badagent')
-        return _update(hostname, ipaddr, agent, ssl)
+        return _update(hostname, ipaddr, agent, ssl, logger=logger)
 
 
 class AuthorizedNicUpdateView(View):
@@ -204,7 +211,8 @@ class AuthorizedNicUpdateView(View):
     def dispatch(self, *args, **kwargs):
         return super(AuthorizedNicUpdateView, self).dispatch(*args, **kwargs)
 
-    def get(self, request):
+    @log.logger(__name__)
+    def get(self, request, logger=None):
         """
         similar to NicUpdateView, but the client is not a router or other dyndns client,
         but the admin browser who is currently logged into the nsupdate.info site.
@@ -227,10 +235,10 @@ class AuthorizedNicUpdateView(View):
         ipaddr = request.GET.get('myip')
         if not ipaddr:
             ipaddr = request.META.get('REMOTE_ADDR')
-        return _update(hostname, ipaddr, agent, ssl)
+        return _update(hostname, ipaddr, agent, ssl, logger=logger)
 
 
-def _update(hostname, ipaddr, agent='unknown', ssl=False):
+def _update(hostname, ipaddr, agent='unknown', ssl=False, logger=None):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
@@ -239,14 +247,14 @@ def _update(hostname, ipaddr, agent='unknown', ssl=False):
     if num_hosts == 0:
         return False
     if num_hosts > 1:
-        logging.error("fqdn %s has multiple entries" % hostname)
+        logger.error("fqdn %s has multiple entries" % hostname)
         return False
     kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
     hosts[0].poke(kind, ssl)
     try:
         update(hostname, ipaddr)
-        logger.info('%s - received good update -> ip: %s [ssl: %r ua: %s]' % (hostname, ipaddr, ssl, agent))
+        logger.info('%s - received good update -> ip: %s ssl: %r' % (hostname, ipaddr, ssl))
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s [ssl: %r ua: %s]' % (hostname, ipaddr, ssl, agent))
+        logger.warning('%s - received no-change update, ip: %s ssl: %r' % (hostname, ipaddr, ssl))
         return Response('nochg %s' % ipaddr)
