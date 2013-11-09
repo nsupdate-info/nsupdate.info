@@ -14,76 +14,93 @@ Usage:
     Logging formatter configuration:
 
     'format': '[%(asctime)s] %(levelname)s %(message)s ' \
-              '[ip: %(request.meta.remote_addr)s, ua: "%(request.meta.http_user_agent)s"]'
+              '[ip: %(request.META.REMOTE_ADDR)s, ua: "%(request.META.HTTP_USER_AGENT)s"]'
 
-Based on code from:
+Based on code from (but heavily modified/refactored):
     https://derrickpetzold.com/p/django-requst-logging-json/
     which is (c) Derrick Petzold - with a Creative Commons BY-SA license.
 """
 
-import socket
 import logging
 
 from django.http.request import HttpRequest
 
 
-class RequestInfo(object):
+def _get_attrdict(obj, basename, excluded=None):
+    """
+    get a dictionary of (basename-prefixed) attribute names/values,
+    excluding the excluded names, internal stuff and callables.
 
-    def __init__(self, request):
-        self.request = request
-
-    def __getitem__(self, name):
-        if name == 'request.host':
-            return socket.gethostname()
-
-        if name.startswith('request.meta.'):
-            val = name.split('.')[2]
+    :param obj: the object to inspect
+    :param basename: the prefix for the names in the result dictionary
+    :param excluded: excluded attribute names, do not even touch [set or list]
+    :return: dict names: values
+    """
+    if excluded is None:
+        excluded = set()
+    d = {}
+    names = set(dir(obj)) - set(excluded)
+    for name in names:
+        if not name.startswith('_'):
             try:
-                return self.request.META[val.upper()]
-            except KeyError as e:
-                return None
-        return eval('self.%s' % (name))
+                attr = getattr(obj, name)
+                if not callable(attr):
+                    d[basename + name] = attr
+            except AttributeError:
+                pass
+    return d
 
-    def _get_attrs(self, obj, excluded=None):
-        if excluded is None:
-            excluded = set()
-        attrs = []
-        for attr in dir(obj):
-            if attr not in excluded:
-                try:
-                    if not attr.startswith('_') and \
-                            not callable(getattr(obj, attr)):
-                        attrs.append(attr)
-                except AttributeError:
-                    pass
-        return attrs
 
-    def __iter__(self):
-        keys = ['request.host']
-        keys.extend(['request.%s' % (a, )
-                     for a in self._get_attrs(self.request, set(['raw_post_data', ]))])
-        keys.extend(['request.session.%s' % (a, )
-                     for a in self._get_attrs(self.request.session)])
-        keys.extend(['request.user.%s' % (a, )
-                     for a in self._get_attrs(self.request.user)])
-        keys.extend(['request.meta.%s' % (a.lower(), )
-                     for a in self.request.META.keys()])
-        return keys.__iter__()
+def _get_elementdict(dct, basename, excluded=None):
+    """
+    get a dictionary of (basename-prefixed) dictionary elements,
+    excluding the excluded names.
+
+    :param dct: the dict to inspect
+    :param basename: the prefix for the names in the result dictionary
+    :param excluded: excluded dictionary keys [set or list]
+    :return: dict names: values
+    """
+    if excluded is None:
+        excluded = set()
+    names = set(dct) - set(excluded)
+    return {basename + name: dct[name] for name in names}
+
+
+def _build_request_info(request):
+    """
+    build a dictionary with extra information extracted from request object
+
+    :param request: django HttpRequest object
+    :return: dict names: values
+    """
+    d = _get_elementdict(request.META, "request.META.")
+    d.update(_get_attrdict(request, "request.", ['raw_post_data', ]))
+    d.update(_get_attrdict(request.session, "request.session."))
+    d.update(_get_attrdict(request.user, "request.user."))
+    return d
 
 
 def logger(name):
+    """
+    decorator to provide extra information from request to logging
+
+    :param name: name of the logger
+    :return: decorated function/method
+    """
     def wrap(func):
         def caller(*args, **kwargs):
             request = None
             for arg in args:
                 if isinstance(arg, HttpRequest):
                     request = arg
+                    break
             if 'logger' not in kwargs:
-                if request is not None:
-                    kwargs['logger'] = logging.LoggerAdapter(
-                        logging.getLogger(name), RequestInfo(request))
+                l = logging.getLogger(name)
+                if request is None:
+                    kwargs['logger'] = l
                 else:
-                    kwargs['logger'] = logging.getLogger(name)
+                    kwargs['logger'] = logging.LoggerAdapter(l, _build_request_info(request))
             return func(*args, **kwargs)
         return caller
     return wrap

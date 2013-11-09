@@ -216,7 +216,7 @@ LOGGING = {
     'formatters': {
         'stderr': {
             'format': '[%(asctime)s] %(levelname)s %(message)s '
-                      '[ip: %(request.meta.remote_addr)s, ua: "%(request.meta.http_user_agent)s"]',
+                      '[ip: %(request.META.REMOTE_ADDR)s, ua: "%(request.META.HTTP_USER_AGENT)s"]',
         },
     },
 }
