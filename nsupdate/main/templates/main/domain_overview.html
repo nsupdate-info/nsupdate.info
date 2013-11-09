@@ -11,7 +11,7 @@
                     <th>Domain</th>
                     <th>Public?</th>
                     <th>Available?</th>
-                    <th>Nameserver IP</th>
+                    <th>Owner</th>
                     <th>Comment</th>
                 </tr>
             </thead>
@@ -20,7 +20,7 @@
                     <td><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
                     <td>{{ domain.public|yesno }}</td>
                     <td>{{ domain.available|yesno }}</td>
-                    <td>{{ domain.nameserver_ip }}</td>
+                    <td>{{ domain.created_by }}</td>
                     <td>{{ domain.comment }}</td>
                 </tr>
             {% empty %}
@@ -31,7 +31,7 @@
                     <td>{{ domain.domain }}</td>
                     <td>{{ domain.public|yesno }}</td>
                     <td>{{ domain.available|yesno }}</td>
-                    <td>{{ domain.nameserver_ip }}</td>
+                    <td>{{ domain.created_by }}</td>
                     <td>{{ domain.comment }}</td>
                 </tr>
             {% empty %}
