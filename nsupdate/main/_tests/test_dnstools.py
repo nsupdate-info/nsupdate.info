@@ -7,9 +7,8 @@ import pytest
 pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN, NoAnswer
-from dns.tsig import PeerBadSignature
 
-from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
+from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError, DnsUpdateError
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'
@@ -180,6 +179,6 @@ class TestUpdate(object):
 
     def test_bad_update(self):
         # test whether we ONLY can update the TEST_HOST
-        with pytest.raises(PeerBadSignature):
-            response = update_ns(INVALID_HOST, 'A', '6.6.6.6', action='upd', ttl=60, raise_badsig=True)
+        with pytest.raises(DnsUpdateError):
+            response = update_ns(INVALID_HOST, 'A', '6.6.6.6', action='upd', ttl=60)
             print response

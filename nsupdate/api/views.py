@@ -16,7 +16,7 @@ from django.utils.decorators import method_decorator
 
 from ..utils import log
 from ..main.models import Host
-from ..main.dnstools import update, SameIpError, DnsUpdateError, check_ip
+from ..main.dnstools import update, SameIpError, DnsUpdateError, NameServerNotAvailable, check_ip
 
 
 def Response(content):
@@ -258,7 +258,7 @@ def _update(hostname, ipaddr, agent='unknown', ssl=False, logger=None):
     except SameIpError:
         logger.warning('%s - received no-change update, ip: %s ssl: %r' % (hostname, ipaddr, ssl))
         return Response('nochg %s' % ipaddr)
-    except DnsUpdateError as e:
+    except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
         logger.warning('%s - received update that resulted in an error, ip: %s ssl: %r [%s]' % (
                        hostname, ipaddr, ssl, msg))

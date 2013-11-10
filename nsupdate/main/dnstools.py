@@ -240,8 +240,7 @@ def get_ns_info(fqdn, origin=None):
     return d.nameserver_ip, origin, domain, name, keyname, d.nameserver_update_key, algorithm
 
 
-def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60,
-              raise_badsig=False):
+def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     """
     update our master server
 
@@ -284,10 +283,8 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60,
         raise
     except dns.tsig.PeerBadSignature:
         logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin, ))
-        if raise_badsig:
-            raise
-        else:
-            set_ns_availability(domain, False)
+        set_ns_availability(domain, False)
+        raise DnsUpdateError("PeerBadSignature")
 
 
 def set_ns_availability(domain, available):
