@@ -191,7 +191,7 @@ class NicUpdateView(View):
             return basic_challenge("authenticate to update DNS", 'noauth')
         username, password = basic_authenticate(auth)
         if not check_api_auth(username, password):
-            logger.info('%s - received bad credentials, username: %s' % (hostname, username, ))
+            logger.warning('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         logger.info("authenticated by update secret for host %s" % username)
         if hostname is None:
@@ -199,14 +199,14 @@ class NicUpdateView(View):
             hostname = username
         elif hostname != username:
             # maybe this host is owned by same person, but we can't know.
-            logger.info("rejecting to update wrong host %s (given in query string) "
-                        "[instead of %s (given in basic auth)]" % (hostname, username))
+            logger.warning("rejecting to update wrong host %s (given in query string) "
+                           "[instead of %s (given in basic auth)]" % (hostname, username))
             return Response('nohost')  # or 'badauth'?
         ipaddr = request.GET.get('myip')
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
         if agent in settings.BAD_AGENTS:
-            logger.info('%s - received update from bad user agent' % (hostname, ))
+            logger.warning('%s - received update from bad user agent' % (hostname, ))
             return Response('badagent')
         return _update(hostname, ipaddr, agent, ssl, logger=logger)
 
@@ -236,7 +236,7 @@ class AuthorizedNicUpdateView(View):
         if hostname is None:
             return Response('nohost')
         if not check_session_auth(request.user, hostname):
-            logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
+            logger.warning('%s - is not owned by user: %s' % (hostname, request.user.username, ))
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         ipaddr = request.GET.get('myip')
@@ -267,6 +267,6 @@ def _update(hostname, ipaddr, agent='unknown', ssl=False, logger=None):
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        logger.warning('%s - received update that resulted in an error, ip: %s ssl: %r [%s]' % (
-                       hostname, ipaddr, ssl, msg))
+        logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
+                     hostname, msg, ipaddr, ssl))
         return Response('dnserr %s' % msg)
