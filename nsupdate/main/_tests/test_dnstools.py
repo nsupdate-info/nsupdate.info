@@ -3,13 +3,18 @@ Tests for dnstools module.
 """
 
 import pytest
-from test_settings import *
 
 pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN, NoAnswer
+from dns.tsig import PeerBadSignature
 
 from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError
+
+# see also conftest.py
+BASEDOMAIN = 'nsupdate.info'
+TEST_HOST = 'test.' + BASEDOMAIN  # you can ONLY update THIS host in unit tests
+INVALID_HOST = 'test999.' + BASEDOMAIN  # therefore, this can't get updated
 
 
 def remove_records(host, records=('A', 'AAAA', )):
@@ -75,28 +80,32 @@ class TestIntelligentDeleter(object):
 
 class TestQuery(object):
     def test_queries_ok(self):
-        assert query_ns(WWW_IPV4_HOST, 'A') == WWW_IPV4_IP  # v4 ONLY
-        assert query_ns(WWW_IPV6_HOST, 'AAAA') == WWW_IPV6_IP  # v6 ONLY
-        assert query_ns(WWW_HOST, 'A') == WWW_IPV4_IP  # v4 and v6, query v4
-        assert query_ns(WWW_HOST, 'AAAA') == WWW_IPV6_IP  # v4 and v6, query v6
-
-    def test_queries_failing(self):
+        host, ipv4, ipv6 = TEST_HOST, '42.42.42.42', '::23'
+        remove_records(host)
         with pytest.raises(NXDOMAIN):
-            query_ns(NONEXISTING_HOST, 'A')
+            query_ns(TEST_HOST, 'A')
         with pytest.raises(NXDOMAIN):
-            query_ns(NONEXISTING_HOST, 'AAAA')
+            query_ns(TEST_HOST, 'AAAA')
+        add(host, ipv4)
+        assert query_ns(TEST_HOST, 'A') == ipv4
+        with pytest.raises(NoAnswer):
+            query_ns(TEST_HOST, 'AAAA')
+        add(host, ipv6)
+        assert query_ns(TEST_HOST, 'AAAA') == ipv6
 
 
 class TestUpdate(object):
     def test_parse1(self):
-        origin, relname = parse_name('test.' + BASEDOMAIN)
-        assert str(origin) == BASEDOMAIN + '.'
-        assert str(relname) == 'test'
+        host, domain = 'test', BASEDOMAIN
+        origin, relname = parse_name(host + '.' + domain)
+        assert str(origin) == domain + '.'
+        assert str(relname) == host
 
     def test_parse2(self):
-        origin, relname = parse_name('foo.test.' + BASEDOMAIN)
-        assert str(origin) == BASEDOMAIN + '.'
-        assert str(relname) == 'foo.test'
+        host, domain = 'prefix.test', BASEDOMAIN
+        origin, relname = parse_name(host + '.' + domain)
+        assert str(origin) == domain + '.'
+        assert str(relname) == 'prefix.test'
 
     def test_parse_with_origin(self):
         origin, relname = parse_name('foo.bar.baz.org', 'bar.baz.org')
@@ -168,3 +177,9 @@ class TestUpdate(object):
 
         # make sure the v6 is unchanged
         assert query_ns(host6, 'AAAA') == ip6
+
+    def test_bad_update(self):
+        # test whether we ONLY can update the TEST_HOST
+        with pytest.raises(PeerBadSignature):
+            response = update_ns(INVALID_HOST, 'A', '6.6.6.6', action='upd', ttl=60, raise_badsig=True)
+            print response

@@ -155,8 +155,7 @@ def query_ns(qname, rdtype, origin=None):
     origin, name = parse_name(qname, origin)
     fqdn = name + origin
     assert fqdn.is_absolute()
-    origin_str = str(origin)
-    nameserver = get_ns_info(origin_str)[0]
+    nameserver, origin = get_ns_info(fqdn)[0:2]
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
@@ -195,18 +194,33 @@ def parse_name(fqdn, origin=None):
     return origin, rel_name
 
 
-def get_ns_info(origin):
+def get_ns_info(fqdn, origin=None):
     """
     Get the master nameserver for the <origin> zone, the key needed
     to update the zone and the key algorithm used.
 
-    :param origin: zone we are dealing with, must be with trailing dot
-    :return: master nameserver, update key, update algo
+    :param fqdn: the fully qualified hostname we are dealing with (str)
+    :param origin: zone we are dealing with, must be with trailing dot (default:autodetect) (str)
+    :return: master nameserver, origin, domain, update keyname, update key, update algo
     :raises: NameServerNotAvailable if ns was flagged unavailable in the db
     """
+    fqdn_str = str(fqdn)
+    origin, name = parse_name(fqdn_str, origin)
+    origin_str = str(origin)
     from .models import Domain
-    domain = origin.rstrip('.')
-    d = Domain.objects.get(domain=domain)
+    try:
+        # first we check if we have an entry for the fqdn
+        # single-host update secret use case
+        # XXX we need 2 DB accesses for the usual case just to support this rare case
+        domain = fqdn_str.rstrip('.')
+        d = Domain.objects.get(domain=domain)
+        keyname = fqdn_str
+    except Domain.DoesNotExist:
+        # now check the base zone, the usual case
+        # zone update secret use case
+        domain = origin_str.rstrip('.')
+        d = Domain.objects.get(domain=domain)
+        keyname = origin_str
     if not d.available:
         if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
             # if there are troubles with a nameserver, we set available=False
@@ -215,12 +229,13 @@ def get_ns_info(origin):
                                          domain, d.nameserver_ip, ))
         else:
             # retry timeout is over, set it available again
-            set_ns_availability(origin, True)
+            set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return d.nameserver_ip, d.nameserver_update_key, algorithm
+    return d.nameserver_ip, origin, domain, name, keyname, d.nameserver_update_key, algorithm
 
 
-def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
+def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60,
+              raise_badsig=False):
     """
     update our master server
 
@@ -233,11 +248,9 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     :return: dns response
     """
     assert action in ['add', 'del', 'upd', ]
-    origin, name = parse_name(fqdn, origin)
-    origin_str = str(origin)
-    nameserver, key, algo = get_ns_info(origin_str)
+    nameserver, origin, domain, name, keyname, key, algo = get_ns_info(fqdn, origin)
     upd = dns.update.Update(origin,
-                            keyring=dns.tsigkeyring.from_text({origin_str: key}),
+                            keyring=dns.tsigkeyring.from_text({keyname: key}),
                             keyalgorithm=algo)
     if action == 'add':
         assert ipaddr is not None
@@ -255,11 +268,14 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     except dns.exception.Timeout:
         logger.warning("timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
                        action, name, origin, rdtype, ipaddr))
-        set_ns_availability(origin, False)
+        set_ns_availability(domain, False)
         raise
     except dns.tsig.PeerBadSignature:
-        logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin_str, ))
-        set_ns_availability(origin, False)
+        logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin, ))
+        if raise_badsig:
+            raise
+        else:
+            set_ns_availability(domain, False)
 
 
 def set_ns_availability(domain, available):
