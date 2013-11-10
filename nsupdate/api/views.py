@@ -198,9 +198,9 @@ class NicUpdateView(View):
             # as we use update_username == hostname, we can fall back to that:
             hostname = username
         elif hostname != username:
-            # trying to update a hostname given in querystring that doesn't
-            # match the username, which is required for us!
             # maybe this host is owned by same person, but we can't know.
+            logger.info("rejecting to update wrong host %s (given in query string) "
+                        "[instead of %s (given in basic auth)]" % (hostname, username))
             return Response('nohost')  # or 'badauth'?
         ipaddr = request.GET.get('myip')
         if ipaddr is None:
