@@ -40,6 +40,12 @@ class SameIpError(ValueError):
     """
 
 
+class DnsUpdateError(ValueError):
+    """
+    raised if DNS update return code is not NOERROR
+    """
+
+
 class NameServerNotAvailable(Exception):
     """
     raised if some nameserver was flagged as not available,
@@ -264,6 +270,12 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60,
                  action, name, origin, rdtype, ipaddr))
     try:
         response = dns.query.tcp(upd, nameserver, timeout=UPDATE_TIMEOUT)
+        rcode = response.rcode()
+        if rcode != dns.rcode.NOERROR:
+            rcode_text = dns.rcode.to_text(rcode)
+            logger.warning("DNS error [%s] performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
+                           rcode_text, action, name, origin, rdtype, ipaddr))
+            raise DnsUpdateError(rcode_text)
         return response
     except dns.exception.Timeout:
         logger.warning("timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
