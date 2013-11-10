@@ -193,9 +193,15 @@ class NicUpdateView(View):
         if not check_api_auth(username, password):
             logger.info('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
+        logging.info("authenticated by update secret for host %s" % username)
         if hostname is None:
             # as we use update_username == hostname, we can fall back to that:
             hostname = username
+        elif hostname != username:
+            # trying to update a hostname given in querystring that doesn't
+            # match the username, which is required for us!
+            # maybe this host is owned by same person, but we can't know.
+            return Response('nohost')  # or 'badauth'?
         ipaddr = request.GET.get('myip')
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
@@ -232,6 +238,7 @@ class AuthorizedNicUpdateView(View):
         if not check_session_auth(request.user, hostname):
             logger.info('%s - is not owned by user: %s' % (hostname, request.user.username, ))
             return Response('nohost')
+        logging.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         ipaddr = request.GET.get('myip')
         if not ipaddr:
             ipaddr = request.META.get('REMOTE_ADDR')
