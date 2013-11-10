@@ -1,4 +1,4 @@
-include README.rst LICENSE AUTHORS
+include README.rst CHANGES.rst LICENSE AUTHORS
 include setup.cfg setup.py
 recursive-include docs *
 recursive-exclude docs *.pyc
