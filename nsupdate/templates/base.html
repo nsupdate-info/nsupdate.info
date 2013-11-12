@@ -92,6 +92,12 @@
                                 {% endif %}
                             </div>
                         {% endif %}
+                        <noscript>
+                            <div class="alert alert-warning">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                Some functionality on this site requires that you have JavaScript enabled in your browser.
+                            </div>
+                        </noscript>
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert {{ message.tags }}">
