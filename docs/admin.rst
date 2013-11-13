@@ -68,6 +68,17 @@ applies to the django version YOU use):
 
 https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+Regular jobs
+------------
+Run these commands regularly::
+
+    # clear expired sessions from the database, use your correct settings module:
+    django-admin.py clearsessions --settings=local_settings
+
+To run these commands regularly on Linux (or other POSIX OSes), you can use
+crontab -e to create a cronjob that runs as the same user as the nsupdate.info
+wsgi application.
+
 
 Configuration
 =============
