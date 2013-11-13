@@ -74,10 +74,18 @@ Run these commands regularly::
 
     # clear expired sessions from the database, use your correct settings module:
     django-admin.py clearsessions --settings=local_settings
+    # reinitialize the test user:
+    django-admin.py testuser --settings=local_settings
 
 To run these commands regularly on Linux (or other POSIX OSes), you can use
 crontab -e to create a cronjob that runs as the same user as the nsupdate.info
 wsgi application.
+
+Here's a user crontab::
+
+    DJANGO_SETTINGS_MODULE=local_settings
+    50 2 * * * django-admin.py testuser
+    0  3 * * 1 django-admin.py clearsessions
 
 
 Configuration
