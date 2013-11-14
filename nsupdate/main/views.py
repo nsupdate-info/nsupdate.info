@@ -316,9 +316,6 @@ class RobotsTxtView(View):
     """
     Dynamically serve robots.txt content.
     If you like, you can optimize this by statically serving this by your web server.
-
-    :param request: django request object
-    :return: HttpResponse object
     """
     def get(self, request):
         content = """\
