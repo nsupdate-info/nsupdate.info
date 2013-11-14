@@ -14,6 +14,7 @@ UPDATE_TIMEOUT = 20.0
 UNAVAILABLE_RETRY = 300.0
 
 
+import time
 from datetime import timedelta
 
 import logging
@@ -305,3 +306,31 @@ def set_ns_availability(domain, available):
         logger.info("set zone '%s' to available" % domain)
     else:
         logger.warning("set zone '%s' to unavailable" % domain)
+
+
+def put_ip_into_session(session, ipaddr, kind=None, max_age=0,
+                        save=False):
+    """
+    put an IP address into the session, including a timestamp,
+    so we know how fresh it is.
+
+    :param session: the session object
+    :param ipaddr: ip address (can be v4 or v6, str)
+    :param kind: 'ipv4' or 'ipv6' or None to autodetect
+    :param max_age: maximum age of info, if older we refresh the timestamp
+    :param save: save the session, if it was changed
+    """
+    if kind is None:
+        kind = check_ip(ipaddr)
+    # we try to avoid modifying the session if not necessary...
+    if session.get(kind) != ipaddr:
+        # we have a new ip, remember it, with timestamp
+        session[kind] = ipaddr
+        session[kind + '_timestamp'] = int(time.time())
+    else:
+        old_timestamp = session.get(kind + '_timestamp')
+        if not max_age or old_timestamp is None or old_timestamp + max_age < int(time.time()):
+            # keep it fresh (to avoid that it gets killed and triggers detection)
+            session[kind + '_timestamp'] = int(time.time())
+    if save and session.modified:
+        session.save()

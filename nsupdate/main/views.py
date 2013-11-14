@@ -82,11 +82,6 @@ class HomeView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context['nav_home'] = True
-        ipaddr = self.request.META['REMOTE_ADDR']
-        key = dnstools.check_ip(ipaddr)
-        s = self.request.session
-        s[key] = ipaddr
-        s.save()
         return context
 
 

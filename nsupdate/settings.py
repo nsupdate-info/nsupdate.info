@@ -134,7 +134,7 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
     'nsupdate.context_processors.add_settings',
-    'nsupdate.context_processors.remove_stale_ips',
+    'nsupdate.context_processors.update_ips',
     'social.apps.django_app.context_processors.backends',
     'social.apps.django_app.context_processors.login_redirect',
 )

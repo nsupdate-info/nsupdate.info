@@ -3,7 +3,6 @@
 import logging
 logger = logging.getLogger(__name__)
 
-import time
 import json
 
 from django.http import HttpResponse
@@ -16,7 +15,7 @@ from django.utils.decorators import method_decorator
 
 from ..utils import log
 from ..main.models import Host
-from ..main.dnstools import update, SameIpError, DnsUpdateError, NameServerNotAvailable, check_ip
+from ..main.dnstools import update, SameIpError, DnsUpdateError, NameServerNotAvailable, check_ip, put_ip_into_session
 
 
 def Response(content):
@@ -60,11 +59,10 @@ class DetectIpView(View):
         # the sessionid:
         s = SessionStore(session_key=sessionid)
         ipaddr = request.META['REMOTE_ADDR']
-        key = check_ip(ipaddr)
-        s[key] = ipaddr
-        s[key + '_timestamp'] = int(time.time())
-        logger.debug("detected remote %s address: %s for session %s" % (key, ipaddr, sessionid))
-        s.save()
+        # as this is NOT the session automatically established and
+        # also saved by the framework, we need to use save=True here
+        put_ip_into_session(s, ipaddr, save=True)
+        logger.debug("detected remote address: %s for session %s" % (ipaddr, sessionid))
         return HttpResponse(status=204)
 
 
