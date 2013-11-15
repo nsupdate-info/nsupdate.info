@@ -62,7 +62,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {{ request.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> Profile</a></li>
-                                    <li><a href="{% url 'password_change' %}"><i class="fa fa-key fa-fw"></i> Change password</a></li>
+                                    <li><a href="{% url 'auth_password_change' %}"><i class="fa fa-key fa-fw"></i> Change password</a></li>
                                     {% if request.user.is_staff %}
                                         <li><a href="/admin/"><i class="fa fa-wrench fa-fw"></i> Admin</a></li>
                                     {% endif %}
