@@ -54,4 +54,9 @@ def update_ips(request):
                     # kill the IP, it is not up-to-date any more
                     # note: it is used to fill form fields, so set it to empty string
                     put_ip_into_session(s, '', kind=key)
+    if s.session_key is None:
+        # if we have a new session (== not loaded from database / storage), we
+        # MUST save it here to create its session_key as the base.html template
+        # uses .session_key to build the URL for detectip:
+        s.save()
     return {}
