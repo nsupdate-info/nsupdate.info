@@ -180,9 +180,7 @@ class NicUpdateView(View):
         :param request: django request object
         :return: HttpResponse object
         """
-        ssl = request.is_secure()
         hostname = request.GET.get('hostname')
-        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
             logger.warning('%s - received no auth' % (hostname, ))
@@ -200,12 +198,14 @@ class NicUpdateView(View):
             logger.warning("rejecting to update wrong host %s (given in query string) "
                            "[instead of %s (given in basic auth)]" % (hostname, username))
             return Response('nohost')  # or 'badauth'?
-        ipaddr = request.GET.get('myip')
-        if ipaddr is None:
-            ipaddr = request.META.get('REMOTE_ADDR')
+        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         if agent in settings.BAD_AGENTS:
             logger.warning('%s - received update from bad user agent' % (hostname, ))
             return Response('badagent')
+        ipaddr = request.GET.get('myip')
+        if ipaddr is None:
+            ipaddr = request.META.get('REMOTE_ADDR')
+        ssl = request.is_secure()
         return _update(hostname, ipaddr, agent, ssl, logger=logger)
 
 
@@ -228,8 +228,6 @@ class AuthorizedNicUpdateView(View):
         :param request: django request object
         :return: HttpResponse object
         """
-        ssl = request.is_secure()
-        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         hostname = request.GET.get('hostname')
         if hostname is None:
             return Response('nohost')
@@ -238,8 +236,10 @@ class AuthorizedNicUpdateView(View):
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         ipaddr = request.GET.get('myip')
-        if not ipaddr:
+        if not ipaddr:  # None or emptry string
             ipaddr = request.META.get('REMOTE_ADDR')
+        ssl = request.is_secure()
+        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         return _update(hostname, ipaddr, agent, ssl, logger=logger)
 
 
