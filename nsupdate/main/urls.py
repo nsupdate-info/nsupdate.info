@@ -28,8 +28,8 @@ urlpatterns = patterns(
     url(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),
     url(r'^nic/update_authorized$', AuthorizedNicUpdateView.as_view(), name='nic_update_authorized'),
     # api (for update clients)
-    url(r'^myip$', myip_view),
-    url(r'^nic/update$', NicUpdateView.as_view()),
+    url(r'^myip$', myip_view, name='myip'),
+    url(r'^nic/update$', NicUpdateView.as_view(), name='update'),
     # for bots
     url(r'^robots.txt$', RobotsTxtView.as_view()),
 )
