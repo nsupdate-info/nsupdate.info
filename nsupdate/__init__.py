@@ -62,4 +62,4 @@ class Version(tuple):
         return version_str
 
 
-version = Version(0, 3, 0)
+version = Version(0, 4, 0)
