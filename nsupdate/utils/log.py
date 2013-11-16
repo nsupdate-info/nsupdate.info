@@ -22,7 +22,6 @@ Based on code from (but heavily modified/refactored):
 """
 
 import logging
-from collections import defaultdict
 
 from django.http.request import HttpRequest
 
@@ -75,15 +74,22 @@ def _build_request_info(request):
     :param request: django HttpRequest object or None
     :return: dict names: values
     """
-    # we avoid KeyErrors in case we have a logging format string using
-    # placeholders that are not available (either because they are not in
-    # request or because we have no request)
-    d = defaultdict(lambda: None)
+    d = {}
     if request:
         d.update(_get_elementdict(request.META, "request.META."))
         d.update(_get_attrdict(request, "request.", ['raw_post_data', ]))
         d.update(_get_attrdict(request.session, "request.session."))
         d.update(_get_attrdict(request.user, "request.user."))
+    # note: avoid KeyErrors at least for the default logging format string.
+    # using a defaultdict as d does not help, as it gets iterated and keys/values
+    # transferred into a normal dict and then the logging format() is still
+    # failing when it encounters an unknown key.
+    # XXX this is ugly and prone to fail for other format strings
+    for key in ['request.META.REMOTE_ADDR',
+                'request.META.HTTP_USER_AGENT',
+                ]:
+        if key not in d:
+            d[key] = 'unknown'
     return d
 
 
