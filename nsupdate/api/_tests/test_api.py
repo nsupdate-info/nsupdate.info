@@ -10,6 +10,9 @@ from django.core.urlresolvers import reverse
 TEST_HOST = "test.nsupdate.info"
 TEST_SECRET = "secret"
 
+USERNAME = 'test'
+PASSWORD = 'pass'
+
 
 def test_myip(client):
     response = client.get(reverse('myip'))
@@ -43,9 +46,19 @@ def test_nic_update_authorized(client):
     assert response.content.startswith('good ') or response.content.startswith('nochg ')
 
 
-def test_nic_update_session(client):
+def test_nic_update_session_nosession(client):
     response = client.get(reverse('nic_update_authorized'))
     assert response.status_code == 302  # redirects to login view
+
+
+def test_nic_update_session(client):
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.get(reverse('nic_update_authorized'))
+    assert response.status_code == 200
+    assert response.content == "nohost"  # we did not tell which host
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
+    assert response.status_code == 200
+    assert response.content.startswith('good ') or response.content.startswith('nochg ')
 
 
 def test_detect_ip(client):
