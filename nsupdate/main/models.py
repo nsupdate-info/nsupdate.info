@@ -165,12 +165,13 @@ class Host(models.Model):
             self.ssl_update_ipv6 = ssl
         self.save()
 
-    def generate_secret(self):
+    def generate_secret(self, secret=None):
         # note: we use a quick hasher for the update_secret as expensive
         # more modern hashes might put too much load on the servers. also
         # many update clients might use http without ssl, so it is not too
         # secure anyway.
-        secret = User.objects.make_random_password()
+        if secret is None:
+            secret = User.objects.make_random_password()
         self.update_secret = make_password(
             secret,
             hasher='sha1'

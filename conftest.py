@@ -4,14 +4,20 @@ configuration for the tests
 
 import pytest
 
+from django.conf import settings
+
 # this is to create a Domain entries in the database, so they can be used for unit tests:
 BASEDOMAIN = "nsupdate.info"
 TEST_HOST = 'test.' + BASEDOMAIN  # unit tests can update this host ONLY
+TEST_SECRET = "secret"
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
 # no problem, you can ONLY update the TEST_HOST with this key, nothing else:
 NAMESERVER_UPDATE_KEY = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
 NAMESERVER_PUBLIC = True
+
+USERNAME = 'test'
+PASSWORD = 'pass'
 
 from django.utils.translation import activate
 
@@ -22,7 +28,11 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     """
     Init the database contents for testing, so we have a service domain, ...
     """
-    from nsupdate.main.models import Domain
+    from django.contrib.auth.models import User
+    from nsupdate.main.models import Host, Domain
+    # create a fresh test user
+    u = User.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
+    u.save()
     # this is for updating:
     Domain.objects.create(
         domain=TEST_HOST,  # special: single-host update secret!
@@ -32,13 +42,16 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         public=NAMESERVER_PUBLIC,
     )
     # this is for querying:
-    Domain.objects.create(
+    d = Domain.objects.create(
         domain=BASEDOMAIN,
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_key='invalid=',  # we don't send updates there (and the real key is really secret)
         public=NAMESERVER_PUBLIC,
     )
+    # a Host for api / session update tests
+    h = Host(subdomain='test', domain=d, created_by=u)
+    h.generate_secret(secret=TEST_SECRET)
 
 
 def pytest_runtest_setup(item):
