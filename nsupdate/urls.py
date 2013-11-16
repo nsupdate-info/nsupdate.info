@@ -9,6 +9,18 @@ from registration.backends.default.views import RegistrationView
 from registration.forms import RegistrationForm
 
 
+def remember_me_login(request, *args, **kw):
+    """
+    Wraps the default login view function. If user does not want to be
+    remembered, we change the cookie to a session cookie that gets cleared
+    when the browser is closed.
+    """
+    if request.method == 'POST':
+        if not request.POST.get('remember_me'):
+            request.session.set_expiry(0)
+    return auth_views.login(request, *args, **kw)
+
+
 class Html5RegistrationForm(RegistrationForm):
     def __init__(self, *args, **kwargs):
         super(Html5RegistrationForm, self).__init__(*args, **kwargs)
@@ -37,7 +49,7 @@ urlpatterns = patterns(
         name='registration_register'),
     # from registration.auth_urls:
     url(r'^accounts/login/$',
-        auth_views.login,
+        remember_me_login,
         {'authentication_form': Html5AuthenticationForm,
          'template_name': 'registration/login.html'},
         name='auth_login'),

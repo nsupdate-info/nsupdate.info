@@ -11,6 +11,10 @@
         <form method="post" action="{% url 'auth_login' %}">
             {% csrf_token %}
             {{ form|bootstrap }}
+            <div class="form-group">
+                <input id="id_remember_me" name="remember_me" type="checkbox">
+                <label class="control-label " for="id_remember_me">Keep me logged in</label>
+            </div>
             <p><a href="{% url 'auth_password_reset' %}">Forgot</a> your password?
                <a href="{% url 'registration_register' %}">Need an account</a>?</p>
             <button type="submit" class="btn btn-primary">login</button>

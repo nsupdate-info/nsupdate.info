@@ -253,8 +253,8 @@ SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_PATH = '/'
 SESSION_COOKIE_SECURE = False  # use True here if you have set WE_HAVE_SSL = True
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_AGE = 14 * 24 * 3600  # 2 weeks, in seconds
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe than False
+SESSION_COOKIE_AGE = 14 * 24 * 3600  # 2 weeks, in seconds (remember_me is True)
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # more safe (remember_me is False)
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
