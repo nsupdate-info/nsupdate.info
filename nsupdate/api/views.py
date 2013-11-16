@@ -184,7 +184,7 @@ class NicUpdateView(View):
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
             logger.warning('%s - received no auth' % (hostname, ))
-            return basic_challenge("authenticate to update DNS", 'noauth')
+            return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = basic_authenticate(auth)
         if not check_api_auth(username, password):
             logger.warning('%s - received bad credentials, username: %s' % (hostname, username, ))

@@ -17,14 +17,22 @@ def test_myip(client):
     assert response.content in ['127.0.0.1', '::1']
 
 
-def test_nic_update(client):
+def test_nic_update_noauth(client):
     response = client.get(reverse('nic_update'))
     assert response.status_code == 401
+    assert response.content == "badauth"
 
 
 def make_basic_auth_header(username, password):
     import base64
     return "Basic " + base64.b64encode("%s:%s" % (username, password))
+
+
+def test_nic_update_badauth(client):
+    response = client.get(reverse('nic_update'),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, "wrong"))
+    assert response.status_code == 401
+    assert response.content == "badauth"
 
 
 def test_nic_update_authorized(client):
