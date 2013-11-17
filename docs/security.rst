@@ -161,5 +161,14 @@ For Django >=1.6 json will be the default rather than the less safe pickle forma
 Django's SECRET_KEY
 ===================
 
-Well, it needs to be secret, so don't just keep the value from our settings.py,
-but define a really secret one in your local_settings.py.
+Django's SECRET_KEY needs to be a long, random and secret string (it is
+usually set up by the administrator of the site).
+
+The builtin default settings will try to read SECRET_KEY from an environment
+variable of same name. If there is no such environment variable, the SECRET_KEY
+will be undefined.
+
+You can also define the SECRET_KEY in your local_settings.py.
+
+If you do not define a SECRET_KEY by one of these methods, the application
+will refuse to start and give you an error, that a SECRET_KEY is required.
