@@ -1,9 +1,13 @@
 language: python
 python:
-    - "2.5"
     - "2.6"
     - "2.7"
     - "pypy"
 install:
-    - "pip install ."
-script: "py.test"
+    - "pip install -q -e . --use-mirrors"
+env: SECRET_KEY=justfortravis
+script: "py.test --pep8"
+notifications:
+    email:
+        recipients:
+            - info@nsupdate.info
