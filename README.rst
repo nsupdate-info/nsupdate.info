@@ -10,6 +10,15 @@ The software project lives at:
 https://github.com/nsupdate-info/nsupdate.info
 
 
+.. image:: https://travis-ci.org/nsupdate-info/nsupdate.info.png
+    :target: https://travis-ci.org/nsupdate-info/nsupdate.info
+
+.. image:: https://badge.fury.io/py/nsupdate.png
+    :target: http://badge.fury.io/py/nsupdate
+
+.. image:: https://pypip.in/d/nsupdate/badge.png
+        :target: https://crate.io/packages/nsupdate/
+
 Features
 ========
 
