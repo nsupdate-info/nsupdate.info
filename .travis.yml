@@ -4,7 +4,7 @@ python:
     - "2.7"
     - "pypy"
 install:
-    - "pip install -q -e . --use-mirrors"
+    - "pip install -e . --use-mirrors"
 env: SECRET_KEY=justfortravis
 script: "py.test --pep8"
 notifications:
