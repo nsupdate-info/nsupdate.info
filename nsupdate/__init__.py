@@ -5,7 +5,7 @@ nsupdate - dynamic DNS service
 import re
 
 
-class Version(tuple):
+class Version(tuple):  # pragma: no cover
     """
     Version objects store versions like 1.2.3a4 in a structured
     way and support version comparisons and direct version component access.

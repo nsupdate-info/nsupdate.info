@@ -6,9 +6,8 @@ install:
     - "pip install --upgrade --use-mirrors -e ."
     - "pip install coveralls"
 env: SECRET_KEY=justfortravis
-script: "coverage run --source nsupdate --omit '*/migrations/*,*/_tests/*' -m py.test --pep8"
+script: "coverage run -m py.test --pep8"
 after_success:
-    - coveralls debug
     - coveralls
 notifications:
     email:
