@@ -25,11 +25,15 @@
     </div>
     <div class="col-lg-5">
         <h1>Login with a remote Account</h1>
-        <ul>
-            {% for backend in backends.backends %}
-                <li><a href="{% url 'social:begin' backend %}">{{ backend }}</a></li>
-            {% endfor %}
-        </ul>
+        <div class="btn-toolbar" role="toolbar">
+        {% for backend in backends.backends %}
+            <div class="btn-group">
+                <a class="btn btn-default btn-lg" role="button" href="{% url 'social:begin' backend %}">
+                    <i class="fa fa-sign-in fa-fw"></i> {{ backend }}
+                </a>
+            </div>
+        {% endfor %}
+        </div>
     </div>
     <div class="col-lg-1">
     </div>
