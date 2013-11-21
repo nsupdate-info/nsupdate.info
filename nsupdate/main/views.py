@@ -88,6 +88,10 @@ class HomeView(TemplateView):
 class StatusView(TemplateView):
     template_name = "main/status.html"
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(StatusView, self).dispatch(*args, **kwargs)
+
     def get_context_data(self, *args, **kwargs):
         context = super(
             StatusView, self).get_context_data(*args, **kwargs)

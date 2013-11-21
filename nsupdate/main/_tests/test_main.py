@@ -17,7 +17,7 @@ def test_views_anon(client):
         ('about', dict(), 200),
         ('legal', dict(), 200),
         ('robots', dict(), 200),
-        ('status', dict(), 200),  # TODO make this require a login
+        ('status', dict(), 302),
         ('overview', dict(), 302),
         # stuff that requires a log in redirects to the login view:
         ('domain_overview', dict(), 302),
