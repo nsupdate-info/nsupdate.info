@@ -41,13 +41,18 @@ IP v4 or v6 or both (dual stack).
 We always show you the IP addresses where your requests come from. Under some circumstances, these might not be what
 you expect (e.g. presence or non-presence of NAT gateways, proxies, etc.).
 
-We detect your IPv4 and v6 addresses in the same way (no matter what you currently use to look at the web interface)
-using 2 invisible fake "images" that your browser loads from a IPv4-only and a IPv6-only server.
+We detect your addresses by 2 means:
+
+* your current remote address (where your accesses to the web interface come from) - the IP detected this way is
+  immediately visible on the web interface.
+* if we don't already have the IP address from the remote address, we use an invisible fake "image" that your browser
+ loads from an IPv4-only or IPv6-only server - the IP detected by this method usually shows up after a few seconds.
 
 We do some optimizations to not load these images too frequently, but also try to make sure we do not show you outdated
 information about your current IP addresses.
 
-If you don't see an IP address of some kind (v4 or v6) after a few seconds, it means you don't have that kind of address.
+If you don't see an IP address of some kind (v4 or v6) after a few seconds, it means you don't have that kind of
+address (plus working connectivity of that kind).
 
 Register / Login / Logout
 -------------------------
