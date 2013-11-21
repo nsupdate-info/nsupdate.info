@@ -236,7 +236,7 @@ class AuthorizedNicUpdateView(View):
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         ipaddr = request.GET.get('myip')
-        if not ipaddr:  # None or emptry string
+        if not ipaddr:  # None or empty string
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
