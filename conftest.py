@@ -45,6 +45,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_key=NAMESERVER_UPDATE_KEY,
         public=NAMESERVER_PUBLIC,
+        created_by=u,
     )
     # this is for querying:
     d = Domain.objects.create(
@@ -53,6 +54,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_key='invalid=',  # we don't send updates there (and the real key is really secret)
         public=NAMESERVER_PUBLIC,
+        created_by=u2,
     )
     # a Host for api / session update tests
     h = Host(subdomain='test', domain=d, created_by=u)

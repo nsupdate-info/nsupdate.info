@@ -69,6 +69,25 @@ def test_nic_update_authorized_myip(client):
     assert response.status_code == 200
     # we don't care whether it is nochg or good, but should be the ip from myip=...:
     assert response.content in ['good 4.3.2.1', 'nochg 4.3.2.1']
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be good (was different IP)
+    assert response.content == 'good 1.2.3.4'
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be nochg (was same IP)
+    assert response.content == 'nochg 1.2.3.4'
+
+
+def test_nic_update_authorized_badagent(client, settings):
+    settings.BAD_AGENTS = ['foo', 'bad_agent', 'bar', ]
+    response = client.get(reverse('nic_update'),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET),
+                          HTTP_USER_AGENT='bad_agent')
+    assert response.status_code == 200
+    assert response.content == 'badagent'
 
 
 def test_nic_update_session_nosession(client):
@@ -76,14 +95,25 @@ def test_nic_update_session_nosession(client):
     assert response.status_code == 302  # redirects to login view
 
 
-def test_nic_update_session(client):
+def test_nic_update_session_no_hostname(client):
     client.login(username=USERNAME, password=PASSWORD)
     response = client.get(reverse('nic_update_authorized'))
     assert response.status_code == 200
     assert response.content == "nohost"  # we did not tell which host
-    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
+
+
+def test_nic_update_session(client):
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s' % (TEST_HOST, ))
     assert response.status_code == 200
     assert response.content.startswith('good ') or response.content.startswith('nochg ')
+
+
+def test_nic_update_session_myip(client):
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
+    assert response.status_code == 200
+    assert response.content.startswith('good 1.2.3.4') or response.content.startswith('nochg 1.2.3.4')
 
 
 def test_nic_update_session_foreign_host(client):

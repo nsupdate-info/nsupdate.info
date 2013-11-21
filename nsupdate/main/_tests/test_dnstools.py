@@ -76,6 +76,20 @@ class TestIntelligentDeleter(object):
         remove_records(host)
         delete(host)  # hmm, this doesn't raise NXDOMAIN!?
 
+    def test_delete_typed(self):
+        host, ip4, ip6 = TEST_HOST, '1.2.3.4', '::42'
+        # make sure the host is there
+        update_ns(host, 'A', ip4, action='add')
+        update_ns(host, 'AAAA', ip6, action='add')
+        delete(host, 'A')
+        # make sure it is gone
+        with pytest.raises(NoAnswer):
+            query_ns(host, 'A')
+        delete(host, 'AAAA')
+        # make sure it is gone
+        with pytest.raises(NXDOMAIN):
+            query_ns(host, 'AAAA')
+
 
 class TestQuery(object):
     def test_queries_ok(self):

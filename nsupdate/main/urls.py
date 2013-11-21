@@ -31,5 +31,5 @@ urlpatterns = patterns(
     url(r'^myip$', myip_view, name='myip'),
     url(r'^nic/update$', NicUpdateView.as_view(), name='nic_update'),
     # for bots
-    url(r'^robots.txt$', RobotsTxtView.as_view()),
+    url(r'^robots.txt$', RobotsTxtView.as_view(), name='robots'),
 )
