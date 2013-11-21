@@ -13,6 +13,9 @@ https://github.com/nsupdate-info/nsupdate.info
 .. image:: https://travis-ci.org/nsupdate-info/nsupdate.info.png
     :target: https://travis-ci.org/nsupdate-info/nsupdate.info
 
+.. image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
+        :target: https://coveralls.io/r/nsupdate-info/nsupdate.info
+
 .. image:: https://badge.fury.io/py/nsupdate.png
     :target: http://badge.fury.io/py/nsupdate
 

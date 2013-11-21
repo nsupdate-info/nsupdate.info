@@ -7,7 +7,9 @@ install:
     - "pip install coveralls"
 env: SECRET_KEY=justfortravis
 script: "coverage run --source nsupdate --omit '*/migrations/*,*/_tests/*' -m py.test --pep8"
-after_success: coveralls
+after_success:
+    - coveralls debug
+    - coveralls
 notifications:
     email:
         recipients:
