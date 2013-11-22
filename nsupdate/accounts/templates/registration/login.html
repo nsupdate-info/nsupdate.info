@@ -15,11 +15,18 @@
                 <input id="id_remember_me" name="remember_me" type="checkbox">
                 <label class="control-label " for="id_remember_me">Keep me logged in</label>
             </div>
-            <p><a href="{% url 'auth_password_reset' %}">Forgot</a> your password?
-               <a href="{% url 'registration_register' %}">Need an account</a>?</p>
-            <button type="submit" class="btn btn-primary">login</button>
+            <button type="submit" class="btn btn-primary btn-lg">login</button>
             <input type="hidden" name="next" value="{{ next }}" />
         </form>
+        <hr>
+        <h2>Forgot your password?</h2>
+        <p>
+            <a class="btn btn-default" href="{% url 'auth_password_reset' %}">Request a password reset</a>
+        </p>
+        <h2>Don't have an account yet?</h2>
+        <p>
+            <a class="btn btn-default" role="button" href="{% url 'registration_register' %}">Register an account</a>
+        </p>
     </div>
     <div class="col-lg-1">
     </div>
