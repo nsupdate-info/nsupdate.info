@@ -17,6 +17,14 @@ html, body {
   padding-bottom: 60px;
 }
 
+/* bootstrap uses a quite big jumbotron top/bottom padding and
+   even increases it for wide(!) screens -- we don't want that.
+ */
+.jumbotron {
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
 .footer {
   height: 60px;
   padding-top: 15px;
@@ -24,4 +32,3 @@ html, body {
   margin-top: 60px;
   background-color: #ddd;
 }
-
