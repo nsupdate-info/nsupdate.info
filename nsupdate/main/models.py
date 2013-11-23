@@ -17,7 +17,7 @@ from . import dnstools
 
 class BlacklistedDomain(models.Model):
     domain = models.CharField(
-        max_length=256,
+        max_length=255,
         unique=True,
         help_text='Blacklisted domain. Evaluated as regex (search).')
 
@@ -54,16 +54,18 @@ UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 class Domain(models.Model):
     domain = models.CharField(
-        max_length=256, unique=True,
+        max_length=255,  # RFC 2181 (and also: max length of unique fields)
+        unique=True,
         help_text="Name of the zone where dynamic hosts may get added")
     nameserver_ip = models.GenericIPAddressField(
-        max_length=256,
+        max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         help_text="IP where the dynamic DNS updates for this zone will be sent to")
     nameserver_update_key = models.CharField(
-        max_length=256,
+        max_length=88,  # 512 bits base64 -> 88 bytes
         help_text="Shared secret that allows updating this zone (base64 encoded)")
     nameserver_update_algorithm = models.CharField(
-        max_length=256, default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES)
+        max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
+        default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES)
     public = models.BooleanField(
         default=False,
         help_text="Check to allow any user to add dynamic hosts to this zone - "
@@ -75,7 +77,8 @@ class Domain(models.Model):
         help_text="Check if nameserver is available/reachable - "
                   "if not checked, we'll pause querying/updating this nameserver for a while")
     comment = models.CharField(
-        max_length=256, default='', blank=True, null=True,
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
         help_text="Some arbitrary comment about your domain. "
                   "If your domain is public, the comment will be also publicly shown.")
 
@@ -99,17 +102,23 @@ class Domain(models.Model):
 
 
 class Host(models.Model):
-    subdomain = models.CharField(max_length=256, validators=[
-        RegexValidator(
-            regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
-            message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
-        ),
-        domain_blacklist_validator],
+    subdomain = models.CharField(
+        max_length=255,  # RFC 2181 (and considering having multiple joined labels here later)
+        validators=[
+            RegexValidator(
+                regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
+                message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
+            ),
+            domain_blacklist_validator,
+        ],
         help_text="The name of your host.")
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
-    update_secret = models.CharField(max_length=256)  # gets hashed on save
+    update_secret = models.CharField(
+        max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
+    )
     comment = models.CharField(
-        max_length=256, default='', blank=True, null=True,
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
         help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
 
     last_update = models.DateTimeField(auto_now=True)
