@@ -196,5 +196,8 @@ def pre_delete_host(sender, **kwargs):
     except (dnstools.Timeout, dnstools.NameServerNotAvailable):
         # well, we tried to clean up, but we didn't reach the nameserver
         pass
+    except (dnstools.DnsUpdateError, ):
+        # e.g. PeerBadSignature if host is protected by a key we do not have
+        pass
 
 pre_delete.connect(pre_delete_host, sender=Host)
