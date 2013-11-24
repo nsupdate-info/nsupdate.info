@@ -1,6 +1,29 @@
 ChangeLog
 =========
 
+Release <TBD>
+-------------
+
+Fixes:
+
+* status view is for logged-in users only (it was removed from navigation,
+  but still accessible by URL in previous releases)
+
+New Features:
+
+* added per-host fault counters for update client and dns server
+* customizable footer (use a custom base_footer.html template)
+* notfqdn result code supported
+
+Other changes:
+
+* use sane field lengths in the DB
+* more help texts, more hints, better docs
+* workflow for adding a domain is now similar to adding a host
+* improved screen layout, cosmetics
+* use travis-ci and coveralls services for the project
+
+
 Release 0.4.0
 -------------
 
