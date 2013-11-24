@@ -120,14 +120,16 @@ def check_api_auth(username, password):
 
     :param username: http basic auth username (== fqdn)
     :param password: update password
-    :return: True if authenticated, False otherwise.
+    :return: host object if authenticated, None otherwise.
     """
     fqdn = username
     try:
         host = Host.filter_by_fqdn(fqdn)
     except ValueError:
-        return False
-    return host is not None and check_password(password, host.update_secret)
+        return None
+    if host is None or not check_password(password, host.update_secret):
+        return None
+    return host
 
 
 def check_session_auth(user, hostname):
@@ -136,16 +138,16 @@ def check_session_auth(user, hostname):
 
     :param user: django user object
     :param hostname: fqdn
-    :return: True if hostname is owned by this user, False otherwise.
+    :return: host object if hostname is owned by this user, None otherwise.
     """
     fqdn = hostname
     try:
         host = Host.filter_by_fqdn(fqdn, created_by=user)
     except ValueError:
-        return False
-    # as we have specifically looked for a host of the logged in user,
-    # we are ok if we found one.
-    return host is not None
+        return None
+    # we have specifically looked for a host of the logged in user,
+    # we either have one now and return it, or we have None and return that.
+    return host
 
 
 class NicUpdateView(View):
@@ -184,7 +186,8 @@ class NicUpdateView(View):
         if '.' not in username:  # username MUST be the fqdn
             # specifically point to configuration errors on client side
             return Response('notfqdn')
-        if not check_api_auth(username, password):
+        host = check_api_auth(username, password)
+        if host is None:
             logger.warning('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         logger.info("authenticated by update secret for host %s" % username)
@@ -209,7 +212,7 @@ class NicUpdateView(View):
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
-        return _update(hostname, ipaddr, agent, ssl, logger=logger)
+        return _update(host, hostname, ipaddr, agent, ssl, logger=logger)
 
 
 class AuthorizedNicUpdateView(View):
@@ -234,7 +237,8 @@ class AuthorizedNicUpdateView(View):
         hostname = request.GET.get('hostname')
         if hostname is None:
             return Response('nohost')
-        if not check_session_auth(request.user, hostname):
+        host = check_session_auth(request.user, hostname)
+        if host is None:
             logger.warning('%s - is not owned by user: %s' % (hostname, request.user.username, ))
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
@@ -243,19 +247,13 @@ class AuthorizedNicUpdateView(View):
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
-        return _update(hostname, ipaddr, agent, ssl, logger=logger)
+        return _update(host, hostname, ipaddr, agent, ssl, logger=logger)
 
 
-def _update(hostname, ipaddr, agent='unknown', ssl=False, logger=None):
+def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
-    try:
-        host = Host.filter_by_fqdn(hostname)
-    except ValueError:
-        return Response('nohost')
-    if host is None:
-        return Response('nohost')
     kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
     host.poke(kind, ssl)
     try:
