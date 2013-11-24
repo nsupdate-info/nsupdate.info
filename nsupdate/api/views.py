@@ -124,17 +124,10 @@ def check_api_auth(username, password):
     """
     fqdn = username
     try:
-        hosts = Host.filter_by_fqdn(fqdn)
-    except NotImplementedError:
+        host = Host.filter_by_fqdn(fqdn)
+    except ValueError:
         return False
-    num_hosts = len(hosts)
-    if num_hosts == 0:
-        return False
-    if num_hosts > 1:
-        logger.error("fqdn %s has multiple entries" % fqdn)
-        return False
-    password_hash = hosts[0].update_secret
-    return check_password(password, password_hash)
+    return host is not None and check_password(password, host.update_secret)
 
 
 def check_session_auth(user, hostname):
@@ -146,14 +139,13 @@ def check_session_auth(user, hostname):
     :return: True if hostname is owned by this user, False otherwise.
     """
     fqdn = hostname
-    hosts = Host.filter_by_fqdn(fqdn, created_by=user)
-    num_hosts = len(hosts)
-    if num_hosts == 0:
+    try:
+        host = Host.filter_by_fqdn(fqdn, created_by=user)
+    except ValueError:
         return False
-    if num_hosts > 1:
-        logger.error("fqdn %s has multiple entries" % fqdn)
-        return False
-    return True
+    # as we have specifically looked for a host of the logged in user,
+    # we are ok if we found one.
+    return host is not None
 
 
 class NicUpdateView(View):
@@ -258,15 +250,14 @@ def _update(hostname, ipaddr, agent='unknown', ssl=False, logger=None):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
-    hosts = Host.filter_by_fqdn(hostname)
-    num_hosts = len(hosts)
-    if num_hosts == 0:
-        return False
-    if num_hosts > 1:
-        logger.error("fqdn %s has multiple entries" % hostname)
-        return False
+    try:
+        host = Host.filter_by_fqdn(hostname)
+    except ValueError:
+        return Response('nohost')
+    if host is None:
+        return Response('nohost')
     kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
-    hosts[0].poke(kind, ssl)
+    host.poke(kind, ssl)
     try:
         update(hostname, ipaddr)
         logger.info('%s - received good update -> ip: %s ssl: %r' % (hostname, ipaddr, ssl))

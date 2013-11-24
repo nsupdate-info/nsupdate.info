@@ -150,9 +150,16 @@ class Host(models.Model):
         # Assuming subdomain has no dots (.) the fqdn is split at the first dot
         splitted = fqdn.split('.', 1)
         if not len(splitted) == 2:
-            raise NotImplemented("FQDN has to contain a dot")
-        return Host.objects.filter(
+            raise ValueError("FQDN has to contain (at least) one dot")
+        hosts = Host.objects.filter(
             subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
+        count = len(hosts)
+        if count == 0:
+            return None
+        if count == 1:
+            return hosts[0]
+        if count > 1:
+            raise ValueError("filter_by_fqdn(%s) found more than 1 host" % fqdn)
 
     def get_ipv4(self):
         try:
