@@ -203,12 +203,12 @@ def parse_name(fqdn, origin=None):
 
 def get_ns_info(fqdn, origin=None):
     """
-    Get the master nameserver for the <origin> zone, the key needed
+    Get the master nameserver for the <origin> zone, the key secret needed
     to update the zone and the key algorithm used.
 
     :param fqdn: the fully qualified hostname we are dealing with (str)
     :param origin: zone we are dealing with, must be with trailing dot (default:autodetect) (str)
-    :return: master nameserver, origin, domain, update keyname, update key, update algo
+    :return: master nameserver, origin, domain, update keyname, update secret, update algo
     :raises: NameServerNotAvailable if ns was flagged unavailable in the db
     """
     fqdn_str = str(fqdn)
@@ -238,7 +238,7 @@ def get_ns_info(fqdn, origin=None):
             # retry timeout is over, set it available again
             set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return d.nameserver_ip, origin, domain, name, keyname, d.nameserver_update_key, algorithm
+    return d.nameserver_ip, origin, domain, name, keyname, d.nameserver_update_secret, algorithm
 
 
 def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):

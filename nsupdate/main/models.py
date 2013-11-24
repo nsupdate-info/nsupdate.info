@@ -60,8 +60,9 @@ class Domain(models.Model):
     nameserver_ip = models.GenericIPAddressField(
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         help_text="IP where the dynamic DNS updates for this zone will be sent to")
-    nameserver_update_key = models.CharField(
+    nameserver_update_secret = models.CharField(
         max_length=88,  # 512 bits base64 -> 88 bytes
+        default='',
         help_text="Shared secret that allows updating this zone (base64 encoded)")
     nameserver_update_algorithm = models.CharField(
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
@@ -94,9 +95,9 @@ class Domain(models.Model):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
         secret = User.objects.make_random_password(length=bitlength / 8)
-        self.nameserver_update_key = key = base64.b64encode(secret)
+        self.nameserver_update_secret = secret_base64 = base64.b64encode(secret)
         self.save()
-        return key
+        return secret_base64
 
     def get_bind9_algorithm(self):
         return UPDATE_ALGORITHMS.get(self.nameserver_update_algorithm).bind_name

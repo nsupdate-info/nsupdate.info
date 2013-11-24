@@ -14,8 +14,8 @@ TEST_HOST2 = 'test2.' + BASEDOMAIN
 TEST_SECRET2 = "somethingelse"
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
-# no problem, you can ONLY update the TEST_HOST with this key, nothing else:
-NAMESERVER_UPDATE_KEY = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
+# no problem, you can ONLY update the TEST_HOST with this secret, nothing else:
+NAMESERVER_UPDATE_SECRET = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
 NAMESERVER_PUBLIC = True
 
 USERNAME = 'test'
@@ -43,7 +43,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         domain=TEST_HOST,  # special: single-host update secret!
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
-        nameserver_update_key=NAMESERVER_UPDATE_KEY,
+        nameserver_update_secret=NAMESERVER_UPDATE_SECRET,
         public=NAMESERVER_PUBLIC,
         created_by=u,
     )
@@ -52,7 +52,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         domain=BASEDOMAIN,
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
-        nameserver_update_key='invalid=',  # we don't send updates there (and the real key is really secret)
+        nameserver_update_secret='invalid=',  # we don't send updates there (and the real key is really secret)
         public=NAMESERVER_PUBLIC,
         created_by=u2,
     )

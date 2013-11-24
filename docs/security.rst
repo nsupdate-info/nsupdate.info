@@ -86,21 +86,21 @@ If you lose the secret, you'll have to generate a new one and change it in your
 update client also.
 
 
-Nameserver Update Key (backend, RFC 2136)
------------------------------------------
+Nameserver Update Secret (backend, RFC 2136)
+--------------------------------------------
 
-We currently store this key (which is basically a base64 encoded shared secret,
+We currently store this secret (which is basically a base64 encoded shared secret,
 one per dynamic zone) "as is" into the database ("Domain" records there).
 
 This is somehow critical, but also hard to do better - encryption would only
-help very little here as we would need to decrypt the update key before using it,
+help very little here as we would need to decrypt the update secret before using it,
 so we would need the unlocked decryption key on the same machine.
 
-Make sure no unauthorized person gets that key or he/she will be able to update
+Make sure no unauthorized person gets that secret or he/she will be able to update
 ANY record in the respective zone / nameserver directly (without going over
 nsupdate.info software / service).
 
-We support creating random update keys, so you don't need an extra tool for this.
+We support creating a random update secret, so you don't need an extra tool for this.
 
 
 CSRF protection
