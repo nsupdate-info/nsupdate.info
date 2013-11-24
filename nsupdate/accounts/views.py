@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.views.generic import UpdateView
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
 
 from .forms import UserProfileForm
@@ -8,7 +8,7 @@ from .forms import UserProfileForm
 
 class UserProfileView(UpdateView):
     template_name = "accounts/user_profile.html"
-    model = User
+    model = get_user_model()
     fields = ['first_name', 'last_name', 'email']
     form_class = UserProfileForm
 

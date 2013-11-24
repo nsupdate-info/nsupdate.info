@@ -4,7 +4,7 @@ import base64
 import dns.resolver
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
@@ -23,7 +23,7 @@ class BlacklistedDomain(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, blank=True, null=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blacklisted_domains')
 
     def __unicode__(self):
         return u"%s" % (self.domain, )
@@ -86,7 +86,7 @@ class Domain(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, blank=True, null=True, related_name='domains')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains')
 
     def __unicode__(self):
         return u"%s" % (self.domain, )
@@ -94,7 +94,8 @@ class Domain(models.Model):
     def generate_ns_secret(self):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
-        secret = User.objects.make_random_password(length=bitlength / 8)
+        user_model = get_user_model()
+        secret = user_model.objects.make_random_password(length=bitlength / 8)
         self.nameserver_update_secret = secret_base64 = base64.b64encode(secret)
         self.save()
         return secret_base64
@@ -132,7 +133,7 @@ class Host(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, blank=True, null=True, related_name='hosts')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts')
 
     def __unicode__(self):
         return u"%s.%s" % (
@@ -182,7 +183,8 @@ class Host(models.Model):
         # many update clients might use http without ssl, so it is not too
         # secure anyway.
         if secret is None:
-            secret = User.objects.make_random_password()
+            user_model = get_user_model()
+            secret = user_model.objects.make_random_password()
         self.update_secret = make_password(
             secret,
             hasher='sha1'

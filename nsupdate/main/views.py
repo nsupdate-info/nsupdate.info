@@ -7,7 +7,7 @@ from django.views.generic import View, TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
@@ -121,16 +121,17 @@ class StatusView(TemplateView):
         context['hosts_ipv6_2y'] = Host.objects.filter(last_update_ipv6__gt=before_2y).count()
         context['hosts_ipv4_ssl_2y'] = Host.objects.filter(last_update_ipv4__gt=before_2y, ssl_update_ipv4=True).count()
         context['hosts_ipv6_ssl_2y'] = Host.objects.filter(last_update_ipv6__gt=before_2y, ssl_update_ipv6=True).count()
-        context['users_total'] = User.objects.count()
-        context['users_active'] = User.objects.filter(is_active=True).count()
-        context['users_created_2d'] = User.objects.filter(date_joined__gt=before_2d).count()
-        context['users_loggedin_2d'] = User.objects.filter(last_login__gt=before_2d).count()
-        context['users_created_2w'] = User.objects.filter(date_joined__gt=before_2w).count()
-        context['users_loggedin_2w'] = User.objects.filter(last_login__gt=before_2w).count()
-        context['users_created_2m'] = User.objects.filter(date_joined__gt=before_2m).count()
-        context['users_loggedin_2m'] = User.objects.filter(last_login__gt=before_2m).count()
-        context['users_created_2y'] = User.objects.filter(date_joined__gt=before_2y).count()
-        context['users_loggedin_2y'] = User.objects.filter(last_login__gt=before_2y).count()
+        user_model = get_user_model()
+        context['users_total'] = user_model.objects.count()
+        context['users_active'] = user_model.objects.filter(is_active=True).count()
+        context['users_created_2d'] = user_model.objects.filter(date_joined__gt=before_2d).count()
+        context['users_loggedin_2d'] = user_model.objects.filter(last_login__gt=before_2d).count()
+        context['users_created_2w'] = user_model.objects.filter(date_joined__gt=before_2w).count()
+        context['users_loggedin_2w'] = user_model.objects.filter(last_login__gt=before_2w).count()
+        context['users_created_2m'] = user_model.objects.filter(date_joined__gt=before_2m).count()
+        context['users_loggedin_2m'] = user_model.objects.filter(last_login__gt=before_2m).count()
+        context['users_created_2y'] = user_model.objects.filter(date_joined__gt=before_2y).count()
+        context['users_loggedin_2y'] = user_model.objects.filter(last_login__gt=before_2y).count()
         return context
 
 

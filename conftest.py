@@ -31,12 +31,13 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     """
     Init the database contents for testing, so we have a service domain, ...
     """
-    from django.contrib.auth.models import User
+    from django.contrib.auth import get_user_model
     from nsupdate.main.models import Host, Domain
+    user_model = get_user_model()
     # create a fresh test user
-    u = User.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
+    u = user_model.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
     u.save()
-    u2 = User.objects.create_user(USERNAME2, 'test@example.org', PASSWORD)
+    u2 = user_model.objects.create_user(USERNAME2, 'test@example.org', PASSWORD)
     u2.save()
     # this is for updating:
     Domain.objects.create(
