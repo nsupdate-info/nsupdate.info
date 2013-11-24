@@ -86,7 +86,7 @@ class Domain(models.Model):
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(User, blank=True, null=True)
+    created_by = models.ForeignKey(User, blank=True, null=True, related_name='domains')
 
     def __unicode__(self):
         return u"%s" % (self.domain, )
@@ -123,16 +123,16 @@ class Host(models.Model):
         default='', blank=True, null=True,
         help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
 
-    last_update = models.DateTimeField(auto_now=True)
     # when we received the last update for v4/v6 addr
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(blank=True, null=True)
     # how we received the last update for v4/v6 addr
     ssl_update_ipv4 = models.BooleanField()
     ssl_update_ipv6 = models.BooleanField()
+
+    last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name='hosts')
+    created_by = models.ForeignKey(User, blank=True, null=True, related_name='hosts')
 
     def __unicode__(self):
         return u"%s.%s" % (
