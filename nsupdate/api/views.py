@@ -203,10 +203,12 @@ class NicUpdateView(View):
                 result = 'nohost'  # or 'badauth'?
             logger.warning("rejecting to update wrong host %s (given in query string) "
                            "[instead of %s (given in basic auth)]" % (hostname, username))
+            host.register_client_fault()
             return Response(result)
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         if agent in settings.BAD_AGENTS:
             logger.warning('%s - received update from bad user agent' % (hostname, ))
+            host.register_client_fault()
             return Response('badagent')
         ipaddr = request.GET.get('myip')
         if ipaddr is None:
@@ -262,9 +264,11 @@ def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
         return Response('good %s' % ipaddr)
     except SameIpError:
         logger.warning('%s - received no-change update, ip: %s ssl: %r' % (hostname, ipaddr, ssl))
+        host.register_client_fault()
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
         logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
                      hostname, msg, ipaddr, ssl))
+        host.register_server_fault()
         return Response('dnserr %s' % msg)

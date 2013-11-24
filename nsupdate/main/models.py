@@ -124,6 +124,13 @@ class Host(models.Model):
         default='', blank=True, null=True,
         help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
 
+    # count client misbehaviours, like sending nochg updates or other
+    # errors that should make the client stop trying to update:
+    client_faults = models.PositiveIntegerField(default=0)
+
+    # count server faults that happened when updating this host
+    server_faults = models.PositiveIntegerField(default=0)
+
     # when we received the last update for v4/v6 addr
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(blank=True, null=True)
@@ -182,6 +189,14 @@ class Host(models.Model):
         else:
             self.last_update_ipv6 = now()
             self.ssl_update_ipv6 = ssl
+        self.save()
+
+    def register_client_fault(self, increment=1):
+        self.client_faults += increment
+        self.save()
+
+    def register_server_fault(self, increment=1):
+        self.server_faults += increment
         self.save()
 
     def generate_secret(self, secret=None):
