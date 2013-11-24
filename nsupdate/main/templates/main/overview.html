@@ -42,6 +42,22 @@
         </div>
         <div class="col-lg-8">
             <div class="well well-sm">
+                <h3>Help</h3>
+                <p>Here you can add new hosts (like routers, PCs, servers, ...).
+                </p>
+                <p>You need to be able to configure one of your machines so it sends dyndns2 compatible
+                   updates to us when your IP changes. Routers usually have some builtin software that does
+                   this, but you can also use some software on another system (like a PC or server).
+                </p>
+                <p>
+                   Just make sure your update client either is customizable well enough or has specific
+                   support for our service.
+                </p>
+                <p>
+                   We'll show you configuration examples after you add a host.
+                </p>
+            </div>
+            <div class="well well-sm">
                 <h3>Your current IP(s):</h3>
                 <p><b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span></p>
                 <p><b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span></p>
