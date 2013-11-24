@@ -57,10 +57,11 @@
             <div class="well well-sm">
                 <h3>Help</h3>
                 <p>Here you can add new domains (zones) which you control (and this is only useful if you
-                   have some own zone which you can update automatically).</p>
-                <p>You need to configure the primary master nameserver of the zone so it accepts dynamic updates
-                   if the correct update key is presented (which is just a shared secret between the nameserver
-                   and this service).
+                   have some own zone which you can update automatically).
+                </p>
+                <p>You need to be able to configure the primary master nameserver of the zone so it accepts
+                   dynamic updates (via RFC 2136 "dynamic update" protocol) if the correct update secret is presented.
+                   We'll show you configuration examples after you add a domain.
                 </p>
             </div>
         </div>

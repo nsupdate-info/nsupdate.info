@@ -22,7 +22,8 @@ class EditHostForm(forms.ModelForm):
 class CreateDomainForm(forms.ModelForm):
     class Meta(object):
         model = Domain
-        exclude = ['created_by']
+        fields = ['domain', 'nameserver_ip', 'nameserver_update_algorithm',
+                  'public', 'available', 'comment']
         widgets = {
             'domain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }

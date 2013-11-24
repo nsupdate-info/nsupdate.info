@@ -7,6 +7,10 @@
         <div class="col-lg-8">
             <h3>Edit Domain</h3>
             <p>You can't change the domain name. If you want to have another domain name, you have to delete this domain and create a new one.</p>
+            <p>
+                Please note that update algorithm and update secret need to match.
+                Just create a new secret after submitting this form with a changed update algorithm.
+            </p>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}

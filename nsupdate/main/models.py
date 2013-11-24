@@ -65,7 +65,8 @@ class Domain(models.Model):
         help_text="Shared secret that allows updating this zone (base64 encoded)")
     nameserver_update_algorithm = models.CharField(
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
-        default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES)
+        default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES,
+        help_text="HMAC_SHA512 is fine for bind9 (you can change this later, if needed)")
     public = models.BooleanField(
         default=False,
         help_text="Check to allow any user to add dynamic hosts to this zone - "

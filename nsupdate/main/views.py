@@ -241,7 +241,7 @@ class DomainOverwievView(CreateView):
         return super(DomainOverwievView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
-        return reverse('domain_overview')
+        return reverse('generate_ns_secret_view', args=(self.object.pk,))
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
