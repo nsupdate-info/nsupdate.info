@@ -46,7 +46,7 @@ We detect your addresses by 2 means:
 * your current remote address (where your accesses to the web interface come from) - the IP detected this way is
   immediately visible on the web interface.
 * if we don't already have the IP address from the remote address, we use an invisible fake "image" that your browser
- loads from an IPv4-only or IPv6-only server - the IP detected by this method usually shows up after a few seconds.
+  loads from an IPv4-only or IPv6-only server - the IP detected by this method usually shows up after a few seconds.
 
 We do some optimizations to not load these images too frequently, but also try to make sure we do not show you outdated
 information about your current IP addresses.
@@ -81,6 +81,16 @@ In case you lose the update secret, just create a new one (and enter it in your 
 IP v4 and v6 addresses work completely independently of each other, you need to send 2 updates if you want to update
 both. If you want to be specific about which IP address you update, use our IPv4-only or IPv6-only host to make sure
 it is the v4 (or v6) address.
+
+After configuring a new update client, please keep an eye one the Faults column on the overview page.
+It shows 2 values: C: <client faults> S: <server faults>
+
+An increasing number of client faults usually means you (or the software you use) are doing something wrong
+(e.g. sending updates although your IP address did not change). If you see that, please fix it!
+
+An increasing number of server faults means there is either something wrong with the nameserver or the
+connection to it or it is rejecting the updates for your hostname.
+
 
 Domains
 -------
