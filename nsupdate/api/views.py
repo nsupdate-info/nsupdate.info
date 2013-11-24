@@ -173,8 +173,11 @@ class NicUpdateView(View):
         https://fqdn:secret@nsupdate.info/nic/update
 
         If the request does not come from the correct IP, you can give it as
-        a query parameter, you can also give the hostname (then it won't use
-        the username from http basic auth as the fqdn:
+        a query parameter.
+        You can also give the hostname/fqdn as a query parameter (this is
+        supported for api compatibility only), but then it MUST match the fqdn
+        used for http basic auth's username part, because the secret only
+        allows you to update this single fqdn).
         https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
         :param request: django request object
