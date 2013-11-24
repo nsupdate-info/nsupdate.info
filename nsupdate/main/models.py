@@ -32,7 +32,7 @@ class BlacklistedDomain(models.Model):
 def domain_blacklist_validator(value):
     for bd in BlacklistedDomain.objects.all():
         if re.search(bd.domain, value):
-            raise ValidationError(u'This domain is not allowed')
+            raise ValidationError(u'This name is blacklisted')
 
 
 from collections import namedtuple
