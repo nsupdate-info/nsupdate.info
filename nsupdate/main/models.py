@@ -135,8 +135,8 @@ class Host(models.Model):
         settings.AUTH_USER_MODEL, related_name='hosts')
 
     def __unicode__(self):
-        return u"%s.%s - %s" % (
-            self.subdomain, self.domain.domain, self.comment)
+        return u"%s.%s" % (
+            self.subdomain, self.domain.domain)
 
     class Meta(object):
         unique_together = (('subdomain', 'domain'),)
