@@ -189,6 +189,9 @@ class NicUpdateView(View):
             logger.warning('%s - received no auth' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = basic_authenticate(auth)
+        if '.' not in username:  # username MUST be the fqdn
+            # specifically point to configuration errors on client side
+            return Response('notfqdn')
         if not check_api_auth(username, password):
             logger.warning('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
@@ -197,10 +200,15 @@ class NicUpdateView(View):
             # as we use update_username == hostname, we can fall back to that:
             hostname = username
         elif hostname != username:
-            # maybe this host is owned by same person, but we can't know.
+            if '.' not in hostname:
+                # specifically point to configuration errors on client side
+                result = 'notfqdn'
+            else:
+                # maybe this host is owned by same person, but we can't know.
+                result = 'nohost'  # or 'badauth'?
             logger.warning("rejecting to update wrong host %s (given in query string) "
                            "[instead of %s (given in basic auth)]" % (hostname, username))
-            return Response('nohost')  # or 'badauth'?
+            return Response(result)
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         if agent in settings.BAD_AGENTS:
             logger.warning('%s - received update from bad user agent' % (hostname, ))

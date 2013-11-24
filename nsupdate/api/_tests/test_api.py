@@ -55,6 +55,20 @@ def test_nic_update_authorized_foreign_host(client):
     assert response.content == 'nohost'
 
 
+def test_nic_update_authorized_not_fqdn_hostname(client):
+    response = client.get(reverse('nic_update') + '?hostname=test',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == 'notfqdn'
+
+
+def test_nic_update_authorized_not_fqdn_username(client):
+    response = client.get(reverse('nic_update'),
+                          HTTP_AUTHORIZATION=make_basic_auth_header('test', TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == 'notfqdn'
+
+
 def test_nic_update_authorized(client):
     response = client.get(reverse('nic_update'),
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
