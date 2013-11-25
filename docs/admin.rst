@@ -21,6 +21,9 @@ Then install the software with requirements to your virtual env::
 
     pip install -e .
 
+Set SECRET_KEY and create settings_local.py file::
+
+    echo "SECRET_KEY='S3CR3T'" > nsupdate/settings_local.py
 
 To create and initialize the database, use::
 
