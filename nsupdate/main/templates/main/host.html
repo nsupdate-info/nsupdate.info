@@ -17,7 +17,10 @@
             <h3>Show Configurations</h3>
             <p>
                 We'll generate a ready-to-use configuration for your router / update
-                client, filled out with all values (including a <em>new</em> secret).
+                client, filled out with all values.
+            </p>
+            <p class="text-danger">
+                We'll create a new secret - if you had one before, it will become invalid.
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Show Configuration</button>
@@ -26,6 +29,9 @@
             <p>
                 We store your update secret salted and hashed, so if you forget or lose it
                 you will have to create a new one.
+            </p>
+            <p class="text-danger">
+                We'll create a new secret - if you had one before, it will become invalid.
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Generate New</button>
