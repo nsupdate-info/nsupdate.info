@@ -14,8 +14,19 @@
             </form>
         </div>
         <div  class="col-lg-4">
+            <h3>Show Configurations</h3>
+            <p>
+                We'll generate a ready-to-use configuration for your router / update
+                client, filled out with all values (including a <em>new</em> secret).
+            </p>
+            <form action="{% url 'generate_secret_view' host.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">Show Configuration</button>
+            </form>
             <h3>Generate New Secret</h3>
-            <p>We store your update secret salted and hashed, so if you forget or lose it you will have to create a new one.</p>
+            <p>
+                We store your update secret salted and hashed, so if you forget or lose it
+                you will have to create a new one.
+            </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Generate New</button>
             </form>
