@@ -49,6 +49,7 @@ setup(
         'django-registration',
         'django-extensions',
         'python-social-auth',
+        'requests',  # for our ddns_client
         # packages only needed for development:
         'django-debug-toolbar',
         'pytest',
