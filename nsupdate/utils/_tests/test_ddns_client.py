@@ -4,9 +4,7 @@ Tests for ddns_client module.
 
 import pytest
 
-from requests import Timeout, ConnectionError
-
-from ..ddns_client import dyndns2_update
+from ..ddns_client import dyndns2_update, Timeout, ConnectionError
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'

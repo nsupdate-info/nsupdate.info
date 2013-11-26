@@ -6,6 +6,8 @@ import pytest
 
 from django.core.urlresolvers import reverse
 
+from nsupdate.main.dnstools import query_ns
+
 
 TEST_HOST = "test.nsupdate.info"
 TEST_HOST2 = "test2.nsupdate.info"
@@ -13,6 +15,9 @@ TEST_SECRET = "secret"
 
 USERNAME = 'test'
 PASSWORD = 'pass'
+
+BASEDOMAIN = "nsupdate.info"
+HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
 
 
 def test_myip(client):
@@ -93,6 +98,28 @@ def test_nic_update_authorized_myip(client):
     assert response.status_code == 200
     # must be nochg (was same IP)
     assert response.content == 'nochg 1.2.3.4'
+
+
+def test_nic_update_authorized_update_other_services(client):
+    response = client.get(reverse('nic_update') + '?myip=4.3.2.1',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # we don't care whether it is nochg or good, but should be the ip from myip=...:
+    assert response.content in ['good 4.3.2.1', 'nochg 4.3.2.1']
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be good (was different IP)
+    assert response.content == 'good 1.2.3.4'
+    # now check if it updated the other service also:
+    assert query_ns(HOSTNAME, 'A') == '1.2.3.4'
+    response = client.get(reverse('nic_update') + '?myip=2.3.4.5',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be good (was different IP)
+    assert response.content == 'good 2.3.4.5'
+    # now check if it updated the other service also:
+    assert query_ns(HOSTNAME, 'A') == '2.3.4.5'
 
 
 def test_nic_update_authorized_badagent(client, settings):

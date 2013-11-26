@@ -22,6 +22,11 @@ USERNAME = 'test'
 USERNAME2 = 'test2'
 PASSWORD = 'pass'
 
+HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
+_PASSWORD = 'yUTvxjRwNu'  # no problem, is only used for this unit test
+SERVER = 'ipv4.' + BASEDOMAIN
+SECURE = False  # SSL/SNI support on python 2.x sucks :(
+
 from django.utils.translation import activate
 
 
@@ -32,7 +37,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     Init the database contents for testing, so we have a service domain, ...
     """
     from django.contrib.auth import get_user_model
-    from nsupdate.main.models import Host, Domain
+    from nsupdate.main.models import Host, Domain, ServiceUpdater, ServiceUpdaterHostConfig
     user_model = get_user_model()
     # create a fresh test user
     u = user_model.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
@@ -60,8 +65,24 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     # a Host for api / session update tests
     h = Host(subdomain='test', domain=d, created_by=u)
     h.generate_secret(secret=TEST_SECRET)
-    h = Host(subdomain='test2', domain=d, created_by=u2)
-    h.generate_secret(secret=TEST_SECRET2)
+    h2 = Host(subdomain='test2', domain=d, created_by=u2)
+    h2.generate_secret(secret=TEST_SECRET2)
+
+    # "update other service" ddns_client feature
+    s = ServiceUpdater.objects.create(
+        name='nsupdate',
+        server=SERVER,
+        secure=SECURE,
+        created_by=u,
+    )
+    ServiceUpdaterHostConfig.objects.create(
+        hostname=None,  # not needed for nsupdate.info, see below
+        name=HOSTNAME,
+        password=_PASSWORD,
+        service=s,
+        host=h,
+        created_by=u,
+    )
 
 
 def pytest_runtest_setup(item):

@@ -227,3 +227,62 @@ def pre_delete_host(sender, **kwargs):
         pass
 
 pre_delete.connect(pre_delete_host, sender=Host)
+
+
+class ServiceUpdater(models.Model):
+    name = models.CharField(
+        max_length=32,
+        help_text="Service name")
+    comment = models.CharField(
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
+        help_text="Some arbitrary comment about the service")
+    server = models.CharField(
+        max_length=255,  # should be enough
+        help_text="Update Server [name or IP] of this service")
+    path = models.CharField(
+        max_length=255,  # should be enough
+        default='/nic/update',
+        help_text="Update Server URL path of this service")
+    secure = models.BooleanField(
+        default=True,
+        help_text="Use https / SSL to contact the Update Server?")
+
+    last_update = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdater')
+
+    def __unicode__(self):
+        return u"%s service updater" % (
+            self.name)
+
+
+class ServiceUpdaterHostConfig(models.Model):
+    service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE)
+
+    hostname = models.CharField(
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
+        help_text="The hostname for that service (used in query string)")
+    comment = models.CharField(
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
+        help_text="Some arbitrary comment about your host on that service")
+    # credentials for http basic auth for THAT service (not for us),
+    # we need to store the password in plain text, we can't hash it
+    name = models.CharField(
+        max_length=255,  # should be enough
+        help_text="The name/id for that service (used for http basic auth)")
+    password = models.CharField(
+        max_length=255,  # should be enough
+        help_text="The password/secret for that service (used for http basic auth)")
+
+    host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='serviceupdaterhostconfigs')
+
+    last_update = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdaterhostconfigs')
+
+    def __unicode__(self):
+        return u"%s service updater data for %s" % (
+            self.service.name, unicode(self.host))

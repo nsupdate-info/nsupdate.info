@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.backends.db import SessionStore
 from django.utils.decorators import method_decorator
 
-from ..utils import log
+from ..utils import log, ddns_client
 from ..main.models import Host
 from ..main.dnstools import update, SameIpError, DnsUpdateError, NameServerNotAvailable, check_ip, put_ip_into_session
 
@@ -261,6 +261,19 @@ def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
     try:
         update(hostname, ipaddr)
         logger.info('%s - received good update -> ip: %s ssl: %r' % (hostname, ipaddr, ssl))
+        # now check if there are other services we shall relay updates to:
+        for uc in host.serviceupdaterhostconfigs.all():
+            kwargs = dict(
+                name=uc.name, password=uc.password,
+                hostname=uc.hostname, myip=ipaddr,
+                server=uc.service.server, path=uc.service.path, secure=uc.service.secure,
+            )
+            try:
+                ddns_client.dyndns2_update(**kwargs)
+            except Exception:
+                # we never want to crash here
+                kwargs.pop('password')
+                logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
         return Response('good %s' % ipaddr)
     except SameIpError:
         logger.warning('%s - received no-change update, ip: %s ssl: %r' % (hostname, ipaddr, ssl))

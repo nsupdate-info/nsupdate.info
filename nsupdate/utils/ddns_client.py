@@ -6,17 +6,19 @@ import logging
 logger = logging.getLogger(__name__)
 
 import requests
+from requests import Timeout, ConnectionError  # keep, is imported from here
+
 
 TIMEOUT = 30.0  # timeout for http request response [s]
 
 
-def dyndns2_update(userid, password,
+def dyndns2_update(name, password,
                    server, hostname=None, myip=None,
                    path='/nic/update', secure=True, timeout=TIMEOUT):
     """
     send a dyndns2-compatible update request
 
-    :param userid: for http basic auth
+    :param name: for http basic auth
     :param password: for http basic auth
     :param server: server to send the update to
     :param hostname: hostname we want to update
@@ -34,7 +36,8 @@ def dyndns2_update(userid, password,
     if myip is not None:
         params['myip'] = myip
     url = "%s://%s%s" % ('https' if secure else 'http', server, path)
-    r = requests.get(url, params=params, auth=(userid, password), timeout=timeout)
+    logger.debug("update request: %s %r" % (url, params, ))
+    r = requests.get(url, params=params, auth=(name, password), timeout=timeout)
     r.close()
     logger.debug("update response: %d %s" % (r.status_code, r.text, ))
-    return r.status_code, r.text
+    return r.status_code, r.text.strip()
