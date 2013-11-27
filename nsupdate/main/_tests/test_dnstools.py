@@ -8,7 +8,7 @@ pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN, NoAnswer
 
-from ..dnstools import add, delete, update, query_ns, parse_name, update_ns, SameIpError, DnsUpdateError
+from ..dnstools import add, delete, update, query_ns, rev_lookup, parse_name, update_ns, SameIpError, DnsUpdateError
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'
@@ -105,6 +105,16 @@ class TestQuery(object):
             query_ns(TEST_HOST, 'AAAA')
         add(host, ipv6)
         assert query_ns(TEST_HOST, 'AAAA') == ipv6
+
+
+class TestReverseLookup(object):
+    def test_rev_lookup_v4(self):
+        name, ip = 'google-public-dns-a.google.com', '8.8.8.8'
+        assert rev_lookup(ip) == name
+
+    def test_rev_lookup_v6(self):
+        name, ip = 'google-public-dns-a.google.com', '2001:4860:4860::8888'
+        assert rev_lookup(ip) == name
 
 
 class TestUpdate(object):

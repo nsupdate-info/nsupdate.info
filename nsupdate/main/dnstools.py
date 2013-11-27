@@ -20,6 +20,8 @@ from datetime import timedelta
 import logging
 logger = logging.getLogger(__name__)
 
+import socket
+
 import dns.inet
 import dns.name
 import dns.resolver
@@ -179,6 +181,16 @@ def query_ns(qname, rdtype, origin=None):
                        name, origin, rdtype))
         set_ns_availability(origin, False)
         raise
+
+
+def rev_lookup(ipaddr):
+    """
+    do a normal reverse DNS lookup, IP to name
+
+    :param ipaddr: ip address (str)
+    :return: hostname
+    """
+    return socket.gethostbyaddr(ipaddr)[0]
 
 
 def parse_name(fqdn, origin=None):
