@@ -60,12 +60,16 @@
                 </p>
             </div>
             <div class="well well-sm">
-                <h3>Your current IP(s):</h3>
-                <p><b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span>
-                                <span id="ipv4_rdns" class="ipv4addr">{{ request.session.ipv4_rdns }}</span>
+                <h3>Your current IP(s) + reverse DNS:</h3>
+                <p>
+                   <b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span>
+                   <br>
+                   <b>rDNS:</b> <span id="ipv4_rdns" class="ipv4addr">{{ request.session.ipv4_rdns }}</span>
                 </p>
-                <p><b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span>
-                                <span id="ipv6_rdns" class="ipv6addr">{{ request.session.ipv6_rdns }}</span>
+                <p>
+                   <b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span>
+                   <br>
+                   <b>rDNS:</b> <span id="ipv6_rdns" class="ipv6addr">{{ request.session.ipv6_rdns }}</span>
                 </p>
             </div>
         </div>
