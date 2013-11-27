@@ -187,10 +187,18 @@ def rev_lookup(ipaddr):
     """
     do a normal reverse DNS lookup, IP to name
 
+    note: this call may be slow, especially if there is no reverse dns entry
+
     :param ipaddr: ip address (str)
-    :return: hostname
+    :return: hostname (or empty string if lookup failed)
     """
-    return socket.gethostbyaddr(ipaddr)[0]
+    name = ''
+    if ipaddr:
+        try:
+            name = socket.gethostbyaddr(ipaddr)[0]
+        except socket.error:
+            pass
+    return name
 
 
 def parse_name(fqdn, origin=None):
@@ -337,8 +345,9 @@ def put_ip_into_session(session, ipaddr, kind=None, max_age=0,
     # we try to avoid modifying the session if not necessary...
     if session.get(kind) != ipaddr:
         # we have a new ip, remember it, with timestamp
-        session[kind] = ipaddr
         session[kind + '_timestamp'] = int(time.time())
+        session[kind] = ipaddr
+        session[kind + '_rdns'] = rev_lookup(ipaddr)  # may be slow
     else:
         old_timestamp = session.get(kind + '_timestamp')
         if not max_age or old_timestamp is None or old_timestamp + max_age < int(time.time()):

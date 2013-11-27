@@ -155,7 +155,9 @@
                         $.getJSON("{%  url 'ajax_get_ips' %}")
                         .done(function(data) {
                             $('#ipv4').text(data['ipv4']);
+                            $('#ipv4_rdns').text(data['ipv4_rdns']);
                             $('#ipv6').text(data['ipv6']);
+                            $('#ipv6_rdns').text(data['ipv6_rdns']);
                         });
                     }
                     setTimeout(insert_ips, 1500);

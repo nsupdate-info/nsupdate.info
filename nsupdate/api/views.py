@@ -79,7 +79,9 @@ class AjaxGetIps(View):
         """
         response = dict(
             ipv4=request.session.get('ipv4', ''),
+            ipv4_rdns=request.session.get('ipv4_rdns', ''),
             ipv6=request.session.get('ipv6', ''),
+            ipv6_rdns=request.session.get('ipv6_rdns', ''),
         )
         logger.debug("ajax_get_ips response: %r" % (response, ))
         return HttpResponse(json.dumps(response), content_type='application/json')
