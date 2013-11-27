@@ -232,14 +232,14 @@ class DeleteHostView(DeleteView):
         return context
 
 
-class DomainOverwievView(CreateView):
+class DomainOverviewView(CreateView):
     model = Domain
     template_name = "main/domain_overview.html"
     form_class = CreateDomainForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(DomainOverwievView, self).dispatch(*args, **kwargs)
+        return super(DomainOverviewView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
         return reverse('generate_ns_secret_view', args=(self.object.pk,))
@@ -253,7 +253,7 @@ class DomainOverwievView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(
-            DomainOverwievView, self).get_context_data(*args, **kwargs)
+            DomainOverviewView, self).get_context_data(*args, **kwargs)
         context['nav_domain_overview'] = True
         context['your_domains'] = Domain.objects.filter(
             created_by=self.request.user)
