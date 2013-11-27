@@ -38,6 +38,9 @@ Your current IP(s)
 At some places, we show your current IP address(es). Depending on the type of your internet connection, this can be
 IP v4 or v6 or both (dual stack).
 
+At some places, we additionally show the result of a reverse DNS lookup ("rDNS") for your IP address(es).
+If nothing shows up for an IP, the IP does not have a reverse DNS record.
+
 We always show you the IP addresses where your requests come from. Under some circumstances, these might not be what
 you expect (e.g. presence or non-presence of NAT gateways, proxies, etc.).
 
