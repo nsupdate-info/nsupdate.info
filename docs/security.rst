@@ -128,10 +128,10 @@ If you have set WE_HAVE_SSL to True (because you run the software on a https
 site), you should also set *_COOKIE_SECURE to True to avoid the cookies getting
 transmitted via http.
 
-For local account logins, we use a session cookie by default (gets cleared when
-you close the browser). If you check the "Keep me logged in checkbox" on the
-login screen, then we'll set a permanent cookie with a lifetime as configured
-by the site admin (SESSION_COOKIE_AGE, default: 14 days).
+We use a session cookie by default (gets cleared when you close the browser).
+If you check the "Keep me logged in" checkbox on the login screen, then we'll
+set a permanent cookie with a lifetime as configured by the site admin
+(SESSION_COOKIE_AGE, default: 14 days).
 
 Be careful with domain cookies
 ------------------------------

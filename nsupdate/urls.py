@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
@@ -16,8 +17,8 @@ def remember_me_login(request, *args, **kw):
     when the browser is closed.
     """
     if request.method == 'POST':
-        if not request.POST.get('remember_me'):
-            request.session.set_expiry(0)
+        if request.POST.get('remember_me'):
+            request.session.set_expiry(settings.SESSION_COOKIE_AGE)
     return auth_views.login(request, *args, **kw)
 
 
