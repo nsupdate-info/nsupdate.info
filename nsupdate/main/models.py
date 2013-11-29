@@ -248,6 +248,10 @@ class ServiceUpdater(models.Model):
         default=True,
         help_text="Use https / SSL to contact the Update Server?")
 
+    # what kind(s) of IPs is (are) acceptable to this service:
+    accept_ipv4 = models.BooleanField(default=False)
+    accept_ipv6 = models.BooleanField(default=False)
+
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdater')
@@ -276,6 +280,10 @@ class ServiceUpdaterHostConfig(models.Model):
     password = models.CharField(
         max_length=255,  # should be enough
         help_text="The password/secret for that service (used for http basic auth)")
+
+    # what kind(s) of IPs should be given to this service:
+    give_ipv4 = models.BooleanField(default=False)
+    give_ipv6 = models.BooleanField(default=False)
 
     host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='serviceupdaterhostconfigs')
 

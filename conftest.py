@@ -73,6 +73,8 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         name='nsupdate',
         server=SERVER,
         secure=SECURE,
+        accept_ipv4=True,
+        accept_ipv6=False,
         created_by=u,
     )
     ServiceUpdaterHostConfig.objects.create(
@@ -81,6 +83,8 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         password=_PASSWORD,
         service=s,
         host=h,
+        give_ipv4=True,
+        give_ipv6=False,
         created_by=u,
     )
 
