@@ -279,7 +279,7 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 #    Used to redirect the user once the auth process ended successfully.
 #    The value of ?next=/foo is used if it was present
 
-#SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/accounts/login/'
 #    URL where the user will be redirected in case of an error
 
 SOCIAL_AUTH_LOGIN_URL = '/accounts/login/'
