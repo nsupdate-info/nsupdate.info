@@ -106,3 +106,17 @@ secret.
 You can either privately use such an own domain or alternatively even offer them publically for all users of the service.
 
 If you have cool domains, please offer publically!
+
+
+Other Services Updaters
+-----------------------
+
+Users can associate "other services" (3rd party services) updaters with their
+hosts and if we receive an update for such a host, we'll automatically send
+(dyndns2) updates to these other services.
+
+You can choose which kind of IP addresses shall be sent to the other service
+using the "give IPv4" and/or "give IPv6" options.
+
+Currently, Users can only use services that were made available by an admin
+(by adding the service record using Django's admin interface).

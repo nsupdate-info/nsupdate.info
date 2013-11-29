@@ -103,6 +103,16 @@ nsupdate.info software / service).
 We support creating a random update secret, so you don't need an extra tool for this.
 
 
+Other Services Update Secret (dyndns2 client)
+---------------------------------------------
+
+We need to store this secret "as is" into the database for the same reasons as
+outlined above.
+
+But: we tell you in the services overview whether we'll use SSL to transmit the
+update, so at least if SSL is enabled, it won't go unencrypted over the wire.
+
+
 CSRF protection
 ===============
 
