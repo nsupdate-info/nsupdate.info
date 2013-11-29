@@ -16,8 +16,9 @@ from django.utils.timezone import now
 
 import dnstools
 
-from .forms import CreateHostForm, EditHostForm, CreateDomainForm, EditDomainForm
-from .models import Host, Domain
+from .forms import (CreateHostForm, EditHostForm, CreateDomainForm, EditDomainForm,
+                    CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)
+from .models import Host, Domain, ServiceUpdaterHostConfig
 
 
 class GenerateSecretView(UpdateView):
@@ -314,6 +315,88 @@ class DeleteDomainView(DeleteView):
         context = super(DeleteDomainView, self).get_context_data(*args, **kwargs)
         context['nav_domain_overview'] = True
         context['domains'] = Domain.objects.filter(created_by=self.request.user)
+        return context
+
+
+class UpdaterHostConfigOverviewView(CreateView):
+    model = ServiceUpdaterHostConfig
+    template_name = "main/updater_hostconfig_overview.html"
+    form_class = CreateUpdaterHostConfigForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        self.__host_pk = kwargs.pop('pk', None)
+        return super(UpdaterHostConfigOverviewView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('updater_hostconfig_overview', args=(self.__host_pk,))
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.host = Host(pk=self.__host_pk)
+        self.object.created_by = self.request.user
+        self.object.save()
+        messages.add_message(self.request, messages.SUCCESS, 'Service Updater Host Configuration added.')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(
+            UpdaterHostConfigOverviewView, self).get_context_data(*args, **kwargs)
+        context['updater_configs'] = ServiceUpdaterHostConfig.objects.filter(
+            host=self.__host_pk)
+        return context
+
+
+class UpdaterHostConfigView(UpdateView):
+    model = ServiceUpdaterHostConfig
+    template_name = "main/updater_hostconfig.html"
+    form_class = EditUpdaterHostConfigForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UpdaterHostConfigView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        host_pk = self.object.host.pk
+        return reverse('updater_hostconfig_overview', args=(host_pk,))
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        messages.add_message(self.request, messages.SUCCESS, 'Service Updater Host Configuration updated.')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self, *args, **kwargs):
+        obj = super(UpdaterHostConfigView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdaterHostConfigView, self).get_context_data(*args, **kwargs)
+        return context
+
+
+class DeleteUpdaterHostConfigView(DeleteView):
+    model = ServiceUpdaterHostConfig
+    template_name = "main/delete_object.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DeleteUpdaterHostConfigView, self).dispatch(*args, **kwargs)
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteUpdaterHostConfigView, self).get_object(*args, **kwargs)
+        if obj.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_success_url(self):
+        host_pk = self.object.host.pk
+        return reverse('updater_hostconfig_overview', args=(host_pk,))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DeleteUpdaterHostConfigView, self).get_context_data(*args, **kwargs)
         return context
 
 

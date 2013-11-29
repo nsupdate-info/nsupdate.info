@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 
 from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
-    RobotsTxtView, DomainOverviewView, DomainView, DeleteDomainView, StatusView)
+    RobotsTxtView, DomainOverviewView, DomainView, DeleteDomainView, StatusView,
+    UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView)
 from ..api.views import (
     myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView)
 
@@ -23,6 +24,11 @@ urlpatterns = patterns(
     url(r'^host/(?P<pk>\d+)/delete/$', DeleteHostView.as_view(), name='delete_host'),
     url(r'^domain_overview/$', DomainOverviewView.as_view(), name='domain_overview'),
     url(r'^domain/(?P<pk>\d+)/delete/$', DeleteDomainView.as_view(), name='delete_domain'),
+    url(r'^updater_hostconfig_overview/(?P<pk>\d+)/$', UpdaterHostConfigOverviewView.as_view(),
+        name='updater_hostconfig_overview'),
+    url(r'^updater_hostconfig/(?P<pk>\d+)/$', UpdaterHostConfigView.as_view(), name='updater_hostconfig'),
+    url(r'^updater_hostconfig/(?P<pk>\d+)/delete/$', DeleteUpdaterHostConfigView.as_view(),
+        name='delete_updater_hostconfig'),
     # internal use by the web ui
     url(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView.as_view(), name='detectip'),
     url(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),

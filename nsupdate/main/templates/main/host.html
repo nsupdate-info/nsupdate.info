@@ -12,6 +12,11 @@
                 {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
+            <h3>Update other Services</h3>
+            <p>We can send updates to other services when we receive an update from you.</p>
+            <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">Configure Updaters</button>
+            </form>
         </div>
         <div  class="col-lg-4">
             <h3>Show Configurations</h3>

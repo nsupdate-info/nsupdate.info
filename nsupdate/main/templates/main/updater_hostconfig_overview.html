@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Your updater configurations for other services</h3>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>Host</th>
+                    <th>give IPv4</th>
+                    <th>give IPv6</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            {% for uc in updater_configs %}
+                <tr>
+                    <td>{{ uc.service.name }} (SSL: {{ uc.service.secure|yesno }})</td>
+                    <td><a href="{% url 'updater_hostconfig' uc.pk %}">{{ uc.hostname }}</a></td>
+                    <td>{{ uc.give_ipv4|yesno }}</td>
+                    <td>{{ uc.give_ipv6|yesno }}</td>
+                    <td>{{ uc.comment }}</td>
+                </tr>
+            {% empty %}
+                <tr>No other services to update yet.</tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="well well-sm">
+                <h3>Create a new updater configuration</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="well well-sm">
+                <h3>Help</h3>
+                <p>Here you can add new configurations for 3rd party services you like to get updated.
+                </p>
+                <p>We will send an update to them each time you update your host with us.
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

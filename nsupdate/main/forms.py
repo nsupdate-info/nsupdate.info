@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import forms
 
-from .models import Host, Domain
+from .models import Host, Domain, ServiceUpdaterHostConfig
 
 
 class CreateHostForm(forms.ModelForm):
@@ -34,3 +34,20 @@ class EditDomainForm(forms.ModelForm):
         model = Domain
         fields = ['comment', 'nameserver_ip', 'public', 'available',
                   'nameserver_update_algorithm', 'nameserver_update_secret']
+
+
+class CreateUpdaterHostConfigForm(forms.ModelForm):
+    class Meta(object):
+        model = ServiceUpdaterHostConfig
+        fields = ['service', 'hostname', 'name', 'password',
+                  'give_ipv4', 'give_ipv6', 'comment']
+        widgets = {
+            'hostname': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+        }
+
+
+class EditUpdaterHostConfigForm(forms.ModelForm):
+    class Meta(object):
+        model = ServiceUpdaterHostConfig
+        fields = ['hostname', 'comment', 'name', 'password',
+                  'give_ipv4', 'give_ipv6']
