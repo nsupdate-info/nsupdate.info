@@ -257,8 +257,7 @@ class ServiceUpdater(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdater')
 
     def __unicode__(self):
-        return u"%s service updater" % (
-            self.name)
+        return u"%s" % (self.name, )
 
 
 class ServiceUpdaterHostConfig(models.Model):
@@ -292,5 +291,4 @@ class ServiceUpdaterHostConfig(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdaterhostconfigs')
 
     def __unicode__(self):
-        return u"%s service updater data for %s" % (
-            self.service.name, unicode(self.host))
+        return u"%s (%s)" % (self.hostname, self.service.name, )
