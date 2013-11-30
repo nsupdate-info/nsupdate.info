@@ -168,19 +168,19 @@ class Host(models.Model):
         if count > 1:
             raise ValueError("filter_by_fqdn(%s) found more than 1 host" % fqdn)
 
-    def get_ipv4(self):
+    def get_ip(self, kind):
+        record = 'A' if kind == 'ipv4' else 'AAAA'
         try:
-            return dnstools.query_ns(self.get_fqdn(), 'A', origin=self.domain.domain)
+            return dnstools.query_ns(self.get_fqdn(), record, origin=self.domain.domain)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
                 dnstools.NameServerNotAvailable):
             return 'error'
 
+    def get_ipv4(self):
+        return self.get_ip('ipv4')
+
     def get_ipv6(self):
-        try:
-            return dnstools.query_ns(self.get_fqdn(), 'AAAA', origin=self.domain.domain)
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
-                dnstools.NameServerNotAvailable):
-            return 'error'
+        return self.get_ip('ipv6')
 
     def poke(self, kind, ssl):
         if kind == 'ipv4':
