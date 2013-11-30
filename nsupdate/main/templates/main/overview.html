@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th>Host</th>
+                    <th>Available</th>
                     <th>Faults</th>
                     <th>IPv4 Address</th>
                     <th>IPv6 Address</th>
@@ -18,7 +19,8 @@
             {% for host in hosts %}
                 <tr>
                     <td><a href="{% url 'host_view' host.pk %}"><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></a></td>
-                    <td>C: {{ host.client_faults }} S: {{ host.server_faults }}</td>
+                    <td>{{ host.available|yesno }}</td>
+                    <td>C: {{ host.client_faults }} S: {{ host.server_faults }}{% if host.abuse_blocked %} ABUSE-BLOCKED{% elif host.abuse %} ABUSE{% endif %}</td>
                     <td>{{ host.get_ipv4 }} ({{ host.last_update_ipv4|timesince }}, {% if not host.ssl_update_ipv4 %}no {% endif %}SSL)</td>
                     <td>{{ host.get_ipv6 }} ({{ host.last_update_ipv6|timesince }}, {% if not host.ssl_update_ipv6 %}no {% endif %}SSL)</td>
                     <td>{{ host.comment }}</td>

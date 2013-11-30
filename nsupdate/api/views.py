@@ -255,6 +255,14 @@ class AuthorizedNicUpdateView(View):
 
 
 def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
+    # we are doing abuse / available checks rather late, so the client might
+    # get more specific responses (like 'badagent' or 'notfqdn') by earlier
+    # checks. it also avoids some code duplication if done here:
+    if host.abuse or host.abuse_blocked:
+        return Response('abuse')
+    if not host.available:
+        # not available is like it doesn't exist
+        return Response('nohost')
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41

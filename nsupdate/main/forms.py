@@ -16,7 +16,7 @@ class CreateHostForm(forms.ModelForm):
 class EditHostForm(forms.ModelForm):
     class Meta(object):
         model = Host
-        fields = ['comment']
+        fields = ['comment', 'available', 'abuse']
 
 
 class CreateDomainForm(forms.ModelForm):

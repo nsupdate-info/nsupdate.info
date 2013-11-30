@@ -124,6 +124,31 @@ class Host(models.Model):
         default='', blank=True, null=True,
         help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
 
+    # available means that this host may be updated (or not, if False) -
+    # gets set to False if abuse happens (client malfunctioning) or
+    # if updating this host triggers other errors:
+    available = models.BooleanField(
+        default=True,
+        help_text="Check if host is available/in use - "
+                  "if not checked, we won't accept updates for this host")
+
+    # abuse means that we (either the operator or some automatic mechanism)
+    # think the host is used in some abusive or unfair way, e.g.:
+    # sending nochg updates way too often or otherwise using a defect,
+    # misconfigured or otherwise malfunctioning update client
+    # acting against fair use / ToS.
+    # the abuse flag can be switched off by the user, if the user thinks
+    # he fixed the problem on his side (or that there was no problem).
+    abuse = models.BooleanField(
+        default=False,
+        help_text="Checked if we think you abuse the service - "
+                  "you may uncheck this AFTER fixing all issues on your side")
+
+    # similar to above, but can not be toggled by the user:
+    abuse_blocked = models.BooleanField(
+        default=False,
+        help_text="Checked to block a host for abuse.")
+
     # count client misbehaviours, like sending nochg updates or other
     # errors that should make the client stop trying to update:
     client_faults = models.PositiveIntegerField(default=0)

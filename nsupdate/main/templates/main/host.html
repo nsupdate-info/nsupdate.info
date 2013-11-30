@@ -6,7 +6,6 @@
         <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="fa fa-angle-double-left"></i> back to overview</a></small></h3>
         <div class="col-lg-4">
             <h3>Edit Host</h3>
-            <p>You can only change the comment. If you want to have another host name, you have to delete this host and create a new one.</p>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
