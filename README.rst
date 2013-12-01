@@ -27,18 +27,28 @@ Features
 
 * Frontend: Dynamic DNS updates via dyndns2 protocol (like supported
   by many DSL/cable routers and client software).
-* Backend: Uses DYNAMIC DNS UPDATE protocol (RFC 2136) to update compatible
-  nameservers like BIND, PowerDNS and others (the nameserver itself is NOT
-  included).
-* Easy and simple web interface.
-* Multiple Hosts per user
+* Backends:
+
+  - Uses DYNAMIC DNS UPDATE protocol (RFC 2136) to update compatible
+    nameservers like BIND, PowerDNS and others (the nameserver itself is
+    NOT included).
+  - Optionally uses dyndns2 protocol to update other services - we can
+    send updates to configurable 3rd party services when we receive an
+    update from the router / update client.
+
+* Prominently shows visitor's IPs (v4 and v6) on main view,
+  shows reverse DNS lookup results (on host overview view).
+* Multiple Hosts per user (using separate secrets for security)
 * Add own domains / nameservers (public or only for yourself)
-* Supports IP v4 and v6, SSL.
 * Login with local or remote accounts (google, github, bitbucket, ...
   accounts - everything supported by python-social-auth package)
 * Manual IP updates via web interface
 * Shows time since last update via api, whether it used SSL or not
-* Made with security in mind
-* No nagging, no spamming - trying not to annoy users
-* Free and Open Source Software
-* Made with Python and Django
+* Shows v4 and v6 IP addresses (from master nameserver records)
+* Shows client / server fault counters, available and abuse flags
+* Supports IP v4 and v6, SSL.
+* Easy and simple web interface, it tries to actively help to configure
+  routers / update clients / nameservers.
+* Made with security and privacy in mind
+* No nagging, no spamming, no ads - trying not to annoy users
+* Free and Open Source Software, made with Python and Django
