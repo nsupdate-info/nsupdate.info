@@ -12,11 +12,11 @@
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
             <h3>Delete Host</h3>
-            <p>
+            <p class="text-danger">
                 Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret.
             </p>
             <form method="get" action="{% url 'delete_host' host.pk %}">
-                <button type="submit" class="btn btn-primary">Delete host</button>
+                <button type="submit" class="btn btn-primary btn-danger">Delete host</button>
             </form>
         </div>
         <div  class="col-lg-4">
@@ -25,22 +25,22 @@
                 We'll generate a ready-to-use configuration for your router / update
                 client, filled out with all values.
             </p>
-            <p class="text-danger">
+            <p class="text-warning">
                 We'll create a new secret - if you had one before, it will become invalid.
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">Show Configuration</button>
+                <button type="submit" class="btn btn-primary btn-warning">Show Configuration</button>
             </form>
             <h3>Generate New Secret</h3>
             <p>
                 We store your update secret salted and hashed, so if you forget or lose it
                 you will have to create a new one.
             </p>
-            <p class="text-danger">
+            <p class="text-warning">
                 We'll create a new secret - if you had one before, it will become invalid.
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">Generate New</button>
+                <button type="submit" class="btn btn-primary btn-warning">Generate New</button>
             </form>
             <h3>Update other Services</h3>
             <p>We can send updates to other services when we receive an update from you.</p>
