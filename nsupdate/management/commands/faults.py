@@ -56,6 +56,13 @@ class Command(BaseCommand):
                     default=True,
                     help='reset the available flag (to True) of all hosts',
         ),
+        make_option('--flag-abuse',
+                    action='store',
+                    dest='flag_abuse',
+                    default=None,
+                    type='int',
+                    help='if client faults > N then set abuse flag and reset client faults',
+        ),
     )
 
     def handle(self, *args, **options):
@@ -66,6 +73,7 @@ class Command(BaseCommand):
         reset_available = options['reset_available']
         reset_abuse = options['reset_abuse']
         reset_abuse_blocked = options['reset_abuse_blocked']
+        flag_abuse = options['flag_abuse']
         for h in Host.objects.all():
             if show_client or show_server:
                 output = u""
@@ -75,7 +83,14 @@ class Command(BaseCommand):
                     output += u"%-6d " % h.server_faults
                 output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
                 self.stdout.write(output)
-            if reset_client or reset_server or reset_available or reset_abuse or reset_abuse_blocked:
+            if (flag_abuse is not None or reset_client or reset_server or
+                reset_available or reset_abuse or reset_abuse_blocked):
+                if flag_abuse is not None:
+                    if h.client_faults > flag_abuse:
+                        h.abuse = True
+                        self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
+                                          h.get_fqdn(), h.created_by, h.client_faults))
+                        h.client_faults = 0
                 if reset_client:
                     h.client_faults = 0
                 if reset_server:

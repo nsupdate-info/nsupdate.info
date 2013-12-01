@@ -81,11 +81,43 @@ it runs as the same user as the nsupdate.info wsgi application::
     # reinitialize the test user:
     50 2 * * * django-admin.py testuser
     # reset the fault counters:
-    55 2 * * * django-admin.py faults --reset-client --reset-server
+    55 2 * * * django-admin.py faults --flag-abuse=20 --reset-client
     # clear expired sessions from the database, use your correct settings module:
     0  3 * * 1 django-admin.py clearsessions
     # clear outdated registrations:
     0  3 * * 2 django-admin.py cleanupregistration
+
+
+Dealing with abuse
+------------------
+
+In the regular jobs example in the previous section,
+--flag-abuse=20 means that it'll set the abuse flag if the client fault counter
+is over 20 (and, for these cases, it'll also reset the fault counter back to 0).
+
+--reset-client additionally sets all client fault counters back to 0, so all
+counts are just "per day".
+
+So, if you run this daily, it means that more than 20 client faults per day are
+considered abuse (e.g. if someone runs a stupid cronjob to update the IP instead
+of a well-behaved update client).
+
+Hosts with the abuse flag set won't accept updates, but the user will be able to
+see the abuse flag (as ABUSE on the web interface and also their update client
+should show it somehow), fix the problem on the client side and reset the abuse
+flag via the web interface. If the problem was not really fixed, then it will
+set the abuse flag again the next day.
+
+This procedure should make sure that users of the service run sane and correctly
+working update clients while being able to fix issues on their own without
+needing help from service administration.
+
+For really bad cases of intentional or ongoing abuse, there is also a
+abuse_blocked flag that can only be set or reset manually by service
+administration (using django admin interface).
+While abuse_blocked is set, the service won't accept updates for this host.
+The user can see the ABUSE-BLOCKED status on the web interface, but can not
+change the flag.
 
 
 Configuration
