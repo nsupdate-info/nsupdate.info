@@ -19,17 +19,22 @@
         </div>
         <div class="col-lg-4">
             <h3>Generate New Secret</h3>
-            <p>You can generate a new shared secret here. If you do so, you have to put it into your nameserver config also.
-               We'll show you an example config...</p>
+            <p>
+                You can generate a new shared secret here and we'll show you an updated example config.
+            </p>
+            <p class="text-warning">
+                We'll create a new shared secret - if you had one before, it will become invalid.
+                You have to put the new secret into your nameserver config.
+            </p>
             <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">Generate New</button>
+                <button type="submit" class="btn btn-primary btn-warning">Generate New</button>
             </form>
             <h3>Delete Domain</h3>
-            <p>
+            <p class="text-danger">
                 Deleting a domain is not undoable. If you need it back, you'll have to add it again and configure a new shared secret.
             </p>
             <form method="get" action="{% url 'delete_domain' domain.pk %}">
-                <button type="submit" class="btn btn-primary">Delete domain {{ domain.domain }}</button>
+                <button type="submit" class="btn btn-primary btn-danger">Delete domain</button>
             </form>
         </div>
     </div>
