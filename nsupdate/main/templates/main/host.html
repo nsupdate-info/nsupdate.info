@@ -11,10 +11,12 @@
                 {{ form|bootstrap }}
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
-            <h3>Update other Services</h3>
-            <p>We can send updates to other services when we receive an update from you.</p>
-            <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">Configure Updaters</button>
+            <h3>Delete Host</h3>
+            <p>
+                Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret.
+            </p>
+            <form method="get" action="{% url 'delete_host' host.pk %}">
+                <button type="submit" class="btn btn-primary">Delete host</button>
             </form>
         </div>
         <div  class="col-lg-4">
@@ -40,12 +42,10 @@
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">Generate New</button>
             </form>
-            <h3>Delete Host</h3>
-            <p>
-                Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret.
-            </p>
-            <form method="get" action="{% url 'delete_host' host.pk %}">
-                <button type="submit" class="btn btn-primary">Delete host {{ host.get_fqdn }}</button>
+            <h3>Update other Services</h3>
+            <p>We can send updates to other services when we receive an update from you.</p>
+            <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">Configure Updaters</button>
             </form>
         </div>
         <div  class="col-lg-4">
