@@ -4,23 +4,42 @@ ChangeLog
 Release <TBD>
 -------------
 
+Important note (only for upgrades):
+
+There is an issue if you use "south" and the "sqlite" database - it can't
+add BooleanFields and set the default values correctly when using "migrate".
+
+As we added some critical fields, you need to use these commands immediately
+after running "django-admin.py migrate" to make sure their initial values are
+correct::
+
+    # all hosts will be available, no host will have abuse flags set:
+    django-admin.py faults --reset-available --reset-abuse --reset-abuse-blocked
+
 Fixes:
 
+* use python-social-auth exception middleware to catch exceptions
 * status view is for logged-in users only (it was removed from navigation,
   but still accessible by URL in previous releases)
+* fix session cookie behaviour to be more private for not-logged-in users
 
 New Features:
 
+* "update other services" feature (act as dyndns2 client to update 3rd party
+  services when we receive an update)
 * added per-host fault counters for update client and dns server
+* abuse handling (for clients triggering too many faults) using the "faults"
+  management command
+* notfqdn and abuse dyndns2 api result codes supported
+* show reverse DNS of current IPs (only on host overview)
 * customizable footer (use a custom base_footer.html template)
-* notfqdn result code supported
 
 Other changes:
 
 * use sane field lengths in the DB
 * more help texts, more hints, better docs
 * workflow for adding a domain is now similar to adding a host
-* improved screen layout, cosmetics
+* improved user interface
 * use travis-ci and coveralls services for the project
 
 
