@@ -19,6 +19,8 @@
             <dl>
                 <dt>Total:</dt>
                 <dd>{{ hosts_total }}</dd>
+                <dt>Unavailable / Abuse / Abuse-Blocked:</dt>
+                <dd>{{ hosts_unavailable }} / {{ hosts_abuse }} / {{ hosts_abuse_blocked }}</dd>
                 <dt>ip v4 (ssl) / v6 (ssl) updated last 2d:</dt>
                 <dd>{{ hosts_ipv4_2d }} ({{ hosts_ipv4_ssl_2d }}) / {{ hosts_ipv6_2d }} ({{ hosts_ipv6_ssl_2d }})</dd>
                 <dt>ip v4 (ssl) / v6 (ssl) updated last 2w:</dt>
