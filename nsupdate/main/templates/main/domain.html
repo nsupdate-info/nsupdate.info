@@ -18,16 +18,17 @@
             </form>
         </div>
         <div class="col-lg-4">
-            <h3>Generate New Secret</h3>
+            <h3>Show Configuration</h3>
             <p>
-                You can generate a new shared secret here and we'll show you an updated example config.
+                We'll generate a ready-to-use configuration for your name server,
+                filled out with all values (including a new secret).
             </p>
             <p class="text-warning">
                 We'll create a new shared secret - if you had one before, it will become invalid.
-                You have to put the new secret into your nameserver config.
+                You have to use the new secret in your name server configuration.
             </p>
             <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
-                <button type="submit" class="btn btn-primary btn-warning">Generate New</button>
+                <button type="submit" class="btn btn-primary btn-warning">Show Configuration</button>
             </form>
             <h3>Delete Domain</h3>
             <p class="text-danger">
