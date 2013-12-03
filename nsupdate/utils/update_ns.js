@@ -23,7 +23,7 @@ try{
 } 
 
 //Prepare and do the request to get Clients IP from the host
-ajaxRequest.open("GET", "http://nsupdate.info/myip", true);
+ajaxRequest.open("GET", "https://nsupdate.info/myip", true);
 ajaxRequest.send(null); 
 
 // Recieve IP from host
@@ -62,7 +62,7 @@ ajaxRequest.onreadystatechange = function(){
 				//Prepare and do the request to update the IP at the host
 				update_Request.open("GET", "https://fqdn:secret@nsupdate.info/nic/update", true); // FQDN, SECRET hardcoded here
 				update_Request.send(null);
-				oldIP == newIP; //Remeber the new ID
+				oldIP == newIP; //Remeber the new IP
 			}
 		}
 	}
