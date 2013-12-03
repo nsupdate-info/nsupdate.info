@@ -1,6 +1,9 @@
 //Global Vars
 var oldIP;
 var newIP;
+
+function update_ns()
+{
 var ajaxRequest;
 
 // declare AJAX-Request variable (Browser-dependent)
@@ -66,4 +69,7 @@ ajaxRequest.onreadystatechange = function(){
 			}
 		}
 	}
+}
+
+setTimeout('update_ns()', 300000); //Check again in 5 Minutes (300k millis)
 }
