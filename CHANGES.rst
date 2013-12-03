@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-Release <TBD>
+Release 0.5.0
 -------------
 
 Important note (only for upgrades):
@@ -30,6 +30,7 @@ New Features:
 * added per-host fault counters for update client and dns server
 * abuse handling (for clients triggering too many faults) using the "faults"
   management command
+* abuse-blocked / abuse / unavailable counts on status view
 * notfqdn and abuse dyndns2 api result codes supported
 * show reverse DNS of current IPs (only on host overview)
 * customizable footer (use a custom base_footer.html template)
@@ -41,6 +42,7 @@ Other changes:
 * workflow for adding a domain is now similar to adding a host
 * improved user interface
 * use travis-ci and coveralls services for the project
+* updated bootstrap to 3.0.2 (from cdn)
 
 
 Release 0.4.0
