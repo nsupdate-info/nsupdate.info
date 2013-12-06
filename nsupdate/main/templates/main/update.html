@@ -41,7 +41,7 @@
                     $('#response_timestamp').text(new Date().toISOString());
                     last_ip = ip;
                 })
-                .fail(function (data) {
+                .fail(function( data ) {
                     $('#response').text('update failed');
                     $('#response_timestamp').text(new Date().toISOString());
                 });
@@ -50,11 +50,10 @@
         .fail(function( data ) {
             $('#response').text('myip failed');
         });
-        setTimeout('checkIP', 300000);  // repeat in N ms
     }
 
     $(document).ready(function() {
-        checkIP();
+        setInterval(checkIP, 300000);  // repeat every N ms
     });
     </script>
 {% endblock %}
