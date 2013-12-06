@@ -142,7 +142,7 @@ class StatusView(TemplateView):
 from nsupdate.api.views import basic_challenge, basic_authenticate
 
 
-class UpdateView(TemplateView):
+class JsUpdateView(TemplateView):
     template_name = "main/update.html"
 
     def get(self, request, *args, **kwargs):
@@ -152,10 +152,10 @@ class UpdateView(TemplateView):
         username, password = basic_authenticate(auth)
         self.hostname = username
         self.secret = password
-        return super(UpdateView, self).get(request, *args, **kwargs)
+        return super(JsUpdateView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(UpdateView, self).get_context_data(*args, **kwargs)
+        context = super(JsUpdateView, self).get_context_data(*args, **kwargs)
         context['hostname'] = self.hostname
         context['secret'] = self.secret
         return context
