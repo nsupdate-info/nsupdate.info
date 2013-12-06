@@ -5,7 +5,7 @@
     <div class="jumbotron">
         <h2>Browser-based Updater</h2>
         <p>
-            Host {{ hostname }} (pw {{ secret }}) will get automatically updated as long as you keep this window open.
+            Your host {{ hostname }} will get automatically updated as long as you keep this window open.
         </p>
         <noscript>
             <p class="text-danger">
@@ -14,12 +14,13 @@
         </noscript>
         <h2>Updater Status</h2>
         <dl>
-            <dt>Last response:</dt><dd><span id="response"></span></dd>
+            <dt>Last response:</dt><dd><span id="response"></span> at <span id="last_update"></span></dd>
         </dl>
     </div>
     <script type="text/javascript">
     // Thanks to 1v3ry for helping with the js code!
     var last_ip = '';
+    var last_update ='';
 
     function checkIP() {
         $.get("{% url 'myip' %}")
@@ -38,6 +39,8 @@
                 .fail(function (data) {
                     $('#response').text('update failed');
                 });
+                last_update = new Date;
+                $('#last_update').text(now.toLocaleDateString("en-US")+' '+now.toLocaleTimeString("en-US"));
             }
         })
         .fail(function( data ) {
