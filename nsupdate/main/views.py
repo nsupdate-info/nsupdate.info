@@ -139,6 +139,28 @@ class StatusView(TemplateView):
         return context
 
 
+from nsupdate.api.views import basic_challenge, basic_authenticate
+
+
+class UpdateView(TemplateView):
+    template_name = "main/update.html"
+
+    def get(self, request, *args, **kwargs):
+        auth = request.META.get('HTTP_AUTHORIZATION')
+        if auth is None:
+            return basic_challenge("authenticate to update DNS", 'badauth')
+        username, password = basic_authenticate(auth)
+        self.hostname = username
+        self.secret = password
+        return super(UpdateView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateView, self).get_context_data(*args, **kwargs)
+        context['hostname'] = self.hostname
+        context['secret'] = self.secret
+        return context
+
+
 class OverviewView(CreateView):
     model = Host
     template_name = "main/overview.html"

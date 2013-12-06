@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h2>Browser-based Updater</h2>
+        <p>
+            Host {{ hostname }} (pw {{ secret }}) will get automatically updated as long as you keep this window open.
+        </p>
+        <noscript>
+            <p class="text-danger">
+                The browser based updater only works if javascript is enabled.
+            </p>
+        </noscript>
+        <h2>Updater Status</h2>
+        <dl>
+            <dt>Last response:</dt><dd><span id="response"></span></dd>
+        </dl>
+    </div>
+    <script type="text/javascript">
+    // Thanks to 1v3ry for helping with the js code!
+    var last_ip = '';
+
+    function checkIP() {
+        $.get("{% url 'myip' %}")
+        .done(function( data ) {
+            ip = data;
+            if(ip != last_ip) {
+                $.ajax({
+                    url: "{% url 'nic_update' %}",
+                    username: "{{ hostname }}",
+                    password: "{{ secret }}"
+                })
+                .done(function( data ) {
+                    $('#response').text(data);
+                    last_ip = ip;
+                })
+                .fail(function (data) {
+                    $('#response').text('update failed');
+                });
+            }
+        })
+        .fail(function( data ) {
+            $('#response').text('myip failed');
+        });
+        setTimeout('checkIP', 300000);  // repeat in N ms
+    }
+
+    $(document).ready(function() {
+        checkIP();
+    });
+    </script>
+{% endblock %}
