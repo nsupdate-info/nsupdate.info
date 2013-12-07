@@ -40,21 +40,23 @@
                     response = data.split(" ");
                     switch(response[0])
                     {
-                        case "good": $('#response').text("IP adress was updated successfully"); break;
-                        case "nochg": $('#response').text("IP adress didn't change"); break;
+                        case "good": $('#response').text("IP address was updated successfully"); break;
+                        case "nochg": $('#response').text("IP address didn't change"); break;
+                        case "911": $('#response').text("An error at the DNS service occured. You might want to update your host manually."); break;
+                        default: $('#response').text("An unknown error occured. You might want to update your host manually."); break;
                     }
                     
                     $('#response_timestamp').text(new Date().toISOString());
                     last_ip = ip;
                 })
                 .fail(function( data ) {
-                    $('#response').text('could not update DNS entries');
+                    $('#response').text('Could not update DNS entries. You might want to relaod the page.');
                     $('#response_timestamp').text(new Date().toISOString());
                 });
             }
         })
         .fail(function( data ) {
-            $('#response').text('could not determine IP adress');
+            $('#response').text('Could not determine IP address. You might want to relaod the page.');
         });
     }
 
