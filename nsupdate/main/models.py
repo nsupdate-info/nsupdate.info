@@ -160,8 +160,8 @@ class Host(models.Model):
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(blank=True, null=True)
     # how we received the last update for v4/v6 addr
-    ssl_update_ipv4 = models.BooleanField()
-    ssl_update_ipv6 = models.BooleanField()
+    ssl_update_ipv4 = models.BooleanField(default=False)
+    ssl_update_ipv6 = models.BooleanField(default=False)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
