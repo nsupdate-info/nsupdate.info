@@ -37,18 +37,24 @@
                     password: "{{ secret }}"
                 })
                 .done(function( data ) {
-                    $('#response').text(data);
+                    response = data.split(" ");
+                    switch(response[0])
+                    {
+                        case "good": $('#response').text("IP adress was updated successfully"); break;
+                        case "nochg": $('#response').text("IP adress didn't change"); break;
+                    }
+                    
                     $('#response_timestamp').text(new Date().toISOString());
                     last_ip = ip;
                 })
                 .fail(function( data ) {
-                    $('#response').text('update failed');
+                    $('#response').text('could not update DNS entries');
                     $('#response_timestamp').text(new Date().toISOString());
                 });
             }
         })
         .fail(function( data ) {
-            $('#response').text('myip failed');
+            $('#response').text('could not determine IP adress');
         });
     }
 
