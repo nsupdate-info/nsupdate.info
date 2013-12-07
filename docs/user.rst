@@ -120,3 +120,50 @@ using the "give IPv4" and/or "give IPv6" options.
 
 Currently, Users can only use services that were made available by an admin
 (by adding the service record using Django's admin interface).
+
+
+Browser-based Update Client
+---------------------------
+
+The service has a "built-in" browser/javascript-based update client that will
+query the IP and send update requests if the IP changes.
+
+One typical scenario where this is useful:
+
+* you are an admin for multiple, sometimes rather ad-hoc clients where you
+  have to do remote support / maintenance
+* the clients have no (working) dynamic dns host / updater configured
+* you have prepared a hostname in the nsupdate.info service you use just
+  for such scenarios, e.g. "yourname-adhoc" (+ the base domain you use)
+* you need to do some remote work, but you want to avoid losing access in
+  case you get disconnected and the IP changes
+* you don't want to require the client to find out his/her current IP and
+  communicate it to you nor do you want to remember an IP address if you can
+  have a nice (and always same) hostname
+
+How to optimize this scenario:
+
+* go to the "yourname-adhoc" entry and use "Show Configuration"
+* copy and paste the URL shown in the "Browser" tab of the configuration help
+  panel, under headline "Browser-based update client"
+* optional: try it yourself in your browser
+* give this URL to your client (E-Mail, Chat, ...), tell the client to open it
+  with a browser and keep that page open in the browser until you're finished.
+* once the client has done that, "yourname-adhoc" will point to the client's IP
+
+Note:
+
+* we show 3 slightly different URLs:
+  - the first one is generic and will use either IP v4 or v6,
+  - the other 2 are specific and will either enforce usage of IP v4, or v6.
+* this whole browser-based mechanism is only for adhoc and temporary use - if
+  you need something permanently or repeatingly, please configure a real update
+  client
+* if you can't electronically give the URL to the client, you can also give:
+  - URL: like above, but remove the "yourname-adhoc.basedomain:secret@" part
+  - when clients visits that URL, it will ask for username and password:
+    - User name: yourname-adhoc.basedomain
+    - Password: secret
+  - let the client check "Last update response". Should be "good" (or "nochg")
+    plus same IP as shown below "My IP". If it shows something else, then there
+    likely was a typo in the user name or password.
