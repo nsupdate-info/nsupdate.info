@@ -1,6 +1,15 @@
 ChangeLog
 =========
 
+Release <TBD>
+-------------
+
+New Features:
+
+* browser/javascript-based update client (the URL you need is shown in the
+  "browser" help panel after you add a host or generate a new secret).
+
+
 Release 0.5.0
 -------------
 

@@ -43,6 +43,7 @@ Features
 * Login with local or remote accounts (google, github, bitbucket, ...
   accounts - everything supported by python-social-auth package)
 * Manual IP updates via web interface
+* Browser-based update client for temporary/adhoc usage
 * Shows time since last update via api, whether it used SSL or not
 * Shows v4 and v6 IP addresses (from master nameserver records)
 * Shows client / server fault counters, available and abuse flags
