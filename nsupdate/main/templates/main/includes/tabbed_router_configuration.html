@@ -153,6 +153,14 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 </pre>
     </div>
     <div class="tab-pane" id="browser">
+        <h4>Browser-based update client</h4>
+        These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.
+        It periodically checks your IP and updates DNS if it changes.
+        <ul>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update   (similar, but ipv4 only)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update   (similar, but ipv6 only)</li>
+        </ul>
         <h4>Update URLs for browser / http user agent use</h4>
         Interactive - will ask for username (give your hostname) and password (give your secret):
         <ul>
