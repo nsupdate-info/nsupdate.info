@@ -153,7 +153,24 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 </pre>
     </div>
     <div class="tab-pane" id="browser">
-        <h4>Easy update URLs</h4>
+        <h4>Update URLs for browser / http user agent use</h4>
+        Interactive - will ask for username (give your hostname) and password (give your secret):
+        <ul>
+            <li>https://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>https://{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
+            <li>https://{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+        </ul>
+        Giving the http basic auth username and password in the URL:
+        <ul>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+        </ul>
+        As above, but manually specifying the IP address:
+        <ul>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
+        </ul>
         Explanation of parameters:
         <ul>
             {% if not host %}
@@ -165,23 +182,6 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
             <li>IP addresses: we use the v4 and v6 localhost addresses in the examples, but
                 of course you need to use your real public IP instead of that.
             </li>
-        </ul>
-        For browser / interactive use (will ask for username (give your hostname) and password (give yoursecret)):
-        <ul>
-            <li>https://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>https://{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
-        </ul>
-        For browser / interactive use (give http basic auth username and password in URL):
-        <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (updates hostname to point to remote ipv4 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (updates hostname to point to remote ipv6 address)</li>
-        </ul>
-        For browser / interactive use as above, but manually specifying the IP address:
-        <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
         </ul>
     </div>
 </div>
