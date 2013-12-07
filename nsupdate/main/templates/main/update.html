@@ -24,12 +24,30 @@
     // Thanks to 1v3ry for helping with the js code!
     var last_ip = '';
 
+    function format_dt(dt) {
+        // return a somehow ISO-like formatted local date / time string,
+        // but without timezone, "T", "Z", milliseconds or other stuff.
+        function pad(number) {
+            return number <= 9 ? '0' + number : number;
+        }
+        return (
+            dt.getFullYear() + '-' + pad(dt.getMonth() + 1) + '-' + pad(dt.getDate()) +
+            ' ' +
+            pad(dt.getHours()) + ':' + pad(dt.getMinutes()) + ':' + pad(dt.getSeconds())
+        );
+    }
+
+    function now_str() {
+        dt = new Date();
+        return format_dt(dt);
+    }
+
     function checkIP() {
         $.get("{% url 'myip' %}")
         .done(function( data ) {
             ip = data;
             $('#myip').text(ip);
-            $('#myip_timestamp').text(new Date().toISOString());
+            $('#myip_timestamp').text(now_str());
             if(ip != last_ip) {
                 $.ajax({
                     url: "{% url 'nic_update' %}",
@@ -38,17 +56,18 @@
                 })
                 .done(function( data ) {
                     $('#response').text(data);
-                    $('#response_timestamp').text(new Date().toISOString());
+                    $('#response_timestamp').text(now_str());
                     last_ip = ip;
                 })
                 .fail(function( data ) {
                     $('#response').text('update failed');
-                    $('#response_timestamp').text(new Date().toISOString());
+                    $('#response_timestamp').text(now_str());
                 });
             }
         })
         .fail(function( data ) {
             $('#response').text('myip failed');
+            $('#response_timestamp').text(now_str());
         });
     }
 
