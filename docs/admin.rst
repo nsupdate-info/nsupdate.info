@@ -71,6 +71,51 @@ applies to the django version YOU use):
 
 https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+PostgreSQL
+~~~~~~~~~~
+For production usage and better scalability, you may rather want to use
+PostgreSQL than SQLite database. Django stores its sessions into the
+database, so if you get a lot of accesses, sqlite will run into "database
+is locked" issues.
+
+Here are some notes I made when installing it using ubuntu 12.04:
+
+First installing and preparing PostgreSQL::
+
+    apt-get install postgresql  # I used 9.1
+    apt-get install libpq-dev  # needed to install psycopg2
+
+    # within the virtual env:
+    pip install psycopg2
+
+    sudo -u postgres createdb nsupdate
+    sudo -u postgres createuser --no-createrole --no-superuser --no-createdb --pwprompt nsupdate
+    # enter reallysecret password, twice
+    sudo -u postgres psql -c 'GRANT ALL PRIVILEGES ON DATABASE nsupdate TO nsupdate;'
+
+    sudo vim /etc/postgresql/9.1/main/pg_hba.conf
+    # by default, postgresql on ubuntu uses only "peer" authentication for unix sockets, add "md5"
+    # (password hash) authentication, otherwise it might use your login user instead of the configured user:
+    # local   all             all                                     md5
+
+
+To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'nsupdate',  # database name
+            'USER': 'nsupdate',
+            'PASSWORD': 'reallysecret',
+            'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+            'PORT': ''  # Set to empty string for default.
+        }
+    }
+
+
+Now proceed with syncdb / migrate as shown above.
+
+
 Regular jobs
 ------------
 You need to run some commands regularly, we show how to do that on Linux (or
