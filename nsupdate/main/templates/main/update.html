@@ -53,7 +53,8 @@
     }
 
     $(document).ready(function() {
-        setInterval(checkIP, 300000);  // repeat every N ms
+        checkIP();  // run immediately ...
+        setInterval(checkIP, 300000);  // ... then repeat every N ms
     });
     </script>
 {% endblock %}
