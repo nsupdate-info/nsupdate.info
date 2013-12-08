@@ -131,6 +131,11 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+if DEBUG:
+    MIDDLEWARE_CLASSES = (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ) + MIDDLEWARE_CLASSES
+    INTERNAL_IPS = ['127.0.0.1', '::1', ]  # needed for DebugToolbar!
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
@@ -170,6 +175,11 @@ INSTALLED_APPS = (
     'registration',
     'django_extensions',
 )
+if DEBUG:
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
 
 # A sample logging configuration.
 # Sends an email to the site admins on every HTTP 500 error when DEBUG=False.
