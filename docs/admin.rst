@@ -21,9 +21,23 @@ Then install the software with requirements to your virtual env::
 
     pip install -e .
 
-Set SECRET_KEY and create settings_local.py file::
 
-    echo "SECRET_KEY='S3CR3T'" > nsupdate/settings_local.py
+Configuration
+=============
+
+nsupdate.info Service
+---------------------
+
+Use a local_settings.py (do not modify the nsupdate/settings.py file directly):
+
+    from nsupdate.settings import *
+    # override whatever you need to override here (read nsupdate/settings.py
+    # to get an overview over what you might need to customize):
+    SECRET_KEY='S3CR3T'
+
+
+Initialize the database
+-----------------------
 
 To create and initialize the database, use::
 
@@ -31,9 +45,21 @@ To create and initialize the database, use::
     python manage.py migrate
 
 
-To start the development server::
+Start the development server
+----------------------------
 
     python manage.py runserver
+
+
+Nameserver
+----------
+
+Now as the server is running, you can log in using the database administrator
+account you created in the syncdb step and use "admin" from the menu to start
+Django's admin.
+
+You'll need to configure at least 1 nameserver / 1 zone to accept dynamic updates,
+see the "Domains" section in the "user" part of the manual.
 
 
 Installation (for production)
@@ -72,7 +98,7 @@ applies to the django version YOU use):
 https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 PostgreSQL
-~~~~~~~~~~
+----------
 For production usage and better scalability, you may rather want to use
 PostgreSQL than SQLite database. Django stores its sessions into the
 database, so if you get a lot of accesses, sqlite will run into "database
@@ -115,6 +141,9 @@ To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
 
 Now proceed with syncdb / migrate as shown above.
 
+
+Maintenance
+===========
 
 Regular jobs
 ------------
@@ -165,25 +194,6 @@ The user can see the ABUSE-BLOCKED status on the web interface, but can not
 change the flag.
 
 
-Configuration
-=============
-
-nsupdate.info Service
----------------------
-
-Use a local_settings.py.
-
-
-Nameserver
-----------
-
-You'll need to configure at least 1 nameserver / 1 zone to accept dynamic updates, see the "Domains" section
-in the "user" part of the manual.
-
-
-Maintenance
-===========
-
 Database contents
 -----------------
 Users who are in the "staff" group (like the one initially created when creating the database) can access the
@@ -194,7 +204,7 @@ Only give Django admin access ("staff" group membership) to highly trusted admin
 
 
 Software updates / upgrades
-===========================
+---------------------------
 
 After upgrading the code, you'll usually need to run::
 

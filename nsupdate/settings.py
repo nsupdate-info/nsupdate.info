@@ -2,6 +2,9 @@
 Django settings for nsupdate project
 """
 
+# Note: django internally first loads its own defaults and then loads the
+# project's settings on top of that. Due to this, no import * is required here.
+
 import os
 import django.conf.global_settings as DEFAULT_SETTINGS
 
@@ -396,8 +399,3 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
     constants.ERROR: 'alert-danger',
 }
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
