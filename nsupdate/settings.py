@@ -44,13 +44,16 @@ DATABASES = {
 }
 
 WE_HAVE_SSL = True  # True if you run a https site also, suggest that site to users if they work on the http site.
-BASEDOMAIN = 'nsupdate.info'
 SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
-WWW_HOST = BASEDOMAIN
-WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN
-WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN
 
-# for debugging IP detection on localhost
+# these are the service host names we deal with
+BASEDOMAIN = 'nsupdate.info'
+WWW_HOST = BASEDOMAIN  # a host with a ipv4 and a ipv6 address
+# hosts to enforce a v4 / v6 connection (to determine the respective ip)
+WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN  # a host with ONLY a ipv4 address
+WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN  # a host with ONLY a ipv6 address
+
+# for debugging IP detection on localhost, use this:
 #WWW_IPV4_HOST = 'localhost:8000'
 #WWW_IPV6_HOST = 'ip6-localhost:8000'
 
