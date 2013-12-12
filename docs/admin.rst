@@ -28,7 +28,7 @@ Configuration
 nsupdate.info Service
 ---------------------
 
-Use a local_settings.py (do not modify the nsupdate/settings.py file directly):
+Use a local_settings.py (do not modify the nsupdate/settings.py file directly)::
 
     from nsupdate.settings import *
     # override whatever you need to override here (read nsupdate/settings.py
@@ -47,6 +47,8 @@ To create and initialize the database, use::
 
 Start the development server
 ----------------------------
+
+::
 
     python manage.py runserver
 

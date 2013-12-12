@@ -154,14 +154,17 @@ How to optimize this scenario:
 Note:
 
 * we show 3 slightly different URLs:
+
   - the first one is generic and will use either IP v4 or v6,
   - the other 2 are specific and will either enforce usage of IP v4, or v6.
 * this whole browser-based mechanism is only for adhoc and temporary use - if
   you need something permanently or repeatingly, please configure a real update
   client
 * if you can't electronically give the URL to the client, you can also give:
+
   - URL: like above, but remove the "yourname-adhoc.basedomain:secret@" part
   - when clients visits that URL, it will ask for username and password:
+
     - User name: yourname-adhoc.basedomain
     - Password: secret
   - let the client check "Last update response". Should be "good" (or "nochg")
