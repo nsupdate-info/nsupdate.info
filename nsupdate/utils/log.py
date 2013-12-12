@@ -64,7 +64,7 @@ def _get_elementdict(dct, basename, excluded=None):
     if excluded is None:
         excluded = set()
     names = set(dct) - set(excluded)
-    return {basename + name: dct[name] for name in names}
+    return dict((basename + name, dct[name]) for name in names)
 
 
 def _build_request_info(request):
