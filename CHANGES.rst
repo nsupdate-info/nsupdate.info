@@ -9,6 +9,14 @@ New Features:
 * browser/javascript-based update client (the URL you need is shown in the
   "browser" help panel after you add a host or generate a new secret).
 
+Other changes:
+
+* remove .local_settings import from settings.py, improve docs about a sane
+  settings setup
+* document postgreSQL setup
+* also support Python 2.6.x
+* for debugging, add django-debug-toolbar
+
 
 Release 0.5.0
 -------------
