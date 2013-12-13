@@ -11,11 +11,12 @@ env:
       - TEST_OPTS="-k 'not dnstools and not ddns_client'"
       - COVERAGE=""
     matrix:
-      include:
-        - python: "2.7"
-          env: DJANGO=1.6.1 COVERAGE="coverage run -m" TEST_OPTS="--pep8"
       - DJANGO=1.5.5
       - DJANGO=1.6.1
+matrix:
+  include:
+    - python: "2.7"
+      env: DJANGO=1.6.1 COVERAGE="coverage run -m" TEST_OPTS="--pep8"
 install:
     - "pip install --use-mirrors Django==$DJANGO"
     - "pip install --use-mirrors -e ."
