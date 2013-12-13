@@ -8,14 +8,19 @@ env:
       - SECRET_KEY=justfortravis
       - DNS_RESOLVER_TIMEOUT=15.0
       - DNS_UPDATE_TIMEOUT=30.0
+      - TEST_OPTS="-k 'not dnstools and not ddns_client'"
+      - COVERAGE=""
     matrix:
       - DJANGO=1.5.5
       - DJANGO=1.6.1
+      include:
+        - python: "2.7"
+          env: DJANGO=1.6.1 COVERAGE="coverage run -m" TEST_OPTS="--pep8"
 install:
     - "pip install --use-mirrors Django==$DJANGO"
     - "pip install --use-mirrors -e ."
     - "pip install --use-mirrors coveralls"
-script: "coverage run -m py.test --pep8"
+script: "$COVERAGE py.test $TEST_OPTS"
 after_success:
     - coveralls
 notifications:
