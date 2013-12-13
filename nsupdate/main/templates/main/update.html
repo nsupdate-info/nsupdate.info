@@ -40,9 +40,13 @@
                     response = data.split(" ");
                     switch(response[0])
                     {
-                        case "good": $('#response').text("IP address was updated successfully"); break;
-                        case "nochg": $('#response').text("IP address didn't change"); break;
-                        case "911": $('#response').text("An error at the DNS service occured. You might want to update your host manually."); break;
+                        case "good": $('#response').text("IP address was updated successfully. ["+data+"]"); break;
+                        case "nochg": $('#response').text("IP address didn't change. ["+data+"]"); break;
+                        case "dnserr": $('#response').text("The update request resulted in a DNS error. ["+data+"]"); break;
+                        case "nohost": $('#response').text("The host you specified does not exist. ["+data+"]"); break;
+                        case "abuse": $('#response').text("Your host is listed with an abuse flag. ["+data+"]"); break;
+                        case "badagent": $('#response').text("Your user agent is listed as bad. ["+data+"]"); break;
+                        case "notfqdn": $('#response').text("Your username does not match the domain-name of your host. ["+data+"]"); break;
                         default: $('#response').text("An unknown error occured. You might want to update your host manually."); break;
                     }
                     
@@ -50,13 +54,13 @@
                     last_ip = ip;
                 })
                 .fail(function( data ) {
-                    $('#response').text('Could not update DNS entries. You might want to relaod the page.');
+                    $('#response').text('Could connect to the update-service. You might want to reload the page or update your host manually.');
                     $('#response_timestamp').text(new Date().toISOString());
                 });
             }
         })
         .fail(function( data ) {
-            $('#response').text('Could not determine IP address. You might want to relaod the page.');
+            $('#response').text('Could not determine IP address. You might want to reload the page or update your host manually.');
         });
     }
 
