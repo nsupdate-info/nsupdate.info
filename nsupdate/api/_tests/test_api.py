@@ -23,25 +23,25 @@ HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
 def test_myip(client):
     response = client.get(reverse('myip'))
     assert response.status_code == 200
-    assert response.content in ['127.0.0.1', '::1']
+    assert response.content in [b'127.0.0.1', b'::1']
 
 
 def test_nic_update_noauth(client):
     response = client.get(reverse('nic_update'))
     assert response.status_code == 401
-    assert response.content == "badauth"
+    assert response.content == b'badauth'
 
 
 def make_basic_auth_header(username, password):
     import base64
-    return "Basic " + base64.b64encode("%s:%s" % (username, password))
+    return b'Basic ' + base64.b64encode((username + ':' + password).encode('utf-8'))
 
 
 def test_nic_update_badauth(client):
     response = client.get(reverse('nic_update'),
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, "wrong"))
     assert response.status_code == 401
-    assert response.content == "badauth"
+    assert response.content == b'badauth'
 
 
 def test_nic_update_authorized_nonexistent_host(client):
@@ -49,7 +49,7 @@ def test_nic_update_authorized_nonexistent_host(client):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we must not get this updated, it doesn't exist in the database:
-    assert response.content == 'nohost'
+    assert response.content == b'nohost'
 
 
 def test_nic_update_authorized_foreign_host(client):
@@ -57,21 +57,21 @@ def test_nic_update_authorized_foreign_host(client):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we must not get this updated, this is a host of some other user!
-    assert response.content == 'nohost'
+    assert response.content == b'nohost'
 
 
 def test_nic_update_authorized_not_fqdn_hostname(client):
     response = client.get(reverse('nic_update') + '?hostname=test',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
-    assert response.content == 'notfqdn'
+    assert response.content == b'notfqdn'
 
 
 def test_nic_update_authorized_not_fqdn_username(client):
     response = client.get(reverse('nic_update'),
                           HTTP_AUTHORIZATION=make_basic_auth_header('test', TEST_SECRET))
     assert response.status_code == 200
-    assert response.content == 'notfqdn'
+    assert response.content == b'notfqdn'
 
 
 def test_nic_update_authorized(client):
@@ -79,7 +79,8 @@ def test_nic_update_authorized(client):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we don't care whether it is nochg or good, but should be one of them:
-    assert response.content.startswith('good ') or response.content.startswith('nochg ')
+    content = response.content.decode('utf-8')
+    assert content.startswith('good ') or content.startswith('nochg ')
 
 
 def test_nic_update_authorized_myip(client):
@@ -87,17 +88,17 @@ def test_nic_update_authorized_myip(client):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we don't care whether it is nochg or good, but should be the ip from myip=...:
-    assert response.content in ['good 4.3.2.1', 'nochg 4.3.2.1']
+    assert response.content in [b'good 4.3.2.1', b'nochg 4.3.2.1']
     response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # must be good (was different IP)
-    assert response.content == 'good 1.2.3.4'
+    assert response.content == b'good 1.2.3.4'
     response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # must be nochg (was same IP)
-    assert response.content == 'nochg 1.2.3.4'
+    assert response.content == b'nochg 1.2.3.4'
 
 
 def test_nic_update_authorized_update_other_services(client):
@@ -105,19 +106,19 @@ def test_nic_update_authorized_update_other_services(client):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we don't care whether it is nochg or good, but should be the ip from myip=...:
-    assert response.content in ['good 4.3.2.1', 'nochg 4.3.2.1']
+    assert response.content in [b'good 4.3.2.1', b'nochg 4.3.2.1']
     response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # must be good (was different IP)
-    assert response.content == 'good 1.2.3.4'
+    assert response.content == b'good 1.2.3.4'
     # now check if it updated the other service also:
     assert query_ns(HOSTNAME, 'A') == '1.2.3.4'
     response = client.get(reverse('nic_update') + '?myip=2.3.4.5',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # must be good (was different IP)
-    assert response.content == 'good 2.3.4.5'
+    assert response.content == b'good 2.3.4.5'
     # now check if it updated the other service also:
     assert query_ns(HOSTNAME, 'A') == '2.3.4.5'
 
@@ -128,7 +129,7 @@ def test_nic_update_authorized_badagent(client, settings):
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET),
                           HTTP_USER_AGENT='bad_agent')
     assert response.status_code == 200
-    assert response.content == 'badagent'
+    assert response.content == b'badagent'
 
 
 def test_nic_update_session_nosession(client):
@@ -140,21 +141,23 @@ def test_nic_update_session_no_hostname(client):
     client.login(username=USERNAME, password=PASSWORD)
     response = client.get(reverse('nic_update_authorized'))
     assert response.status_code == 200
-    assert response.content == "nohost"  # we did not tell which host
+    assert response.content == b'nohost'  # we did not tell which host
 
 
 def test_nic_update_session(client):
     client.login(username=USERNAME, password=PASSWORD)
     response = client.get(reverse('nic_update_authorized') + '?hostname=%s' % (TEST_HOST, ))
     assert response.status_code == 200
-    assert response.content.startswith('good ') or response.content.startswith('nochg ')
+    content = response.content.decode('utf-8')
+    assert content.startswith('good ') or content.startswith('nochg ')
 
 
 def test_nic_update_session_myip(client):
     client.login(username=USERNAME, password=PASSWORD)
     response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
     assert response.status_code == 200
-    assert response.content.startswith('good 1.2.3.4') or response.content.startswith('nochg 1.2.3.4')
+    content = response.content.decode('utf-8')
+    assert content.startswith('good 1.2.3.4') or content.startswith('nochg 1.2.3.4')
 
 
 def test_nic_update_session_foreign_host(client):
@@ -162,7 +165,7 @@ def test_nic_update_session_foreign_host(client):
     response = client.get(reverse('nic_update_authorized') + '?hostname=%s' % TEST_HOST2)
     assert response.status_code == 200
     # we must not get this updated, this is a host of some other user!
-    assert response.content == "nohost"
+    assert response.content == b'nohost'
 
 
 def test_detect_ip_invalid_session(client):

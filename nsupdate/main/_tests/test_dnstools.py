@@ -2,6 +2,8 @@
 Tests for dnstools module.
 """
 
+from __future__ import print_function
+
 import pytest
 
 pytestmark = pytest.mark.django_db
@@ -139,55 +141,55 @@ class TestUpdate(object):
         host, ip = TEST_HOST, '1.1.1.1'
         remove_records(host)
         response = update_ns(host, 'A', ip, action='add', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'A') == ip
         response = update_ns(host, 'A', action='del')
-        print response
+        print(response)
         with pytest.raises(NXDOMAIN):
             query_ns(host, 'A') == ip
 
     def test_update_v4(self):
         host, ip = TEST_HOST, '2.2.2.2'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'A') == ip
 
         host, ip = TEST_HOST, '3.3.3.3'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'A') == ip
 
     def test_add_del_v6(self):
         host, ip = TEST_HOST, '::1'
         remove_records(host)
         response = update_ns(host, 'AAAA', ip, action='add', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'AAAA') == ip
         response = update_ns(host, 'AAAA', action='del')
-        print response
+        print(response)
         with pytest.raises(NXDOMAIN):
             query_ns(host, 'AAAA') == ip
 
     def test_update_v6(self):
         host, ip = TEST_HOST, '::2'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'AAAA') == ip
 
         host, ip = TEST_HOST, '::3'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host, 'AAAA') == ip
 
     def test_update_mixed(self):
         host4, ip4 = TEST_HOST, '4.4.4.4'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host4, 'A') == ip4
 
         host6, ip6 = TEST_HOST, '::4'
         response = update_ns(host6, 'AAAA', ip6, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host6, 'AAAA') == ip6
 
         # make sure the v4 is unchanged
@@ -195,7 +197,7 @@ class TestUpdate(object):
 
         host4, ip4 = TEST_HOST, '5.5.5.5'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
-        print response
+        print(response)
         assert query_ns(host4, 'A') == ip4
 
         # make sure the v6 is unchanged
@@ -205,4 +207,4 @@ class TestUpdate(object):
         # test whether we ONLY can update the TEST_HOST
         with pytest.raises(DnsUpdateError):
             response = update_ns(INVALID_HOST, 'A', '6.6.6.6', action='upd', ttl=60)
-            print response
+            print(response)

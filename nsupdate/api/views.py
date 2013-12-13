@@ -108,10 +108,12 @@ def basic_authenticate(auth):
     :param auth: http basic auth string
     :return: username, password
     """
+    auth = auth.decode('utf-8')
     authmeth, auth = auth.split(' ', 1)
     if authmeth.lower() != 'basic':
         return
-    auth = auth.strip().decode('base64')
+    from base64 import b64decode
+    auth = b64decode(auth.strip()).decode('utf-8')
     username, password = auth.split(':', 1)
     return username, password
 

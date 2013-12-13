@@ -2,12 +2,20 @@
 setup for nsupdate package
 """
 
+import sys
+PY2 = sys.version_info[0] == 2
+
 from setuptools import setup, find_packages
 
 from nsupdate import version
 
 with open('README.rst') as f:
     readme_content = f.read()
+
+if PY2:
+    install_requires = ['dnspython', ]
+else:
+    install_requires = ['dnspython3', ]
 
 setup(
     name='nsupdate',
@@ -41,10 +49,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=[
+    install_requires=install_requires+[
         'django >=1.5.3, <1.7',  # 1.5.3 has the session serializer configurable
                                  # 1.7 is not tested yet
-        'dnspython',
         'south',
         'django-bootstrap-form',
         'django-registration',
@@ -65,8 +72,11 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
         'Topic :: Internet :: Name Service (DNS)',
     ],
 )

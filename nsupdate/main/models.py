@@ -95,7 +95,8 @@ class Domain(models.Model):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
         user_model = get_user_model()
-        secret = user_model.objects.make_random_password(length=bitlength / 8)
+        secret = user_model.objects.make_random_password(length=bitlength // 8)
+        secret = secret.encode('utf-8')
         self.nameserver_update_secret = secret_base64 = base64.b64encode(secret)
         self.save()
         return secret_base64

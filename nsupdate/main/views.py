@@ -14,7 +14,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.utils.timezone import now
 
-import dnstools
+from . import dnstools
 
 from .forms import (CreateHostForm, EditHostForm, CreateDomainForm, EditDomainForm,
                     CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)

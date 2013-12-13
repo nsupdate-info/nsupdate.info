@@ -2,6 +2,8 @@
 Tests for main views module.
 """
 
+from __future__ import print_function
+
 import pytest
 
 from django.core.urlresolvers import reverse
@@ -30,7 +32,7 @@ def test_views_anon(client):
         # interactive updater shows http basic auth popup
         ('update', dict(), 401),
     ]:
-        print view, kwargs, status_code
+        print("%s, %s, %s" % (view, kwargs, status_code))
         response = client.get(reverse(view, kwargs=kwargs))
         assert response.status_code == status_code
 
@@ -53,6 +55,6 @@ def test_views_logged_in(client):
         ('delete_domain', dict(pk=1), 200),
         ('update', dict(), 401),
     ]:
-        print view, kwargs, status_code
+        print("%s, %s, %s" % (view, kwargs, status_code))
         response = client.get(reverse(view, kwargs=kwargs))
         assert response.status_code == status_code
