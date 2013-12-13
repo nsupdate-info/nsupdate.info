@@ -4,11 +4,13 @@ Misc. DNS related code: query, dynamic update, etc.
 Usually, higher level code wants to call the add/update/delete functions.
 """
 
+import os
+
 # time to wait for dns name resolving [s]
-RESOLVER_TIMEOUT = 5.0
+RESOLVER_TIMEOUT = float(os.environ.get('DNS_RESOLVER_TIMEOUT', '5.0'))
 
 # time to wait for dns name updating [s]
-UPDATE_TIMEOUT = 20.0
+UPDATE_TIMEOUT = float(os.environ.get('DNS_UPDATE_TIMEOUT', '20.0'))
 
 # time after we retry to reach a previously unreachable ns [s]
 UNAVAILABLE_RETRY = 300.0

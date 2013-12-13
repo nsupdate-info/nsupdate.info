@@ -6,6 +6,8 @@ python:
 env:
     global:
       - SECRET_KEY=justfortravis
+      - DNS_RESOLVER_TIMEOUT=15.0
+      - DNS_UPDATE_TIMEOUT=30.0
     matrix:
       - DJANGO=1.5.5
       - DJANGO=1.6.1
