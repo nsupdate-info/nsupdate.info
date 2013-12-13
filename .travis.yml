@@ -3,10 +3,16 @@ python:
     - "2.6"
     - "2.7"
     - "pypy"
+env:
+    global:
+      - SECRET_KEY=justfortravis
+    matrix:
+      - DJANGO=1.5.5
+      - DJANGO=1.6.1
 install:
-    - "pip install --upgrade --use-mirrors -e ."
-    - "pip install coveralls"
-env: SECRET_KEY=justfortravis
+    - "pip install --use-mirrors Django==$DJANGO"
+    - "pip install --use-mirrors -e ."
+    - "pip install --use-mirrors coveralls"
 script: "coverage run -m py.test --pep8"
 after_success:
     - coveralls
