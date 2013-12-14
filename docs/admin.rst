@@ -28,10 +28,10 @@ Configuration
 nsupdate.info Service
 ---------------------
 
-Use a local_settings.py (do not modify the nsupdate/settings.py file directly)::
+Use a local_settings.py (do not modify the nsupdate/settings/*.py files directly)::
 
-    from nsupdate.settings import *
-    # override whatever you need to override here (read nsupdate/settings.py
+    from nsupdate.settings.prod import *
+    # override whatever you need to override here (read nsupdate/settings/*.py
     # to get an overview over what you might need to customize):
     SECRET_KEY='S3CR3T'
 

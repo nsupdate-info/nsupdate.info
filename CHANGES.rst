@@ -11,8 +11,13 @@ New Features:
 
 Other changes:
 
-* remove .local_settings import from settings.py, improve docs about a sane
-  settings setup
+* important: in your local_settings.py, please do your imports like this:
+  from nsupdate.settings.dev import *   # for development
+  from nsupdate.settings.prod import *  # for production
+  after that, override whatever you need to override.
+  importing from nsupdate.settings does not work any more, nor does the
+  nsupdate.local_settings hack work any more.
+* improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x
 * for debugging, add django-debug-toolbar

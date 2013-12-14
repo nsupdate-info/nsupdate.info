@@ -1,5 +1,7 @@
 """
 Django settings for nsupdate project
+
+Note: do not directly use these settings, rather use "dev" or "prod".
 """
 
 # Note: django internally first loads its own defaults and then loads the
@@ -7,10 +9,6 @@ Django settings for nsupdate project
 
 import os
 import django.conf.global_settings as DEFAULT_SETTINGS
-
-# set this to False for production (see the docs for important hints)
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 # To make this work, put a unique, long, random, secret string into your environment.
 # E.g. in ~/.bashrc: export SECRET_KEY="..."
@@ -43,25 +41,9 @@ DATABASES = {
     }
 }
 
-WE_HAVE_SSL = True  # True if you run a https site also, suggest that site to users if they work on the http site.
 SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
 
-# these are the service host names we deal with
-BASEDOMAIN = 'nsupdate.info'
-WWW_HOST = BASEDOMAIN  # a host with a ipv4 and a ipv6 address
-# hosts to enforce a v4 / v6 connection (to determine the respective ip)
-WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN  # a host with ONLY a ipv4 address
-WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN  # a host with ONLY a ipv6 address
-
-# for debugging IP detection on localhost, use this:
-#WWW_IPV4_HOST = 'localhost:8000'
-#WWW_IPV6_HOST = 'ip6-localhost:8000'
-
 BAD_AGENTS = set()  # useragent blacklist for /nic/update service
-
-# Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [WWW_HOST, WWW_IPV4_HOST, WWW_IPV6_HOST]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -137,11 +119,6 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-if DEBUG:
-    MIDDLEWARE_CLASSES = (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ) + MIDDLEWARE_CLASSES
-    INTERNAL_IPS = ['127.0.0.1', '::1', ]  # needed for DebugToolbar!
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
@@ -181,11 +158,6 @@ INSTALLED_APPS = (
     'registration',
     'django_extensions',
 )
-if DEBUG:
-    DEBUG_TOOLBAR_PATCH_SETTINGS = False
-    INSTALLED_APPS += (
-        'debug_toolbar',
-    )
 
 # A sample logging configuration.
 # Sends an email to the site admins on every HTTP 500 error when DEBUG=False.
@@ -262,13 +234,11 @@ CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 # Settings for CSRF cookie.
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_COOKIE_PATH = '/'
-CSRF_COOKIE_SECURE = False  # use True here if you have set WE_HAVE_SSL = True
 CSRF_COOKIE_HTTPONLY = False
 
 # Settings for session cookie.
 SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_PATH = '/'
-SESSION_COOKIE_SECURE = False  # use True here if you have set WE_HAVE_SSL = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 14 * 24 * 60 * 60  # 14 days, in seconds (remember_me is True)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe (remember_me is False)
