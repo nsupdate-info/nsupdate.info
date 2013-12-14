@@ -54,7 +54,7 @@
                     last_ip = ip;
                 })
                 .fail(function( data ) {
-                    $('#response').text('Could connect to the update-service. You might want to reload the page or update your host manually.');
+                    $('#response').text('Could not connect to the update-service. You might want to reload the page or update your host manually.');
                     $('#response_timestamp').text(new Date().toISOString());
                 });
             }
