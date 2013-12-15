@@ -55,18 +55,33 @@
                     password: "{{ secret }}"
                 })
                 .done(function( data ) {
-                    $('#response').text(data);
-                    $('#response_timestamp').text(now_str());
+                    var msg;
                     last_ip = ip;
+                    response = data.split(" ");
+                    switch(response[0])
+                    {
+                        case "good": msg = "Success: IP address was updated"; break;
+                        case "nochg": msg = "Warning: IP address didn't change"; break;
+                        case "dnserr": msg = "Error: The update request resulted in a DNS error"; break;
+                        case "nohost": msg = "Error: The host you specified does not exist"; break;
+                        case "abuse": msg = "Error: Update rejected as your host is flagged for abuse"; break;
+                        case "badauth": msg = "Error: Wrong user name (host FQDN) or password (update secret)"; break;
+                        case "badagent": msg = "Error: Update rejected as your user agent is blacklisted"; break;
+                        case "notfqdn": msg = "Error: Your user name is not the FQDN of your host"; break;
+                        case "911": msg = "Error: There is a problem or maintenance at the DNS update service."; break;
+                        default: msg = "Error:"; break;
+                    }
+                    $('#response').text(msg + " [" + data + "].");
+                    $('#response_timestamp').text(now_str());
                 })
                 .fail(function( data ) {
-                    $('#response').text('update failed');
+                    $('#response').text('Error: Could not connect to the DNS update service - will retry soon...');
                     $('#response_timestamp').text(now_str());
                 });
             }
         })
         .fail(function( data ) {
-            $('#response').text('myip failed');
+            $('#response').text('Error: Could not determine IP address - will retry soon...');
             $('#response_timestamp').text(now_str());
         });
     }
