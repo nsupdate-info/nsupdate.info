@@ -15,15 +15,14 @@ Other changes:
   does the nsupdate.local_settings hack work any more).
   in your local_settings.py, please do your imports like this::
 
-  from nsupdate.settings.dev import *   # for development
-  # alternatively:
-  from nsupdate.settings.prod import *  # for production
-  # after that, override whatever you need to override.
-
+      from nsupdate.settings.dev import *   # for development
+      # alternatively:
+      from nsupdate.settings.prod import *  # for production
+      # after that, override whatever you need to override.
 * improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x
-* for debugging, add django-debug-toolbar
+* for debugging, added django-debug-toolbar
 
 
 Release 0.5.0
