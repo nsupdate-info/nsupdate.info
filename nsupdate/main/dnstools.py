@@ -161,7 +161,8 @@ def query_ns(qname, rdtype, origin=None):
     :type rdtype: int or str
     :param origin: origin zone
     :type origin: str or None
-    :return: IP (as str) or "-" if ns is not available
+    :return: IP (as str)
+    :raises: see dns.resolver.Resolver.query
     """
     origin, name = parse_name(qname, origin)
     fqdn = name + origin
@@ -274,6 +275,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     :param action: 'add', 'del' or 'upd'
     :param ttl: time to live for the added/updated resource, default 60s (int)
     :return: dns response
+    :raises: DnsUpdateError, Timeout
     """
     assert action in ['add', 'del', 'upd', ]
     nameserver, origin, domain, name, keyname, key, algo = get_ns_info(fqdn, origin)
@@ -340,7 +342,7 @@ def put_ip_into_session(session, ipaddr, kind=None, max_age=0,
     :param ipaddr: ip address (can be v4 or v6, str)
     :param kind: 'ipv4' or 'ipv6' or None to autodetect
     :param max_age: maximum age of info, if older we refresh the timestamp
-    :param save: save the session, if it was changed
+    :param save: save the session immediately, if it was changed
     """
     if kind is None:
         kind = check_ip(ipaddr)
