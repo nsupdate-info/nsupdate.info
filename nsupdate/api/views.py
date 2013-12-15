@@ -258,6 +258,17 @@ class AuthorizedNicUpdateView(View):
 
 
 def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
+    """
+    common code shared by the 2 update views
+
+    :param host: host object
+    :param hostname: hostname (fqdn)
+    :param ipaddr: new ip addr (v4 or v6)
+    :param agent: remote's user agent string
+    :param ssl: True if we use SSL/https
+    :param logger: a logger object
+    :return: Response object with dyndns2 response
+    """
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:

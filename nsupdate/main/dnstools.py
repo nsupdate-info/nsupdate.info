@@ -265,7 +265,7 @@ def get_ns_info(fqdn, origin=None):
 
 def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
     """
-    update our master server
+    update the master server
 
     :param fqdn: the fully qualified domain name to update (str)
     :param rdtype: the record type (default: 'A') (str)
