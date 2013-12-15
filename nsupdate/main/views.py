@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+views for the interactive web user interface
+"""
 
 from datetime import timedelta
 

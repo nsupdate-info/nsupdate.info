@@ -1,3 +1,7 @@
+"""
+register our models for Django's admin
+"""
+
 from django.contrib import admin
 
 from .models import Host, Domain, BlacklistedDomain, ServiceUpdater, ServiceUpdaterHostConfig

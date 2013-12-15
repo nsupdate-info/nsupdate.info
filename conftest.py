@@ -1,5 +1,5 @@
 """
-configuration for the tests
+configuration for the (py.test based) tests
 """
 
 import pytest

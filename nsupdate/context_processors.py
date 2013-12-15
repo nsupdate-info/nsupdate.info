@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+context processors for injecting some settings into the template context and
+also for keeping the IP addrs in the session fresh.
+"""
 
 import logging
 logger = logging.getLogger(__name__)

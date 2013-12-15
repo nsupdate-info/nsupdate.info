@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+form definitions (which fields are available, order, autofocus, ...)
+"""
+
 from django import forms
 
 from .models import Host, Domain, ServiceUpdaterHostConfig

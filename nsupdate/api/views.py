@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+views for the (usually non-interactive, automated) web api
+"""
 
 import logging
 logger = logging.getLogger(__name__)

@@ -1,5 +1,5 @@
 """
-reinitialize the test user account (and clean up)
+dealing with the fault counters and available/abuse/abuse_blocked flags
 """
 
 from optparse import make_option
