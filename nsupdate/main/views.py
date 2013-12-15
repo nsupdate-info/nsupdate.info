@@ -441,14 +441,19 @@ Disallow: /account/
 Disallow: /accounts/
 Disallow: /login/
 Disallow: /admin/
-Disallow: /myip/
-Disallow: /nic/update/
-Disallow: /overview/
-Disallow: /domain_overview/
-Disallow: /host/
-Disallow: /domain/
 Disallow: /status/
+Disallow: /myip/
+Disallow: /detect_ip/
 Disallow: /ajax_get_ips/
+Disallow: /nic/update/
+Disallow: /nic/update_authorized/
+Disallow: /update/
+Disallow: /host/
+Disallow: /overview/
+Disallow: /domain/
+Disallow: /domain_overview/
+Disallow: /updater_hostconfig/
+Disallow: /updater_hostconfig_overview/
 """
         return HttpResponse(content, content_type="text/plain")
 
