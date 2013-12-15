@@ -4,7 +4,6 @@ dealing with the fault counters and available/abuse/abuse_blocked flags
 
 from optparse import make_option
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from nsupdate.main.models import Host

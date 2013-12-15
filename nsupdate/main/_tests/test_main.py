@@ -2,8 +2,6 @@
 Tests for main views module.
 """
 
-import pytest
-
 from django.core.urlresolvers import reverse
 
 

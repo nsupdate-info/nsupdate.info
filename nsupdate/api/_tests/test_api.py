@@ -2,8 +2,6 @@
 Tests for api package.
 """
 
-import pytest
-
 from django.core.urlresolvers import reverse
 
 from nsupdate.main.dnstools import query_ns
