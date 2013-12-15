@@ -463,6 +463,7 @@ def csrf_failure_view(request, reason):
     Django's CSRF middleware's builtin view doesn't tell the user that he needs to have cookies enabled.
 
     :param request: django request object
+    :param reason: why the csrf check failed
     :return: HttpResponse object
     """
     if reason == "CSRF cookie not set.":

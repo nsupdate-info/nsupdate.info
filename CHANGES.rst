@@ -19,6 +19,7 @@ Other changes:
       # alternatively:
       from nsupdate.settings.prod import *  # for production
       # after that, override whatever you need to override.
+
 * improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x

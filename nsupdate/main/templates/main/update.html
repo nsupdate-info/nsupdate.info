@@ -38,14 +38,14 @@
     }
 
     function now_str() {
-        dt = new Date();
+        var dt = new Date();
         return format_dt(dt);
     }
 
     function checkIP() {
         $.get("{% url 'myip' %}")
         .done(function( data ) {
-            ip = data;
+            var ip = data;
             $('#myip').text(ip);
             $('#myip_timestamp').text(now_str());
             if(ip != last_ip) {
