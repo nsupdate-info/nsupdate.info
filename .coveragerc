@@ -7,6 +7,7 @@ omit =
     */migrations/*
     */_tests/*
     nsupdate/wsgi.py
+    nsupdate/settings/*
 
 [report]
 # Regexes for lines to exclude from consideration
