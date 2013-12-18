@@ -458,7 +458,7 @@ Disallow: /updater_hostconfig_overview/
         return HttpResponse(content, content_type="text/plain")
 
 
-def csrf_failure_view(request, reason):
+def csrf_failure_view(request, reason):  # pragma: no cover (hard to test)
     """
     Django's CSRF middleware's builtin view doesn't tell the user that he needs to have cookies enabled.
 
