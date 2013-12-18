@@ -311,4 +311,4 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
         logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
                      hostname, msg, ipaddr, ssl))
         host.register_server_fault()
-        return Response('dnserr %s' % msg)
+        return Response('dnserr')

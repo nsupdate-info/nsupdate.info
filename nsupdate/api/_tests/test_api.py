@@ -5,6 +5,7 @@ Tests for api package.
 from django.core.urlresolvers import reverse
 
 from nsupdate.main.dnstools import query_ns
+from nsupdate.main.models import Domain
 
 
 TEST_HOST = "test.nsupdate.info"
@@ -78,6 +79,16 @@ def test_nic_update_authorized(client):
     assert response.status_code == 200
     # we don't care whether it is nochg or good, but should be one of them:
     assert response.content.startswith('good ') or response.content.startswith('nochg ')
+
+
+def test_nic_update_authorized_ns_unavailable(client):
+    d = Domain.objects.get(domain=TEST_HOST)
+    d.available = False  # simulate DNS unavailability
+    d.save()
+    response = client.get(reverse('nic_update'),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == 'dnserr'
 
 
 def test_nic_update_authorized_myip(client):
