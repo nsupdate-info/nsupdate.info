@@ -4,14 +4,9 @@ ChangeLog
 Release <TBD>
 -------------
 
-New Features:
+Important notes:
 
-* browser/javascript-based update client (the URL you need is shown in the
-  "browser" help panel after you add a host or generate a new secret).
-
-Other changes:
-
-* important: importing from nsupdate.settings does not work any more (nor
+* importing from nsupdate.settings does not work any more (nor
   does the nsupdate.local_settings hack work any more).
   in your local_settings.py, please do your imports like this::
 
@@ -20,13 +15,21 @@ Other changes:
       from nsupdate.settings.prod import *  # for production
       # after that, override whatever you need to override.
 
-* important: if you run Django 1.6.x, you manually need to apply a patch for
+* if you run Django 1.6.x, you manually need to apply a patch for
   django-registration (until that package is fixed for django 1.6 compatibility),
   see the django-registration-dj16-fix.diff in the toplevel directory of the repo.
 
-* improved docs about a sane settings setup
+New Features:
+
+* browser/javascript-based update client (the URL you need is shown in the
+  "browser" help panel after you add a host or generate a new secret).
+
+Other changes:
+
+* cleaned up how settings work, improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x
+* also support Django 1.6.x
 * for debugging, added django-debug-toolbar
 
 
