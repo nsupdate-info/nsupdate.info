@@ -147,7 +147,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
     'social.apps.django_app.default',
     'south',
     'nsupdate',
@@ -156,6 +155,7 @@ INSTALLED_APPS = (
     'nsupdate.main',
     'bootstrapform',
     'registration',
+    'django.contrib.admin',
     'django_extensions',
 )
 
