@@ -20,6 +20,10 @@ Other changes:
       from nsupdate.settings.prod import *  # for production
       # after that, override whatever you need to override.
 
+* important: if you run Django 1.6.x, you manually need to apply a patch for
+  django-registration (until that package is fixed for django 1.6 compatibility),
+  see the django-registration-dj16-fix.diff in the toplevel directory of the repo.
+
 * improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x
