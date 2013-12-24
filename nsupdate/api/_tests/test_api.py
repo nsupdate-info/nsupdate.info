@@ -89,7 +89,7 @@ def test_nic_update_authorized_ns_unavailable(client):
     response = client.get(reverse('nic_update'),
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
-    assert response.content == 'dnserr'
+    assert response.content == b'dnserr'
 
 
 def test_nic_update_authorized_myip(client):
