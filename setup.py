@@ -49,7 +49,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=install_requires+[
+    install_requires=install_requires + [
         'django >=1.5.3, <1.7',  # 1.5.3 has the session serializer configurable
                                  # 1.7 is not tested yet
         'south',
