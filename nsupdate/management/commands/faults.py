@@ -1,10 +1,9 @@
 """
-reinitialize the test user account (and clean up)
+dealing with the fault counters and available/abuse/abuse_blocked flags
 """
 
 from optparse import make_option
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from nsupdate.main.models import Host
@@ -18,13 +17,13 @@ class Command(BaseCommand):
                     action='store_true',
                     dest='show_server',
                     default=False,
-                    help='reset the server fault counters of all hosts',
+                    help='show server fault counters',
         ),
         make_option('--show-client',
                     action='store_true',
                     dest='show_client',
                     default=False,
-                    help='reset the server fault counters of all hosts',
+                    help='show client fault counters',
         ),
         make_option('--reset-server',
                     action='store_true',
@@ -36,7 +35,7 @@ class Command(BaseCommand):
                     action='store_true',
                     dest='reset_client',
                     default=False,
-                    help='reset the client faults counters of all hosts',
+                    help='reset the client fault counters of all hosts',
         ),
         make_option('--reset-abuse',
                     action='store_true',

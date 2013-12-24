@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+views for the (usually non-interactive, automated) web api
+"""
 
 import logging
 logger = logging.getLogger(__name__)
@@ -218,7 +221,7 @@ class NicUpdateView(View):
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
-        return _update(host, hostname, ipaddr, agent, ssl, logger=logger)
+        return _update(host, hostname, ipaddr, ssl, logger=logger)
 
 
 class AuthorizedNicUpdateView(View):
@@ -248,15 +251,26 @@ class AuthorizedNicUpdateView(View):
             logger.warning('%s - is not owned by user: %s' % (hostname, request.user.username, ))
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
+        # note: we do not check the user agent here as this is interactive
+        # and logged-in usage - thus misbehaved user agents are no problem.
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or empty string
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
-        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
-        return _update(host, hostname, ipaddr, agent, ssl, logger=logger)
+        return _update(host, hostname, ipaddr, ssl, logger=logger)
 
 
-def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
+def _update(host, hostname, ipaddr, ssl=False, logger=None):
+    """
+    common code shared by the 2 update views
+
+    :param host: host object
+    :param hostname: hostname (fqdn)
+    :param ipaddr: new ip addr (v4 or v6)
+    :param ssl: True if we use SSL/https
+    :param logger: a logger object
+    :return: Response object with dyndns2 response
+    """
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
@@ -299,4 +313,4 @@ def _update(host, hostname, ipaddr, agent='unknown', ssl=False, logger=None):
         logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
                      hostname, msg, ipaddr, ssl))
         host.register_server_fault()
-        return Response('dnserr %s' % msg)
+        return Response('dnserr')

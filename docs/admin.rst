@@ -28,12 +28,24 @@ Configuration
 nsupdate.info Service
 ---------------------
 
-Use a local_settings.py (do not modify the nsupdate/settings.py file directly)::
+Use a local_settings.py (do not modify the nsupdate/settings/*.py files directly)::
 
-    from nsupdate.settings import *
-    # override whatever you need to override here (read nsupdate/settings.py
+    from nsupdate.settings.prod import *
+    # override whatever you need to override here (read nsupdate/settings/*.py
     # to get an overview over what you might need to customize):
     SECRET_KEY='S3CR3T'
+
+IMPORTANT: you usually need to tell django what settings you want to use.
+
+We won't document this for every single command in this documentation, but
+we'll assume that you either set DJANGO_SETTINGS_MODULE environment variable
+so it points to your settings module or that you give the --settings parameter
+additionally with all commands that need it::
+
+    DJANGO_SETTINGS_MODULE=local_settings  # this is YOUR settings file
+    or
+    django-admin.py --settings=local_settings ...
+    python manage.py --settings=local_settings ...
 
 
 Initialize the database
@@ -67,9 +79,39 @@ see the "Domains" section in the "user" part of the manual.
 Installation (for production)
 =============================
 
-You usually will use a production webserver like apache or nginx (not the
-builtin "runserver"). Please consult the webserver docs how to configure it
-and how to run django apps (wsgi apps) with it.
+You usually will use a production webserver like apache or nginx (not Django's
+builtin "runserver").
+
+WSGI
+----
+
+Module nsupdate.wsgi contains the wsgi "application" object.
+
+Please consult the webserver / django docs how to configure it and how to run
+django apps (wsgi apps) with the webserver you use.
+
+Django has nice generic documentation about this, see there:
+
+https://docs.djangoproject.com/en/1.6/howto/deployment/
+
+Even if you do not follow or fully read the deployment guide, make sure that
+you at least read the checklist:
+
+https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+
+
+HTTP Basic Auth
+---------------
+
+Additionally, you need to make sure that the "authorization" http header needed
+for HTTP Basic Auth gets through to the nsupdate.info wsgi application. Some
+web servers may need special settings for this::
+
+    WSGIPassAuthorization On  # use this for apache2/mod-wsgi
+
+
+Static Files
+------------
 
 As soon as you switch off DEBUG, Django won't serve static files any more,
 thus you need to arrange /static/ file serving by your web server.
@@ -94,10 +136,6 @@ to the outside world.
 
 Make sure your static files really work.
 
-Since version 1.6, Django has a nice deployment checklist (make sure stuff
-applies to the django version YOU use):
-
-https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 PostgreSQL
 ----------
@@ -106,7 +144,7 @@ PostgreSQL than SQLite database. Django stores its sessions into the
 database, so if you get a lot of accesses, sqlite will run into "database
 is locked" issues.
 
-Here are some notes I made when installing it using ubuntu 12.04:
+Here are some notes I made when installing PostgreSQL using Ubuntu 12.04:
 
 First installing and preparing PostgreSQL::
 
@@ -208,8 +246,14 @@ Only give Django admin access ("staff" group membership) to highly trusted admin
 Software updates / upgrades
 ---------------------------
 
+Please read the changelog before doing any upgrades, it might contain
+important hints.
+
 After upgrading the code, you'll usually need to run::
 
     python manage.py migrate
 
 This fixes your database schema so it is compatible with the new code.
+
+Of course, you'll also need to restart the django/wsgi processes, so the new
+code gets loaded.

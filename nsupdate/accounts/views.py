@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from django.views.generic import UpdateView
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse

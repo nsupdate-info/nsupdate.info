@@ -29,6 +29,9 @@ def test_views_anon(client):
         ('generate_ns_secret_view', dict(pk=1), 302),
         ('delete_host', dict(pk=1), 302),
         ('delete_domain', dict(pk=1), 302),
+        ('updater_hostconfig_overview', dict(pk=1), 302),
+        ('updater_hostconfig', dict(pk=1), 302),
+        ('delete_updater_hostconfig', dict(pk=1), 302),
         # interactive updater shows http basic auth popup
         ('update', dict(), 401),
     ]:
@@ -53,6 +56,9 @@ def test_views_logged_in(client):
         ('generate_ns_secret_view', dict(pk=1), 200),
         ('delete_host', dict(pk=1), 200),
         ('delete_domain', dict(pk=1), 200),
+        ('updater_hostconfig_overview', dict(pk=1), 200),
+        ('updater_hostconfig', dict(pk=1), 200),
+        ('delete_updater_hostconfig', dict(pk=1), 200),
         ('update', dict(), 401),
     ]:
         print("%s, %s, %s" % (view, kwargs, status_code))

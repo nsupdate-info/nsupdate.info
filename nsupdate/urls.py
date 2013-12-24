@@ -1,3 +1,7 @@
+"""
+top-level url dispatching
+"""
+
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
@@ -60,6 +64,12 @@ urlpatterns = patterns(
          'template_name': 'registration/password_change.html',  # own template
          'post_change_redirect': '/account/profile'},  # reverse() does not work here
         name='auth_password_change'),
+    #url(r'^accounts/password/reset/$',
+    #    auth_views.password_reset,
+    #    name='auth_password_reset'),
+    #url(r'^accounts/password/reset/done/$',
+    #    auth_views.password_reset,
+    #    name='password_reset_done'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     # registration end
     url(r'^account/', include('nsupdate.accounts.urls')),

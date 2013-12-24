@@ -9,11 +9,11 @@
 
         <title>{% block title %}{{ WWW_HOST }}{% endblock %}</title>
 
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
         {% include "includes/base_head.html" %}
         {% block html_head %}{% endblock %}
     </head>
@@ -119,7 +119,7 @@
             {% include "includes/base_footer.html" %}
             </div>
         </div>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <div id="ip_detection" style="display: none">
             {% comment %}
                Why IP detection it is implemented as it is

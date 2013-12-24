@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+views for the interactive web user interface
+"""
 
 from datetime import timedelta
 
@@ -438,23 +441,29 @@ Disallow: /account/
 Disallow: /accounts/
 Disallow: /login/
 Disallow: /admin/
-Disallow: /myip/
-Disallow: /nic/update/
-Disallow: /overview/
-Disallow: /domain_overview/
-Disallow: /host/
-Disallow: /domain/
 Disallow: /status/
+Disallow: /myip/
+Disallow: /detect_ip/
 Disallow: /ajax_get_ips/
+Disallow: /nic/update/
+Disallow: /nic/update_authorized/
+Disallow: /update/
+Disallow: /host/
+Disallow: /overview/
+Disallow: /domain/
+Disallow: /domain_overview/
+Disallow: /updater_hostconfig/
+Disallow: /updater_hostconfig_overview/
 """
         return HttpResponse(content, content_type="text/plain")
 
 
-def csrf_failure_view(request, reason):
+def csrf_failure_view(request, reason):  # pragma: no cover (hard to test)
     """
     Django's CSRF middleware's builtin view doesn't tell the user that he needs to have cookies enabled.
 
     :param request: django request object
+    :param reason: why the csrf check failed
     :return: HttpResponse object
     """
     if reason == "CSRF cookie not set.":

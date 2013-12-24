@@ -1,8 +1,24 @@
 ChangeLog
 =========
 
-Release <TBD>
+Release 0.6.0
 -------------
+
+Important notes:
+
+* importing from nsupdate.settings does not work any more (nor
+  does the nsupdate.local_settings hack work any more).
+  in your local_settings.py, please do your imports like this::
+
+      from nsupdate.settings.dev import *   # for development
+      # alternatively:
+      from nsupdate.settings.prod import *  # for production
+      # after that, override whatever you need to override.
+
+* if you run Django 1.6.x, you manually need to apply a patch for
+  django-registration (until that package is fixed for django 1.6
+  compatibility), see the django-registration-dj16-fix.diff in the toplevel
+  directory of the repo.
 
 New Features:
 
@@ -11,11 +27,11 @@ New Features:
 
 Other changes:
 
-* remove .local_settings import from settings.py, improve docs about a sane
-  settings setup
+* cleaned up how settings work, improved docs about a sane settings setup
 * document postgreSQL setup
 * also support Python 2.6.x
-* for debugging, add django-debug-toolbar
+* also support Django 1.6.x
+* for debugging, added django-debug-toolbar
 
 
 Release 0.5.0
