@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-Release <TBD>
+Release 0.6.0
 -------------
 
 Important notes:

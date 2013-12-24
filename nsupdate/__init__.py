@@ -62,4 +62,4 @@ class Version(tuple):  # pragma: no cover
         return version_str
 
 
-version = Version(0, 5, 0)
+version = Version(0, 6, 0)
