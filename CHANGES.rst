@@ -16,8 +16,9 @@ Important notes:
       # after that, override whatever you need to override.
 
 * if you run Django 1.6.x, you manually need to apply a patch for
-  django-registration (until that package is fixed for django 1.6 compatibility),
-  see the django-registration-dj16-fix.diff in the toplevel directory of the repo.
+  django-registration (until that package is fixed for django 1.6
+  compatibility), see the django-registration-dj16-fix.diff in the toplevel
+  directory of the repo.
 
 New Features:
 
