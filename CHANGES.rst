@@ -1,6 +1,22 @@
 ChangeLog
 =========
 
+Release <TBD>
+-------------
+
+Important notes:
+
+* ...
+
+New Features:
+
+* ...
+
+Other changes:
+
+* also support Python >= 3.3 (experimental, please give feedback)
+
+
 Release 0.6.0
 -------------
 
