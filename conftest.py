@@ -4,14 +4,16 @@ configuration for the (py.test based) tests
 
 import pytest
 
+from random import randint
+
 from django.conf import settings
 
 # this is to create a Domain entries in the database, so they can be used for unit tests:
 BASEDOMAIN = "nsupdate.info"
 TESTDOMAIN = "tests." + BASEDOMAIN
-TEST_HOST = 'test.' + TESTDOMAIN  # unit tests can update this host ONLY
+TEST_HOST = 'test%da.%s' % (randint(1, 1000000), TESTDOMAIN)  # unit tests can update this host ONLY
 TEST_SECRET = "secret"
-TEST_HOST2 = 'test2.' + TESTDOMAIN
+TEST_HOST2 = 'test%db.%s' % (randint(1, 1000000), TESTDOMAIN)
 TEST_SECRET2 = "somethingelse"
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
@@ -30,7 +32,6 @@ SECURE = False  # SSL/SNI support on python 2.x sucks :(
 
 from django.utils.translation import activate
 
-from random import randint
 from nsupdate.main.dnstools import update_ns
 
 
@@ -84,9 +85,11 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         created_by=u2,
     )
     # a Host for api / session update tests
-    h = Host(subdomain='test', domain=dt, created_by=u)
+    hostname = TEST_HOST.split('.', 1)[0]
+    h = Host(subdomain=hostname, domain=dt, created_by=u)
     h.generate_secret(secret=TEST_SECRET)
-    h2 = Host(subdomain='test2', domain=dt, created_by=u2)
+    hostname2 = TEST_HOST2.split('.', 1)[0]
+    h2 = Host(subdomain=hostname2, domain=dt, created_by=u2)
     h2.generate_secret(secret=TEST_SECRET2)
 
     # "update other service" ddns_client feature
