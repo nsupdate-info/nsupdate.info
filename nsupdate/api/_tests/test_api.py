@@ -8,8 +8,9 @@ from nsupdate.main.dnstools import query_ns
 from nsupdate.main.models import Domain
 
 
-TEST_HOST = "test.nsupdate.info"
-TEST_HOST2 = "test2.nsupdate.info"
+TESTDOMAIN = "tests.nsupdate.info"
+TEST_HOST = "test." + TESTDOMAIN
+TEST_HOST2 = "test2." + TESTDOMAIN
 TEST_SECRET = "secret"
 
 USERNAME = 'test'
@@ -83,7 +84,7 @@ def test_nic_update_authorized(client):
 
 
 def test_nic_update_authorized_ns_unavailable(client):
-    d = Domain.objects.get(domain=TEST_HOST)
+    d = Domain.objects.get(domain=TESTDOMAIN)
     d.available = False  # simulate DNS unavailability
     d.save()
     response = client.get(reverse('nic_update'),

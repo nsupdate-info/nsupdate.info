@@ -8,13 +8,14 @@ from django.conf import settings
 
 # this is to create a Domain entries in the database, so they can be used for unit tests:
 BASEDOMAIN = "nsupdate.info"
-TEST_HOST = 'test.' + BASEDOMAIN  # unit tests can update this host ONLY
+TESTDOMAIN = "tests." + BASEDOMAIN
+TEST_HOST = 'test.' + TESTDOMAIN  # unit tests can update this host ONLY
 TEST_SECRET = "secret"
-TEST_HOST2 = 'test2.' + BASEDOMAIN
+TEST_HOST2 = 'test2.' + TESTDOMAIN
 TEST_SECRET2 = "somethingelse"
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
-# no problem, you can ONLY update the TEST_HOST with this secret, nothing else:
+# no problem, you can ONLY update the TESTDOMAIN with this secret, nothing else:
 NAMESERVER_UPDATE_SECRET = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
 NAMESERVER_PUBLIC = True
 
@@ -28,6 +29,26 @@ SERVER = 'ipv4.' + BASEDOMAIN
 SECURE = False  # SSL/SNI support on python 2.x sucks :(
 
 from django.utils.translation import activate
+
+from random import randint
+from nsupdate.main.dnstools import update_ns
+
+
+@pytest.yield_fixture(scope="function")
+def ddns_hostname():
+    """
+    get a random hostname for tests and make sure it is removed from dns
+    after the test
+    """
+    hostname = "test%d" % randint(1000000000, 2000000000)
+    yield hostname
+    update_ns(hostname + '.' + TESTDOMAIN, 'A', action='del')
+    update_ns(hostname + '.' + TESTDOMAIN, 'AAAA', action='del')
+
+
+@pytest.yield_fixture(scope="function")
+def ddns_fqdn(ddns_hostname):
+    yield ddns_hostname + '.' + TESTDOMAIN
 
 
 # Note: fixture must be "function" scope (default), see https://github.com/pelme/pytest_django/issues/33
@@ -44,9 +65,9 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     u.save()
     u2 = user_model.objects.create_user(USERNAME2, 'test@example.org', PASSWORD)
     u2.save()
-    # this is for updating:
-    Domain.objects.create(
-        domain=TEST_HOST,  # special: single-host update secret!
+    # this is for tests:
+    dt = Domain.objects.create(
+        domain=TESTDOMAIN,  # special: test-domain update secret!
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret=NAMESERVER_UPDATE_SECRET,
@@ -63,9 +84,9 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         created_by=u2,
     )
     # a Host for api / session update tests
-    h = Host(subdomain='test', domain=d, created_by=u)
+    h = Host(subdomain='test', domain=dt, created_by=u)
     h.generate_secret(secret=TEST_SECRET)
-    h2 = Host(subdomain='test2', domain=d, created_by=u2)
+    h2 = Host(subdomain='test2', domain=dt, created_by=u2)
     h2.generate_secret(secret=TEST_SECRET2)
 
     # "update other service" ddns_client feature

@@ -14,8 +14,7 @@ from ..dnstools import add, delete, update, query_ns, rev_lookup, parse_name, up
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'
-TEST_HOST = 'test.' + BASEDOMAIN  # you can ONLY update THIS host in unit tests
-INVALID_HOST = 'test999.' + BASEDOMAIN  # therefore, this can't get updated
+INVALID_HOST = 'test999.' + BASEDOMAIN  # this can't get updated
 
 
 def remove_records(host, records=('A', 'AAAA', )):
@@ -29,8 +28,8 @@ def remove_records(host, records=('A', 'AAAA', )):
 
 
 class TestIntelligentUpdater(object):
-    def test_double_update(self):
-        host, ip = TEST_HOST, '1.2.3.4'
+    def test_double_update(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '1.2.3.4'
         remove_records(host)
         # first update with this IP, should work without issue:
         update(host, ip)
@@ -41,8 +40,8 @@ class TestIntelligentUpdater(object):
 
 
 class TestIntelligentAdder(object):
-    def test_double_add_same(self):
-        host, ip = TEST_HOST, '1.2.3.4'
+    def test_double_add_same(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '1.2.3.4'
         remove_records(host)
         # first add with this IP, should work without issue:
         add(host, ip)
@@ -51,8 +50,8 @@ class TestIntelligentAdder(object):
             # trying to add again with same IP should raise
             add(host, ip)
 
-    def test_double_add_different(self):
-        host, ip = TEST_HOST, '1.2.3.4'
+    def test_double_add_different(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '1.2.3.4'
         remove_records(host)
         # first add with this IP, should work without issue:
         add(host, ip)
@@ -64,8 +63,8 @@ class TestIntelligentAdder(object):
 
 
 class TestIntelligentDeleter(object):
-    def test_delete(self):
-        host, ip = TEST_HOST, '1.2.3.4'
+    def test_delete(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '1.2.3.4'
         # make sure the host is there
         update_ns(host, 'A', ip, action='add')
         delete(host)
@@ -73,13 +72,13 @@ class TestIntelligentDeleter(object):
         with pytest.raises(NXDOMAIN):
             query_ns(host, 'A')
 
-    def test_double_delete(self):
-        host = TEST_HOST
+    def test_double_delete(self, ddns_fqdn):
+        host = ddns_fqdn
         remove_records(host)
         delete(host)  # hmm, this doesn't raise NXDOMAIN!?
 
-    def test_delete_typed(self):
-        host, ip4, ip6 = TEST_HOST, '1.2.3.4', '::42'
+    def test_delete_typed(self, ddns_fqdn):
+        host, ip4, ip6 = ddns_fqdn, '1.2.3.4', '::42'
         # make sure the host is there
         update_ns(host, 'A', ip4, action='add')
         update_ns(host, 'AAAA', ip6, action='add')
@@ -94,19 +93,19 @@ class TestIntelligentDeleter(object):
 
 
 class TestQuery(object):
-    def test_queries_ok(self):
-        host, ipv4, ipv6 = TEST_HOST, '42.42.42.42', '::23'
+    def test_queries_ok(self, ddns_fqdn):
+        host, ipv4, ipv6 = ddns_fqdn, '42.42.42.42', '::23'
         remove_records(host)
         with pytest.raises(NXDOMAIN):
-            query_ns(TEST_HOST, 'A')
+            query_ns(ddns_fqdn, 'A')
         with pytest.raises(NXDOMAIN):
-            query_ns(TEST_HOST, 'AAAA')
+            query_ns(ddns_fqdn, 'AAAA')
         add(host, ipv4)
-        assert query_ns(TEST_HOST, 'A') == ipv4
+        assert query_ns(ddns_fqdn, 'A') == ipv4
         with pytest.raises(NoAnswer):
-            query_ns(TEST_HOST, 'AAAA')
+            query_ns(ddns_fqdn, 'AAAA')
         add(host, ipv6)
-        assert query_ns(TEST_HOST, 'AAAA') == ipv6
+        assert query_ns(ddns_fqdn, 'AAAA') == ipv6
 
 
 class TestReverseLookup(object):
@@ -137,8 +136,8 @@ class TestUpdate(object):
         assert str(origin) == 'bar.baz.org' + '.'
         assert str(relname) == 'foo'
 
-    def test_add_del_v4(self):
-        host, ip = TEST_HOST, '1.1.1.1'
+    def test_add_del_v4(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '1.1.1.1'
         remove_records(host)
         response = update_ns(host, 'A', ip, action='add', ttl=60)
         print(response)
@@ -148,19 +147,19 @@ class TestUpdate(object):
         with pytest.raises(NXDOMAIN):
             query_ns(host, 'A') == ip
 
-    def test_update_v4(self):
-        host, ip = TEST_HOST, '2.2.2.2'
+    def test_update_v4(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '2.2.2.2'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
         print(response)
         assert query_ns(host, 'A') == ip
 
-        host, ip = TEST_HOST, '3.3.3.3'
+        host, ip = ddns_fqdn, '3.3.3.3'
         response = update_ns(host, 'A', ip, action='upd', ttl=60)
         print(response)
         assert query_ns(host, 'A') == ip
 
-    def test_add_del_v6(self):
-        host, ip = TEST_HOST, '::1'
+    def test_add_del_v6(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '::1'
         remove_records(host)
         response = update_ns(host, 'AAAA', ip, action='add', ttl=60)
         print(response)
@@ -170,24 +169,24 @@ class TestUpdate(object):
         with pytest.raises(NXDOMAIN):
             query_ns(host, 'AAAA') == ip
 
-    def test_update_v6(self):
-        host, ip = TEST_HOST, '::2'
+    def test_update_v6(self, ddns_fqdn):
+        host, ip = ddns_fqdn, '::2'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
         print(response)
         assert query_ns(host, 'AAAA') == ip
 
-        host, ip = TEST_HOST, '::3'
+        host, ip = ddns_fqdn, '::3'
         response = update_ns(host, 'AAAA', ip, action='upd', ttl=60)
         print(response)
         assert query_ns(host, 'AAAA') == ip
 
-    def test_update_mixed(self):
-        host4, ip4 = TEST_HOST, '4.4.4.4'
+    def test_update_mixed(self, ddns_fqdn):
+        host4, ip4 = ddns_fqdn, '4.4.4.4'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
         print(response)
         assert query_ns(host4, 'A') == ip4
 
-        host6, ip6 = TEST_HOST, '::4'
+        host6, ip6 = ddns_fqdn, '::4'
         response = update_ns(host6, 'AAAA', ip6, action='upd', ttl=60)
         print(response)
         assert query_ns(host6, 'AAAA') == ip6
@@ -195,7 +194,7 @@ class TestUpdate(object):
         # make sure the v4 is unchanged
         assert query_ns(host4, 'A') == ip4
 
-        host4, ip4 = TEST_HOST, '5.5.5.5'
+        host4, ip4 = ddns_fqdn, '5.5.5.5'
         response = update_ns(host4, 'A', ip4, action='upd', ttl=60)
         print(response)
         assert query_ns(host4, 'A') == ip4
@@ -204,7 +203,7 @@ class TestUpdate(object):
         assert query_ns(host6, 'AAAA') == ip6
 
     def test_bad_update(self):
-        # test whether we ONLY can update the TEST_HOST
+        # test whether we ONLY can update the TESTDOMAIN
         with pytest.raises(DnsUpdateError):
             response = update_ns(INVALID_HOST, 'A', '6.6.6.6', action='upd', ttl=60)
             print(response)
