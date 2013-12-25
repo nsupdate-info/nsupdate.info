@@ -2,6 +2,8 @@
 
 from django.views.generic import UpdateView
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 
 from .forms import UserProfileForm
@@ -12,6 +14,10 @@ class UserProfileView(UpdateView):
     model = get_user_model()
     fields = ['first_name', 'last_name', 'email']
     form_class = UserProfileForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UserProfileView, self).dispatch(*args, **kwargs)
 
     def get_object(self, queryset=None):
         return self.request.user
