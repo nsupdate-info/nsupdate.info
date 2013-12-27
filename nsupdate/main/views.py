@@ -190,6 +190,9 @@ class OverviewView(CreateView):
             success, level, msg = False, messages.ERROR, 'Timeout - communicating to name server failed.'
         except dnstools.NameServerNotAvailable:
             success, level, msg = False, messages.ERROR, 'Name server unavailable.'
+        except Domain.DoesNotExist:
+            # should not happen: POST data had invalid (base)domain
+            success, level, msg = False, messages.ERROR, 'Base domain does not exist.'
         else:
             self.object.created_by = self.request.user
             self.object.save()
