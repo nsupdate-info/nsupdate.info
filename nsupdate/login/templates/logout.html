@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+{% block title %}{% trans "Login" %}{% endblock %}
+{% block content %}
+<div class="container">
+      <div class="form-signin">
+          <p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+          <p><a href="{% url 'django.contrib.auth.views.login' %}">{% trans 'Log in again' %}</a></p>
+      </div>
+</div>
+{% endblock %}
