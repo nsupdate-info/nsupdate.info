@@ -6,8 +6,24 @@ from django.contrib import admin
 
 from .models import Host, Domain, BlacklistedDomain, ServiceUpdater, ServiceUpdaterHostConfig
 
-admin.site.register(BlacklistedDomain)
-admin.site.register(Domain)
-admin.site.register(Host)
+
+class DomainAdmin(admin.ModelAdmin):
+    list_display = ("domain", "public", "available", "created_by")
+    list_filter = ("public", "available", "created_by")
+
+
+class HostAdmin(admin.ModelAdmin):
+    list_display = ("subdomain", "domain", "abuse_blocked")
+    list_filter = ("domain", "created_by", "abuse", "abuse_blocked")
+
+
+class BlacklistedDomainAdmin(admin.ModelAdmin):
+    list_display = ("domain", "created_by")
+    list_filter = ("created_by", "created")
+
+
+admin.site.register(BlacklistedDomain, BlacklistedDomainAdmin)
+admin.site.register(Domain, DomainAdmin)
+admin.site.register(Host, HostAdmin)
 admin.site.register(ServiceUpdater)
 admin.site.register(ServiceUpdaterHostConfig)

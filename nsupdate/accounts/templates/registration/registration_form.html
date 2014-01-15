@@ -4,7 +4,7 @@
 {% block title %}{% trans "Register for an account" %}{% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-lg-5">
+  <div class="col-md-6">
     <h2>No registration required for testing</h2>
     <p>
         You can easily test the service and see what you get.
@@ -31,9 +31,7 @@
         finishing your initial evaluation.
     </p>
   </div>
-  <div class="col-lg-1">
-  </div>
-  <div class="col-lg-6">
+  <div class="col-md-6">
     <h2>Register new account</h2>
     <p>
         Username: should be related to your <em>person or organisation</em>
@@ -41,9 +39,14 @@
         E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
         Password: please use a sane one, we trust you.
     </p>
-    <form method='post' action=''>{% csrf_token %}
-        {{ form|bootstrap }}
-        <button type="submit" class="btn btn-primary">{% trans "Send activation email" %}</button>
+    <form class="form-horizontal" role="form" method="post" action="">
+        {% csrf_token %}
+        {{ form|bootstrap_horizontal }}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="{% trans "Send activation email" %}" />
+            </div>
+        </div>
     </form>
   </div>
 </div>

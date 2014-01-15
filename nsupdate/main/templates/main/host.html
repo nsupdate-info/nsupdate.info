@@ -4,7 +4,7 @@
 {% block content %}
     <div class="row">
         <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="fa fa-angle-double-left"></i> back to overview</a></small></h3>
-        <div class="col-lg-4">
+        <div class="col-md-4">
             <h3>Edit Host</h3>
             <form method="post" action="">
                 {% csrf_token %}
@@ -19,7 +19,7 @@
                 <button type="submit" class="btn btn-primary btn-danger">Delete host</button>
             </form>
         </div>
-        <div  class="col-lg-4">
+        <div  class="col-md-4">
             <h3>Show Configuration</h3>
             <p>
                 We'll generate a ready-to-use configuration for your router / update
@@ -38,7 +38,7 @@
                 <button type="submit" class="btn btn-primary">Configure Updaters</button>
             </form>
         </div>
-        <div  class="col-lg-4">
+        <div  class="col-md-4">
             <h3>Update Nameserver Entry</h3>
             <p>Usually you configure your router to follow the dyndns2 protocol.
                But if you know what you are doing, and you want to update it manually, you can do it here.

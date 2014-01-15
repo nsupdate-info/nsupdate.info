@@ -1,27 +1,31 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load bootstrap %}
 
 {% block content %}
 <div class="row">
-    <div class="col-lg-4">
-        <h1>User Profile of {{ request.user.username }}</h1>
-        <form method="post" action="">
+    <div class="col-md-7">
+        <h2>User Profile of {{ request.user.username }}</h2>
+        <hr />
+        <form class="form-horizontal" role="form" method="post">
             {% csrf_token %}
-            {{ form|bootstrap }}
-            <button type="submit" class="btn btn-primary">Save</button>
+            {{ form|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Submit" %}" />
+                </div>
+            </div>
         </form>
     </div>
-    <div class="col-lg-1">
-    </div>
-    <div class="col-lg-6">
-        <h1>Associate with remote Account</h1>
+    <div class="col-md-5">
+        <h3>Associate with remote Account</h3>
         {% for backend in backends.not_associated %}
             <form method="get" action="{% url 'social:begin' backend %}"
                   style="display: inline-block;">
                 <button type="submit" class="btn btn-xs btn-success">{{ backend }}</button>
             </form>
         {% endfor %}
-        <h1>Deassociate from remote Account</h1>
+        <h3>Deassociate from remote Account</h3>
         {% for socauth in backends.associated %}
             <form method="post" action="{% url 'social:disconnect_individual' socauth.provider socauth.pk %}"
                   style="display: inline-block;">
@@ -29,8 +33,6 @@
                 <button type="submit" class="btn btn-xs btn-danger">{{ socauth.provider }}</button>
             </form>
         {% endfor %}
-    </div>
-    <div class="col-lg-1">
     </div>
 </div>
 {% endblock %}
