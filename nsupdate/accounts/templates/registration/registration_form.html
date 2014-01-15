@@ -39,7 +39,7 @@
         E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
         Password: please use a sane one, we trust you.
     </p>
-    <form class="form-horizontal" role="form" method='post' action=''>
+    <form class="form-horizontal" role="form" method="post" action="">
         {% csrf_token %}
         {{ form|bootstrap_horizontal }}
         <div class="form-group">
