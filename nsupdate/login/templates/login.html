@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 {% load i18n %}{% load bootstrap %}
 {% block title %}{% trans "Login" %}{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-6">
-        <h2>Login with a local Account</h2>
+        <h2>{% trans "Login with a local Account" %}</h2>
         <hr />
         {% if form.errors %}
-            <p>{% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}</p>
         {% endif %}
         <form class="form-horizontal" role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
             {% csrf_token %}
@@ -15,7 +16,7 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input id="id_remember_me" name="remember_me" type="checkbox">
-                    <label class="control-label " for="id_remember_me">Remember me</label>
+                    <label class="control-label " for="id_remember_me">{% trans "Remember me" %}</label>
                 </div>
             </div>
             <div class="form-group">
@@ -23,14 +24,14 @@
                     <input type="submit" class="btn btn-primary" value="{% trans 'Log in' %}" />
                     <a href="{% url 'registration_register' %}"><button class="btn btn-default" type="button">{% trans "Sign up" %}</button></a>
                     <p></p>
-                <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans 'Forgot your password?' %}</a></p>
+                    <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans 'Forgot your password?' %}</a></p>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="col-md-6">
-        <h2>Login with a remote Account</h2>
+        <h2>{% trans "Login with a remote Account" %}</h2>
         <hr />
         <div class="btn-toolbar" role="toolbar">
         {% for backend in backends.backends %}
@@ -43,5 +44,6 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">document.getElementById("id_username").focus();</script>
 {% endblock %}
