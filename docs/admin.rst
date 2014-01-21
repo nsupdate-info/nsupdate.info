@@ -182,6 +182,41 @@ To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
 Now proceed with syncdb / migrate as shown above.
 
 
+Customization of the Web UI
+===========================
+
+You likely will need to customize the Web UI a bit, here is how.
+
+Overriding the builtin templates
+--------------------------------
+If you want to add/modify footers or headers or if you need to add stuff
+into the HEAD element of the html, you can override some includes we made
+to support this usecase.
+
+Create an custom template directory (not within the repository / code
+directory) and add it to your settings, e.g.::
+
+    TEMPLATE_DIRS = ('/srv/nsupdate.info/templates', )
+
+Below that template directory, you can override the builtin templates by
+just using the same relative name, e.g.:
+
+* includes/base_footer.html (footer of all web UI views)
+* main/includes/home_bottom.html (bottom of main view)
+* (there are more of these, just look into the code's template dirs)
+
+Best way to start is likely to copy the original file from the template
+directories located below the code directory into YOUR custom template
+directory and then slightly modify it.
+
+As the templates might be cached in memory, you may need to restart your
+wsgi process to have them reloaded.
+
+Note: it is advised that you keep local customizations to a minimum as if you
+override builtin templates with your customized copies, you will have to keep
+your copies in sync with future changes we make to the builtin ones.
+
+
 Maintenance
 ===========
 
@@ -257,3 +292,5 @@ This fixes your database schema so it is compatible with the new code.
 
 Of course, you'll also need to restart the django/wsgi processes, so the new
 code gets loaded.
+
+
