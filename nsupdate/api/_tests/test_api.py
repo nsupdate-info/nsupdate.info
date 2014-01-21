@@ -174,6 +174,37 @@ def test_nic_update_session_foreign_host(client):
     assert response.content == b'nohost'
 
 
+def test_nic_delete_authorized(client):
+    response = client.get(reverse('nic_update') + '?myip=%s' % ('1.2.3.4', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    response = client.get(reverse('nic_update') + '?myip=%s' % ('::1', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    response = client.get(reverse('nic_delete') + '?myip=%s' % ('0.0.0.0', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'deleted A'
+    response = client.get(reverse('nic_delete') + '?myip=%s' % ('::', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'deleted AAAA'
+
+
+def test_nic_delete_session(client):
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
+    assert response.status_code == 200
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '::1'))
+    assert response.status_code == 200
+    response = client.get(reverse('nic_delete_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '0.0.0.0'))
+    assert response.status_code == 200
+    assert response.content == b'deleted A'
+    response = client.get(reverse('nic_delete_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '::'))
+    assert response.status_code == 200
+    assert response.content == b'deleted AAAA'
+
+
 def test_detect_ip_invalid_session(client):
     response = client.get(reverse('detectip', args=('invalid_session_id', )))
     assert response.status_code == 204

@@ -10,7 +10,8 @@ from .views import (
     RobotsTxtView, DomainOverviewView, DomainView, DeleteDomainView, StatusView, JsUpdateView,
     UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView)
 from ..api.views import (
-    myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView)
+    myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView,
+    NicDeleteView, AuthorizedNicDeleteView)
 
 
 urlpatterns = patterns(
@@ -38,9 +39,11 @@ urlpatterns = patterns(
     url(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView.as_view(), name='detectip'),
     url(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),
     url(r'^nic/update_authorized$', AuthorizedNicUpdateView.as_view(), name='nic_update_authorized'),
+    url(r'^nic/delete_authorized$', AuthorizedNicDeleteView.as_view(), name='nic_delete_authorized'),
     # api (for update clients)
     url(r'^myip$', myip_view, name='myip'),
     url(r'^nic/update$', NicUpdateView.as_view(), name='nic_update'),
+    url(r'^nic/delete$', NicDeleteView.as_view(), name='nic_delete'),  # api extension
     # for bots
     url(r'^robots.txt$', RobotsTxtView.as_view(), name='robots'),
 )

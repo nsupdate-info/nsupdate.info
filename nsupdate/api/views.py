@@ -18,7 +18,8 @@ from django.utils.decorators import method_decorator
 
 from ..utils import log, ddns_client
 from ..main.models import Host
-from ..main.dnstools import update, SameIpError, DnsUpdateError, NameServerNotAvailable, check_ip, put_ip_into_session
+from ..main.dnstools import (update, delete, check_ip, put_ip_into_session,
+                             SameIpError, DnsUpdateError, NameServerNotAvailable)
 
 
 def Response(content):
@@ -159,7 +160,7 @@ def check_session_auth(user, hostname):
 
 class NicUpdateView(View):
     @log.logger(__name__)
-    def get(self, request, logger=None):
+    def get(self, request, logger=None, delete=False):
         """
         dyndns2 compatible /nic/update API.
 
@@ -182,6 +183,7 @@ class NicUpdateView(View):
         https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
         :param request: django request object
+        :param delete: False means update, True means delete - used by NicDeleteView
         :return: HttpResponse object
         """
         hostname = request.GET.get('hostname')
@@ -221,7 +223,28 @@ class NicUpdateView(View):
         if ipaddr is None:
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
-        return _update(host, hostname, ipaddr, ssl, logger=logger)
+        if delete:
+            return _delete(host, hostname, ipaddr, ssl, logger=logger)
+        else:
+            return _update(host, hostname, ipaddr, ssl, logger=logger)
+
+
+class NicDeleteView(NicUpdateView):
+    @log.logger(__name__)
+    def get(self, request, logger=None, delete=True):
+        """
+        /nic/delete API - delete a A or AAAA record.
+
+        API is pretty much the same as for /nic/update, but it does not update
+        the A or AAAA record, but deletes it.
+        The ip address given via myip= param (or determined via REMOTE_ADDR)
+        is used to determine the record type for deletion, but is otherwise
+        ignored (so you can e.g. give myip=0.0.0.0 for A and myip=:: for AAAA).
+
+        :param request: django request object
+        :return: HttpResponse object
+        """
+        return super(NicDeleteView, self).get(request, logger=logger, delete=delete)
 
 
 class AuthorizedNicUpdateView(View):
@@ -231,7 +254,7 @@ class AuthorizedNicUpdateView(View):
         return super(AuthorizedNicUpdateView, self).dispatch(*args, **kwargs)
 
     @log.logger(__name__)
-    def get(self, request, logger=None):
+    def get(self, request, logger=None, delete=False):
         """
         similar to NicUpdateView, but the client is not a router or other dyndns client,
         but the admin browser who is currently logged into the nsupdate.info site.
@@ -241,6 +264,7 @@ class AuthorizedNicUpdateView(View):
         https://nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
         :param request: django request object
+        :param delete: False means update, True means delete - used by AuthorizedNicDeleteView
         :return: HttpResponse object
         """
         hostname = request.GET.get('hostname')
@@ -257,7 +281,23 @@ class AuthorizedNicUpdateView(View):
         if not ipaddr:  # None or empty string
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
-        return _update(host, hostname, ipaddr, ssl, logger=logger)
+        if delete:
+            return _delete(host, hostname, ipaddr, ssl, logger=logger)
+        else:
+            return _update(host, hostname, ipaddr, ssl, logger=logger)
+
+
+class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
+
+    @log.logger(__name__)
+    def get(self, request, logger=None, delete=True):
+        """
+        /nic/delete API - for logged-in admin browser.
+
+        :param request: django request object
+        :return: HttpResponse object
+        """
+        return super(AuthorizedNicDeleteView, self).get(request, logger=logger, delete=delete)
 
 
 def _update(host, hostname, ipaddr, ssl=False, logger=None):
@@ -317,5 +357,49 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
         msg = str(e)
         logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
                      hostname, msg, ipaddr, ssl))
+        host.register_server_fault()
+        return Response('dnserr')
+
+
+def _delete(host, hostname, ipaddr, ssl=False, logger=None):
+    """
+    common code shared by the 2 delete views
+
+    :param host: host object
+    :param hostname: hostname (fqdn)
+    :param ipaddr: ip addr (to determine record type A or AAAA)
+    :param ssl: True if we use SSL/https
+    :param logger: a logger object
+    :return: Response object with dyndns2 response
+    """
+    # we are doing abuse / available checks rather late, so the client might
+    # get more specific responses (like 'badagent' or 'notfqdn') by earlier
+    # checks. it also avoids some code duplication if done here:
+    if host.abuse or host.abuse_blocked:
+        return Response('abuse')
+    if not host.available:
+        # not available is like it doesn't exist
+        return Response('nohost')
+    ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
+                          # https://github.com/rthalley/dnspython/issues/41
+                          # TODO: reproduce and submit traceback to issue 41
+
+    try:
+        kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
+    except ValueError:
+        # invalid ip address string
+        return Response('dnserr')  # there should be a better response code for this
+
+    host.poke(kind, ssl)
+    try:
+        rdtype = 'A' if kind == 'ipv4' else 'AAAA'
+        delete(hostname, rdtype)
+        logger.info('%s - received delete for record %s, ssl: %r' % (hostname, rdtype, ssl))
+        # XXX unclear what to do for "other services" we relay updates to
+        return Response('deleted %s' % rdtype)
+    except (DnsUpdateError, NameServerNotAvailable) as e:
+        msg = str(e)
+        logger.error('%s - received delete for record %s that resulted in a dns error [%s], ssl: %r' % (
+                     hostname, rdtype, msg, ssl))
         host.register_server_fault()
         return Response('dnserr')
