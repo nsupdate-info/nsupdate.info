@@ -282,7 +282,12 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
     ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
                           # https://github.com/rthalley/dnspython/issues/41
                           # TODO: reproduce and submit traceback to issue 41
-    kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
+    try:
+        kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
+    except ValueError:
+        # invalid ip address string
+        return Response('dnserr')  # there should be a better response code for this
+
     host.poke(kind, ssl)
     try:
         update(hostname, ipaddr)
