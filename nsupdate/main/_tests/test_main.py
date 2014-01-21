@@ -17,7 +17,6 @@ def test_views_anon(client):
     for view, kwargs, status_code in [
         ('home', dict(), 200),
         ('about', dict(), 200),
-        ('legal', dict(), 200),
         ('robots', dict(), 200),
         # stuff that requires being logged-in redirects to the login view:
         ('status', dict(), 302),
@@ -45,7 +44,6 @@ def test_views_logged_in(client):
     for view, kwargs, status_code in [
         ('home', dict(), 200),
         ('about', dict(), 200),
-        ('legal', dict(), 200),
         ('robots', dict(), 200),
         ('status', dict(), 200),
         ('overview', dict(), 200),

@@ -19,7 +19,6 @@ urlpatterns = patterns(
     # interactive web ui
     url(r'^$', HomeView.as_view(), name="home"),
     url(r'^about/$', AboutView.as_view(), name="about"),
-    url(r'^legal/$', TemplateView.as_view(template_name='main/legal.html'), name="legal"),
     url(r'^update$', JsUpdateView.as_view(), name='update'),
     url(r'^overview/$', OverviewView.as_view(), name='overview'),
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
