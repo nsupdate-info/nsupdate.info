@@ -39,9 +39,9 @@
             </form>
         </div>
         <div  class="col-md-4">
-            <h3>Update Nameserver Entry</h3>
+            <h3>Update Nameserver Records</h3>
             <p>Usually you configure your router to follow the dyndns2 protocol.
-               But if you know what you are doing, and you want to update it manually, you can do it here.
+               But if you know what you are doing, and you want to update manually, you can do it here.
                <br>
                We populated the input fields for the new addresses with your currently detected remote addresses.
             </p>
@@ -51,7 +51,8 @@
                     <label for="myipv4">Set new IPv4 address</label>
                     <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required autofocus>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">Apply</button> <span id="update_result_v4"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">Update</button> <span id="update_result_v4"></span>
+                <button type="button" class="btn" onclick="delete_host_v4('{{ host.get_fqdn }}')">Delete</button> <span id="delete_result_v4"></span>
                 <p></p>
                 <div class="form-group">
                     <label for="current_ipv6">Current IPv6 address from master nameserver</label>
@@ -59,7 +60,8 @@
                     <label for="myipv6">Set new IPv6 address</label>
                     <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="give new ipv6 address" value="{{ request.session.ipv6 }}" required>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">Apply</button> <span id="update_result_v6"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">Update</button> <span id="update_result_v6"></span>
+                <button type="button" class="btn" onclick="delete_host_v6('{{ host.get_fqdn }}')">Delete</button> <span id="delete_result_v6"></span>
             <script>
                 update_host_v4 = function(host) {
                     $('#update_result_v4').text('updating...');
@@ -77,6 +79,24 @@
                         $('#update_result_v6').text(data);
                       }).fail(function( data ) {
                         $('#update_result_v6').text('error');
+                      });
+                };
+                delete_host_v4 = function(host) {
+                    $('#delete_result_v4').text('deleting...');
+                    $.get( "{% url 'nic_delete_authorized' %}", { myip: '0.0.0.0', hostname: host } )
+                      .done(function( data ) {
+                        $('#delete_result_v4').text(data);
+                      }).fail(function( data ) {
+                        $('#delete_result_v4').text('error');
+                      });
+                };
+                delete_host_v6 = function(host) {
+                    $('#delete_result_v6').text('deleting...');
+                    $.get( "{% url 'nic_delete_authorized' %}", { myip: '::', hostname: host } )
+                      .done(function( data ) {
+                        $('#delete_result_v6').text(data);
+                      }).fail(function( data ) {
+                        $('#delete_result_v6').text('error');
                       });
                 };
             </script>
