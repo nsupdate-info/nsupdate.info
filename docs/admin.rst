@@ -216,6 +216,29 @@ Note: it is advised that you keep local customizations to a minimum as if you
 override builtin templates with your customized copies, you will have to keep
 your copies in sync with future changes we make to the builtin ones.
 
+Custom templates
+----------------
+
+If you need to add some simple views, just showing some simple templates (like
+e.g. if you have some footer links that link to these views to show some site-
+specific content, some legalese, ...), do it like that:
+
+* have a footer and a custom template directory like described in previous
+  section
+* add files like main/custom/foo.html to that directory::
+
+    {% extends "base.html" %}
+    {% load bootstrap %}
+    {% block content %}
+    This is content rendered from template "foo.html".
+    {% endblock %}
+
+* link to the view made from that template like this::
+
+    <a href="{% url 'custom' template='foo.html' %}">
+        link to custom foo.html view
+    </a>
+
 
 Maintenance
 ===========

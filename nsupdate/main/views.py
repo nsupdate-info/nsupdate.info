@@ -80,6 +80,14 @@ class AboutView(TemplateView):
         return context
 
 
+class CustomTemplateView(TemplateView):
+    # template_name is set in dispatch method
+
+    def dispatch(self, *args, **kwargs):
+        self.template_name = 'main/custom/%s' % kwargs.get('template')
+        return super(CustomTemplateView, self).dispatch(*args, **kwargs)
+
+
 class HomeView(TemplateView):
     template_name = "main/home.html"
 

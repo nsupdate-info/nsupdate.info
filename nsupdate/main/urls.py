@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 from .views import (
     HomeView, OverviewView, HostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
     RobotsTxtView, DomainOverviewView, DomainView, DeleteDomainView, StatusView, JsUpdateView,
-    UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView)
+    UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView, CustomTemplateView)
 from ..api.views import (
     myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView,
     NicDeleteView, AuthorizedNicDeleteView)
@@ -19,6 +19,7 @@ urlpatterns = patterns(
     # interactive web ui
     url(r'^$', HomeView.as_view(), name="home"),
     url(r'^about/$', AboutView.as_view(), name="about"),
+    url(r'^custom/(?P<template>[\w.]+)$', CustomTemplateView.as_view(), name="custom"),
     url(r'^update$', JsUpdateView.as_view(), name='update'),
     url(r'^overview/$', OverviewView.as_view(), name='overview'),
     url(r'^host/(?P<pk>\d+)/$', HostView.as_view(), name='host_view'),
