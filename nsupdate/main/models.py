@@ -202,8 +202,9 @@ class Host(models.Model):
         record = 'A' if kind == 'ipv4' else 'AAAA'
         try:
             return dnstools.query_ns(self.get_fqdn(), record, origin=self.domain.domain)
-        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.Timeout,
-                dnstools.NameServerNotAvailable):
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return 'none'
+        except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable):
             return 'error'
 
     def get_ipv4(self):
