@@ -106,7 +106,7 @@
         </ul>
     </div>
     <div class="tab-pane" id="ddwrt">
-        <h4>DD-WRT</h4>
+        <h4>DD-WRT (verified with v24-sp2)</h4>
         <h5>Go to:</h5>
         <div class="well well-sm">
             Setup <i class="fa fa-long-arrow-right"></i>
@@ -117,9 +117,13 @@
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>DDNS Service</td><td>Custom</td></tr>
             <tr><td>DYNDNS Server</td><td>{{ WWW_IPV4_HOST }}</td></tr>
-            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
-            <tr><td>Host Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Hostname</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>URL</td><td>/nic/update?</td></tr>
+            <tr><td>Additional DDNS Options</td><td>(leave this field empty)</td></tr>
+            <tr><td>Do not use external ip check</td><td>Yes</td></tr>
+            <tr><td>Force Update Interval</td><td>7</td></tr>
         </table>
     </div>
     <div class="tab-pane" id="ddclient">
