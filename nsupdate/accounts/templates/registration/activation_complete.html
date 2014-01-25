@@ -3,7 +3,7 @@
 {% block title %}Activation complete{% endblock %}
 {% block content %}
 <h1>Thanks, activation complete!</h1>
-<p>You may now <a href="{% url 'auth_login' %}">login</a> using the username and password you set at registration.</p>
+<p>You may now <a href="{% url 'django.contrib.auth.views.login' %}">login</a> using the username and password you set at registration.</p>
 {% endblock %}
 
 
