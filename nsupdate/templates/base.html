@@ -14,6 +14,11 @@
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
+        <!-- note: keep jQuery and bootstrap js here,
+                   stuff in the include / block right below might depend on it!
+        -->
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         {% include "includes/base_head.html" %}
         {% block html_head %}{% endblock %}
     </head>
@@ -119,8 +124,6 @@
             {% include "includes/base_footer.html" %}
             </div>
         </div>
-        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <div id="ip_detection" style="display: none">
             {% comment %}
                Why IP detection it is implemented as it is
