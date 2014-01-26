@@ -174,6 +174,10 @@ def query_ns(qname, rdtype, origin=None):
     resolver.nameservers = [nameserver, ]
     resolver.search = []
     resolver.lifetime = RESOLVER_TIMEOUT
+    # as we query directly the (authoritative) master dns, we do not desire
+    # recursion. But: RD (recursion desired) is the internal default for flags
+    # (used if flags = None is given). Thus, we explicitly give flags (all off):
+    resolver.flags = 0
     try:
         answer = resolver.query(fqdn, rdtype)
         ip = str(list(answer)[0])
