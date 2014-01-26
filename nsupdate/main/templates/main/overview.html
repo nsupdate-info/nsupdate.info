@@ -8,20 +8,25 @@
             <table class="table">
             <thead>
                 <tr>
-                    <th>Host</th>
+                    <th>Host<br>Comment</th>
                     <th>Available</th>
-                    <th>Faults</th>
-                    <th>IPv4 Address (last update)</th>
-                    <th>IPv6 Address (last update)</th>
-                    <th>Comment</th>
+                    <th>Faults<br>C / S</th>
+                    <th>IPv4 Address<br>(last update)</th>
+                    <th>IPv6 Address<br>(last update)</th>
                 </tr>
             </thead>
             {% for host in hosts %}
                 <tr>
-                    <td><a href="{% url 'host_view' host.pk %}"><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></a></td>
+                    <td><a href="{% url 'host_view' host.pk %}"><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></a>
+                        <br>
+                        {{ host.comment }}
+                    </td>
                     <td>{{ host.available|yesno }}</td>
-                    <td>C: {{ host.client_faults }} S: {{ host.server_faults }}{% if host.abuse_blocked %} ABUSE-BLOCKED{% elif host.abuse %} ABUSE{% endif %}</td>
+                    <td>{{ host.client_faults }} / {{ host.server_faults }}
+                        {% if host.abuse_blocked %}<br>ABUSE-BLOCKED{% elif host.abuse %}<br>ABUSE{% endif %}
+                    </td>
                     <td>{{ host.get_ipv4 }}
+                        <br>
                         {% if host.last_update_ipv4 %}
                         ({{ host.last_update_ipv4|timesince }},
                          {% if not host.ssl_update_ipv4 %}
@@ -32,6 +37,7 @@
                         {% endif %}
                     </td>
                     <td>{{ host.get_ipv6 }}
+                        <br>
                         {% if host.last_update_ipv6 %}
                         ({{ host.last_update_ipv6|timesince }},
                          {% if not host.ssl_update_ipv6 %}
@@ -41,10 +47,9 @@
                         (unknown)
                         {% endif %}
                     </td>
-                    <td>{{ host.comment }}</td>
                 </tr>
             {% empty %}
-                <tr><td colspan="6">No hosts yet.</td></tr>
+                <tr><td colspan="5">No hosts yet.</td></tr>
             {% endfor %}
             </table>
         </div>
