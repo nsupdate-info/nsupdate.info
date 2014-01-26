@@ -9,8 +9,6 @@ html, body {
 
 .wrap {
   min-height: 100%;
-  height: auto !important;
-  height: 100%;
   /* Negative indent footer by its height */
   margin: 0 auto -120px;
   /* Pad bottom by footer height */
