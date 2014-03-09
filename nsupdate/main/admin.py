@@ -13,7 +13,7 @@ class DomainAdmin(admin.ModelAdmin):
 
 
 class HostAdmin(admin.ModelAdmin):
-    list_display = ("subdomain", "domain", "abuse_blocked")
+    list_display = ("subdomain", "domain", "abuse", "abuse_blocked")
     list_filter = ("domain", "created_by", "abuse", "abuse_blocked")
 
 
