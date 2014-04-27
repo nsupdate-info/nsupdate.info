@@ -220,7 +220,7 @@ class NicUpdateView(View):
             host.register_client_fault()
             return Response('badagent')
         ipaddr = request.GET.get('myip')
-        if ipaddr is None:
+        if not ipaddr:  # None or ''
             ipaddr = request.META.get('REMOTE_ADDR')
         ssl = request.is_secure()
         if delete:
