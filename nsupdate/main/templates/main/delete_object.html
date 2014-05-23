@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
@@ -7,7 +7,7 @@
             <h3>Delete {{ object }}</h3>
             <form action="" method="post">
                 {% csrf_token %}
-                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
                 <button type="submit" class="btn btn-primary">Confirm</button>
             </form>
         </div>

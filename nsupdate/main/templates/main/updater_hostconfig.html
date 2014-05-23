@@ -1,36 +1,36 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
-        <h3>{{ object.hostname }} ({{ object.service.name }}) <br><small><a href="{% url 'updater_hostconfig_overview' object.host.pk %}"><i class="fa fa-angle-double-left"></i> back to overview</a></small></h3>
+        <h3>{{ object.hostname }} ({{ object.service.name }}) <br><small><a href="{% url 'updater_hostconfig_overview' object.host.pk %}"><i class="fa fa-angle-double-left"></i> {% trans "back to overview" %}</a></small></h3>
         <div class="col-lg-6">
-            <h3>Edit Updater Configuration</h3>
+            <h3>{% trans "Edit Updater Configuration" %}</h3>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
             </form>
-            <h3>Delete Updater Configuration</h3>
+            <h3>{% trans "Delete Updater Configuration" %}</h3>
             <p>
-                Deleting a updater configuration is not undoable. If you need it back, you'll have to add it again.
+                {% trans "Deleting a updater configuration is not undoable. If you need it back, you'll have to add it again." %}
             </p>
             <form method="get" action="{% url 'delete_updater_hostconfig' object.pk %}">
-                <button type="submit" class="btn btn-primary">Delete</button>
+                <button type="submit" class="btn btn-primary">{% trans "Delete" %}</button>
             </form>
         </div>
         <div class="col-lg-6">
             <div class="well well-sm">
-                <h3>Help</h3>
-                <p>Here you can edit the configuration of the "{{ object.service.name }}" updater.
+                <h3>{% trans "Help" %}</h3>
+                <p>{% trans "Here you can edit the configuration of the" %} "{{ object.service.name }}" {% trans "updater" %}.
                 </p>
                 <p>
-                   The values you need here are the same ones as you would usually enter in your router
-                   or update client.
+                   {% blocktrans %}The values you need here are the same ones as you would usually enter in your router
+                   or update client.{% endblocktrans %}
                 </p>
                 <p>
-                   You get these values after registering with the "{{ object.service.name }}" service
-                   and (likely) configuring that service to accept updates.
+                   {% blocktrans %}You get these values after registering with the "{{ object.service.name }}" service
+                   and (likely) configuring that service to accept updates.{% endblocktrans %}
                 </p>
             </div>
         </div>

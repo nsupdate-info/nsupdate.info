@@ -1,97 +1,97 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
-        <h1>About the {{ WWW_HOST }} service</h1>
+       <h1>{% blocktrans %}About the {{ WWW_HOST }} service{% endblocktrans %}</h1>
         <div class="col-lg-4">
-            <h2>What's this?</h2>
+            <h2>{% trans "What's this?" %}</h2>
             <p>
-                {{ WWW_HOST }} is a <b>dynamic dns service</b>.
+                {% blocktrans %}{{ WWW_HOST }} is a <b>dynamic dns service{% endblocktrans %}</b>.
             </p>
             <p>
-                You usually need it so your router (or other dyndns2-compatible
+                {% blocktrans %}You usually need it so your router (or other dyndns2-compatible
                 client) can update a hostname, so you don't need to know or find
-                out your current IP address.
+                out your current IP address.{% endblocktrans %}
             </p>
             <p>
-                {{ WWW_HOST }} is <b>simple, usable, free, friendly, secure and respects your privacy</b>.
+                {% blocktrans %}{{ WWW_HOST }} is <b>simple, usable, free, friendly, secure and respects your privacy{% endblocktrans %}</b>.
             </p>
         </div>
         <div class="col-lg-4">
-            <h2>Why another one?</h2>
+            <h2>{% trans "Why another one?" %}</h2>
             <p>
-                As far as we know, there was no service yet that is <em>not</em>:
+                {% blocktrans %}As far as we know, there was no service yet that is <em>not</em>{% endblocktrans %}:
             </p>
             <ul>
-                <li>nagging its users to make a paid subscription</li>
-                <li>annoying its users with advertisements or spam</li>
-                <li>cancelling hosts or accounts after a short period of non-usage</li>
-                <li>hiding the few free features almost undiscoverably
-                    between a ton of commercial-only features</li>
+                <li>{% trans "nagging its users to make a paid subscription" %}</li>
+                <li>{% trans "annoying its users with advertisements or spam" %}</li>
+                <li>{% trans "cancelling hosts or accounts after a short period of non-usage" %}</li>
+                <li>{% blocktrans %}hiding the few free features almost undiscoverably
+                    between a ton of commercial-only features{% endblocktrans %}</li>
             </ul>
         </div>
         <div class="col-lg-4">
-            <h2>How is it?</h2>
+            <h2>{% trans "How is it?" %}</h2>
             <p>
-                You can just try it using the test account (see Register page).
+                {% trans "You can just try it using the test account (see Register page)." %}
             </p>
             <p>
-                Also, we have
+                {% blocktrans %}Also, we have
                 <a href="http://nsupdateinfo.readthedocs.org/"
                    title="Open docs in new window" target="_blank">documentation</a> &mdash;
                 there might be some interesting stuff for you in it that is
-                not visible or obvious on the user interface.
+                not visible or obvious on the user interface.{% endblocktrans %}
             </p>
-            <p>If you are interested in the software project, have a look at the
-                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>.
+            <p>{% blocktrans %}If you are interested in the software project, have a look at the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub{% endblocktrans %}</a>.
             </p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4">
-            <h2>Fair use of the service</h2>
+            <h2>{% trans "Fair use of the service" %}</h2>
             <p>
-                The only thing we expect from you is fair use of this service:
+                {% trans "The only thing we expect from you is fair use of this service:" %}
             </p>
             <ul>
-                <li>Don't abuse the service in any way.</li>
-                <li>Don't update your hosts too often.</li>
-                <li>Don't do updates if your IP did not change.</li>
-                <li>Don't create lots of users or lots of hosts.</li>
-                <li>Don't use the service for any illegal or otherwise questionable purpose.</li>
-                <li>Don't spam us via e-mail.</li>
+                <li>{% trans "Don't abuse the service in any way." %}</li>
+                <li>{% trans "Don't update your hosts too often." %}</li>
+                <li>{% trans "Don't do updates if your IP did not change." %}</li>
+                <li>{% trans "Don't create lots of users or lots of hosts." %}</li>
+                <li>{% trans "Don't use the service for any illegal or otherwise questionable purpose." %}</li>
+                <li>{% trans "Don't spam us via e-mail" %}.</li>
             </ul>
             <p>
-                We reserve the right to remove any account or hostname(s) that are
-                related to unfair use of the service - at any time and without prior notice.
+                {% blocktrans %}We reserve the right to remove any account or hostname(s) that are
+                related to unfair use of the service - at any time and without prior notice.{% endblocktrans %}
             </p>
         </div>
         <div class="col-lg-4">
-            <h2>No warranties</h2>
+            <h2>{% trans "No warranties" %}</h2>
             <p>
-                This is free software and a free service, there are no warranties.
+                {% trans "This is free software and a free service, there are no warranties." %}
             </p>
             <p>
-                If it breaks, it breaks.
+                {% trans "If it breaks, it breaks." %}
             </p>
         </div>
         <div class="col-lg-4">
-            <h2>Service Contact</h2>
+            <h2>{% trans "Service Contact" %}</h2>
             <p>
                 {{ SERVICE_CONTACT }}
             </p>
             <p>
-                Before contacting us via E-Mail, please read the docs, they exist for a reason.
+                {% trans "Before contacting us via E-Mail, please read the docs, they exist for a reason." %}
             </p>
-            <h2>Software Project Contact</h2>
+            <h2>{% trans "Software Project Contact" %}</h2>
             <p>
-                Visit the
-                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a> to:
+                {% blocktrans %}Visit the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a> to:{% endblocktrans %}
             </p>
             <ul>
-                <li>file issues on the issue tracker for bugs, ideas, patches.</li>
-                <li>create pull requests for your contributions.</li>
+                <li>{% trans "file issues on the issue tracker for bugs, ideas, patches." %}</li>
+                <li>{% trans "create pull requests for your contributions." %}</li>
             </ul>
         </div>
     </div>

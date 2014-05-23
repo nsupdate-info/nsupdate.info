@@ -1,18 +1,18 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <h3>Your Hosts</h3>
+            <h3>{% trans "Your Hosts" %}</h3>
             <table class="table">
             <thead>
                 <tr>
-                    <th>Host<br>Comment</th>
-                    <th>Available</th>
-                    <th>Faults<br>C / S</th>
-                    <th>IPv4 Address<br>(last update)</th>
-                    <th>IPv6 Address<br>(last update)</th>
+                    <th>{% trans "Host<br>Comment" %}</th>
+                    <th>{% trans "Available" %}</th>
+                    <th>{% blocktrans %}Faults<br>C / S{% endblocktrans %}</th>
+                    <th>{% blocktrans %}IPv4 Address<br>(last update){% endblocktrans %}</th>
+                    <th>{% blocktrans %}IPv6 Address<br>(last update){% endblocktrans %}</th>
                 </tr>
             </thead>
             {% for host in hosts %}
@@ -49,7 +49,7 @@
                     </td>
                 </tr>
             {% empty %}
-                <tr><td colspan="5">No hosts yet.</td></tr>
+                <tr><td colspan="5">{% trans "No hosts yet." %}</td></tr>
             {% endfor %}
             </table>
         </div>
@@ -59,33 +59,33 @@
     <div class="row">
         <div class="col-md-4">
             <div class="well well-sm">
-                <h3>Create a new Host</h3>
+                <h3>{% trans "Create a new Host" %}</h3>
                 <form method="post" action="">
                     {% csrf_token %}
                     {{ form|bootstrap }}
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
                 </form>
             </div>
         </div>
         <div class="col-md-8">
             <div class="well well-sm">
-                <h3>Help</h3>
-                <p>Here you can add new hosts (like routers, PCs, servers, ...).
+                <h3>{% trans "Help" %}</h3>
+                <p>{% trans "Here you can add new hosts (like routers, PCs, servers, ...)" %}.
                 </p>
-                <p>You need to be able to configure one of your machines so it sends dyndns2 compatible
+                <p>{% blocktrans %}You need to be able to configure one of your machines so it sends dyndns2 compatible
                    updates to us when your IP changes. Routers usually have some builtin software that does
-                   this, but you can also use some software on another system (like a PC or server).
+                   this, but you can also use some software on another system (like a PC or server).{% endblocktrans %}
                 </p>
                 <p>
-                   Just make sure your update client either is customizable well enough or has specific
-                   support for our service.
+                   {% blocktrans %}Just make sure your update client either is customizable well enough or has specific
+                   support for our service.{% endblocktrans %}
                 </p>
                 <p>
-                   We'll show you configuration examples after you add a host.
+                   {% trans "We'll show you configuration examples after you add a host." %}
                 </p>
             </div>
             <div class="well well-sm">
-                <h3>Your current IP(s) + reverse DNS:</h3>
+                <h3>{% trans "Your current IP(s) + reverse DNS:" %}</h3>
                 <p>
                    <b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span>
                    <br>

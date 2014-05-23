@@ -1,22 +1,22 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="jumbotron">
-        <h2>Browser-based Updater</h2>
+        <h2>{% trans "Browser-based Updater" %}</h2>
         <p>
-            Host {{ hostname }} will get automatically updated as long as you keep this window open.
+            {% blocktrans %}Host {{ hostname }} will get automatically updated as long as you keep this window open.{% endblocktrans %}
         </p>
         <noscript>
             <p class="text-danger">
-                The browser based updater only works if javascript is enabled.
+                {% trans "The browser based updater only works if javascript is enabled." %}
             </p>
         </noscript>
-        <h2>Updater Status</h2>
+        <h2>{% trans "Updater Status" %}</h2>
         <dl>
-            <dt>My IP:</dt>
+            <dt>{% trans "My IP" %}:</dt>
             <dd><span id="myip"></span> (<span id="myip_timestamp"></span>)</dd>
-            <dt>Last update response:</dt>
+            <dt>{% trans "Last update response" %}:</dt>
             <dd><span id="response"></span> (<span id="response_timestamp"></span>)</dd>
         </dl>
     </div>
@@ -61,7 +61,7 @@
                     switch(response[0])
                     {
                         case "good": msg = "Success: IP address was updated"; break;
-                        case "nochg": msg = "Warning: IP address didn't change"; break;
+                        case "nochg": msg = "Warning: IP address did not change"; break;
                         case "dnserr": msg = "Error: The update request resulted in a DNS error"; break;
                         case "nohost": msg = "Error: The host you specified does not exist"; break;
                         case "abuse": msg = "Error: Update rejected as your host is flagged for abuse"; break;
