@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-7">
-        <h2>User Profile of {{ request.user.username }}</h2>
+        <h2>{% trans "User Profile of" %} {{ request.user.username }}</h2>
         <hr />
         <form class="form-horizontal" role="form" method="post">
             {% csrf_token %}
@@ -18,14 +17,14 @@
         </form>
     </div>
     <div class="col-md-5">
-        <h3>Associate with remote Account</h3>
+        <h3>{% trans "Associate with remote Account" %}</h3>
         {% for backend in backends.not_associated %}
             <form method="get" action="{% url 'social:begin' backend %}"
                   style="display: inline-block;">
                 <button type="submit" class="btn btn-xs btn-success">{{ backend }}</button>
             </form>
         {% endfor %}
-        <h3>Deassociate from remote Account</h3>
+        <h3>{% trans "Deassociate from remote Account" %}</h3>
         {% for socauth in backends.associated %}
             <form method="post" action="{% url 'social:disconnect_individual' socauth.provider socauth.pk %}"
                   style="display: inline-block;">

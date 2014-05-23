@@ -1,5 +1,5 @@
 {% extends "registration/registration_base.html" %}
-{% load i18n %}
+{% load i18n %}{% load bootstrap %}
 {% url 'auth_login' as auth_login_url %}
 {% block title %}{% if account %}{% trans "Activation complete" %}{% else %}{% trans "Activation problem" %}{% endif %}{% endblock %}
 {% block content %}
