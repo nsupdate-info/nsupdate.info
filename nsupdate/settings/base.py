@@ -53,7 +53,7 @@ TIME_ZONE = 'Europe/Berlin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
@@ -110,6 +110,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -373,3 +374,11 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
     constants.ERROR: 'alert-danger',
 }
+
+#by default language is set to english - modify settings.py to set list of languages
+#see https://docs.djangoproject.com/en/dev/topics/i18n/translation/#message-files and
+#	https://docs.djangoproject.com/en/dev/topics/i18n/translation/#how-django-discovers-language-preference for details
+gettext_noop = lambda s: s
+LANGUAGES = (
+	('en', gettext_noop('English')),
+)
