@@ -6,20 +6,20 @@
         <div class="col-md-4">
             <h3>{% trans "Domains" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ domains_total }}</dd>
-                <dt>Public:</dt>
+                <dt>{% trans "Public:" %}</dt>
                 <dd>{{ domains_public }}</dd>
-                <dt>{% trans "Unavailable / Down" %}:</dt>
+                <dt>{% trans "Unavailable / Down:" %}</dt>
                 <dd>{{ domains_unavailable }}</dd>
             </dl>
         </div>
         <div class="col-md-4">
             <h3>{% trans "Hosts" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ hosts_total }}</dd>
-                <dt>{% trans "Unavailable / Abuse / Abuse-Blocked" %}:</dt>
+                <dt>{% trans "Unavailable / Abuse / Abuse-Blocked:" %}</dt>
                 <dd>{{ hosts_unavailable }} / {{ hosts_abuse }} / {{ hosts_abuse_blocked }}</dd>
                 <dt>{% trans "ip v4 (ssl) / v6 (ssl) updated last 2d:" %}</dt>
                 <dd>{{ hosts_ipv4_2d }} ({{ hosts_ipv4_ssl_2d }}) / {{ hosts_ipv6_2d }} ({{ hosts_ipv6_ssl_2d }})</dd>
@@ -34,17 +34,17 @@
         <div class="col-md-4">
             <h3>{% trans "Users" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ users_total }}</dd>
-                <dt>{% trans "Active" %}:</dt>
+                <dt>{% trans "Active:" %}</dt>
                 <dd>{{ users_active }}</dd>
-                <dt>{% trans "logged / created in last 2d" %}:</dt>
+                <dt>{% trans "logged / created in last 2d:" %}</dt>
                 <dd>{{ users_loggedin_2d }} / {{ users_created_2d }}</dd>
-                <dt>{% trans "logged / created in last 2w" %}:</dt>
+                <dt>{% trans "logged / created in last 2w:" %}</dt>
                 <dd>{{ users_loggedin_2w }} / {{ users_created_2w }}</dd>
-                <dt>{% trans "logged / created in last 2m" %}:</dt>
+                <dt>{% trans "logged / created in last 2m:" %}</dt>
                 <dd>{{ users_loggedin_2m }} / {{ users_created_2m }}</dd>
-                <dt>{% trans "logged / created in last 2y" %}:</dt>
+                <dt>{% trans "logged / created in last 2y:" %}</dt>
                 <dd>{{ users_loggedin_2y }} / {{ users_created_2y }}</dd>
             </dl>
         </div>

@@ -9,69 +9,73 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="generic">
-        <h4>General configuration hints</h4>
+        <h4>{% trans "General configuration hints" %}</h4>
         <p>
+            {% blocktrans %}
             Usually, you should configure one system on your network to update the DNS.
             This can be either your router or a host on your network and it will run some software
-            called the update client.
+            called the update client.{% endblocktrans %}
         </p>
         <p>
+            {% blocktrans %}
             We have some specific configuration hints for some devices and update clients,
-            please see the tabs above. If you don't find yours there, use the generic hints below.
+            please see the tabs above. If you don't find yours there, use the generic hints below.{% endblocktrans %}
         </p>
         <p>
+            {% blocktrans %}
             <b>Important note about security and compatibility</b>:
             For update URLs, we always give the https (not: http) URL as that will use an encrypted connection
             to transfer your data (including your update secret). Depending on your update client (router firmware or
             PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.
             So, if it does not work, you have the choice of using a different update client and/or a different service,
             or transmitting your data using an unencrypted connection (using http: instead of https:).<br>
-            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>
+            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>{% endblocktrans %}
         </p>
         <hr>
         <p>
-            Your update client needs to access the following URLs to update the DNS:
+            {% trans "Your update client needs to access the following URLs to update the DNS:" %}
         </p>
-        For IPv4 updates:
+        {% trans "For IPv4 updates:" %}
         <div class="well well-sm">
             <a href="https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
         </div>
-        For IPv6 updates:
+        {% trans "For IPv6 updates:" %}
         <div class="well well-sm">
             <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
         </div>
+        {% blocktrans %}
         The IPs will be determined automatically using the remote address our service is seeing
-        (see below for more details).
+        (see below for more details).{% endblocktrans %}
         <hr>
         <p>
-            Your update client has to do the following steps:
+            {% trans "Your update client has to do the following steps:" %}
         </p>
         <ul>
-            <li>Do HTTP Basic Auth with:
+            <li>{% trans "Do HTTP Basic Auth with:" %}
                 <ul>
-                    <li>Username: {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
-                    <li>Password: {{ update_secret|default:"&lt;your secret&gt;" }}</li>
+                    <li>{% trans "Username:" %} {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
+                    <li>{% trans "Password:" %} {{ update_secret|default:"&lt;your secret&gt;" }}</li>
                 </ul>
             </li>
-            <li>Send a http GET request to:
+            <li>{% trans "Send a http GET request to:" %}
                 <ul>
-                    <li>https://{{ WWW_IPV4_HOST }}/nic/update  (to update IPv4 A record in DNS)</li>
-                    <li>https://{{ WWW_IPV6_HOST }}/nic/update  (to update IPv6 AAAA record in DNS)</li>
+                    <li>https://{{ WWW_IPV4_HOST }}/nic/update  {% trans "(to update IPv4 A record in DNS)" %}</li>
+                    <li>https://{{ WWW_IPV6_HOST }}/nic/update  {% trans "(to update IPv6 AAAA record in DNS)" %}</li>
                 </ul>
             </li>
-            <li>Optionally, we support some URL arguments:
+            <li>{% trans "Optionally, we support some URL arguments:" %}
                 <ul>
-                    <li>myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
-                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)
+                    <li>{% blocktrans %}myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
+                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...){% endblocktrans %}
                     </li>
-                    <li>hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} (if not given: autodetect from http basic auth)</li>
+                    <li>{% blocktrans %}hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} (if not given: autodetect from http basic auth){% endblocktrans %}</li>
                 </ul>
             </li>
-            <li>The response status and content will be:
+            <li>{% trans "The response status and content will be:" %}
                 <ul>
-                    <li>Status 200 and "good &lt;your ip&gt;" <i class="fa fa-long-arrow-right"></i> new IP accepted</li>
-                    <li>Status 200 and "nochg &lt;your ip&gt;" <i class="fa fa-long-arrow-right"></i> IP accepted, but did not change since last update</li>
-                    <li>Status 401: Authorization Required <i class="fa fa-long-arrow-right"></i> Incorrect authentication or no http basic auth header received</li>
+                    <li>Status 200 and "good &lt;your ip&gt;" <i class="fa fa-long-arrow-right"></i> {% trans "new IP accepted" %}</li>
+                    <li>Status 200 and "nochg &lt;your ip&gt;" <i class="fa fa-long-arrow-right"></i> {% trans "IP accepted, but did not change since last update" %}</li>
+                    <li>Status 401: Authorization Required <i class="fa fa-long-arrow-right"></i> {% trans "Incorrect authentication or no http basic auth header received" %}</li>
                 </ul>
             </li>
         </ul>
@@ -79,13 +83,13 @@
     <div class="tab-pane" id="avm">
         <h4>Fritz!Box 6360, 7390 and maybe others:</h4>
         <hr>
-        <h5>Go to:</h5>
+        <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
             Internet <i class="fa fa-long-arrow-right"></i>
             Permit Access <i class="fa fa-long-arrow-right"></i>
             Dynamic DNS
         </div>
-        <h5>Enter the following data:</h5>
+        <h5>{% trans "Enter the following data:" %}</h5>
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
@@ -94,25 +98,25 @@
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
-        <h5>If you have IPv4 and IPv6</h5>
-        Set Update-URL to the following (two URLs, separated by one space)
+        <h5>{% trans "If you have IPv4 and IPv6" %}</h5>
+        {% trans "Set Update-URL to the following (two URLs, separated by one space)" %}
         <div class="well well-sm">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
-        <h5>Forcing a dynamic DNS update</h5>
-        If you want to force a dynamic update for testing purposes, you can do it like this:
+        <h5>{% trans "Forcing a dynamic DNS update" %}</h5>
+        {% trans "If you want to force a dynamic update for testing purposes, you can do it like this:" %}
         <ul>
-            <li>disable dynamic DNS, apply</li>
-            <li>enable dynamic DNS, apply</li>
-            <li>(now the Fritz!Box sends an update, it might be "good" or "nochg" depending on whether we already have that IP in DNS)</li>
+            <li>{% trans "disable dynamic DNS, apply" %}</li>
+            <li>{% trans "enable dynamic DNS, apply" %}</li>
+            <li>{% trans "(now the Fritz!Box sends an update, it might be "good" or "nochg" depending on whether we already have that IP in DNS)" %}</li>
         </ul>
     </div>
     <div class="tab-pane" id="ddwrt">
         <h4>DD-WRT (verified with v24-sp2)</h4>
-        <h5>Go to:</h5>
+        <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
             Setup <i class="fa fa-long-arrow-right"></i>
             DDNS
         </div>
-        <h5>Enter the following data:</h5>
+        <h5>{% trans "Enter the following data:" %}</h5>
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>DDNS Service</td><td>Custom</td></tr>
@@ -121,7 +125,7 @@
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
             <tr><td>Hostname</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>URL</td><td>/nic/update?</td></tr>
-            <tr><td>Additional DDNS Options</td><td>(leave this field empty)</td></tr>
+            <tr><td>Additional DDNS Options</td><td>{% trans "(leave this field empty)" %}</td></tr>
             <tr><td>Do not use external ip check</td><td>Yes</td></tr>
             <tr><td>Force Update Interval</td><td>7</td></tr>
         </table>
@@ -129,7 +133,7 @@
     <div class="tab-pane" id="ddclient">
         <h4>ddclient</h4>
         <p>
-            ddclient is a popular dyndns update daemon on Linux.
+            {% trans "ddclient is a popular dyndns update daemon on Linux." %}
         </p>
         <pre># /etc/ddclient.conf
 
@@ -164,7 +168,7 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
         <div class="well well-sm">
             Services <i class="fa fa-long-arrow-right"></i>Dynamic DNS
         </div>
-        <h5>Enter the following data:</h5>
+        <h5>{% trans "Enter the following data:" %}</h5>
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>Service Type</td><td>DynDNS</td></tr>
@@ -176,41 +180,42 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
     </div>
     <div class="tab-pane" id="browser">
         <h4>Browser-based update client</h4>
+        {% blocktrans %}
         These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.
-        It periodically checks your IP and updates DNS if it changes.
+        It periodically checks your IP and updates DNS if it changes.{% endblocktrans %}
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update   (similar, but ipv4 only)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update   (similar, but ipv6 only)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update   {% blocktrans %}(updates hostname to point to remote ipv4 or ipv6 address){% endblocktrans %}</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update   {% blocktrans %}(similar, but ipv4 only){% endblocktrans %}</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update   {% blocktrans %}(similar, but ipv6 only){% endblocktrans %}</li>
         </ul>
         <h4>Update URLs for browser / http user agent use</h4>
-        Interactive - will ask for username (give your hostname) and password (give your secret):
+        {% blocktrans %}Interactive - will ask for username (give your hostname) and password (give your secret):{% endblocktrans %}
         <ul>
-            <li>https://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
-            <li>https://{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+            <li>https://{{ WWW_HOST }}/nic/update   {% blocktrans %}(updates hostname to point to remote ipv4 or ipv6 address){% endblocktrans %}</li>
+            <li>https://{{ WWW_IPV4_HOST }}/nic/update   {% blocktrans %}(similar, but ipv4 only){% endblocktrans %}</li>
+            <li>https://{{ WWW_IPV6_HOST }}/nic/update   {% blocktrans %}(similar, but ipv6 only){% endblocktrans %}</li>
         </ul>
         Giving the http basic auth username and password in the URL:
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   {% blocktrans %}(updates hostname to point to remote ipv4 or ipv6 address){% endblocktrans %}</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   {% blocktrans %}(similar, but ipv4 only){% endblocktrans %}</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   {% blocktrans %}(similar, but ipv6 only){% endblocktrans %}</li>
         </ul>
-        As above, but manually specifying the IP address:
+        {% trans "As above, but manually specifying the IP address:" %}
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   {% blocktrans %}(updates hostname to point to ipv4 127.0.0.1){% endblocktrans %}</li>
+            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   {% blocktrans %}(updates hostname to point to ipv6 ::1){% endblocktrans %}</li>
         </ul>
-        Explanation of parameters:
+        {% trans "Explanation of parameters:" %}
         <ul>
             {% if not host %}
-                <li>&lt;your hostname&gt;: your fully qualified hostname, something like example.{{ WWW_HOST }}</li>
+                <li>&lt;your hostname&gt;: {% blocktrans %}your fully qualified hostname, something like example.{{ WWW_HOST }}{% endblocktrans %}</li>
             {% endif %}
             {% if not update_secret %}
-                <li>&lt;your secret&gt;: the secret you have configured for this hostname</li>
+                <li>&lt;your secret&gt;: {% blocktrans %}the secret you have configured for this hostname{% endblocktrans %}</li>
             {% endif %}
-            <li>IP addresses: we use the v4 and v6 localhost addresses in the examples, but
-                of course you need to use your real public IP instead of that.
+            <li>{% blocktrans %}IP addresses: we use the v4 and v6 localhost addresses in the examples, but
+                of course you need to use your real public IP instead of that.{% endblocktrans %}
             </li>
         </ul>
     </div>

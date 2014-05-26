@@ -5,39 +5,43 @@
 {% block content %}
 <div class="row">
   <div class="col-md-6">
-    <h2>No registration required for testing</h2>
+    <h2>{% trans "No registration required for testing" %}</h2>
     <p>
-        You can easily test the service and see what you get.
+        {% trans "You can easily test the service and see what you get." %}
     </p>
     <p>
-        Just directly log in as:
+        {% trans "Just directly log in as:" %}
     </p>
     <ul>
-        <li>username: test</li>
-        <li>password: test</li>
+        <li>{% trans "username: test" %}</li>
+        <li>{% trans "password: test" %}</li>
     </ul>
     <p>
+        {% blocktrans %}
         <b>Note:</b> if that doesn't work, the service administrator did not set up
         the test account yet or discontinued offering it. In that case, you can
-        still just register a new account.
+        still just register a new account.{% endblocktrans %}
     </p>
-    <h2>test account is <b>only</b> for testing</h2>
+    <h2>{% blocktrans %}test account is <b>only</b> for testing{% endblocktrans %}</h2>
     <p>
+        {% blocktrans %}
         Any data (hosts, domains, ...) entered using the test account might be removed
-        at any time and without prior notice.
+        at any time and without prior notice.{% endblocktrans %}
     </p>
     <p>
+        {% blocktrans %}
         So if you'ld like your stuff to stay, please register for a regular account after
-        finishing your initial evaluation.
+        finishing your initial evaluation.{% endblocktrans %}
     </p>
   </div>
   <div class="col-md-6">
-    <h2>Register new account</h2>
+    <h2>{% trans "Register new account" %}</h2>
     <p>
+        {% blocktrans %}
         Username: should be related to your <em>person or organisation</em>
         (not: to the host(s) you want to register).<br>
         E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
-        Password: please use a sane one, we trust you.
+        Password: please use a sane one, we trust you.{% endblocktrans %}
     </p>
     <form class="form-horizontal" role="form" method="post" action="">
         {% csrf_token %}
