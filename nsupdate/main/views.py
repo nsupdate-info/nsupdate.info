@@ -3,6 +3,7 @@
 views for the interactive web user interface
 """
 
+import socket
 from datetime import timedelta
 
 from django.db.models import Q
@@ -203,6 +204,8 @@ class OverviewView(CreateView):
         except Domain.DoesNotExist:
             # should not happen: POST data had invalid (base)domain
             success, level, msg = False, messages.ERROR, 'Base domain does not exist.'
+        except socket.error as err:
+            success, level, msg = False, messages.ERROR, 'Communication to name server failed [%s]' % str(err)
         else:
             self.object.created_by = self.request.user
             self.object.save()
