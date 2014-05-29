@@ -36,6 +36,7 @@ from django.utils.timezone import now
 
 
 Timeout = dns.resolver.Timeout
+NoNameservers = dns.resolver.NoNameservers
 
 
 class SameIpError(ValueError):

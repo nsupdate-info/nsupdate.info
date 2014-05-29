@@ -199,6 +199,8 @@ class OverviewView(CreateView):
             success, level, msg = False, messages.ERROR, 'Timeout - communicating to name server failed.'
         except dnstools.NameServerNotAvailable:
             success, level, msg = False, messages.ERROR, 'Name server unavailable.'
+        except dnstools.NoNameservers:
+            success, level, msg = False, messages.ERROR, 'Resolving failed: No name servers.'
         except dnstools.DnsUpdateError as e:
             success, level, msg = False, messages.ERROR, 'DNS update error [%s].' % str(e)
         except Domain.DoesNotExist:
