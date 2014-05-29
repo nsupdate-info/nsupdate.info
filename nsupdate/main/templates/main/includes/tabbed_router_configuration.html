@@ -179,22 +179,22 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
         These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.
         It periodically checks your IP and updates DNS if it changes.
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update   (similar, but ipv4 only)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update   (similar, but ipv6 only)</li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update">update hostname to point to remote ipv4 or ipv6 address</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">similar, ipv4 only</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">similar, ipv6 only</a></li>
         </ul>
         <h4>Update URLs for browser / http user agent use</h4>
         Interactive - will ask for username (give your hostname) and password (give your secret):
         <ul>
-            <li>https://{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
-            <li>https://{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+            <li><a href="https://{{ WWW_HOST }}/nic/update">update hostname to point to remote ipv4 or ipv6 address</a></li>
+            <li><a href="https://{{ WWW_IPV4_HOST }}/nic/update">similar, ipv4 only</a></li>
+            <li><a href="https://{{ WWW_IPV6_HOST }}/nic/update">similar, ipv6 only</a></li>
         </ul>
         Giving the http basic auth username and password in the URL:
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update   (updates hostname to point to remote ipv4 or ipv6 address)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update   (similar, but ipv4 only)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update   (similar, but ipv6 only)</li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update">update hostname to point to remote ipv4 or ipv6 address</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">similar, ipv4 only</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update">similar, ipv6 only</a></li>
         </ul>
         As above, but manually specifying the IP address:
         <ul>
