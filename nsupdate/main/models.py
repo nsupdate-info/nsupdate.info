@@ -183,20 +183,20 @@ class Host(models.Model):
         return '%s.%s' % (self.subdomain, self.domain.domain)
 
     @classmethod
-    def filter_by_fqdn(cls, fqdn, **kwargs):
+    def get_by_fqdn(cls, fqdn, **kwargs):
         # Assuming subdomain has no dots (.) the fqdn is split at the first dot
         splitted = fqdn.split('.', 1)
-        if not len(splitted) == 2:
-            raise ValueError("FQDN has to contain (at least) one dot")
-        hosts = Host.objects.filter(
-            subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
-        count = len(hosts)
-        if count == 0:
+        if len(splitted) != 2:
+            raise ValueError("get_by_fqdn(%s): FQDN has to contain (at least) one dot" % fqdn)
+        try:
+            host = Host.objects.get(subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
+        except Host.DoesNotExist:
             return None
-        if count == 1:
-            return hosts[0]
-        if count > 1:
-            raise ValueError("filter_by_fqdn(%s) found more than 1 host" % fqdn)
+        except Host.MultipleObjectsReturned:
+            # should not happen, see Meta.unique_together
+            raise ValueError("get_by_fqdn(%s) found more than 1 host" % fqdn)
+        else:
+            return host
 
     def get_ip(self, kind):
         record = 'A' if kind == 'ipv4' else 'AAAA'

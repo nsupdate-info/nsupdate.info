@@ -132,7 +132,7 @@ def check_api_auth(username, password):
     """
     fqdn = username
     try:
-        host = Host.filter_by_fqdn(fqdn)
+        host = Host.get_by_fqdn(fqdn)
     except ValueError:
         return None
     if host is None or not check_password(password, host.update_secret):
@@ -150,7 +150,7 @@ def check_session_auth(user, hostname):
     """
     fqdn = hostname
     try:
-        host = Host.filter_by_fqdn(fqdn, created_by=user)
+        host = Host.get_by_fqdn(fqdn, created_by=user)
     except ValueError:
         return None
     # we have specifically looked for a host of the logged in user,
