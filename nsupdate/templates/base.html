@@ -88,7 +88,7 @@
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 Your (http) connection is unencrypted and thus insecure.
-                                {% if WE_HAVE_SSL %}
+                                {% if WE_HAVE_TLS %}
                                     Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.
                                 {% endif %}
                                 {% if COOKIE_SECURE %}

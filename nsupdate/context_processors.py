@@ -22,7 +22,7 @@ def add_settings(request):
     context['WWW_IPV4_HOST'] = settings.WWW_IPV4_HOST
     context['WWW_IPV6_HOST'] = settings.WWW_IPV6_HOST
     context['SERVICE_CONTACT'] = settings.SERVICE_CONTACT  # about view
-    context['WE_HAVE_SSL'] = settings.WE_HAVE_SSL
+    context['WE_HAVE_TLS'] = settings.WE_HAVE_TLS
     context['COOKIE_SECURE'] = settings.SESSION_COOKIE_SECURE or settings.CSRF_COOKIE_SECURE
     return context
 

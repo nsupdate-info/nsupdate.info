@@ -10,7 +10,7 @@ Use https for the web interface as well as for the update client (if possible).
 Otherwise, your username / password (FQDN / update secret) will be transmitted
 in clear text (unencrypted).
 
-The web interface will warn you if you use it via http. If WE_HAVE_SSL is
+The web interface will warn you if you use it via http. If WE_HAVE_TLS is
 set to True, it will suggest you better use the https site and link there.
 
 Additionally, the service administrator can implement a redirect from the
@@ -134,7 +134,7 @@ The software ("as is") uses these cookies:
 * "sessionid" (host-only, to keep the session when you have logged-in to the
   web interface)
 
-If you have set WE_HAVE_SSL to True (because you run the software on a https
+If you have set WE_HAVE_TLS to True (because you run the software on a https
 site), you should also set *_COOKIE_SECURE to True to avoid the cookies getting
 transmitted via http.
 

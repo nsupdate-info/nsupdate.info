@@ -7,9 +7,9 @@ from .base import *
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-WE_HAVE_SSL = True  # True if you run a https site also, suggest that site to users if they work on the http site.
-CSRF_COOKIE_SECURE = WE_HAVE_SSL
-SESSION_COOKIE_SECURE = WE_HAVE_SSL
+WE_HAVE_TLS = True  # True if you run a https site also, suggest that site to users if they work on the http site.
+CSRF_COOKIE_SECURE = WE_HAVE_TLS
+SESSION_COOKIE_SECURE = WE_HAVE_TLS
 
 # these are the service host names we deal with
 BASEDOMAIN = 'nsupdate.info'

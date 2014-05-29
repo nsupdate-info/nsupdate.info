@@ -6,7 +6,8 @@ Release <TBD>
 
 Important notes:
 
-* ...
+* WE_HAVE_SSL configuration setting name was changed to WE_HAVE_TLS.
+  Please update your configuration, if you use it.
 
 New Features:
 

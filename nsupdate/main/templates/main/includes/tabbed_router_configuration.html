@@ -26,7 +26,7 @@
             PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.
             So, if it does not work, you have the choice of using a different update client and/or a different service,
             or transmitting your data using an unencrypted connection (using http: instead of https:).<br>
-            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>
+            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_TLS %}not {% endif %}supported.</b>
         </p>
         <hr>
         <p>
