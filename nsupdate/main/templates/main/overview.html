@@ -23,7 +23,11 @@
                     </td>
                     <td>{{ host.available|yesno }}</td>
                     <td>{{ host.client_faults }} / {{ host.server_faults }}
-                        {% if host.abuse_blocked %}<br>ABUSE-BLOCKED{% elif host.abuse %}<br>ABUSE{% endif %}
+                        {% if host.abuse_blocked %}
+                            <br><span class="label label-danger">ABUSE-BLOCKED</span>
+                        {% elif host.abuse %}
+                            <br><span class="label label-warning">ABUSE</span>
+                        {% endif %}
                     </td>
                     <td>{{ host.get_ipv4 }}
                         <br>
