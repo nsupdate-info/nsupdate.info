@@ -44,10 +44,10 @@ Features
   accounts - everything supported by python-social-auth package)
 * Manual IP updates via web interface
 * Browser-based update client for temporary/adhoc usage
-* Shows time since last update via api, whether it used SSL or not
+* Shows time since last update via api, whether it used TLS or not
 * Shows v4 and v6 IP addresses (from master nameserver records)
 * Shows client / server fault counters, available and abuse flags
-* Supports IP v4 and v6, SSL.
+* Supports IP v4 and v6, TLS.
 * Easy and simple web interface, it tries to actively help to configure
   routers / update clients / nameservers.
 * Made with security and privacy in mind

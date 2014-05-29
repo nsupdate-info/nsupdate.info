@@ -24,7 +24,7 @@ def dyndns2_update(name, password,
     :param hostname: hostname we want to update
     :param myip: the new ip address for hostname
     :param path: url path (default: '/nic/update')
-    :param secure: whether to use ssl for the request (default: True)
+    :param secure: whether to use tls for the request (default: True)
                    note: if you use secure=False, it will transmit
                    the given data unencrypted.
     :param timeout: how long to wait until response has to begin

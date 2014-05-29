@@ -17,7 +17,7 @@
             </thead>
             {% for uc in updater_configs %}
                 <tr>
-                    <td>{{ uc.service.name }} (SSL: {{ uc.service.secure|yesno }})</td>
+                    <td>{{ uc.service.name }} (TLS: {{ uc.service.secure|yesno }})</td>
                     <td><a href="{% url 'updater_hostconfig' uc.pk %}">{{ uc.hostname }}</a></td>
                     <td>{{ uc.give_ipv4|yesno }}</td>
                     <td>{{ uc.give_ipv6|yesno }}</td>

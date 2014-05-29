@@ -307,7 +307,7 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
     :param host: host object
     :param hostname: hostname (fqdn)
     :param ipaddr: new ip addr (v4 or v6)
-    :param ssl: True if we use SSL/https
+    :param ssl: True if we use TLS/https
     :param logger: a logger object
     :return: Response object with dyndns2 response
     """
@@ -331,7 +331,7 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
     host.poke(kind, ssl)
     try:
         update(hostname, ipaddr)
-        logger.info('%s - received good update -> ip: %s ssl: %r' % (hostname, ipaddr, ssl))
+        logger.info('%s - received good update -> ip: %s tls: %r' % (hostname, ipaddr, ssl))
         # now check if there are other services we shall relay updates to:
         for hc in host.serviceupdaterhostconfigs.all():
             if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
@@ -350,12 +350,12 @@ def _update(host, hostname, ipaddr, ssl=False, logger=None):
                     logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s ssl: %r' % (hostname, ipaddr, ssl))
+        logger.warning('%s - received no-change update, ip: %s tls: %r' % (hostname, ipaddr, ssl))
         host.register_client_fault()
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        logger.error('%s - received update that resulted in a dns error [%s], ip: %s ssl: %r' % (
+        logger.error('%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
                      hostname, msg, ipaddr, ssl))
         host.register_server_fault()
         return Response('dnserr')
@@ -368,7 +368,7 @@ def _delete(host, hostname, ipaddr, ssl=False, logger=None):
     :param host: host object
     :param hostname: hostname (fqdn)
     :param ipaddr: ip addr (to determine record type A or AAAA)
-    :param ssl: True if we use SSL/https
+    :param ssl: True if we use TLS/https
     :param logger: a logger object
     :return: Response object with dyndns2 response
     """
@@ -394,12 +394,12 @@ def _delete(host, hostname, ipaddr, ssl=False, logger=None):
     try:
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
         delete(hostname, rdtype)
-        logger.info('%s - received delete for record %s, ssl: %r' % (hostname, rdtype, ssl))
+        logger.info('%s - received delete for record %s, tls: %r' % (hostname, rdtype, ssl))
         # XXX unclear what to do for "other services" we relay updates to
         return Response('deleted %s' % rdtype)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        logger.error('%s - received delete for record %s that resulted in a dns error [%s], ssl: %r' % (
+        logger.error('%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
                      hostname, rdtype, msg, ssl))
         host.register_server_fault()
         return Response('dnserr')

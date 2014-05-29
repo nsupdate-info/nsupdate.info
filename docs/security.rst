@@ -22,7 +22,7 @@ For the router / update client configuration examples we show when creating a
 update secret, we use update URLs with https: (and we also tell why it might
 not work).
 
-On the hosts overview page, we show whether we received the last update via SSL.
+On the hosts overview page, we show whether we received the last update via TLS.
 
 
 Login with remote vs. local Account
@@ -109,8 +109,8 @@ Other Services Update Secret (dyndns2 client)
 We need to store this secret "as is" into the database for the same reasons as
 outlined above.
 
-But: we tell you in the services overview whether we'll use SSL to transmit the
-update, so at least if SSL is enabled, it won't go unencrypted over the wire.
+But: we tell you in the services overview whether we'll use TLS to transmit the
+update, so at least if TLS is enabled, it won't go unencrypted over the wire.
 
 
 CSRF protection

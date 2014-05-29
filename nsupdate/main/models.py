@@ -234,7 +234,7 @@ class Host(models.Model):
     def generate_secret(self, secret=None):
         # note: we use a quick hasher for the update_secret as expensive
         # more modern hashes might put too much load on the servers. also
-        # many update clients might use http without ssl, so it is not too
+        # many update clients might use http without tls, so it is not too
         # secure anyway.
         if secret is None:
             user_model = get_user_model()
@@ -278,7 +278,7 @@ class ServiceUpdater(models.Model):
         help_text="Update Server URL path of this service")
     secure = models.BooleanField(
         default=True,
-        help_text="Use https / SSL to contact the Update Server?")
+        help_text="Use https / TLS to contact the Update Server?")
 
     # what kind(s) of IPs is (are) acceptable to this service:
     accept_ipv4 = models.BooleanField(default=False)
