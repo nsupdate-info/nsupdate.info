@@ -5,6 +5,7 @@ dealing with the fault counters and available/abuse/abuse_blocked flags
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 
 from nsupdate.main.models import Host
 
@@ -73,31 +74,32 @@ class Command(BaseCommand):
         reset_abuse = options['reset_abuse']
         reset_abuse_blocked = options['reset_abuse_blocked']
         flag_abuse = options['flag_abuse']
-        for h in Host.objects.all():
-            if show_client or show_server:
-                output = u""
-                if show_client:
-                    output += u"%-6d " % h.client_faults
-                if show_server:
-                    output += u"%-6d " % h.server_faults
-                output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
-                self.stdout.write(output)
-            if (flag_abuse is not None or reset_client or reset_server or
-                reset_available or reset_abuse or reset_abuse_blocked):
-                if flag_abuse is not None:
-                    if h.client_faults > flag_abuse:
-                        h.abuse = True
-                        self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
-                                          h.get_fqdn(), h.created_by, h.client_faults))
+        with transaction.commit_on_success():  # TODO: after requiring django 1.6, use atomic()
+            for h in Host.objects.all():
+                if show_client or show_server:
+                    output = u""
+                    if show_client:
+                        output += u"%-6d " % h.client_faults
+                    if show_server:
+                        output += u"%-6d " % h.server_faults
+                    output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
+                    self.stdout.write(output)
+                if (flag_abuse is not None or reset_client or reset_server or
+                    reset_available or reset_abuse or reset_abuse_blocked):
+                    if flag_abuse is not None:
+                        if h.client_faults > flag_abuse:
+                            h.abuse = True
+                            self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
+                                              h.get_fqdn(), h.created_by, h.client_faults))
+                            h.client_faults = 0
+                    if reset_client:
                         h.client_faults = 0
-                if reset_client:
-                    h.client_faults = 0
-                if reset_server:
-                    h.server_faults = 0
-                if reset_available:
-                    h.available = True
-                if reset_abuse:
-                    h.abuse = False
-                if reset_abuse_blocked:
-                    h.abuse_blocked = False
-                h.save()
+                    if reset_server:
+                        h.server_faults = 0
+                    if reset_available:
+                        h.available = True
+                    if reset_abuse:
+                        h.abuse = False
+                    if reset_abuse_blocked:
+                        h.abuse_blocked = False
+                    h.save()
