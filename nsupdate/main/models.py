@@ -214,13 +214,13 @@ class Host(models.Model):
     def get_ipv6(self):
         return self.get_ip('ipv6')
 
-    def poke(self, kind, ssl):
+    def poke(self, kind, secure):
         if kind == 'ipv4':
             self.last_update_ipv4 = now()
-            self.ssl_update_ipv4 = ssl
+            self.ssl_update_ipv4 = secure
         else:
             self.last_update_ipv6 = now()
-            self.ssl_update_ipv6 = ssl
+            self.ssl_update_ipv6 = secure
         self.save()
 
     def register_client_fault(self, increment=1):
