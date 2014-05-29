@@ -198,8 +198,8 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
         </ul>
         As above, but manually specifying the IP address:
         <ul>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1   (updates hostname to point to ipv4 127.0.0.1)</li>
-            <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1   (updates hostname to point to ipv6 ::1)</li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1">update hostname to point to ipv4 127.0.0.1</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1">update hostname to point to ipv6 ::1</a></li>
         </ul>
         Explanation of parameters:
         <ul>
