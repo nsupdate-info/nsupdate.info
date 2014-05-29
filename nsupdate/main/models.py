@@ -177,7 +177,8 @@ class Host(models.Model):
             self.subdomain, self.domain.domain)
 
     class Meta(object):
-        unique_together = (('subdomain', 'domain'),)
+        unique_together = (('subdomain', 'domain'), )
+        index_together = (('subdomain', 'domain'), )
 
     def get_fqdn(self):
         return '%s.%s' % (self.subdomain, self.domain.domain)
