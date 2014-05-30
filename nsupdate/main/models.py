@@ -165,8 +165,8 @@ class Host(models.Model):
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(blank=True, null=True)
     # how we received the last update for v4/v6 addr
-    ssl_update_ipv4 = models.BooleanField(default=False)
-    ssl_update_ipv6 = models.BooleanField(default=False)
+    tls_update_ipv4 = models.BooleanField(default=False)
+    tls_update_ipv6 = models.BooleanField(default=False)
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -217,10 +217,10 @@ class Host(models.Model):
     def poke(self, kind, secure):
         if kind == 'ipv4':
             self.last_update_ipv4 = now()
-            self.ssl_update_ipv4 = secure
+            self.tls_update_ipv4 = secure
         else:
             self.last_update_ipv6 = now()
-            self.ssl_update_ipv6 = secure
+            self.tls_update_ipv6 = secure
         self.save()
 
     def register_client_fault(self, increment=1):
