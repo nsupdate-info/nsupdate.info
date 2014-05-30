@@ -1,3 +1,4 @@
+{% load i18n %}{% load bootstrap %}
 <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a href="#generic" data-toggle="tab">General</a></li>
     <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
@@ -28,8 +29,8 @@
             to transfer your data (including your update secret). Depending on your update client (router firmware or
             PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.
             So, if it does not work, you have the choice of using a different update client and/or a different service,
-            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>
-            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>{% endblocktrans %}
+            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>{% endblocktrans %}
+            <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_SSL %}not {% endif %}supported.</b>
         </p>
         <hr>
         <p>
@@ -68,7 +69,7 @@
                     <li>{% blocktrans %}myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
                         the one you want to put into DNS, you need to give the wanted one explicitly using myip=...){% endblocktrans %}
                     </li>
-                    <li>{% blocktrans %}hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} (if not given: autodetect from http basic auth){% endblocktrans %}</li>
+                    <li>hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} {% blocktrans %}(if not given: autodetect from http basic auth){% endblocktrans %}</li>
                 </ul>
             </li>
             <li>{% trans "The response status and content will be:" %}
@@ -81,7 +82,7 @@
         </ul>
     </div>
     <div class="tab-pane" id="avm">
-        <h4>Fritz!Box 6360, 7390 and maybe others:</h4>
+        <h4>Fritz!Box 6360, 7390 {% trans "and maybe others:" %}</h4>
         <hr>
         <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
@@ -106,11 +107,11 @@
         <ul>
             <li>{% trans "disable dynamic DNS, apply" %}</li>
             <li>{% trans "enable dynamic DNS, apply" %}</li>
-            <li>{% trans "(now the Fritz!Box sends an update, it might be "good" or "nochg" depending on whether we already have that IP in DNS)" %}</li>
+            <li>{% trans '(now the Fritz!Box sends an update, it might be "good" or "nochg" depending on whether we already have that IP in DNS)' %}</li>
         </ul>
     </div>
     <div class="tab-pane" id="ddwrt">
-        <h4>DD-WRT (verified with v24-sp2)</h4>
+        <h4>DD-WRT ({% trans "verified with" %} v24-sp2)</h4>
         <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
             Setup <i class="fa fa-long-arrow-right"></i>
@@ -164,7 +165,7 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
     <div class="tab-pane" id="m0n0wall">
         <h4>m0n0wall</h4>
         <p>Homepage: <a href="http://m0n0.ch/wall/">http://m0n0.ch/wall</a></p>
-        <h5>Go to:</h5>
+        <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
             Services <i class="fa fa-long-arrow-right"></i>Dynamic DNS
         </div>
@@ -188,7 +189,7 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
             <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update   {% blocktrans %}(similar, but ipv4 only){% endblocktrans %}</li>
             <li>https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update   {% blocktrans %}(similar, but ipv6 only){% endblocktrans %}</li>
         </ul>
-        <h4>Update URLs for browser / http user agent use</h4>
+        <h4>{% trans "Update URLs for browser / http user agent use" %}</h4>
         {% blocktrans %}Interactive - will ask for username (give your hostname) and password (give your secret):{% endblocktrans %}
         <ul>
             <li>https://{{ WWW_HOST }}/nic/update   {% blocktrans %}(updates hostname to point to remote ipv4 or ipv6 address){% endblocktrans %}</li>
