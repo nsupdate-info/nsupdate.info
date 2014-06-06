@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-30 14:12+0200\n"
+"POT-Creation-Date: 2014-06-06 23:51+0200\n"
 "PO-Revision-Date: 2014-05-30 14:36+0100\n"
 "Last-Translator: Wil <admin@lesbrindherbes.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -679,6 +679,13 @@ msgstr "Ajouter un nouveau domaine"
 msgid "Add"
 msgstr "Ajouter"
 
+#: main/templates/main/domain_overview.html:58
+#: main/templates/main/overview.html:76
+#: main/templates/main/updater_hostconfig.html:24
+#: main/templates/main/updater_hostconfig_overview.html:47
+msgid "Help"
+msgstr "Aide"
+
 #: main/templates/main/domain_overview.html:60
 msgid ""
 "Here you can add new domains (zones) which you control (and this is only "
@@ -920,32 +927,26 @@ msgstr "Adresse IPV4<br>(Dernière mise à jour)"
 msgid "IPv6 Address<br>(last update)"
 msgstr "Adresse IPV6<br>(Dernière mise à jour)"
 
-#: main/templates/main/overview.html:52
+#: main/templates/main/overview.html:56
 msgid "No hosts yet."
 msgstr "Aucun hôte pour le moment."
 
-#: main/templates/main/overview.html:62
+#: main/templates/main/overview.html:66
 msgid "Create a new Host"
 msgstr "Créer un nouvel hôte"
 
-#: main/templates/main/overview.html:66
+#: main/templates/main/overview.html:70
 #: main/templates/main/updater_hostconfig_overview.html:41
 msgid "Create"
 msgstr "Créer"
 
-#: main/templates/main/overview.html:72
-#: main/templates/main/updater_hostconfig.html:24
-#: main/templates/main/updater_hostconfig_overview.html:47
-msgid "Help"
-msgstr "Aide"
-
-#: main/templates/main/overview.html:73
+#: main/templates/main/overview.html:77
 msgid "Here you can add new hosts (like routers, PCs, servers, ...)."
 msgstr ""
 "Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des "
 "serveurs,...)."
 
-#: main/templates/main/overview.html:75
+#: main/templates/main/overview.html:79
 msgid ""
 "You need to be able to configure one of your machines so it sends dyndns2 "
 "compatible\n"
@@ -961,7 +962,7 @@ msgstr ""
 "qui peut s'occuper de ça ; sinon, vous pouvez aussi utiliser un logiciel "
 "installé sur un autre système (Pc ou Serveur)."
 
-#: main/templates/main/overview.html:80
+#: main/templates/main/overview.html:84
 msgid ""
 "Just make sure your update client either is customizable well enough or has "
 "specific\n"
@@ -970,12 +971,12 @@ msgstr ""
 "Assurez vous simplement que votre client de mise à jour supporte nos "
 "services."
 
-#: main/templates/main/overview.html:84
+#: main/templates/main/overview.html:88
 msgid "We'll show you configuration examples after you add a host."
 msgstr ""
 "Nous afficherons un exemple de configuration après l'ajout d'un nouvel hôte."
 
-#: main/templates/main/overview.html:88
+#: main/templates/main/overview.html:92
 msgid "Your current IP(s) + reverse DNS:"
 msgstr "Votre IP(s) actuelle + DNS inversé:"
 
@@ -1005,20 +1006,20 @@ msgid "Unavailable / Abuse / Abuse-Blocked:"
 msgstr "Hors-ligne / Abuse / Abuse-Blocked:"
 
 #: main/templates/main/status.html:24
-msgid "ip v4 (ssl) / v6 (ssl) updated last 2d:"
-msgstr "ip v4 (ssl) / v6 (ssl) mise à jour ces 2 derniers jours:"
+msgid "ip v4 (tls) / v6 (tls) updated last 2d:"
+msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 derniers jours:"
 
 #: main/templates/main/status.html:26
-msgid "ip v4 (ssl) / v6 (ssl) updated last 2w:"
-msgstr "ip v4 (ssl) / v6 (ssl) mise à jour ces 2 dernières semaines:"
+msgid "ip v4 (tls) / v6 (tls) updated last 2w:"
+msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 dernières semaines:"
 
 #: main/templates/main/status.html:28
-msgid "ip v4 (ssl) / v6 (ssl) updated last 2m:"
-msgstr "ip v4 (ssl) / v6 (ssl) mise à jour ces 2 deniers mois:"
+msgid "ip v4 (tls) / v6 (tls) updated last 2m:"
+msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 deniers mois:"
 
 #: main/templates/main/status.html:30
-msgid "ip v4 (ssl) / v6 (ssl) updated last 2y:"
-msgstr "ip v4 (ssl) / v6 (ssl) mise à jour ces 2 dernières années:"
+msgid "ip v4 (tls) / v6 (tls) updated last 2y:"
+msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 dernières années:"
 
 #: main/templates/main/status.html:35
 msgid "Users"
@@ -1395,29 +1396,29 @@ msgstr ""
 "Il vérifiera régulièrement votre adresse IP et mettra à jour les DNS si elle "
 "venait à changer."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:188
-#: main/templates/main/includes/tabbed_router_configuration.html:195
-#: main/templates/main/includes/tabbed_router_configuration.html:201
+#: main/templates/main/includes/tabbed_router_configuration.html:193
+#: main/templates/main/includes/tabbed_router_configuration.html:212
+#: main/templates/main/includes/tabbed_router_configuration.html:218
 msgid "(updates hostname to point to remote ipv4 or ipv6 address)"
 msgstr "(met à jour un nom de domaine pour pointer vers une adresse IPv4 ou v6"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:189
-#: main/templates/main/includes/tabbed_router_configuration.html:196
-#: main/templates/main/includes/tabbed_router_configuration.html:202
+#: main/templates/main/includes/tabbed_router_configuration.html:194
+#: main/templates/main/includes/tabbed_router_configuration.html:213
+#: main/templates/main/includes/tabbed_router_configuration.html:219
 msgid "(similar, but ipv4 only)"
 msgstr "(similaire, mais ipv4 uniquement)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:190
-#: main/templates/main/includes/tabbed_router_configuration.html:197
-#: main/templates/main/includes/tabbed_router_configuration.html:203
+#: main/templates/main/includes/tabbed_router_configuration.html:195
+#: main/templates/main/includes/tabbed_router_configuration.html:214
+#: main/templates/main/includes/tabbed_router_configuration.html:220
 msgid "(similar, but ipv6 only)"
 msgstr "(similaire, mais ipv6 uniquement)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:192
+#: main/templates/main/includes/tabbed_router_configuration.html:198
 msgid "Update URLs for browser / http user agent use"
 msgstr "Utilisation des URLs de mise à jour depuis un navigateur"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:193
+#: main/templates/main/includes/tabbed_router_configuration.html:199
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
@@ -1425,35 +1426,35 @@ msgstr ""
 "Interactif - vous demandera un <em>username</em> (donnez le nom de domaine) "
 "et un <em>password</em> (donnez votre clé):"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:205
+#: main/templates/main/includes/tabbed_router_configuration.html:223
 msgid "As above, but manually specifying the IP address:"
 msgstr "Identique, mais en spécifiant manuellement l'adresse IP:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:207
+#: main/templates/main/includes/tabbed_router_configuration.html:229
 msgid "(updates hostname to point to ipv4 127.0.0.1)"
 msgstr ""
 "(met à jour le nom de domaine pour pointer ver l'adresse ipv4 127.0.0.1)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:208
+#: main/templates/main/includes/tabbed_router_configuration.html:230
 msgid "(updates hostname to point to ipv6 ::1)"
 msgstr "(met à jour le nom de domaine pour pointer ver l'adresse ipv6 ::1)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:210
+#: main/templates/main/includes/tabbed_router_configuration.html:233
 msgid "Explanation of parameters:"
 msgstr "Explications des paramètres:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:213
+#: main/templates/main/includes/tabbed_router_configuration.html:236
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
 msgstr ""
 "votre FQDN (nom de domaine complètement qualifié), quelque chose comme "
 "example.%(WWW_HOST)s"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:216
+#: main/templates/main/includes/tabbed_router_configuration.html:239
 msgid "the secret you have configured for this hostname"
 msgstr "La clé que vous avez configuré pour ce nom de domaine"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:218
+#: main/templates/main/includes/tabbed_router_configuration.html:241
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
 "                of course you need to use your real public IP instead of "
@@ -1467,7 +1468,7 @@ msgstr ""
 msgid "English"
 msgstr "English"
 
-#: settings/dev.py:34
+#: settings/dev.py:36
 msgid "French"
 msgstr "French"
 
@@ -1536,13 +1537,13 @@ msgstr ""
 msgid "Powered by nsupdate.info"
 msgstr "Powered by nsupdate.info"
 
+#: templates/includes/base_footer.html:5 templates/includes/base_footer.html:8
+msgid "Valid CSS"
+msgstr "Valid CSS"
+
 #: templates/includes/base_footer.html:6
 msgid "Valid HTML"
 msgstr "Valid HTML"
-
-#: templates/includes/base_footer.html:8
-msgid "Valid CSS"
-msgstr "Valid CSS"
 
 #~ msgid "hostname="
 #~ msgstr "hostname="
