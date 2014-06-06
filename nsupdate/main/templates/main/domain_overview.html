@@ -24,7 +24,7 @@
                     <td>{{ domain.comment }}</td>
                 </tr>
             {% empty %}
-                <tr><td colspan="5">" %}{% trans "No domains from you yet." %}</td></tr>
+                <tr><td colspan="5">{% trans "No domains from you yet." %}</td></tr>
             {% endfor %}
             {% for domain in public_domains %}
                 <tr>
