@@ -378,5 +378,5 @@ MESSAGE_TAGS = {
 # By default language is set to english - modify settings.py to set list of languages
 gettext_noop = lambda s: s
 LANGUAGES = (
-	('en', gettext_noop('English')),
+    ('en', gettext_noop('English')),
 )
