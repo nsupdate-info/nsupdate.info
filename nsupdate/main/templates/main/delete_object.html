@@ -1,14 +1,14 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
          <div class="col-lg-8">
-            <h3>Delete {{ object }}</h3>
+            <h3>{% blocktrans %}Delete {{ object }}{% endblocktrans %}</h3>
             <form action="" method="post">
                 {% csrf_token %}
-                <p>Are you sure you want to delete "{{ object }}"?</p>
-                <button type="submit" class="btn btn-primary">Confirm</button>
+                <p>{% blocktrans %}Are you sure you want to delete "{{ object }}"?{% endblocktrans %}</p>
+                <button type="submit" class="btn btn-primary">{% trans "Confirm" %}</button>
             </form>
         </div>
     </div>

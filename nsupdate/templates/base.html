@@ -1,5 +1,5 @@
 {% load static from staticfiles %}
-{% load i18n %}
+{% load i18n %}{% load bootstrap %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -87,20 +87,20 @@
                         {% if not request.is_secure %}
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                Your (http) connection is unencrypted and thus insecure.
+                                {% trans "Your (http) connection is unencrypted and thus insecure." %}
                                 {% if WE_HAVE_TLS %}
-                                    Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.
+                                    {% blocktrans %}Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.{% endblocktrans %}
                                 {% endif %}
                                 {% if COOKIE_SECURE %}
-                                    At least some of the required cookies will only work on the secure https site,
-                                    expect malfunctioning on the http site.
+                                    {% blocktrans %}At least some of the required cookies will only work on the secure https site,
+                                    expect malfunctioning on the http site.{% endblocktrans %}
                                 {% endif %}
                             </div>
                         {% endif %}
                         <noscript>
                             <div class="alert alert-warning">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                Some functionality on this site requires that you have JavaScript enabled in your browser.
+                                {% trans "Some functionality on this site requires that you have JavaScript enabled in your browser." %}
                             </div>
                         </noscript>
                         {% if messages %}

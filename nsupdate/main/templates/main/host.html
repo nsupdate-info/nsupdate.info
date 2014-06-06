@@ -1,67 +1,67 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
-        <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="fa fa-angle-double-left"></i> back to overview</a></small></h3>
+        <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="fa fa-angle-double-left"></i> {% trans "back to overview" %}</a></small></h3>
         <div class="col-md-4">
-            <h3>Edit Host</h3>
+            <h3>{% trans "Edit Host" %}</h3>
             <form method="post" action="">
                 {% csrf_token %}
                 {{ form|bootstrap }}
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
             </form>
-            <h3>Delete Host</h3>
+            <h3>{% trans "Delete Host" %}</h3>
             <p class="text-danger">
-                Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret.
+                {% trans "Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret." %}
             </p>
             <form method="get" action="{% url 'delete_host' host.pk %}">
-                <button type="submit" class="btn btn-primary btn-danger">Delete host</button>
+                <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete host" %}</button>
             </form>
         </div>
         <div  class="col-md-4">
-            <h3>Show Configuration</h3>
+            <h3>{% trans "Show Configuration" %}</h3>
             <p>
-                We'll generate a ready-to-use configuration for your router / update
-                client, filled out with all values (including a new secret).
+                {% blocktrans %}We'll generate a ready-to-use configuration for your router / update
+                client, filled out with all values (including a new secret).{% endblocktrans %}
             </p>
             <p class="text-warning">
-                We'll create a new secret - if you had one before, it will become invalid.
-                You have to use the new secret in your router / update client configuration.
+                {% blocktrans %}We'll create a new secret - if you had one before, it will become invalid.
+                You have to use the new secret in your router / update client configuration.{% endblocktrans %}
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary btn-warning">Show Configuration</button>
+                <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
             </form>
-            <h3>Update other Services</h3>
-            <p>We can send updates to other services when we receive an update from you.</p>
+            <h3>{% trans "Update other Services" %}</h3>
+            <p>{% trans "We can send updates to other services when we receive an update from you." %}</p>
             <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">Configure Updaters</button>
+                <button type="submit" class="btn btn-primary">{% trans "Configure Updaters" %}</button>
             </form>
         </div>
         <div  class="col-md-4">
-            <h3>Update Nameserver Records</h3>
-            <p>Usually you configure your router to follow the dyndns2 protocol.
-               But if you know what you are doing, and you want to update manually, you can do it here.
+            <h3>{% trans "Update Nameserver Records" %}</h3>
+            <p>{% blocktrans %}Usually you configure your router to follow the dyndns2 protocol.
+               But if you know what you are doing, and you want to update manually, you can do it here.{% endblocktrans %}
                <br>
-               We populated the input fields for the new addresses with your currently detected remote addresses.
+               {% trans "We populated the input fields for the new addresses with your currently detected remote addresses." %}
             </p>
                 <div class="form-group">
-                    <label for="current_ipv4">Current IPv4 address from master nameserver</label>
+                    <label for="current_ipv4">{% trans "Current IPv4 address from master nameserver" %}</label>
                     <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.get_ipv4 }}" disabled>
-                    <label for="myipv4">Set new IPv4 address</label>
+                    <label for="myipv4">{% trans "Set new IPv4 address" %}</label>
                     <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required autofocus>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">Update</button> <span id="update_result_v4"></span>
-                <button type="button" class="btn" onclick="delete_host_v4('{{ host.get_fqdn }}')">Delete</button> <span id="delete_result_v4"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">{% trans "Update" %}</button> <span id="update_result_v4"></span>
+                <button type="button" class="btn" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button> <span id="delete_result_v4"></span>
                 <p></p>
                 <div class="form-group">
-                    <label for="current_ipv6">Current IPv6 address from master nameserver</label>
+                    <label for="current_ipv6">{% trans "Current IPv6 address from master nameserver" %}</label>
                     <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.get_ipv6 }}" disabled>
-                    <label for="myipv6">Set new IPv6 address</label>
+                    <label for="myipv6">{% trans "Set new IPv6 address" %}</label>
                     <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="give new ipv6 address" value="{{ request.session.ipv6 }}" required>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">Update</button> <span id="update_result_v6"></span>
-                <button type="button" class="btn" onclick="delete_host_v6('{{ host.get_fqdn }}')">Delete</button> <span id="delete_result_v6"></span>
+                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">{% trans "Update" %}</button> <span id="update_result_v6"></span>
+                <button type="button" class="btn" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button> <span id="delete_result_v6"></span>
             <script>
                 update_host_v4 = function(host) {
                     $('#update_result_v4').text('updating...');

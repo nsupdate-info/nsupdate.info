@@ -110,6 +110,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -373,3 +374,9 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
     constants.ERROR: 'alert-danger',
 }
+
+# By default language is set to english - modify settings.py to set list of languages
+gettext_noop = lambda s: s
+LANGUAGES = (
+	('en', gettext_noop('English')),
+)

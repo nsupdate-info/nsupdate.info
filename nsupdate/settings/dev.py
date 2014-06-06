@@ -28,3 +28,14 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+
+# For language translations
+LANGUAGES = (
+	('fr', gettext_noop('French')),
+	"""
+	see https://docs.djangoproject.com/en/dev/topics/i18n/translation/#message-files and 
+	https://docs.djangoproject.com/en/dev/topics/i18n/translation/#how-django-discovers-language-preference
+	for details
+	('de', _('German')),
+	"""
+) + LANGUAGES
