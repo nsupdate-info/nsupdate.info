@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 {% load static %}
 
 {% block html_head %}
@@ -9,39 +9,39 @@
 {% block content %}
     {% include "main/includes/home_top.html" %}
     <div class="jumbotron">
-        <h4>Your current IP(s):</h4>
+        <h4>{% trans "Your current IP(s):" %}</h4>
         <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
         <h3>IPv6: <span id="ipv6">{{ request.session.ipv6 }}</span></h3>
     </div>
     {% include "main/includes/home_middle.html" %}
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
-            <h1>{{ WWW_HOST }} &mdash; the Dynamic DNS service you waited for.</h1>
+            <h1>{{ WWW_HOST }} &mdash; {% trans "the Dynamic DNS service you waited for." %}</h1>
         </div>
         <div class="col-sm-4" style="text-align: center">
             <h1><i class="fa fa-thumbs-o-up fa-3x"></i></h1>
-            <h3>Free and Nice</h3>
+            <h3>{% trans "Free and Nice" %}</h3>
             <p>
-                {{ WWW_HOST }} is a free service.<br>
-                Also, we won't annoy you with ads or spam.
+                {{ WWW_HOST }} {% trans "is a free service." %}<br>
+                {% trans "Also, we won't annoy you with ads or spam." %}
             </p>
         </div>
         <div class="col-sm-4" style="text-align: center">
             <h1><i class="fa fa-code fa-3x"></i></h1>
-            <h3>Free and Open Source</h3>
+            <h3>{% trans "Free and Open Source" %}</h3>
             <p>
-                nsupdate.info is free and open-source software.
+                {% trans "nsupdate.info is free and open-source software." %}
             </p>
             <p>
-                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>
+                <a href="https://github.com/nsupdate-info/nsupdate.info">{% trans "nsupdate.info project on GitHub" %}</a>
             </p>
         </div>
         <div class="col-sm-4" style="text-align: center">
             <h1><i class="fa fa-heart-o fa-3x"></i></h1>
-            <h3>Awesome Code</h3>
+            <h3>{% trans "Awesome Code" %}</h3>
             <p>
-                Empowered by Python and Django,<br>
-                we love to write clean and secure code.
+                {% blocktrans %}Empowered by Python and Django,<br>
+                we love to write clean and secure code.{% endblocktrans %}
             </p>
         </div>
     </div>

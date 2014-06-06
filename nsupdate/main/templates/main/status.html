@@ -1,50 +1,50 @@
 {% extends "base.html" %}
-{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-4">
-            <h3>Domains</h3>
+            <h3>{% trans "Domains" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ domains_total }}</dd>
-                <dt>Public:</dt>
+                <dt>{% trans "Public:" %}</dt>
                 <dd>{{ domains_public }}</dd>
-                <dt>Unavailable / Down:</dt>
+                <dt>{% trans "Unavailable / Down:" %}</dt>
                 <dd>{{ domains_unavailable }}</dd>
             </dl>
         </div>
         <div class="col-md-4">
-            <h3>Hosts</h3>
+            <h3>{% trans "Hosts" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ hosts_total }}</dd>
-                <dt>Unavailable / Abuse / Abuse-Blocked:</dt>
+                <dt>{% trans "Unavailable / Abuse / Abuse-Blocked:" %}</dt>
                 <dd>{{ hosts_unavailable }} / {{ hosts_abuse }} / {{ hosts_abuse_blocked }}</dd>
-                <dt>ip v4 (tls) / v6 (tls) updated last 2d:</dt>
+                <dt>{% trans "ip v4 (tls) / v6 (tls) updated last 2d:" %}</dt>
                 <dd>{{ hosts_ipv4_2d }} ({{ hosts_ipv4_tls_2d }}) / {{ hosts_ipv6_2d }} ({{ hosts_ipv6_tls_2d }})</dd>
-                <dt>ip v4 (tls) / v6 (tls) updated last 2w:</dt>
+                <dt>{% trans "ip v4 (tls) / v6 (tls) updated last 2w:" %}</dt>
                 <dd>{{ hosts_ipv4_2w }} ({{ hosts_ipv4_tls_2w }}) / {{ hosts_ipv6_2w }} ({{ hosts_ipv6_tls_2w }})</dd>
-                <dt>ip v4 (tls) / v6 (tls) updated last 2m:</dt>
+                <dt>{% trans "ip v4 (tls) / v6 (tls) updated last 2m:" %}</dt>
                 <dd>{{ hosts_ipv4_2m }} ({{ hosts_ipv4_tls_2m }}) / {{ hosts_ipv6_2m }} ({{ hosts_ipv6_tls_2m }})</dd>
-                <dt>ip v4 (tls) / v6 (tls) updated last 2y:</dt>
+                <dt>{% trans "ip v4 (tls) / v6 (tls) updated last 2y:" %}</dt>
                 <dd>{{ hosts_ipv4_2y }} ({{ hosts_ipv4_tls_2y }}) / {{ hosts_ipv6_2y }} ({{ hosts_ipv6_tls_2y }})</dd>
             </dl>
         </div>
         <div class="col-md-4">
-            <h3>Users</h3>
+            <h3>{% trans "Users" %}</h3>
             <dl>
-                <dt>Total:</dt>
+                <dt>{% trans "Total:" %}</dt>
                 <dd>{{ users_total }}</dd>
-                <dt>Active:</dt>
+                <dt>{% trans "Active:" %}</dt>
                 <dd>{{ users_active }}</dd>
-                <dt>logged / created in last 2d:</dt>
+                <dt>{% trans "logged / created in last 2d:" %}</dt>
                 <dd>{{ users_loggedin_2d }} / {{ users_created_2d }}</dd>
-                <dt>logged / created in last 2w:</dt>
+                <dt>{% trans "logged / created in last 2w:" %}</dt>
                 <dd>{{ users_loggedin_2w }} / {{ users_created_2w }}</dd>
-                <dt>logged / created in last 2m:</dt>
+                <dt>{% trans "logged / created in last 2m:" %}</dt>
                 <dd>{{ users_loggedin_2m }} / {{ users_created_2m }}</dd>
-                <dt>logged / created in last 2y:</dt>
+                <dt>{% trans "logged / created in last 2y:" %}</dt>
                 <dd>{{ users_loggedin_2y }} / {{ users_created_2y }}</dd>
             </dl>
         </div>
