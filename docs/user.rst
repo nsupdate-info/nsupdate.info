@@ -69,6 +69,11 @@ We'll also use that E-Mail address in case you forget your login password.
 
 For your own safety, use https and a sane password.
 
+Be careful: in case you lose your login username/password and you also can't receive mail sent to the E-Mail address
+you gave when registering, you might not be able to regain access to your account / your hosts (neither automatically
+nor with help from service admin) as you likely can't prove that they are really yours / you are permitted to
+control them.
+
 Hosts
 -----
 You can add hosts to all the zones (base domains) offered to you.
