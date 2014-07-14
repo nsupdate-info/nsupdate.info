@@ -20,6 +20,10 @@ feedback, ...), link to documentation is all there:
 
 https://github.com/nsupdate-info/nsupdate.info
 
+Translations are on Transifex:
+
+https://www.transifex.com/organization/thomaswaldmann/dashboard/nsupdateinfo
+
 
 Contributing
 ============
