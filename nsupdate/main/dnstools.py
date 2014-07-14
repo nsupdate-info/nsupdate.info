@@ -315,6 +315,10 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
         logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin, ))
         set_ns_availability(domain, False)
         raise DnsUpdateError("PeerBadSignature")
+    except dns.message.UnknownTSIGKey as e:
+        logger.error("UnknownTSIGKey [%s] - zone: %s" % (str(e), origin, ))
+        set_ns_availability(domain, False)
+        raise DnsUpdateError("UnknownTSIGKey")
 
 
 def set_ns_availability(domain, available):
