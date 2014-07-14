@@ -22,9 +22,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <input type="submit" class="btn btn-primary" value="{% trans 'Log in' %}" />
-                    <a href="{% url 'registration_register' %}"><button class="btn btn-default" type="button">{% trans "Sign up" %}</button></a>
                     <p></p>
                     <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans 'Forgot your password?' %}</a></p>
+                    <p><a href="{% url 'registration_register' %}">{% trans "Sign up for a new account..." %}</a></p>
                 </div>
             </div>
         </form>
