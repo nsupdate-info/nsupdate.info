@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-06 23:58+0200\n"
+"POT-Creation-Date: 2014-07-14 14:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -185,12 +185,12 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-#: login/templates/login.html:25 templates/base.html:63
-msgid "Sign up"
+#: login/templates/login.html:26
+msgid "Forgot your password?"
 msgstr ""
 
 #: login/templates/login.html:27
-msgid "Forgot your password?"
+msgid "Sign up for a new account..."
 msgstr ""
 
 #: login/templates/login.html:34
@@ -1247,8 +1247,8 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: static/400.html:3 static/404.html:3 static/500.html:3
-msgid "Sorry :( we screwed up"
+#: settings/dev.py:37
+msgid "German"
 msgstr ""
 
 #: templates/base.html:40
@@ -1265,6 +1265,10 @@ msgstr ""
 
 #: templates/base.html:58
 msgid "Documentation"
+msgstr ""
+
+#: templates/base.html:63
+msgid "Sign up"
 msgstr ""
 
 #: templates/base.html:69
@@ -1305,10 +1309,10 @@ msgstr ""
 msgid "Powered by nsupdate.info"
 msgstr ""
 
-#: templates/includes/base_footer.html:5 templates/includes/base_footer.html:8
-msgid "Valid CSS"
+#: templates/includes/base_footer.html:5
+msgid "Valid HTML"
 msgstr ""
 
-#: templates/includes/base_footer.html:6
-msgid "Valid HTML"
+#: templates/includes/base_footer.html:7
+msgid "Valid CSS"
 msgstr ""

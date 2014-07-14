@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-06 23:51+0200\n"
+"POT-Creation-Date: 2014-07-14 14:08+0200\n"
 "PO-Revision-Date: 2014-05-30 14:36+0100\n"
 "Last-Translator: Wil <admin@lesbrindherbes.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -232,13 +232,14 @@ msgstr "Se souvenir de moi"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: login/templates/login.html:25 templates/base.html:63
-msgid "Sign up"
-msgstr "S'enregistrer"
-
-#: login/templates/login.html:27
+#: login/templates/login.html:26
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié ?"
+
+#: login/templates/login.html:27
+#, fuzzy
+msgid "Sign up for a new account..."
+msgstr "S'enregistrer"
 
 #: login/templates/login.html:34
 msgid "Login with a remote Account"
@@ -1472,9 +1473,9 @@ msgstr "English"
 msgid "French"
 msgstr "French"
 
-#: static/400.html:3 static/404.html:3 static/500.html:3
-msgid "Sorry :( we screwed up"
-msgstr "Houston nous avons un problème... Désolé :("
+#: settings/dev.py:37
+msgid "German"
+msgstr ""
 
 #: templates/base.html:40
 msgid "Home"
@@ -1491,6 +1492,10 @@ msgstr "A propos"
 #: templates/base.html:58
 msgid "Documentation"
 msgstr "Documentation"
+
+#: templates/base.html:63
+msgid "Sign up"
+msgstr "S'enregistrer"
 
 #: templates/base.html:69
 msgid "Profile"
@@ -1537,13 +1542,16 @@ msgstr ""
 msgid "Powered by nsupdate.info"
 msgstr "Powered by nsupdate.info"
 
-#: templates/includes/base_footer.html:5 templates/includes/base_footer.html:8
+#: templates/includes/base_footer.html:5
+msgid "Valid HTML"
+msgstr "Valid HTML"
+
+#: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr "Valid CSS"
 
-#: templates/includes/base_footer.html:6
-msgid "Valid HTML"
-msgstr "Valid HTML"
+#~ msgid "Sorry :( we screwed up"
+#~ msgstr "Houston nous avons un problème... Désolé :("
 
 #~ msgid "hostname="
 #~ msgstr "hostname="
