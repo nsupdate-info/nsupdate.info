@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: nsupdate\n"
+"Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 14:08+0200\n"
-"PO-Revision-Date: 2014-05-30 14:36+0100\n"
-"Last-Translator: Wil <admin@lesbrindherbes.org>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2014-07-14 21:11+0200\n"
+"PO-Revision-Date: 2014-07-14 15:27+0000\n"
+"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
+"language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.6.5\n"
-"X-Poedit-SourceCharset: UTF-8\n"
 
 #: accounts/templates/accounts/user_profile.html:7
 msgid "User Profile of"
@@ -237,9 +236,8 @@ msgid "Forgot your password?"
 msgstr "Mot de passe oublié ?"
 
 #: login/templates/login.html:27
-#, fuzzy
 msgid "Sign up for a new account..."
-msgstr "S'enregistrer"
+msgstr ""
 
 #: login/templates/login.html:34
 msgid "Login with a remote Account"
@@ -623,7 +621,7 @@ msgstr ""
 "\tVous devrez utilisez la nouvelle clé pour la configuration de votre "
 "serveur."
 
-#: main/templates/main/domain.html:33
+#: main/templates/main/domain.html:33 main/templates/main/domain.html.py:38
 msgid "Delete Domain"
 msgstr "Supprimer le domaine"
 
@@ -634,10 +632,6 @@ msgid ""
 msgstr ""
 "Aucun retour arrière après avoir supprimer un domaine. Si vous en avez à "
 "nouveau besoin, vous devrez le recréer et configurer une nouvelle clé."
-
-#: main/templates/main/domain.html:38
-msgid "Delete domain"
-msgstr "Supprimer le domaine"
 
 #: main/templates/main/domain_overview.html:7
 msgid "Domains (yours first, then public)"
@@ -809,7 +803,7 @@ msgstr ""
 msgid "Edit Host"
 msgstr "Editer l'hôte"
 
-#: main/templates/main/host.html:14
+#: main/templates/main/host.html:14 main/templates/main/host.html.py:19
 msgid "Delete Host"
 msgstr "Supprimer l'hôte"
 
@@ -820,10 +814,6 @@ msgid ""
 msgstr ""
 "Aucun retour arrière après la supprimer d'un hôte. Si vous en avez à nouveau "
 "besoin, vous devrez le recréer et configurer une nouvelle clé de mise à jour."
-
-#: main/templates/main/host.html:19
-msgid "Delete host"
-msgstr "Supprimer l'hôte"
 
 #: main/templates/main/host.html:25
 msgid ""
@@ -1093,15 +1083,12 @@ msgstr ""
 "Aucun retour arrière après la suppression de la configuration du client de "
 "mise à jour. Si vous en avez à nouveau besoin, vous devrez le recréer."
 
-#: main/templates/main/updater_hostconfig.html:25
-msgid "Here you can edit the configuration of the"
+#: main/templates/main/updater_hostconfig.html:26
+#, fuzzy, python-format
+msgid "Here you can edit the configuration of the \"%(servicename)s\" updater."
 msgstr "Vous pouvez éditer ici la configuration de"
 
-#: main/templates/main/updater_hostconfig.html:25
-msgid "updater."
-msgstr "updater."
-
-#: main/templates/main/updater_hostconfig.html:28
+#: main/templates/main/updater_hostconfig.html:29
 msgid ""
 "The values you need here are the same ones as you would usually enter in "
 "your router\n"
@@ -1111,7 +1098,7 @@ msgstr ""
 "utilisez\n"
 "pour votre routeur ou client de mise à jour."
 
-#: main/templates/main/updater_hostconfig.html:32
+#: main/templates/main/updater_hostconfig.html:33
 #, python-format
 msgid ""
 "You get these values after registering with the \"%(object.service.name)s\" "
@@ -1550,52 +1537,11 @@ msgstr "Valid HTML"
 msgid "Valid CSS"
 msgstr "Valid CSS"
 
-#~ msgid "Sorry :( we screwed up"
-#~ msgstr "Houston nous avons un problème... Désolé :("
+#~ msgid "Delete domain"
+#~ msgstr "Supprimer le domaine"
 
-#~ msgid "hostname="
-#~ msgstr "hostname="
+#~ msgid "Delete host"
+#~ msgstr "Supprimer l'hôte"
 
-#~ msgid "now the Fritz!Box sends an update, it might be"
-#~ msgstr ""
-#~ "Maintenant, la Fritz!Box devrait envoyer une mise à jour qui sera soi"
-
-#~ msgid "or"
-#~ msgstr "(OK) ou"
-
-#~ msgid "Giving the http basic auth username and password in the URL:"
-#~ msgstr ""
-#~ "En précisant le <em>username</em> et le <em>mot de passe</em> dans l'URL:"
-
-#~ msgid "Success: IP address was updated"
-#~ msgstr "Success: L'adresse IP a été mise à jour"
-
-#~ msgid "Warning: IP address did not change"
-#~ msgstr "Warning: L'adresse IP n'a pas changé"
-
-#~ msgid "Error: The update request resulted in a DNS error"
-#~ msgstr "Error: La requête de mise à jour à retourné une erreur DNS"
-
-#~ msgid "Error: The host you specified does not exist"
-#~ msgstr "Error: L'hôte que vous avez spécifiez n'existe pas"
-
-#~ msgid "Error: Update rejected as your host is flagged for abuse"
-#~ msgstr "Error: Mise à jour rejetée, votre hôte est épinglé pour abus"
-
-#~ msgid "Error: Wrong user name (host FQDN) or password (update secret)"
-#~ msgstr ""
-#~ "Error: Utilisateur (FQDN de l'hôte) ou mot de passe (clé) incorrect(e)"
-
-#~ msgid "Error: Update rejected as your user agent is blacklisted"
-#~ msgstr "Error: Mise à jour rejetée, votre client est blacklistée"
-
-#~ msgid "Error: Your user name is not the FQDN of your host"
-#~ msgstr "Error: Le nom d'utilisateur n'est pas le FQDN de votre hôte"
-
-#~ msgid "Error: There is a problem or maintenance at the DNS update service."
-#~ msgstr ""
-#~ "Error: Il y a un problème ou une maintenance sur le service de mise à "
-#~ "jour DNS"
-
-#~ msgid "Error:"
-#~ msgstr "Erreur:"
+#~ msgid "updater."
+#~ msgstr "updater."

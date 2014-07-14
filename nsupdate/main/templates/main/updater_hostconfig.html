@@ -23,8 +23,7 @@
             <div class="well well-sm">
                 <h3>{% trans "Help" %}</h3>
                 <p>
-                    {% blocktrans with servicename=object.service.name
-                    %}Here you can edit the configuration of the "{{ servicename }}" updater.{% endblocktrans %}
+                    {% blocktrans with servicename=object.service.name %}Here you can edit the configuration of the "{{ servicename }}" updater.{% endblocktrans %}
                 </p>
                 <p>
                    {% blocktrans %}The values you need here are the same ones as you would usually enter in your router
