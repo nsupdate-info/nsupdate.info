@@ -8,9 +8,7 @@ Important notes:
 
 * WE_HAVE_SSL configuration setting name was changed to WE_HAVE_TLS.
   Please update your configuration, if you use it.
-* using django 1.6.x is strongly recommended, 1.5 might need fixing
-  nsupdate/login/urls.py (see comment there).
-  https://github.com/nsupdate-info/nsupdate.info/issues/141
+* Django 1.6.x required now, if you want to use 1.5.x: see setup.py
 
 New Features:
 
@@ -53,6 +51,7 @@ Other changes:
   https://github.com/nsupdate-info/nsupdate.info/issues/78
 * replaced "SSL" by "TLS" everywhere.      
   SSL is the old/outdated name. Since 1999, it's called TLS.
+
 
 Release 0.6.0
 -------------

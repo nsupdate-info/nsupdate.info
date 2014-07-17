@@ -50,8 +50,9 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=install_requires + [
-        'django >=1.5.3, <1.7',  # 1.5.3 has the session serializer configurable
-                                 # 1.7 is not tested yet
+        'django >=1.6, <1.7',  # 1.7 is not tested yet
+        # django >= 1.5.3 also works, but needs a code change, see
+        # https://github.com/nsupdate-info/nsupdate.info/issues/141
         'south',
         'django-bootstrap-form',
         'django-registration',
