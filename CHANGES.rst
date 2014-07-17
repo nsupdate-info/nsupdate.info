@@ -8,15 +8,51 @@ Important notes:
 
 * WE_HAVE_SSL configuration setting name was changed to WE_HAVE_TLS.
   Please update your configuration, if you use it.
+* using django 1.6.x is strongly recommended, 1.5 might need fixing
+  nsupdate/login/urls.py (see comment there).
+  https://github.com/nsupdate-info/nsupdate.info/issues/141
 
 New Features:
 
-* ...
+* i18n support (uses preferred language from browser)
+* fr translation
+* translations are on transifex, you can help there!
+  https://www.transifex.com/projects/p/nsupdateinfo/
+* add m0n0wall router configuration
+* implemented host delete API at /nic/delete to remove A or AAAA record in DNS
+  (very similar to the dyndns2 update api, which does not offer this)
+* host delete functionality on web UI
+* custom templates (for legalese, site-specific notes, etc. - see docs for
+  details)
+* abuse / abuse blocked flags + script support (see docs)
+* show example zone file for bind9 after adding a new domain
+* better display in the admin
+
+Fixes:
+
+* fix 500 error when domain does not exist
+* fix 500 error on profile view when not logged in
+* fix html validation errors 
+* deal with invalid ip address strings in updates ("dnserr")
+* updated dd-wrt configuration with verified settings
+* fix login url generation in activation_complete template #139
+* switch off RD #142
+* handle DnsUpdateError (e.g. SERVFAIL)
+* handle NoNameservers exception
+* handle UnknownTSIGKey exception
+* handle "Network is unreachable" error
+* handle empty ?myip=
 
 Other changes:
 
 * also support Python >= 3.3 (experimental, please give feedback)
-
+* improve looks, UI / UX
+* removed view for legalese (please solve locally, according to your law -
+  you can use custom templates for this)
+* added some ugly logos (if you can do better ones, please help)
+  https://github.com/nsupdate-info/nsupdate.info/issues/78
+* replaced "SSL" by "TLS" everywhere.      
+  SSL is the old/outdated name. Since 1999, it's called TLS.
 
 Release 0.6.0
 -------------
