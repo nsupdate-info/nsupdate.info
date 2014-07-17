@@ -1,7 +1,7 @@
 ChangeLog
 =========
 
-Release <TBD>
+Release 0.7.0
 -------------
 
 Important notes:
