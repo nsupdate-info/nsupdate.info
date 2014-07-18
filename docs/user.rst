@@ -106,7 +106,8 @@ If you control an own nameserver / zone, you can use the service to dynamically 
 client.
 
 For this, it is required that the master nameserver of that zone accepts dynamic updates (RFC 2136) using a shared
-secret.
+secret. If you run your own bind9 nameserver for your domain, we show you how to configure it for dynamic updates
+after you add a domain on nsupdate.info.
 
 You can either privately use such an own domain or alternatively even offer them publically for all users of the service.
 
@@ -118,8 +119,13 @@ updates (RFC 2136) unless otherwise noted by your DNS hoster. If unsure, read th
 web interfaces (if they allow dynamic updates, there should be some means to configure or see the update algorithm,
 secret and maybe even the update policy (where you can setup rules to allow/deny specific hosts) or just ask them.
 
-If you run an own DNS server (like e.g. bind9) for your domain, you can configure it to support dynamic updates.
-We show you how after you add a domain to nsupdate.info.
+If your DNS hoster does not support dynamic updates, there is some trick how you still can use them:
+
+::
+    # configure this for your domain at your DNS hoster:
+    dynamichost.yourdomain.com  CNAME  updatedhost.nsupdate.info
+
+At the nsupdate.info site, add a host "updatedhost.nsupdate.info" and keep it updated using an update client.
 
 
 Other Services Updaters
