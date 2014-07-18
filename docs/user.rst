@@ -112,6 +112,15 @@ You can either privately use such an own domain or alternatively even offer them
 
 If you have cool domains, please offer publically!
 
+Note: if you just register a domain at some domain seller (and the domain seller runs the DNS for you), you usually
+just get some web interface to manage the DNS records. Often, that nameserver is not configured to accept dynamic
+updates (RFC 2136) unless otherwise noted by your DNS hoster. If unsure, read their documentation, examine their
+web interfaces (if they allow dynamic updates, there should be some means to configure or see the update algorithm,
+secret and maybe even the update policy (where you can setup rules to allow/deny specific hosts) or just ask them.
+
+If you run an own DNS server (like e.g. bind9) for your domain, you can configure it to support dynamic updates.
+We show you how after you add a domain to nsupdate.info.
+
 
 Other Services Updaters
 -----------------------
