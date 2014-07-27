@@ -24,7 +24,7 @@
                 <button type="submit" class="btn btn-xs btn-success">{{ backend }}</button>
             </form>
         {% endfor %}
-        <h3>{% trans "Deassociate from remote Account" %}</h3>
+        <h3>{% trans "Disassociate from remote Account" %}</h3>
         {% for socauth in backends.associated %}
             <form method="post" action="{% url 'social:disconnect_individual' socauth.provider socauth.pk %}"
                   style="display: inline-block;">
