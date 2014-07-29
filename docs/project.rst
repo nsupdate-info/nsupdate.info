@@ -20,9 +20,23 @@ feedback, ...), link to documentation is all there:
 
 https://github.com/nsupdate-info/nsupdate.info
 
-Translations are on Transifex:
+Translations
+============
 
-https://www.transifex.com/organization/thomaswaldmann/dashboard/nsupdateinfo
+Translations are done on Transifex - please collaborate there to avoid double work / workflow issues:
+
+https://www.transifex.com/projects/p/nsupdateinfo/
+
+Translation update workflow (start from a clean workdir):
+
+::
+
+    # pull all translations from transifex:
+    tx pull
+    # update the translations with changes from the source code:
+    django-admin.py makemessages -a
+    # push updated translation files back to transifex:
+    tx push -s -t
 
 
 Contributing
