@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-29 18:21+0200\n"
-"PO-Revision-Date: 2014-07-29 16:27+0000\n"
+"POT-Creation-Date: 2014-07-29 19:19+0200\n"
+"PO-Revision-Date: 2014-07-29 17:21+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -1190,17 +1190,25 @@ msgid ""
 "                of course you need to use your real public IP instead of that."
 msgstr "IP-Adressen: wir benutzen die v4 und v6 localhost-Adresse in den Beispielen, aber\nnatürlich musst Du Deine wirkliche, öffentliche IP stattdessen benutzen."
 
-#: settings/base.py:381
+#: settings/base.py:381 settings/dev.py:37
 msgid "English"
 msgstr "Englisch"
 
-#: settings/dev.py:36
+#: settings/base.py:382 settings/dev.py:38
+msgid "German"
+msgstr "Deutsch"
+
+#: settings/base.py:383 settings/dev.py:39
 msgid "French"
 msgstr "Französisch"
 
-#: settings/dev.py:37
-msgid "German"
-msgstr "Deutsch"
+#: settings/base.py:384 settings/dev.py:40
+msgid "Italian"
+msgstr "Italienisch"
+
+#: settings/dev.py:41
+msgid "Polish"
+msgstr "Polnisch"
 
 #: templates/base.html:40
 msgid "Home"

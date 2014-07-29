@@ -1,24 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Łukasz Jurczak <jurczak@poczta.fm>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-29 18:21+0200\n"
-"PO-Revision-Date: 2014-07-29 14:19+0000\n"
-"Last-Translator: Łukasz Jurczak <jurczak@poczta.fm>\n"
-"Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/"
-"nsupdateinfo/language/pl_PL/)\n"
-"Language: pl_PL\n"
+"POT-Creation-Date: 2014-07-29 19:19+0200\n"
+"PO-Revision-Date: 2014-07-29 17:20+0000\n"
+"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
+"Language-Team: Polish (http://www.transifex.com/projects/p/nsupdateinfo/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: accounts/templates/accounts/user_profile.html:7
 msgid "User Profile of"
@@ -49,8 +47,7 @@ msgstr "Problem z aktywacją"
 msgid ""
 "\n"
 "Thanks %(account)s, activation complete!\n"
-"You may now <a href='%(auth_login_url)s'>login</a> using the username and "
-"password you set at registration.\n"
+"You may now <a href='%(auth_login_url)s'>login</a> using the username and password you set at registration.\n"
 msgstr ""
 
 #: accounts/templates/registration/activate.html:12
@@ -67,15 +64,13 @@ msgid ""
 "<p>\n"
 "You (or someone pretending to be you) have asked to register an account at\n"
 "<b>%(sitename)s</b>.<br/>\n"
-"If this wasn't you, please ignore this email and your address will be "
-"removed\n"
+"If this wasn't you, please ignore this email and your address will be removed\n"
 "from our records.\n"
 "</p>\n"
 "<p>\n"
 "To activate this account, please click the following link within the next \n"
 "<b>%(expiration_days)s</b> days:<br/>\n"
-"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s"
-"%(activation_key_url)s</a>\n"
+"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s%(activation_key_url)s</a>\n"
 "</p>\n"
 "<p>\n"
 "Sincerely,<br/>\n"
@@ -121,10 +116,8 @@ msgstr "hasło: test"
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
 "\n"
-"        <b>Note:</b> if that doesn't work, the service administrator did not "
-"set up\n"
-"        the test account yet or discontinued offering it. In that case, you "
-"can\n"
+"        <b>Note:</b> if that doesn't work, the service administrator did not set up\n"
+"        the test account yet or discontinued offering it. In that case, you can\n"
 "        still just register a new account."
 msgstr ""
 
@@ -135,16 +128,14 @@ msgstr "konto testowe jest <b>wyłącznie</b> do testów"
 #: accounts/templates/registration/registration_form.html:27
 msgid ""
 "\n"
-"        Any data (hosts, domains, ...) entered using the test account might "
-"be removed\n"
+"        Any data (hosts, domains, ...) entered using the test account might be removed\n"
 "        at any time and without prior notice."
 msgstr ""
 
 #: accounts/templates/registration/registration_form.html:32
 msgid ""
 "\n"
-"        So if you'ld like your stuff to stay, please register for a regular "
-"account after\n"
+"        So if you'ld like your stuff to stay, please register for a regular account after\n"
 "        finishing your initial evaluation."
 msgstr ""
 
@@ -157,8 +148,7 @@ msgid ""
 "\n"
 "        Username: should be related to your <em>person or organisation</em>\n"
 "        (not: to the host(s) you want to register).<br>\n"
-"        E-Mail address: must be a <em>working</em> one, we'll send you an "
-"activation E-Mail there.<br>\n"
+"        E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>\n"
 "        Password: please use a sane one, we trust you."
 msgstr ""
 
@@ -214,8 +204,8 @@ msgstr "Zmiana hasła"
 
 #: login/templates/password_change.html:8
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
 msgstr ""
 
 #: login/templates/password_change.html:15
@@ -310,8 +300,7 @@ msgstr ""
 #: main/templates/main/about.html:13
 msgid ""
 "You usually need it so your router (or other dyndns2-compatible\n"
-"                client) can update a hostname, so you don't need to know or "
-"find\n"
+"                client) can update a hostname, so you don't need to know or find\n"
 "                out your current IP address."
 msgstr ""
 
@@ -360,8 +349,7 @@ msgstr ""
 msgid ""
 "Also, we have\n"
 "                <a href=\"http://nsupdateinfo.readthedocs.org/\"\n"
-"                   title=\"Open docs in new window\" target=\"_blank"
-"\">documentation</a> &mdash;\n"
+"                   title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash;\n"
 "                there might be some interesting stuff for you in it that is\n"
 "                not visible or obvious on the user interface."
 msgstr ""
@@ -369,8 +357,7 @@ msgstr ""
 #: main/templates/main/about.html:46
 msgid ""
 "If you are interested in the software project, have a look at the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
-"\">nsupdate.info project on GitHub</a>."
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a>."
 msgstr ""
 
 #: main/templates/main/about.html:53
@@ -409,8 +396,7 @@ msgstr ""
 #: main/templates/main/about.html:66
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are\n"
-"                related to unfair use of the service - at any time and "
-"without prior notice."
+"                related to unfair use of the service - at any time and without prior notice."
 msgstr ""
 
 #: main/templates/main/about.html:71
@@ -442,8 +428,7 @@ msgstr ""
 #: main/templates/main/about.html:89
 msgid ""
 "Visit the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
-"\">nsupdate.info project on GitHub</a> to:"
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
 msgstr ""
 
 #: main/templates/main/about.html:93
@@ -488,8 +473,7 @@ msgstr ""
 #: main/templates/main/domain.html:11
 msgid ""
 "Please note that update algorithm and update secret need to match.\n"
-"                Just create a new secret after submitting this form with a "
-"changed update algorithm."
+"                Just create a new secret after submitting this form with a changed update algorithm."
 msgstr ""
 
 #: main/templates/main/domain.html:17 main/templates/main/host.html:12
@@ -511,10 +495,8 @@ msgstr ""
 
 #: main/templates/main/domain.html:27
 msgid ""
-"We'll create a new shared secret - if you had one before, it will become "
-"invalid.\n"
-"                You have to use the new secret in your name server "
-"configuration."
+"We'll create a new shared secret - if you had one before, it will become invalid.\n"
+"                You have to use the new secret in your name server configuration."
 msgstr ""
 
 #: main/templates/main/domain.html:33 main/templates/main/domain.html.py:38
@@ -577,17 +559,14 @@ msgstr "Pomoc"
 
 #: main/templates/main/domain_overview.html:60
 msgid ""
-"Here you can add new domains (zones) which you control (and this is only "
-"useful if you\n"
+"Here you can add new domains (zones) which you control (and this is only useful if you\n"
 "                   have some own zone which you can update automatically)."
 msgstr ""
 
 #: main/templates/main/domain_overview.html:64
 msgid ""
-"You need to be able to configure the primary master nameserver of the zone "
-"so it accepts\n"
-"                   dynamic updates (via RFC 2136 \"dynamic update\" "
-"protocol) if the correct update secret is presented."
+"You need to be able to configure the primary master nameserver of the zone so it accepts\n"
+"                   dynamic updates (via RFC 2136 \"dynamic update\" protocol) if the correct update secret is presented."
 msgstr ""
 
 #: main/templates/main/domain_overview.html:68
@@ -624,8 +603,8 @@ msgstr ""
 #: main/templates/main/generate_secret.html:10
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
-"have to generate a new one again. Everytime you visit this page a new secret "
-"will be generated and the old one becomes invalid."
+"have to generate a new one again. Everytime you visit this page a new secret"
+" will be generated and the old one becomes invalid."
 msgstr ""
 
 #: main/templates/main/generate_secret.html:16
@@ -697,8 +676,7 @@ msgstr ""
 #: main/templates/main/host.html:29
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid.\n"
-"                You have to use the new secret in your router / update "
-"client configuration."
+"                You have to use the new secret in your router / update client configuration."
 msgstr ""
 
 #: main/templates/main/host.html:35
@@ -721,8 +699,7 @@ msgstr ""
 #: main/templates/main/host.html:43
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol.\n"
-"               But if you know what you are doing, and you want to update "
-"manually, you can do it here."
+"               But if you know what you are doing, and you want to update manually, you can do it here."
 msgstr ""
 
 #: main/templates/main/host.html:46
@@ -795,18 +772,14 @@ msgstr ""
 
 #: main/templates/main/overview.html:79
 msgid ""
-"You need to be able to configure one of your machines so it sends dyndns2 "
-"compatible\n"
-"                   updates to us when your IP changes. Routers usually have "
-"some builtin software that does\n"
-"                   this, but you can also use some software on another "
-"system (like a PC or server)."
+"You need to be able to configure one of your machines so it sends dyndns2 compatible\n"
+"                   updates to us when your IP changes. Routers usually have some builtin software that does\n"
+"                   this, but you can also use some software on another system (like a PC or server)."
 msgstr ""
 
 #: main/templates/main/overview.html:84
 msgid ""
-"Just make sure your update client either is customizable well enough or has "
-"specific\n"
+"Just make sure your update client either is customizable well enough or has specific\n"
 "                   support for our service."
 msgstr ""
 
@@ -931,16 +904,14 @@ msgstr ""
 
 #: main/templates/main/updater_hostconfig.html:29
 msgid ""
-"The values you need here are the same ones as you would usually enter in "
-"your router\n"
+"The values you need here are the same ones as you would usually enter in your router\n"
 "                   or update client."
 msgstr ""
 
 #: main/templates/main/updater_hostconfig.html:33
 #, python-format
 msgid ""
-"You get these values after registering with the \"%(object.service.name)s\" "
-"service\n"
+"You get these values after registering with the \"%(object.service.name)s\" service\n"
 "                   and (likely) configuring that service to accept updates."
 msgstr ""
 
@@ -989,36 +960,27 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:15
 msgid ""
 "\n"
-"            Usually, you should configure one system on your network to "
-"update the DNS.\n"
-"            This can be either your router or a host on your network and it "
-"will run some software\n"
+"            Usually, you should configure one system on your network to update the DNS.\n"
+"            This can be either your router or a host on your network and it will run some software\n"
 "            called the update client."
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:21
 msgid ""
 "\n"
-"            We have some specific configuration hints for some devices and "
-"update clients,\n"
-"            please see the tabs above. If you don't find yours there, use "
-"the generic hints below."
+"            We have some specific configuration hints for some devices and update clients,\n"
+"            please see the tabs above. If you don't find yours there, use the generic hints below."
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:26
 msgid ""
 "\n"
 "            <b>Important note about security and compatibility</b>:\n"
-"            For update URLs, we always give the https (not: http) URL as "
-"that will use an encrypted connection\n"
-"            to transfer your data (including your update secret). Depending "
-"on your update client (router firmware or\n"
-"            PC software) <em>and</em> the specific nsupdate.info-based "
-"service, https might be not supported.\n"
-"            So, if it does not work, you have the choice of using a "
-"different update client and/or a different service,\n"
-"            or transmitting your data using an unencrypted connection (using "
-"http: instead of https:).<br>"
+"            For update URLs, we always give the https (not: http) URL as that will use an encrypted connection\n"
+"            to transfer your data (including your update secret). Depending on your update client (router firmware or\n"
+"            PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.\n"
+"            So, if it does not work, you have the choice of using a different update client and/or a different service,\n"
+"            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:37
@@ -1037,8 +999,7 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:47
 msgid ""
 "\n"
-"        The IPs will be determined automatically using the remote address "
-"our service is seeing\n"
+"        The IPs will be determined automatically using the remote address our service is seeing\n"
 "        (see below for more details)."
 msgstr ""
 
@@ -1076,10 +1037,8 @@ msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:69
 msgid ""
-"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
-"autodetected IP is not\n"
-"                        the one you want to put into DNS, you need to give "
-"the wanted one explicitly using myip=...)"
+"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not\n"
+"                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:72
@@ -1165,8 +1124,7 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:184
 msgid ""
 "\n"
-"        These URLs invoke the built-in update client, which is intended for "
-"temporary and adhoc scenarios only.\n"
+"        These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.\n"
 "        It periodically checks your IP and updates DNS if it changes."
 msgstr ""
 
@@ -1226,21 +1184,28 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:241
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
-"                of course you need to use your real public IP instead of "
-"that."
+"                of course you need to use your real public IP instead of that."
 msgstr ""
 
-#: settings/base.py:381
+#: settings/base.py:381 settings/dev.py:37
 msgid "English"
 msgstr "Angielski"
 
-#: settings/dev.py:36
+#: settings/base.py:382 settings/dev.py:38
+msgid "German"
+msgstr "Niemiecki"
+
+#: settings/base.py:383 settings/dev.py:39
 msgid "French"
 msgstr "Francuski"
 
-#: settings/dev.py:37
-msgid "German"
-msgstr "Niemiecki"
+#: settings/base.py:384 settings/dev.py:40
+msgid "Italian"
+msgstr ""
+
+#: settings/dev.py:41
+msgid "Polish"
+msgstr ""
 
 #: templates/base.html:40
 msgid "Home"
@@ -1285,15 +1250,14 @@ msgstr ""
 
 #: templates/base.html:95
 msgid ""
-"At least some of the required cookies will only work on the secure https "
-"site,\n"
+"At least some of the required cookies will only work on the secure https site,\n"
 "                                    expect malfunctioning on the http site."
 msgstr ""
 
 #: templates/base.html:103
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in "
-"your browser."
+"Some functionality on this site requires that you have JavaScript enabled in"
+" your browser."
 msgstr ""
 
 #: templates/includes/base_footer.html:3

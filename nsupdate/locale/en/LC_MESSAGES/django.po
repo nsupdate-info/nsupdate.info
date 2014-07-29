@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-29 18:21+0200\n"
+"POT-Creation-Date: 2014-07-29 19:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1227,16 +1227,24 @@ msgid ""
 "that."
 msgstr ""
 
-#: settings/base.py:381
+#: settings/base.py:381 settings/dev.py:37
 msgid "English"
 msgstr ""
 
-#: settings/dev.py:36
+#: settings/base.py:382 settings/dev.py:38
+msgid "German"
+msgstr ""
+
+#: settings/base.py:383 settings/dev.py:39
 msgid "French"
 msgstr ""
 
-#: settings/dev.py:37
-msgid "German"
+#: settings/base.py:384 settings/dev.py:40
+msgid "Italian"
+msgstr ""
+
+#: settings/dev.py:41
+msgid "Polish"
 msgstr ""
 
 #: templates/base.html:40
