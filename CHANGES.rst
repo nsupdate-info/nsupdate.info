@@ -13,7 +13,7 @@ Important notes:
 New Features:
 
 * i18n support (uses preferred language from browser)
-* fr translation
+* fr/de/it translations added
 * translations are on transifex, you can help there!
   https://www.transifex.com/projects/p/nsupdateinfo/
 * add m0n0wall router configuration
