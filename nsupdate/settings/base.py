@@ -379,4 +379,7 @@ MESSAGE_TAGS = {
 gettext_noop = lambda s: s
 LANGUAGES = (
     ('en', gettext_noop('English')),
+    ('de', gettext_noop('German')),
+    ('fr', gettext_noop('French')),
+    ('it', gettext_noop('Italian')),
 )
