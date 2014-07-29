@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # mandrag0ra <mandrag0ra@icloud.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-14 14:08+0200\n"
+"POT-Creation-Date: 2014-07-29 18:21+0200\n"
 "PO-Revision-Date: 2014-07-27 23:31+0000\n"
 "Last-Translator: mandrag0ra <mandrag0ra@icloud.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
+"language/fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: accounts/templates/accounts/user_profile.html:7
@@ -31,7 +32,8 @@ msgid "Associate with remote Account"
 msgstr "Associé au compte distant"
 
 #: accounts/templates/accounts/user_profile.html:27
-msgid "Deassociate from remote Account"
+#, fuzzy
+msgid "Disassociate from remote Account"
 msgstr "Dissocié du compte distant"
 
 #: accounts/templates/registration/activate.html:4
@@ -47,14 +49,21 @@ msgstr "Problème lors de l'enregistrement"
 msgid ""
 "\n"
 "Thanks %(account)s, activation complete!\n"
-"You may now <a href='%(auth_login_url)s'>login</a> using the username and password you set at registration.\n"
-msgstr "\nMerci %(account)s, votre compte a été enregistré.\nVous pouvez maintenant vous <a href='%(auth_login_url)s'>connectez</a> en utilisant votre login et mot de passe.\n"
+"You may now <a href='%(auth_login_url)s'>login</a> using the username and "
+"password you set at registration.\n"
+msgstr ""
+"\n"
+"Merci %(account)s, votre compte a été enregistré.\n"
+"Vous pouvez maintenant vous <a href='%(auth_login_url)s'>connectez</a> en "
+"utilisant votre login et mot de passe.\n"
 
 #: accounts/templates/registration/activate.html:12
 msgid ""
 "Oops -- it seems that your activation key is invalid.  Please check the url "
 "again."
-msgstr "Oops -- Il semblerait que votre clé d'action soit invalide. Merci de vérifier vos informations."
+msgstr ""
+"Oops -- Il semblerait que votre clé d'action soit invalide. Merci de "
+"vérifier vos informations."
 
 #: accounts/templates/registration/activation_email.html:8
 #, python-format
@@ -64,20 +73,42 @@ msgid ""
 "<p>\n"
 "You (or someone pretending to be you) have asked to register an account at\n"
 "<b>%(sitename)s</b>.<br/>\n"
-"If this wasn't you, please ignore this email and your address will be removed\n"
+"If this wasn't you, please ignore this email and your address will be "
+"removed\n"
 "from our records.\n"
 "</p>\n"
 "<p>\n"
 "To activate this account, please click the following link within the next \n"
 "<b>%(expiration_days)s</b> days:<br/>\n"
-"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s%(activation_key_url)s</a>\n"
+"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s"
+"%(activation_key_url)s</a>\n"
 "</p>\n"
 "<p>\n"
 "Sincerely,<br/>\n"
 "%(sitename)s Management\n"
 "</p>\n"
 "</body>\n"
-msgstr "<body>\n<h3>Confirmation d'enregistrement pour %(sitename)s</h3>\n<p>\nVous avez demandé (ou quelqu'un prétendant être vous a demandé ) la création d'un compte sur le site\n<b>%(sitename)s</b>.<br/>\nSi vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail et votre adresse sera supprimer de notre base de donnée.\n</p>\n<p>\nPour activer votre compte, veuillez cliquer sur le lien suivant dans les \n<b>%(expiration_days)s</b> jours:<br/>\n<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s%(activation_key_url)s</a>\n</p>\n<p>\nCordialement,<br/>\n%(sitename)s Management\n</p>\n</body>\n"
+msgstr ""
+"<body>\n"
+"<h3>Confirmation d'enregistrement pour %(sitename)s</h3>\n"
+"<p>\n"
+"Vous avez demandé (ou quelqu'un prétendant être vous a demandé ) la création "
+"d'un compte sur le site\n"
+"<b>%(sitename)s</b>.<br/>\n"
+"Si vous n'êtes pas à l'origine de cette demande, veuillez ignorer cet e-mail "
+"et votre adresse sera supprimer de notre base de donnée.\n"
+"</p>\n"
+"<p>\n"
+"Pour activer votre compte, veuillez cliquer sur le lien suivant dans les \n"
+"<b>%(expiration_days)s</b> jours:<br/>\n"
+"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s"
+"%(activation_key_url)s</a>\n"
+"</p>\n"
+"<p>\n"
+"Cordialement,<br/>\n"
+"%(sitename)s Management\n"
+"</p>\n"
+"</body>\n"
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
@@ -87,7 +118,10 @@ msgstr "Email d'activation envoyé"
 msgid ""
 "An activation email has been sent.\n"
 "Please check your email and click on the link to activate your account."
-msgstr "Un email d'activation a été envoyé.\nVeuillez s'il vous plait vérifier vos email et cliquer sur le lien pour activer votre compte."
+msgstr ""
+"Un email d'activation a été envoyé.\n"
+"Veuillez s'il vous plait vérifier vos email et cliquer sur le lien pour "
+"activer votre compte."
 
 #: accounts/templates/registration/registration_form.html:4
 msgid "Register for an account"
@@ -116,10 +150,16 @@ msgstr "mot de passe: test"
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
 "\n"
-"        <b>Note:</b> if that doesn't work, the service administrator did not set up\n"
-"        the test account yet or discontinued offering it. In that case, you can\n"
+"        <b>Note:</b> if that doesn't work, the service administrator did not "
+"set up\n"
+"        the test account yet or discontinued offering it. In that case, you "
+"can\n"
 "        still just register a new account."
-msgstr "\n<b>Note:</b> Si la connexion ne fonctionne pas, il est possible que l'administrateur n'est pas configuré le compte test ou a cessé de le proposer.Dans ce cas, n'hésitez pas à vous enregistrer."
+msgstr ""
+"\n"
+"<b>Note:</b> Si la connexion ne fonctionne pas, il est possible que "
+"l'administrateur n'est pas configuré le compte test ou a cessé de le "
+"proposer.Dans ce cas, n'hésitez pas à vous enregistrer."
 
 #: accounts/templates/registration/registration_form.html:25
 msgid "test account is <b>only</b> for testing"
@@ -128,16 +168,24 @@ msgstr "Le compte test ne sert <b>qu'</b>à tester"
 #: accounts/templates/registration/registration_form.html:27
 msgid ""
 "\n"
-"        Any data (hosts, domains, ...) entered using the test account might be removed\n"
+"        Any data (hosts, domains, ...) entered using the test account might "
+"be removed\n"
 "        at any time and without prior notice."
-msgstr "\nTous les enregistrements (hôtes, domaines,...) utilisés avec le compte test pourront être supprimé\nà n'importe quel moment, sans préavis."
+msgstr ""
+"\n"
+"Tous les enregistrements (hôtes, domaines,...) utilisés avec le compte test "
+"pourront être supprimé\n"
+"à n'importe quel moment, sans préavis."
 
 #: accounts/templates/registration/registration_form.html:32
 msgid ""
 "\n"
-"        So if you'ld like your stuff to stay, please register for a regular account after\n"
+"        So if you'ld like your stuff to stay, please register for a regular "
+"account after\n"
 "        finishing your initial evaluation."
-msgstr "\nSi vous souhaitez garder vos informations, veuillez s.v.p, vous enregistrer."
+msgstr ""
+"\n"
+"Si vous souhaitez garder vos informations, veuillez s.v.p, vous enregistrer."
 
 #: accounts/templates/registration/registration_form.html:38
 msgid "Register new account"
@@ -148,9 +196,17 @@ msgid ""
 "\n"
 "        Username: should be related to your <em>person or organisation</em>\n"
 "        (not: to the host(s) you want to register).<br>\n"
-"        E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>\n"
+"        E-Mail address: must be a <em>working</em> one, we'll send you an "
+"activation E-Mail there.<br>\n"
 "        Password: please use a sane one, we trust you."
-msgstr "\nNom d'utilisateur: devrait être <em>une personne ou une organisation</em>\n(et non un hôte que vous souhaitez enregistrer).<br>\nE-mail : doit être <em>valide</em>. Nous vous enverrons un lien d'activation à cette adresse e-mail.<br>\nMot de passe: veuillez s.v.p utiliser un mot de passe fort, nous vous faisons confiance."
+msgstr ""
+"\n"
+"Nom d'utilisateur: devrait être <em>une personne ou une organisation</em>\n"
+"(et non un hôte que vous souhaitez enregistrer).<br>\n"
+"E-mail : doit être <em>valide</em>. Nous vous enverrons un lien d'activation "
+"à cette adresse e-mail.<br>\n"
+"Mot de passe: veuillez s.v.p utiliser un mot de passe fort, nous vous "
+"faisons confiance."
 
 #: accounts/templates/registration/registration_form.html:51
 msgid "Send activation email"
@@ -204,9 +260,12 @@ msgstr "Mot de passe modifié"
 
 #: login/templates/password_change.html:8
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new"
-" password twice so we can verify you typed it in correctly."
-msgstr "Veuillez d'abord saisir votre ancien mot de passe (question de sécurité..), puis choisissez vote nouveau mot de passe. Saisissez le deux fois (question de sureté...)"
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+"Veuillez d'abord saisir votre ancien mot de passe (question de sécurité..), "
+"puis choisissez vote nouveau mot de passe. Saisissez le deux fois (question "
+"de sureté...)"
 
 #: login/templates/password_change.html:15
 #: login/templates/password_reset_confirm.html:17
@@ -231,7 +290,9 @@ msgstr "Mot de passe réinitialisé"
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr "Mot de passe oublié ? Saisissez votre adresse mail  et nous vous enverrons les instructions pour en enregistrer un nouveau."
+msgstr ""
+"Mot de passe oublié ? Saisissez votre adresse mail  et nous vous enverrons "
+"les instructions pour en enregistrer un nouveau."
 
 #: login/templates/password_reset.html:18
 msgid "Reset my password"
@@ -244,7 +305,8 @@ msgstr "Réinitialisation du mot de passe terminé"
 
 #: login/templates/password_reset_complete.html:8
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Votre mot de passe a été enregistré. Vous pouvez maintenant vous connecter."
+msgstr ""
+"Votre mot de passe a été enregistré. Vous pouvez maintenant vous connecter."
 
 #: login/templates/password_reset_confirm.html:8
 msgid "Enter new password"
@@ -264,7 +326,9 @@ msgstr "Réinitialisation du mot de passe : Houston nous avons un problème.."
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "Le lien de réinitialisation de mot de passe est invalide. A-t-il déjà été utilisé ? Veuillez faire une nouvelle de demande de réinitialisation."
+msgstr ""
+"Le lien de réinitialisation de mot de passe est invalide. A-t-il déjà été "
+"utilisé ? Veuillez faire une nouvelle de demande de réinitialisation."
 
 #: login/templates/password_reset_done.html:3
 #: login/templates/password_reset_done.html:6
@@ -275,13 +339,19 @@ msgstr "Mot de passe réinitialisé avec succès"
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
-msgstr "Nous vous avons envoyez les instructions pour réinitialisation votre mot de passe. Vous devriez le recevoir rapidement."
+msgstr ""
+"Nous vous avons envoyez les instructions pour réinitialisation votre mot de "
+"passe. Vous devriez le recevoir rapidement."
 
 #: login/templates/password_reset_done.html:10
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr "Si vous n'avez pas reçu les instructions, veuillez s'il vous plait vérifier que vous avez entrer l'adresse email avec laquelle vous vous êtes enregistré. N'oubliez pas de vérifier qu'il n'est pas dans votre dossier de spam (On ne sait jamais...)"
+msgstr ""
+"Si vous n'avez pas reçu les instructions, veuillez s'il vous plait vérifier "
+"que vous avez entrer l'adresse email avec laquelle vous vous êtes "
+"enregistré. N'oubliez pas de vérifier qu'il n'est pas dans votre dossier de "
+"spam (On ne sait jamais...)"
 
 #: main/templates/main/about.html:6
 #, python-format
@@ -300,16 +370,23 @@ msgstr "%(WWW_HOST)s est un <b>service de DNS dynamique</b>."
 #: main/templates/main/about.html:13
 msgid ""
 "You usually need it so your router (or other dyndns2-compatible\n"
-"                client) can update a hostname, so you don't need to know or find\n"
+"                client) can update a hostname, so you don't need to know or "
+"find\n"
 "                out your current IP address."
-msgstr "Il est généralement utile pour que votre routeur (ou \n\ttout autre client compatible dyndns2) puisse mettre à jour un nom\n\tde domaine ; Ainsi vous n'aurez plus besoin de connaitre ou de trouver votre adresse IP."
+msgstr ""
+"Il est généralement utile pour que votre routeur (ou \n"
+"\ttout autre client compatible dyndns2) puisse mettre à jour un nom\n"
+"\tde domaine ; Ainsi vous n'aurez plus besoin de connaitre ou de trouver "
+"votre adresse IP."
 
 #: main/templates/main/about.html:18
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr "%(WWW_HOST)s est <b> simple, utile, gratuit, facile, sécurisé et respectueux de votre vie privée</b>."
+msgstr ""
+"%(WWW_HOST)s est <b> simple, utile, gratuit, facile, sécurisé et respectueux "
+"de votre vie privée</b>."
 
 #: main/templates/main/about.html:22
 msgid "Why another one?"
@@ -329,13 +406,16 @@ msgstr "Harceler ses utilisateurs avec du spam et de la publicité"
 
 #: main/templates/main/about.html:29
 msgid "cancelling hosts or accounts after a short period of non-usage"
-msgstr "Annuler des hôtes ou des comptes après une courte période sans utilisation"
+msgstr ""
+"Annuler des hôtes ou des comptes après une courte période sans utilisation"
 
 #: main/templates/main/about.html:30
 msgid ""
 "hiding the few free features almost undiscoverably\n"
 "                    between a ton of commercial-only features"
-msgstr "Cacher le peu de fonctions gratuites\n\t\tau milieu d'un tone de fonctions payantes"
+msgstr ""
+"Cacher le peu de fonctions gratuites\n"
+"\t\tau milieu d'un tone de fonctions payantes"
 
 #: main/templates/main/about.html:35
 msgid "How is it?"
@@ -343,22 +423,36 @@ msgstr "Comment ça marche ?"
 
 #: main/templates/main/about.html:37
 msgid "You can just try it using the test account (see Register page)."
-msgstr "Vous pouvez le tester en utilisant le compte \"test\" (Voir page d'enregistrement)."
+msgstr ""
+"Vous pouvez le tester en utilisant le compte \"test\" (Voir page "
+"d'enregistrement)."
 
 #: main/templates/main/about.html:40
 msgid ""
 "Also, we have\n"
 "                <a href=\"http://nsupdateinfo.readthedocs.org/\"\n"
-"                   title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash;\n"
+"                   title=\"Open docs in new window\" target=\"_blank"
+"\">documentation</a> &mdash;\n"
 "                there might be some interesting stuff for you in it that is\n"
 "                not visible or obvious on the user interface."
-msgstr "Vous trouverez aussi toute la\n\t<a href=\"http://nsupdateinfo.readthedocs.org/\"\n                   title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash;\n\tVous pourrez y trouver des informations intéressantes qui ne sont pas visible depuis\n\tl'interface utilisateur."
+msgstr ""
+"Vous trouverez aussi toute la\n"
+"\t<a href=\"http://nsupdateinfo.readthedocs.org/\"\n"
+"                   title=\"Open docs in new window\" target=\"_blank"
+"\">documentation</a> &mdash;\n"
+"\tVous pourrez y trouver des informations intéressantes qui ne sont pas "
+"visible depuis\n"
+"\tl'interface utilisateur."
 
 #: main/templates/main/about.html:46
 msgid ""
 "If you are interested in the software project, have a look at the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a>."
-msgstr "Si vous êtes intéressés par le projet, jetez un oeil\n<a href=\"https://github.com/nsupdate-info/nsupdate.info\">au projet nsupdate.info sur GitHub</a>."
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
+"\">nsupdate.info project on GitHub</a>."
+msgstr ""
+"Si vous êtes intéressés par le projet, jetez un oeil\n"
+"<a href=\"https://github.com/nsupdate-info/nsupdate.info\">au projet "
+"nsupdate.info sur GitHub</a>."
 
 #: main/templates/main/about.html:53
 msgid "Fair use of the service"
@@ -366,7 +460,8 @@ msgstr "Utilisation sans abus"
 
 #: main/templates/main/about.html:55
 msgid "The only thing we expect from you is fair use of this service:"
-msgstr "La seule chose que nous attendons de vous est une utilisation sans abus :"
+msgstr ""
+"La seule chose que nous attendons de vous est une utilisation sans abus :"
 
 #: main/templates/main/about.html:58
 msgid "Don't abuse the service in any way."
@@ -387,7 +482,9 @@ msgstr "Ne créez pas 10 000 utilisateurs or hôtes."
 #: main/templates/main/about.html:62
 msgid ""
 "Don't use the service for any illegal or otherwise questionable purpose."
-msgstr "N'utilisez pas ce service pour des activités illégales ou à caractère préjudiciable."
+msgstr ""
+"N'utilisez pas ce service pour des activités illégales ou à caractère "
+"préjudiciable."
 
 #: main/templates/main/about.html:63
 msgid "Don't spam us via e-mail."
@@ -396,8 +493,12 @@ msgstr "Ne nous spammer pas avec des e-mail."
 #: main/templates/main/about.html:66
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are\n"
-"                related to unfair use of the service - at any time and without prior notice."
-msgstr "Nous nous réservons le droit de supprimer un compte ou un hôte qui\n\tne respecte pas une utilisation sans abus - à n'importe quel moment et sans notification."
+"                related to unfair use of the service - at any time and "
+"without prior notice."
+msgstr ""
+"Nous nous réservons le droit de supprimer un compte ou un hôte qui\n"
+"\tne respecte pas une utilisation sans abus - à n'importe quel moment et "
+"sans notification."
 
 #: main/templates/main/about.html:71
 msgid "No warranties"
@@ -405,7 +506,9 @@ msgstr "Pas de garantie"
 
 #: main/templates/main/about.html:73
 msgid "This is free software and a free service, there are no warranties."
-msgstr "Ce service reste un logiciel gratuit avec une utilisation gratuite. Difficile d'avoir des garanties."
+msgstr ""
+"Ce service reste un logiciel gratuit avec une utilisation gratuite. "
+"Difficile d'avoir des garanties."
 
 #: main/templates/main/about.html:76
 msgid "If it breaks, it breaks."
@@ -419,7 +522,9 @@ msgstr "Information de contact"
 msgid ""
 "Before contacting us via E-Mail, please read the docs, they exist for a "
 "reason."
-msgstr "Avant de nous contacter par mail, lisez la doc s.v.p ; Elle existe pour une bonne raison."
+msgstr ""
+"Avant de nous contacter par mail, lisez la doc s.v.p ; Elle existe pour une "
+"bonne raison."
 
 #: main/templates/main/about.html:87
 msgid "Software Project Contact"
@@ -428,8 +533,12 @@ msgstr "Contact du projet"
 #: main/templates/main/about.html:89
 msgid ""
 "Visit the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
-msgstr "Allez sur\n\t<a href=\"https://github.com/nsupdate-info/nsupdate.info\">le projet nsupdate.info sur GitHub</a> pour :"
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
+"\">nsupdate.info project on GitHub</a> to:"
+msgstr ""
+"Allez sur\n"
+"\t<a href=\"https://github.com/nsupdate-info/nsupdate.info\">le projet "
+"nsupdate.info sur GitHub</a> pour :"
 
 #: main/templates/main/about.html:93
 msgid "file issues on the issue tracker for bugs, ideas, patches."
@@ -468,13 +577,20 @@ msgstr "Editer le domaine"
 msgid ""
 "You can't change the domain name. If you want to have another domain name, "
 "you have to delete this domain and create a new one."
-msgstr "Vous ne pouvez pas modifier le nom de domaine. Si vous souhaitez avoir un autre nom de domaine, vous devez supprimer celui-ci et en créer un nouveau."
+msgstr ""
+"Vous ne pouvez pas modifier le nom de domaine. Si vous souhaitez avoir un "
+"autre nom de domaine, vous devez supprimer celui-ci et en créer un nouveau."
 
 #: main/templates/main/domain.html:11
 msgid ""
 "Please note that update algorithm and update secret need to match.\n"
-"                Just create a new secret after submitting this form with a changed update algorithm."
-msgstr "N'oubliez pas s.v.p que l'algorithme de mise à jour et la clé de mise à jour doit correspondre.\n\tCréez une nouvelle clé après avoir soumis ce formulaire avec un nouvel algorithme de mise à jour."
+"                Just create a new secret after submitting this form with a "
+"changed update algorithm."
+msgstr ""
+"N'oubliez pas s.v.p que l'algorithme de mise à jour et la clé de mise à jour "
+"doit correspondre.\n"
+"\tCréez une nouvelle clé après avoir soumis ce formulaire avec un nouvel "
+"algorithme de mise à jour."
 
 #: main/templates/main/domain.html:17 main/templates/main/host.html:12
 #: main/templates/main/host.html.py:54 main/templates/main/host.html:63
@@ -491,15 +607,23 @@ msgstr "Afficher la configuration"
 msgid ""
 "We'll generate a ready-to-use configuration for your name server,\n"
 "                filled out with all values (including a new secret)."
-msgstr "Nous générerons une nouvelle configuration pour votre serveur,\n\tremplissez tous les champs (ainsi qu'une nouvelle clé)."
+msgstr ""
+"Nous générerons une nouvelle configuration pour votre serveur,\n"
+"\tremplissez tous les champs (ainsi qu'une nouvelle clé)."
 
 #: main/templates/main/domain.html:27
 msgid ""
-"We'll create a new shared secret - if you had one before, it will become invalid.\n"
-"                You have to use the new secret in your name server configuration."
-msgstr "Nous créerons un nouvelle clé - Si vous en aviez précédemment un, il deviendra invalide.\n\tVous devrez utilisez la nouvelle clé pour la configuration de votre serveur."
+"We'll create a new shared secret - if you had one before, it will become "
+"invalid.\n"
+"                You have to use the new secret in your name server "
+"configuration."
+msgstr ""
+"Nous créerons un nouvelle clé - Si vous en aviez précédemment un, il "
+"deviendra invalide.\n"
+"\tVous devrez utilisez la nouvelle clé pour la configuration de votre "
+"serveur."
 
-#: main/templates/main/domain.html:33
+#: main/templates/main/domain.html:33 main/templates/main/domain.html.py:38
 msgid "Delete Domain"
 msgstr "Supprimer le domaine"
 
@@ -507,11 +631,9 @@ msgstr "Supprimer le domaine"
 msgid ""
 "Deleting a domain is not undoable. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
-msgstr "Aucun retour arrière après avoir supprimer un domaine. Si vous en avez à nouveau besoin, vous devrez le recréer et configurer une nouvelle clé."
-
-#: main/templates/main/domain.html:38
-msgid "Delete domain"
-msgstr "Supprimer le domaine"
+msgstr ""
+"Aucun retour arrière après avoir supprimer un domaine. Si vous en avez à "
+"nouveau besoin, vous devrez le recréer et configurer une nouvelle clé."
 
 #: main/templates/main/domain_overview.html:7
 msgid "Domains (yours first, then public)"
@@ -563,19 +685,31 @@ msgstr "Aide"
 
 #: main/templates/main/domain_overview.html:60
 msgid ""
-"Here you can add new domains (zones) which you control (and this is only useful if you\n"
+"Here you can add new domains (zones) which you control (and this is only "
+"useful if you\n"
 "                   have some own zone which you can update automatically)."
-msgstr "Ici, vous pouvez ajouter de nouveau nom de domaine (zones) que vous contrôlez (ceci n'est utile\n\tque si vous avez votre propre zone qui peut être mis à jour automatiquement)."
+msgstr ""
+"Ici, vous pouvez ajouter de nouveau nom de domaine (zones) que vous "
+"contrôlez (ceci n'est utile\n"
+"\tque si vous avez votre propre zone qui peut être mis à jour "
+"automatiquement)."
 
 #: main/templates/main/domain_overview.html:64
 msgid ""
-"You need to be able to configure the primary master nameserver of the zone so it accepts\n"
-"                   dynamic updates (via RFC 2136 \"dynamic update\" protocol) if the correct update secret is presented."
-msgstr "Vous devez être en mesure de configurer votre serveur DNS primaire afin que la zone accepte\n\tdes mises à jour automatique (via RFC 2136, <em>dynamic update protocol</em>) si la bonne clé de mise à jour est envoyée."
+"You need to be able to configure the primary master nameserver of the zone "
+"so it accepts\n"
+"                   dynamic updates (via RFC 2136 \"dynamic update\" "
+"protocol) if the correct update secret is presented."
+msgstr ""
+"Vous devez être en mesure de configurer votre serveur DNS primaire afin que "
+"la zone accepte\n"
+"\tdes mises à jour automatique (via RFC 2136, <em>dynamic update protocol</"
+"em>) si la bonne clé de mise à jour est envoyée."
 
 #: main/templates/main/domain_overview.html:68
 msgid "We'll show you configuration examples after you add a domain."
-msgstr "Nous vous donnerons un exemple de configuration après l'ajout d'un domaine."
+msgstr ""
+"Nous vous donnerons un exemple de configuration après l'ajout d'un domaine."
 
 #: main/templates/main/generate_ns_secret.html:8
 msgid "Nameserver Shared Secret Generated"
@@ -585,7 +719,9 @@ msgstr "Clé partagée du serveur DNS générée"
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
-msgstr "Une nouvelle clé partagée a été générée. A chaque fois que vous visitez cette page, une nouvelle clé sera générée et l'ancienne deviendra invalide."
+msgstr ""
+"Une nouvelle clé partagée a été générée. A chaque fois que vous visitez "
+"cette page, une nouvelle clé sera générée et l'ancienne deviendra invalide."
 
 #: main/templates/main/generate_ns_secret.html:11
 msgid "Algorithm:"
@@ -598,7 +734,9 @@ msgstr "Clé:"
 
 #: main/templates/main/generate_ns_secret.html:19
 msgid "How to configure your bind9 nameserver to accept dynamic DNS updates?"
-msgstr "Comment configurer votre serveur Bind9 pour qu'il accepte des mise à jour dynamique de DNS?"
+msgstr ""
+"Comment configurer votre serveur Bind9 pour qu'il accepte des mise à jour "
+"dynamique de DNS?"
 
 #: main/templates/main/generate_secret.html:8
 msgid "Host Secret Generated"
@@ -607,9 +745,13 @@ msgstr "Clé d'hôte générée"
 #: main/templates/main/generate_secret.html:10
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
-"have to generate a new one again. Everytime you visit this page a new secret"
-" will be generated and the old one becomes invalid."
-msgstr "Nouvelle clé généré pour vous. Nous l'avons stocké <em>hashé</em> ; Sauvegardez là maintenant ou vous devez en générer une nouvelle. A chaque visite sur cette page, une nouvelle clé sera générée et l'ancienne deviendra invalide."
+"have to generate a new one again. Everytime you visit this page a new secret "
+"will be generated and the old one becomes invalid."
+msgstr ""
+"Nouvelle clé généré pour vous. Nous l'avons stocké <em>hashé</em> ; "
+"Sauvegardez là maintenant ou vous devez en générer une nouvelle. A chaque "
+"visite sur cette page, une nouvelle clé sera générée et l'ancienne deviendra "
+"invalide."
 
 #: main/templates/main/generate_secret.html:16
 msgid "How to configure automated dynamic DNS updates?"
@@ -655,13 +797,15 @@ msgstr "<em>Awesome</em> Code"
 msgid ""
 "Empowered by Python and Django,<br>\n"
 "                we love to write clean and secure code."
-msgstr "Développer avec Python et Django,<br>\n\tnous adorons écrire du code <em>\"propre\"</em> et sécurisé."
+msgstr ""
+"Développer avec Python et Django,<br>\n"
+"\tnous adorons écrire du code <em>\"propre\"</em> et sécurisé."
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
 msgstr "Editer l'hôte"
 
-#: main/templates/main/host.html:14
+#: main/templates/main/host.html:14 main/templates/main/host.html.py:19
 msgid "Delete Host"
 msgstr "Supprimer l'hôte"
 
@@ -669,23 +813,29 @@ msgstr "Supprimer l'hôte"
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
-msgstr "Aucun retour arrière après la supprimer d'un hôte. Si vous en avez à nouveau besoin, vous devrez le recréer et configurer une nouvelle clé de mise à jour."
-
-#: main/templates/main/host.html:19
-msgid "Delete host"
-msgstr "Supprimer l'hôte"
+msgstr ""
+"Aucun retour arrière après la supprimer d'un hôte. Si vous en avez à nouveau "
+"besoin, vous devrez le recréer et configurer une nouvelle clé de mise à jour."
 
 #: main/templates/main/host.html:25
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update\n"
 "                client, filled out with all values (including a new secret)."
-msgstr "Nous générerons une configuration <em>prêt-à-l'emploi</em> pour votre\n\trouteur / client de mise à jour incluant toutes les informations nécessaires (nouvelle clé comprise)."
+msgstr ""
+"Nous générerons une configuration <em>prêt-à-l'emploi</em> pour votre\n"
+"\trouteur / client de mise à jour incluant toutes les informations "
+"nécessaires (nouvelle clé comprise)."
 
 #: main/templates/main/host.html:29
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid.\n"
-"                You have to use the new secret in your router / update client configuration."
-msgstr "Nous créerons une nouvelle clé - Si vous en aviez une avant, elle deviendra invalide.\n\tVous devez utiliser la nouvelle clé pour la configuration de votre routeur / logiciel de mise à jour."
+"                You have to use the new secret in your router / update "
+"client configuration."
+msgstr ""
+"Nous créerons une nouvelle clé - Si vous en aviez une avant, elle deviendra "
+"invalide.\n"
+"\tVous devez utiliser la nouvelle clé pour la configuration de votre "
+"routeur / logiciel de mise à jour."
 
 #: main/templates/main/host.html:35
 msgid "Update other Services"
@@ -694,7 +844,9 @@ msgstr "Mise à jour des autres Services"
 #: main/templates/main/host.html:36
 msgid ""
 "We can send updates to other services when we receive an update from you."
-msgstr "Nous pouvons envoyer des mises à jour à d'autres services lorsque nous recevons une mise à jour venant de vous."
+msgstr ""
+"Nous pouvons envoyer des mises à jour à d'autres services lorsque nous "
+"recevons une mise à jour venant de vous."
 
 #: main/templates/main/host.html:38
 msgid "Configure Updaters"
@@ -707,14 +859,21 @@ msgstr "Mettre à jour les enregistrements DNS"
 #: main/templates/main/host.html:43
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol.\n"
-"               But if you know what you are doing, and you want to update manually, you can do it here."
-msgstr "Normalement, vous configurerez votre routeur en utilisant le protocole dyndns2.\n\tMais si vous savez ce que vous faîtes et que vous souhaitez le mettre à jour manuellement, vous pouvez le faire ici."
+"               But if you know what you are doing, and you want to update "
+"manually, you can do it here."
+msgstr ""
+"Normalement, vous configurerez votre routeur en utilisant le protocole "
+"dyndns2.\n"
+"\tMais si vous savez ce que vous faîtes et que vous souhaitez le mettre à "
+"jour manuellement, vous pouvez le faire ici."
 
 #: main/templates/main/host.html:46
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
-msgstr "Ces champs ont été remplis avec la detection automatique de votre configuration actuelle."
+msgstr ""
+"Ces champs ont été remplis avec la detection automatique de votre "
+"configuration actuelle."
 
 #: main/templates/main/host.html:49
 msgid "Current IPv4 address from master nameserver"
@@ -776,24 +935,39 @@ msgstr "Créer"
 
 #: main/templates/main/overview.html:77
 msgid "Here you can add new hosts (like routers, PCs, servers, ...)."
-msgstr "Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des serveurs,...)."
+msgstr ""
+"Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des "
+"serveurs,...)."
 
 #: main/templates/main/overview.html:79
 msgid ""
-"You need to be able to configure one of your machines so it sends dyndns2 compatible\n"
-"                   updates to us when your IP changes. Routers usually have some builtin software that does\n"
-"                   this, but you can also use some software on another system (like a PC or server)."
-msgstr "Vous devez pouvoir configurer une de vos machines pour qu'elle envoie des mises à jour\ncompatible avec le protocole dyndns2 lorsque votre IP change. Parfois, les routeur intègre un logiciel\nqui peut s'occuper de ça ; sinon, vous pouvez aussi utiliser un logiciel installé sur un autre système (Pc ou Serveur)."
+"You need to be able to configure one of your machines so it sends dyndns2 "
+"compatible\n"
+"                   updates to us when your IP changes. Routers usually have "
+"some builtin software that does\n"
+"                   this, but you can also use some software on another "
+"system (like a PC or server)."
+msgstr ""
+"Vous devez pouvoir configurer une de vos machines pour qu'elle envoie des "
+"mises à jour\n"
+"compatible avec le protocole dyndns2 lorsque votre IP change. Parfois, les "
+"routeur intègre un logiciel\n"
+"qui peut s'occuper de ça ; sinon, vous pouvez aussi utiliser un logiciel "
+"installé sur un autre système (Pc ou Serveur)."
 
 #: main/templates/main/overview.html:84
 msgid ""
-"Just make sure your update client either is customizable well enough or has specific\n"
+"Just make sure your update client either is customizable well enough or has "
+"specific\n"
 "                   support for our service."
-msgstr "Assurez vous simplement que votre client de mise à jour supporte nos services."
+msgstr ""
+"Assurez vous simplement que votre client de mise à jour supporte nos "
+"services."
 
 #: main/templates/main/overview.html:88
 msgid "We'll show you configuration examples after you add a host."
-msgstr "Nous afficherons un exemple de configuration après l'ajout d'un nouvel hôte."
+msgstr ""
+"Nous afficherons un exemple de configuration après l'ajout d'un nouvel hôte."
 
 #: main/templates/main/overview.html:92
 msgid "Your current IP(s) + reverse DNS:"
@@ -873,11 +1047,15 @@ msgstr "Browser-based Updater"
 msgid ""
 "Host %(hostname)s will get automatically updated as long as you keep this "
 "window open."
-msgstr "L'hôte %(hostname) sera mis à jour automatiquement, aussi longtemps que vous laisserez cette fenêtre ouverte."
+msgstr ""
+"L'hôte %(hostname) sera mis à jour automatiquement, aussi longtemps que vous "
+"laisserez cette fenêtre ouverte."
 
 #: main/templates/main/update.html:12
 msgid "The browser based updater only works if javascript is enabled."
-msgstr "La mise à jour automatique via le navigateur ne fonctionne que si javascript est activé."
+msgstr ""
+"La mise à jour automatique via le navigateur ne fonctionne que si javascript "
+"est activé."
 
 #: main/templates/main/update.html:15
 msgid "Updater Status"
@@ -903,28 +1081,35 @@ msgstr "Supprimer la configuration du client de mise à jour"
 msgid ""
 "Deleting a updater configuration is not undoable. If you need it back, "
 "you'll have to add it again."
-msgstr "Aucun retour arrière après la suppression de la configuration du client de mise à jour. Si vous en avez à nouveau besoin, vous devrez le recréer."
+msgstr ""
+"Aucun retour arrière après la suppression de la configuration du client de "
+"mise à jour. Si vous en avez à nouveau besoin, vous devrez le recréer."
 
-#: main/templates/main/updater_hostconfig.html:25
-msgid "Here you can edit the configuration of the"
+#: main/templates/main/updater_hostconfig.html:26
+#, fuzzy, python-format
+msgid "Here you can edit the configuration of the \"%(servicename)s\" updater."
 msgstr "Vous pouvez éditer ici la configuration de"
 
-#: main/templates/main/updater_hostconfig.html:25
-msgid "updater."
-msgstr "updater."
-
-#: main/templates/main/updater_hostconfig.html:28
+#: main/templates/main/updater_hostconfig.html:29
 msgid ""
-"The values you need here are the same ones as you would usually enter in your router\n"
+"The values you need here are the same ones as you would usually enter in "
+"your router\n"
 "                   or update client."
-msgstr "Les informations nécessaire ici sont généralement les mêmes que vous utilisez\npour votre routeur ou client de mise à jour."
+msgstr ""
+"Les informations nécessaire ici sont généralement les mêmes que vous "
+"utilisez\n"
+"pour votre routeur ou client de mise à jour."
 
-#: main/templates/main/updater_hostconfig.html:32
+#: main/templates/main/updater_hostconfig.html:33
 #, python-format
 msgid ""
-"You get these values after registering with the \"%(object.service.name)s\" service\n"
+"You get these values after registering with the \"%(object.service.name)s\" "
+"service\n"
 "                   and (likely) configuring that service to accept updates."
-msgstr "Vous obtiendrez généralement ces informations après vous être enregistré sur le service \"%(object.service.name)s\"\net l'avoir configurer pour accepter les mises à jour."
+msgstr ""
+"Vous obtiendrez généralement ces informations après vous être enregistré sur "
+"le service \"%(object.service.name)s\"\n"
+"et l'avoir configurer pour accepter les mises à jour."
 
 #: main/templates/main/updater_hostconfig_overview.html:7
 msgid "Your updater configurations for other services"
@@ -958,11 +1143,15 @@ msgstr "Créer une nouvelle configuration "
 msgid ""
 "Here you can add new configurations for 3rd party services you like to get "
 "updated."
-msgstr "Vous pouvez ajouter ici une nouvelle configuration d'une service tiers que vous souhaitez mettre à jour."
+msgstr ""
+"Vous pouvez ajouter ici une nouvelle configuration d'une service tiers que "
+"vous souhaitez mettre à jour."
 
 #: main/templates/main/updater_hostconfig_overview.html:50
 msgid "We will send an update to them each time you update your host with us."
-msgstr "Nous leur enverrons une mise à jour à chaque fois que vous mettrez à jour votre hôte depuis notre service."
+msgstr ""
+"Nous leur enverrons une mise à jour à chaque fois que vous mettrez à jour "
+"votre hôte depuis notre service."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:13
 msgid "General configuration hints"
@@ -971,33 +1160,65 @@ msgstr "Configuration générale"
 #: main/templates/main/includes/tabbed_router_configuration.html:15
 msgid ""
 "\n"
-"            Usually, you should configure one system on your network to update the DNS.\n"
-"            This can be either your router or a host on your network and it will run some software\n"
+"            Usually, you should configure one system on your network to "
+"update the DNS.\n"
+"            This can be either your router or a host on your network and it "
+"will run some software\n"
 "            called the update client."
-msgstr "\nVous devrez configurer un système sur votre réseau pour mettre à jours les DNS.\nCe pourrait être votre routeur ou un hôte dans votre réseau local. Nous appellerons le logiciel utilisé le client de mise à jour."
+msgstr ""
+"\n"
+"Vous devrez configurer un système sur votre réseau pour mettre à jours les "
+"DNS.\n"
+"Ce pourrait être votre routeur ou un hôte dans votre réseau local. Nous "
+"appellerons le logiciel utilisé le client de mise à jour."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:21
 msgid ""
 "\n"
-"            We have some specific configuration hints for some devices and update clients,\n"
-"            please see the tabs above. If you don't find yours there, use the generic hints below."
-msgstr "\nDans les onglets ci-dessus, vous trouverez des exemples de configurations pour certains routeurs et/ou client de mise à jour.\nSi vous ne trouvez pas le votre, vous pouvez utiliser la configuration générique ci-dessous."
+"            We have some specific configuration hints for some devices and "
+"update clients,\n"
+"            please see the tabs above. If you don't find yours there, use "
+"the generic hints below."
+msgstr ""
+"\n"
+"Dans les onglets ci-dessus, vous trouverez des exemples de configurations "
+"pour certains routeurs et/ou client de mise à jour.\n"
+"Si vous ne trouvez pas le votre, vous pouvez utiliser la configuration "
+"générique ci-dessous."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:26
 msgid ""
 "\n"
 "            <b>Important note about security and compatibility</b>:\n"
-"            For update URLs, we always give the https (not: http) URL as that will use an encrypted connection\n"
-"            to transfer your data (including your update secret). Depending on your update client (router firmware or\n"
-"            PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.\n"
-"            So, if it does not work, you have the choice of using a different update client and/or a different service,\n"
-"            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>"
-msgstr "\n<b>Note importante de sécurité et de compatibilité</b>:\nPour les URLs de mise à jour, nous donnons toujours le lien https (et non http) qui permettra une connexion cryptée\npour transférer vos données (clé de mise à jour comprise). En fonction de votre client de mise à jour (firmware du routeur ou logiciel PC)\n<em>et</em> du service nsupdate, https pourrait ne pas être supporter.\nDans ce cas, vous avez le choix entre utiliser un autre client de mise à jour et/ou un autre service,\nou transmettre vos données en utilisant un connexion non cryptée (http ou lieu de https).<br>"
+"            For update URLs, we always give the https (not: http) URL as "
+"that will use an encrypted connection\n"
+"            to transfer your data (including your update secret). Depending "
+"on your update client (router firmware or\n"
+"            PC software) <em>and</em> the specific nsupdate.info-based "
+"service, https might be not supported.\n"
+"            So, if it does not work, you have the choice of using a "
+"different update client and/or a different service,\n"
+"            or transmitting your data using an unencrypted connection (using "
+"http: instead of https:).<br>"
+msgstr ""
+"\n"
+"<b>Note importante de sécurité et de compatibilité</b>:\n"
+"Pour les URLs de mise à jour, nous donnons toujours le lien https (et non "
+"http) qui permettra une connexion cryptée\n"
+"pour transférer vos données (clé de mise à jour comprise). En fonction de "
+"votre client de mise à jour (firmware du routeur ou logiciel PC)\n"
+"<em>et</em> du service nsupdate, https pourrait ne pas être supporter.\n"
+"Dans ce cas, vous avez le choix entre utiliser un autre client de mise à "
+"jour et/ou un autre service,\n"
+"ou transmettre vos données en utilisant un connexion non cryptée (http ou "
+"lieu de https).<br>"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:37
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
-msgstr "Votre client de mise à jour doit accéder au URLs suivantes pour mettre à jour les DNS:"
+msgstr ""
+"Votre client de mise à jour doit accéder au URLs suivantes pour mettre à "
+"jour les DNS:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:39
 msgid "For IPv4 updates:"
@@ -1010,9 +1231,13 @@ msgstr "Pour mettre à jour IPv6:"
 #: main/templates/main/includes/tabbed_router_configuration.html:47
 msgid ""
 "\n"
-"        The IPs will be determined automatically using the remote address our service is seeing\n"
+"        The IPs will be determined automatically using the remote address "
+"our service is seeing\n"
 "        (see below for more details)."
-msgstr "\nL'adresse IP sera détectée automatiquement par notre service\n(Voir détails ci-dessous)."
+msgstr ""
+"\n"
+"L'adresse IP sera détectée automatiquement par notre service\n"
+"(Voir détails ci-dessous)."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:52
 msgid "Your update client has to do the following steps:"
@@ -1048,13 +1273,20 @@ msgstr "Vous pouvez ajouter en option des arguments dans l'URL:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:69
 msgid ""
-"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not\n"
-"                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)"
-msgstr "myip=127.0.0.1 ou myip=::1 (nous détectons, par défaut, l'adresse IP. Si cette adresse IP n'est pas celle que vous\nsouhaitez utiliser pour votre enregistrement DNS, vous devez nous la fournir explicitement en utilisant myip=...)"
+"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
+"autodetected IP is not\n"
+"                        the one you want to put into DNS, you need to give "
+"the wanted one explicitly using myip=...)"
+msgstr ""
+"myip=127.0.0.1 ou myip=::1 (nous détectons, par défaut, l'adresse IP. Si "
+"cette adresse IP n'est pas celle que vous\n"
+"souhaitez utiliser pour votre enregistrement DNS, vous devez nous la fournir "
+"explicitement en utilisant myip=...)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:72
 msgid "(if not given: autodetect from http basic auth)"
-msgstr "(si non préciser: détection automatique depuis l'authentification http)"
+msgstr ""
+"(si non préciser: détection automatique depuis l'authentification http)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:75
 msgid "The response status and content will be:"
@@ -1070,7 +1302,9 @@ msgstr "IP acceptée, mais n'a pas changer depuis la dernière mise à jour"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:79
 msgid "Incorrect authentication or no http basic auth header received"
-msgstr "Authentification incorrect ou aucune authentification reçue dans l'entête http"
+msgstr ""
+"Authentification incorrect ou aucune authentification reçue dans l'entête "
+"http"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:85
 msgid "and maybe others:"
@@ -1094,7 +1328,9 @@ msgstr "Si vous avez une adresse IPv4 et IPv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:103
 msgid "Set Update-URL to the following (two URLs, separated by one space)"
-msgstr "Configurez avec l'URL de mise à jour suivante (deux URLs, séparées par un espace)"
+msgstr ""
+"Configurez avec l'URL de mise à jour suivante (deux URLs, séparées par un "
+"espace)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:105
 msgid "Forcing a dynamic DNS update"
@@ -1104,7 +1340,9 @@ msgstr "Forcer une mise à jour DNS dynamique"
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
-msgstr "Si vous souhaitez forcer une mise à jour dynamique, pour tester, vous pouvez le faire comme suit:"
+msgstr ""
+"Si vous souhaitez forcer une mise à jour dynamique, pour tester, vous pouvez "
+"le faire comme suit:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:108
 msgid "disable dynamic DNS, apply"
@@ -1118,7 +1356,10 @@ msgstr "enable dynamic DNS, apply"
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
-msgstr "(Fritz!Box envoie maintenant une mise à jour, elle peut être \"good\" (OK) ou \"nochg\" (inchangé) en fonction de l'adresse IP déjà enregistrée dans les DNS)"
+msgstr ""
+"(Fritz!Box envoie maintenant une mise à jour, elle peut être \"good\" (OK) "
+"ou \"nochg\" (inchangé) en fonction de l'adresse IP déjà enregistrée dans "
+"les DNS)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:114
 msgid "verified with"
@@ -1135,9 +1376,15 @@ msgstr "ddclient est un logiciel Linux assez répandu."
 #: main/templates/main/includes/tabbed_router_configuration.html:184
 msgid ""
 "\n"
-"        These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.\n"
+"        These URLs invoke the built-in update client, which is intended for "
+"temporary and adhoc scenarios only.\n"
 "        It periodically checks your IP and updates DNS if it changes."
-msgstr "\nCes URLs font appel à un client de mise à jour, mais uniquement pour dans un contexte adhoc et temporaire.\nIl vérifiera régulièrement votre adresse IP et mettra à jour les DNS si elle venait à changer."
+msgstr ""
+"\n"
+"Ces URLs font appel à un client de mise à jour, mais uniquement pour dans un "
+"contexte adhoc et temporaire.\n"
+"Il vérifiera régulièrement votre adresse IP et mettra à jour les DNS si elle "
+"venait à changer."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:193
 #: main/templates/main/includes/tabbed_router_configuration.html:212
@@ -1165,7 +1412,9 @@ msgstr "Utilisation des URLs de mise à jour depuis un navigateur"
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
-msgstr "Interactif - vous demandera un <em>username</em> (donnez le nom de domaine) et un <em>password</em> (donnez votre clé):"
+msgstr ""
+"Interactif - vous demandera un <em>username</em> (donnez le nom de domaine) "
+"et un <em>password</em> (donnez votre clé):"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:223
 msgid "As above, but manually specifying the IP address:"
@@ -1173,7 +1422,8 @@ msgstr "Identique, mais en spécifiant manuellement l'adresse IP:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:229
 msgid "(updates hostname to point to ipv4 127.0.0.1)"
-msgstr "(met à jour le nom de domaine pour pointer ver l'adresse ipv4 127.0.0.1)"
+msgstr ""
+"(met à jour le nom de domaine pour pointer ver l'adresse ipv4 127.0.0.1)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:230
 msgid "(updates hostname to point to ipv6 ::1)"
@@ -1186,7 +1436,9 @@ msgstr "Explications des paramètres:"
 #: main/templates/main/includes/tabbed_router_configuration.html:236
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
-msgstr "votre FQDN (nom de domaine complètement qualifié), quelque chose comme example.%(WWW_HOST)s"
+msgstr ""
+"votre FQDN (nom de domaine complètement qualifié), quelque chose comme "
+"example.%(WWW_HOST)s"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:239
 msgid "the secret you have configured for this hostname"
@@ -1195,8 +1447,12 @@ msgstr "La clé que vous avez configuré pour ce nom de domaine"
 #: main/templates/main/includes/tabbed_router_configuration.html:241
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
-"                of course you need to use your real public IP instead of that."
-msgstr "Adresse IP: vous utilisons les adresse IP v4 et v6 de localhost comme exemple, mais\nvous devez bien entendu utiliser votre vrai adresse IP publique à la place."
+"                of course you need to use your real public IP instead of "
+"that."
+msgstr ""
+"Adresse IP: vous utilisons les adresse IP v4 et v6 de localhost comme "
+"exemple, mais\n"
+"vous devez bien entendu utiliser votre vrai adresse IP publique à la place."
 
 #: settings/base.py:381
 msgid "English"
@@ -1249,19 +1505,27 @@ msgstr "Votre connexion (http) n'est pas cryptée et donc pas sécurisée."
 #: templates/base.html:92
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
-msgstr "Utilisez s.v.p notre <a href=\"https://%(WWW_HOST)s/\">site sécurisé</a>."
+msgstr ""
+"Utilisez s.v.p notre <a href=\"https://%(WWW_HOST)s/\">site sécurisé</a>."
 
 #: templates/base.html:95
 msgid ""
-"At least some of the required cookies will only work on the secure https site,\n"
+"At least some of the required cookies will only work on the secure https "
+"site,\n"
 "                                    expect malfunctioning on the http site."
-msgstr "Certains cookies requis ne fonctionneront qu'à travers le site sécurisé (https),\ncertaines fonctions seront donc indisponible à travers le site non sécurisé (http)."
+msgstr ""
+"Certains cookies requis ne fonctionneront qu'à travers le site sécurisé "
+"(https),\n"
+"certaines fonctions seront donc indisponible à travers le site non sécurisé "
+"(http)."
 
 #: templates/base.html:103
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in"
-" your browser."
-msgstr "Certaines fonctionnalités nécessiteront que Javascript soit activé dans votre navigateur."
+"Some functionality on this site requires that you have JavaScript enabled in "
+"your browser."
+msgstr ""
+"Certaines fonctionnalités nécessiteront que Javascript soit activé dans "
+"votre navigateur."
 
 #: templates/includes/base_footer.html:3
 msgid "Powered by nsupdate.info"
@@ -1274,3 +1538,12 @@ msgstr "Valid HTML"
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr "Valid CSS"
+
+#~ msgid "Delete domain"
+#~ msgstr "Supprimer le domaine"
+
+#~ msgid "Delete host"
+#~ msgstr "Supprimer l'hôte"
+
+#~ msgid "updater."
+#~ msgstr "updater."
