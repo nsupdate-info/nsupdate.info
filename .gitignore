@@ -4,7 +4,6 @@
 local_settings.py
 .coverage
 .idea/
-.tx/
 .cache/
 *.sqlite
 *.egg-info
