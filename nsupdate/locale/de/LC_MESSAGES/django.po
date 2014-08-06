@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-29 19:19+0200\n"
-"PO-Revision-Date: 2014-07-29 17:21+0000\n"
+"PO-Revision-Date: 2014-08-05 23:56+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -305,7 +305,7 @@ msgid ""
 "You usually need it so your router (or other dyndns2-compatible\n"
 "                client) can update a hostname, so you don't need to know or find\n"
 "                out your current IP address."
-msgstr "Üblicherweise braucht man sowas, damit Dein Router (oder anderer dyndns2-kompatibler\nClient) einen Hostname aktualisieren kann, so dass Du nicht Deine\naktuelle IP wissen oder herausfinden musst."
+msgstr "Üblicherweise brauchst Du das, damit Dein Router (oder anderer dyndns2-kompatibler\nClient) einen Hostname aktualisieren kann, so dass Du nicht Deine\naktuelle IP wissen oder herausfinden musst."
 
 #: main/templates/main/about.html:18
 #, python-format
@@ -355,7 +355,7 @@ msgid ""
 "                   title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash;\n"
 "                there might be some interesting stuff for you in it that is\n"
 "                not visible or obvious on the user interface."
-msgstr "Wir haben auch eine\n                <a href=\"http://nsupdateinfo.readthedocs.org/\"\n                   title=\"Dokumentation in neuem Fenster\" target=\"_blank\">Dokumentation</a> &mdash;\n                sie könnte interessante Infos für Dich enthalten,\n                die nicht unmittelbar sichtbar oder offensichtlich\n                auf der Benutzeroberfläche sind."
+msgstr "Wir haben auch eine\n                <a href=\"http://nsupdateinfo.readthedocs.org/\"\n                   title=\"Dokumentation in neuem Fenster\" target=\"_blank\">Dokumentation</a> &mdash;\n                sie könnte interessante Infos für Dich enthalten,\n                die auf der Benutzeroberfläche nicht unmittelbar sichtbar oder offensichtlich sind."
 
 #: main/templates/main/about.html:46
 msgid ""
@@ -426,7 +426,7 @@ msgstr "Bevor Du uns via E-Mail kontaktierst, lese bitte die Dokumentation - sie
 
 #: main/templates/main/about.html:87
 msgid "Software Project Contact"
-msgstr "Software-Projekt Kontakt"
+msgstr "Software-Projekt-Kontakt"
 
 #: main/templates/main/about.html:89
 msgid ""
@@ -494,7 +494,7 @@ msgstr "Konfiguration anzeigen"
 msgid ""
 "We'll generate a ready-to-use configuration for your name server,\n"
 "                filled out with all values (including a new secret)."
-msgstr "Wir werden ein fertige Konfiguration für Deinen Nameserver erzeugen, wo alle Werte bereits drinstehen (inklusive einem neue Secret)."
+msgstr "Wir werden ein fertige Konfiguration für Deinen Nameserver erzeugen, wo alle Werte bereits drinstehen (inklusive einem neuen Secret)."
 
 #: main/templates/main/domain.html:27
 msgid ""
@@ -640,7 +640,7 @@ msgstr "Frei und Open-Source"
 
 #: main/templates/main/home.html:33
 msgid "nsupdate.info is free and open-source software."
-msgstr "nsupdate.info ist freie and Open-Source-Software."
+msgstr "nsupdate.info ist freie und Open-Source-Software."
 
 #: main/templates/main/home.html:36
 msgid "nsupdate.info project on GitHub"
@@ -674,7 +674,7 @@ msgstr "Das Löschen eines Hosts kann nicht rückgängig gemacht werden. Wenn Du
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update\n"
 "                client, filled out with all values (including a new secret)."
-msgstr "Wir werden ein fertige Konfiguration für Deinen Router / Update-\nClient erzeugen, wo alle Werte bereits drinstehen (inklusive einem neue Secret)."
+msgstr "Wir werden ein fertige Konfiguration für Deinen Router / Update-\nClient erzeugen, wo alle Werte bereits drinstehen (inklusive einem neuen Secret)."
 
 #: main/templates/main/host.html:29
 msgid ""
@@ -750,11 +750,11 @@ msgstr "Fehler<br>C / S"
 
 #: main/templates/main/overview.html:14
 msgid "IPv4 Address<br>(last update)"
-msgstr "IPv4-Adresse<br>(letzter Update)"
+msgstr "IPv4-Adresse<br>(letztes Update)"
 
 #: main/templates/main/overview.html:15
 msgid "IPv6 Address<br>(last update)"
-msgstr "IPv6-Adresse<br>(letzter Update)"
+msgstr "IPv6-Adresse<br>(letztes Update)"
 
 #: main/templates/main/overview.html:56
 msgid "No hosts yet."
