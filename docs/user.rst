@@ -122,6 +122,7 @@ secret and maybe even the update policy (where you can setup rules to allow/deny
 If your DNS hoster does not support dynamic updates, there is some trick how you still can use them:
 
 ::
+
     # configure this for your domain at your DNS hoster:
     dynamichost.yourdomain.com  CNAME  updatedhost.nsupdate.info
 
