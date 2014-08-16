@@ -52,6 +52,15 @@
             {% trans "Your update client has to do the following steps:" %}
         </p>
         <ul>
+            <li>
+                {% trans "Check your current IP:" %}
+                <ul>
+                    <li>https://{{ WWW_IPV4_HOST }}/myip  ({% trans "to get your current IPv4 address" %})</li>
+                    <li>https://{{ WWW_IPV6_HOST }}/myip  ({% trans "to get your current IPv6 address" %})</li>
+                    <li>https://{{ WWW_HOST }}/myip  ({% trans "to get your current IPv4 or IPv6 address" %})</li>
+                </ul>
+                {% trans "Important: Do not send an update if your IP did not change since last update!" %}
+            </li>
             <li>{% trans "Do HTTP Basic Auth with:" %}
                 <ul>
                     <li>{% trans "Username:" %} {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
@@ -189,7 +198,14 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
             <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">{% blocktrans %}similar, ipv4 only{% endblocktrans %}</a></li>
             <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">{% blocktrans %}similar, ipv6 only{% endblocktrans %}</a></li>
         </ul>
-        <h4>{% trans "Update URLs for browser / http user agent use" %}</h4>
+        <h4>{% trans "URLs for browser / http user agent use" %}</h4>
+        {% trans "Important: Do not send an update if your IP did not change since last update!" %}
+        {% trans "Check your current IP:" %}
+        <ul>
+            <li><a href="https://{{ WWW_IPV4_HOST }}/myip">{% blocktrans %}to get your current IPv4 address{% endblocktrans %}</a></li>
+            <li><a href="https://{{ WWW_IPV6_HOST }}/myip">{% blocktrans %}to get your current IPv6 address{% endblocktrans %}</a></li>
+            <li><a href="https://{{ WWW_HOST }}/myip">{% blocktrans %}to get your current IPv4 or IPv6 address{% endblocktrans %}</a></li>
+        </ul>
         {% trans "Interactive - will ask for username (give your hostname) and password (give your secret):" %}
         <ul>
             <li><a href="https://{{ WWW_HOST }}/nic/update">{% blocktrans %}update DNS to point to remote ipv4 or ipv6 address{% endblocktrans %}</a></li>
