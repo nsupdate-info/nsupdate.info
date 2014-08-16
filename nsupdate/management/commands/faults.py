@@ -54,7 +54,7 @@ class Command(BaseCommand):
         make_option('--reset-available',
                     action='store_true',
                     dest='reset_available',
-                    default=True,
+                    default=False,
                     help='reset the available flag (to True) of all hosts',
         ),
         make_option('--flag-abuse',
