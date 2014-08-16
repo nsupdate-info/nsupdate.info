@@ -116,19 +116,20 @@ Issue: The abuse flag for your host was set.
 Explanation:
 The abuse flag usually gets set if your update client sends way too many
 updates although your IP address did not change.
-In your case, your client sent %(faults_count)d faulty updates since
-we last checked. We have reset the faults counter to 0 now, but we are
-rejecting updates for this host until you resolve the issue.
+
+Your update client sent %(faults_count)d faulty updates since we last checked.
+We have reset the faults counter to 0 now, but we are rejecting updates
+for this host until you resolve the issue.
 
 Resolution:
-You can easily resolve this on your own:
+You can easily do this on your own:
 1. fix or replace the update client on this host - it must not send
    updates if the IP did not change
 2. visit the service web interface and remove the abuse flag for this host
 
 Notes:
-- this is usually caused by misbehaving, too simplish / faulty update
-  clients (on your PC / server or router / firewall).
+- this is usually caused by a misbehaving / faulty update client
+  (on your PC / server or router / firewall)
 - the dyndns2 standard explicitly states that frequently sending
   nochg updates is considered abuse of the service
 - you are using way more resources on the service than really needed
