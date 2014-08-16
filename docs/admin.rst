@@ -253,7 +253,7 @@ it runs as the same user as the nsupdate.info wsgi application::
     # reinitialize the test user:
     50 2 * * * django-admin.py testuser
     # reset the fault counters:
-    55 2 * * * django-admin.py faults --flag-abuse=20 --reset-client
+    55 2 * * * django-admin.py faults --flag-abuse=20 --reset-client --notify-user
     # clear expired sessions from the database, use your correct settings module:
     0  3 * * 1 django-admin.py clearsessions
     # clear outdated registrations:
@@ -269,6 +269,10 @@ is over 20 (and, for these cases, it'll also reset the fault counter back to 0).
 
 --reset-client additionally sets all client fault counters back to 0, so all
 counts are just "per day".
+
+--notify-user will send an email notification to the creator of the host if we
+set the abuse flag for it. The email will contain instructions for the user
+about how to fix the problem.
 
 So, if you run this daily, it means that more than 20 client faults per day are
 considered abuse (e.g. if someone runs a stupid cronjob to update the IP instead
