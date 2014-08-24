@@ -76,6 +76,27 @@
                             </li>
                         {% endif %}
                     </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            {% get_language_info_list for LANGUAGES as langs %}
+                            {% for lang in langs %}
+                                {% if lang.code != LANGUAGE_CODE %}
+                                <li>
+                                    <form name="setLang{{ lang.name }}" action="{% url 'set_language' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="language" value="{{ lang.code }}" />
+                                        <a href="#" onclick="document.setLang{{ lang.name }}.submit();return false;">
+                                            {{ lang.name_local }} ({{ lang.name }}) [{{ lang.code }}]
+                                        </a>
+                                    </form>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

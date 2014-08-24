@@ -32,6 +32,7 @@ urlpatterns = patterns(
     # registration and user settings
     url(r'^account/', include('nsupdate.accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('nsupdate.main.urls')),
 )
 
