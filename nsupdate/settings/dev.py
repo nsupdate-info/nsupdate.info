@@ -34,9 +34,5 @@ INSTALLED_APPS += (
 # https://docs.djangoproject.com/en/dev/topics/i18n/translation/#how-django-discovers-language-preference
 LANGUAGES += (
     # note: for the development install we also offer unfinished translations:
-    ('en', gettext_noop('English')),
-    ('de', gettext_noop('German')),
-    ('fr', gettext_noop('French')),
-    ('it', gettext_noop('Italian')),
     ('pl', gettext_noop('Polish')),
 )
