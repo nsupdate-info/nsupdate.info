@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-16 23:03+0200\n"
-"PO-Revision-Date: 2014-08-16 20:51+0000\n"
-"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
+"POT-Creation-Date: 2014-08-26 14:59+0200\n"
+"PO-Revision-Date: 2014-08-19 12:02+0000\n"
+"Last-Translator: mandrag0ra <mandrag0ra@icloud.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/fr/)\n"
 "Language: fr\n"
@@ -34,7 +34,7 @@ msgstr "Associé au compte distant"
 
 #: accounts/templates/accounts/user_profile.html:27
 msgid "Disassociate from remote Account"
-msgstr ""
+msgstr "Dissocié du compte distant"
 
 #: accounts/templates/registration/activate.html:4
 msgid "Activation complete"
@@ -1089,6 +1089,8 @@ msgstr ""
 #, python-format
 msgid "Here you can edit the configuration of the \"%(servicename)s\" updater."
 msgstr ""
+"Vous pouvez éditer ici la configuration du service de mise à jour "
+"\"%(servicename)s\" "
 
 #: main/templates/main/updater_hostconfig.html:29
 msgid ""
@@ -1246,28 +1248,30 @@ msgstr "Votre client de mise à jour devra procéder aux étapes suivantes:"
 #: main/templates/main/includes/tabbed_router_configuration.html:56
 #: main/templates/main/includes/tabbed_router_configuration.html:203
 msgid "Check your current IP:"
-msgstr ""
+msgstr "Votre IP actuelle:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:58
 #: main/templates/main/includes/tabbed_router_configuration.html:205
 msgid "to get your current IPv4 address"
-msgstr ""
+msgstr "Récupérer votre adresse IPV4 actuelle"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:59
 #: main/templates/main/includes/tabbed_router_configuration.html:206
 msgid "to get your current IPv6 address"
-msgstr ""
+msgstr "Récupérer votre adresse IPV6 actuelle"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:60
 #: main/templates/main/includes/tabbed_router_configuration.html:207
 msgid "to get your current IPv4 or IPv6 address"
-msgstr ""
+msgstr "Récupérer vos adresses IPV4 et IPV6 actuelles"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:62
 #: main/templates/main/includes/tabbed_router_configuration.html:202
 msgid ""
 "Important: Do not send an update if your IP did not change since last update!"
 msgstr ""
+"Important : Il n'est pas utile d'envoyer une mise à jour si votre IP n'a pas "
+"changé."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:64
 msgid "Do HTTP Basic Auth with:"
@@ -1401,7 +1405,7 @@ msgstr "ddclient est un logiciel Linux assez répandu."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:192
 msgid "Browser-based update client"
-msgstr ""
+msgstr "Client de mise à jour via un navigateur"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:193
 msgid ""
@@ -1420,23 +1424,23 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:211
 #: main/templates/main/includes/tabbed_router_configuration.html:217
 msgid "update DNS to point to remote ipv4 or ipv6 address"
-msgstr ""
+msgstr "met à jour les DNS pour pointer vers une adresse ipv4 ou ipv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:198
 #: main/templates/main/includes/tabbed_router_configuration.html:212
 #: main/templates/main/includes/tabbed_router_configuration.html:218
 msgid "similar, ipv4 only"
-msgstr ""
+msgstr "similaire, ipv4 uniquement"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:199
 #: main/templates/main/includes/tabbed_router_configuration.html:213
 #: main/templates/main/includes/tabbed_router_configuration.html:219
 msgid "similar, ipv6 only"
-msgstr ""
+msgstr "similaire, ipv6 uniquement"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:201
 msgid "URLs for browser / http user agent use"
-msgstr ""
+msgstr "Utilisation des URLs de mise à jour depuis un navigateur"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:209
 msgid ""
@@ -1448,7 +1452,7 @@ msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:215
 msgid "Giving the http basic auth username and password in the URL:"
-msgstr ""
+msgstr "En mentionnant le nom d'utilisateur et le mot de passe dans l'URL:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:221
 msgid "As above, but manually specifying the IP address:"
@@ -1456,11 +1460,11 @@ msgstr "Identique, mais en spécifiant manuellement l'adresse IP:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:223
 msgid "update DNS to point to ipv4 127.0.0.1"
-msgstr ""
+msgstr "met à jour les DNS pour pointer vers l'adresse ipv4 127.0.0.1"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:224
 msgid "update DNS to point to ipv6 ::1"
-msgstr ""
+msgstr "met à jour les DNS pour pointer vers l'adresse ipv6 ::1"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:226
 msgid "Explanation of parameters:"
@@ -1487,25 +1491,25 @@ msgstr ""
 "exemple, mais\n"
 "vous devez bien entendu utiliser votre vrai adresse IP publique à la place."
 
-#: settings/base.py:381 settings/dev.py:37
+#: settings/base.py:382
 msgid "English"
 msgstr "English"
 
-#: settings/base.py:382 settings/dev.py:38
+#: settings/base.py:383
 msgid "German"
 msgstr "Allemand"
 
-#: settings/base.py:383 settings/dev.py:39
+#: settings/base.py:384
 msgid "French"
 msgstr "French"
 
-#: settings/base.py:384 settings/dev.py:40
+#: settings/base.py:385
 msgid "Italian"
-msgstr ""
+msgstr "Italien"
 
-#: settings/dev.py:41
+#: settings/dev.py:37
 msgid "Polish"
-msgstr ""
+msgstr "Polonnais"
 
 #: templates/base.html:40
 msgid "Home"
@@ -1539,17 +1543,17 @@ msgstr "Interface admin"
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: templates/base.html:90
+#: templates/base.html:111
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "Votre connexion (http) n'est pas cryptée et donc pas sécurisée."
 
-#: templates/base.html:92
+#: templates/base.html:113
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
 msgstr ""
 "Utilisez s.v.p notre <a href=\"https://%(WWW_HOST)s/\">site sécurisé</a>."
 
-#: templates/base.html:95
+#: templates/base.html:116
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site,\n"
@@ -1560,7 +1564,7 @@ msgstr ""
 "certaines fonctions seront donc indisponible à travers le site non sécurisé "
 "(http)."
 
-#: templates/base.html:103
+#: templates/base.html:124
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in "
 "your browser."

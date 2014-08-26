@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-16 23:03+0200\n"
+"POT-Creation-Date: 2014-08-26 14:59+0200\n"
 "PO-Revision-Date: 2014-08-16 21:00+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/"
@@ -1491,23 +1491,23 @@ msgstr ""
 "aber\n"
 "natürlich musst Du Deine wirkliche, öffentliche IP stattdessen benutzen."
 
-#: settings/base.py:381 settings/dev.py:37
+#: settings/base.py:382
 msgid "English"
 msgstr "Englisch"
 
-#: settings/base.py:382 settings/dev.py:38
+#: settings/base.py:383
 msgid "German"
 msgstr "Deutsch"
 
-#: settings/base.py:383 settings/dev.py:39
+#: settings/base.py:384
 msgid "French"
 msgstr "Französisch"
 
-#: settings/base.py:384 settings/dev.py:40
+#: settings/base.py:385
 msgid "Italian"
 msgstr "Italienisch"
 
-#: settings/dev.py:41
+#: settings/dev.py:37
 msgid "Polish"
 msgstr "Polnisch"
 
@@ -1543,18 +1543,18 @@ msgstr "Administration"
 msgid "Logout"
 msgstr "Abmelden"
 
-#: templates/base.html:90
+#: templates/base.html:111
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "Deine (http-)Verbindung ist unverschlüsselt und deshalb unsicher."
 
-#: templates/base.html:92
+#: templates/base.html:113
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
 msgstr ""
 "Bitte benutze unsere <a href=\"https://%(WWW_HOST)s/\">sichere https-Seite</"
 "a>."
 
-#: templates/base.html:95
+#: templates/base.html:116
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site,\n"
@@ -1564,7 +1564,7 @@ msgstr ""
 "https-Seite,\n"
 "auf der http-Seite sind Fehlfunktionen zu erwarten."
 
-#: templates/base.html:103
+#: templates/base.html:124
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in "
 "your browser."
