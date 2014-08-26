@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-26 14:59+0200\n"
-"PO-Revision-Date: 2014-08-25 07:53+0000\n"
+"POT-Creation-Date: 2014-08-26 20:04+0200\n"
+"PO-Revision-Date: 2014-08-26 14:47+0000\n"
 "Last-Translator: ykmm <ykmm@mediacom.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/it/)\n"
@@ -406,7 +406,7 @@ msgstr "Per quanto ne sappiamo, non esiste un servizio che <em>non</em>:"
 
 #: main/templates/main/about.html:27
 msgid "nagging its users to make a paid subscription"
-msgstr "importuna gli utenti per sottscrivere un abbonamento a pagamento."
+msgstr "importuna gli utenti per sottoscrivere un abbonamento a pagamento."
 
 #: main/templates/main/about.html:28
 msgid "annoying its users with advertisements or spam"
@@ -779,11 +779,11 @@ msgstr "Gratuito e Piacevole"
 
 #: main/templates/main/home.html:25
 msgid "is a free service."
-msgstr "e' un servizio gratuito."
+msgstr "è un servizio gratuito."
 
 #: main/templates/main/home.html:26
 msgid "Also, we won't annoy you with ads or spam."
-msgstr "Inoltre, non ti infastidiremtno con pubblicità o spam."
+msgstr "Inoltre, non ti infastidiremo con pubblicità o spam."
 
 #: main/templates/main/home.html:31
 msgid "Free and Open Source"
@@ -1442,7 +1442,7 @@ msgstr "simile, ma solo ipv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:201
 msgid "URLs for browser / http user agent use"
-msgstr "lista URL da usare come http user agent per il browser"
+msgstr "Lista URL da usare nel browser o nel client di update http"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:209
 msgid ""
