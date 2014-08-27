@@ -17,7 +17,7 @@ WWW_HOST = 'localhost:8000'
 WWW_IPV4_HOST = 'localhost:8000'
 WWW_IPV6_HOST = 'ip6-localhost:8000'
 
-#ALLOWED_HOSTS is not needed here, as DEBUG is True
+# ALLOWED_HOSTS is not needed here, as DEBUG is True
 
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -30,7 +30,7 @@ INSTALLED_APPS += (
 )
 
 # translations - for details, see:
-# https://docs.djangoproject.com/en/dev/topics/i18n/translation/#message-files and 
+# https://docs.djangoproject.com/en/dev/topics/i18n/translation/#message-files and
 # https://docs.djangoproject.com/en/dev/topics/i18n/translation/#how-django-discovers-language-preference
 LANGUAGES += (
     # note: for the development install we also offer unfinished translations:

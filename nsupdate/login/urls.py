@@ -13,11 +13,10 @@ urlpatterns = patterns(
         {'template_name': 'password_reset.html'}, name='password_reset'),
     url(r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done',
         {'template_name': 'password_reset_done.html'}, name='password_reset_done'),
-    # TODO: fix stuff below so it is compatible with django 1.5 AND 1.6:
     # for django 1.5.x:
-    #url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-    #    'django.contrib.auth.views.password_reset_confirm',
-    #    {'template_name': 'password_reset_confirm.html'}, name='password_reset_confirm'),
+    # url(r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]{1,13})-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    #     'django.contrib.auth.views.password_reset_confirm',
+    #     {'template_name': 'password_reset_confirm.html'}, name='password_reset_confirm'),
     #
     # for django 1.6.x:
     url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',

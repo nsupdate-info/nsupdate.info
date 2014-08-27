@@ -85,7 +85,7 @@ STATIC_URL = '/static/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-#STATIC_ROOT = "/srv/nsupdate.info/htdocs/static"
+# STATIC_ROOT = "/srv/nsupdate.info/htdocs/static"
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -274,7 +274,7 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = '/accounts/login/'
 SOCIAL_AUTH_LOGIN_URL = '/accounts/login/'
 #    Is used as a fallback for LOGIN_ERROR_URL (if it is not defined).
 
-#SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
+# SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
 #    Used to redirect new registered users, will be used in place of SOCIAL_AUTH_LOGIN_REDIRECT_URL if defined.
 
 SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/account/profile/'
@@ -287,20 +287,20 @@ SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account/profile'
 SOCIAL_AUTH_INACTIVE_USER_URL = '/'
 #    Inactive users can be redirected to this URL when trying to authenticate.
 
-#SOCIAL_AUTH_USER_MODEL = 'foo.bar.User'
+# SOCIAL_AUTH_USER_MODEL = 'foo.bar.User'
 #    User model must have a username and email field, these are required.
 #    Also an is_authenticated and is_active boolean flags are recommended, these can be methods if necessary (must
 #    return True or False). If the model lacks them a True value is assumed.
 
-#SOCIAL_AUTH_UID_LENGTH = <int>
+# SOCIAL_AUTH_UID_LENGTH = <int>
 #    Used to define the max length of the field uid. A value of 223 should work when using MySQL InnoDB which impose
 #    a 767 bytes limit (assuming UTF-8 encoding).
 
-#SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = <int>
+# SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = <int>
 #    Nonce model has a unique constraint over ('server_url', 'timestamp', 'salt'), salt has a max length of 40, so
 #    server_url length must be tweaked using this setting.
 
-#SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = <int> or SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = <int>
+# SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = <int> or SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = <int>
 #    Association model has a unique constraint over ('server_url', 'handle'), both fields lengths can be tweaked by
 #    these settings.
 
@@ -313,26 +313,26 @@ SOCIAL_AUTH_UUID_LENGTH = 16
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    If you want to use the full email address as the username, define this setting.
 
-#SOCIAL_AUTH_SLUGIFY_USERNAMES = False
+# SOCIAL_AUTH_SLUGIFY_USERNAMES = False
 #    For those that prefer slugged usernames, the get_username pipeline can apply a slug transformation (code borrowed
 #    from Django project) by defining this setting to True. The feature is disabled by default to to not force this
 #    option to all projects.
 
-#SOCIAL_AUTH_CLEAN_USERNAMES = True
+# SOCIAL_AUTH_CLEAN_USERNAMES = True
 #    By default the regex r'[^\w.@+-_]+' is applied over usernames to clean them from usual undesired characters like
 #    spaces. Set this setting to False to disable this behavior.
 
-#SOCIAL_AUTH_SANITIZE_REDIRECTS = False
+# SOCIAL_AUTH_SANITIZE_REDIRECTS = False
 #    The auth process finishes with a redirect, by default it's done to the value of SOCIAL_AUTH_LOGIN_REDIRECT_URL
 #    but can be overridden with next GET argument. If this settings is True, this application will verify the domain of
 #    the final URL and only redirect to it if it's on the same domain.
 
-#SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
+# SOCIAL_AUTH_REDIRECT_IS_HTTPS = False
 #    On projects behind a reverse proxy that uses HTTPS, the redirect URIs can became with the wrong schema
 #    (http:// instead of https://) when the request lacks some headers, and might cause errors with the auth process,
 #    to force HTTPS in the final URIs set this setting to True
 
-#SOCIAL_AUTH_URLOPEN_TIMEOUT = 30
+# SOCIAL_AUTH_URLOPEN_TIMEOUT = 30
 #    Any urllib2.urlopen call will be performed with the default timeout value, to change it without affecting the
 #    global socket timeout define this setting (the value specifies timeout seconds).
 #    urllib2.urlopen uses socket.getdefaulttimeout() value by default, so setting socket.setdefaulttimeout(...) will
@@ -340,27 +340,27 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    other places in Django.
 #    timeout argument was introduced in python 2.6 according to urllib2 documentation
 
-#SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_DOMAINS = ['foo.com', 'bar.com']
+# SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_DOMAINS = ['foo.com', 'bar.com']
 #    Supply a list of domain names to be white-listed. Any user with an email address on any of the allowed domains will
 #    login successfully, otherwise AuthForbidden is raised.
 
-#SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_EMAILS = ['me@foo.com', 'you@bar.com']
+# SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_EMAILS = ['me@foo.com', 'you@bar.com']
 #    Supply a list of email addresses to be white-listed. Any user with an email address in this list will login
 #    successfully, otherwise AuthForbidden is raised.
 
-#SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', ]
+# SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email', ]
 #    The user_details pipeline processor will set certain fields on user objects, such as email. Set this to a list of
 #    fields you only want to set for newly created users and avoid updating on further logins.
 
-#SOCIAL_AUTH_SESSION_EXPIRATION = True
+# SOCIAL_AUTH_SESSION_EXPIRATION = True
 #    Some providers return the time that the access token will live, the value is stored in UserSocialAuth.extra_data
 #    under the key expires. By default the current user session is set to expire if this value is present, this
 #    behavior can be disabled by setting.
 
-#SOCIAL_AUTH_OPENID_PAPE_MAX_AUTH_AGE = <int value>
+# SOCIAL_AUTH_OPENID_PAPE_MAX_AUTH_AGE = <int value>
 #    Enable OpenID PAPE extension support by defining this setting.
 
-#SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['foo', ]
+# SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['foo', ]
 #    If you want to store extra parameters from POST or GET in session, like it was made for next parameter, define
 #    this setting with the parameter names.
 #    In this case foo field's value will be stored when user follows this link
