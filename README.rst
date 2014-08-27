@@ -6,8 +6,9 @@ https://nsupdate.info is a free dynamic dns service.
 nsupdate.info is also the name of the software used to implement it.
 If you like, you can use it to host the service on your own server.
 
-The software project lives at:
-https://github.com/nsupdate-info/nsupdate.info
+Documentation: https://nsupdateinfo.readthedocs.org/
+
+Software project: https://github.com/nsupdate-info/nsupdate.info
 
 
 .. image:: https://travis-ci.org/nsupdate-info/nsupdate.info.png
