@@ -83,7 +83,12 @@ def test_nic_update_authorized_ns_unavailable(client):
     d = Domain.objects.get(domain=TESTDOMAIN)
     d.available = False  # simulate DNS unavailability
     d.save()
-    response = client.get(reverse('nic_update'),
+    # prepare: we must make sure the real test is not a nochg update
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # now do the real test: ip changed, but we can't update DNS as it is unavailable
+    response = client.get(reverse('nic_update') + '?myip=4.3.2.1',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     assert response.content == b'dnserr'
