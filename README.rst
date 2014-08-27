@@ -23,6 +23,8 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
 .. image:: https://pypip.in/d/nsupdate/badge.png
         :target: https://crate.io/packages/nsupdate/
 
+(build and coverage are for latest repo code, package and downloads are for pypi release)
+
 Features
 ========
 
