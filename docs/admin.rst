@@ -317,7 +317,10 @@ After upgrading the code, you'll usually need to run::
 
 This fixes your database schema so it is compatible with the new code.
 
+Maybe you also need the next command (we bundle .mo files, but if you run into
+troubles with them, try this)::
+
+    python manage.py compilemessages
+
 Of course, you'll also need to restart the django/wsgi processes, so the new
 code gets loaded.
-
-
