@@ -320,15 +320,15 @@ def _update(host, hostname, ipaddr, secure=False, logger=None):
         # not available is like it doesn't exist
         return Response('nohost')
     try:
-        ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
-                              # https://github.com/rthalley/dnspython/issues/41
-                              # TODO: reproduce and submit traceback to issue 41
+        # bug in dnspython: crashes if ipaddr is unicode, wants a str!
+        # https://github.com/rthalley/dnspython/issues/41
+        # TODO: reproduce and submit traceback to issue 41
+        ipaddr = str(ipaddr)
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
     except (ValueError, UnicodeError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
         return Response('dnserr')  # there should be a better response code for this
-
     host.poke(kind, secure)
     try:
         update(hostname, ipaddr)
@@ -381,16 +381,16 @@ def _delete(host, hostname, ipaddr, secure=False, logger=None):
     if not host.available:
         # not available is like it doesn't exist
         return Response('nohost')
-    ipaddr = str(ipaddr)  # bug in dnspython: crashes if ipaddr is unicode, wants a str!
-                          # https://github.com/rthalley/dnspython/issues/41
-                          # TODO: reproduce and submit traceback to issue 41
-
     try:
+        # bug in dnspython: crashes if ipaddr is unicode, wants a str!
+        # https://github.com/rthalley/dnspython/issues/41
+        # TODO: reproduce and submit traceback to issue 41
+        ipaddr = str(ipaddr)
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
-    except ValueError:
+    except (ValueError, UnicodeError):
         # invalid ip address string
+        # some people manage to even give a non-ascii string instead of an ip addr
         return Response('dnserr')  # there should be a better response code for this
-
     host.poke(kind, secure)
     try:
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
