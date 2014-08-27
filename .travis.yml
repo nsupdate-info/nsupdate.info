@@ -4,6 +4,7 @@ python:
     - "2.7"
     - "pypy"
     - "3.3"
+    - "3.4"
 env:
     global:
       - SECRET_KEY=justfortravis
@@ -13,15 +14,15 @@ env:
       - TEST_OPTS=""
       - COVERAGE=""
     matrix:
-      - DJANGO=1.5.5
-      - DJANGO=1.6.1
+      - DJANGO=1.5.9
+      - DJANGO=1.6.6
 matrix:
   exclude:
     - python: "2.7"
-      env: DJANGO=1.6.1
+      env: DJANGO=1.6.6
   include:
     - python: "2.7"
-      env: DJANGO=1.6.1 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
+      env: DJANGO=1.6.6 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
 install:
     - "pip install --use-mirrors Django==$DJANGO"
     - "pip install --use-mirrors -e ."
