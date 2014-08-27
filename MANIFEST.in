@@ -5,8 +5,11 @@ include django-registration-dj16-fix.diff
 recursive-include docs *
 recursive-exclude docs *.pyc
 recursive-exclude docs *.pyo
+recursive-include nsupdate/locale *.po
+recursive-include nsupdate/locale *.mo
 recursive-include nsupdate/static *
 recursive-include nsupdate/templates *
+recursive-include nsupdate/login/templates *
 recursive-include nsupdate/main/templates *
 recursive-include nsupdate/accounts/templates *
 prune docs/_build

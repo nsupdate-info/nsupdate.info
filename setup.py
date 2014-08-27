@@ -35,11 +35,15 @@ setup(
             'static/*.html',
             'static/*.png',
             'static/css/*.css',
+            'locale/*/LC_MESSAGES/*',
         ],
         'nsupdate.accounts': [
             'templates/accounts/*.html',
             'templates/registration/*.html',
             'templates/registration/*.txt',
+        ],
+        'nsupdate.login': [
+            'templates/*.html',
         ],
         'nsupdate.main': [
             'templates/main/*.html',
