@@ -19,6 +19,7 @@ Clone the repo and cd into::
 
 Then install the software with requirements to your virtual env::
 
+    pip install -r requirements.d/dev.txt
     pip install -e .
 
 
@@ -28,11 +29,16 @@ Configuration
 nsupdate.info Service
 ---------------------
 
-Use a local_settings.py (do not modify the nsupdate/settings/*.py files directly)::
+First, please read the nsupdate/settings/*.py files - they contain a lot of
+settings you can use to customize your nsupdate.info installation. dev is for
+a development setup, prod is for a production setup and base has settings that
+are common for both.
 
-    from nsupdate.settings.prod import *
-    # override whatever you need to override here (read nsupdate/settings/*.py
-    # to get an overview over what you might need to customize):
+But do not change anything in there, but rather create your own
+local_settings.py file, import from our settings and override anything you want
+to change afterwards.::
+
+    from nsupdate.settings.dev import *
     SECRET_KEY='S3CR3T'
 
 IMPORTANT: you usually need to tell django what settings you want to use.
@@ -42,10 +48,18 @@ we'll assume that you either set DJANGO_SETTINGS_MODULE environment variable
 so it points to your settings module or that you give the --settings parameter
 additionally with all commands that need it::
 
-    DJANGO_SETTINGS_MODULE=local_settings  # this is YOUR settings file
+    export DJANGO_SETTINGS_MODULE=local_settings  # this is YOUR settings file
     or
     django-admin.py --settings=local_settings ...
     python manage.py --settings=local_settings ...
+
+
+Note: if Django can't import your local_settings module, make sure that your
+python search path contains the directory that contains local_settings.py::
+
+    # we assume here that local_settings.py is in current directory.
+    # alternatively, you could also give a specific path instead of .
+    export PYTHONPATH=.:$PYTHONPATH
 
 
 Initialize the database
@@ -81,6 +95,32 @@ Installation (for production)
 
 You usually will use a production webserver like apache or nginx (not Django's
 builtin "runserver").
+
+If you want to use a virtualenv: see the hints for development installation.
+
+If you install from repo code, it is sufficient to use the production
+requirements file (will install less packages than for development)::
+
+    pip install -r requirements.d/prod.txt
+    pip install -e .
+
+Alternatively, you can just install the latest release from pypi::
+
+    pip install nsupdate
+
+
+Configuration
+=============
+
+As described for testing/development, but use nsupdate.settings.prod in your
+local_settings.py file.
+
+Also, you will need to review the settings in the nsupdate.settings.prod
+module and override everything that is different for your setup into your
+local_settings.py file.
+
+Note: if you do not setup ALLOWED_HOSTS correctly, your will just see status
+400 errors.
 
 WSGI
 ----
