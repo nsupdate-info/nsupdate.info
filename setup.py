@@ -59,12 +59,6 @@ setup(
         'django-extensions',
         'python-social-auth',
         'requests',  # for our ddns_client
-        # packages only needed for development:
-        'django-debug-toolbar',
-        'pytest',
-        'pytest-django',
-        'pytest-pep8',
-        'sphinx',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
