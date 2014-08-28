@@ -1,3 +1,4 @@
+# packages needed for production
 -r all.txt
 psycopg2
 gunicorn

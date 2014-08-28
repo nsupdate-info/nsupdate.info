@@ -1,3 +1,4 @@
+# packages needed for development
 -r all.txt
 django-debug-toolbar
 pytest
