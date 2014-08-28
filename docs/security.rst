@@ -119,6 +119,12 @@ CSRF protection
 We use Django's CSRF protection middleware.
 
 
+Clickjacking protection
+=======================
+
+We use Django's clickjacking protection middleware.
+
+
 XSS protection
 ==============
 

@@ -117,8 +117,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
@@ -231,6 +230,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_REDIRECT_URL = '/overview/'
+
+X_FRAME_OPTIONS = 'DENY'  # for clickjacking middleware
 
 CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 
