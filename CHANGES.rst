@@ -55,6 +55,7 @@ Other changes:
   https://github.com/nsupdate-info/nsupdate.info/issues/78
 * replaced "SSL" by "TLS" everywhere.      
   SSL is the old/outdated name. Since 1999, it's called TLS.
+* updated to latest versions on CDN: jquery, bootstrap, font-awesome
 
 
 Release 0.6.0
