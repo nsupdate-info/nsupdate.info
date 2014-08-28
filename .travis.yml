@@ -25,8 +25,8 @@ matrix:
       env: DJANGO=1.6.6 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
 install:
     - "pip install --use-mirrors Django==$DJANGO"
+    - "pip install --use-mirrors -r requirements.d/travis.txt"
     - "pip install --use-mirrors -e ."
-    - "pip install --use-mirrors coveralls"
 script: $COVERAGE py.test $TEST_OPTS -k "$TEST_K"
 after_success:
     - coveralls
