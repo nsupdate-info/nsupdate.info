@@ -23,6 +23,7 @@ New Features:
 * custom templates (for legalese, site-specific notes, etc. - see docs for
   details)
 * abuse / abuse blocked flags + script support (see docs)
+* notification by email if host gets flagged as abusive
 * show example zone file for bind9 after adding a new domain
 * better display in the admin
 
@@ -40,11 +41,14 @@ Fixes:
 * handle UnknownTSIGKey exception
 * handle "Network is unreachable" error
 * handle empty ?myip=
+* fix --reset-available cmdline option processing
 
 Other changes:
 
 * also support Python >= 3.3 (experimental, please give feedback)
 * improve looks, UI / UX
+* improve docs, sample configs
+* remove requirements from setup.py that were only for development
 * removed view for legalese (please solve locally, according to your law -
   you can use custom templates for this)
 * added some ugly logos (if you can do better ones, please help)
