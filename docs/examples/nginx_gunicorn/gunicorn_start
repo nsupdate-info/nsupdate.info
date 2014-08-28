@@ -8,8 +8,9 @@ SOCKFILE=/srv/nsupdate/run/gunicorn.sock           # communication socket
 PIDFILE=/srv/nsupdate/run/gunicorn.pid
 USER=www-data                                      # the user to run as
 GROUP=www-data                                     # the group to run as
-NUM_WORKERS=3                                      # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=nsupdate.settings.dev       # which settings file should Django use
+NUM_WORKERS=1                                      # how many worker processes should Gunicorn spawn
+                                                   # note: use 1 for sqlite database, more for postgres
+DJANGO_SETTINGS_MODULE=local_settings              # which settings file should Django use
 DJANGO_WSGI_MODULE=nsupdate.wsgi                   # WSGI module name
  
 echo "Starting $NAME"
