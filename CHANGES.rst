@@ -16,7 +16,8 @@ New Features:
 * fr/de/it translations added
 * translations are on transifex, you can help there!
   https://www.transifex.com/projects/p/nsupdateinfo/
-* add m0n0wall router configuration
+* add m0n0wall configuration help
+* add pfSense configuration help
 * implemented host delete API at /nic/delete to remove A or AAAA record in DNS
   (very similar to the dyndns2 update api, which does not offer this)
 * host delete functionality on web UI
