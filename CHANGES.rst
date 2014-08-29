@@ -26,22 +26,26 @@ New Features:
 * notification by email if host gets flagged as abusive
 * show example zone file for bind9 after adding a new domain
 * better display in the admin
+* enabled Django's clickjacking protection middleware in settings
 
 Fixes:
 
-* fix 500 error when domain does not exist
-* fix 500 error on profile view when not logged in
-* fix html validation errors 
-* deal with invalid ip address strings in updates ("dnserr")
-* updated dd-wrt configuration with verified settings
-* fix login url generation in activation_complete template #139
-* switch off RD #142
-* handle DnsUpdateError (e.g. SERVFAIL)
-* handle NoNameservers exception
-* handle UnknownTSIGKey exception
-* handle "Network is unreachable" error
-* handle empty ?myip=
+* fix some status 500 errors / unhandled exceptions:
+
+  * when domain does not exist
+  * on profile view when not logged in
+  * DnsUpdateError (e.g. SERVFAIL)
+  * NoNameservers exception
+  * UnknownTSIGKey exception
+  * "Network is unreachable" error
+  * empty ?myip=
+  * invalid ip address strings in updates (now: "dnserr")
+
+* fix html validation errors
+* fix login url generation in activation_complete template, issue #139
+* switch off recursion when querying master dns, issue #142
 * fix --reset-available cmdline option processing
+* updated dd-wrt configuration with verified settings
 
 Other changes:
 
