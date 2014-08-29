@@ -188,6 +188,33 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
     </div>
+    <div class="tab-pane" id="pfsense">
+        <h4>pfSense</h4>
+        <p>Homepage: <a href="https://www.pfsense.org/">https://www.pfsense.org</a></p>
+        <p>
+            {% blocktrans %}Please note: if the pfSense WAN interface is not
+            your public IP and does not notice your public IP changing, the
+            update will be done delayed (default: daily at 01:01). You can
+            tweak this by editing /etc/crontab from where it invokes
+            /etc/rc.dyndns.update - but be careful: do not invoke it too
+            frequently and consider that this applies to all your DDNS updaters.
+            {% endblocktrans %}
+        </p>
+        <h5>{% trans "Enter the following data:" %}</h5>
+        <table class="table">
+            <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+            <tr><td>Disable</td><td>{% trans "(do not select this)" %}</td></tr>
+            <tr><td>DDNS Service</td><td>Custom</td></tr>
+            <tr><td>Interface to monitor</td><td>WAN {% trans "(most likely)" %}</td></tr>
+            <tr><td>Interface to send from</td><td>WAN {% trans "(most likely)" %}</td></tr>
+            <tr><td>Verbose logging</td><td>{% trans "(select this as long as you need it)" %}</td></tr>
+            <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
+            <tr><td>Update URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
+            <tr><td>Result Match</td><td>good|nochg</td></tr>
+            <tr><td>Description</td><td>update DDNS host with IP v4 address</td></tr>
+        </table>
+    </div>
     <div class="tab-pane" id="browser">
         <h4>{% trans "Browser-based update client" %}</h4>
         {% blocktrans %}
