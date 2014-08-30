@@ -4,7 +4,7 @@ Tests for api package.
 
 from django.core.urlresolvers import reverse
 
-from nsupdate.main.dnstools import query_ns
+from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 
 from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST2, TEST_SECRET, TEST_SECRET2
@@ -13,7 +13,7 @@ USERNAME = 'test'
 PASSWORD = 'pass'
 
 BASEDOMAIN = "nsupdate.info"
-HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
+TEST_HOST_OTHER = FQDN('nsupdate-ddns-client-unittest', BASEDOMAIN)
 
 
 def test_myip(client):
@@ -124,14 +124,14 @@ def test_nic_update_authorized_update_other_services(client):
     # must be good (was different IP)
     assert response.content == b'good 1.2.3.4'
     # now check if it updated the other service also:
-    assert query_ns(HOSTNAME, 'A') == '1.2.3.4'
+    assert query_ns(TEST_HOST_OTHER, 'A') == '1.2.3.4'
     response = client.get(reverse('nic_update') + '?myip=2.3.4.5',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # must be good (was different IP)
     assert response.content == b'good 2.3.4.5'
     # now check if it updated the other service also:
-    assert query_ns(HOSTNAME, 'A') == '2.3.4.5'
+    assert query_ns(TEST_HOST_OTHER, 'A') == '2.3.4.5'
 
 
 def test_nic_update_authorized_badagent(client, settings):

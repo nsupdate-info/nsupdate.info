@@ -32,7 +32,7 @@ SECURE = False  # TLS/SNI support on python 2.x sucks :(
 
 from django.utils.translation import activate
 
-from nsupdate.main.dnstools import update_ns
+from nsupdate.main.dnstools import update_ns, FQDN
 
 
 @pytest.yield_fixture(scope="function")
@@ -43,13 +43,14 @@ def ddns_hostname():
     """
     hostname = "test%d" % randint(1000000000, 2000000000)
     yield hostname
-    update_ns(hostname + '.' + TESTDOMAIN, 'A', action='del')
-    update_ns(hostname + '.' + TESTDOMAIN, 'AAAA', action='del')
+    fqdn = FQDN(hostname, TESTDOMAIN)
+    update_ns(fqdn, 'A', action='del')
+    update_ns(fqdn, 'AAAA', action='del')
 
 
 @pytest.yield_fixture(scope="function")
 def ddns_fqdn(ddns_hostname):
-    yield ddns_hostname + '.' + TESTDOMAIN
+    yield FQDN(ddns_hostname, TESTDOMAIN)
 
 
 # Note: fixture must be "function" scope (default), see https://github.com/pelme/pytest_django/issues/33

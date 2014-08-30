@@ -194,7 +194,7 @@ class OverviewView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         try:
-            dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'], origin=self.object.domain.domain)
+            dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'])
         except dnstools.Timeout:
             success, level, msg = False, messages.ERROR, 'Timeout - communicating to name server failed.'
         except dnstools.NameServerNotAvailable:

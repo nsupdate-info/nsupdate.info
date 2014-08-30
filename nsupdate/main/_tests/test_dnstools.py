@@ -10,12 +10,12 @@ pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN, NoAnswer
 
-from ..dnstools import (add, delete, update, query_ns, rev_lookup, parse_name, update_ns,
+from ..dnstools import (add, delete, update, query_ns, rev_lookup, update_ns,
                         SameIpError, DnsUpdateError, FQDN)
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'
-INVALID_HOST = 'test999.' + BASEDOMAIN  # this can't get updated
+INVALID_HOST = FQDN('test999', BASEDOMAIN)  # this can't get updated
 
 
 class TestFQDN(object):
@@ -128,23 +128,6 @@ class TestReverseLookup(object):
 
 
 class TestUpdate(object):
-    def test_parse1(self):
-        host, domain = 'test', BASEDOMAIN
-        origin, relname = parse_name(host + '.' + domain)
-        assert str(origin) == domain + '.'
-        assert str(relname) == host
-
-    def test_parse2(self):
-        host, domain = 'prefix.test', BASEDOMAIN
-        origin, relname = parse_name(host + '.' + domain)
-        assert str(origin) == domain + '.'
-        assert str(relname) == 'prefix.test'
-
-    def test_parse_with_origin(self):
-        origin, relname = parse_name('foo.bar.baz.org', 'bar.baz.org')
-        assert str(origin) == 'bar.baz.org' + '.'
-        assert str(relname) == 'foo'
-
     def test_add_del_v4(self, ddns_fqdn):
         host, ip = ddns_fqdn, '1.1.1.1'
         remove_records(host)

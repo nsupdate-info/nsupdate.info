@@ -181,7 +181,7 @@ class Host(models.Model):
         index_together = (('subdomain', 'domain'), )
 
     def get_fqdn(self):
-        return '%s.%s' % (self.subdomain, self.domain.domain)
+        return dnstools.FQDN(self.subdomain, self.domain.domain)
 
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):
@@ -202,7 +202,7 @@ class Host(models.Model):
     def get_ip(self, kind):
         record = 'A' if kind == 'ipv4' else 'AAAA'
         try:
-            return dnstools.query_ns(self.get_fqdn(), record, origin=self.domain.domain)
+            return dnstools.query_ns(self.get_fqdn(), record)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             return 'none'
         except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable):
@@ -250,7 +250,7 @@ class Host(models.Model):
 def pre_delete_host(sender, **kwargs):
     obj = kwargs['instance']
     try:
-        dnstools.delete(obj.get_fqdn(), origin=obj.domain.domain)
+        dnstools.delete(obj.get_fqdn())
     except (dnstools.Timeout, dnstools.NameServerNotAvailable):
         # well, we tried to clean up, but we didn't reach the nameserver
         pass

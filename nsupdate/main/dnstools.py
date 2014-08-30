@@ -98,22 +98,22 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     return keys[af == dns.inet.AF_INET6]
 
 
-def add(fqdn, ipaddr, ttl=60, origin=None):
+def add(fqdn, ipaddr, ttl=60):
     """
     intelligent dns adder - first does a lookup on the master server to find
     the current ip and only sends an 'add' if there is no such entry.
     otherwise send an 'upd' if the if we have a different ip.
 
-    :param fqdn: fully qualified domain name (str)
+    :param fqdn: fully qualified domain name (FQDN)
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
-    :param origin: origin zone (optional, str)
     :raises: SameIpError if new and old IP is the same
     :raises: ValueError if ipaddr is no valid ip address string
     """
+    assert isinstance(fqdn, FQDN)
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
-        current_ipaddr = query_ns(fqdn, rdtype, origin=origin)
+        current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
         ok = ipaddr != current_ipaddr
         action = 'upd'
@@ -125,43 +125,43 @@ def add(fqdn, ipaddr, ttl=60, origin=None):
         # only send an add/update if the ip really changed as the update
         # causes write I/O on the nameserver and also traffic to the
         # dns slaves (they get a notify if we update the zone).
-        update_ns(fqdn, rdtype, ipaddr, action=action, ttl=ttl, origin=origin)
+        update_ns(fqdn, rdtype, ipaddr, action=action, ttl=ttl)
     else:
         raise SameIpError
 
 
-def delete(fqdn, rdtype=None, origin=None):
+def delete(fqdn, rdtype=None):
     """
     dns deleter
 
-    :param fqdn: fully qualified domain name (str)
+    :param fqdn: fully qualified domain name (FQDN)
     :param rdtype: 'A', 'AAAA' or None (deletes 'A' and 'AAAA')
-    :param origin: origin zone (optional, str)
     """
+    assert isinstance(fqdn, FQDN)
     if rdtype is not None:
         assert rdtype in ['A', 'AAAA', ]
         rdtypes = [rdtype, ]
     else:
         rdtypes = ['A', 'AAAA']
     for rdtype in rdtypes:
-        update_ns(fqdn, rdtype, action='del', origin=origin)
+        update_ns(fqdn, rdtype, action='del')
 
 
-def update(fqdn, ipaddr, ttl=60, origin=None):
+def update(fqdn, ipaddr, ttl=60):
     """
     intelligent dns updater - first does a lookup on the master server to find
     the current ip and only sends a dynamic update if we have a different ip.
 
-    :param fqdn: fully qualified domain name (str)
+    :param fqdn: fully qualified domain name (FQDN)
     :param ipaddr: new ip address
     :param ttl: time to live, default 60s (int)
-    :param origin: origin zone (optional, str)
     :raises: SameIpError if new and old IP is the same
     :raises: ValueError if ipaddr is no valid ip address string
     """
+    assert isinstance(fqdn, FQDN)
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
-        current_ipaddr = query_ns(fqdn, rdtype, origin=origin)
+        current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
         ok = ipaddr != current_ipaddr
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
@@ -171,27 +171,23 @@ def update(fqdn, ipaddr, ttl=60, origin=None):
         # only send an update if the ip really changed as the update
         # causes write I/O on the nameserver and also traffic to the
         # dns slaves (they get a notify if we update the zone).
-        update_ns(fqdn, rdtype, ipaddr, action='upd', ttl=ttl, origin=origin)
+        update_ns(fqdn, rdtype, ipaddr, action='upd', ttl=ttl)
     else:
         raise SameIpError
 
 
-def query_ns(qname, rdtype, origin=None):
+def query_ns(fqdn, rdtype):
     """
     query a dns name from our master server
 
-    :param qname: the query name
-    :type qname: dns.name.Name object or str
+    :param fqdn: fqdn to query the name server for
+    :type fqdn: dnstools.FQDN
     :param rdtype: the query type
     :type rdtype: int or str
-    :param origin: origin zone
-    :type origin: str or None
     :return: IP (as str)
     :raises: see dns.resolver.Resolver.query
     """
-    origin, name = parse_name(qname, origin)
-    fqdn = name + origin
-    assert fqdn.is_absolute()
+    assert isinstance(fqdn, FQDN)
     nameserver, origin = get_ns_info(fqdn)[0:2]
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
@@ -204,13 +200,13 @@ def query_ns(qname, rdtype, origin=None):
     # (used if flags = None is given). Thus, we explicitly give flags (all off):
     resolver.flags = 0
     try:
-        answer = resolver.query(fqdn, rdtype)
+        answer = resolver.query(str(fqdn), rdtype)
         ip = str(list(answer)[0])
-        logger.debug("query: %s answer: %s" % (fqdn.to_text(), ip))
+        logger.debug("query: %s answer: %s" % (fqdn, ip))
         return ip
     except (dns.resolver.Timeout, dns.resolver.NoNameservers):  # socket.error also?
         logger.warning("timeout when querying for name '%s' in zone '%s' with rdtype '%s'." % (
-                       name, origin, rdtype))
+                       fqdn.host, origin, rdtype))
         set_ns_availability(origin, False)
         raise
 
@@ -233,53 +229,27 @@ def rev_lookup(ipaddr):
     return name
 
 
-def parse_name(fqdn, origin=None):
+def get_ns_info(fqdn):
     """
-    Parse a fully qualified domain name into a relative name
-    and a origin zone. Please note that the origin return value will
-    have a trailing dot.
-
-    :param fqdn: fully qualified domain name (str)
-    :param origin: origin zone (optional, str)
-    :return: origin, relative name (both dns.name.Name)
-    """
-    fqdn = dns.name.from_text(fqdn)
-    if origin is None:
-        origin = dns.resolver.zone_for_name(fqdn)
-        rel_name = fqdn.relativize(origin)
-    else:
-        origin = dns.name.from_text(origin)
-        rel_name = fqdn - origin
-    return origin, rel_name
-
-
-def get_ns_info(fqdn, origin=None):
-    """
-    Get the master nameserver for the <origin> zone, the key secret needed
-    to update the zone and the key algorithm used.
+    Get the master nameserver for fqdn, the key secret needed to update the zone and the key algorithm used.
 
     :param fqdn: the fully qualified hostname we are dealing with (str)
-    :param origin: zone we are dealing with, must be with trailing dot (default:autodetect) (str)
     :return: master nameserver, origin, domain, update keyname, update secret, update algo
     :raises: NameServerNotAvailable if ns was flagged unavailable in the db
     """
-    fqdn_str = str(fqdn)
-    origin, name = parse_name(fqdn_str, origin)
-    origin_str = str(origin)
+    assert isinstance(fqdn, FQDN)
     from .models import Domain
     try:
         # first we check if we have an entry for the fqdn
         # single-host update secret use case
         # XXX we need 2 DB accesses for the usual case just to support this rare case
-        domain = fqdn_str.rstrip('.')
+        domain = str(fqdn)
         d = Domain.objects.get(domain=domain)
-        keyname = fqdn_str
     except Domain.DoesNotExist:
         # now check the base zone, the usual case
         # zone update secret use case
-        domain = origin_str.rstrip('.')
+        domain = fqdn.domain
         d = Domain.objects.get(domain=domain)
-        keyname = origin_str
     if not d.available:
         if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
             # if there are troubles with a nameserver, we set available=False
@@ -290,24 +260,24 @@ def get_ns_info(fqdn, origin=None):
             # retry timeout is over, set it available again
             set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return d.nameserver_ip, origin, domain, name, keyname, d.nameserver_update_secret, algorithm
+    return d.nameserver_ip, fqdn.domain, domain, fqdn.host, domain, d.nameserver_update_secret, algorithm
 
 
-def update_ns(fqdn, rdtype='A', ipaddr=None, origin=None, action='upd', ttl=60):
+def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     """
     update the master server
 
-    :param fqdn: the fully qualified domain name to update (str)
+    :param fqdn: the fully qualified domain name to update (FQDN)
     :param rdtype: the record type (default: 'A') (str)
     :param ipaddr: ip address (v4 or v6), if needed (str)
-    :param origin: the origin zone to update (default; autodetect) (str)
     :param action: 'add', 'del' or 'upd'
     :param ttl: time to live for the added/updated resource, default 60s (int)
     :return: dns response
     :raises: DnsUpdateError, Timeout
     """
+    assert isinstance(fqdn, FQDN)
     assert action in ['add', 'del', 'upd', ]
-    nameserver, origin, domain, name, keyname, key, algo = get_ns_info(fqdn, origin)
+    nameserver, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
     upd = dns.update.Update(origin,
                             keyring=dns.tsigkeyring.from_text({keyname: key}),
                             keyalgorithm=algo)

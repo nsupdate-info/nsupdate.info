@@ -224,9 +224,9 @@ class NicUpdateView(View):
             ipaddr = request.META.get('REMOTE_ADDR')
         secure = request.is_secure()
         if delete:
-            return _delete(host, hostname, ipaddr, secure, logger=logger)
+            return _delete(host, ipaddr, secure, logger=logger)
         else:
-            return _update(host, hostname, ipaddr, secure, logger=logger)
+            return _update(host, ipaddr, secure, logger=logger)
 
 
 class NicDeleteView(NicUpdateView):
@@ -282,9 +282,9 @@ class AuthorizedNicUpdateView(View):
             ipaddr = request.META.get('REMOTE_ADDR')
         secure = request.is_secure()
         if delete:
-            return _delete(host, hostname, ipaddr, secure, logger=logger)
+            return _delete(host, ipaddr, secure, logger=logger)
         else:
-            return _update(host, hostname, ipaddr, secure, logger=logger)
+            return _update(host, ipaddr, secure, logger=logger)
 
 
 class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
@@ -300,12 +300,11 @@ class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
         return super(AuthorizedNicDeleteView, self).get(request, logger=logger, delete=delete)
 
 
-def _update(host, hostname, ipaddr, secure=False, logger=None):
+def _update(host, ipaddr, secure=False, logger=None):
     """
     common code shared by the 2 update views
 
     :param host: host object
-    :param hostname: hostname (fqdn)
     :param ipaddr: new ip addr (v4 or v6)
     :param secure: True if we use TLS/https
     :param logger: a logger object
@@ -330,9 +329,10 @@ def _update(host, hostname, ipaddr, secure=False, logger=None):
         # some people manage to even give a non-ascii string instead of an ip addr
         return Response('dnserr')  # there should be a better response code for this
     host.poke(kind, secure)
+    fqdn = host.get_fqdn()
     try:
-        update(hostname, ipaddr)
-        logger.info('%s - received good update -> ip: %s tls: %r' % (hostname, ipaddr, secure))
+        update(fqdn, ipaddr)
+        logger.info('%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure))
         # now check if there are other services we shall relay updates to:
         for hc in host.serviceupdaterhostconfigs.all():
             if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
@@ -351,23 +351,22 @@ def _update(host, hostname, ipaddr, secure=False, logger=None):
                     logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s tls: %r' % (hostname, ipaddr, secure))
+        logger.warning('%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure))
         host.register_client_fault()
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
         logger.error('%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
-                     hostname, msg, ipaddr, secure))
+                     fqdn, msg, ipaddr, secure))
         host.register_server_fault()
         return Response('dnserr')
 
 
-def _delete(host, hostname, ipaddr, secure=False, logger=None):
+def _delete(host, ipaddr, secure=False, logger=None):
     """
     common code shared by the 2 delete views
 
     :param host: host object
-    :param hostname: hostname (fqdn)
     :param ipaddr: ip addr (to determine record type A or AAAA)
     :param secure: True if we use TLS/https
     :param logger: a logger object
@@ -392,15 +391,16 @@ def _delete(host, hostname, ipaddr, secure=False, logger=None):
         # some people manage to even give a non-ascii string instead of an ip addr
         return Response('dnserr')  # there should be a better response code for this
     host.poke(kind, secure)
+    fqdn = host.get_fqdn()
     try:
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
-        delete(hostname, rdtype)
-        logger.info('%s - received delete for record %s, tls: %r' % (hostname, rdtype, secure))
+        delete(fqdn, rdtype)
+        logger.info('%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure))
         # XXX unclear what to do for "other services" we relay updates to
         return Response('deleted %s' % rdtype)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
         logger.error('%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
-                     hostname, rdtype, msg, secure))
+                     fqdn, rdtype, msg, secure))
         host.register_server_fault()
         return Response('dnserr')
