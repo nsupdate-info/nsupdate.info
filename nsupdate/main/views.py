@@ -175,7 +175,7 @@ class JsUpdateView(TemplateView):
 
 class OverviewView(CreateView):
     model = Host
-    template_name = "main/overview.html"
+    template_name = "main/host_overview.html"
     form_class = CreateHostForm
 
     @method_decorator(login_required)
