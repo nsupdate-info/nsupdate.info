@@ -30,19 +30,6 @@
                    {% trans "We'll show you configuration examples after you add a host." %}
                 </p>
             </div>
-            <div class="well well-sm">
-                <h3>{% trans "Your current IP(s) + reverse DNS:" %}</h3>
-                <p>
-                   <b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span>
-                   <br>
-                   <b>rDNS:</b> <span id="ipv4_rdns" class="ipv4addr">{{ request.session.ipv4_rdns }}</span>
-                </p>
-                <p>
-                   <b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span>
-                   <br>
-                   <b>rDNS:</b> <span id="ipv6_rdns" class="ipv6addr">{{ request.session.ipv6_rdns }}</span>
-                </p>
-            </div>
         </div>
     </div>
 {% endblock %}
