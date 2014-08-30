@@ -62,7 +62,8 @@ setup(
         'django-registration',
         'django-extensions',
         'python-social-auth',
-        'requests',  # for our ddns_client
+        'requests<2.4.0',  # for our ddns_client
+                           # 2.4.0 has a bug, does not reraise ProtocolError as ConnectionError
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
