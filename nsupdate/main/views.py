@@ -41,7 +41,7 @@ class GenerateSecretView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenerateSecretView, self).get_context_data(*args, **kwargs)
-        context['nav_host_overview'] = True
+        context['nav_overview'] = True
         # generate secret, store it hashed and return the plain secret for the context
         context['update_secret'] = self.object.generate_secret()
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
@@ -174,7 +174,7 @@ class JsUpdateView(TemplateView):
 
 
 class OverviewView(TemplateView):
-    template_name = "main/host_overview.html"
+    template_name = "main/overview.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -182,8 +182,12 @@ class OverviewView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(OverviewView, self).get_context_data(*args, **kwargs)
-        context['nav_host_overview'] = True
+        context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
+        context['your_domains'] = Domain.objects.filter(
+            created_by=self.request.user)
+        context['public_domains'] = Domain.objects.filter(
+            public=True).exclude(created_by=self.request.user)
         return context
 
 
@@ -232,7 +236,7 @@ class AddHostView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(AddHostView, self).get_context_data(*args, **kwargs)
-        context['nav_host_overview'] = True
+        context['nav_overview'] = True
         return context
 
 
@@ -262,7 +266,7 @@ class HostView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HostView, self).get_context_data(*args, **kwargs)
-        context['nav_host_overview'] = True
+        context['nav_overview'] = True
         context['remote_addr'] = self.request.META['REMOTE_ADDR']
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
@@ -287,26 +291,8 @@ class DeleteHostView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteHostView, self).get_context_data(*args, **kwargs)
-        context['nav_host_overview'] = True
+        context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
-        return context
-
-
-class DomainOverviewView(TemplateView):
-    template_name = "main/domain_overview.html"
-
-    @method_decorator(login_required)
-    def dispatch(self, *args, **kwargs):
-        return super(DomainOverviewView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(
-            DomainOverviewView, self).get_context_data(*args, **kwargs)
-        context['nav_domain_overview'] = True
-        context['your_domains'] = Domain.objects.filter(
-            created_by=self.request.user)
-        context['public_domains'] = Domain.objects.filter(
-            public=True).exclude(created_by=self.request.user)
         return context
 
 
@@ -350,7 +336,7 @@ class DomainView(UpdateView):
         return super(DomainView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
-        return reverse('domain_overview')
+        return reverse('overview')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -386,7 +372,7 @@ class DeleteDomainView(DeleteView):
         return obj
 
     def get_success_url(self):
-        return reverse('domain_overview')
+        return reverse('overview')
 
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteDomainView, self).get_context_data(*args, **kwargs)
@@ -500,7 +486,6 @@ Disallow: /update/
 Disallow: /host/
 Disallow: /overview/
 Disallow: /domain/
-Disallow: /domain_overview/
 Disallow: /updater_hostconfig/
 Disallow: /updater_hostconfig_overview/
 """

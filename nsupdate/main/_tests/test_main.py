@@ -21,7 +21,6 @@ def test_views_anon(client):
         # stuff that requires being logged-in redirects to the login view:
         ('status', dict(), 302),
         ('overview', dict(), 302),
-        ('domain_overview', dict(), 302),
         ('host_view', dict(pk=1), 302),
         ('domain_view', dict(pk=1), 302),
         ('generate_secret_view', dict(pk=1), 302),
@@ -47,7 +46,6 @@ def test_views_logged_in(client):
         ('robots', dict(), 200),
         ('status', dict(), 200),
         ('overview', dict(), 200),
-        ('domain_overview', dict(), 200),
         ('host_view', dict(pk=1), 200),
         ('domain_view', dict(pk=1), 200),
         ('generate_secret_view', dict(pk=1), 200),

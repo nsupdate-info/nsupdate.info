@@ -60,5 +60,44 @@
             {% endfor %}
             </table>
         </div>
+        <div class="col-md-12">
+            <h3>
+                {% trans "Domains (yours first, then public)" %}
+                <a href="{% url 'add_domain' %}" class="btn btn-primary">{% trans "Add Domain" %}</a>
+            </h3>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>{% trans "Domain" %}</th>
+                    <th>{% trans "Public?" %}</th>
+                    <th>{% trans "Available?" %}</th>
+                    <th>{% trans "Owner" %}</th>
+                    <th>{% trans "Comment" %}</th>
+                </tr>
+            </thead>
+            {% for domain in your_domains %}
+                <tr>
+                    <td><a href="{% url 'domain_view' domain.pk %}">{{ domain.domain }}</a></td>
+                    <td>{{ domain.public|yesno }}</td>
+                    <td>{{ domain.available|yesno }}</td>
+                    <td>{{ domain.created_by }}</td>
+                    <td>{{ domain.comment }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5">{% trans "No domains from you yet." %}</td></tr>
+            {% endfor %}
+            {% for domain in public_domains %}
+                <tr>
+                    <td>{{ domain.domain }}</td>
+                    <td>{{ domain.public|yesno }}</td>
+                    <td>{{ domain.available|yesno }}</td>
+                    <td>{{ domain.created_by }}</td>
+                    <td>{{ domain.comment }}</td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="5">{% trans "No public domains from other users yet." %}</td></tr>
+            {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}
