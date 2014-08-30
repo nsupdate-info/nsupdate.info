@@ -6,8 +6,8 @@ from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
 from .views import (
-    HomeView, OverviewView, HostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
-    RobotsTxtView, DomainOverviewView, DomainView, DeleteDomainView, StatusView, JsUpdateView,
+    HomeView, OverviewView, HostView, AddHostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
+    RobotsTxtView, DomainOverviewView, DomainView, AddDomainView, DeleteDomainView, StatusView, JsUpdateView,
     UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView, CustomTemplateView)
 from ..api.views import (
     myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView,
@@ -27,8 +27,10 @@ urlpatterns = patterns(
     url(r'^status/$', StatusView.as_view(), name='status'),
     url(r'^generate_secret/(?P<pk>\d+)/$', GenerateSecretView.as_view(), name='generate_secret_view'),
     url(r'^generate_ns_secret/(?P<pk>\d+)/$', GenerateNSSecretView.as_view(), name='generate_ns_secret_view'),
+    url(r'^host/add/$', AddHostView.as_view(), name='add_host'),
     url(r'^host/(?P<pk>\d+)/delete/$', DeleteHostView.as_view(), name='delete_host'),
     url(r'^domain_overview/$', DomainOverviewView.as_view(), name='domain_overview'),
+    url(r'^domain/add/$', AddDomainView.as_view(), name='add_domain'),
     url(r'^domain/(?P<pk>\d+)/delete/$', DeleteDomainView.as_view(), name='delete_domain'),
     url(r'^updater_hostconfig_overview/(?P<pk>\d+)/$', UpdaterHostConfigOverviewView.as_view(),
         name='updater_hostconfig_overview'),

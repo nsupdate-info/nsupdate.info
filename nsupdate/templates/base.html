@@ -40,7 +40,7 @@
                             <a href="{% url 'home' %}"><i class="fa fa-home fa-fw"></i> {% trans "Home" %}</a>
                         </li>
                         {% if request.user.is_authenticated %}
-                        <li{% if nav_overview %} class="active"{% endif %}>
+                        <li{% if nav_host_overview %} class="active"{% endif %}>
                             <a href="{% url 'overview' %}"><i class="fa fa-list fa-fw"></i> {% trans "Hosts" %}</a>
                         </li>
                         <li{% if nav_domain_overview %} class="active"{% endif %}>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well well-sm">
+                <h3>{% trans "Create a new Host" %}</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="well well-sm">
+                <h3>{% trans "Help" %}</h3>
+                <p>{% trans "Here you can add new hosts (like routers, PCs, servers, ...)." %}
+                </p>
+                <p>{% blocktrans %}You need to be able to configure one of your machines so it sends dyndns2 compatible
+                   updates to us when your IP changes. Routers usually have some builtin software that does
+                   this, but you can also use some software on another system (like a PC or server).{% endblocktrans %}
+                </p>
+                <p>
+                   {% blocktrans %}Just make sure your update client either is customizable well enough or has specific
+                   support for our service.{% endblocktrans %}
+                </p>
+                <p>
+                   {% trans "We'll show you configuration examples after you add a host." %}
+                </p>
+            </div>
+            <div class="well well-sm">
+                <h3>{% trans "Your current IP(s) + reverse DNS:" %}</h3>
+                <p>
+                   <b>IPv4:</b> <span id="ipv4" class="ipv4addr">{{ request.session.ipv4 }}</span>
+                   <br>
+                   <b>rDNS:</b> <span id="ipv4_rdns" class="ipv4addr">{{ request.session.ipv4_rdns }}</span>
+                </p>
+                <p>
+                   <b>IPv6:</b> <span id="ipv6" class="ipv6addr">{{ request.session.ipv6 }}</span>
+                   <br>
+                   <b>rDNS:</b> <span id="ipv6_rdns" class="ipv6addr">{{ request.session.ipv6_rdns }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

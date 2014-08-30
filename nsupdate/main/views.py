@@ -41,7 +41,7 @@ class GenerateSecretView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenerateSecretView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
+        context['nav_host_overview'] = True
         # generate secret, store it hashed and return the plain secret for the context
         context['update_secret'] = self.object.generate_secret()
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
@@ -173,20 +173,34 @@ class JsUpdateView(TemplateView):
         return context
 
 
-class OverviewView(CreateView):
-    model = Host
+class OverviewView(TemplateView):
     template_name = "main/host_overview.html"
-    form_class = CreateHostForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(OverviewView, self).dispatch(*args, **kwargs)
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(OverviewView, self).get_context_data(*args, **kwargs)
+        context['nav_host_overview'] = True
+        context['hosts'] = Host.objects.filter(created_by=self.request.user)
+        return context
+
+
+class AddHostView(CreateView):
+    template_name = "main/host_add.html"
+    model = Host
+    form_class = CreateHostForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AddHostView, self).dispatch(*args, **kwargs)
+
     def get_success_url(self):
         return reverse('generate_secret_view', args=(self.object.pk,))
 
     def get_form(self, form_class):
-        form = super(OverviewView, self).get_form(form_class)
+        form = super(AddHostView, self).get_form(form_class)
         form.fields['domain'].queryset = Domain.objects.filter(
             Q(created_by=self.request.user) | Q(public=True))
         return form
@@ -217,9 +231,8 @@ class OverviewView(CreateView):
         return HttpResponseRedirect(url)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(OverviewView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
-        context['hosts'] = Host.objects.filter(created_by=self.request.user)
+        context = super(AddHostView, self).get_context_data(*args, **kwargs)
+        context['nav_host_overview'] = True
         return context
 
 
@@ -249,7 +262,7 @@ class HostView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(HostView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
+        context['nav_host_overview'] = True
         context['remote_addr'] = self.request.META['REMOTE_ADDR']
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
@@ -274,19 +287,37 @@ class DeleteHostView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteHostView, self).get_context_data(*args, **kwargs)
-        context['nav_overview'] = True
+        context['nav_host_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
 
 
-class DomainOverviewView(CreateView):
-    model = Domain
+class DomainOverviewView(TemplateView):
     template_name = "main/domain_overview.html"
-    form_class = CreateDomainForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(DomainOverviewView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(
+            DomainOverviewView, self).get_context_data(*args, **kwargs)
+        context['nav_domain_overview'] = True
+        context['your_domains'] = Domain.objects.filter(
+            created_by=self.request.user)
+        context['public_domains'] = Domain.objects.filter(
+            public=True).exclude(created_by=self.request.user)
+        return context
+
+
+class AddDomainView(CreateView):
+    template_name = "main/domain_add.html"
+    model = Domain
+    form_class = CreateDomainForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(AddDomainView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
         return reverse('generate_ns_secret_view', args=(self.object.pk,))
@@ -300,7 +331,7 @@ class DomainOverviewView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(
-            DomainOverviewView, self).get_context_data(*args, **kwargs)
+            AddDomainView, self).get_context_data(*args, **kwargs)
         context['nav_domain_overview'] = True
         context['your_domains'] = Domain.objects.filter(
             created_by=self.request.user)

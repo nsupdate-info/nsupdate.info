@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>{% trans "Add a new Domain" %}</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>{% trans "Help" %}</h3>
+                <p>
+                   {% blocktrans %}Here you can add new domains (zones) which you control (and this is only useful if you
+                   have some own zone which you can update automatically).{% endblocktrans %}
+                </p>
+                <p>
+                   {% blocktrans %}You need to be able to configure the primary master nameserver of the zone so it accepts
+                   dynamic updates (via RFC 2136 "dynamic update" protocol) if the correct update secret is presented.{% endblocktrans %}
+                </p>
+                <p>
+                   {% trans "We'll show you configuration examples after you add a domain." %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
