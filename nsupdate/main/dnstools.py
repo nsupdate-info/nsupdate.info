@@ -18,6 +18,7 @@ UNAVAILABLE_RETRY = 300.0
 
 import time
 from datetime import timedelta
+from collections import namedtuple
 
 import logging
 logger = logging.getLogger(__name__)
@@ -33,6 +34,29 @@ import dns.tsig
 import dns.tsigkeyring
 
 from django.utils.timezone import now
+
+
+class FQDN(namedtuple('FQDN', ['host', 'domain'])):
+    """
+    named tuple to represent a fully qualified domain name:
+
+    * a host in a zone/domain
+    * just a zone/domain (give host=None when creating)
+
+    use this instead of str so that the information is not lost
+    what the host part is vs. what the domain part is.
+
+    e.g. foo.bar.example.org could be a host foo in domain bar.example.org
+    or a host foo.bar in domain example.org.
+    """
+    def __str__(self):
+        """
+        when transforming this into a str, just give the fqdn
+        """
+        if self.host:
+            return self.host + '.' + self.domain
+        else:
+            return self.domain
 
 
 Timeout = dns.resolver.Timeout

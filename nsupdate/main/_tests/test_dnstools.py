@@ -10,11 +10,20 @@ pytestmark = pytest.mark.django_db
 
 from dns.resolver import NXDOMAIN, NoAnswer
 
-from ..dnstools import add, delete, update, query_ns, rev_lookup, parse_name, update_ns, SameIpError, DnsUpdateError
+from ..dnstools import (add, delete, update, query_ns, rev_lookup, parse_name, update_ns,
+                        SameIpError, DnsUpdateError, FQDN)
 
 # see also conftest.py
 BASEDOMAIN = 'nsupdate.info'
 INVALID_HOST = 'test999.' + BASEDOMAIN  # this can't get updated
+
+
+class TestFQDN(object):
+    def test_create(self):
+        fqdn = FQDN('test', 'example.org')
+        assert fqdn.host == 'test'
+        assert fqdn.domain == 'example.org'
+        assert str(fqdn) == 'test.example.org'
 
 
 def remove_records(host, records=('A', 'AAAA', )):
