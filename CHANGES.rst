@@ -1,6 +1,27 @@
 ChangeLog
 =========
 
+Release 0.8.0
+-------------
+
+New Features:
+
+* ...
+
+Fixes:
+
+* refactored internal api so host/zone boundary is not lost and does not need
+  to be discovered (we KNOW it) - fixes issues #122 and #138.
+
+Other changes:
+
+* UI redesign:
+  * unify hosts and domains overview into 1 view
+  * move forms to add hosts/domains to own views
+  * move reverse DNS display to home view
+  * removed some superfluous links and formatting
+
+
 Release 0.7.0
 -------------
 
