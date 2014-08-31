@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-        <h3>{{ object.hostname }} ({{ object.service.name }}) <br><small><a href="{% url 'updater_hostconfig_overview' object.host.pk %}"><i class="fa fa-angle-double-left"></i> {% trans "back to overview" %}</a></small></h3>
+        <h3>{{ object.hostname }} ({{ object.service.name }})</h3>
         <div class="col-lg-6">
             <h3>{% trans "Edit Updater Configuration" %}</h3>
             <form method="post" action="">

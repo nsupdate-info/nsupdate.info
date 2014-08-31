@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-        <h3>{{ host.get_fqdn }} <br><small><a href="{% url 'overview' %}"><i class="fa fa-angle-double-left"></i> {% trans "back to overview" %}</a></small></h3>
+        <h3>{{ host.get_fqdn }}</h3>
         <div class="col-md-4">
             <h3>{% trans "Edit Host" %}</h3>
             <form method="post" action="">
