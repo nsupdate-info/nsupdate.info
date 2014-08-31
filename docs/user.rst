@@ -32,14 +32,15 @@ When using a browser for administrating your hosts / domains via the web interfa
 Functionality of the Web Interface
 ==================================
 
-Your current IP(s)
-------------------
+Your current IP(s) + reverse DNS
+--------------------------------
 
-At some places, we show your current IP address(es). Depending on the type of your internet connection, this can be
-IP v4 or v6 or both (dual stack).
+We show your current IP address(es).
+Depending on the type of your internet connection, this can be IP v4 or v6 or both (dual stack).
+If nothing shows up, you don't have that kind of IP address.
 
-At some places, we additionally show the result of a reverse DNS lookup ("rDNS") for your IP address(es).
-If nothing shows up for an IP, the IP does not have a reverse DNS record.
+We additionally show the result of a reverse DNS lookup ("rDNS") for your IP address(es).
+If nothing shows up, that IP does not have a reverse DNS record.
 
 We always show you the IP addresses where your requests come from. Under some circumstances, these might not be what
 you expect (e.g. presence or non-presence of NAT gateways, proxies, etc.).
@@ -65,7 +66,8 @@ Your hosts / domains are only for you, so you need to identify to create or chan
 
 You need to give a valid E-Mail address, as we send you a link you need to access to complete the registration.
 
-We'll also use that E-Mail address in case you forget your login password.
+We'll also use that E-Mail address in case you forget your login password or when there are technical issues
+with your hosts or domains.
 
 For your own safety, use https and a sane password.
 
@@ -74,8 +76,19 @@ you gave when registering, you might not be able to regain access to your accoun
 nor with help from service admin) as you likely can't prove that they are really yours / you are permitted to
 control them.
 
-Hosts
------
+Overview
+--------
+We show a list of your hosts and also available (public) domains as well as your domains (if any).
+
+You can see the most important data directly on the overview page. If you need more details or you want to change
+something, click on the host or domain you want to see / edit.
+
+You can also add hosts and domains by clicking on the respective button.
+
+You can always get back to the overview page by clicking on the link in the navigation bar.
+
+Adding Hosts
+------------
 You can add hosts to all the zones (base domains) offered to you.
 Usually this will be one or more zone(s) offered by the service operator, but you can even add your own domains
 (see the separate section about domains).
@@ -100,8 +113,8 @@ An increasing number of server faults means there is either something wrong with
 connection to it or it is rejecting the updates for your hostname.
 
 
-Domains
--------
+Adding Domains
+--------------
 If you control an own nameserver / zone, you can use the service to dynamically update it with your router / update
 client.
 
@@ -191,3 +204,90 @@ Note:
   - let the client check "Last update response". Should be "good" (or "nochg")
     plus same IP as shown below "My IP". If it shows something else, then there
     likely was a typo in the user name or password.
+
+
+Troubleshooting
+===============
+
+Address update for your host is not working (and never worked)
+--------------------------------------------------------------
+
+Check your update client settings again:
+
+* typos? additional spaces somewhere? this is sometimes hard to see.
+* keep in mind that when we create and show you a new update secret, the old one becomes invalid.
+* the updater uses your host's fqdn and the update secret as credentials,
+  NOT your service web site username / password.
+* if the https update URL does not work, try http - especially for older software.
+
+Address update for your host is not working (but worked before)
+---------------------------------------------------------------
+
+If this is the case, first check these things (and then the ones listed above):
+
+* if you use an updater that does not conform to the dyndns2 standard, it might be that your host got flagged as
+  abusive. Go to the detailled view of your host and see whether abuse is checked. If it is, fix / change your
+  updater then uncheck the abuse flag and save.
+* if the client fault counter on the overview page keeps rising, you didn't fix the issue - try again.
+* if it keeps getting flagged as abusive, you didn't fix the issue - try again.
+* if you have a local network with multiple machines that shared one internet connection, it is sufficient to enable
+  an update client on one of the machines (preferably your internet router or a machine that is on most of the time).
+  if you run update clients on multiple machines, this may cause them sending nochg updates frequently and your host
+  might get flagged as abusive due to that.
+
+Something else?
+---------------
+
+* read the hints and on-screen help the service shows to you, including the footer stuff.
+* if nothing else helps, contact the service administrator.
+* if you think you have found a bug in the software, file it on the project's issue tracker on github (after doing
+  a quick check whether such a bug has already been reported or even fixed).
+
+
+Update clients
+==============
+
+It is important that you run a dyndns2 standards compliant software to update your host.
+
+Recommended
+-----------
+
+Here are some clients that likely qualify:
+
+* ddclient
+  - we offer configuration help for it, just copy & paste
+  - good working, reliable
+  - the official version is IPv4 only, IPv6 support needs a patched version
+  - Linux & other POSIX systems
+
+* python-dyndnsc
+  - IPv4 and v6 support
+  - Mac OS X, Linux and FreeBSD
+
+* whatever your router / gateway / firewall has for dyndns / ddns
+  - quality of update client implementations varies widely
+  - running on the system that has your public IP makes updating your host when your IP changes easier
+  - no need to run additional software on other machines in that network
+
+* nsupdate-info's browser-based updater
+  - only for adhoc scenarios, not intended for long term use
+  - runs in your browser with javascript
+
+Known-Problematic
+-----------------
+
+These clients or update methods have known issues or are not dyndns2 standards compliant.
+This likely causes unnecessary load on the service servers and network.
+
+You should not use these:
+
+* a cron job + wget or curl
+  - will either send nochg updates frequently (your host will get flagged as abusive)
+  - or it will be very slow reacting to IP changes
+
+* your self-written not fully standards compliant update client software
+  - it looks simple first, but to fully comply is more effort
+  - if you're not willing to fully comply, then don't even start
+  - there are already enough badly implemented and also "almost compliant" updaters out there
+  - rather try to use well-behaved existing update software
+  - or try to improve the "almost compliant" existing update software
