@@ -126,7 +126,7 @@ def test_nic_update_authorized_update_other_services(client):
     # must be good (was different IP)
     assert response.content == b'good 1.2.3.4'
     # test below was sometimes failing, give other service n seconds to process the update:
-    time.sleep(10.0)
+    time.sleep(100.0)
     # now check if it updated the other service also:
     assert query_ns(TEST_HOST_OTHER, 'A') == '1.2.3.4'
     response = client.get(reverse('nic_update') + '?myip=2.3.4.5',
