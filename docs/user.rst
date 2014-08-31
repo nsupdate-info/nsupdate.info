@@ -255,21 +255,22 @@ Recommended
 Here are some clients that likely qualify:
 
 * ddclient
+
   - we offer configuration help for it, just copy & paste
   - good working, reliable
   - the official version is IPv4 only, IPv6 support needs a patched version
   - Linux & other POSIX systems
-
 * python-dyndnsc
+
   - IPv4 and v6 support
   - Mac OS X, Linux and FreeBSD
-
 * whatever your router / gateway / firewall has for dyndns / ddns
+
   - quality of update client implementations varies widely
   - running on the system that has your public IP makes updating your host when your IP changes easier
   - no need to run additional software on other machines in that network
-
 * nsupdate-info's browser-based updater
+
   - only for adhoc scenarios, not intended for long term use
   - runs in your browser with javascript
 
@@ -282,10 +283,11 @@ This likely causes unnecessary load on the service servers and network.
 You should not use these:
 
 * a cron job + wget or curl
+
   - will either send nochg updates frequently (your host will get flagged as abusive)
   - or it will be very slow reacting to IP changes
-
 * your self-written not fully standards compliant update client software
+
   - it looks simple first, but to fully comply is more effort
   - if you're not willing to fully comply, then don't even start
   - there are already enough badly implemented and also "almost compliant" updaters out there
