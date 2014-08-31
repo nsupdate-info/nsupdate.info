@@ -20,7 +20,7 @@
             </thead>
             {% for host in hosts %}
                 <tr>
-                    <td><a href="{% url 'host_view' host.pk %}"><b>{{ host.subdomain }}.{{ host.domain.domain }}</b></a>
+                    <td><a href="{% url 'host_view' host.pk %}">{{ host.get_fqdn }}</a>
                         <br>
                         {{ host.comment }}
                     </td>
