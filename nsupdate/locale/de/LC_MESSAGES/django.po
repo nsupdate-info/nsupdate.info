@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 02:38+0200\n"
-"PO-Revision-Date: 2014-08-16 21:00+0000\n"
+"POT-Creation-Date: 2014-08-31 02:55+0200\n"
+"PO-Revision-Date: 2014-08-31 00:54+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/de/)\n"
@@ -904,9 +904,8 @@ msgid "Your Hosts"
 msgstr "Deine Hosts"
 
 #: main/templates/main/overview.html:9
-#, fuzzy
 msgid "Add Host"
-msgstr "Host bearbeiten"
+msgstr "Host hinzufügen"
 
 #: main/templates/main/overview.html:14
 msgid "Host<br>Comment"
@@ -937,9 +936,8 @@ msgid "Domains (yours first, then public)"
 msgstr "Domains (zuerst Deine, dann öffentliche)"
 
 #: main/templates/main/overview.html:66
-#, fuzzy
 msgid "Add Domain"
-msgstr "Neue Domain hinzufügen"
+msgstr "Domain hinzufügen"
 
 #: main/templates/main/overview.html:71
 msgid "Domain"
@@ -1404,7 +1402,7 @@ msgstr "ddclient ist ein verbreiteter dyndns-Update-Daemon für Linux."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:196
 msgid ""
-"Please note: if the pfSense WAN interface is not\n"
+"Please note: if the pfSense WAN interface does not have\n"
 "            your public IP and does not notice your public IP changing, the\n"
 "            update will be done delayed (default: daily at 01:01). You can\n"
 "            tweak this by editing /etc/crontab from where it invokes\n"
@@ -1413,19 +1411,25 @@ msgid ""
 "updaters.\n"
 "            "
 msgstr ""
+"Bitte beachten: wenn das pfSense-WAN-Interface nicht Deine\n"
+"öffentliche IP hat und nicht mitbekommt, wenn sich diese ändert,\n"
+"dann wird das Update verzögert stattfinden (default: täglich um 01:01).\n"
+"Du kannst dass verändern, indem Du /etc/crontab editierst,\n"
+"von wo aus es /etc/rc.dyndns.update aufruft - aber sei vorsichtig:\n"
+"rufe es nicht zu oft auf und beachte, dass dies alle DDNS-Updater betrifft."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:207
 msgid "(do not select this)"
-msgstr ""
+msgstr "(dies nicht selektieren)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:209
 #: main/templates/main/includes/tabbed_router_configuration.html:210
 msgid "(most likely)"
-msgstr ""
+msgstr "(sehr wahrscheinlich)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:211
 msgid "(select this as long as you need it)"
-msgstr ""
+msgstr "(dies selektieren, solange wie Du es brauchst)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:220
 msgid "Browser-based update client"
@@ -1540,9 +1544,8 @@ msgid "Home"
 msgstr "Startseite"
 
 #: templates/base.html:44
-#, fuzzy
 msgid "Overview"
-msgstr "Service"
+msgstr "Übersicht"
 
 #: templates/base.html:47
 msgid "Status"
@@ -1612,9 +1615,3 @@ msgstr "Valid HTML"
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr "Valid CSS"
-
-#~ msgid "back to overview"
-#~ msgstr "zurück zur Übersicht"
-
-#~ msgid "Your current IP(s):"
-#~ msgstr "Deine aktuelle(n) IP(s):"
