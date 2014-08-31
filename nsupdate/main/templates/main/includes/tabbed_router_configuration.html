@@ -193,7 +193,7 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
         <h4>pfSense</h4>
         <p>Homepage: <a href="https://www.pfsense.org/">https://www.pfsense.org</a></p>
         <p>
-            {% blocktrans %}Please note: if the pfSense WAN interface is not
+            {% blocktrans %}Please note: if the pfSense WAN interface does not have
             your public IP and does not notice your public IP changing, the
             update will be done delayed (default: daily at 01:01). You can
             tweak this by editing /etc/crontab from where it invokes
