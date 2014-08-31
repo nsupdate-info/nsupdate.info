@@ -2,8 +2,6 @@
 Tests for api package.
 """
 
-import time
-
 from django.core.urlresolvers import reverse
 
 from nsupdate.main.dnstools import query_ns, FQDN
@@ -125,8 +123,8 @@ def test_nic_update_authorized_update_other_services(client):
     assert response.status_code == 200
     # must be good (was different IP)
     assert response.content == b'good 1.2.3.4'
-    # test below was sometimes failing, give other service n seconds to process the update:
-    time.sleep(100.0)
+    # XXX test below can not run in parallel (like on travis-ci.org) if updating same
+    # "other service" target host
     # now check if it updated the other service also:
     assert query_ns(TEST_HOST_OTHER, 'A') == '1.2.3.4'
     response = client.get(reverse('nic_update') + '?myip=2.3.4.5',
