@@ -27,7 +27,7 @@ install:
     - "pip install --use-mirrors Django==$DJANGO"
     - "pip install --use-mirrors -r requirements.d/travis.txt"
     - "pip install --use-mirrors -e ."
-script: $COVERAGE py.test $TEST_OPTS -k "$TEST_K"
+script: $COVERAGE py.test $TEST_OPTS -k "$TEST_K" -m "not requires_sequential"
 after_success:
     - coveralls
 notifications:

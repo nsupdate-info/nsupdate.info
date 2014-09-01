@@ -2,6 +2,8 @@
 Tests for api package.
 """
 
+import pytest
+
 from django.core.urlresolvers import reverse
 
 from nsupdate.main.dnstools import query_ns, FQDN
@@ -112,6 +114,7 @@ def test_nic_update_authorized_myip(client):
     assert response.content == b'nochg 1.2.3.4'
 
 
+@pytest.mark.requires_sequential
 def test_nic_update_authorized_update_other_services(client):
     response = client.get(reverse('nic_update') + '?myip=4.3.2.1',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
