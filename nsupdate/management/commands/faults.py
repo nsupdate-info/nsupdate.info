@@ -11,6 +11,40 @@ from django.db import transaction
 from nsupdate.main.models import Host
 
 
+ABUSE_MSG = """\
+Your host: %(fqdn)s (comment: %(comment)s)
+
+Issue: The abuse flag for your host was set.
+
+Explanation:
+The abuse flag usually gets set if your update client sends way too many
+updates although your IP address did not change.
+
+Your update client sent %(faults_count)d faulty updates since we last checked.
+We have reset the faults counter to 0 now, but we are rejecting updates
+for this host until you resolve the issue.
+
+Resolution:
+You can easily do this on your own:
+1. fix or replace the update client on this host - it must not send
+   updates if the IP did not change
+2. visit the service web interface and remove the abuse flag for this host
+
+Notes:
+- this is usually caused by a misbehaving / faulty update client
+  (on your PC / server or router / firewall)
+- the dyndns2 standard explicitly states that frequently sending
+  nochg updates is considered abuse of the service
+- you are using way more resources on the service than really needed
+- for Linux and similar OSes, you can use the ddclient software - we
+  give copy&paste-ready configuration help for it on our web UI
+- if you need something else, use anything that can be considered
+  a valid, well-behaved dyndns2-compatible update client
+- if you already used such a software and you ran into this problem,
+  complain to whoever wrote it about it sending nochg updates
+"""
+
+
 class Command(BaseCommand):
     help = 'deal with the faults counters'
 
@@ -108,38 +142,7 @@ class Command(BaseCommand):
                                 from_addr = None  # will use DEFAULT_FROM_EMAIL
                                 to_addr = creator.email
                                 subject = "issue with your host %(fqdn)s" % dict(fqdn=fqdn)
-                                msg = """\
-Your host: %(fqdn)s (comment: %(comment)s)
-
-Issue: The abuse flag for your host was set.
-
-Explanation:
-The abuse flag usually gets set if your update client sends way too many
-updates although your IP address did not change.
-
-Your update client sent %(faults_count)d faulty updates since we last checked.
-We have reset the faults counter to 0 now, but we are rejecting updates
-for this host until you resolve the issue.
-
-Resolution:
-You can easily do this on your own:
-1. fix or replace the update client on this host - it must not send
-   updates if the IP did not change
-2. visit the service web interface and remove the abuse flag for this host
-
-Notes:
-- this is usually caused by a misbehaving / faulty update client
-  (on your PC / server or router / firewall)
-- the dyndns2 standard explicitly states that frequently sending
-  nochg updates is considered abuse of the service
-- you are using way more resources on the service than really needed
-- for Linux and similar OSes, you can use the ddclient software - we
-  give copy&paste-ready configuration help for it on our web UI
-- if you need something else, use anything that can be considered
-  a valid, well-behaved dyndns2-compatible update client
-- if you already used such a software and you ran into this problem,
-  complain to whoever wrote it about it sending nochg updates
-""" % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
+                                msg = ABUSE_MSG % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
                                 send_mail(subject, msg, from_addr, [to_addr], fail_silently=True)
                     if reset_client:
                         h.client_faults = 0
