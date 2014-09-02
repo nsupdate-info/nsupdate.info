@@ -72,6 +72,20 @@ def test_nic_update_authorized_not_fqdn_username(client):
     assert response.content == b'notfqdn'
 
 
+def test_nic_update_authorized_invalid_ip1(client):
+    response = client.get(reverse('nic_update') + '?myip=1234',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
+
+
+def test_nic_update_authorized_invalid_ip2(client):
+    response = client.get(reverse('nic_update') + '?myip=%C3%A4%C3%BC%C3%B6',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
+
+
 def test_nic_update_authorized(client):
     response = client.get(reverse('nic_update'),
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
@@ -182,6 +196,20 @@ def test_nic_update_session_foreign_host(client):
     assert response.status_code == 200
     # we must not get this updated, this is a host of some other user!
     assert response.content == b'nohost'
+
+
+def test_nic_delete_authorized_invalid_ip1(client):
+    response = client.get(reverse('nic_delete') + '?myip=1234',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
+
+
+def test_nic_delete_authorized_invalid_ip2(client):
+    response = client.get(reverse('nic_delete') + '?myip=%C3%A4%C3%BC%C3%B6',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
 
 
 def test_nic_delete_authorized(client):
