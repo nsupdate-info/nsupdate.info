@@ -3,6 +3,7 @@ models for hosts, domains, service updaters, ...
 """
 
 import re
+import time
 import base64
 
 import dns.resolver
@@ -18,6 +19,16 @@ from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from . import dnstools
+
+RESULT_MSG_LEN = 255
+
+
+def result_fmt(msg):
+    """
+    format the message for storage into client/server_result_msg fields
+    """
+    msg = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(time.time())) + ' ' + msg
+    return msg[:RESULT_MSG_LEN]
 
 
 class BlacklistedDomain(models.Model):
@@ -158,9 +169,17 @@ class Host(models.Model):
     # count client misbehaviours, like sending nochg updates or other
     # errors that should make the client stop trying to update:
     client_faults = models.PositiveIntegerField(default=0)
+    client_result_msg = models.CharField(
+        max_length=RESULT_MSG_LEN,
+        default='', blank=True, null=True,
+        help_text=_("Latest result message relating to the client"))
 
     # count server faults that happened when updating this host
     server_faults = models.PositiveIntegerField(default=0)
+    server_result_msg = models.CharField(
+        max_length=RESULT_MSG_LEN,
+        default='', blank=True, null=True,
+        help_text=_("Latest result message relating to the server"))
 
     # when we received the last update for v4/v6 addr
     last_update_ipv4 = models.DateTimeField(blank=True, null=True)
@@ -224,14 +243,16 @@ class Host(models.Model):
             self.tls_update_ipv6 = secure
         self.save()
 
-    def register_client_result(self, fault=False):
+    def register_client_result(self, msg, fault=False):
         if fault:
             self.client_faults += 1
+        self.client_result_msg = result_fmt(msg)
         self.save()
 
-    def register_server_result(self, fault=False):
+    def register_server_result(self, msg, fault=False):
         if fault:
             self.server_faults += 1
+        self.server_result_msg = result_fmt(msg)
         self.save()
 
     def generate_secret(self, secret=None):

@@ -210,14 +210,16 @@ class NicUpdateView(View):
             else:
                 # maybe this host is owned by same person, but we can't know.
                 result = 'nohost'  # or 'badauth'?
-            logger.warning("rejecting to update wrong host %s (given in query string) "
-                           "[instead of %s (given in basic auth)]" % (hostname, username))
-            host.register_client_result(fault=True)
+            msg = ("rejecting to update wrong host %s (given in query string) "
+                   "[instead of %s (given in basic auth)]" % (hostname, username))
+            logger.warning(msg)
+            host.register_client_result(msg, fault=True)
             return Response(result)
         agent = request.META.get('HTTP_USER_AGENT', 'unknown')
         if agent in settings.BAD_AGENTS:
-            logger.warning('%s - received update from bad user agent' % (hostname, ))
-            host.register_client_result(fault=True)
+            msg = '%s - received update from bad user agent %r' % (hostname, agent)
+            logger.warning(msg)
+            host.register_client_result(msg, fault=True)
             return Response('badagent')
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or ''
@@ -351,14 +353,16 @@ def _update(host, ipaddr, secure=False, logger=None):
                     logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
         return Response('good %s' % ipaddr)
     except SameIpError:
-        logger.warning('%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure))
-        host.register_client_result(fault=True)
+        msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
+        logger.warning(msg)
+        host.register_client_result(msg, fault=True)
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        logger.error('%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
-                     fqdn, msg, ipaddr, secure))
-        host.register_server_result(fault=True)
+        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
+            fqdn, msg, ipaddr, secure)
+        logger.error(msg)
+        host.register_server_result(msg, fault=True)
         return Response('dnserr')
 
 
@@ -400,7 +404,8 @@ def _delete(host, ipaddr, secure=False, logger=None):
         return Response('deleted %s' % rdtype)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        logger.error('%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
-                     fqdn, rdtype, msg, secure))
-        host.register_server_result(fault=True)
+        msg = '%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
+            fqdn, rdtype, msg, secure)
+        logger.error(msg)
+        host.register_server_result(msg, fault=True)
         return Response('dnserr')
