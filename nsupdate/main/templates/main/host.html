@@ -102,4 +102,15 @@
             </script>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>{% trans "Result Messages" %}</h3>
+            <form>
+                <label for="client_result_msg">{% trans "Client Result Message" %}</label>
+                <input class="form-control" type="text" maxlength="255" id="client_result_msg" value="{{ host.client_result_msg }}" disabled>
+                <label for="server_result_msg">{% trans "Server Result Message" %}</label>
+                <input class="form-control" type="text" maxlength="255" id="server_result_msg" value="{{ host.server_result_msg }}" disabled>
+            </form>
+        </div>
+    </div>
 {% endblock %}
