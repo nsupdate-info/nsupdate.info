@@ -27,6 +27,7 @@ Fixes:
 Other changes:
 
 * form field help texts are translatable now
+* admin views: added "created", removed "created_by" filter (does not scale)
 
 
 Release 0.7.0
