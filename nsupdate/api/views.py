@@ -315,10 +315,17 @@ def _update(host, ipaddr, secure=False, logger=None):
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
+    fqdn = host.get_fqdn()
     if host.abuse or host.abuse_blocked:
+        msg = '%s - received update for host with abuse / abuse_blocked flag set' % (fqdn, )
+        logger.warning(msg)
+        host.register_client_result(msg, fault=False)
         return Response('abuse')
     if not host.available:
         # not available is like it doesn't exist
+        msg = '%s - received update for unavailable host' % (fqdn, )
+        logger.warning(msg)
+        host.register_client_result(msg, fault=False)
         return Response('nohost')
     try:
         # bug in dnspython: crashes if ipaddr is unicode, wants a str!
@@ -329,12 +336,16 @@ def _update(host, ipaddr, secure=False, logger=None):
     except (ValueError, UnicodeError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
+        msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
+        logger.warning(msg)
+        host.register_client_result(msg, fault=True)
         return Response('dnserr')  # there should be a better response code for this
     host.poke(kind, secure)
-    fqdn = host.get_fqdn()
     try:
         update(fqdn, ipaddr)
-        logger.info('%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure))
+        msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
+        logger.info(msg)
+        host.register_client_result(msg, fault=False)
         # now check if there are other services we shall relay updates to:
         for hc in host.serviceupdaterhostconfigs.all():
             if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
@@ -379,10 +390,17 @@ def _delete(host, ipaddr, secure=False, logger=None):
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
+    fqdn = host.get_fqdn()
     if host.abuse or host.abuse_blocked:
+        msg = '%s - received delete for host with abuse / abuse_blocked flag set' % (fqdn, )
+        logger.warning(msg)
+        host.register_client_result(msg, fault=False)
         return Response('abuse')
     if not host.available:
         # not available is like it doesn't exist
+        msg = '%s - received delete for unavailable host' % (fqdn, )
+        logger.warning(msg)
+        host.register_client_result(msg, fault=False)
         return Response('nohost')
     try:
         # bug in dnspython: crashes if ipaddr is unicode, wants a str!
@@ -393,13 +411,17 @@ def _delete(host, ipaddr, secure=False, logger=None):
     except (ValueError, UnicodeError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
+        msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
+        logger.warning(msg)
+        host.register_client_result(msg, fault=True)
         return Response('dnserr')  # there should be a better response code for this
     host.poke(kind, secure)
-    fqdn = host.get_fqdn()
     try:
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
         delete(fqdn, rdtype)
-        logger.info('%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure))
+        msg = '%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure)
+        logger.info(msg)
+        host.register_client_result(msg, fault=False)
         # XXX unclear what to do for "other services" we relay updates to
         return Response('deleted %s' % rdtype)
     except (DnsUpdateError, NameServerNotAvailable) as e:
