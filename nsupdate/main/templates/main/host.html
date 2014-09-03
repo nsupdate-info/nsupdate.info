@@ -49,7 +49,7 @@
                     <label for="current_ipv4">{% trans "Current IPv4 address from master nameserver" %}</label>
                     <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.get_ipv4 }}" disabled>
                     <label for="myipv4">{% trans "Set new IPv4 address" %}</label>
-                    <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="give new ipv4 address" value="{{ request.session.ipv4 }}" required autofocus>
+                    <input class="form-control" type="text" id="myipv4" name="myipv4" placeholder="{% trans "give new ipv4 address" %}" value="{{ request.session.ipv4 }}" required autofocus>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">{% trans "Update" %}</button> <span id="update_result_v4"></span>
                 <button type="button" class="btn" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button> <span id="delete_result_v4"></span>
@@ -58,7 +58,7 @@
                     <label for="current_ipv6">{% trans "Current IPv6 address from master nameserver" %}</label>
                     <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.get_ipv6 }}" disabled>
                     <label for="myipv6">{% trans "Set new IPv6 address" %}</label>
-                    <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="give new ipv6 address" value="{{ request.session.ipv6 }}" required>
+                    <input class="form-control" type="text" id="myipv6" name="myipv6" placeholder="{% trans "give new ipv6 address" %}" value="{{ request.session.ipv6 }}" required>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">{% trans "Update" %}</button> <span id="update_result_v6"></span>
                 <button type="button" class="btn" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button> <span id="delete_result_v6"></span>
