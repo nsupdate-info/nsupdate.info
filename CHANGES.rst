@@ -6,20 +6,27 @@ Release 0.8.0
 
 New Features:
 
-* ...
+* redesigned UI:
+  * unify hosts and domains overview into 1 view
+  * move forms to add hosts/domains to own views
+  * move reverse DNS display to home view
+  * removed some superfluous links and formatting
+* host view; give more feedback about client/server results on the web UI,
+  so a user can see why updates are not working (even if some stupid update
+  client does not tell him).
+  But please note: if you fail to configure your credentials correctly in your
+  update client, we can NOT show that there as we need them to load your host
+  record from the database (and to know it is really YOU who is talking to us).
 
 Fixes:
 
 * refactored internal api so host/zone boundary is not lost and does not need
   to be discovered (we KNOW it) - fixes issues #122 and #138.
+* fixed tests so they behave on travis-ci
 
 Other changes:
 
-* UI redesign:
-  * unify hosts and domains overview into 1 view
-  * move forms to add hosts/domains to own views
-  * move reverse DNS display to home view
-  * removed some superfluous links and formatting
+* form field help texts are translatable now
 
 
 Release 0.7.0
