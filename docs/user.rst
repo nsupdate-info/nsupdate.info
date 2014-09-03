@@ -209,6 +209,30 @@ Note:
 Troubleshooting
 ===============
 
+Look here first if it doesn't work
+----------------------------------
+
+On the web interface, find the not working host in the overview's host list.
+
+What does the "available" and "faults c/s" column say?
+
+* if your host is not available, it can't be updated (visit host view to make
+  it available)
+* if you see increasing client faults count, your update client is doing something
+  wrong. in the end, that might flag that host as abusive: you'll see "abuse" or
+  "abuse_blocked" in that case (visit host view to deselect "abuse" flag).
+
+Now click on the hostname to go to the detailled host view.
+
+There, at the bottom, you will see the last messages that were generated about
+your client (whether it is updating ok or causing errors/warnings) and about
+the domain's DNS server (in case it can't be reached or is malfunctioning or
+rejects updates). The date/time given is UTC.
+
+But please note: we can not show you issues with your credentials there (like
+when you configured your update client with wrong values for http basic authentication).
+
+
 Address update for your host is not working (and never worked)
 --------------------------------------------------------------
 
