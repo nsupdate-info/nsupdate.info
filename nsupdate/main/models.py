@@ -15,6 +15,7 @@ from django.conf import settings
 from django.db.models.signals import pre_delete
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
+from django.utils.translation import ugettext_lazy as _
 
 from . import dnstools
 
@@ -23,7 +24,7 @@ class BlacklistedDomain(models.Model):
     domain = models.CharField(
         max_length=255,
         unique=True,
-        help_text='Blacklisted domain. Evaluated as regex (search).')
+        help_text=_('Blacklisted domain. Evaluated as regex (search).'))
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -60,33 +61,33 @@ class Domain(models.Model):
     domain = models.CharField(
         max_length=255,  # RFC 2181 (and also: max length of unique fields)
         unique=True,
-        help_text="Name of the zone where dynamic hosts may get added")
+        help_text=_("Name of the zone where dynamic hosts may get added"))
     nameserver_ip = models.GenericIPAddressField(
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
-        help_text="IP where the dynamic DNS updates for this zone will be sent to")
+        help_text=_("IP where the dynamic DNS updates for this zone will be sent to"))
     nameserver_update_secret = models.CharField(
         max_length=88,  # 512 bits base64 -> 88 bytes
         default='',
-        help_text="Shared secret that allows updating this zone (base64 encoded)")
+        help_text=_("Shared secret that allows updating this zone (base64 encoded)"))
     nameserver_update_algorithm = models.CharField(
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
         default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES,
-        help_text="HMAC_SHA512 is fine for bind9 (you can change this later, if needed)")
+        help_text=_("HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"))
     public = models.BooleanField(
         default=False,
-        help_text="Check to allow any user to add dynamic hosts to this zone - "
-                  "if not checked, we'll only allow the owner to add hosts")
+        help_text=_("Check to allow any user to add dynamic hosts to this zone - "
+                    "if not checked, we'll only allow the owner to add hosts"))
     # available means "nameserver for domain operating and reachable" -
     # gets set to False if we have trouble reaching the nameserver
     available = models.BooleanField(
         default=True,
-        help_text="Check if nameserver is available/reachable - "
-                  "if not checked, we'll pause querying/updating this nameserver for a while")
+        help_text=_("Check if nameserver is available/reachable - "
+                    "if not checked, we'll pause querying/updating this nameserver for a while"))
     comment = models.CharField(
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text="Some arbitrary comment about your domain. "
-                  "If your domain is public, the comment will be also publicly shown.")
+        help_text=_("Some arbitrary comment about your domain. "
+                    "If your domain is public, the comment will be also publicly shown."))
 
     last_update = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -119,7 +120,7 @@ class Host(models.Model):
             ),
             domain_blacklist_validator,
         ],
-        help_text="The name of your host.")
+        help_text=_("The name of your host."))
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
     update_secret = models.CharField(
         max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
@@ -127,15 +128,15 @@ class Host(models.Model):
     comment = models.CharField(
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text="Some arbitrary comment about your host, e.g  who / what / where this host is")
+        help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
 
     # available means that this host may be updated (or not, if False) -
     # gets set to False if abuse happens (client malfunctioning) or
     # if updating this host triggers other errors:
     available = models.BooleanField(
         default=True,
-        help_text="Check if host is available/in use - "
-                  "if not checked, we won't accept updates for this host")
+        help_text=_("Check if host is available/in use - "
+                    "if not checked, we won't accept updates for this host"))
 
     # abuse means that we (either the operator or some automatic mechanism)
     # think the host is used in some abusive or unfair way, e.g.:
@@ -146,13 +147,13 @@ class Host(models.Model):
     # he fixed the problem on his side (or that there was no problem).
     abuse = models.BooleanField(
         default=False,
-        help_text="Checked if we think you abuse the service - "
-                  "you may uncheck this AFTER fixing all issues on your side")
+        help_text=_("Checked if we think you abuse the service - "
+                    "you may uncheck this AFTER fixing all issues on your side"))
 
     # similar to above, but can not be toggled by the user:
     abuse_blocked = models.BooleanField(
         default=False,
-        help_text="Checked to block a host for abuse.")
+        help_text=_("Checked to block a host for abuse."))
 
     # count client misbehaviours, like sending nochg updates or other
     # errors that should make the client stop trying to update:
@@ -264,21 +265,21 @@ pre_delete.connect(pre_delete_host, sender=Host)
 class ServiceUpdater(models.Model):
     name = models.CharField(
         max_length=32,
-        help_text="Service name")
+        help_text=_("Service name"))
     comment = models.CharField(
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text="Some arbitrary comment about the service")
+        help_text=_("Some arbitrary comment about the service"))
     server = models.CharField(
         max_length=255,  # should be enough
-        help_text="Update Server [name or IP] of this service")
+        help_text=_("Update Server [name or IP] of this service"))
     path = models.CharField(
         max_length=255,  # should be enough
         default='/nic/update',
-        help_text="Update Server URL path of this service")
+        help_text=_("Update Server URL path of this service"))
     secure = models.BooleanField(
         default=True,
-        help_text="Use https / TLS to contact the Update Server?")
+        help_text=_("Use https / TLS to contact the Update Server?"))
 
     # what kind(s) of IPs is (are) acceptable to this service:
     accept_ipv4 = models.BooleanField(default=False)
@@ -298,19 +299,19 @@ class ServiceUpdaterHostConfig(models.Model):
     hostname = models.CharField(
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text="The hostname for that service (used in query string)")
+        help_text=_("The hostname for that service (used in query string)"))
     comment = models.CharField(
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text="Some arbitrary comment about your host on that service")
+        help_text=_("Some arbitrary comment about your host on that service"))
     # credentials for http basic auth for THAT service (not for us),
     # we need to store the password in plain text, we can't hash it
     name = models.CharField(
         max_length=255,  # should be enough
-        help_text="The name/id for that service (used for http basic auth)")
+        help_text=_("The name/id for that service (used for http basic auth)"))
     password = models.CharField(
         max_length=255,  # should be enough
-        help_text="The password/secret for that service (used for http basic auth)")
+        help_text=_("The password/secret for that service (used for http basic auth)"))
 
     # what kind(s) of IPs should be given to this service:
     give_ipv4 = models.BooleanField(default=False)
