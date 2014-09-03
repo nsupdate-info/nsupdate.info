@@ -224,12 +224,14 @@ class Host(models.Model):
             self.tls_update_ipv6 = secure
         self.save()
 
-    def register_client_fault(self, increment=1):
-        self.client_faults += increment
+    def register_client_result(self, fault=False):
+        if fault:
+            self.client_faults += 1
         self.save()
 
-    def register_server_fault(self, increment=1):
-        self.server_faults += increment
+    def register_server_result(self, fault=False):
+        if fault:
+            self.server_faults += 1
         self.save()
 
     def generate_secret(self, secret=None):
