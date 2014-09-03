@@ -44,7 +44,6 @@ class GenerateSecretView(UpdateView):
         context['nav_overview'] = True
         # generate secret, store it hashed and return the plain secret for the context
         context['update_secret'] = self.object.generate_secret()
-        context['hosts'] = Host.objects.filter(created_by=self.request.user)
         messages.add_message(self.request, messages.SUCCESS, 'Host secret created.')
         return context
 
@@ -65,9 +64,8 @@ class GenerateNSSecretView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GenerateNSSecretView, self).get_context_data(*args, **kwargs)
-        context['nav_domain_overview'] = True
+        context['nav_overview'] = True
         context['shared_secret'] = self.object.generate_ns_secret()
-        context['domains'] = Domain.objects.filter(created_by=self.request.user)
         messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
         return context
 
@@ -268,7 +266,6 @@ class HostView(UpdateView):
         context = super(HostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
         context['remote_addr'] = self.request.META['REMOTE_ADDR']
-        context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
 
 
@@ -292,7 +289,6 @@ class DeleteHostView(DeleteView):
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteHostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
-        context['hosts'] = Host.objects.filter(created_by=self.request.user)
         return context
 
 
@@ -316,13 +312,8 @@ class AddDomainView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, *args, **kwargs):
-        context = super(
-            AddDomainView, self).get_context_data(*args, **kwargs)
-        context['nav_domain_overview'] = True
-        context['your_domains'] = Domain.objects.filter(
-            created_by=self.request.user)
-        context['public_domains'] = Domain.objects.filter(
-            public=True).exclude(created_by=self.request.user)
+        context = super(AddDomainView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
         return context
 
 
@@ -352,8 +343,7 @@ class DomainView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DomainView, self).get_context_data(*args, **kwargs)
-        context['nav_domain_overview'] = True
-        context['domains'] = Domain.objects.filter(created_by=self.request.user)
+        context['nav_overview'] = True
         return context
 
 
@@ -376,8 +366,7 @@ class DeleteDomainView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteDomainView, self).get_context_data(*args, **kwargs)
-        context['nav_domain_overview'] = True
-        context['domains'] = Domain.objects.filter(created_by=self.request.user)
+        context['nav_overview'] = True
         return context
 
 
