@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 02:55+0200\n"
+"POT-Creation-Date: 2014-09-03 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -288,6 +288,105 @@ msgstr ""
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
+msgstr ""
+
+#: main/models.py:27
+msgid "Blacklisted domain. Evaluated as regex (search)."
+msgstr ""
+
+#: main/models.py:64
+msgid "Name of the zone where dynamic hosts may get added"
+msgstr ""
+
+#: main/models.py:67
+msgid "IP where the dynamic DNS updates for this zone will be sent to"
+msgstr ""
+
+#: main/models.py:71
+msgid "Shared secret that allows updating this zone (base64 encoded)"
+msgstr ""
+
+#: main/models.py:75
+msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
+msgstr ""
+
+#: main/models.py:78
+msgid ""
+"Check to allow any user to add dynamic hosts to this zone - if not checked, "
+"we'll only allow the owner to add hosts"
+msgstr ""
+
+#: main/models.py:84
+msgid ""
+"Check if nameserver is available/reachable - if not checked, we'll pause "
+"querying/updating this nameserver for a while"
+msgstr ""
+
+#: main/models.py:89
+msgid ""
+"Some arbitrary comment about your domain. If your domain is public, the "
+"comment will be also publicly shown."
+msgstr ""
+
+#: main/models.py:123
+msgid "The name of your host."
+msgstr ""
+
+#: main/models.py:131
+msgid ""
+"Some arbitrary comment about your host, e.g  who / what / where this host is"
+msgstr ""
+
+#: main/models.py:138
+msgid ""
+"Check if host is available/in use - if not checked, we won't accept updates "
+"for this host"
+msgstr ""
+
+#: main/models.py:150
+msgid ""
+"Checked if we think you abuse the service - you may uncheck this AFTER "
+"fixing all issues on your side"
+msgstr ""
+
+#: main/models.py:156
+msgid "Checked to block a host for abuse."
+msgstr ""
+
+#: main/models.py:268
+msgid "Service name"
+msgstr ""
+
+#: main/models.py:272
+msgid "Some arbitrary comment about the service"
+msgstr ""
+
+#: main/models.py:275
+msgid "Update Server [name or IP] of this service"
+msgstr ""
+
+#: main/models.py:279
+msgid "Update Server URL path of this service"
+msgstr ""
+
+#: main/models.py:282
+msgid "Use https / TLS to contact the Update Server?"
+msgstr ""
+
+#: main/models.py:302
+msgid "The hostname for that service (used in query string)"
+msgstr ""
+
+#: main/models.py:306
+msgid "Some arbitrary comment about your host on that service"
+msgstr ""
+
+#: main/models.py:311
+msgid "The name/id for that service (used for http basic auth)"
+msgstr ""
+
+#: main/models.py:314
+msgid "The password/secret for that service (used for http basic auth)"
 msgstr ""
 
 #: main/templates/main/about.html:6
@@ -695,6 +794,10 @@ msgstr ""
 msgid "Set new IPv4 address"
 msgstr ""
 
+#: main/templates/main/host.html:52
+msgid "give new ipv4 address"
+msgstr ""
+
 #: main/templates/main/host.html:55 main/templates/main/host.html.py:64
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
@@ -706,6 +809,10 @@ msgstr ""
 
 #: main/templates/main/host.html:60
 msgid "Set new IPv6 address"
+msgstr ""
+
+#: main/templates/main/host.html:61
+msgid "give new ipv6 address"
 msgstr ""
 
 #: main/templates/main/host_add.html:8
