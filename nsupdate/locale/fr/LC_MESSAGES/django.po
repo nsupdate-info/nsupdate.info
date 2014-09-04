@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 14:38+0200\n"
-"PO-Revision-Date: 2014-09-03 12:31+0000\n"
+"POT-Creation-Date: 2014-09-04 18:45+0200\n"
+"PO-Revision-Date: 2014-09-04 16:01+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/fr/)\n"
@@ -140,12 +140,14 @@ msgid "Just directly log in as:"
 msgstr "Connecter vous directement avec le compte:"
 
 #: accounts/templates/registration/registration_form.html:16
-msgid "username: test"
-msgstr "Nom d'utilisateur: test"
+#: main/templates/main/includes/tabbed_router_configuration.html:67
+msgid "Username:"
+msgstr "Username:"
 
 #: accounts/templates/registration/registration_form.html:17
-msgid "password: test"
-msgstr "mot de passe: test"
+#: main/templates/main/includes/tabbed_router_configuration.html:68
+msgid "Password:"
+msgstr "Mot de passe:"
 
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
@@ -212,9 +214,10 @@ msgstr ""
 msgid "Send activation email"
 msgstr "Envoyer un mail d'activation"
 
-#: login/templates/login.html:3 login/templates/logout.html:3
-msgid "Login"
-msgstr "Login"
+#: login/templates/login.html:3 login/templates/login.html.py:24
+#: login/templates/password_reset_complete.html:10 templates/base.html:61
+msgid "Log in"
+msgstr "Se connecter"
 
 #: login/templates/login.html:8
 msgid "Login with a local Account"
@@ -228,11 +231,6 @@ msgstr "Votre login et mot de passe ne correspondent pas. Veuillez réessayer."
 msgid "Remember me"
 msgstr "Se souvenir de moi"
 
-#: login/templates/login.html:24
-#: login/templates/password_reset_complete.html:10 templates/base.html:61
-msgid "Log in"
-msgstr "Se connecter"
-
 #: login/templates/login.html:26
 msgid "Forgot your password?"
 msgstr "Mot de passe oublié ?"
@@ -244,6 +242,11 @@ msgstr "S'enregistrer"
 #: login/templates/login.html:34
 msgid "Login with a remote Account"
 msgstr "Se connecter (avec un compte distant)"
+
+#: login/templates/logout.html:3 templates/base.html:71
+#, fuzzy
+msgid "Log out"
+msgstr "Se connecter"
 
 #: login/templates/logout.html:7
 msgid "Thanks for spending some quality time with the Web site today."
@@ -353,102 +356,110 @@ msgstr ""
 "enregistré. N'oubliez pas de vérifier qu'il n'est pas dans votre dossier de "
 "spam (On ne sait jamais...)"
 
-#: main/models.py:27
+#: main/models.py:38
 msgid "Blacklisted domain. Evaluated as regex (search)."
 msgstr ""
 
-#: main/models.py:64
+#: main/models.py:75
 msgid "Name of the zone where dynamic hosts may get added"
 msgstr ""
 
-#: main/models.py:67
+#: main/models.py:78
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
 msgstr ""
 
-#: main/models.py:71
+#: main/models.py:82
 msgid "Shared secret that allows updating this zone (base64 encoded)"
 msgstr ""
 
-#: main/models.py:75
+#: main/models.py:86
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
 msgstr ""
 
-#: main/models.py:78
+#: main/models.py:89
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
 msgstr ""
 
-#: main/models.py:84
+#: main/models.py:95
 msgid ""
 "Check if nameserver is available/reachable - if not checked, we'll pause "
 "querying/updating this nameserver for a while"
 msgstr ""
 
-#: main/models.py:89
+#: main/models.py:100
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will be also publicly shown."
 msgstr ""
 
-#: main/models.py:123
+#: main/models.py:134
 msgid "The name of your host."
 msgstr ""
 
-#: main/models.py:131
+#: main/models.py:142
 msgid ""
 "Some arbitrary comment about your host, e.g  who / what / where this host is"
 msgstr ""
 
-#: main/models.py:138
+#: main/models.py:149
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
 msgstr ""
 
-#: main/models.py:150
+#: main/models.py:161
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
 msgstr ""
 
-#: main/models.py:156
+#: main/models.py:167
 msgid "Checked to block a host for abuse."
 msgstr ""
 
-#: main/models.py:268
+#: main/models.py:175
+msgid "Latest result message relating to the client"
+msgstr ""
+
+#: main/models.py:182
+msgid "Latest result message relating to the server"
+msgstr ""
+
+#: main/models.py:291
 msgid "Service name"
 msgstr ""
 
-#: main/models.py:272
+#: main/models.py:295
 msgid "Some arbitrary comment about the service"
 msgstr ""
 
-#: main/models.py:275
+#: main/models.py:298
 msgid "Update Server [name or IP] of this service"
 msgstr ""
 
-#: main/models.py:279
+#: main/models.py:302
 msgid "Update Server URL path of this service"
 msgstr ""
 
-#: main/models.py:282
+#: main/models.py:305
 msgid "Use https / TLS to contact the Update Server?"
 msgstr ""
 
-#: main/models.py:302
+#: main/models.py:325
 msgid "The hostname for that service (used in query string)"
 msgstr ""
 
-#: main/models.py:306
+#: main/models.py:329
 msgid "Some arbitrary comment about your host on that service"
 msgstr ""
 
-#: main/models.py:311
+#: main/models.py:334
 msgid "The name/id for that service (used for http basic auth)"
 msgstr ""
 
-#: main/models.py:314
+#: main/models.py:337
 msgid "The password/secret for that service (used for http basic auth)"
 msgstr ""
 
@@ -685,7 +696,7 @@ msgstr ""
 "algorithme de mise à jour."
 
 #: main/templates/main/domain.html:17 main/templates/main/host.html:12
-#: main/templates/main/host.html.py:54 main/templates/main/host.html:63
+#: main/templates/main/host.html.py:56 main/templates/main/host.html:69
 #: main/templates/main/updater_hostconfig.html:12
 msgid "Update"
 msgstr "Mise à jour"
@@ -933,33 +944,48 @@ msgstr ""
 "Ces champs ont été remplis avec la detection automatique de votre "
 "configuration actuelle."
 
-#: main/templates/main/host.html:49
-msgid "Current IPv4 address from master nameserver"
-msgstr "Adresse IPV4 de votre serveur maitre DNS"
-
-#: main/templates/main/host.html:51
-msgid "Set new IPv4 address"
-msgstr "Enregistrer une nouvelle adresse IPV4"
-
-#: main/templates/main/host.html:52
-msgid "give new ipv4 address"
+#: main/templates/main/host.html:49 main/templates/main/host.html.py:51
+#: main/templates/main/host.html:53 main/templates/main/overview.html:28
+#: main/templates/main/updater_hostconfig_overview.html:13
+msgid "IPv4"
 msgstr ""
 
-#: main/templates/main/host.html:55 main/templates/main/host.html.py:64
+#: main/templates/main/host.html:49 main/templates/main/host.html.py:62
+#, python-format
+msgid "Current %(type)s address from master nameserver"
+msgstr ""
+
+#: main/templates/main/host.html:51 main/templates/main/host.html.py:64
+#, python-format
+msgid "Set new %(type)s address"
+msgstr ""
+
+#: main/templates/main/host.html:53 main/templates/main/host.html.py:66
+#, python-format
+msgid "Give new %(type)s address"
+msgstr ""
+
+#: main/templates/main/host.html:58 main/templates/main/host.html.py:71
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
 msgstr "Supprimer"
 
-#: main/templates/main/host.html:58
-msgid "Current IPv6 address from master nameserver"
-msgstr "Adresse IPV6 de votre serveur maitre DNS"
+#: main/templates/main/host.html:62 main/templates/main/host.html.py:64
+#: main/templates/main/host.html:66 main/templates/main/overview.html:33
+#: main/templates/main/updater_hostconfig_overview.html:14
+msgid "IPv6"
+msgstr ""
 
-#: main/templates/main/host.html:60
-msgid "Set new IPv6 address"
-msgstr "Enregistrer une nouvelle adresse IPV6"
+#: main/templates/main/host.html:115
+msgid "Result Messages"
+msgstr ""
 
-#: main/templates/main/host.html:61
-msgid "give new ipv6 address"
+#: main/templates/main/host.html:117
+msgid "Client Result Message"
+msgstr ""
+
+#: main/templates/main/host.html:119
+msgid "Server Result Message"
 msgstr ""
 
 #: main/templates/main/host_add.html:8
@@ -1015,64 +1041,66 @@ msgstr "Vos hôtes"
 msgid "Add Host"
 msgstr ""
 
-#: main/templates/main/overview.html:14
-msgid "Host<br>Comment"
-msgstr "Hôte</br>Commentaire"
-
 #: main/templates/main/overview.html:15
-msgid "Available"
-msgstr "En ligne"
+#: main/templates/main/updater_hostconfig_overview.html:12
+msgid "Host"
+msgstr "Hôte"
 
-#: main/templates/main/overview.html:16
-msgid "Faults<br>C / S"
-msgstr "Faults<br>C / S"
-
-#: main/templates/main/overview.html:17
-msgid "IPv4 Address<br>(last update)"
-msgstr "Adresse IPV4<br>(Dernière mise à jour)"
-
-#: main/templates/main/overview.html:18
-msgid "IPv6 Address<br>(last update)"
-msgstr "Adresse IPV6<br>(Dernière mise à jour)"
-
-#: main/templates/main/overview.html:59
-msgid "No hosts yet."
-msgstr "Aucun hôte pour le moment."
-
-#: main/templates/main/overview.html:65
-msgid "Domains (yours first, then public)"
-msgstr "Domaines (Le vôtre d'abord, puis ceux des utilisateurs)"
-
-#: main/templates/main/overview.html:66
-msgid "Add Domain"
-msgstr ""
-
-#: main/templates/main/overview.html:71
-msgid "Domain"
-msgstr "Domaine"
-
-#: main/templates/main/overview.html:72
-msgid "Public?"
-msgstr "Publique ?"
-
-#: main/templates/main/overview.html:73
-msgid "Available?"
-msgstr "En ligne ?"
-
-#: main/templates/main/overview.html:74
-msgid "Owner"
-msgstr "Propriétaire"
-
-#: main/templates/main/overview.html:75
+#: main/templates/main/overview.html:17 main/templates/main/overview.html:93
 #: main/templates/main/updater_hostconfig_overview.html:15
 msgid "Comment"
 msgstr "Commentaire"
 
-#: main/templates/main/overview.html:87
+#: main/templates/main/overview.html:20 main/templates/main/overview.html:91
+msgid "Available"
+msgstr "En ligne"
+
+#: main/templates/main/overview.html:23
+msgid "Faults"
+msgstr ""
+
+#: main/templates/main/overview.html:25
+msgid "C / S"
+msgstr ""
+
+#: main/templates/main/overview.html:28 main/templates/main/overview.html:33
+#, python-format
+msgid "%(type)s Address"
+msgstr ""
+
+#: main/templates/main/overview.html:30 main/templates/main/overview.html:35
+msgid "(last update)"
+msgstr ""
+
+#: main/templates/main/overview.html:77
+msgid "No hosts yet."
+msgstr "Aucun hôte pour le moment."
+
+#: main/templates/main/overview.html:83
+msgid "Domains (yours first, then public)"
+msgstr "Domaines (Le vôtre d'abord, puis ceux des utilisateurs)"
+
+#: main/templates/main/overview.html:84
+msgid "Add Domain"
+msgstr ""
+
+#: main/templates/main/overview.html:89
+msgid "Domain"
+msgstr "Domaine"
+
+#: main/templates/main/overview.html:90 main/templates/main/status.html:11
+msgid "Public"
+msgstr ""
+
+#: main/templates/main/overview.html:92
+msgid "Owner"
+msgstr "Propriétaire"
+
+#: main/templates/main/overview.html:105
 msgid "No domains from you yet."
 msgstr "Vous n'avez pas encore de domaine."
 
-#: main/templates/main/overview.html:98
+#: main/templates/main/overview.html:116
 msgid "No public domains from other users yet."
 msgstr "Aucun domaine publique venant d'autre utilisateurs pour le moment."
 
@@ -1082,64 +1110,64 @@ msgstr "Domaines"
 
 #: main/templates/main/status.html:9 main/templates/main/status.html.py:20
 #: main/templates/main/status.html:37
-msgid "Total:"
-msgstr "Total:"
+msgid "Total"
+msgstr ""
 
-#: main/templates/main/status.html:11
-msgid "Public:"
-msgstr "Publique:"
+#: main/templates/main/status.html:13 main/templates/main/status.html.py:22
+msgid "Unavailable"
+msgstr ""
 
 #: main/templates/main/status.html:13
-msgid "Unavailable / Down:"
-msgstr "Hors ligne:"
+msgid "Down"
+msgstr ""
 
 #: main/templates/main/status.html:18
 msgid "Hosts"
 msgstr "Hôtes"
 
 #: main/templates/main/status.html:22
-msgid "Unavailable / Abuse / Abuse-Blocked:"
-msgstr "Hors-ligne / Abuse / Abuse-Blocked:"
+msgid "Abuse"
+msgstr ""
 
-#: main/templates/main/status.html:24
-msgid "ip v4 (tls) / v6 (tls) updated last 2d:"
-msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 derniers jours:"
+#: main/templates/main/status.html:22
+msgid "Abuse-Blocked"
+msgstr ""
 
-#: main/templates/main/status.html:26
-msgid "ip v4 (tls) / v6 (tls) updated last 2w:"
-msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 dernières semaines:"
+#: main/templates/main/status.html:24 main/templates/main/status.html.py:41
+msgid "2d"
+msgstr ""
 
-#: main/templates/main/status.html:28
-msgid "ip v4 (tls) / v6 (tls) updated last 2m:"
-msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 deniers mois:"
+#: main/templates/main/status.html:24 main/templates/main/status.html.py:26
+#: main/templates/main/status.html:28 main/templates/main/status.html.py:30
+#, python-format
+msgid "IPv4 (tls) / IPv6 (tls) updated last %(period)s"
+msgstr ""
 
-#: main/templates/main/status.html:30
-msgid "ip v4 (tls) / v6 (tls) updated last 2y:"
-msgstr "ip v4 (tls) / v6 (tls) mise à jour ces 2 dernières années:"
+#: main/templates/main/status.html:26 main/templates/main/status.html.py:43
+msgid "2w"
+msgstr ""
+
+#: main/templates/main/status.html:28 main/templates/main/status.html.py:45
+msgid "2m"
+msgstr ""
+
+#: main/templates/main/status.html:30 main/templates/main/status.html.py:47
+msgid "2y"
+msgstr ""
 
 #: main/templates/main/status.html:35
 msgid "Users"
 msgstr "Utilisateurs"
 
 #: main/templates/main/status.html:39
-msgid "Active:"
-msgstr "Actif:"
+msgid "Active"
+msgstr ""
 
-#: main/templates/main/status.html:41
-msgid "logged / created in last 2d:"
-msgstr "Connecté / créé ces 2 derniers jours:"
-
-#: main/templates/main/status.html:43
-msgid "logged / created in last 2w:"
-msgstr "Connecté / créé ces 2 dernières semaines:"
-
-#: main/templates/main/status.html:45
-msgid "logged / created in last 2m:"
-msgstr "Connecté / créé ces 2 derniers mois:"
-
-#: main/templates/main/status.html:47
-msgid "logged / created in last 2y:"
-msgstr "Connecté / créé ces 2 dernières années:"
+#: main/templates/main/status.html:41 main/templates/main/status.html.py:43
+#: main/templates/main/status.html:45 main/templates/main/status.html.py:47
+#, python-format
+msgid "logged in / created in last %(period)s"
+msgstr ""
 
 #: main/templates/main/update.html:6
 msgid "Browser-based Updater"
@@ -1224,17 +1252,11 @@ msgstr "Configuration de la mise à jour des autres services"
 msgid "Service"
 msgstr "Service"
 
-#: main/templates/main/updater_hostconfig_overview.html:12
-msgid "Host"
-msgstr "Hôte"
-
 #: main/templates/main/updater_hostconfig_overview.html:13
-msgid "give IPv4"
-msgstr "donner l'IPV4"
-
 #: main/templates/main/updater_hostconfig_overview.html:14
-msgid "give IPv6"
-msgstr "donner l'IPV6"
+#, python-format
+msgid "give %(type)s"
+msgstr ""
 
 #: main/templates/main/updater_hostconfig_overview.html:27
 msgid "No other services to update yet."
@@ -1379,14 +1401,6 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:65
 msgid "Do HTTP Basic Auth with:"
 msgstr "Faire une authentification basique HTTP avec:"
-
-#: main/templates/main/includes/tabbed_router_configuration.html:67
-msgid "Username:"
-msgstr "Username:"
-
-#: main/templates/main/includes/tabbed_router_configuration.html:68
-msgid "Password:"
-msgstr "Mot de passe:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:71
 msgid "Send a http GET request to:"
@@ -1552,20 +1566,20 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:225
 #: main/templates/main/includes/tabbed_router_configuration.html:239
 #: main/templates/main/includes/tabbed_router_configuration.html:245
-msgid "update DNS to point to remote ipv4 or ipv6 address"
-msgstr "met à jour les DNS pour pointer vers une adresse ipv4 ou ipv6"
+msgid "update DNS to point to remote IPv4 or IPv6 address"
+msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:226
 #: main/templates/main/includes/tabbed_router_configuration.html:240
 #: main/templates/main/includes/tabbed_router_configuration.html:246
-msgid "similar, ipv4 only"
-msgstr "similaire, ipv4 uniquement"
+msgid "similar, IPv4 only"
+msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:227
 #: main/templates/main/includes/tabbed_router_configuration.html:241
 #: main/templates/main/includes/tabbed_router_configuration.html:247
-msgid "similar, ipv6 only"
-msgstr "similaire, ipv6 uniquement"
+msgid "similar, IPv6 only"
+msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:229
 msgid "URLs for browser / http user agent use"
@@ -1588,12 +1602,12 @@ msgid "As above, but manually specifying the IP address:"
 msgstr "Identique, mais en spécifiant manuellement l'adresse IP:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:251
-msgid "update DNS to point to ipv4 127.0.0.1"
-msgstr "met à jour les DNS pour pointer vers l'adresse ipv4 127.0.0.1"
+msgid "update DNS to point to IPv4 127.0.0.1"
+msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:252
-msgid "update DNS to point to ipv6 ::1"
-msgstr "met à jour les DNS pour pointer vers l'adresse ipv6 ::1"
+msgid "update DNS to point to IPv6 ::1"
+msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:254
 msgid "Explanation of parameters:"
@@ -1672,10 +1686,6 @@ msgstr "Profile"
 msgid "Admin interface"
 msgstr "Interface admin"
 
-#: templates/base.html:71
-msgid "Logout"
-msgstr "Se déconnecter"
-
 #: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "Votre connexion (http) n'est pas cryptée et donc pas sécurisée."
@@ -1716,3 +1726,15 @@ msgstr "Valid HTML"
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr "Valid CSS"
+
+#~ msgid "username: test"
+#~ msgstr "Nom d'utilisateur: test"
+
+#~ msgid "password: test"
+#~ msgstr "mot de passe: test"
+
+#~ msgid "Login"
+#~ msgstr "Login"
+
+#~ msgid "Logout"
+#~ msgstr "Se déconnecter"
