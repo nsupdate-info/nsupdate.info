@@ -10,8 +10,8 @@
                 <tr>
                     <th>{% trans "Service" %}</th>
                     <th>{% trans "Host" %}</th>
-                    <th>{% trans "give IPv4" %}</th>
-                    <th>{% trans "give IPv6" %}</th>
+                    <th>{% blocktrans with type=_("IPv4") %}give {{ type }}{% endblocktrans %}</th>
+                    <th>{% blocktrans with type=_("IPv6") %}give {{ type }}{% endblocktrans %}</th>
                     <th>{% trans "Comment" %}</th>
                 </tr>
             </thead>

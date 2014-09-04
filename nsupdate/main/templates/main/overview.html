@@ -11,11 +11,29 @@
             <table class="table">
             <thead>
                 <tr>
-                    <th>{% trans "Host<br>Comment" %}</th>
-                    <th>{% trans "Available" %}</th>
-                    <th>{% blocktrans %}Faults<br>C / S{% endblocktrans %}</th>
-                    <th>{% blocktrans %}IPv4 Address<br>(last update){% endblocktrans %}</th>
-                    <th>{% blocktrans %}IPv6 Address<br>(last update){% endblocktrans %}</th>
+                    <th>
+                        {% trans "Host" %}
+                        <br>
+                        {% trans "Comment" %}
+                    </th>
+                    <th>
+                        {% trans "Available" %}
+                    </th>
+                    <th>
+                        {% trans "Faults" %}
+                        <br>
+                        {% trans "C / S" %}
+                    </th>
+                    <th>
+                        {% blocktrans with type=_("IPv4") %}{{ type }} Address{% endblocktrans %}
+                        <br>
+                        {% trans "(last update)" %}
+                    </th>
+                    <th>
+                        {% blocktrans with type=_("IPv6") %}{{ type }} Address{% endblocktrans %}
+                        <br>
+                        {% trans "(last update)" %}
+                    </th>
                 </tr>
             </thead>
             {% for host in hosts %}
@@ -27,9 +45,9 @@
                     <td>{{ host.available|yesno }}</td>
                     <td>{{ host.client_faults }} / {{ host.server_faults }}
                         {% if host.abuse_blocked %}
-                            <br><span class="label label-danger">ABUSE-BLOCKED</span>
+                            <br><span class="label label-danger">Abuse-Blocked</span>
                         {% elif host.abuse %}
-                            <br><span class="label label-warning">ABUSE</span>
+                            <br><span class="label label-warning">Abuse</span>
                         {% endif %}
                     </td>
                     <td>{{ host.get_ipv4 }}
@@ -69,8 +87,8 @@
             <thead>
                 <tr>
                     <th>{% trans "Domain" %}</th>
-                    <th>{% trans "Public?" %}</th>
-                    <th>{% trans "Available?" %}</th>
+                    <th>{% trans "Public" %}</th>
+                    <th>{% trans "Available" %}</th>
                     <th>{% trans "Owner" %}</th>
                     <th>{% trans "Comment" %}</th>
                 </tr>

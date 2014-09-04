@@ -68,7 +68,7 @@
                                     {% if request.user.is_staff %}
                                         <li><a href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'django.contrib.auth.views.logout_then_login' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Logout' %}</a></li>
+                                    <li><a href="{% url 'django.contrib.auth.views.logout_then_login' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Log out' %}</a></li>
                                 </ul>
                             </li>
                         {% endif %}
@@ -148,7 +148,7 @@
                -------------------------------------------
                a) we use javascript to insert the img tags after the document (DOM) is ready.
                   if we just have them in the html from the beginning, the browser would be visibly
-                  "loading" until both "images" are loaded or timed out (if e.g. you don't have ip v6).
+                  "loading" until both "images" are loaded or timed out (if e.g. you don't have IPv6).
                   not nice.
                b) we use fake img tags because doing it with jQuery.get() would be cross-domain:
                   WWW_HOST -> WWW_IPV4_HOST
@@ -157,7 +157,7 @@
                   (when loading the images take more than that timeout), making the IPs appear not
                   on the current view, but when the next view is loaded (or the current one reloaded).
                   if you have a better idea, this is something to improve.
-               d) we detect both ipv4 and v6 in the same way. this could be optimized to use the
+               d) we detect both IPv4 and v6 in the same way. this could be optimized to use the
                   REMOTE_ADDR we have from the view's http request and then only detect the other
                   kind of ip using the fake img approach.
                   OTOH, doing both IPs the same way is nicer as it is more symmetric.
