@@ -21,6 +21,7 @@ New Features:
 
 Fixes:
 
+* fix security issue: abuse_blocked flag could be worked around by abuser
 * refactored internal api so host/zone boundary is not lost and does not need
   to be discovered (we KNOW it) - fixes issues #122 and #138.
 * fixed tests so they behave on travis-ci
