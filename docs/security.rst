@@ -85,6 +85,11 @@ It is not stored in clear text by nsupdate.info.
 If you lose the secret, you'll have to generate a new one and change it in your
 update client also.
 
+We use a random and automatically generated update secret to avoid that users
+enter a bad password here (like reusing a password they use somewhere else,
+choosing a too simple password) and to avoid disclosure of such user-chosen
+passwords in case the hashes ever get stolen and brute forced.
+
 
 Nameserver Update Secret (backend, RFC 2136)
 --------------------------------------------
