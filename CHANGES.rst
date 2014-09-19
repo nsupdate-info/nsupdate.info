@@ -18,6 +18,7 @@ New Features:
   But please note: if you fail to configure your credentials correctly in your
   update client, we can NOT show that there as we need them to load your host
   record from the database (and to know it is really YOU who is talking to us).
+* add OpenWRT configuration help
 
 Fixes:
 
