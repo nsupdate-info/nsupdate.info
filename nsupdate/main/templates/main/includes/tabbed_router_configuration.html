@@ -5,6 +5,7 @@
     <li><a href="#ddwrt" data-toggle="tab">DD-WRT</a></li>
     <li><a href="#ddclient" data-toggle="tab">ddclient</a></li>
     <li><a href="#m0n0wall" data-toggle="tab">m0n0wall</a></li>
+    <li><a href="#openwrt" data-toggle="tab">OpenWRT</a></li>
     <li><a href="#pfsense" data-toggle="tab">pfSense</a></li>
     <li><a href="#browser" data-toggle="tab">Browser</a></li>
 </ul>
@@ -188,6 +189,33 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
             <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
+    </div>
+    <div class="tab-pane" id="openwrt">
+        <h4>OpenWRT ({% trans "verified with" %} 14.07-rc3 "Barrier Breaker")</h4>
+        <pre># ddns-scripts configuration /etc/config/ddns
+
+config service "ipv4ddns"
+    option enabled "1"
+    option interface "wan"
+    option use_syslog "1"
+
+    option service_name "{{ WWW_HOST }}"
+    option update_url "http://[USERNAME]:[PASSWORD]@{{ WWW_IPV4_HOST }}/nic/update?hostname=[DOMAIN]&myip=[IP]"
+    option ip_source "web"
+    option ip_url "http://{{ WWW_IPV4_HOST }}/myip"
+
+    option domain "{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}"
+    option username "{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}"
+    option password "{{ update_secret|default:"&lt;your secret&gt;" }}"
+
+    # for https support, first install wget with ssl support and
+    # a current (and working) bundle of CA certificates:
+    # opkg install wget
+    # mkdir -p /etc/ssl/certs
+    # wget -P /etc/ssl/certs http://curl.haxx.se/ca/cacert.pem
+    option use_https "1"
+    option cacert "/etc/ssl/certs/cacert.pem"
+</pre>
     </div>
     <div class="tab-pane" id="pfsense">
         <h4>pfSense</h4>
