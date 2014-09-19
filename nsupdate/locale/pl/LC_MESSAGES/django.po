@@ -2,8 +2,6 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Translators:
-# Łukasz Jurczak <jurczak@poczta.fm>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
