@@ -31,7 +31,7 @@ def result_fmt(msg):
     return msg[:RESULT_MSG_LEN]
 
 
-class BlacklistedDomain(models.Model):
+class BlacklistedHost(models.Model):
     name_re = models.CharField(
         max_length=255,
         unique=True,
@@ -46,7 +46,7 @@ class BlacklistedDomain(models.Model):
 
 
 def domain_blacklist_validator(value):
-    for bd in BlacklistedDomain.objects.all():
+    for bd in BlacklistedHost.objects.all():
         if re.search(bd.name_re, value):
             raise ValidationError(u'This name is blacklisted')
 
