@@ -45,7 +45,7 @@ class BlacklistedHost(models.Model):
         return u"%s" % (self.name_re, )
 
 
-def domain_blacklist_validator(value):
+def host_blacklist_validator(value):
     for bd in BlacklistedHost.objects.all():
         if re.search(bd.name_re, value):
             raise ValidationError(u'This name is blacklisted')
@@ -129,7 +129,7 @@ class Host(models.Model):
                 regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
                 message='Invalid host name: only "a-z", "0-9" and "-" is allowed'
             ),
-            domain_blacklist_validator,
+            host_blacklist_validator,
         ],
         help_text=_("The name of your host."))
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
