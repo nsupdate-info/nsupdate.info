@@ -11,9 +11,9 @@ from .models import Host, Domain, ServiceUpdaterHostConfig
 class CreateHostForm(forms.ModelForm):
     class Meta(object):
         model = Host
-        fields = ['subdomain', 'domain', 'comment']
+        fields = ['name', 'domain', 'comment']
         widgets = {
-            'subdomain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+            'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
 
 
@@ -26,10 +26,10 @@ class EditHostForm(forms.ModelForm):
 class CreateDomainForm(forms.ModelForm):
     class Meta(object):
         model = Domain
-        fields = ['domain', 'nameserver_ip', 'nameserver_update_algorithm',
+        fields = ['name', 'nameserver_ip', 'nameserver_update_algorithm',
                   'public', 'available', 'comment']
         widgets = {
-            'domain': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+            'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
 
 

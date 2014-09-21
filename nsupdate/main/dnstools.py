@@ -244,12 +244,12 @@ def get_ns_info(fqdn):
         # single-host update secret use case
         # XXX we need 2 DB accesses for the usual case just to support this rare case
         domain = str(fqdn)
-        d = Domain.objects.get(domain=domain)
+        d = Domain.objects.get(name=domain)
     except Domain.DoesNotExist:
         # now check the base zone, the usual case
         # zone update secret use case
         domain = fqdn.domain
-        d = Domain.objects.get(domain=domain)
+        d = Domain.objects.get(name=domain)
     if not d.available:
         if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
             # if there are troubles with a nameserver, we set available=False
@@ -330,7 +330,7 @@ def set_ns_availability(domain, available):
     """
     from .models import Domain
     domain = str(domain).rstrip('.')
-    d = Domain.objects.get(domain=domain)
+    d = Domain.objects.get(name=domain)
     d.available = available
     d.save()
     if available:

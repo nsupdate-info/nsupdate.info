@@ -32,7 +32,7 @@ def result_fmt(msg):
 
 
 class BlacklistedDomain(models.Model):
-    domain = models.CharField(
+    name_re = models.CharField(
         max_length=255,
         unique=True,
         help_text=_('Blacklisted domain. Evaluated as regex (search).'))
@@ -42,12 +42,12 @@ class BlacklistedDomain(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blacklisted_domains')
 
     def __unicode__(self):
-        return u"%s" % (self.domain, )
+        return u"%s" % (self.name_re, )
 
 
 def domain_blacklist_validator(value):
     for bd in BlacklistedDomain.objects.all():
-        if re.search(bd.domain, value):
+        if re.search(bd.name_re, value):
             raise ValidationError(u'This name is blacklisted')
 
 
@@ -69,7 +69,7 @@ UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
 class Domain(models.Model):
-    domain = models.CharField(
+    name = models.CharField(
         max_length=255,  # RFC 2181 (and also: max length of unique fields)
         unique=True,
         help_text=_("Name of the zone where dynamic hosts may get added"))
@@ -105,7 +105,7 @@ class Domain(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains')
 
     def __unicode__(self):
-        return u"%s" % (self.domain, )
+        return u"%s" % (self.name, )
 
     def generate_ns_secret(self):
         algorithm = self.nameserver_update_algorithm
@@ -122,12 +122,12 @@ class Domain(models.Model):
 
 
 class Host(models.Model):
-    subdomain = models.CharField(
+    name = models.CharField(
         max_length=255,  # RFC 2181 (and considering having multiple joined labels here later)
         validators=[
             RegexValidator(
                 regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
-                message='Invalid subdomain: only "a-z", "0-9" and "-" is allowed'
+                message='Invalid host name: only "a-z", "0-9" and "-" is allowed'
             ),
             domain_blacklist_validator,
         ],
@@ -194,14 +194,14 @@ class Host(models.Model):
 
     def __unicode__(self):
         return u"%s.%s" % (
-            self.subdomain, self.domain.domain)
+            self.name, self.domain.name)
 
     class Meta(object):
-        unique_together = (('subdomain', 'domain'), )
-        index_together = (('subdomain', 'domain'), )
+        unique_together = (('name', 'domain'), )
+        index_together = (('name', 'domain'), )
 
     def get_fqdn(self):
-        return dnstools.FQDN(self.subdomain, self.domain.domain)
+        return dnstools.FQDN(self.name, self.domain.name)
 
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):
@@ -210,7 +210,7 @@ class Host(models.Model):
         if len(splitted) != 2:
             raise ValueError("get_by_fqdn(%s): FQDN has to contain (at least) one dot" % fqdn)
         try:
-            host = Host.objects.get(subdomain=splitted[0], domain__domain=splitted[1], **kwargs)
+            host = Host.objects.get(name=splitted[0], domain__name=splitted[1], **kwargs)
         except Host.DoesNotExist:
             return None
         except Host.MultipleObjectsReturned:

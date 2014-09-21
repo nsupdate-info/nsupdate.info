@@ -69,7 +69,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     u2.save()
     # this is for tests:
     dt = Domain.objects.create(
-        domain=TESTDOMAIN,  # special: test-domain update secret!
+        name=TESTDOMAIN,  # special: test-domain update secret!
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret=NAMESERVER_UPDATE_SECRET,
@@ -78,7 +78,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     )
     # this is for querying:
     d = Domain.objects.create(
-        domain=BASEDOMAIN,
+        name=BASEDOMAIN,
         nameserver_ip=NAMESERVER_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret='invalid=',  # we don't send updates there (and the real key is really secret)
@@ -87,10 +87,10 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     )
     # a Host for api / session update tests
     hostname = TEST_HOST.split('.', 1)[0]
-    h = Host(subdomain=hostname, domain=dt, created_by=u)
+    h = Host(name=hostname, domain=dt, created_by=u)
     h.generate_secret(secret=TEST_SECRET)
     hostname2 = TEST_HOST2.split('.', 1)[0]
-    h2 = Host(subdomain=hostname2, domain=dt, created_by=u2)
+    h2 = Host(name=hostname2, domain=dt, created_by=u2)
     h2.generate_secret(secret=TEST_SECRET2)
 
     # "update other service" ddns_client feature

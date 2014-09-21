@@ -96,7 +96,7 @@ def test_nic_update_authorized(client):
 
 
 def test_nic_update_authorized_ns_unavailable(client):
-    d = Domain.objects.get(domain=TESTDOMAIN)
+    d = Domain.objects.get(name=TESTDOMAIN)
     d.available = False  # simulate DNS unavailability
     d.save()
     # prepare: we must make sure the real test is not a nochg update
