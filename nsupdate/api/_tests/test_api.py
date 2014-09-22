@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 
-from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST2, TEST_SECRET, TEST_SECRET2
+from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET, TEST_SECRET2
 
 USERNAME = 'test'
 PASSWORD = 'pass'

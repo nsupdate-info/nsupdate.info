@@ -6,14 +6,16 @@ import pytest
 
 from random import randint
 
+from nsupdate.main.dnstools import FQDN
+
 from django.conf import settings
 
 # this is to create a Domain entries in the database, so they can be used for unit tests:
 BASEDOMAIN = "nsupdate.info"
 TESTDOMAIN = "tests." + BASEDOMAIN
-TEST_HOST = 'test%da.%s' % (randint(1, 1000000), TESTDOMAIN)  # unit tests can update this host ONLY
+TEST_HOST = FQDN('test%da' % randint(1, 1000000), TESTDOMAIN)  # unit tests can update this host ONLY
 TEST_SECRET = "secret"
-TEST_HOST2 = 'test%db.%s' % (randint(1, 1000000), TESTDOMAIN)
+TEST_HOST2 = FQDN('test%db' % randint(1, 1000000), TESTDOMAIN)
 TEST_SECRET2 = "somethingelse"
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
@@ -86,10 +88,10 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         created_by=u2,
     )
     # a Host for api / session update tests
-    hostname = TEST_HOST.split('.', 1)[0]
+    hostname = TEST_HOST.host
     h = Host(name=hostname, domain=dt, created_by=u)
     h.generate_secret(secret=TEST_SECRET)
-    hostname2 = TEST_HOST2.split('.', 1)[0]
+    hostname2 = TEST_HOST2.host
     h2 = Host(name=hostname2, domain=dt, created_by=u2)
     h2.generate_secret(secret=TEST_SECRET2)
 

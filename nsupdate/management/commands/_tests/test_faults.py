@@ -11,7 +11,7 @@ from nsupdate.main.models import Host
 def test_faults_reset():
     # trigger execution of all code for coverage, test resetting
     # set flags and counters
-    hostname = TEST_HOST.split('.', 1)[0]
+    hostname = TEST_HOST.host
     h = Host.objects.get(name=hostname)
     h.client_faults = 1
     h.server_faults = 1
@@ -35,7 +35,7 @@ def test_faults_reset():
 
 
 def test_faults_no_abuse():
-    hostname = TEST_HOST.split('.', 1)[0]
+    hostname = TEST_HOST.host
     h = Host.objects.get(name=hostname)
     h.client_faults = 10  # below threshold
     h.abuse = False
@@ -49,7 +49,7 @@ def test_faults_no_abuse():
 
 
 def test_faults_abuse():
-    hostname = TEST_HOST.split('.', 1)[0]
+    hostname = TEST_HOST.host
     h = Host.objects.get(name=hostname)
     h.client_faults = 42  # above threshold
     h.abuse = False
