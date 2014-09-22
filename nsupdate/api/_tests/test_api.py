@@ -32,7 +32,7 @@ def test_nic_update_noauth(client):
 
 def make_basic_auth_header(username, password):
     import base64
-    return b'Basic ' + base64.b64encode((username + ':' + password).encode('utf-8'))
+    return b'Basic ' + base64.b64encode(('%s:%s' % (username, password)).encode('utf-8'))
 
 
 def test_nic_update_badauth(client):
@@ -51,7 +51,7 @@ def test_nic_update_authorized_nonexistent_host(client):
 
 
 def test_nic_update_authorized_foreign_host(client):
-    response = client.get(reverse('nic_update') + '?hostname=%s' % TEST_HOST2,
+    response = client.get(reverse('nic_update') + '?hostname=%s' % (TEST_HOST2, ),
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
     # we must not get this updated, this is a host of some other user!
@@ -192,7 +192,7 @@ def test_nic_update_session_myip(client):
 
 def test_nic_update_session_foreign_host(client):
     client.login(username=USERNAME, password=PASSWORD)
-    response = client.get(reverse('nic_update_authorized') + '?hostname=%s' % TEST_HOST2)
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s' % (TEST_HOST2, ))
     assert response.status_code == 200
     # we must not get this updated, this is a host of some other user!
     assert response.content == b'nohost'
