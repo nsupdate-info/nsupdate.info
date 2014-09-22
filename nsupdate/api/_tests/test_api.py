@@ -110,7 +110,7 @@ def test_nic_update_authorized_ns_unavailable(client):
     assert response.content == b'dnserr'
 
 
-def test_nic_update_authorized_myip(client):
+def test_nic_update_authorized_myip_v4(client):
     response = client.get(reverse('nic_update') + '?myip=4.3.2.1',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
@@ -126,6 +126,28 @@ def test_nic_update_authorized_myip(client):
     assert response.status_code == 200
     # must be nochg (was same IP)
     assert response.content == b'nochg 1.2.3.4'
+    # now check if it updated the ipv4 related hosts also:
+    assert query_ns(TEST_HOST_RELATED, 'A') == '1.2.3.1'  # 1.2.3.4/29 + 0.0.0.1
+
+
+def test_nic_update_authorized_myip_v6(client):
+    response = client.get(reverse('nic_update') + '?myip=2000::2',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # we don't care whether it is nochg or good, but should be the ip from myip=...:
+    assert response.content in [b'good 2000::2', b'nochg 2000::2']
+    response = client.get(reverse('nic_update') + '?myip=2000::3',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be good (was different IP)
+    assert response.content == b'good 2000::3'
+    response = client.get(reverse('nic_update') + '?myip=2000::3',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    # must be nochg (was same IP)
+    assert response.content == b'nochg 2000::3'
+    # now check if it updated the ipv4 related hosts also:
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2000::1'  # 2000::3/64 + ::1
 
 
 @pytest.mark.requires_sequential

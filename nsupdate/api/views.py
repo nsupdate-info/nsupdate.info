@@ -7,6 +7,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 import json
+from netaddr import IPAddress, IPNetwork
+from netaddr.core import AddrFormatError
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -18,7 +20,7 @@ from django.utils.decorators import method_decorator
 
 from ..utils import log, ddns_client
 from ..main.models import Host
-from ..main.dnstools import (update, delete, check_ip, put_ip_into_session,
+from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session,
                              SameIpError, DnsUpdateError, NameServerNotAvailable)
 
 
@@ -343,9 +345,55 @@ def _update(host, ipaddr, secure=False, logger=None):
     host.poke(kind, secure)
     try:
         update(fqdn, ipaddr)
+    except SameIpError:
+        msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
+        logger.warning(msg)
+        host.register_client_result(msg, fault=True)
+        return Response('nochg %s' % ipaddr)
+    except (DnsUpdateError, NameServerNotAvailable) as e:
+        msg = str(e)
+        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
+            fqdn, msg, ipaddr, secure)
+        logger.error(msg)
+        host.register_server_result(msg, fault=True)
+        return Response('dnserr')
+    else:
         msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.info(msg)
         host.register_client_result(msg, fault=False)
+        # update related hosts
+        for rh in host.relatedhosts.all():
+            if rh.available:
+                # TODO: make netmask configurable in Host record
+                if kind == 'ipv4':
+                    ifid, netmask = rh.interface_id_ipv4.strip(), '/29'
+                else:  # kind == 'ipv6':
+                    ifid, netmask = rh.interface_id_ipv6.strip(), '/64'
+                if not ifid:
+                    # ifid can be just left blank if no address record of this type is wanted
+                    continue
+                try:
+                    ifid = IPAddress(ifid)
+                    network = IPNetwork(ipaddr + netmask)
+                    rh_ipaddr = str(IPAddress(network.network) + int(ifid))
+                    rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
+                except AddrFormatError as e:
+                    logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
+                else:
+                    logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
+                    try:
+                        update(rh_fqdn, rh_ipaddr)
+                    except SameIpError:
+                        msg = '%s - received no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
+                        logger.warning(msg)
+                        host.register_client_result(msg, fault=True)
+                    except (DnsUpdateError, NameServerNotAvailable) as e:
+                        msg = str(e)
+                        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
+                            rh_fqdn, msg, rh_ipaddr, secure)
+                        logger.error(msg)
+                        host.register_server_result(msg, fault=True)
+
         # now check if there are other services we shall relay updates to:
         for hc in host.serviceupdaterhostconfigs.all():
             if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
@@ -363,18 +411,6 @@ def _update(host, ipaddr, secure=False, logger=None):
                     kwargs.pop('password')
                     logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
         return Response('good %s' % ipaddr)
-    except SameIpError:
-        msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
-        logger.warning(msg)
-        host.register_client_result(msg, fault=True)
-        return Response('nochg %s' % ipaddr)
-    except (DnsUpdateError, NameServerNotAvailable) as e:
-        msg = str(e)
-        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
-            fqdn, msg, ipaddr, secure)
-        logger.error(msg)
-        host.register_server_result(msg, fault=True)
-        return Response('dnserr')
 
 
 def _delete(host, ipaddr, secure=False, logger=None):

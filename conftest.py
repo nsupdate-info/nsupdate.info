@@ -17,6 +17,8 @@ TEST_HOST = FQDN('test%da' % randint(1, 1000000), TESTDOMAIN)  # unit tests can 
 TEST_SECRET = "secret"
 TEST_HOST2 = FQDN('test%db' % randint(1, 1000000), TESTDOMAIN)
 TEST_SECRET2 = "somethingelse"
+RELATED_HOST_NAME = 'rh'
+TEST_HOST_RELATED = FQDN(RELATED_HOST_NAME + '.' + TEST_HOST.host, TEST_HOST.domain)
 NAMESERVER_IP = "85.10.192.104"
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
 # no problem, you can ONLY update the TESTDOMAIN with this secret, nothing else:
@@ -62,7 +64,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     Init the database contents for testing, so we have a service domain, ...
     """
     from django.contrib.auth import get_user_model
-    from nsupdate.main.models import Host, Domain, ServiceUpdater, ServiceUpdaterHostConfig
+    from nsupdate.main.models import Host, RelatedHost, Domain, ServiceUpdater, ServiceUpdaterHostConfig
     user_model = get_user_model()
     # create a fresh test user
     u = user_model.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
@@ -114,6 +116,8 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
         give_ipv6=False,
         created_by=u,
     )
+
+    RelatedHost.objects.create(name=RELATED_HOST_NAME, interface_id_ipv4="0.0.0.1", interface_id_ipv6="::1", main_host=h)
 
 
 def pytest_runtest_setup(item):

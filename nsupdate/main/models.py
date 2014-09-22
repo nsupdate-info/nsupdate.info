@@ -285,6 +285,40 @@ def pre_delete_host(sender, **kwargs):
 pre_delete.connect(pre_delete_host, sender=Host)
 
 
+class RelatedHost(models.Model):
+    # host addr = network_of_main_host + interface_id
+    name = models.CharField(
+        max_length=255,  # RFC 2181 (and considering having multiple joined labels here later)
+        validators=[
+            RegexValidator(
+                regex=r'^(([a-z0-9][a-z0-9\-]*[a-z0-9])|[a-z0-9])$',
+                message='Invalid host name: only "a-z", "0-9" and "-" is allowed'
+            ),
+        ],
+        help_text=_("The name of a host in same network as your main host."))
+    interface_id_ipv4 = models.CharField(
+        default='',
+        max_length=16,  # 123.123.123.123
+        help_text=_("The IPv4 interface ID of this host."))
+    interface_id_ipv6 = models.CharField(
+        default='',
+        max_length=22,  # ::1234:5678:9abc:def0
+        help_text=_("The IPv6 interface ID of this host."))
+    available = models.BooleanField(
+        default=True,
+        help_text=_("Check if host is available/in use - "
+                    "if not checked, we won't accept updates for this host"))
+
+    main_host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='relatedhosts')
+
+    def __unicode__(self):
+        return u"%s.%s" % (
+            self.name, unicode(self.main_host))
+
+    class Meta(object):
+        unique_together = (('name', 'main_host'), )
+
+
 class ServiceUpdater(models.Model):
     name = models.CharField(
         max_length=32,

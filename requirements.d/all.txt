@@ -1,5 +1,6 @@
 # packages always needed
 dnspython
+netaddr
 django==1.6.6
 django-bootstrap-form
 django-registration
