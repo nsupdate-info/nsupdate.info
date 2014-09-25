@@ -20,9 +20,9 @@ from django.utils.timezone import now
 
 from . import dnstools
 
-from .forms import (CreateHostForm, EditHostForm, CreateDomainForm, EditDomainForm,
-                    CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)
-from .models import Host, Domain, ServiceUpdaterHostConfig
+from .forms import (CreateHostForm, EditHostForm, CreateRelatedHostForm, EditRelatedHostForm,
+                    CreateDomainForm, EditDomainForm, CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)
+from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 
 
 class GenerateSecretView(UpdateView):
@@ -290,6 +290,107 @@ class DeleteHostView(DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(DeleteHostView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        return context
+
+
+class RelatedHostOverviewView(TemplateView):
+    template_name = "main/related_host_overview.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(RelatedHostOverviewView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RelatedHostOverviewView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        mpk = kwargs.get('mpk')
+        context['main_host'] = Host.objects.get(pk=mpk)
+        context['related_hosts'] = RelatedHost.objects.filter(main_host=mpk)
+        return context
+
+
+class AddRelatedHostView(CreateView):
+    template_name = "main/related_host_add.html"
+    model = RelatedHost
+    form_class = CreateRelatedHostForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        self.__main_host_pk = kwargs.pop('mpk')
+        return super(AddRelatedHostView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('related_host_overview', args=(self.object.main_host.pk, ))
+
+    def get_form(self, form_class):
+        form = super(AddRelatedHostView, self).get_form(form_class)
+        return form
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.main_host = Host(pk=self.__main_host_pk)
+        self.object.save()
+        success, level, msg = True, messages.SUCCESS, 'Related host added.'
+        messages.add_message(self.request, level, msg)
+        url = self.get_success_url()
+        return HttpResponseRedirect(url)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(AddRelatedHostView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        return context
+
+
+class RelatedHostView(UpdateView):
+    model = RelatedHost
+    template_name = "main/related_host.html"
+    form_class = EditRelatedHostForm
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(RelatedHostView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('related_host_overview', args=(self.object.main_host.pk, ))
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
+        messages.add_message(self.request, messages.SUCCESS, 'Related host updated.')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_object(self, *args, **kwargs):
+        obj = super(RelatedHostView, self).get_object(*args, **kwargs)
+        if obj.main_host.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(RelatedHostView, self).get_context_data(*args, **kwargs)
+        context['nav_overview'] = True
+        return context
+
+
+class DeleteRelatedHostView(DeleteView):
+    model = RelatedHost
+    template_name = "main/delete_object.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(DeleteRelatedHostView, self).dispatch(*args, **kwargs)
+
+    def get_object(self, *args, **kwargs):
+        obj = super(DeleteRelatedHostView, self).get_object(*args, **kwargs)
+        if obj.main_host.created_by != self.request.user:
+            raise PermissionDenied()  # or Http404
+        return obj
+
+    def get_success_url(self):
+        return reverse('related_host_overview', args=(self.object.main_host.pk, ))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DeleteRelatedHostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
         return context
 

@@ -5,7 +5,7 @@ form definitions (which fields are available, order, autofocus, ...)
 
 from django import forms
 
-from .models import Host, Domain, ServiceUpdaterHostConfig
+from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 
 
 class CreateHostForm(forms.ModelForm):
@@ -21,6 +21,21 @@ class EditHostForm(forms.ModelForm):
     class Meta(object):
         model = Host
         fields = ['comment', 'available', 'abuse']
+
+
+class CreateRelatedHostForm(forms.ModelForm):
+    class Meta(object):
+        model = RelatedHost
+        fields = ['name', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
+        widgets = {
+            'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
+        }
+
+
+class EditRelatedHostForm(forms.ModelForm):
+    class Meta(object):
+        model = RelatedHost
+        fields = ['name', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
 
 
 class CreateDomainForm(forms.ModelForm):

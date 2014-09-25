@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <h3>{{ object }}</h3>
+        <div class="col-md-6">
+            <h3>{% trans "Edit related host" %}</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+            </form>
+            <h3>{% trans "Delete related host" %}</h3>
+            <p class="text-danger">
+                {% trans "Deleting a related host is not undoable. If you need it back, you'll have to add it again." %}
+            </p>
+            <form method="get" action="{% url 'delete_related_host' object.main_host.pk object.pk %}">
+                <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete related host" %}</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>{% trans "Help" %}</h3>
+                <p>{% blocktrans %}When we receive an update for your main host, we compute your network address
+                   from it. To compute your related host's IPs, we just add the interface ID to the network address.
+                   Then we update the DNS records for the related host with these addresses.{% endblocktrans %}
+                </p>
+        </div>
+    </div>
+{% endblock %}

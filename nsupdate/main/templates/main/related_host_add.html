@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>{% trans "Create a new related host" %}</h3>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h3>{% trans "Help" %}</h3>
+                <p>{% trans "Here you can add related hosts (e.g. other machines on same LAN)." %}
+                </p>
+                <p>{% blocktrans %}When we receive an update for your main host, we compute your network address
+                   from it. To compute your related host's IPs, we just add the interface ID to the network address.
+                   Then we update the DNS records for the related host with these addresses.{% endblocktrans %}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

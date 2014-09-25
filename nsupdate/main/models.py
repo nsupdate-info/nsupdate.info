@@ -299,11 +299,11 @@ class RelatedHost(models.Model):
     interface_id_ipv4 = models.CharField(
         default='',
         max_length=16,  # 123.123.123.123
-        help_text=_("The IPv4 interface ID of this host."))
+        help_text=_("The IPv4 interface ID of this host. Use IPv4 notation."))
     interface_id_ipv6 = models.CharField(
         default='',
         max_length=22,  # ::1234:5678:9abc:def0
-        help_text=_("The IPv6 interface ID of this host."))
+        help_text=_("The IPv6 interface ID of this host. Use IPv6 notation."))
     available = models.BooleanField(
         default=True,
         help_text=_("Check if host is available/in use - "
@@ -317,6 +317,9 @@ class RelatedHost(models.Model):
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
+
+    def get_fqdn(self):
+        return dnstools.FQDN(self.name, self.main_host.get_fqdn())
 
 
 class ServiceUpdater(models.Model):

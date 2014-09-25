@@ -32,6 +32,14 @@
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
             </form>
+            <h3>{% trans "Related Hosts" %}</h3>
+            <p>
+                {% blocktrans %}We can update additional host records (for other hosts in same network)
+                when we receive an update for this host.{% endblocktrans %}
+            </p>
+            <form action="{% url 'related_host_overview' host.pk %}" method="get">
+                <button type="submit" class="btn btn-primary">{% trans "Configure related Hosts" %}</button>
+            </form>
             <h3>{% trans "Update other Services" %}</h3>
             <p>{% trans "We can send updates to other services when we receive an update from you." %}</p>
             <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
