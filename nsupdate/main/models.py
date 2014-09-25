@@ -333,6 +333,21 @@ class RelatedHost(models.Model):
         # so the resulting hostname has a dot inside:
         return dnstools.FQDN('%s.%s' % (self.name, main.host), main.domain)
 
+    def get_ip(self, kind):
+        record = 'A' if kind == 'ipv4' else 'AAAA'
+        try:
+            return dnstools.query_ns(self.get_fqdn(), record)
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            return 'none'
+        except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable):
+            return 'error'
+
+    def get_ipv4(self):
+        return self.get_ip('ipv4')
+
+    def get_ipv6(self):
+        return self.get_ip('ipv6')
+
 
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
 

@@ -19,8 +19,16 @@
                         {% trans "Comment" %}
                     </th>
                     <th>{% trans "Available" %}</th>
-                    <th>{% blocktrans with type=_("IPv4") %}{{ type }} interface ID{% endblocktrans %}</th>
-                    <th>{% blocktrans with type=_("IPv6") %}{{ type }} interface ID{% endblocktrans %}</th>
+                    <th>
+                        {% blocktrans with type=_("IPv4") %}{{ type }} Address{% endblocktrans %}
+                        <br>
+                        {% blocktrans with type=_("IPv4") %}{{ type }} interface ID{% endblocktrans %}
+                    </th>
+                    <th>
+                        {% blocktrans with type=_("IPv6") %}{{ type }} Address{% endblocktrans %}
+                        <br>
+                        {% blocktrans with type=_("IPv6") %}{{ type }} interface ID{% endblocktrans %}
+                    </th>
                 </tr>
             </thead>
             {% for rh in related_hosts %}
@@ -31,8 +39,16 @@
                         {{ rh.comment }}
                     </td>
                     <td>{{ rh.available|yesno }}</td>
-                    <td>{{ rh.interface_id_ipv4 }}</td>
-                    <td>{{ rh.interface_id_ipv6 }}</td>
+                    <td>
+                        {{ rh.get_ipv4 }}
+                        <br>
+                        {{ rh.interface_id_ipv4 }}
+                    </td>
+                    <td>
+                        {{ rh.get_ipv6 }}
+                        <br>
+                        {{ rh.interface_id_ipv6 }}
+                    </td>
                 </tr>
             {% empty %}
                 <tr><td colspan="5">{% trans "No related hosts yet." %}</td></tr>
