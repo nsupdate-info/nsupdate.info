@@ -148,10 +148,10 @@ class Host(models.Model):
         default=True,
         help_text=_("Check if host is available/in use - "
                     "if not checked, we won't accept updates for this host"))
-    netmask_ipv4 = models.IntegerField(
+    netmask_ipv4 = models.PositiveSmallIntegerField(
         default=32,
         help_text=_("Netmask/Prefix length for IPv4."))
-    netmask_ipv6 = models.IntegerField(
+    netmask_ipv6 = models.PositiveSmallIntegerField(
         default=64,
         help_text=_("Netmask/Prefix length for IPv6."))
     # abuse means that we (either the operator or some automatic mechanism)
