@@ -142,6 +142,74 @@ If your DNS hoster does not support dynamic updates, there is some trick how you
 At the nsupdate.info site, add a host "updatedhost.nsupdate.info" and keep it updated using an update client.
 
 
+Related Hosts
+-------------
+
+In short: update a whole bunch of DNS records for other hosts on same LAN.
+
+This is a feature most interesting for IPv6 users, but the same mechanism also
+works for IPv4 (it is just rather rare that you get a IPv4 network and you need
+dynamic DNS). So, let's assume IPv6 from now on.
+
+On your main host entry you can configure the IPv6 prefix length (think of netmask).
+Usually you'll get a /64 network from your ISP, so keep the default of "64" there
+and only change it if you know better.
+
+The specific prefix you get from your ISP might be static or may change now and
+then (for better privacy or other reasons - and in that case, you really need
+the related hosts feature).
+
+You need to configure a dyndns2 compatible updater on some device on your LAN
+and the updater needs to send this device's global IPv6 address to the service.
+
+So far, nothing special, upon receiving an update the service will then update
+DNS like this:
+
+::
+
+    mainhost.nsupdate.info -> pppp:pppp:pppp:pppp:iiii:iiii:iiii:iiii
+
+p are prefix parts, i are host/interface parts of the address.
+
+Additionally, the service will go over all related hosts entries for mainhost
+and does more DNS updates based on this computation:
+
+::
+
+    relatedhost.mainhost.nsupdate.info -> pppp:pppp:pppp:pppp:rrrr:rrrr:rrrr:rrrr
+
+You also see it prepends the related host's name to your mainhost's FQDN.
+
+For the related hosts's address, p is same prefix as above (the host is on same
+network), but r comes from what you entered as interface ID into the related
+host record.
+
+In other words:
+
+::
+
+    related_fqdn = relatedhost_name.mainhost_fqdn
+    related_address = mainhost_address_prefix + interface_id
+
+
+Note:
+
+* enter the static interface ID (usually you can get it from the rear 4 words
+  of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr). The r part is
+  usually derived from your hardware MAC address and does not change.
+* make sure your device has a IPv6 address with global scope, some prefix that
+  starts with a "2" and precisely that rrrr:rrrr:rrrr:rrrr value
+* you only need a dyndns2 updater on one device (called mainhost in this
+  example), but the updater needs to find out an address with the same prefix
+  as seen on your LAN (should be easy if the updater runs on a LAN device, but
+  might be difficult if it runs on the router and the router has a different
+  external prefix)
+* if you want your mainhost to resolve correctly to some specific device,
+  make sure you send this device's IPv6 address with the update (myip=...) or
+  run the updater on that device and make sure the request originates from
+  the IPv6 address you want in DNS.
+
+
 Other Services Updaters
 -----------------------
 
