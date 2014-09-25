@@ -1,6 +1,15 @@
 ChangeLog
 =========
 
+Release 0.9.0 (not released yet)
+--------------------------------
+
+New Features:
+
+* Related Hosts: support updating DNS records of other hosts in same LAN by
+  a single updater (e.g. for IPv6 with changing prefix, IPv4 also works)
+
+
 Release 0.8.0 (not released yet)
 --------------------------------
 

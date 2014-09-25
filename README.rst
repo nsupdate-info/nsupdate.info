@@ -43,6 +43,8 @@ Features
   shows reverse DNS lookup results (on host overview view).
 * Multiple Hosts per user (using separate secrets for security)
 * Add own domains / nameservers (public or only for yourself)
+* Related Hosts: support updating DNS records of other hosts in same LAN by
+  a single updater (e.g. for IPv6 with changing prefix, IPv4 also works)
 * Login with local or remote accounts (google, github, bitbucket, ...
   accounts - everything supported by python-social-auth package)
 * Manual IP updates via web interface
