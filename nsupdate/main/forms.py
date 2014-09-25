@@ -20,7 +20,10 @@ class CreateHostForm(forms.ModelForm):
 class EditHostForm(forms.ModelForm):
     class Meta(object):
         model = Host
-        fields = ['comment', 'available', 'abuse']
+        fields = ['comment', 'available', 'abuse', 'netmask_ipv4', 'netmask_ipv6']
+
+    netmask_ipv4 = forms.IntegerField(min_value=0, max_value=32)
+    netmask_ipv6 = forms.IntegerField(min_value=0, max_value=64)
 
 
 class CreateRelatedHostForm(forms.ModelForm):

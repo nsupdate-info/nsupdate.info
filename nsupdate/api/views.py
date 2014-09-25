@@ -364,17 +364,18 @@ def _update(host, ipaddr, secure=False, logger=None):
         # update related hosts
         for rh in host.relatedhosts.all():
             if rh.available:
-                # TODO: make netmask configurable in Host record
                 if kind == 'ipv4':
-                    ifid, netmask = rh.interface_id_ipv4.strip(), '/29'
+                    ifid = rh.interface_id_ipv4.strip()
+                    netmask = host.netmask_ipv4
                 else:  # kind == 'ipv6':
-                    ifid, netmask = rh.interface_id_ipv6.strip(), '/64'
+                    ifid = rh.interface_id_ipv6.strip()
+                    netmask = host.netmask_ipv6
                 if not ifid:
                     # ifid can be just left blank if no address record of this type is wanted
                     continue
                 try:
                     ifid = IPAddress(ifid)
-                    network = IPNetwork(ipaddr + netmask)
+                    network = IPNetwork("%s/%d" % (ipaddr, netmask))
                     rh_ipaddr = str(IPAddress(network.network) + int(ifid))
                     rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
                 except AddrFormatError as e:
