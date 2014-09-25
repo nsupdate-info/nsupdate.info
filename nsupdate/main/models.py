@@ -319,7 +319,13 @@ class RelatedHost(models.Model):
         unique_together = (('name', 'main_host'), )
 
     def get_fqdn(self):
-        return dnstools.FQDN(self.name, self.main_host.get_fqdn())
+        main = self.main_host.get_fqdn()
+        # note: we put the related hosts (subhosts) into same zone as the main host,
+        # so the resulting hostname has a dot inside:
+        return dnstools.FQDN('%s.%s' % (self.name, main.host), main.domain)
+
+
+pre_delete.connect(pre_delete_host, sender=RelatedHost)
 
 
 class ServiceUpdater(models.Model):
