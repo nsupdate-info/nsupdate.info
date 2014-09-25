@@ -26,7 +26,7 @@ class EditHostForm(forms.ModelForm):
 class CreateRelatedHostForm(forms.ModelForm):
     class Meta(object):
         model = RelatedHost
-        fields = ['name', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
+        fields = ['name', 'comment', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
         widgets = {
             'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
@@ -35,7 +35,7 @@ class CreateRelatedHostForm(forms.ModelForm):
 class EditRelatedHostForm(forms.ModelForm):
     class Meta(object):
         model = RelatedHost
-        fields = ['name', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
+        fields = ['name', 'comment', 'available', 'interface_id_ipv4', 'interface_id_ipv6']
 
 
 class CreateDomainForm(forms.ModelForm):

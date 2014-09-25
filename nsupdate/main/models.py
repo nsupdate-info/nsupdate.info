@@ -296,6 +296,10 @@ class RelatedHost(models.Model):
             ),
         ],
         help_text=_("The name of a host in same network as your main host."))
+    comment = models.CharField(
+        max_length=255,  # should be enough
+        default='', blank=True, null=True,
+        help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
     interface_id_ipv4 = models.CharField(
         default='',
         max_length=16,  # 123.123.123.123

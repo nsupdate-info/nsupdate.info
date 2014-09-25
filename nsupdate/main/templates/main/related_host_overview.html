@@ -13,7 +13,11 @@
             <table class="table">
             <thead>
                 <tr>
-                    <th>{% trans "Host" %}</th>
+                    <th>
+                        {% trans "Host" %}
+                        <br>
+                        {% trans "Comment" %}
+                    </th>
                     <th>{% trans "Available" %}</th>
                     <th>{% blocktrans with type=_("IPv4") %}{{ type }} interface ID{% endblocktrans %}</th>
                     <th>{% blocktrans with type=_("IPv6") %}{{ type }} interface ID{% endblocktrans %}</th>
@@ -21,7 +25,11 @@
             </thead>
             {% for rh in related_hosts %}
                 <tr>
-                    <td><a href="{% url 'related_host_view' mpk rh.pk %}">{{ rh }}</a></td>
+                    <td>
+                        <a href="{% url 'related_host_view' mpk rh.pk %}">{{ rh }}</a>
+                        <br>
+                        {{ rh.comment }}
+                    </td>
                     <td>{{ rh.available|yesno }}</td>
                     <td>{{ rh.interface_id_ipv4 }}</td>
                     <td>{{ rh.interface_id_ipv6 }}</td>
