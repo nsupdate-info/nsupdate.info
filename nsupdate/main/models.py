@@ -322,7 +322,7 @@ class RelatedHost(models.Model):
 
     def __unicode__(self):
         return u"%s.%s" % (
-            self.name, unicode(self.main_host))
+            self.name, self.main_host.__unicode__())
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
