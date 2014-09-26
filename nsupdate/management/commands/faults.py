@@ -116,7 +116,7 @@ class Command(BaseCommand):
         reset_abuse_blocked = options['reset_abuse_blocked']
         flag_abuse = options['flag_abuse']
         notify_user = options['notify_user']
-        with transaction.commit_on_success():  # TODO: after requiring django 1.6, use atomic()
+        with transaction.atomic():
             for h in Host.objects.all():
                 if show_client or show_server:
                     output = u""
