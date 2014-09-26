@@ -247,8 +247,6 @@ SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 14 * 24 * 60 * 60  # 14 days, in seconds (remember_me is True)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe (remember_me is False)
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-
 # python-social-auth settings
 
 AUTHENTICATION_BACKENDS = (

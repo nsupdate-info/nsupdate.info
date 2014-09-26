@@ -14,7 +14,6 @@ env:
       - TEST_OPTS=""
       - COVERAGE=""
     matrix:
-      - DJANGO=1.5.10
       - DJANGO=1.6.7
 matrix:
   exclude:
