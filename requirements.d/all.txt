@@ -7,4 +7,4 @@ django-registration
 South
 django-extensions
 python-social-auth
-requests<2.4.0
+requests
