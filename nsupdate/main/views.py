@@ -19,6 +19,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.timezone import now
 
 from . import dnstools
+from .iptools import normalize_ip
 
 from .forms import (CreateHostForm, EditHostForm, CreateRelatedHostForm, EditRelatedHostForm,
                     CreateDomainForm, EditDomainForm, CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)
@@ -210,7 +211,7 @@ class AddHostView(CreateView):
     def form_valid(self, form):
         self.object = form.save(commit=False)
         try:
-            dnstools.add(self.object.get_fqdn(), self.request.META['REMOTE_ADDR'])
+            dnstools.add(self.object.get_fqdn(), normalize_ip(self.request.META['REMOTE_ADDR']))
         except dnstools.Timeout:
             success, level, msg = False, messages.ERROR, 'Timeout - communicating to name server failed.'
         except dnstools.NameServerNotAvailable:
@@ -265,7 +266,7 @@ class HostView(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(HostView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
-        context['remote_addr'] = self.request.META['REMOTE_ADDR']
+        context['remote_addr'] = normalize_ip(self.request.META['REMOTE_ADDR'])
         return context
 
 

@@ -22,6 +22,7 @@ from ..utils import log, ddns_client
 from ..main.models import Host
 from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session,
                              SameIpError, DnsUpdateError, NameServerNotAvailable)
+from ..main.iptools import normalize_ip
 
 
 def Response(content):
@@ -44,7 +45,7 @@ def myip_view(request, logger=None):
     """
     # Note: keeping this as a function-based view, as it is frequently used -
     # maybe it is slightly more efficient than class-based.
-    ipaddr = request.META['REMOTE_ADDR']
+    ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
     logger.debug("detected remote ip address: %s" % ipaddr)
     return Response(ipaddr)
 
@@ -64,7 +65,7 @@ class DetectIpView(View):
         # so the session cookie is not received here - thus we access it via
         # the sessionid:
         s = SessionStore(session_key=sessionid)
-        ipaddr = request.META['REMOTE_ADDR']
+        ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
         # as this is NOT the session automatically established and
         # also saved by the framework, we need to use save=True here
         put_ip_into_session(s, ipaddr, save=True)
@@ -225,7 +226,7 @@ class NicUpdateView(View):
             return Response('badagent')
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or ''
-            ipaddr = request.META.get('REMOTE_ADDR')
+            ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
         secure = request.is_secure()
         if delete:
             return _delete(host, ipaddr, secure, logger=logger)
@@ -283,7 +284,7 @@ class AuthorizedNicUpdateView(View):
         # and logged-in usage - thus misbehaved user agents are no problem.
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or empty string
-            ipaddr = request.META.get('REMOTE_ADDR')
+            ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
         secure = request.is_secure()
         if delete:
             return _delete(host, ipaddr, secure, logger=logger)
