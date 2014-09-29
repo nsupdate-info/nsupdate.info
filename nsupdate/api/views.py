@@ -7,6 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import json
+import base64
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -109,15 +110,14 @@ def basic_authenticate(auth):
     """
     Get username and password from http basic auth string.
 
-    :param auth: http basic auth string
-    :return: username, password
+    :param auth: http basic auth string [str on py2, str on py3]
+    :return: username, password [unicode on py2, str on py3]
     """
-    auth = auth.decode('utf-8')
+    assert isinstance(auth, str)
     authmeth, auth = auth.split(' ', 1)
     if authmeth.lower() != 'basic':
         return
-    from base64 import b64decode
-    auth = b64decode(auth.strip()).decode('utf-8')
+    auth = base64.b64decode(auth.strip()).decode('utf-8')
     username, password = auth.split(':', 1)
     return username, password
 

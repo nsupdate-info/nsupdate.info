@@ -4,10 +4,13 @@ Tests for api package.
 
 import pytest
 
+import base64
+
 from django.core.urlresolvers import reverse
 
 from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
+from nsupdate.api.views import basic_authenticate
 
 from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST2, TEST_SECRET, TEST_SECRET2
 
@@ -31,8 +34,25 @@ def test_nic_update_noauth(client):
 
 
 def make_basic_auth_header(username, password):
-    import base64
-    return b'Basic ' + base64.b64encode((username + ':' + password).encode('utf-8'))
+    """
+    create a basic authentication header
+
+    :param username: user name [unicode on py2, str on py3]
+    :param password: password [unicode on py2, str on py3]
+    :return: basic auth header [str on py2, str on py3]
+    """
+    # note: the coding dance in the next lines is to make sure we get str type
+    # on python 2 as well as on python 3 as str is the type we get in the auth
+    # object when practically running with a real web server.
+    user_pass = u'%s:%s' % (username, password)
+    return 'Basic ' + str(base64.b64encode(user_pass.encode('utf-8')).decode('ascii'))
+
+
+def test_basic_auth():
+    user_pass = "username", "secret"
+    h = make_basic_auth_header(*user_pass)
+    assert isinstance(h, str)  # must be str on py2, must be str on py3!
+    assert basic_authenticate(h) == user_pass
 
 
 def test_nic_update_badauth(client):
