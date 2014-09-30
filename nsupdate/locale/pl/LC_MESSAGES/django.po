@@ -2,12 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
+# Translators:
+# Łukasz Jurczak, 2014
+# Łukasz Jurczak, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 18:45+0200\n"
-"PO-Revision-Date: 2014-09-04 16:01+0000\n"
+"POT-Creation-Date: 2014-09-30 21:38+0200\n"
+"PO-Revision-Date: 2014-09-30 19:06+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/pl/)\n"
@@ -109,12 +112,12 @@ msgid "Just directly log in as:"
 msgstr ""
 
 #: accounts/templates/registration/registration_form.html:16
-#: main/templates/main/includes/tabbed_router_configuration.html:67
+#: main/templates/main/includes/tabbed_router_configuration.html:69
 msgid "Username:"
 msgstr "Login:"
 
 #: accounts/templates/registration/registration_form.html:17
-#: main/templates/main/includes/tabbed_router_configuration.html:68
+#: main/templates/main/includes/tabbed_router_configuration.html:70
 msgid "Password:"
 msgstr "Hasło:"
 
@@ -196,9 +199,8 @@ msgid "Login with a remote Account"
 msgstr ""
 
 #: login/templates/logout.html:3 templates/base.html:71
-#, fuzzy
 msgid "Log out"
-msgstr "Zaloguj się"
+msgstr ""
 
 #: login/templates/logout.html:7
 msgid "Thanks for spending some quality time with the Web site today."
@@ -336,68 +338,88 @@ msgstr ""
 msgid "The name of your host."
 msgstr ""
 
-#: main/models.py:142
+#: main/models.py:142 main/models.py:307
 msgid ""
 "Some arbitrary comment about your host, e.g  who / what / where this host is"
 msgstr ""
 
-#: main/models.py:149
+#: main/models.py:149 main/models.py:318
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
 msgstr ""
 
-#: main/models.py:161
+#: main/models.py:153
+msgid "Netmask/Prefix length for IPv4."
+msgstr ""
+
+#: main/models.py:156
+msgid "Netmask/Prefix length for IPv6."
+msgstr ""
+
+#: main/models.py:166
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
 msgstr ""
 
-#: main/models.py:167
+#: main/models.py:172
 msgid "Checked to block a host for abuse."
 msgstr ""
 
-#: main/models.py:175
+#: main/models.py:180
 msgid "Latest result message relating to the client"
 msgstr ""
 
-#: main/models.py:182
+#: main/models.py:187
 msgid "Latest result message relating to the server"
 msgstr ""
 
-#: main/models.py:291
+#: main/models.py:303
+msgid "The name of a host in same network as your main host."
+msgstr ""
+
+#: main/models.py:311
+msgid "The IPv4 interface ID of this host. Use IPv4 notation."
+msgstr ""
+
+#: main/models.py:315
+msgid "The IPv6 interface ID of this host. Use IPv6 notation."
+msgstr ""
+
+#: main/models.py:358
 msgid "Service name"
 msgstr ""
 
-#: main/models.py:295
+#: main/models.py:362
 msgid "Some arbitrary comment about the service"
 msgstr ""
 
-#: main/models.py:298
+#: main/models.py:365
 msgid "Update Server [name or IP] of this service"
 msgstr ""
 
-#: main/models.py:302
+#: main/models.py:369
 msgid "Update Server URL path of this service"
 msgstr ""
 
-#: main/models.py:305
+#: main/models.py:372
 msgid "Use https / TLS to contact the Update Server?"
 msgstr ""
 
-#: main/models.py:325
+#: main/models.py:392
 msgid "The hostname for that service (used in query string)"
 msgstr ""
 
-#: main/models.py:329
+#: main/models.py:396
 msgid "Some arbitrary comment about your host on that service"
 msgstr ""
 
-#: main/models.py:334
+#: main/models.py:401
 msgid "The name/id for that service (used for http basic auth)"
 msgstr ""
 
-#: main/models.py:337
+#: main/models.py:404
 msgid "The password/secret for that service (used for http basic auth)"
 msgstr ""
 
@@ -594,7 +616,8 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/domain.html:17 main/templates/main/host.html:12
-#: main/templates/main/host.html.py:56 main/templates/main/host.html:69
+#: main/templates/main/host.html.py:64 main/templates/main/host.html:77
+#: main/templates/main/related_host.html:12
 #: main/templates/main/updater_hostconfig.html:12
 msgid "Update"
 msgstr ""
@@ -637,6 +660,8 @@ msgid "Add"
 msgstr "Dodaj"
 
 #: main/templates/main/domain_add.html:18 main/templates/main/host_add.html:18
+#: main/templates/main/related_host.html:23
+#: main/templates/main/related_host_add.html:18
 #: main/templates/main/updater_hostconfig.html:24
 #: main/templates/main/updater_hostconfig_overview.html:47
 msgid "Help"
@@ -769,76 +794,94 @@ msgid ""
 msgstr ""
 
 #: main/templates/main/host.html:35
+msgid "Related Hosts"
+msgstr ""
+
+#: main/templates/main/host.html:37
+msgid ""
+"We can update additional host records (for other hosts in same network)\n"
+"                when we receive an update for this host."
+msgstr ""
+
+#: main/templates/main/host.html:41
+msgid "Configure related Hosts"
+msgstr ""
+
+#: main/templates/main/host.html:43
 msgid "Update other Services"
 msgstr ""
 
-#: main/templates/main/host.html:36
+#: main/templates/main/host.html:44
 msgid ""
 "We can send updates to other services when we receive an update from you."
 msgstr ""
 
-#: main/templates/main/host.html:38
+#: main/templates/main/host.html:46
 msgid "Configure Updaters"
 msgstr ""
 
-#: main/templates/main/host.html:42
+#: main/templates/main/host.html:50
 msgid "Update Nameserver Records"
 msgstr ""
 
-#: main/templates/main/host.html:43
+#: main/templates/main/host.html:51
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol.\n"
 "               But if you know what you are doing, and you want to update "
 "manually, you can do it here."
 msgstr ""
 
-#: main/templates/main/host.html:46
+#: main/templates/main/host.html:54
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
 msgstr ""
 
-#: main/templates/main/host.html:49 main/templates/main/host.html.py:51
-#: main/templates/main/host.html:53 main/templates/main/overview.html:28
+#: main/templates/main/host.html:57 main/templates/main/host.html.py:59
+#: main/templates/main/host.html:61 main/templates/main/overview.html:28
+#: main/templates/main/related_host_overview.html:23
+#: main/templates/main/related_host_overview.html:25
 #: main/templates/main/updater_hostconfig_overview.html:13
 msgid "IPv4"
 msgstr ""
 
-#: main/templates/main/host.html:49 main/templates/main/host.html.py:62
+#: main/templates/main/host.html:57 main/templates/main/host.html.py:70
 #, python-format
 msgid "Current %(type)s address from master nameserver"
 msgstr ""
 
-#: main/templates/main/host.html:51 main/templates/main/host.html.py:64
+#: main/templates/main/host.html:59 main/templates/main/host.html.py:72
 #, python-format
 msgid "Set new %(type)s address"
 msgstr ""
 
-#: main/templates/main/host.html:53 main/templates/main/host.html.py:66
+#: main/templates/main/host.html:61 main/templates/main/host.html.py:74
 #, python-format
 msgid "Give new %(type)s address"
 msgstr ""
 
-#: main/templates/main/host.html:58 main/templates/main/host.html.py:71
+#: main/templates/main/host.html:66 main/templates/main/host.html.py:79
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
 msgstr ""
 
-#: main/templates/main/host.html:62 main/templates/main/host.html.py:64
-#: main/templates/main/host.html:66 main/templates/main/overview.html:33
+#: main/templates/main/host.html:70 main/templates/main/host.html.py:72
+#: main/templates/main/host.html:74 main/templates/main/overview.html:33
+#: main/templates/main/related_host_overview.html:28
+#: main/templates/main/related_host_overview.html:30
 #: main/templates/main/updater_hostconfig_overview.html:14
 msgid "IPv6"
 msgstr ""
 
-#: main/templates/main/host.html:115
+#: main/templates/main/host.html:123
 msgid "Result Messages"
 msgstr ""
 
-#: main/templates/main/host.html:117
+#: main/templates/main/host.html:125
 msgid "Client Result Message"
 msgstr ""
 
-#: main/templates/main/host.html:119
+#: main/templates/main/host.html:127
 msgid "Server Result Message"
 msgstr ""
 
@@ -847,6 +890,7 @@ msgid "Create a new Host"
 msgstr ""
 
 #: main/templates/main/host_add.html:12
+#: main/templates/main/related_host_add.html:12
 #: main/templates/main/updater_hostconfig_overview.html:41
 msgid "Create"
 msgstr ""
@@ -885,16 +929,19 @@ msgid "Add Host"
 msgstr ""
 
 #: main/templates/main/overview.html:15
+#: main/templates/main/related_host_overview.html:17
 #: main/templates/main/updater_hostconfig_overview.html:12
 msgid "Host"
 msgstr ""
 
 #: main/templates/main/overview.html:17 main/templates/main/overview.html:93
+#: main/templates/main/related_host_overview.html:19
 #: main/templates/main/updater_hostconfig_overview.html:15
 msgid "Comment"
 msgstr "Komentarz"
 
 #: main/templates/main/overview.html:20 main/templates/main/overview.html:91
+#: main/templates/main/related_host_overview.html:21
 msgid "Available"
 msgstr ""
 
@@ -907,6 +954,8 @@ msgid "C / S"
 msgstr ""
 
 #: main/templates/main/overview.html:28 main/templates/main/overview.html:33
+#: main/templates/main/related_host_overview.html:23
+#: main/templates/main/related_host_overview.html:28
 #, python-format
 msgid "%(type)s Address"
 msgstr ""
@@ -945,6 +994,62 @@ msgstr ""
 
 #: main/templates/main/overview.html:116
 msgid "No public domains from other users yet."
+msgstr ""
+
+#: main/templates/main/related_host.html:8
+msgid "Edit related host"
+msgstr ""
+
+#: main/templates/main/related_host.html:14
+#: main/templates/main/related_host.html:19
+msgid "Delete related host"
+msgstr ""
+
+#: main/templates/main/related_host.html:16
+msgid ""
+"Deleting a related host is not undoable. If you need it back, you'll have to "
+"add it again."
+msgstr ""
+
+#: main/templates/main/related_host.html:24
+#: main/templates/main/related_host_add.html:21
+msgid ""
+"When we receive an update for your main host, we compute your network "
+"address\n"
+"                   from it. To compute your related host's IPs, we just add "
+"the interface ID to the network address.\n"
+"                   Then we update the DNS records for the related host with "
+"these addresses."
+msgstr ""
+
+#: main/templates/main/related_host_add.html:8
+msgid "Create a new related host"
+msgstr ""
+
+#: main/templates/main/related_host_add.html:19
+msgid "Here you can add related hosts (e.g. other machines on same LAN)."
+msgstr ""
+
+#: main/templates/main/related_host_overview.html:7
+msgid "Related hosts"
+msgstr ""
+
+#: main/templates/main/related_host_overview.html:8
+msgid "Add related host"
+msgstr ""
+
+#: main/templates/main/related_host_overview.html:11
+msgid "Main host:"
+msgstr ""
+
+#: main/templates/main/related_host_overview.html:25
+#: main/templates/main/related_host_overview.html:30
+#, python-format
+msgid "%(type)s interface ID"
+msgstr ""
+
+#: main/templates/main/related_host_overview.html:54
+msgid "No related hosts yet."
 msgstr ""
 
 #: main/templates/main/status.html:7
@@ -1105,11 +1210,15 @@ msgstr ""
 msgid "We will send an update to them each time you update your host with us."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:14
-msgid "General configuration hints"
+#: main/templates/main/includes/tabbed_router_configuration.html:3
+msgid "General"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:16
+msgid "General configuration hints"
+msgstr ""
+
+#: main/templates/main/includes/tabbed_router_configuration.html:18
 msgid ""
 "\n"
 "            Usually, you should configure one system on your network to "
@@ -1119,7 +1228,7 @@ msgid ""
 "            called the update client."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:22
+#: main/templates/main/includes/tabbed_router_configuration.html:24
 msgid ""
 "\n"
 "            We have some specific configuration hints for some devices and "
@@ -1128,7 +1237,7 @@ msgid ""
 "the generic hints below."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:27
+#: main/templates/main/includes/tabbed_router_configuration.html:29
 msgid ""
 "\n"
 "            <b>Important note about security and compatibility</b>:\n"
@@ -1144,20 +1253,20 @@ msgid ""
 "http: instead of https:).<br>"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:38
+#: main/templates/main/includes/tabbed_router_configuration.html:40
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:40
+#: main/templates/main/includes/tabbed_router_configuration.html:42
 msgid "For IPv4 updates:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:44
+#: main/templates/main/includes/tabbed_router_configuration.html:46
 msgid "For IPv6 updates:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:48
+#: main/templates/main/includes/tabbed_router_configuration.html:50
 msgid ""
 "\n"
 "        The IPs will be determined automatically using the remote address "
@@ -1165,57 +1274,57 @@ msgid ""
 "        (see below for more details)."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:53
+#: main/templates/main/includes/tabbed_router_configuration.html:55
 msgid "Your update client has to do the following steps:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:57
-#: main/templates/main/includes/tabbed_router_configuration.html:231
+#: main/templates/main/includes/tabbed_router_configuration.html:59
+#: main/templates/main/includes/tabbed_router_configuration.html:277
 msgid "Check your current IP:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:59
-#: main/templates/main/includes/tabbed_router_configuration.html:233
+#: main/templates/main/includes/tabbed_router_configuration.html:61
+#: main/templates/main/includes/tabbed_router_configuration.html:279
 msgid "to get your current IPv4 address"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:60
-#: main/templates/main/includes/tabbed_router_configuration.html:234
+#: main/templates/main/includes/tabbed_router_configuration.html:62
+#: main/templates/main/includes/tabbed_router_configuration.html:280
 msgid "to get your current IPv6 address"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:61
-#: main/templates/main/includes/tabbed_router_configuration.html:235
+#: main/templates/main/includes/tabbed_router_configuration.html:63
+#: main/templates/main/includes/tabbed_router_configuration.html:281
 msgid "to get your current IPv4 or IPv6 address"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:63
-#: main/templates/main/includes/tabbed_router_configuration.html:230
+#: main/templates/main/includes/tabbed_router_configuration.html:65
+#: main/templates/main/includes/tabbed_router_configuration.html:276
 msgid ""
 "Important: Do not send an update if your IP did not change since last update!"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:65
+#: main/templates/main/includes/tabbed_router_configuration.html:67
 msgid "Do HTTP Basic Auth with:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:71
+#: main/templates/main/includes/tabbed_router_configuration.html:73
 msgid "Send a http GET request to:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:73
+#: main/templates/main/includes/tabbed_router_configuration.html:75
 msgid "(to update IPv4 A record in DNS)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:74
+#: main/templates/main/includes/tabbed_router_configuration.html:76
 msgid "(to update IPv6 AAAA record in DNS)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:77
+#: main/templates/main/includes/tabbed_router_configuration.html:79
 msgid "Optionally, we support some URL arguments:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:79
+#: main/templates/main/includes/tabbed_router_configuration.html:81
 msgid ""
 "myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
 "autodetected IP is not\n"
@@ -1223,88 +1332,90 @@ msgid ""
 "the wanted one explicitly using myip=...)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:82
+#: main/templates/main/includes/tabbed_router_configuration.html:84
 msgid "(if not given: autodetect from http basic auth)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:85
+#: main/templates/main/includes/tabbed_router_configuration.html:87
 msgid "The response status and content will be:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:87
+#: main/templates/main/includes/tabbed_router_configuration.html:89
 msgid "new IP accepted"
 msgstr "Zaakceptowano nowe IP"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:88
+#: main/templates/main/includes/tabbed_router_configuration.html:90
 msgid "IP accepted, but did not change since last update"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:89
+#: main/templates/main/includes/tabbed_router_configuration.html:91
 msgid "Incorrect authentication or no http basic auth header received"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:95
+#: main/templates/main/includes/tabbed_router_configuration.html:97
 msgid "and maybe others:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:97
-#: main/templates/main/includes/tabbed_router_configuration.html:125
-#: main/templates/main/includes/tabbed_router_configuration.html:178
+#: main/templates/main/includes/tabbed_router_configuration.html:99
+#: main/templates/main/includes/tabbed_router_configuration.html:127
+#: main/templates/main/includes/tabbed_router_configuration.html:180
 msgid "Go to:"
 msgstr "Idź do:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:103
-#: main/templates/main/includes/tabbed_router_configuration.html:130
-#: main/templates/main/includes/tabbed_router_configuration.html:182
-#: main/templates/main/includes/tabbed_router_configuration.html:204
+#: main/templates/main/includes/tabbed_router_configuration.html:105
+#: main/templates/main/includes/tabbed_router_configuration.html:132
+#: main/templates/main/includes/tabbed_router_configuration.html:184
+#: main/templates/main/includes/tabbed_router_configuration.html:250
 msgid "Enter the following data:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:112
+#: main/templates/main/includes/tabbed_router_configuration.html:114
 msgid "If you have IPv4 and IPv6"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:113
+#: main/templates/main/includes/tabbed_router_configuration.html:115
 msgid "Set Update-URL to the following (two URLs, separated by one space)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:115
+#: main/templates/main/includes/tabbed_router_configuration.html:117
 msgid "Forcing a dynamic DNS update"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:116
+#: main/templates/main/includes/tabbed_router_configuration.html:118
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:118
+#: main/templates/main/includes/tabbed_router_configuration.html:120
 msgid "disable dynamic DNS, apply"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:119
+#: main/templates/main/includes/tabbed_router_configuration.html:121
 msgid "enable dynamic DNS, apply"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:120
+#: main/templates/main/includes/tabbed_router_configuration.html:122
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:124
+#: main/templates/main/includes/tabbed_router_configuration.html:126
+#: main/templates/main/includes/tabbed_router_configuration.html:195
+#: main/templates/main/includes/tabbed_router_configuration.html:212
 msgid "verified with"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:139
+#: main/templates/main/includes/tabbed_router_configuration.html:141
 msgid "(leave this field empty)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:147
+#: main/templates/main/includes/tabbed_router_configuration.html:149
 msgid "ddclient is a popular dyndns update daemon on Linux."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:196
+#: main/templates/main/includes/tabbed_router_configuration.html:242
 msgid ""
 "Please note: if the pfSense WAN interface does not have\n"
 "            your public IP and does not notice your public IP changing, the\n"
@@ -1316,24 +1427,24 @@ msgid ""
 "            "
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:207
+#: main/templates/main/includes/tabbed_router_configuration.html:253
 msgid "(do not select this)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:209
-#: main/templates/main/includes/tabbed_router_configuration.html:210
+#: main/templates/main/includes/tabbed_router_configuration.html:255
+#: main/templates/main/includes/tabbed_router_configuration.html:256
 msgid "(most likely)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:211
+#: main/templates/main/includes/tabbed_router_configuration.html:257
 msgid "(select this as long as you need it)"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:220
+#: main/templates/main/includes/tabbed_router_configuration.html:266
 msgid "Browser-based update client"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:221
+#: main/templates/main/includes/tabbed_router_configuration.html:267
 msgid ""
 "\n"
 "        These URLs invoke the built-in update client, which is intended for "
@@ -1341,83 +1452,83 @@ msgid ""
 "        It periodically checks your IP and updates DNS if it changes."
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:225
-#: main/templates/main/includes/tabbed_router_configuration.html:239
-#: main/templates/main/includes/tabbed_router_configuration.html:245
+#: main/templates/main/includes/tabbed_router_configuration.html:271
+#: main/templates/main/includes/tabbed_router_configuration.html:285
+#: main/templates/main/includes/tabbed_router_configuration.html:291
 msgid "update DNS to point to remote IPv4 or IPv6 address"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:226
-#: main/templates/main/includes/tabbed_router_configuration.html:240
-#: main/templates/main/includes/tabbed_router_configuration.html:246
+#: main/templates/main/includes/tabbed_router_configuration.html:272
+#: main/templates/main/includes/tabbed_router_configuration.html:286
+#: main/templates/main/includes/tabbed_router_configuration.html:292
 msgid "similar, IPv4 only"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:227
-#: main/templates/main/includes/tabbed_router_configuration.html:241
-#: main/templates/main/includes/tabbed_router_configuration.html:247
+#: main/templates/main/includes/tabbed_router_configuration.html:273
+#: main/templates/main/includes/tabbed_router_configuration.html:287
+#: main/templates/main/includes/tabbed_router_configuration.html:293
 msgid "similar, IPv6 only"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:229
+#: main/templates/main/includes/tabbed_router_configuration.html:275
 msgid "URLs for browser / http user agent use"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:237
+#: main/templates/main/includes/tabbed_router_configuration.html:283
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:243
+#: main/templates/main/includes/tabbed_router_configuration.html:289
 msgid "Giving the http basic auth username and password in the URL:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:249
+#: main/templates/main/includes/tabbed_router_configuration.html:295
 msgid "As above, but manually specifying the IP address:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:251
+#: main/templates/main/includes/tabbed_router_configuration.html:297
 msgid "update DNS to point to IPv4 127.0.0.1"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:252
+#: main/templates/main/includes/tabbed_router_configuration.html:298
 msgid "update DNS to point to IPv6 ::1"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:254
+#: main/templates/main/includes/tabbed_router_configuration.html:300
 msgid "Explanation of parameters:"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:257
+#: main/templates/main/includes/tabbed_router_configuration.html:303
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:260
+#: main/templates/main/includes/tabbed_router_configuration.html:306
 msgid "the secret you have configured for this hostname"
 msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:262
+#: main/templates/main/includes/tabbed_router_configuration.html:308
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
 "                of course you need to use your real public IP instead of "
 "that."
 msgstr ""
 
-#: settings/base.py:383
+#: settings/base.py:381
 msgid "English"
 msgstr "Angielski"
 
-#: settings/base.py:384
+#: settings/base.py:382
 msgid "German"
 msgstr "Niemiecki"
 
-#: settings/base.py:385
+#: settings/base.py:383
 msgid "French"
 msgstr "Francuski"
 
-#: settings/base.py:386
+#: settings/base.py:384
 msgid "Italian"
 msgstr ""
 
@@ -1490,15 +1601,3 @@ msgstr ""
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr ""
-
-#~ msgid "username: test"
-#~ msgstr "login: test"
-
-#~ msgid "password: test"
-#~ msgstr "hasło: test"
-
-#~ msgid "Login"
-#~ msgstr "Zaloguj"
-
-#~ msgid "Logout"
-#~ msgstr "Wyloguj się"
