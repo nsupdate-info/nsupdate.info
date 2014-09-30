@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-04 18:45+0200\n"
+"POT-Creation-Date: 2014-09-30 19:16+0200\n"
 "PO-Revision-Date: 2014-09-04 16:44+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/"
@@ -143,12 +143,12 @@ msgid "Just directly log in as:"
 msgstr "Logge Dich einfach direkt ein als:"
 
 #: accounts/templates/registration/registration_form.html:16
-#: main/templates/main/includes/tabbed_router_configuration.html:67
+#: main/templates/main/includes/tabbed_router_configuration.html:68
 msgid "Username:"
 msgstr "Benutzername:"
 
 #: accounts/templates/registration/registration_form.html:17
-#: main/templates/main/includes/tabbed_router_configuration.html:68
+#: main/templates/main/includes/tabbed_router_configuration.html:69
 msgid "Password:"
 msgstr "Passwort:"
 
@@ -1297,11 +1297,11 @@ msgstr ""
 "Immer wenn Du Deinen Host bei uns aktualisierst, werden wir dann auch denen "
 "eine Aktualisierung senden"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:14
+#: main/templates/main/includes/tabbed_router_configuration.html:15
 msgid "General configuration hints"
 msgstr "Allgemeine Hinweise zur Konfiguration"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:16
+#: main/templates/main/includes/tabbed_router_configuration.html:17
 msgid ""
 "\n"
 "            Usually, you should configure one system on your network to "
@@ -1316,7 +1316,7 @@ msgstr ""
 "Das kann entweder Dein Router oder ein anderes System in Deinem Netzwerk "
 "sein und es läuft ein sogenannter Update-Client darauf."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:22
+#: main/templates/main/includes/tabbed_router_configuration.html:23
 msgid ""
 "\n"
 "            We have some specific configuration hints for some devices and "
@@ -1330,7 +1330,7 @@ msgstr ""
 "siehe die Karteireiter oben. Wenn Du Deins dort nicht findest, benutze die "
 "allgemeinen Hinweise unten."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:27
+#: main/templates/main/includes/tabbed_router_configuration.html:28
 msgid ""
 "\n"
 "            <b>Important note about security and compatibility</b>:\n"
@@ -1358,22 +1358,22 @@ msgstr ""
 "            oder Deine Daten über eine unverschlüsselte Verbindung\n"
 "            zu übertragen (mit http: anstatt https:):<br>"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:38
+#: main/templates/main/includes/tabbed_router_configuration.html:39
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
 msgstr ""
 "Dein Update-Client muss auf die folgenden URLs zugreifen, um den DNS zu "
 "aktualisieren:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:40
+#: main/templates/main/includes/tabbed_router_configuration.html:41
 msgid "For IPv4 updates:"
 msgstr "Für IPv4-Updates:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:44
+#: main/templates/main/includes/tabbed_router_configuration.html:45
 msgid "For IPv6 updates:"
 msgstr "Für IPv6-Updates:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:48
+#: main/templates/main/includes/tabbed_router_configuration.html:49
 msgid ""
 "\n"
 "        The IPs will be determined automatically using the remote address "
@@ -1385,59 +1385,59 @@ msgstr ""
 "Service sieht\n"
 "(Details siehe unten)."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:53
+#: main/templates/main/includes/tabbed_router_configuration.html:54
 msgid "Your update client has to do the following steps:"
 msgstr "Dein Update-Client muss folgende Schritte ausführen:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:57
-#: main/templates/main/includes/tabbed_router_configuration.html:231
+#: main/templates/main/includes/tabbed_router_configuration.html:58
+#: main/templates/main/includes/tabbed_router_configuration.html:259
 msgid "Check your current IP:"
 msgstr "Aktuelle IP bestimmen:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:59
-#: main/templates/main/includes/tabbed_router_configuration.html:233
+#: main/templates/main/includes/tabbed_router_configuration.html:60
+#: main/templates/main/includes/tabbed_router_configuration.html:261
 msgid "to get your current IPv4 address"
 msgstr "um Deine aktuelle IPv4-Adresse zu bestimmen"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:60
-#: main/templates/main/includes/tabbed_router_configuration.html:234
+#: main/templates/main/includes/tabbed_router_configuration.html:61
+#: main/templates/main/includes/tabbed_router_configuration.html:262
 msgid "to get your current IPv6 address"
 msgstr "um Deine aktuelle IPv6-Adresse zu bestimmen"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:61
-#: main/templates/main/includes/tabbed_router_configuration.html:235
+#: main/templates/main/includes/tabbed_router_configuration.html:62
+#: main/templates/main/includes/tabbed_router_configuration.html:263
 msgid "to get your current IPv4 or IPv6 address"
 msgstr "um Deine aktuelle IPv4- oder IPv6-Adresse zu bestimmen"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:63
-#: main/templates/main/includes/tabbed_router_configuration.html:230
+#: main/templates/main/includes/tabbed_router_configuration.html:64
+#: main/templates/main/includes/tabbed_router_configuration.html:258
 msgid ""
 "Important: Do not send an update if your IP did not change since last update!"
 msgstr ""
 "Wichtig: Sende keine Aktualisierung, wenn sich Deine IP seit der letzten "
 "Aktualisierung nicht geändert hat!"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:65
+#: main/templates/main/includes/tabbed_router_configuration.html:66
 msgid "Do HTTP Basic Auth with:"
 msgstr "HTTP Basic Authentication ausführen mit:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:71
+#: main/templates/main/includes/tabbed_router_configuration.html:72
 msgid "Send a http GET request to:"
 msgstr "Sende einen http GET-Request zu:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:73
+#: main/templates/main/includes/tabbed_router_configuration.html:74
 msgid "(to update IPv4 A record in DNS)"
 msgstr "(um den IPv4 A record im DNS zu aktualisieren)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:74
+#: main/templates/main/includes/tabbed_router_configuration.html:75
 msgid "(to update IPv6 AAAA record in DNS)"
 msgstr "(um den IPv6 AAAA record im DNS zu aktualisieren)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:77
+#: main/templates/main/includes/tabbed_router_configuration.html:78
 msgid "Optionally, we support some URL arguments:"
 msgstr "Optional unterstützen wir einige URL-Argumente:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:79
+#: main/templates/main/includes/tabbed_router_configuration.html:80
 msgid ""
 "myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
 "autodetected IP is not\n"
@@ -1449,61 +1449,61 @@ msgstr ""
 "die gewünschte ist, die Du im DNS aktualisieren willst, musst Du die "
 "gewünschte explizit mit myip=... angeben)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:82
+#: main/templates/main/includes/tabbed_router_configuration.html:83
 msgid "(if not given: autodetect from http basic auth)"
 msgstr ""
 "(wenn nicht angegeben: auto-detektieren via \"http basic authentication\")"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:85
+#: main/templates/main/includes/tabbed_router_configuration.html:86
 msgid "The response status and content will be:"
 msgstr "Der Antwort-Status und Inhalt wird sein:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:87
+#: main/templates/main/includes/tabbed_router_configuration.html:88
 msgid "new IP accepted"
 msgstr "neue IP akzeptiert"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:88
+#: main/templates/main/includes/tabbed_router_configuration.html:89
 msgid "IP accepted, but did not change since last update"
 msgstr "IP akzeptiert, aber hat sich seit dem letzten Update nicht geändert"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:89
+#: main/templates/main/includes/tabbed_router_configuration.html:90
 msgid "Incorrect authentication or no http basic auth header received"
 msgstr ""
 "Falsche Authentifizierung oder kein \"http basic authentication\"-Header "
 "empfangen"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:95
+#: main/templates/main/includes/tabbed_router_configuration.html:96
 msgid "and maybe others:"
 msgstr "und vielleicht andere:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:97
-#: main/templates/main/includes/tabbed_router_configuration.html:125
-#: main/templates/main/includes/tabbed_router_configuration.html:178
+#: main/templates/main/includes/tabbed_router_configuration.html:98
+#: main/templates/main/includes/tabbed_router_configuration.html:126
+#: main/templates/main/includes/tabbed_router_configuration.html:179
 msgid "Go to:"
 msgstr "Gehe zu:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:103
-#: main/templates/main/includes/tabbed_router_configuration.html:130
-#: main/templates/main/includes/tabbed_router_configuration.html:182
-#: main/templates/main/includes/tabbed_router_configuration.html:204
+#: main/templates/main/includes/tabbed_router_configuration.html:104
+#: main/templates/main/includes/tabbed_router_configuration.html:131
+#: main/templates/main/includes/tabbed_router_configuration.html:183
+#: main/templates/main/includes/tabbed_router_configuration.html:232
 msgid "Enter the following data:"
 msgstr "Gib die folgenden Daten ein:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:112
+#: main/templates/main/includes/tabbed_router_configuration.html:113
 msgid "If you have IPv4 and IPv6"
 msgstr "Wenn Du IPv4 und IPv6 hast"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:113
+#: main/templates/main/includes/tabbed_router_configuration.html:114
 msgid "Set Update-URL to the following (two URLs, separated by one space)"
 msgstr ""
 "Setze die Update-URL auf das Folgende (zwei URLs, durch ein Leerzeichen "
 "getrennt)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:115
+#: main/templates/main/includes/tabbed_router_configuration.html:116
 msgid "Forcing a dynamic DNS update"
 msgstr "Erzwingen eines dynamischen DNS-Update"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:116
+#: main/templates/main/includes/tabbed_router_configuration.html:117
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
@@ -1511,15 +1511,15 @@ msgstr ""
 "Wenn Du einen dynamsichen Update für Test-Zwecke erzwingen willst, kannst Du "
 "das wie folgt tun:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:118
+#: main/templates/main/includes/tabbed_router_configuration.html:119
 msgid "disable dynamic DNS, apply"
 msgstr "dynamisches DNS abschalten, Anwenden"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:119
+#: main/templates/main/includes/tabbed_router_configuration.html:120
 msgid "enable dynamic DNS, apply"
 msgstr "dynamisches DNS anschalten, Anwenden"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:120
+#: main/templates/main/includes/tabbed_router_configuration.html:121
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
@@ -1527,19 +1527,20 @@ msgstr ""
 "(die Fritz!Box sendet nun ein Update, es kann \"good\" oder \"nochg\" sein, "
 "je nachdem ob wir diese IP bereits im DNS haben)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:124
+#: main/templates/main/includes/tabbed_router_configuration.html:125
+#: main/templates/main/includes/tabbed_router_configuration.html:194
 msgid "verified with"
 msgstr "überprüft mit"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:139
+#: main/templates/main/includes/tabbed_router_configuration.html:140
 msgid "(leave this field empty)"
 msgstr "(dieses Feld leer lassen)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:147
+#: main/templates/main/includes/tabbed_router_configuration.html:148
 msgid "ddclient is a popular dyndns update daemon on Linux."
 msgstr "ddclient ist ein verbreiteter dyndns-Update-Daemon für Linux."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:196
+#: main/templates/main/includes/tabbed_router_configuration.html:224
 msgid ""
 "Please note: if the pfSense WAN interface does not have\n"
 "            your public IP and does not notice your public IP changing, the\n"
@@ -1557,24 +1558,24 @@ msgstr ""
 "von wo aus es /etc/rc.dyndns.update aufruft - aber sei vorsichtig:\n"
 "rufe es nicht zu oft auf und beachte, dass dies alle DDNS-Updater betrifft."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:207
+#: main/templates/main/includes/tabbed_router_configuration.html:235
 msgid "(do not select this)"
 msgstr "(dies nicht selektieren)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:209
-#: main/templates/main/includes/tabbed_router_configuration.html:210
+#: main/templates/main/includes/tabbed_router_configuration.html:237
+#: main/templates/main/includes/tabbed_router_configuration.html:238
 msgid "(most likely)"
 msgstr "(sehr wahrscheinlich)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:211
+#: main/templates/main/includes/tabbed_router_configuration.html:239
 msgid "(select this as long as you need it)"
 msgstr "(dies selektieren, solange wie Du es brauchst)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:220
+#: main/templates/main/includes/tabbed_router_configuration.html:248
 msgid "Browser-based update client"
 msgstr "Browser-basierter Update-Client"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:221
+#: main/templates/main/includes/tabbed_router_configuration.html:249
 msgid ""
 "\n"
 "        These URLs invoke the built-in update client, which is intended for "
@@ -1587,31 +1588,31 @@ msgstr ""
 "Er überprüft periodisch Deine IP und aktualisiert den DNS, wenn sie sich "
 "ändert."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:225
-#: main/templates/main/includes/tabbed_router_configuration.html:239
-#: main/templates/main/includes/tabbed_router_configuration.html:245
+#: main/templates/main/includes/tabbed_router_configuration.html:253
+#: main/templates/main/includes/tabbed_router_configuration.html:267
+#: main/templates/main/includes/tabbed_router_configuration.html:273
 msgid "update DNS to point to remote IPv4 or IPv6 address"
 msgstr ""
 "aktualisiere den DNS, so daß er auf die entfernte IPv4- oder IPv6-Adresse "
 "zeigt"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:226
-#: main/templates/main/includes/tabbed_router_configuration.html:240
-#: main/templates/main/includes/tabbed_router_configuration.html:246
+#: main/templates/main/includes/tabbed_router_configuration.html:254
+#: main/templates/main/includes/tabbed_router_configuration.html:268
+#: main/templates/main/includes/tabbed_router_configuration.html:274
 msgid "similar, IPv4 only"
 msgstr "ähnlich, aber nur IPv4"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:227
-#: main/templates/main/includes/tabbed_router_configuration.html:241
-#: main/templates/main/includes/tabbed_router_configuration.html:247
+#: main/templates/main/includes/tabbed_router_configuration.html:255
+#: main/templates/main/includes/tabbed_router_configuration.html:269
+#: main/templates/main/includes/tabbed_router_configuration.html:275
 msgid "similar, IPv6 only"
 msgstr "ähnlich, aber nur IPv6"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:229
+#: main/templates/main/includes/tabbed_router_configuration.html:257
 msgid "URLs for browser / http user agent use"
 msgstr "URLs für Browser / http user agent Benutzung"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:237
+#: main/templates/main/includes/tabbed_router_configuration.html:265
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
@@ -1619,36 +1620,36 @@ msgstr ""
 "Interaktiv - fragt nach Username (gib Deinen Hostnamen an) und Passwort (gib "
 "Dein Secret an):"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:243
+#: main/templates/main/includes/tabbed_router_configuration.html:271
 msgid "Giving the http basic auth username and password in the URL:"
 msgstr "Angeben des Benutzernamens/Passworts für http basic auth in der URL:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:249
+#: main/templates/main/includes/tabbed_router_configuration.html:277
 msgid "As above, but manually specifying the IP address:"
 msgstr "Wie oben, aber mit manueller Angabe der IP-Adresse:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:251
+#: main/templates/main/includes/tabbed_router_configuration.html:279
 msgid "update DNS to point to IPv4 127.0.0.1"
 msgstr "akualisiere den DNS, so daß er auf IPv4 127.0.0.1 zeigt"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:252
+#: main/templates/main/includes/tabbed_router_configuration.html:280
 msgid "update DNS to point to IPv6 ::1"
 msgstr "akualisiere den DNS, so daß er auf IPv6 ::1 zeigt"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:254
+#: main/templates/main/includes/tabbed_router_configuration.html:282
 msgid "Explanation of parameters:"
 msgstr "Erklärung der Parameter:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:257
+#: main/templates/main/includes/tabbed_router_configuration.html:285
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
 msgstr "Dein voll-qualifizierter Hostname, etwas wie example.%(WWW_HOST)s"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:260
+#: main/templates/main/includes/tabbed_router_configuration.html:288
 msgid "the secret you have configured for this hostname"
 msgstr "das Secret, das Du für diesen Hostname konfiguriert hast"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:262
+#: main/templates/main/includes/tabbed_router_configuration.html:290
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
 "                of course you need to use your real public IP instead of "
