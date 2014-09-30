@@ -1,8 +1,12 @@
 ChangeLog
 =========
 
-Release 0.8.0 (not released yet)
---------------------------------
+Release 0.8.0
+-------------
+
+Note: 0.8 is the last release with Django 1.5.x support, we'll remove support
+for it in 0.9. Django 1.5 is also EOLed from Django Project, so upgrade your
+Django soon.
 
 New Features:
 
@@ -19,9 +23,11 @@ New Features:
   update client, we can NOT show that there as we need them to load your host
   record from the database (and to know it is really YOU who is talking to us).
 * add OpenWRT configuration help
+* add search field to Host and Domain admin
 
 Fixes:
 
+* fixed Python 3 incompatibility of Basic Auth code (issue #172)
 * fix security issue: abuse_blocked flag could be worked around by abuser
 * refactored internal api so host/zone boundary is not lost and does not need
   to be discovered (we KNOW it) - fixes issues #122 and #138.
