@@ -10,12 +10,12 @@ from .models import Host, Domain, BlacklistedHost, ServiceUpdater, ServiceUpdate
 class DomainAdmin(admin.ModelAdmin):
     list_display = ("name", "public", "available", "created_by")
     list_filter = ("created", "public", "available")
-
+    search_fields = ("name", "created_by__username", "created_by__email")
 
 class HostAdmin(admin.ModelAdmin):
     list_display = ("name", "domain", "created_by", "client_faults", "abuse", "abuse_blocked")
     list_filter = ("created", "abuse", "abuse_blocked", "domain")
-
+    search_fields = ("name", "created_by__username", "created_by__email")
 
 class BlacklistedHostAdmin(admin.ModelAdmin):
     list_display = ("name_re", "created_by")
