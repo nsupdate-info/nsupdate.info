@@ -5,7 +5,7 @@ and your address will be removed from our records.
 To activate this account, please click the following link within the next 
 {{ expiration_days }} days:
 
-http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+{{ request.scheme }}://{{ site.domain }}{% url 'registration_activate' activation_key %}
 
 Sincerely,
 {{ site.name }} Management

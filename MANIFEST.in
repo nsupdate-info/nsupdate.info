@@ -1,7 +1,6 @@
 include README.rst CHANGES.rst LICENSE AUTHORS
 include setup.cfg setup.py
 include conftest.py
-include django-registration-dj16-fix.diff
 recursive-include docs *
 recursive-exclude docs *.pyc
 recursive-exclude docs *.pyo

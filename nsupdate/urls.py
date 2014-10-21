@@ -7,8 +7,6 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-admin.autodiscover()
-
 from registration.backends.default.views import RegistrationView
 from registration.forms import RegistrationForm
 

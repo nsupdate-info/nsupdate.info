@@ -55,10 +55,9 @@ setup(
     platforms='any',
     install_requires=install_requires + [
         'netaddr',
-        'django >=1.6, <1.7',  # 1.7 is not tested yet
-        'south',
+        'django>=1.7',
         'django-bootstrap-form',
-        'django-registration',
+        'django-registration-redux',
         'django-extensions',
         'python-social-auth',
         'requests',  # for our ddns_client
@@ -71,7 +70,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',

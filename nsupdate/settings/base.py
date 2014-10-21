@@ -139,6 +139,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    # TEMPLATE_DIRS must be a tuple, so don't forget the trailing comma if you
+    # put a single entry in here!
 )
 
 INSTALLED_APPS = (
@@ -150,7 +152,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'nsupdate.login',
-    'south',
     'nsupdate',
     'nsupdate.accounts',
     'nsupdate.api',
@@ -383,3 +384,6 @@ LANGUAGES = (
     ('fr', gettext_noop('French')),
     ('it', gettext_noop('Italian')),
 )
+
+# silences 1_6.W001 warning you get without this:
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'

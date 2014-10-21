@@ -67,7 +67,6 @@ Initialize the database
 
 To create and initialize the database, use::
 
-    python manage.py syncdb
     python manage.py migrate
 
 
@@ -83,8 +82,8 @@ Nameserver
 ----------
 
 Now as the server is running, you can log in using the database administrator
-account you created in the syncdb step and use "admin" from the menu to start
-Django's admin.
+account you created in the manage migrate step and use "admin" from the menu
+to start Django's admin.
 
 You'll need to configure at least 1 nameserver / 1 zone to accept dynamic updates,
 see the "Domains" section in the "user" part of the manual.
@@ -219,7 +218,7 @@ To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
     }
 
 
-Now proceed with syncdb / migrate as shown above.
+Now proceed with manage migrate as shown above.
 
 
 Customization of the Web UI

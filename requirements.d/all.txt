@@ -1,10 +1,9 @@
 # packages always needed
 dnspython
 netaddr
-django==1.6.7
+django==1.7.0
 django-bootstrap-form
-django-registration
-South
+django-registration-redux
 django-extensions
 python-social-auth
 requests

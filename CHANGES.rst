@@ -1,6 +1,25 @@
 ChangeLog
 =========
 
+Release 0.10.0 (not released yet)
+---------------------------------
+
+Important: before upgrading to 0.10.0, your database must be migrated to
+latest 0.9.x release of nsupdate.info. So, if you do not run latest 0.9.x
+release already, first upgrade to that!
+
+New Features:
+
+* None!
+
+Other changes:
+
+* support and require Django >= 1.7
+* remove Python 2.6 support, require 2.7 or 3.3+
+* remove support for "south" migrations
+* add support for django 1.7's builtin migrations
+
+
 Release 0.9.0 (not released yet)
 --------------------------------
 
