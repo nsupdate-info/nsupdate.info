@@ -3,7 +3,6 @@ main app url dispatching
 """
 
 from django.conf.urls import patterns, url
-from django.views.generic import TemplateView
 
 from .views import (
     HomeView, OverviewView, HostView, AddHostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
