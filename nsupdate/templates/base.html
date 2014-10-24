@@ -81,12 +81,11 @@
                             {% for lang in langs %}
                                 {% if lang.code != LANGUAGE_CODE %}
                                 <li>
-                                    {% set langname = lang.name.split|join:"_" %}
-                                    <form name="setLang{{ langname }}" action="{% url 'set_language' %}" method="post">
+                                    <form name="setLang{{ lang.name.split|join:"_" }}" action="{% url 'set_language' %}" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="language" value="{{ lang.code }}" />
                                     </form>
-                                    <a href="#" onclick="document.setLang{{ langname }}.submit();return false;">
+                                    <a href="#" onclick="document.setLang{{ lang.name.split|join:"_" }}.submit();return false;">
                                         {{ lang.name_local }} ({{ lang.name }}) [{{ lang.code }}]
                                     </a>
                                 </li>
