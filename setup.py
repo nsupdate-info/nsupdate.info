@@ -60,7 +60,7 @@ setup(
         'django-bootstrap-form',
         'django-registration',
         'django-extensions',
-        'python-social-auth',
+        'python-social-auth<0.2.0',  # >= 0.2.0 breaks south migrations
         'requests',  # for our ddns_client
     ],
     classifiers=[

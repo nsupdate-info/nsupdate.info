@@ -6,5 +6,5 @@ django-bootstrap-form
 django-registration
 South!=1.0.0
 django-extensions
-python-social-auth
+python-social-auth<0.2.0
 requests
