@@ -4,14 +4,33 @@ ChangeLog
 Release 0.9.0 (not released yet)
 --------------------------------
 
+Note: 0.9 is the last release with Django 1.6.x support, we'll remove support
+for it in 0.10 (because Django 1.7 has some implications that make it hard to
+support 1.6 and 1.7).
+
 New Features:
 
 * Related Hosts: support updating DNS records of other hosts in same LAN by
   a single updater (e.g. for IPv6 with changing prefix, IPv4 also works)
+* Handle IPv4-mapped IPv6 addresses
+  Some reverse proxy configurations pass REMOTE_ADDR as a IPv4-mapped IPv6
+  address when listening on a IPv6 socket.
+  We now convert such a mapped address into a IPv4 address at all usages.
+  Handles both the ::ffff:192.0.2.128 format as well as the deprecated
+  ::192.0.2.128 format.
+* add "inadyn" dyndns updater to configuration help
+
+Other changes:
+
+* updated / added some translations
 
 
-Release 0.8.0 (not released yet)
---------------------------------
+Release 0.8.0
+-------------
+
+Note: 0.8 is the last release with Django 1.5.x support, we'll remove support
+for it in 0.9. Django 1.5 is also EOLed from Django Project, so upgrade your
+Django soon.
 
 New Features:
 
@@ -28,9 +47,11 @@ New Features:
   update client, we can NOT show that there as we need them to load your host
   record from the database (and to know it is really YOU who is talking to us).
 * add OpenWRT configuration help
+* add search field to Host and Domain admin
 
 Fixes:
 
+* fixed Python 3 incompatibility of Basic Auth code (issue #172)
 * fix security issue: abuse_blocked flag could be worked around by abuser
 * refactored internal api so host/zone boundary is not lost and does not need
   to be discovered (we KNOW it) - fixes issues #122 and #138.
