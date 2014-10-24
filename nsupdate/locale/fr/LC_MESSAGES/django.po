@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-30 21:38+0200\n"
-"PO-Revision-Date: 2014-09-30 19:06+0000\n"
-"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
+"POT-Creation-Date: 2014-10-24 20:39+0200\n"
+"PO-Revision-Date: 2014-10-01 17:21+0000\n"
+"Last-Translator: mandrag0ra <mandrag0ra@icloud.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/fr/)\n"
 "Language: fr\n"
@@ -423,11 +423,11 @@ msgstr ""
 
 #: main/models.py:153
 msgid "Netmask/Prefix length for IPv4."
-msgstr ""
+msgstr "Masque de sous-réseau IPv4"
 
 #: main/models.py:156
 msgid "Netmask/Prefix length for IPv6."
-msgstr ""
+msgstr "Masque de sous-réseau IPv6"
 
 #: main/models.py:166
 msgid ""
@@ -455,11 +455,11 @@ msgstr ""
 
 #: main/models.py:311
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
-msgstr ""
+msgstr "L'interface réseau IPv4 de cet hôte. "
 
 #: main/models.py:315
 msgid "The IPv6 interface ID of this host. Use IPv6 notation."
-msgstr ""
+msgstr "L'interface réseau IPv6 de cet hôte. "
 
 #: main/models.py:358
 msgid "Service name"
@@ -1215,7 +1215,7 @@ msgstr ""
 #: main/templates/main/related_host_overview.html:30
 #, python-format
 msgid "%(type)s interface ID"
-msgstr ""
+msgstr "Interface réseau %(type)s"
 
 #: main/templates/main/related_host_overview.html:54
 msgid "No related hosts yet."
@@ -1399,7 +1399,7 @@ msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:3
 msgid "General"
-msgstr ""
+msgstr "Général"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:16
 msgid "General configuration hints"
