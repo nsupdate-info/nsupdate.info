@@ -35,4 +35,5 @@ INSTALLED_APPS += (
 LANGUAGES += (
     # note: for the development install we also offer unfinished translations:
     ('pl', gettext_noop('Polish')),
+    ('zh_CN', gettext_noop('Chinese (China)')),
 )
