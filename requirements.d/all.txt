@@ -4,7 +4,7 @@ netaddr
 django==1.6.7
 django-bootstrap-form
 django-registration
-South
+South!=1.0.0
 django-extensions
 python-social-auth
 requests

@@ -56,7 +56,7 @@ setup(
     install_requires=install_requires + [
         'netaddr',
         'django >=1.6, <1.7',  # 1.7 is not tested yet
-        'south',
+        'south!=1.0.0',  # south 1.0 broke python 3 compatibility
         'django-bootstrap-form',
         'django-registration',
         'django-extensions',
