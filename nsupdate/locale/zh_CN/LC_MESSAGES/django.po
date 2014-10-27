@@ -4,12 +4,13 @@
 #
 # Translators:
 # porkness, 2014
+# porkness, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-24 21:27+0200\n"
-"PO-Revision-Date: 2014-10-17 23:33+0000\n"
+"POT-Creation-Date: 2014-10-27 20:05+0100\n"
+"PO-Revision-Date: 2014-10-25 23:41+0000\n"
 "Last-Translator: porkness\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
 "nsupdateinfo/language/zh_CN/)\n"
@@ -501,7 +502,7 @@ msgstr ""
 
 #: main/templates/main/about.html:22
 msgid "Why another one?"
-msgstr ""
+msgstr "我们的优势"
 
 #: main/templates/main/about.html:24
 msgid "As far as we know, there was no service yet that is <em>not</em>:"
@@ -585,26 +586,26 @@ msgstr "不要大量注册帐号和添加主机"
 #: main/templates/main/about.html:62
 msgid ""
 "Don't use the service for any illegal or otherwise questionable purpose."
-msgstr "不要将此服务用于非法或者其他打擦边球的用途"
+msgstr "不要将此服务用于非法或者其他不适当的用途"
 
 #: main/templates/main/about.html:63
 msgid "Don't spam us via e-mail."
-msgstr "不要爆我们的邮箱"
+msgstr "不要向我们的邮箱发送垃圾邮件"
 
 #: main/templates/main/about.html:66
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are\n"
 "                related to unfair use of the service - at any time and "
 "without prior notice."
-msgstr "我们有权利在任何时间不经通知的移除不正常使用此服务的主机/帐号"
+msgstr "我们有权利在任何时候不经通知的移除不正常使用此服务的主机/帐号"
 
 #: main/templates/main/about.html:71
 msgid "No warranties"
-msgstr "没有保证"
+msgstr "没有担保"
 
 #: main/templates/main/about.html:73
 msgid "This is free software and a free service, there are no warranties."
-msgstr "因为这是自由软件和免费服务，所以没有任何形式的保证"
+msgstr "因为这是自由软件和免费服务，所以没有任何形式的担保"
 
 #: main/templates/main/about.html:76
 msgid "If it breaks, it breaks."
@@ -693,7 +694,7 @@ msgid ""
 "We'll generate a ready-to-use configuration for your name server,\n"
 "                filled out with all values (including a new secret)."
 msgstr ""
-"我们将会为您的生成一组可用的配置，包含所有所需要的信息\n"
+"我们将会为您的域名服务器生成一组可用的配置，包含所有所需要的信息\n"
 "（包括新的密钥）"
 
 #: main/templates/main/domain.html:27
@@ -739,6 +740,7 @@ msgid ""
 "useful if you\n"
 "                   have some own zone which you can update automatically)."
 msgstr ""
+"您可以在此添加在您所拥有的域名（此设置只有在您的域名支持动态更新时才能生效）"
 
 #: main/templates/main/domain_add.html:24
 msgid ""
@@ -747,37 +749,42 @@ msgid ""
 "                   dynamic updates (via RFC 2136 \"dynamic update\" "
 "protocol) if the correct update secret is presented."
 msgstr ""
+"您需要设置域名的主域名服务器使其可以验证并接受动态域名更新请求（通过RFC "
+"2136 \n"
+"“dynamic update”协议）"
 
 #: main/templates/main/domain_add.html:28
 msgid "We'll show you configuration examples after you add a domain."
-msgstr ""
+msgstr "在您成功添加域名后我们将会生成配置范例"
 
 #: main/templates/main/generate_ns_secret.html:8
 msgid "Nameserver Shared Secret Generated"
-msgstr ""
+msgstr "已生成域名服务器共享密钥"
 
 #: main/templates/main/generate_ns_secret.html:9
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
 msgstr ""
+"新的域名服务器共享密钥已生成成功。在您每次访问此网页时都会生成新的密钥并取代"
+"旧密钥"
 
 #: main/templates/main/generate_ns_secret.html:10
 msgid "Algorithm:"
-msgstr ""
+msgstr "算法："
 
 #: main/templates/main/generate_ns_secret.html:11
 #: main/templates/main/generate_secret.html:10
 msgid "Secret:"
-msgstr ""
+msgstr "密钥："
 
 #: main/templates/main/generate_ns_secret.html:18
 msgid "How to configure your bind9 nameserver to accept dynamic DNS updates?"
-msgstr ""
+msgstr "bind9域名服务器配置范例："
 
 #: main/templates/main/generate_secret.html:8
 msgid "Host Secret Generated"
-msgstr ""
+msgstr "已生成主机更新密钥"
 
 #: main/templates/main/generate_secret.html:9
 msgid ""
@@ -785,72 +792,79 @@ msgid ""
 "have to generate a new one again. Everytime you visit this page a new secret "
 "will be generated and the old one becomes invalid."
 msgstr ""
+"新的主机更新密钥已生成成功。我们不会明文保存密钥，所以请立即保存它，如果密钥"
+"丢失您必须生成新的密钥。在您每次访问此网页时都会生成新的密钥并取代旧密钥。"
 
 #: main/templates/main/generate_secret.html:15
 msgid "How to configure automated dynamic DNS updates?"
-msgstr ""
+msgstr "自动DDNS更新配置范例："
 
 #: main/templates/main/home.html:12
 msgid "Your current IP(s) + reverse DNS:"
-msgstr ""
+msgstr "您当前的IP地址 + 反向DNS解析："
 
 #: main/templates/main/home.html:21
 msgid "the Dynamic DNS service you waited for."
-msgstr ""
+msgstr "您所期待的DDNS服务"
 
 #: main/templates/main/home.html:25
 msgid "Free and Nice"
-msgstr ""
+msgstr "免费，纯净"
 
 #: main/templates/main/home.html:27
 msgid "is a free service."
-msgstr ""
+msgstr "是一个免费服务"
 
 #: main/templates/main/home.html:28
 msgid "Also, we won't annoy you with ads or spam."
-msgstr ""
+msgstr "而且我们不会使用广告或垃圾邮件打扰您"
 
 #: main/templates/main/home.html:33
 msgid "Free and Open Source"
-msgstr ""
+msgstr "自由，开源"
 
 #: main/templates/main/home.html:35
 msgid "nsupdate.info is free and open-source software."
-msgstr ""
+msgstr "nsupdate.info是自由，开源的软件"
 
 #: main/templates/main/home.html:38
 msgid "nsupdate.info project on GitHub"
-msgstr ""
+msgstr "nsupdate.info项目的GitHub主页"
 
 #: main/templates/main/home.html:43
 msgid "Awesome Code"
-msgstr ""
+msgstr "优质，强大"
 
 #: main/templates/main/home.html:45
 msgid ""
 "Empowered by Python and Django,<br>\n"
 "                we love to write clean and secure code."
 msgstr ""
+"由Python和Django强力驱动<br>\n"
+"我们热衷于编写清晰和安全的代码。"
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
-msgstr ""
+msgstr "编辑主机"
 
 #: main/templates/main/host.html:14 main/templates/main/host.html.py:19
 msgid "Delete Host"
-msgstr ""
+msgstr "删除主机"
 
 #: main/templates/main/host.html:16
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
 msgstr ""
+"删除主机操作不可撤销。如果您需要继续使用该主机，请重新添加并且配置新的密钥。"
 
 #: main/templates/main/host.html:25
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update\n"
 "                client, filled out with all values (including a new secret)."
 msgstr ""
+"我们将会为您的路由器/客户端生成一组可用的配置，包含所有所需要的信息\n"
+"（包括新的密钥）"
 
 #: main/templates/main/host.html:29
 msgid ""
@@ -858,6 +872,8 @@ msgid ""
 "                You have to use the new secret in your router / update "
 "client configuration."
 msgstr ""
+"我们将会生成一个新的更新密钥 - 旧的密钥将会失效。\n"
+"您必须在您的路由器/客户端的配置中使用新的密钥。"
 
 #: main/templates/main/host.html:35
 msgid "Related Hosts"
@@ -1075,7 +1091,7 @@ msgstr "删除关联主机"
 msgid ""
 "Deleting a related host is not undoable. If you need it back, you'll have to "
 "add it again."
-msgstr ""
+msgstr "删除关联主机操作不可撤销。如果您需要恢复使用，请重新添加。"
 
 #: main/templates/main/related_host.html:24
 #: main/templates/main/related_host_add.html:21
@@ -1606,7 +1622,7 @@ msgstr "波兰语"
 
 #: settings/dev.py:38
 msgid "Chinese (China)"
-msgstr ""
+msgstr "中文（中国）"
 
 #: templates/base.html:40
 msgid "Home"
@@ -1655,8 +1671,8 @@ msgid ""
 "site,\n"
 "                                    expect malfunctioning on the http site."
 msgstr ""
-"至少某些所需的cookie只能在https环境下才能正常工作\n"
-"在http环境下估计会出问题"
+"某些所需的cookie只能在https环境下才能正常工作\n"
+"在http环境下会出现问题"
 
 #: templates/base.html:121
 msgid ""

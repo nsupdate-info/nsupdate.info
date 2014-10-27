@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-24 21:27+0200\n"
-"PO-Revision-Date: 2014-10-01 17:21+0000\n"
+"POT-Creation-Date: 2014-10-27 20:05+0100\n"
+"PO-Revision-Date: 2014-10-27 16:38+0000\n"
 "Last-Translator: mandrag0ra <mandrag0ra@icloud.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/fr/)\n"
@@ -452,6 +452,7 @@ msgstr "Dernier message reçu du serveur"
 #: main/models.py:303
 msgid "The name of a host in same network as your main host."
 msgstr ""
+"Le nom d'un hôte figurant dans le même réseau que votre hôte principal."
 
 #: main/models.py:311
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
@@ -945,17 +946,20 @@ msgstr ""
 
 #: main/templates/main/host.html:35
 msgid "Related Hosts"
-msgstr ""
+msgstr "Hôtes"
 
 #: main/templates/main/host.html:37
 msgid ""
 "We can update additional host records (for other hosts in same network)\n"
 "                when we receive an update for this host."
 msgstr ""
+"Nous pouvons mettre à jour des hôtes supplémentaires (figurant sur le même "
+"réseau)\n"
+"lorsque nous recevons une mise à jour pour cet hôte"
 
 #: main/templates/main/host.html:41
 msgid "Configure related Hosts"
-msgstr ""
+msgstr "Configurer hôtes"
 
 #: main/templates/main/host.html:43
 msgid "Update other Services"
@@ -1167,18 +1171,20 @@ msgstr "Aucun domaine publique venant d'autre utilisateurs pour le moment."
 
 #: main/templates/main/related_host.html:8
 msgid "Edit related host"
-msgstr ""
+msgstr "Editer l'hôte"
 
 #: main/templates/main/related_host.html:14
 #: main/templates/main/related_host.html:19
 msgid "Delete related host"
-msgstr ""
+msgstr "Supprimer l'hôte"
 
 #: main/templates/main/related_host.html:16
 msgid ""
 "Deleting a related host is not undoable. If you need it back, you'll have to "
 "add it again."
 msgstr ""
+"Aucun retour arrière après la suppression d'un hôte. Si vous en avez à "
+"nouveau besoin, vous devrez le recréer."
 
 #: main/templates/main/related_host.html:24
 #: main/templates/main/related_host_add.html:21
@@ -1190,26 +1196,34 @@ msgid ""
 "                   Then we update the DNS records for the related host with "
 "these addresses."
 msgstr ""
+"Lorsque nous recevons une mise à jour de votre hôte principal, nous "
+"calculons votre adresse réseau.\n"
+"Pour calculer les adresses IP de vos hôtes, nous ajoutons juste l'ID de "
+"l'interface à l'adresse réseau.\n"
+"Puis nous mettons à jour les enregistrements DNS des différents hôtes avec "
+"ces adresses."
 
 #: main/templates/main/related_host_add.html:8
 msgid "Create a new related host"
-msgstr ""
+msgstr "Créer un nouvel hôte"
 
 #: main/templates/main/related_host_add.html:19
 msgid "Here you can add related hosts (e.g. other machines on same LAN)."
 msgstr ""
+"Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des "
+"serveurs, d'autres machines sur le même réseau local)."
 
 #: main/templates/main/related_host_overview.html:7
 msgid "Related hosts"
-msgstr ""
+msgstr "Hôtes"
 
 #: main/templates/main/related_host_overview.html:8
 msgid "Add related host"
-msgstr ""
+msgstr "Ajouter un hôte"
 
 #: main/templates/main/related_host_overview.html:11
 msgid "Main host:"
-msgstr ""
+msgstr "Hôte principal"
 
 #: main/templates/main/related_host_overview.html:25
 #: main/templates/main/related_host_overview.html:30
@@ -1219,7 +1233,7 @@ msgstr "Interface réseau %(type)s"
 
 #: main/templates/main/related_host_overview.html:54
 msgid "No related hosts yet."
-msgstr ""
+msgstr "Aucun hôte pour le moment."
 
 #: main/templates/main/status.html:7
 msgid "Domains"
@@ -1785,7 +1799,7 @@ msgstr "Polonnais"
 
 #: settings/dev.py:38
 msgid "Chinese (China)"
-msgstr ""
+msgstr "Chinois (Chine)"
 
 #: templates/base.html:40
 msgid "Home"

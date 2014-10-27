@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# Thomas Waldmann <tw@waldmann-edv.de>, 2014
 # ykmm <ykmm@mediacom.it>, 2014
 # ykmm <ykmm@mediacom.it>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-24 21:27+0200\n"
-"PO-Revision-Date: 2014-10-24 17:15+0000\n"
-"Last-Translator: ykmm <ykmm@mediacom.it>\n"
+"POT-Creation-Date: 2014-10-27 20:05+0100\n"
+"PO-Revision-Date: 2014-10-27 19:03+0000\n"
+"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/it/)\n"
 "Language: it\n"
@@ -1799,7 +1800,7 @@ msgstr "Polacco"
 
 #: settings/dev.py:38
 msgid "Chinese (China)"
-msgstr ""
+msgstr "Cinese (Cina)"
 
 #: templates/base.html:40
 msgid "Home"

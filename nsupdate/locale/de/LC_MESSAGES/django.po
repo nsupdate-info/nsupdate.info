@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-24 21:27+0200\n"
-"PO-Revision-Date: 2014-09-30 19:36+0000\n"
+"POT-Creation-Date: 2014-10-27 20:05+0100\n"
+"PO-Revision-Date: 2014-10-27 18:34+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/de/)\n"
@@ -1802,7 +1802,7 @@ msgstr "Polnisch"
 
 #: settings/dev.py:38
 msgid "Chinese (China)"
-msgstr ""
+msgstr "Chinesisch (China)"
 
 #: templates/base.html:40
 msgid "Home"
