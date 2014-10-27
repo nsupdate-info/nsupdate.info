@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
         <h2>{% trans "User Profile of" %} {{ request.user.username }}</h2>
         <hr />
         <form class="form-horizontal" role="form" method="post">
@@ -15,8 +15,6 @@
                 </div>
             </div>
         </form>
-    </div>
-    <div class="col-md-5">
         <h3>{% trans "Associate with remote Account" %}</h3>
         {% for backend in backends.not_associated %}
             <form method="get" action="{% url 'social:begin' backend %}"
@@ -32,6 +30,19 @@
                 <button type="submit" class="btn btn-xs btn-danger">{{ socauth.provider }}</button>
             </form>
         {% endfor %}
+    </div>
+    <div class="col-md-4">
+        <h3>{% trans "Delete User Profile" %}</h3>
+        <p>
+            {% blocktrans %}
+            If you'ld like to stop using this service and delete this user profile and
+            all your data (especially all hosts and all domains created by this user),
+            you can do it here.
+            {% endblocktrans %}
+        </p>
+        <a class="btn btn-danger" href="{% url 'account_delete' %}">
+            <i class="fa fa-exclamation-triangle"></i> {% trans "Delete User Profile" %}
+        </a>
     </div>
 </div>
 {% endblock %}
