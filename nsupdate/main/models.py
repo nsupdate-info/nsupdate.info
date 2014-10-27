@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -288,6 +288,21 @@ def pre_delete_host(sender, **kwargs):
         pass
 
 pre_delete.connect(pre_delete_host, sender=Host)
+
+
+def post_save_host(sender, **kwargs):
+    obj = kwargs['instance']
+    if obj.abuse or obj.abuse_blocked:
+        try:
+            dnstools.delete(obj.get_fqdn())
+        except (dnstools.Timeout, dnstools.NameServerNotAvailable):
+            # well, we tried to clean up, but we didn't reach the nameserver
+            pass
+        except (dnstools.DnsUpdateError, ):
+            # e.g. PeerBadSignature if host is protected by a key we do not have
+            pass
+
+post_save.connect(post_save_host, sender=Host)
 
 
 class RelatedHost(models.Model):
