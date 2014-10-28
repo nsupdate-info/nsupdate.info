@@ -13,14 +13,14 @@ env:
       - TEST_OPTS=""
       - COVERAGE=""
     matrix:
-      - DJANGO=1.7.0
+      - DJANGO=1.7.1
 matrix:
   exclude:
     - python: "2.7"
-      env: DJANGO=1.7.0
+      env: DJANGO=1.7.1
   include:
     - python: "2.7"
-      env: DJANGO=1.7.0 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
+      env: DJANGO=1.7.1 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
 install:
     - "pip install --use-mirrors Django==$DJANGO"
     - "pip install --use-mirrors -r requirements.d/travis.txt"

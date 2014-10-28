@@ -1,9 +1,9 @@
 {% extends "registration/registration_base.html" %}
 {% load i18n %}{% load bootstrap %}
-{% block title %}Activation complete{% endblock %}
+{% block title %}{% trans 'Activation complete' %}{% endblock %}
+
 {% block content %}
-<h1>Thanks, activation complete!</h1>
-<p>You may now <a href="{% url 'django.contrib.auth.views.login' %}">login</a> using the username and password you set at registration.</p>
+<h2>{% trans 'Thanks, activation complete!' %}</h2>
+<p>{% trans 'You may now login using the username and password you set at registration.' %}</p>
+<p><a href="{{ login_url }}"><button class="btn btn-primary" type="button">{% trans "Log in" %}</button></a></p>
 {% endblock %}
-
-
