@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load bootstrap %}{% load humanize %}
 
 {% block content %}
     <div class="row">
@@ -53,7 +53,7 @@
                     <td>{{ host.get_ipv4 }}
                         <br>
                         {% if host.last_update_ipv4 %}
-                        ({{ host.last_update_ipv4|timesince }},
+                        ({{ host.last_update_ipv4|naturaltime }},
                          {% if not host.tls_update_ipv4 %}
                          <span class="label label-warning">no {% else %}
                          <span class="label label-success">{% endif %}TLS</span>)
@@ -64,7 +64,7 @@
                     <td>{{ host.get_ipv6 }}
                         <br>
                         {% if host.last_update_ipv6 %}
-                        ({{ host.last_update_ipv6|timesince }},
+                        ({{ host.last_update_ipv6|naturaltime }},
                          {% if not host.tls_update_ipv6 %}
                          <span class="label label-warning">no {% else %}
                          <span class="label label-success">{% endif %}TLS</span>)
