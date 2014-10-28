@@ -1,10 +1,10 @@
 {% extends "registration/registration_base.html" %}
 {% load i18n %}{% load bootstrap %}
-{% load bootstrap %}
 {% block title %}{% trans "Register for an account" %}{% endblock %}
+
 {% block content %}
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <h2>{% trans "No registration required for testing" %}</h2>
     <p>
         {% trans "You can easily test the service and see what you get." %}
@@ -34,7 +34,7 @@
         finishing your initial evaluation.{% endblocktrans %}
     </p>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-7">
     <h2>{% trans "Register new account" %}</h2>
     <p>
         {% blocktrans %}
@@ -43,15 +43,17 @@
         E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
         Password: please use a sane one, we trust you.{% endblocktrans %}
     </p>
-    <form class="form-horizontal" role="form" method="post" action="">
+    <br>
+    <form class="form-horizontal jumbotron" role="form" method="post" action="">
         {% csrf_token %}
-        {{ form|bootstrap_horizontal }}
+        {{ form|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-offset-3 col-sm-9">
                 <input type="submit" class="btn btn-primary" value="{% trans "Send activation email" %}" />
             </div>
         </div>
     </form>
   </div>
 </div>
+<script type="text/javascript">document.getElementById("id_username").focus();</script>
 {% endblock %}
