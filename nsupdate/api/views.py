@@ -23,7 +23,8 @@ from django.utils.decorators import method_decorator
 from ..utils import log, ddns_client
 from ..main.models import Host
 from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session,
-                             SameIpError, DnsUpdateError, NameServerNotAvailable)
+                             SameIpError, DnsUpdateError, NameServerNotAvailable,
+                             Timeout)
 from ..main.iptools import normalize_ip
 
 
@@ -352,7 +353,7 @@ def _update(host, ipaddr, secure=False, logger=None):
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
         return Response('nochg %s' % ipaddr)
-    except (DnsUpdateError, NameServerNotAvailable) as e:
+    except (DnsUpdateError, NameServerNotAvailable, Timeout) as e:
         msg = str(e)
         msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
             fqdn, msg, ipaddr, secure)
@@ -390,7 +391,7 @@ def _update(host, ipaddr, secure=False, logger=None):
                         msg = '%s - received no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
                         logger.warning(msg)
                         host.register_client_result(msg, fault=True)
-                    except (DnsUpdateError, NameServerNotAvailable) as e:
+                    except (DnsUpdateError, NameServerNotAvailable, Timeout) as e:
                         msg = str(e)
                         msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
                             rh_fqdn, msg, rh_ipaddr, secure)
@@ -463,7 +464,7 @@ def _delete(host, ipaddr, secure=False, logger=None):
         host.register_client_result(msg, fault=False)
         # XXX unclear what to do for "other services" we relay updates to
         return Response('deleted %s' % rdtype)
-    except (DnsUpdateError, NameServerNotAvailable) as e:
+    except (DnsUpdateError, NameServerNotAvailable, Timeout) as e:
         msg = str(e)
         msg = '%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
             fqdn, rdtype, msg, secure)
