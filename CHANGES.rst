@@ -1,8 +1,8 @@
 ChangeLog
 =========
 
-Release 0.9.0 (not released yet)
---------------------------------
+Release 0.9.0
+-------------
 
 Note: 0.9 is the last release with Django 1.6.x support, we'll remove support
 for it in 0.10 (because Django 1.7 has some implications that make it hard to
@@ -19,6 +19,10 @@ New Features:
   Handles both the ::ffff:192.0.2.128 format as well as the deprecated
   ::192.0.2.128 format.
 * add "inadyn" dyndns updater to configuration help
+
+Fixes:
+
+* catch Timeout exceptions
 
 Other changes:
 
