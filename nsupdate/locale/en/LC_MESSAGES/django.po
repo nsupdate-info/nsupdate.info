@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-30 21:38+0200\n"
+"POT-Creation-Date: 2014-11-01 21:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,24 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/templates/accounts/delete_user.html:7
+msgid "Delete your User Account"
+msgstr ""
+
+#: accounts/templates/accounts/delete_user.html:11
+msgid ""
+"\n"
+"                    Are you sure you want to delete your user account and\n"
+"                    all your data on this service? You can not undelete your "
+"data.\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/delete_user.html:16
+#: main/templates/main/delete_object.html:11
+msgid "Confirm"
+msgstr ""
 
 #: accounts/templates/accounts/user_profile.html:7
 msgid "User Profile of"
@@ -25,15 +43,32 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: accounts/templates/accounts/user_profile.html:20
+#: accounts/templates/accounts/user_profile.html:18
 msgid "Associate with remote Account"
 msgstr ""
 
-#: accounts/templates/accounts/user_profile.html:27
+#: accounts/templates/accounts/user_profile.html:25
 msgid "Disassociate from remote Account"
 msgstr ""
 
+#: accounts/templates/accounts/user_profile.html:35
+#: accounts/templates/accounts/user_profile.html:44
+msgid "Delete User Profile"
+msgstr ""
+
+#: accounts/templates/accounts/user_profile.html:37
+msgid ""
+"\n"
+"            If you'ld like to stop using this service and delete this user "
+"profile and\n"
+"            all your data (especially all hosts and all domains created by "
+"this user),\n"
+"            you can do it here.\n"
+"            "
+msgstr ""
+
 #: accounts/templates/registration/activate.html:4
+#: accounts/templates/registration/activation_complete.html:3
 msgid "Activation complete"
 msgstr ""
 
@@ -41,19 +76,31 @@ msgstr ""
 msgid "Activation problem"
 msgstr ""
 
-#: accounts/templates/registration/activate.html:7
-#, python-format
+#: accounts/templates/registration/activate.html:8
+#: accounts/templates/registration/activation_complete.html:6
+msgid "Thanks, activation complete!"
+msgstr ""
+
+#: accounts/templates/registration/activate.html:9
+#: accounts/templates/registration/activation_complete.html:7
 msgid ""
-"\n"
-"Thanks %(account)s, activation complete!\n"
-"You may now <a href='%(auth_login_url)s'>login</a> using the username and "
-"password you set at registration.\n"
+"You may now login using the username and password you set at registration."
+msgstr ""
+
+#: accounts/templates/registration/activate.html:10
+#: accounts/templates/registration/activation_complete.html:8
+#: login/templates/login.html:3 login/templates/login.html.py:24
+#: login/templates/password_reset_complete.html:8 templates/base.html:61
+msgid "Log in"
 msgstr ""
 
 #: accounts/templates/registration/activate.html:12
+msgid "Oops"
+msgstr ""
+
+#: accounts/templates/registration/activate.html:13
 msgid ""
-"Oops -- it seems that your activation key is invalid.  Please check the url "
-"again."
+"it seems that your activation key is invalid.  Please check the url again."
 msgstr ""
 
 #: accounts/templates/registration/activation_email.html:8
@@ -71,8 +118,8 @@ msgid ""
 "<p>\n"
 "To activate this account, please click the following link within the next \n"
 "<b>%(expiration_days)s</b> days:<br/>\n"
-"<a href=\"http://%(sitedomain)s%(activation_key_url)s\">http://%(sitedomain)s"
-"%(activation_key_url)s</a>\n"
+"<a href=\"%(requestscheme)s://%(sitedomain)s%(activation_key_url)s\">"
+"%(requestscheme)s://%(sitedomain)s%(activation_key_url)s</a>\n"
 "</p>\n"
 "<p>\n"
 "Sincerely,<br/>\n"
@@ -85,13 +132,15 @@ msgstr ""
 msgid "Activation email sent"
 msgstr ""
 
-#: accounts/templates/registration/registration_complete.html:5
-msgid ""
-"An activation email has been sent.\n"
-"Please check your email and click on the link to activate your account."
+#: accounts/templates/registration/registration_complete.html:6
+msgid "An activation email has been sent."
 msgstr ""
 
-#: accounts/templates/registration/registration_form.html:4
+#: accounts/templates/registration/registration_complete.html:7
+msgid "Please check your email and click on the link to activate your account."
+msgstr ""
+
+#: accounts/templates/registration/registration_form.html:3
 msgid "Register for an account"
 msgstr ""
 
@@ -161,13 +210,8 @@ msgid ""
 "        Password: please use a sane one, we trust you."
 msgstr ""
 
-#: accounts/templates/registration/registration_form.html:51
+#: accounts/templates/registration/registration_form.html:52
 msgid "Send activation email"
-msgstr ""
-
-#: login/templates/login.html:3 login/templates/login.html.py:24
-#: login/templates/password_reset_complete.html:10 templates/base.html:61
-msgid "Log in"
 msgstr ""
 
 #: login/templates/login.html:8
@@ -182,15 +226,15 @@ msgstr ""
 msgid "Remember me"
 msgstr ""
 
-#: login/templates/login.html:26
+#: login/templates/login.html:24
 msgid "Forgot your password?"
 msgstr ""
 
-#: login/templates/login.html:27
+#: login/templates/login.html:26
 msgid "Sign up for a new account..."
 msgstr ""
 
-#: login/templates/login.html:34
+#: login/templates/login.html:33
 msgid "Login with a remote Account"
 msgstr ""
 
@@ -198,11 +242,11 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: login/templates/logout.html:7
+#: login/templates/logout.html:8
 msgid "Thanks for spending some quality time with the Web site today."
 msgstr ""
 
-#: login/templates/logout.html:8
+#: login/templates/logout.html:9
 msgid "Log in again"
 msgstr ""
 
@@ -218,31 +262,31 @@ msgid ""
 msgstr ""
 
 #: login/templates/password_change.html:15
-#: login/templates/password_reset_confirm.html:17
+#: login/templates/password_reset_confirm.html:14
 msgid "Change my password"
 msgstr ""
 
 #: login/templates/password_change_done.html:3
-#: login/templates/password_change_done.html:7
+#: login/templates/password_change_done.html:6
 msgid "Password change successful"
 msgstr ""
 
-#: login/templates/password_change_done.html:8
+#: login/templates/password_change_done.html:7
 msgid "Your password was changed."
 msgstr ""
 
-#: login/templates/password_reset.html:3 login/templates/password_reset.html:8
+#: login/templates/password_reset.html:3 login/templates/password_reset.html:7
 #: login/templates/password_reset_confirm.html:3
 msgid "Password reset"
 msgstr ""
 
-#: login/templates/password_reset.html:10
+#: login/templates/password_reset.html:9
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
 msgstr ""
 
-#: login/templates/password_reset.html:18
+#: login/templates/password_reset.html:17
 msgid "Reset my password"
 msgstr ""
 
@@ -251,25 +295,25 @@ msgstr ""
 msgid "Password reset complete"
 msgstr ""
 
-#: login/templates/password_reset_complete.html:8
+#: login/templates/password_reset_complete.html:7
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr ""
 
-#: login/templates/password_reset_confirm.html:8
+#: login/templates/password_reset_confirm.html:7
 msgid "Enter new password"
 msgstr ""
 
-#: login/templates/password_reset_confirm.html:10
+#: login/templates/password_reset_confirm.html:8
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
 
-#: login/templates/password_reset_confirm.html:26
+#: login/templates/password_reset_confirm.html:21
 msgid "Password reset unsuccessful"
 msgstr ""
 
-#: login/templates/password_reset_confirm.html:28
+#: login/templates/password_reset_confirm.html:22
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
@@ -280,13 +324,13 @@ msgstr ""
 msgid "Password reset successful"
 msgstr ""
 
-#: login/templates/password_reset_done.html:8
+#: login/templates/password_reset_done.html:7
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
 msgstr ""
 
-#: login/templates/password_reset_done.html:10
+#: login/templates/password_reset_done.html:8
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
@@ -334,12 +378,12 @@ msgstr ""
 msgid "The name of your host."
 msgstr ""
 
-#: main/models.py:142 main/models.py:307
+#: main/models.py:142 main/models.py:322
 msgid ""
 "Some arbitrary comment about your host, e.g  who / what / where this host is"
 msgstr ""
 
-#: main/models.py:149 main/models.py:318
+#: main/models.py:149 main/models.py:333
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
@@ -371,51 +415,51 @@ msgstr ""
 msgid "Latest result message relating to the server"
 msgstr ""
 
-#: main/models.py:303
+#: main/models.py:318
 msgid "The name of a host in same network as your main host."
 msgstr ""
 
-#: main/models.py:311
+#: main/models.py:326
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
 msgstr ""
 
-#: main/models.py:315
+#: main/models.py:330
 msgid "The IPv6 interface ID of this host. Use IPv6 notation."
 msgstr ""
 
-#: main/models.py:358
+#: main/models.py:373
 msgid "Service name"
 msgstr ""
 
-#: main/models.py:362
+#: main/models.py:377
 msgid "Some arbitrary comment about the service"
 msgstr ""
 
-#: main/models.py:365
+#: main/models.py:380
 msgid "Update Server [name or IP] of this service"
 msgstr ""
 
-#: main/models.py:369
+#: main/models.py:384
 msgid "Update Server URL path of this service"
 msgstr ""
 
-#: main/models.py:372
+#: main/models.py:387
 msgid "Use https / TLS to contact the Update Server?"
 msgstr ""
 
-#: main/models.py:392
+#: main/models.py:407
 msgid "The hostname for that service (used in query string)"
 msgstr ""
 
-#: main/models.py:396
+#: main/models.py:411
 msgid "Some arbitrary comment about your host on that service"
 msgstr ""
 
-#: main/models.py:401
+#: main/models.py:416
 msgid "The name/id for that service (used for http basic auth)"
 msgstr ""
 
-#: main/models.py:404
+#: main/models.py:419
 msgid "The password/secret for that service (used for http basic auth)"
 msgstr ""
 
@@ -588,10 +632,6 @@ msgstr ""
 #: main/templates/main/delete_object.html:10
 #, python-format
 msgid "Are you sure you want to delete \"%(object)s\"?"
-msgstr ""
-
-#: main/templates/main/delete_object.html:11
-msgid "Confirm"
 msgstr ""
 
 #: main/templates/main/domain.html:8
@@ -1512,19 +1552,19 @@ msgid ""
 "that."
 msgstr ""
 
-#: settings/base.py:381
+#: settings/base.py:383
 msgid "English"
 msgstr ""
 
-#: settings/base.py:382
+#: settings/base.py:384
 msgid "German"
 msgstr ""
 
-#: settings/base.py:383
+#: settings/base.py:385
 msgid "French"
 msgstr ""
 
-#: settings/base.py:384
+#: settings/base.py:386
 msgid "Italian"
 msgstr ""
 
