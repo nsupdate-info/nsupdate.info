@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # porkness, 2014
 # porkness, 2014
@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-01 21:35+0100\n"
+"POT-Creation-Date: 2014-11-01 22:05+0100\n"
 "PO-Revision-Date: 2014-11-01 20:37+0000\n"
 "Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/nsupdateinfo/language/zh_CN/)\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
+"nsupdateinfo/language/zh_CN/)\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: accounts/templates/accounts/delete_user.html:7
@@ -27,7 +28,8 @@ msgstr ""
 msgid ""
 "\n"
 "                    Are you sure you want to delete your user account and\n"
-"                    all your data on this service? You can not undelete your data.\n"
+"                    all your data on this service? You can not undelete your "
+"data.\n"
 "                    "
 msgstr ""
 
@@ -60,8 +62,10 @@ msgstr ""
 #: accounts/templates/accounts/user_profile.html:37
 msgid ""
 "\n"
-"            If you'ld like to stop using this service and delete this user profile and\n"
-"            all your data (especially all hosts and all domains created by this user),\n"
+"            If you'ld like to stop using this service and delete this user "
+"profile and\n"
+"            all your data (especially all hosts and all domains created by "
+"this user),\n"
 "            you can do it here.\n"
 "            "
 msgstr ""
@@ -102,29 +106,6 @@ msgid ""
 "it seems that your activation key is invalid.  Please check the url again."
 msgstr ""
 
-#: accounts/templates/registration/activation_email.html:8
-#, python-format
-msgid ""
-"<body>\n"
-"<h3>Account registration for %(sitename)s</h3>\n"
-"<p>\n"
-"You (or someone pretending to be you) have asked to register an account at\n"
-"<b>%(sitename)s</b>.<br/>\n"
-"If this wasn't you, please ignore this email and your address will be removed\n"
-"from our records.\n"
-"</p>\n"
-"<p>\n"
-"To activate this account, please click the following link within the next \n"
-"<b>%(expiration_days)s</b> days:<br/>\n"
-"<a href=\"%(requestscheme)s://%(sitedomain)s%(activation_key_url)s\">%(requestscheme)s://%(sitedomain)s%(activation_key_url)s</a>\n"
-"</p>\n"
-"<p>\n"
-"Sincerely,<br/>\n"
-"%(sitename)s Management\n"
-"</p>\n"
-"</body>\n"
-msgstr ""
-
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
 msgstr "激活邮件已发送"
@@ -134,8 +115,7 @@ msgid "An activation email has been sent."
 msgstr ""
 
 #: accounts/templates/registration/registration_complete.html:7
-msgid ""
-"Please check your email and click on the link to activate your account."
+msgid "Please check your email and click on the link to activate your account."
 msgstr ""
 
 #: accounts/templates/registration/registration_form.html:3
@@ -167,10 +147,16 @@ msgstr "密码："
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
 "\n"
-"        <b>Note:</b> if that doesn't work, the service administrator did not set up\n"
-"        the test account yet or discontinued offering it. In that case, you can\n"
+"        <b>Note:</b> if that doesn't work, the service administrator did not "
+"set up\n"
+"        the test account yet or discontinued offering it. In that case, you "
+"can\n"
 "        still just register a new account."
-msgstr "\n<b>注意：</b>如果测试帐号无法使用，可能是管理员没有建立测试帐号\n或者终止了测试帐号的使用。这种情况下您依然可以建立自己的\n新帐号。"
+msgstr ""
+"\n"
+"<b>注意：</b>如果测试帐号无法使用，可能是管理员没有建立测试帐号\n"
+"或者终止了测试帐号的使用。这种情况下您依然可以建立自己的\n"
+"新帐号。"
 
 #: accounts/templates/registration/registration_form.html:25
 msgid "test account is <b>only</b> for testing"
@@ -179,16 +165,22 @@ msgstr "测试帐号<b>仅供</b>测试"
 #: accounts/templates/registration/registration_form.html:27
 msgid ""
 "\n"
-"        Any data (hosts, domains, ...) entered using the test account might be removed\n"
+"        Any data (hosts, domains, ...) entered using the test account might "
+"be removed\n"
 "        at any time and without prior notice."
-msgstr "\n所有存入测试帐号的数据（主机，域名等）随时可能在不事先通知的情况下移除"
+msgstr ""
+"\n"
+"所有存入测试帐号的数据（主机，域名等）随时可能在不事先通知的情况下移除"
 
 #: accounts/templates/registration/registration_form.html:32
 msgid ""
 "\n"
-"        So if you'ld like your stuff to stay, please register for a regular account after\n"
+"        So if you'ld like your stuff to stay, please register for a regular "
+"account after\n"
 "        finishing your initial evaluation."
-msgstr "\n如果您想保留您的数据，请在初步评估结束后注册普通帐号"
+msgstr ""
+"\n"
+"如果您想保留您的数据，请在初步评估结束后注册普通帐号"
 
 #: accounts/templates/registration/registration_form.html:38
 msgid "Register new account"
@@ -199,9 +191,15 @@ msgid ""
 "\n"
 "        Username: should be related to your <em>person or organisation</em>\n"
 "        (not: to the host(s) you want to register).<br>\n"
-"        E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>\n"
+"        E-Mail address: must be a <em>working</em> one, we'll send you an "
+"activation E-Mail there.<br>\n"
 "        Password: please use a sane one, we trust you."
-msgstr "\n帐号：应选择与<em>您个人或者您所属的团体</em>相对应的名字。\n（而不是您想注册的主机名）<br>\n邮箱：请填写<em>可用的</em>邮箱地址，我们将会向这个邮箱发送激活邮件。<br>\n密码：虽然没有密码强度检测，不过请使用可靠的密码。"
+msgstr ""
+"\n"
+"帐号：应选择与<em>您个人或者您所属的团体</em>相对应的名字。\n"
+"（而不是您想注册的主机名）<br>\n"
+"邮箱：请填写<em>可用的</em>邮箱地址，我们将会向这个邮箱发送激活邮件。<br>\n"
+"密码：虽然没有密码强度检测，不过请使用可靠的密码。"
 
 #: accounts/templates/registration/registration_form.html:52
 msgid "Send activation email"
@@ -250,8 +248,8 @@ msgstr "修改密码"
 
 #: login/templates/password_change.html:8
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new"
-" password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
 msgstr "为了帐号安全，请输入您的旧密码，然后请输入两次新密码以便确保输入正确"
 
 #: login/templates/password_change.html:15
@@ -277,7 +275,9 @@ msgstr "密码重置"
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr "忘记了您的密码？请在下方输入您的邮箱地址，我们将发送之后的密码重置步骤到您的邮箱。"
+msgstr ""
+"忘记了您的密码？请在下方输入您的邮箱地址，我们将发送之后的密码重置步骤到您的"
+"邮箱。"
 
 #: login/templates/password_reset.html:17
 msgid "Reset my password"
@@ -327,7 +327,9 @@ msgstr "我们已将密码重置步骤发到您的邮箱。"
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr "如果您没有收到邮件，请确认您所填写的是您在注册时使用的邮箱，并检查垃圾邮件文件夹"
+msgstr ""
+"如果您没有收到邮件，请确认您所填写的是您在注册时使用的邮箱，并检查垃圾邮件文"
+"件夹"
 
 #: main/models.py:38
 msgid "Blacklisted domain. Evaluated as regex (search)."
@@ -353,7 +355,9 @@ msgstr "HMAC_SHA512可适用于bind9（可在之后按需修改）"
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
-msgstr "选中后将允许所有用户在此域名下添加主机 - 如果没有选中，将只允许域名所有者添加主机"
+msgstr ""
+"选中后将允许所有用户在此域名下添加主机 - 如果没有选中，将只允许域名所有者添加"
+"主机"
 
 #: main/models.py:95
 msgid ""
@@ -365,7 +369,8 @@ msgstr "域名服务器可用时请选中此项 - 如果没有选中将暂停该
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will be also publicly shown."
-msgstr "任何关于您的域名的注释信息。如果您的域名是公共域名，注释将会被公开显示。"
+msgstr ""
+"任何关于您的域名的注释信息。如果您的域名是公共域名，注释将会被公开显示。"
 
 #: main/models.py:134
 msgid "The name of your host."
@@ -394,7 +399,9 @@ msgstr "IPv6子网掩码/前缀长度"
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
-msgstr "如果我们发现您的使用有异常，此项将会变为选中状态 - 您可以在修复完所有您的客户端存在的问题之后取消此项"
+msgstr ""
+"如果我们发现您的使用有异常，此项将会变为选中状态 - 您可以在修复完所有您的客户"
+"端存在的问题之后取消此项"
 
 #: main/models.py:172
 msgid "Checked to block a host for abuse."
@@ -473,16 +480,20 @@ msgstr "%(WWW_HOST)s是一个<b>动态域名（Dynamic DNS）服务</b>"
 #: main/templates/main/about.html:13
 msgid ""
 "You usually need it so your router (or other dyndns2-compatible\n"
-"                client) can update a hostname, so you don't need to know or find\n"
+"                client) can update a hostname, so you don't need to know or "
+"find\n"
 "                out your current IP address."
-msgstr "通常您可以使用该服务，通过路由器（或其他兼容dyndns2的客户\n端）更新您的主机域名，以此摆脱记忆/获取主机IP地址的烦恼。"
+msgstr ""
+"通常您可以使用该服务，通过路由器（或其他兼容dyndns2的客户\n"
+"端）更新您的主机域名，以此摆脱记忆/获取主机IP地址的烦恼。"
 
 #: main/templates/main/about.html:18
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr "%(WWW_HOST)s遵循<b>简单，可用，自由，友好，安全，尊重您的隐私</b>的原则"
+msgstr ""
+"%(WWW_HOST)s遵循<b>简单，可用，自由，友好，安全，尊重您的隐私</b>的原则"
 
 #: main/templates/main/about.html:22
 msgid "Why another one?"
@@ -522,16 +533,26 @@ msgstr "您可以直接使用测试帐号进行测试（详见注册页面）"
 msgid ""
 "Also, we have\n"
 "                <a href=\"http://nsupdateinfo.readthedocs.org/\"\n"
-"                   title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash;\n"
+"                   title=\"Open docs in new window\" target=\"_blank"
+"\">documentation</a> &mdash;\n"
 "                there might be some interesting stuff for you in it that is\n"
 "                not visible or obvious on the user interface."
-msgstr "我们还提供了\n<a href=\"http://nsupdateinfo.readthedocs.org/\"\ntitle=\"在新窗口中打开文档\" target=\"_blank\">说明文档</a> &mdash;\n您可能可以在此发现一些让您感兴趣的在用户界面上\n不可见或者难以发现的内容"
+msgstr ""
+"我们还提供了\n"
+"<a href=\"http://nsupdateinfo.readthedocs.org/\"\n"
+"title=\"在新窗口中打开文档\" target=\"_blank\">说明文档</a> &mdash;\n"
+"您可能可以在此发现一些让您感兴趣的在用户界面上\n"
+"不可见或者难以发现的内容"
 
 #: main/templates/main/about.html:46
 msgid ""
 "If you are interested in the software project, have a look at the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a>."
-msgstr "如果您对这个项目感兴趣，请访问\n<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目的GitHub主页</a>"
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
+"\">nsupdate.info project on GitHub</a>."
+msgstr ""
+"如果您对这个项目感兴趣，请访问\n"
+"<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目"
+"的GitHub主页</a>"
 
 #: main/templates/main/about.html:53
 msgid "Fair use of the service"
@@ -569,7 +590,8 @@ msgstr "不要向我们的邮箱发送垃圾邮件"
 #: main/templates/main/about.html:66
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are\n"
-"                related to unfair use of the service - at any time and without prior notice."
+"                related to unfair use of the service - at any time and "
+"without prior notice."
 msgstr "我们有权利在任何时候不经通知的移除不正常使用此服务的主机/帐号"
 
 #: main/templates/main/about.html:71
@@ -601,8 +623,12 @@ msgstr "如果对项目存在疑问"
 #: main/templates/main/about.html:89
 msgid ""
 "Visit the\n"
-"                <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
-msgstr "请访问\n<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目的GitHub主页</a>来："
+"                <a href=\"https://github.com/nsupdate-info/nsupdate.info"
+"\">nsupdate.info project on GitHub</a> to:"
+msgstr ""
+"请访问\n"
+"<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目"
+"的GitHub主页</a>来："
 
 #: main/templates/main/about.html:93
 msgid "file issues on the issue tracker for bugs, ideas, patches."
@@ -630,13 +656,17 @@ msgstr "编辑域名"
 msgid ""
 "You can't change the domain name. If you want to have another domain name, "
 "you have to delete this domain and create a new one."
-msgstr "您不能更改域名，如果您想使用其他的域名，请删除这个域名并重新创建新的域名"
+msgstr ""
+"您不能更改域名，如果您想使用其他的域名，请删除这个域名并重新创建新的域名"
 
 #: main/templates/main/domain.html:11
 msgid ""
 "Please note that update algorithm and update secret need to match.\n"
-"                Just create a new secret after submitting this form with a changed update algorithm."
-msgstr "请注意：更新算法和更新密钥必须一致。\n在修改更新算法之后需要生成新的密钥。"
+"                Just create a new secret after submitting this form with a "
+"changed update algorithm."
+msgstr ""
+"请注意：更新算法和更新密钥必须一致。\n"
+"在修改更新算法之后需要生成新的密钥。"
 
 #: main/templates/main/domain.html:17 main/templates/main/host.html:12
 #: main/templates/main/host.html.py:64 main/templates/main/host.html:77
@@ -654,13 +684,19 @@ msgstr "显示配置"
 msgid ""
 "We'll generate a ready-to-use configuration for your name server,\n"
 "                filled out with all values (including a new secret)."
-msgstr "我们将会为您的域名服务器生成一组可用的配置，包含所有所需要的信息\n（包括新的密钥）"
+msgstr ""
+"我们将会为您的域名服务器生成一组可用的配置，包含所有所需要的信息\n"
+"（包括新的密钥）"
 
 #: main/templates/main/domain.html:27
 msgid ""
-"We'll create a new shared secret - if you had one before, it will become invalid.\n"
-"                You have to use the new secret in your name server configuration."
-msgstr "我们将会生成一个新的共享密钥 - 旧的密钥将会失效。\n您必须在您的域名服务器中使用新的密钥。"
+"We'll create a new shared secret - if you had one before, it will become "
+"invalid.\n"
+"                You have to use the new secret in your name server "
+"configuration."
+msgstr ""
+"我们将会生成一个新的共享密钥 - 旧的密钥将会失效。\n"
+"您必须在您的域名服务器中使用新的密钥。"
 
 #: main/templates/main/domain.html:33 main/templates/main/domain.html.py:38
 msgid "Delete Domain"
@@ -670,7 +706,8 @@ msgstr "删除域名"
 msgid ""
 "Deleting a domain is not undoable. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
-msgstr "删除域名操作不可撤销。如果您需要继续使用该域名，请重新添加并且配置新的密钥。"
+msgstr ""
+"删除域名操作不可撤销。如果您需要继续使用该域名，请重新添加并且配置新的密钥。"
 
 #: main/templates/main/domain_add.html:8
 msgid "Add a new Domain"
@@ -690,15 +727,22 @@ msgstr "帮助"
 
 #: main/templates/main/domain_add.html:20
 msgid ""
-"Here you can add new domains (zones) which you control (and this is only useful if you\n"
+"Here you can add new domains (zones) which you control (and this is only "
+"useful if you\n"
 "                   have some own zone which you can update automatically)."
-msgstr "您可以在此添加在您所拥有的域名（此设置只有在您的域名支持动态更新时才能生效）"
+msgstr ""
+"您可以在此添加在您所拥有的域名（此设置只有在您的域名支持动态更新时才能生效）"
 
 #: main/templates/main/domain_add.html:24
 msgid ""
-"You need to be able to configure the primary master nameserver of the zone so it accepts\n"
-"                   dynamic updates (via RFC 2136 \"dynamic update\" protocol) if the correct update secret is presented."
-msgstr "您需要设置域名的主域名服务器使其可以验证并接受动态域名更新请求（通过RFC 2136 \n“dynamic update”协议）"
+"You need to be able to configure the primary master nameserver of the zone "
+"so it accepts\n"
+"                   dynamic updates (via RFC 2136 \"dynamic update\" "
+"protocol) if the correct update secret is presented."
+msgstr ""
+"您需要设置域名的主域名服务器使其可以验证并接受动态域名更新请求（通过RFC "
+"2136 \n"
+"“dynamic update”协议）"
 
 #: main/templates/main/domain_add.html:28
 msgid "We'll show you configuration examples after you add a domain."
@@ -712,7 +756,9 @@ msgstr "已生成域名服务器共享密钥"
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
-msgstr "新的域名服务器共享密钥已生成成功。在您每次访问此网页时都会生成新的密钥并取代旧密钥"
+msgstr ""
+"新的域名服务器共享密钥已生成成功。在您每次访问此网页时都会生成新的密钥并取代"
+"旧密钥"
 
 #: main/templates/main/generate_ns_secret.html:10
 msgid "Algorithm:"
@@ -734,9 +780,11 @@ msgstr "已生成主机更新密钥"
 #: main/templates/main/generate_secret.html:9
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
-"have to generate a new one again. Everytime you visit this page a new secret"
-" will be generated and the old one becomes invalid."
-msgstr "新的主机更新密钥已生成成功。我们不会明文保存密钥，所以请立即保存它，如果密钥丢失您必须生成新的密钥。在您每次访问此网页时都会生成新的密钥并取代旧密钥。"
+"have to generate a new one again. Everytime you visit this page a new secret "
+"will be generated and the old one becomes invalid."
+msgstr ""
+"新的主机更新密钥已生成成功。我们不会明文保存密钥，所以请立即保存它，如果密钥"
+"丢失您必须生成新的密钥。在您每次访问此网页时都会生成新的密钥并取代旧密钥。"
 
 #: main/templates/main/generate_secret.html:15
 msgid "How to configure automated dynamic DNS updates?"
@@ -782,7 +830,9 @@ msgstr "优质，强大"
 msgid ""
 "Empowered by Python and Django,<br>\n"
 "                we love to write clean and secure code."
-msgstr "由Python和Django强力驱动<br>\n我们热衷于编写清晰和安全的代码。"
+msgstr ""
+"由Python和Django强力驱动<br>\n"
+"我们热衷于编写清晰和安全的代码。"
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
@@ -796,19 +846,25 @@ msgstr "删除主机"
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
-msgstr "删除主机操作不可撤销。如果您需要继续使用该主机，请重新添加并且配置新的密钥。"
+msgstr ""
+"删除主机操作不可撤销。如果您需要继续使用该主机，请重新添加并且配置新的密钥。"
 
 #: main/templates/main/host.html:25
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update\n"
 "                client, filled out with all values (including a new secret)."
-msgstr "我们将会为您的路由器/客户端生成一组可用的配置，包含所有所需要的信息\n（包括新的密钥）"
+msgstr ""
+"我们将会为您的路由器/客户端生成一组可用的配置，包含所有所需要的信息\n"
+"（包括新的密钥）"
 
 #: main/templates/main/host.html:29
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid.\n"
-"                You have to use the new secret in your router / update client configuration."
-msgstr "我们将会生成一个新的更新密钥 - 旧的密钥将会失效。\n您必须在您的路由器/客户端的配置中使用新的密钥。"
+"                You have to use the new secret in your router / update "
+"client configuration."
+msgstr ""
+"我们将会生成一个新的更新密钥 - 旧的密钥将会失效。\n"
+"您必须在您的路由器/客户端的配置中使用新的密钥。"
 
 #: main/templates/main/host.html:35
 msgid "Related Hosts"
@@ -844,7 +900,8 @@ msgstr ""
 #: main/templates/main/host.html:51
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol.\n"
-"               But if you know what you are doing, and you want to update manually, you can do it here."
+"               But if you know what you are doing, and you want to update "
+"manually, you can do it here."
 msgstr ""
 
 #: main/templates/main/host.html:54
@@ -917,14 +974,18 @@ msgstr ""
 
 #: main/templates/main/host_add.html:21
 msgid ""
-"You need to be able to configure one of your machines so it sends dyndns2 compatible\n"
-"                   updates to us when your IP changes. Routers usually have some builtin software that does\n"
-"                   this, but you can also use some software on another system (like a PC or server)."
+"You need to be able to configure one of your machines so it sends dyndns2 "
+"compatible\n"
+"                   updates to us when your IP changes. Routers usually have "
+"some builtin software that does\n"
+"                   this, but you can also use some software on another "
+"system (like a PC or server)."
 msgstr ""
 
 #: main/templates/main/host_add.html:26
 msgid ""
-"Just make sure your update client either is customizable well enough or has specific\n"
+"Just make sure your update client either is customizable well enough or has "
+"specific\n"
 "                   support for our service."
 msgstr ""
 
@@ -1019,16 +1080,19 @@ msgstr "删除关联主机"
 
 #: main/templates/main/related_host.html:16
 msgid ""
-"Deleting a related host is not undoable. If you need it back, you'll have to"
-" add it again."
+"Deleting a related host is not undoable. If you need it back, you'll have to "
+"add it again."
 msgstr "删除关联主机操作不可撤销。如果您需要恢复使用，请重新添加。"
 
 #: main/templates/main/related_host.html:24
 #: main/templates/main/related_host_add.html:21
 msgid ""
-"When we receive an update for your main host, we compute your network address\n"
-"                   from it. To compute your related host's IPs, we just add the interface ID to the network address.\n"
-"                   Then we update the DNS records for the related host with these addresses."
+"When we receive an update for your main host, we compute your network "
+"address\n"
+"                   from it. To compute your related host's IPs, we just add "
+"the interface ID to the network address.\n"
+"                   Then we update the DNS records for the related host with "
+"these addresses."
 msgstr ""
 
 #: main/templates/main/related_host_add.html:8
@@ -1174,14 +1238,16 @@ msgstr ""
 
 #: main/templates/main/updater_hostconfig.html:29
 msgid ""
-"The values you need here are the same ones as you would usually enter in your router\n"
+"The values you need here are the same ones as you would usually enter in "
+"your router\n"
 "                   or update client."
 msgstr ""
 
 #: main/templates/main/updater_hostconfig.html:33
 #, python-format
 msgid ""
-"You get these values after registering with the \"%(object.service.name)s\" service\n"
+"You get these values after registering with the \"%(object.service.name)s\" "
+"service\n"
 "                   and (likely) configuring that service to accept updates."
 msgstr ""
 
@@ -1228,27 +1294,36 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:18
 msgid ""
 "\n"
-"            Usually, you should configure one system on your network to update the DNS.\n"
-"            This can be either your router or a host on your network and it will run some software\n"
+"            Usually, you should configure one system on your network to "
+"update the DNS.\n"
+"            This can be either your router or a host on your network and it "
+"will run some software\n"
 "            called the update client."
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:24
 msgid ""
 "\n"
-"            We have some specific configuration hints for some devices and update clients,\n"
-"            please see the tabs above. If you don't find yours there, use the generic hints below."
+"            We have some specific configuration hints for some devices and "
+"update clients,\n"
+"            please see the tabs above. If you don't find yours there, use "
+"the generic hints below."
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:29
 msgid ""
 "\n"
 "            <b>Important note about security and compatibility</b>:\n"
-"            For update URLs, we always give the https (not: http) URL as that will use an encrypted connection\n"
-"            to transfer your data (including your update secret). Depending on your update client (router firmware or\n"
-"            PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.\n"
-"            So, if it does not work, you have the choice of using a different update client and/or a different service,\n"
-"            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>"
+"            For update URLs, we always give the https (not: http) URL as "
+"that will use an encrypted connection\n"
+"            to transfer your data (including your update secret). Depending "
+"on your update client (router firmware or\n"
+"            PC software) <em>and</em> the specific nsupdate.info-based "
+"service, https might be not supported.\n"
+"            So, if it does not work, you have the choice of using a "
+"different update client and/or a different service,\n"
+"            or transmitting your data using an unencrypted connection (using "
+"http: instead of https:).<br>"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:40
@@ -1267,7 +1342,8 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:50
 msgid ""
 "\n"
-"        The IPs will be determined automatically using the remote address our service is seeing\n"
+"        The IPs will be determined automatically using the remote address "
+"our service is seeing\n"
 "        (see below for more details)."
 msgstr ""
 
@@ -1298,8 +1374,7 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:65
 #: main/templates/main/includes/tabbed_router_configuration.html:276
 msgid ""
-"Important: Do not send an update if your IP did not change since last "
-"update!"
+"Important: Do not send an update if your IP did not change since last update!"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:67
@@ -1324,8 +1399,10 @@ msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:81
 msgid ""
-"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not\n"
-"                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)"
+"myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
+"autodetected IP is not\n"
+"                        the one you want to put into DNS, you need to give "
+"the wanted one explicitly using myip=...)"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:84
@@ -1418,7 +1495,8 @@ msgid ""
 "            update will be done delayed (default: daily at 01:01). You can\n"
 "            tweak this by editing /etc/crontab from where it invokes\n"
 "            /etc/rc.dyndns.update - but be careful: do not invoke it too\n"
-"            frequently and consider that this applies to all your DDNS updaters.\n"
+"            frequently and consider that this applies to all your DDNS "
+"updaters.\n"
 "            "
 msgstr ""
 
@@ -1442,7 +1520,8 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:267
 msgid ""
 "\n"
-"        These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.\n"
+"        These URLs invoke the built-in update client, which is intended for "
+"temporary and adhoc scenarios only.\n"
 "        It periodically checks your IP and updates DNS if it changes."
 msgstr ""
 
@@ -1506,8 +1585,11 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:308
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but\n"
-"                of course you need to use your real public IP instead of that."
-msgstr "IP地址：我们使用了指向本机的IPv4和IPv6地址作为示范，请将其替换成您\n正确的公网IP"
+"                of course you need to use your real public IP instead of "
+"that."
+msgstr ""
+"IP地址：我们使用了指向本机的IPv4和IPv6地址作为示范，请将其替换成您\n"
+"正确的公网IP"
 
 #: settings/base.py:383
 msgid "English"
@@ -1572,14 +1654,17 @@ msgstr "请使用更为安全的<a href=\"https://%(WWW_HOST)s/\">HTTPS站点</a
 
 #: templates/base.html:113
 msgid ""
-"At least some of the required cookies will only work on the secure https site,\n"
+"At least some of the required cookies will only work on the secure https "
+"site,\n"
 "                                    expect malfunctioning on the http site."
-msgstr "某些所需的cookie只能在https环境下才能正常工作\n在http环境下会出现问题"
+msgstr ""
+"某些所需的cookie只能在https环境下才能正常工作\n"
+"在http环境下会出现问题"
 
 #: templates/base.html:121
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in"
-" your browser."
+"Some functionality on this site requires that you have JavaScript enabled in "
+"your browser."
 msgstr "本站部分功能需要调用浏览器的JavaScript功能"
 
 #: templates/includes/base_footer.html:3
