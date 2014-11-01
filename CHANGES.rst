@@ -6,11 +6,17 @@ Release 0.10.0 (not released yet)
 
 Important: before upgrading to 0.10.0, your database must be migrated to
 latest 0.9.x release of nsupdate.info. So, if you do not run latest 0.9.x
-release already, first upgrade to that!
+release already, first upgrade to that and run the migrations!
 
 New Features:
 
-* None!
+* if the abuse / abuse_blocked flag is set for a host, it is removed from DNS
+* users can delete their accounts, if they want to stop using the service
+  (all hosts, domains, etc. created by this user will be deleted)
+
+Fixes:
+
+* the link in the registration mail is now https if the site runs with https
 
 Other changes:
 
@@ -18,7 +24,7 @@ Other changes:
 * remove Python 2.6 support, require 2.7 or 3.3+
 * remove support for "south" migrations
 * add support for django 1.7's builtin migrations
-
+* misc. layout / UI improvments
 
 
 Release 0.9.0
