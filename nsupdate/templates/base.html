@@ -107,11 +107,15 @@
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 {% trans "Your (http) connection is unencrypted and thus insecure." %}
                                 {% if WE_HAVE_TLS %}
-                                    {% blocktrans %}Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.{% endblocktrans %}
+                                    {% blocktrans trimmed %}
+                                    Please use our <a href="https://{{ WWW_HOST }}/">secure https site</a>.
+                                    {% endblocktrans %}
                                 {% endif %}
                                 {% if COOKIE_SECURE %}
-                                    {% blocktrans %}At least some of the required cookies will only work on the secure https site,
-                                    expect malfunctioning on the http site.{% endblocktrans %}
+                                    {% blocktrans trimmed %}
+                                    At least some of the required cookies will only work on the secure https site,
+                                    expect malfunctioning on the http site.
+                                    {% endblocktrans %}
                                 {% endif %}
                             </div>
                         {% endif %}

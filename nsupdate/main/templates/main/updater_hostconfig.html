@@ -23,15 +23,20 @@
             <div class="well well-sm">
                 <h3>{% trans "Help" %}</h3>
                 <p>
-                    {% blocktrans with servicename=object.service.name %}Here you can edit the configuration of the "{{ servicename }}" updater.{% endblocktrans %}
+                    {% blocktrans trimmed with servicename=object.service.name %}
+                    Here you can edit the configuration of the "{{ servicename }}" updater.
+                    {% endblocktrans %}
                 </p>
                 <p>
-                   {% blocktrans %}The values you need here are the same ones as you would usually enter in your router
-                   or update client.{% endblocktrans %}
+                    {% blocktrans trimmed %}
+                    The values you need here are the same ones as you would usually enter in your router or update client.
+                    {% endblocktrans %}
                 </p>
                 <p>
-                   {% blocktrans %}You get these values after registering with the "{{ object.service.name }}" service
-                   and (likely) configuring that service to accept updates.{% endblocktrans %}
+                    {% blocktrans trimmed %}
+                    You get these values after registering with the "{{ object.service.name }}" service
+                    and (likely) configuring that service to accept updates.
+                    {% endblocktrans %}
                 </p>
             </div>
         </div>

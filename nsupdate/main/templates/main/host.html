@@ -22,20 +22,26 @@
         <div  class="col-md-4">
             <h3>{% trans "Show Configuration" %}</h3>
             <p>
-                {% blocktrans %}We'll generate a ready-to-use configuration for your router / update
-                client, filled out with all values (including a new secret).{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We'll generate a ready-to-use configuration for your router / update
+                client, filled out with all values (including a new secret).
+                {% endblocktrans %}
             </p>
             <p class="text-warning">
-                {% blocktrans %}We'll create a new secret - if you had one before, it will become invalid.
-                You have to use the new secret in your router / update client configuration.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We'll create a new secret - if you had one before, it will become invalid.
+                You have to use the new secret in your router / update client configuration.
+                {% endblocktrans %}
             </p>
             <form action="{% url 'generate_secret_view' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
             </form>
             <h3>{% trans "Related Hosts" %}</h3>
             <p>
-                {% blocktrans %}We can update additional host records (for other hosts in same network)
-                when we receive an update for this host.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We can update additional host records (for other hosts in same network)
+                when we receive an update for this host.
+                {% endblocktrans %}
             </p>
             <form action="{% url 'related_host_overview' host.pk %}" method="get">
                 <button type="submit" class="btn btn-primary">{% trans "Configure related Hosts" %}</button>
@@ -48,8 +54,11 @@
         </div>
         <div  class="col-md-4">
             <h3>{% trans "Update Nameserver Records" %}</h3>
-            <p>{% blocktrans %}Usually you configure your router to follow the dyndns2 protocol.
-               But if you know what you are doing, and you want to update manually, you can do it here.{% endblocktrans %}
+            <p>
+                {% blocktrans trimmed %}
+                Usually you configure your router to follow the dyndns2 protocol.
+                But if you know what you are doing, and you want to update manually, you can do it here.
+                {% endblocktrans %}
                <br>
                {% trans "We populated the input fields for the new addresses with your currently detected remote addresses." %}
             </p>

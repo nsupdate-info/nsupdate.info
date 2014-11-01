@@ -8,7 +8,7 @@
         <h2>{% trans "Login with a local Account" %}</h2>
         <hr />
         {% if form.errors %}
-        <p>{% blocktrans %}Your username and password didn't match. Please try again.{% endblocktrans %}</p>
+        <p>{% trans "Your username and password didn't match. Please try again." %}</p>
         {% endif %}
         <form class="form-horizontal" role="form" method="post" action="{% url 'django.contrib.auth.views.login' %}">
             {% csrf_token %}

@@ -15,24 +15,28 @@
     <div class="tab-pane active" id="generic">
         <h4>{% trans "General configuration hints" %}</h4>
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             Usually, you should configure one system on your network to update the DNS.
             This can be either your router or a host on your network and it will run some software
-            called the update client.{% endblocktrans %}
+            called the update client.
+            {% endblocktrans %}
         </p>
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             We have some specific configuration hints for some devices and update clients,
-            please see the tabs above. If you don't find yours there, use the generic hints below.{% endblocktrans %}
+            please see the tabs above. If you don't find yours there, use the generic hints below.
+            {% endblocktrans %}
         </p>
         <p>
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             <b>Important note about security and compatibility</b>:
             For update URLs, we always give the https (not: http) URL as that will use an encrypted connection
             to transfer your data (including your update secret). Depending on your update client (router firmware or
             PC software) <em>and</em> the specific nsupdate.info-based service, https might be not supported.
             So, if it does not work, you have the choice of using a different update client and/or a different service,
-            or transmitting your data using an unencrypted connection (using http: instead of https:).<br>{% endblocktrans %}
+            or transmitting your data using an unencrypted connection (using http: instead of https:).
+            {% endblocktrans %}
+            <br>
             <b>On {{ WWW_HOST }} https is {% if not WE_HAVE_TLS %}not {% endif %}supported.</b>
         </p>
         <hr>
@@ -47,9 +51,10 @@
         <div class="well well-sm">
             <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
         </div>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
         The IPs will be determined automatically using the remote address our service is seeing
-        (see below for more details).{% endblocktrans %}
+        (see below for more details).
+        {% endblocktrans %}
         <hr>
         <p>
             {% trans "Your update client has to do the following steps:" %}
@@ -78,10 +83,13 @@
             </li>
             <li>{% trans "Optionally, we support some URL arguments:" %}
                 <ul>
-                    <li>{% blocktrans %}myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
-                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...){% endblocktrans %}
+                    <li>
+                        {% blocktrans trimmed %}
+                        myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the autodetected IP is not
+                        the one you want to put into DNS, you need to give the wanted one explicitly using myip=...)
+                        {% endblocktrans %}
                     </li>
-                    <li>hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} {% blocktrans %}(if not given: autodetect from http basic auth){% endblocktrans %}</li>
+                    <li>hostname={{ host.get_fqdn|default:"&lt;your fqdn&gt;" }} {% trans "(if not given: autodetect from http basic auth)" %}</li>
                 </ul>
             </li>
             <li>{% trans "The response status and content will be:" %}
@@ -239,7 +247,8 @@ config service "ipv4ddns"
         <h4>pfSense</h4>
         <p>Homepage: <a href="https://www.pfsense.org/">https://www.pfsense.org</a></p>
         <p>
-            {% blocktrans %}Please note: if the pfSense WAN interface does not have
+            {% blocktrans trimmed %}
+            Please note: if the pfSense WAN interface does not have
             your public IP and does not notice your public IP changing, the
             update will be done delayed (default: daily at 01:01). You can
             tweak this by editing /etc/crontab from where it invokes
@@ -264,49 +273,53 @@ config service "ipv4ddns"
     </div>
     <div class="tab-pane" id="browser">
         <h4>{% trans "Browser-based update client" %}</h4>
-        {% blocktrans %}
+        {% blocktrans trimmed %}
         These URLs invoke the built-in update client, which is intended for temporary and adhoc scenarios only.
-        It periodically checks your IP and updates DNS if it changes.{% endblocktrans %}
+        It periodically checks your IP and updates DNS if it changes.
+        {% endblocktrans %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update">{% blocktrans %}update DNS to point to remote IPv4 or IPv6 address{% endblocktrans %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">{% blocktrans %}similar, IPv4 only{% endblocktrans %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">{% blocktrans %}similar, IPv6 only{% endblocktrans %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">{% trans "similar, IPv4 only" %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">{% trans "similar, IPv6 only" %}</a></li>
         </ul>
         <h4>{% trans "URLs for browser / http user agent use" %}</h4>
         {% trans "Important: Do not send an update if your IP did not change since last update!" %}
         {% trans "Check your current IP:" %}
         <ul>
-            <li><a href="https://{{ WWW_IPV4_HOST }}/myip">{% blocktrans %}to get your current IPv4 address{% endblocktrans %}</a></li>
-            <li><a href="https://{{ WWW_IPV6_HOST }}/myip">{% blocktrans %}to get your current IPv6 address{% endblocktrans %}</a></li>
-            <li><a href="https://{{ WWW_HOST }}/myip">{% blocktrans %}to get your current IPv4 or IPv6 address{% endblocktrans %}</a></li>
+            <li><a href="https://{{ WWW_IPV4_HOST }}/myip">{% trans "to get your current IPv4 address" %}</a></li>
+            <li><a href="https://{{ WWW_IPV6_HOST }}/myip">{% trans "to get your current IPv6 address" %}</a></li>
+            <li><a href="https://{{ WWW_HOST }}/myip">{% trans "to get your current IPv4 or IPv6 address" %}</a></li>
         </ul>
         {% trans "Interactive - will ask for username (give your hostname) and password (give your secret):" %}
         <ul>
-            <li><a href="https://{{ WWW_HOST }}/nic/update">{% blocktrans %}update DNS to point to remote IPv4 or IPv6 address{% endblocktrans %}</a></li>
-            <li><a href="https://{{ WWW_IPV4_HOST }}/nic/update">{% blocktrans %}similar, IPv4 only{% endblocktrans %}</a></li>
-            <li><a href="https://{{ WWW_IPV6_HOST }}/nic/update">{% blocktrans %}similar, IPv6 only{% endblocktrans %}</a></li>
+            <li><a href="https://{{ WWW_HOST }}/nic/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
+            <li><a href="https://{{ WWW_IPV4_HOST }}/nic/update">{% trans "similar, IPv4 only" %}</a></li>
+            <li><a href="https://{{ WWW_IPV6_HOST }}/nic/update">{% trans "similar, IPv6 only" %}</a></li>
         </ul>
         {% trans "Giving the http basic auth username and password in the URL:" %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update">{% blocktrans %}update DNS to point to remote IPv4 or IPv6 address{% endblocktrans %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">{% blocktrans %}similar, IPv4 only{% endblocktrans %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update">{% blocktrans %}similar, IPv6 only{% endblocktrans %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">{% trans "similar, IPv4 only" %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update">{% trans "similar, IPv6 only" %}</a></li>
         </ul>
         {% trans "As above, but manually specifying the IP address:" %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1">{% blocktrans %}update DNS to point to IPv4 127.0.0.1{% endblocktrans %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1">{% blocktrans %}update DNS to point to IPv6 ::1{% endblocktrans %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1">{% trans "update DNS to point to IPv4 127.0.0.1" %}</a></li>
+            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1">{% trans "update DNS to point to IPv6 ::1" %}</a></li>
         </ul>
         {% trans "Explanation of parameters:" %}
         <ul>
             {% if not host %}
-                <li>&lt;your hostname&gt;: {% blocktrans %}your fully qualified hostname, something like example.{{ WWW_HOST }}{% endblocktrans %}</li>
+                <li>&lt;your hostname&gt;: {% blocktrans trimmed %}your fully qualified hostname, something like example.{{ WWW_HOST }}{% endblocktrans %}</li>
             {% endif %}
             {% if not update_secret %}
-                <li>&lt;your secret&gt;: {% blocktrans %}the secret you have configured for this hostname{% endblocktrans %}</li>
+                <li>&lt;your secret&gt;: {% trans "the secret you have configured for this hostname" %}</li>
             {% endif %}
-            <li>{% blocktrans %}IP addresses: we use the v4 and v6 localhost addresses in the examples, but
-                of course you need to use your real public IP instead of that.{% endblocktrans %}
+            <li>
+                {% blocktrans trimmed %}
+                IP addresses: we use the v4 and v6 localhost addresses in the examples, but
+                of course you need to use your real public IP instead of that.
+                {% endblocktrans %}
             </li>
         </ul>
     </div>

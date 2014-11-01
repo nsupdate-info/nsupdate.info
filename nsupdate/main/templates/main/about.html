@@ -10,12 +10,16 @@
                 {% blocktrans %}{{ WWW_HOST }} is a <b>dynamic dns service</b>.{% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}You usually need it so your router (or other dyndns2-compatible
+                {% blocktrans trimmed %}
+                You usually need it so your router (or other dyndns2-compatible
                 client) can update a hostname, so you don't need to know or find
-                out your current IP address.{% endblocktrans %}
+                out your current IP address.
+                {% endblocktrans %}
             </p>
             <p>
-                {% blocktrans %}{{ WWW_HOST }} is <b>simple, usable, free, friendly, secure and respects your privacy</b>.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                {{ WWW_HOST }} is <b>simple, usable, free, friendly, secure and respects your privacy</b>.
+                {% endblocktrans %}
             </p>
         </div>
         <div class="col-md-4">
@@ -27,8 +31,11 @@
                 <li>{% trans "nagging its users to make a paid subscription" %}</li>
                 <li>{% trans "annoying its users with advertisements or spam" %}</li>
                 <li>{% trans "cancelling hosts or accounts after a short period of non-usage" %}</li>
-                <li>{% blocktrans %}hiding the few free features almost undiscoverably
-                    between a ton of commercial-only features{% endblocktrans %}</li>
+                <li>
+                    {% blocktrans trimmed %}
+                    hiding the few free features almost undiscoverably between a ton of commercial-only features
+                    {% endblocktrans %}
+                </li>
             </ul>
         </div>
         <div class="col-md-4">
@@ -37,14 +44,19 @@
                 {% trans "You can just try it using the test account (see Register page)." %}
             </p>
             <p>
-                {% blocktrans %}Also, we have
+                {% blocktrans trimmed %}
+                Also, we have
                 <a href="http://nsupdateinfo.readthedocs.org/"
                    title="Open docs in new window" target="_blank">documentation</a> &mdash;
                 there might be some interesting stuff for you in it that is
-                not visible or obvious on the user interface.{% endblocktrans %}
+                not visible or obvious on the user interface.
+                {% endblocktrans %}
             </p>
-            <p>{% blocktrans %}If you are interested in the software project, have a look at the
-                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>.{% endblocktrans %}
+            <p>
+                {% blocktrans trimmed %}
+                If you are interested in the software project, have a look at the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a>.
+                {% endblocktrans %}
             </p>
         </div>
     </div>
@@ -63,8 +75,10 @@
                 <li>{% trans "Don't spam us via e-mail." %}</li>
             </ul>
             <p>
-                {% blocktrans %}We reserve the right to remove any account or hostname(s) that are
-                related to unfair use of the service - at any time and without prior notice.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We reserve the right to remove any account or hostname(s) that are
+                related to unfair use of the service - at any time and without prior notice.
+                {% endblocktrans %}
             </p>
         </div>
         <div class="col-md-4">
@@ -86,8 +100,10 @@
             </p>
             <h2>{% trans "Software Project Contact" %}</h2>
             <p>
-                {% blocktrans %}Visit the
-                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a> to:{% endblocktrans %}
+                {% blocktrans trimmed %}
+                Visit the
+                <a href="https://github.com/nsupdate-info/nsupdate.info">nsupdate.info project on GitHub</a> to:
+                {% endblocktrans %}
             </p>
             <ul>
                 <li>{% trans "file issues on the issue tracker for bugs, ideas, patches." %}</li>

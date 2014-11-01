@@ -5,7 +5,9 @@
     <div class="jumbotron">
         <h2>{% trans "Browser-based Updater" %}</h2>
         <p>
-            {% blocktrans %}Host {{ hostname }} will get automatically updated as long as you keep this window open.{% endblocktrans %}
+            {% blocktrans trimmed %}
+            Host {{ hostname }} will get automatically updated as long as you keep this window open.
+            {% endblocktrans %}
         </p>
         <noscript>
             <p class="text-danger">

@@ -8,8 +8,10 @@
             <h3>{% trans "Edit Domain" %}</h3>
             <p>{% trans "You can't change the domain name. If you want to have another domain name, you have to delete this domain and create a new one." %}</p>
             <p>
-                {% blocktrans %}Please note that update algorithm and update secret need to match.
-                Just create a new secret after submitting this form with a changed update algorithm.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                Please note that update algorithm and update secret need to match.
+                Just create a new secret after submitting this form with a changed update algorithm.
+                {% endblocktrans %}
             </p>
             <form method="post" action="">
                 {% csrf_token %}
@@ -20,12 +22,16 @@
         <div class="col-md-4">
             <h3>{% trans "Show Configuration" %}</h3>
             <p>
-                {% blocktrans %}We'll generate a ready-to-use configuration for your name server,
-                filled out with all values (including a new secret).{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We'll generate a ready-to-use configuration for your name server,
+                filled out with all values (including a new secret).
+                {% endblocktrans %}
             </p>
             <p class="text-warning">
-                {% blocktrans %}We'll create a new shared secret - if you had one before, it will become invalid.
-                You have to use the new secret in your name server configuration.{% endblocktrans %}
+                {% blocktrans trimmed %}
+                We'll create a new shared secret - if you had one before, it will become invalid.
+                You have to use the new secret in your name server configuration.
+                {% endblocktrans %}
             </p>
             <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
                 <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
