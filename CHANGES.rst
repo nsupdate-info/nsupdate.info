@@ -27,6 +27,14 @@ Other changes:
 * misc. layout / UI improvments
 
 
+Release 0.9.1
+-------------
+
+Fixes:
+
+* fix security issue with "related hosts" / "service updaters", fixes #177
+
+
 Release 0.9.0
 -------------
 
