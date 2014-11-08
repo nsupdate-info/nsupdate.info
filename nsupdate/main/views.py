@@ -300,14 +300,17 @@ class RelatedHostOverviewView(TemplateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        try:
+            self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
+        except Host.DoesNotExist:
+            raise PermissionDenied()  # or Http404
         return super(RelatedHostOverviewView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super(RelatedHostOverviewView, self).get_context_data(*args, **kwargs)
         context['nav_overview'] = True
-        mpk = kwargs.get('mpk')
-        context['main_host'] = Host.objects.get(pk=mpk)
-        context['related_hosts'] = RelatedHost.objects.filter(main_host=mpk)
+        context['main_host'] = self.__main_host
+        context['related_hosts'] = RelatedHost.objects.filter(main_host=self.__main_host)
         return context
 
 
@@ -318,7 +321,10 @@ class AddRelatedHostView(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        self.__main_host_pk = kwargs.pop('mpk')
+        try:
+            self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
+        except Host.DoesNotExist:
+            raise PermissionDenied()  # or Http404
         return super(AddRelatedHostView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
@@ -330,7 +336,7 @@ class AddRelatedHostView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.main_host = Host(pk=self.__main_host_pk)
+        self.object.main_host = self.__main_host
         self.object.save()
         success, level, msg = True, messages.SUCCESS, 'Related host added.'
         messages.add_message(self.request, level, msg)
@@ -481,15 +487,18 @@ class UpdaterHostConfigOverviewView(CreateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        self.__host_pk = kwargs.pop('pk', None)
+        try:
+            self.__host = Host.objects.get(pk=kwargs.pop('pk', None), created_by=self.request.user)
+        except Host.DoesNotExist:
+            raise PermissionDenied()  # or Http404
         return super(UpdaterHostConfigOverviewView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
-        return reverse('updater_hostconfig_overview', args=(self.__host_pk,))
+        return reverse('updater_hostconfig_overview', args=(self.__host.pk, ))
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.host = Host(pk=self.__host_pk)
+        self.object.host = self.__host
         self.object.created_by = self.request.user
         self.object.save()
         messages.add_message(self.request, messages.SUCCESS, 'Service Updater Host Configuration added.')
@@ -498,8 +507,7 @@ class UpdaterHostConfigOverviewView(CreateView):
     def get_context_data(self, *args, **kwargs):
         context = super(
             UpdaterHostConfigOverviewView, self).get_context_data(*args, **kwargs)
-        context['updater_configs'] = ServiceUpdaterHostConfig.objects.filter(
-            host=self.__host_pk)
+        context['updater_configs'] = ServiceUpdaterHostConfig.objects.filter(host=self.__host)
         return context
 
 
