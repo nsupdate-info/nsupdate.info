@@ -448,8 +448,8 @@ class ServiceUpdater(models.Model):
         return u"%s" % (self.name, )
 
     class Meta(object):
-        verbose_name = _('service update')
-        verbose_name_plural = _('service updates')
+        verbose_name = _('service updater')
+        verbose_name_plural = _('service updaters')
 
 
 class ServiceUpdaterHostConfig(models.Model):
