@@ -272,7 +272,8 @@ def get_ns_info(fqdn):
             # retry timeout is over, set it available again
             set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return d.nameserver_ip, d.nameserver2_ip, fqdn.domain, domain, fqdn.host, domain, d.nameserver_update_secret, algorithm
+    return (d.nameserver_ip, d.nameserver2_ip, fqdn.domain, domain, fqdn.host, domain,
+            d.nameserver_update_secret, algorithm)
 
 
 def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
