@@ -16,7 +16,8 @@ set to True, it will suggest you better use the https site and link there.
 Additionally, the service administrator can implement a redirect from the
 http to the https site within the webserver configuration for the WWW_HOST.
 The redirect should **not** be implemented for WWW_IPV4_HOST and WWW_IPV6_HOST
-as it is unknown whether all update clients can deal with a redirect.
+as it is unknown whether all update clients can deal with a redirect (and
+support TLS).
 
 For the router / update client configuration examples we show when creating a
 update secret, we use update URLs with https: (and we also tell why it might
