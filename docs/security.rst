@@ -25,6 +25,11 @@ not work).
 
 On the hosts overview page, we show whether we received the last update via TLS.
 
+Please note that if you like security, you also need to use https (with
+certificate verification) if you use the web-based method to query your IP
+address. If you use http, a powerful attacker could MITM your request and
+tell you a wrong IP, which your updater then would happily write into DNS.
+
 
 Login with remote vs. local Account
 ===================================
