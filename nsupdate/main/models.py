@@ -33,16 +33,24 @@ def result_fmt(msg):
 
 class BlacklistedHost(models.Model):
     name_re = models.CharField(
+        _('name RegEx'),
         max_length=255,
         unique=True,
         help_text=_('Blacklisted domain. Evaluated as regex (search).'))
 
-    last_update = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='blacklisted_domains')
+    last_update = models.DateTimeField(_('last update'), auto_now=True)
+    created = models.DateTimeField(_('created at'), auto_now_add=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='blacklisted_domains',
+        verbose_name=_('created by'))
 
     def __unicode__(self):
         return u"%s" % (self.name_re, )
+
+    class Meta:
+        verbose_name = _('blacklisted host')
+        verbose_name_plural = _('blacklisted hosts')
 
 
 def host_blacklist_validator(value):
@@ -70,39 +78,46 @@ UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 class Domain(models.Model):
     name = models.CharField(
+        _("name"),
         max_length=255,  # RFC 2181 (and also: max length of unique fields)
         unique=True,
         help_text=_("Name of the zone where dynamic hosts may get added"))
     nameserver_ip = models.GenericIPAddressField(
+        _("nameserver IP"),
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         help_text=_("IP where the dynamic DNS updates for this zone will be sent to"))
     nameserver_update_secret = models.CharField(
+        _("nameserver update secret"),
         max_length=88,  # 512 bits base64 -> 88 bytes
         default='',
         help_text=_("Shared secret that allows updating this zone (base64 encoded)"))
     nameserver_update_algorithm = models.CharField(
+        _("nameserver update algorithm"),
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
         default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES,
         help_text=_("HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"))
     public = models.BooleanField(
+        _("public"),
         default=False,
         help_text=_("Check to allow any user to add dynamic hosts to this zone - "
                     "if not checked, we'll only allow the owner to add hosts"))
     # available means "nameserver for domain operating and reachable" -
     # gets set to False if we have trouble reaching the nameserver
     available = models.BooleanField(
+        _("available"),
         default=True,
         help_text=_("Check if nameserver is available/reachable - "
                     "if not checked, we'll pause querying/updating this nameserver for a while"))
     comment = models.CharField(
+        _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about your domain. "
                     "If your domain is public, the comment will be also publicly shown."))
 
-    last_update = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains')
+    last_update = models.DateTimeField(_("last update"), auto_now=True)
+    created = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"))
 
     def __unicode__(self):
         return u"%s" % (self.name, )
@@ -120,9 +135,14 @@ class Domain(models.Model):
     def get_bind9_algorithm(self):
         return UPDATE_ALGORITHMS.get(self.nameserver_update_algorithm).bind_name
 
+    class Meta:
+        verbose_name = _('domain')
+        verbose_name_plural = _('domains')
+
 
 class Host(models.Model):
     name = models.CharField(
+        _("name"),
         max_length=255,  # RFC 2181 (and considering having multiple joined labels here later)
         validators=[
             RegexValidator(
@@ -132,11 +152,13 @@ class Host(models.Model):
             host_blacklist_validator,
         ],
         help_text=_("The name of your host."))
-    domain = models.ForeignKey(Domain, on_delete=models.CASCADE)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE, verbose_name=_("domain"))
     update_secret = models.CharField(
+        _("update secret"),
         max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
     )
     comment = models.CharField(
+        _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
@@ -145,13 +167,16 @@ class Host(models.Model):
     # gets set to False if abuse happens (client malfunctioning) or
     # if updating this host triggers other errors:
     available = models.BooleanField(
+        _("available"),
         default=True,
         help_text=_("Check if host is available/in use - "
                     "if not checked, we won't accept updates for this host"))
     netmask_ipv4 = models.PositiveSmallIntegerField(
+        _("netmask IPv4"),
         default=32,
         help_text=_("Netmask/Prefix length for IPv4."))
     netmask_ipv6 = models.PositiveSmallIntegerField(
+        _("netmask IPv6"),
         default=64,
         help_text=_("Netmask/Prefix length for IPv6."))
     # abuse means that we (either the operator or some automatic mechanism)
@@ -162,40 +187,44 @@ class Host(models.Model):
     # the abuse flag can be switched off by the user, if the user thinks
     # he fixed the problem on his side (or that there was no problem).
     abuse = models.BooleanField(
+        _("abuse"),
         default=False,
         help_text=_("Checked if we think you abuse the service - "
                     "you may uncheck this AFTER fixing all issues on your side"))
 
     # similar to above, but can not be toggled by the user:
     abuse_blocked = models.BooleanField(
+        _("abuse blocked"),
         default=False,
         help_text=_("Checked to block a host for abuse."))
 
     # count client misbehaviours, like sending nochg updates or other
     # errors that should make the client stop trying to update:
-    client_faults = models.PositiveIntegerField(default=0)
+    client_faults = models.PositiveIntegerField(_("client faults"), default=0)
     client_result_msg = models.CharField(
+        _("client result msg"),
         max_length=RESULT_MSG_LEN,
         default='', blank=True, null=True,
         help_text=_("Latest result message relating to the client"))
 
     # count server faults that happened when updating this host
-    server_faults = models.PositiveIntegerField(default=0)
+    server_faults = models.PositiveIntegerField(_("server faults"), default=0)
     server_result_msg = models.CharField(
+        _("server result msg"),
         max_length=RESULT_MSG_LEN,
         default='', blank=True, null=True,
         help_text=_("Latest result message relating to the server"))
 
     # when we received the last update for v4/v6 addr
-    last_update_ipv4 = models.DateTimeField(blank=True, null=True)
-    last_update_ipv6 = models.DateTimeField(blank=True, null=True)
+    last_update_ipv4 = models.DateTimeField(_("last update IPv4"), blank=True, null=True)
+    last_update_ipv6 = models.DateTimeField(_("last update IPv6"), blank=True, null=True)
     # how we received the last update for v4/v6 addr
-    tls_update_ipv4 = models.BooleanField(default=False)
-    tls_update_ipv6 = models.BooleanField(default=False)
+    tls_update_ipv4 = models.BooleanField(_("TLS update IPv4"), default=False)
+    tls_update_ipv6 = models.BooleanField(_("TLS update IPv4"), default=False)
 
-    last_update = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts')
+    last_update = models.DateTimeField(_("last update"), auto_now=True)
+    created = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),)
 
     def __unicode__(self):
         return u"%s.%s" % (
@@ -204,6 +233,8 @@ class Host(models.Model):
     class Meta(object):
         unique_together = (('name', 'domain'), )
         index_together = (('name', 'domain'), )
+        verbose_name = _('host')
+        verbose_name_plural = _('hosts')
 
     def get_fqdn(self):
         return dnstools.FQDN(self.name, self.domain.name)
@@ -308,6 +339,7 @@ post_save.connect(post_save_host, sender=Host)
 class RelatedHost(models.Model):
     # host addr = network_of_main_host + interface_id
     name = models.CharField(
+        _("name"),
         max_length=255,  # RFC 2181 (and considering having multiple joined labels here later)
         validators=[
             RegexValidator(
@@ -317,23 +349,31 @@ class RelatedHost(models.Model):
         ],
         help_text=_("The name of a host in same network as your main host."))
     comment = models.CharField(
+        _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
     interface_id_ipv4 = models.CharField(
+        _("interface ID IPv4"),
         default='',
         max_length=16,  # 123.123.123.123
         help_text=_("The IPv4 interface ID of this host. Use IPv4 notation."))
     interface_id_ipv6 = models.CharField(
+        _("interface ID IPv6"),
         default='',
         max_length=22,  # ::1234:5678:9abc:def0
         help_text=_("The IPv6 interface ID of this host. Use IPv6 notation."))
     available = models.BooleanField(
+        _("available"),
         default=True,
         help_text=_("Check if host is available/in use - "
                     "if not checked, we won't accept updates for this host"))
 
-    main_host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='relatedhosts')
+    main_host = models.ForeignKey(
+        Host,
+        on_delete=models.CASCADE,
+        related_name='relatedhosts',
+        verbose_name=_("main host"))
 
     def __unicode__(self):
         return u"%s.%s" % (
@@ -341,6 +381,8 @@ class RelatedHost(models.Model):
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
+        verbose_name = _('related host')
+        verbose_name_plural = _('related hosts')
 
     def get_fqdn(self):
         main = self.main_host.get_fqdn()
@@ -369,64 +411,91 @@ pre_delete.connect(pre_delete_host, sender=RelatedHost)
 
 class ServiceUpdater(models.Model):
     name = models.CharField(
+        _("name"),
         max_length=32,
         help_text=_("Service name"))
     comment = models.CharField(
+        _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about the service"))
     server = models.CharField(
+        _("server"),
         max_length=255,  # should be enough
         help_text=_("Update Server [name or IP] of this service"))
     path = models.CharField(
+        _("path"),
         max_length=255,  # should be enough
         default='/nic/update',
         help_text=_("Update Server URL path of this service"))
     secure = models.BooleanField(
+        _("secure"),
         default=True,
         help_text=_("Use https / TLS to contact the Update Server?"))
 
     # what kind(s) of IPs is (are) acceptable to this service:
-    accept_ipv4 = models.BooleanField(default=False)
-    accept_ipv6 = models.BooleanField(default=False)
+    accept_ipv4 = models.BooleanField(_("accept IPv4"), default=False)
+    accept_ipv6 = models.BooleanField(_("accept IPv6"), default=False)
 
-    last_update = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdater')
+    last_update = models.DateTimeField(_("last update"), auto_now=True)
+    created = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='serviceupdater',
+        verbose_name=_("created by"))
 
     def __unicode__(self):
         return u"%s" % (self.name, )
 
+    class Meta(object):
+        verbose_name = _('service update')
+        verbose_name_plural = _('service updates')
+
 
 class ServiceUpdaterHostConfig(models.Model):
-    service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE)
+    service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE, verbose_name=_("service"))
 
     hostname = models.CharField(
+        _("hostname"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("The hostname for that service (used in query string)"))
     comment = models.CharField(
+        _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about your host on that service"))
     # credentials for http basic auth for THAT service (not for us),
     # we need to store the password in plain text, we can't hash it
     name = models.CharField(
+        _("name"),
         max_length=255,  # should be enough
         help_text=_("The name/id for that service (used for http basic auth)"))
     password = models.CharField(
+        _("password"),
         max_length=255,  # should be enough
         help_text=_("The password/secret for that service (used for http basic auth)"))
 
     # what kind(s) of IPs should be given to this service:
-    give_ipv4 = models.BooleanField(default=False)
-    give_ipv6 = models.BooleanField(default=False)
+    give_ipv4 = models.BooleanField(_("give IPv4"), default=False)
+    give_ipv6 = models.BooleanField(_("give IPv6"), default=False)
 
-    host = models.ForeignKey(Host, on_delete=models.CASCADE, related_name='serviceupdaterhostconfigs')
+    host = models.ForeignKey(
+        Host,
+        on_delete=models.CASCADE,
+        related_name='serviceupdaterhostconfigs',
+        verbose_name=_("host"))
 
-    last_update = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='serviceupdaterhostconfigs')
+    last_update = models.DateTimeField(_("last update"), auto_now=True)
+    created = models.DateTimeField(_("created at"), auto_now_add=True)
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='serviceupdaterhostconfigs',
+        verbose_name=_("created by"))
 
     def __unicode__(self):
         return u"%s (%s)" % (self.hostname, self.service.name, )
+
+    class Meta(object):
+        verbose_name = _('service updater host config')
+        verbose_name_plural = _('service updater host configs')
