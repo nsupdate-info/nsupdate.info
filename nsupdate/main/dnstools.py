@@ -132,7 +132,8 @@ def add(fqdn, ipaddr, ttl=60):
 
 def delete(fqdn, rdtype=None):
     """
-    dns deleter
+    intelligent dns deleter - first does a lookup on the master server to find
+    out whether there is a dns entry and only send a 'del' if there is an entry.
 
     :param fqdn: fully qualified domain name (FQDN)
     :param rdtype: 'A', 'AAAA' or None (deletes 'A' and 'AAAA')
@@ -144,7 +145,15 @@ def delete(fqdn, rdtype=None):
     else:
         rdtypes = ['A', 'AAAA']
     for rdtype in rdtypes:
-        update_ns(fqdn, rdtype, action='del')
+        try:
+            # check if we have a DNS entry
+            query_ns(fqdn, rdtype)
+        except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+            # no dns entry, it is already deleted
+            pass
+        else:
+            # there is a DNS entry, send a del
+            update_ns(fqdn, rdtype, action='del')
 
 
 def update(fqdn, ipaddr, ttl=60):
