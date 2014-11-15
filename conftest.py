@@ -20,6 +20,7 @@ TEST_SECRET2 = "somethingelse"
 RELATED_HOST_NAME = 'rh'
 TEST_HOST_RELATED = FQDN(RELATED_HOST_NAME + '.' + TEST_HOST.host, TEST_HOST.domain)
 NAMESERVER_IP = "85.10.192.104"
+NAMESERVER2_IP = NAMESERVER_IP  # use same server as tests query shortly after update, too quick for secondary
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
 # no problem, you can ONLY update the TESTDOMAIN with this secret, nothing else:
 NAMESERVER_UPDATE_SECRET = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
@@ -75,6 +76,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     dt = Domain.objects.create(
         name=TESTDOMAIN,  # special: test-domain update secret!
         nameserver_ip=NAMESERVER_IP,
+        nameserver2_ip=NAMESERVER2_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret=NAMESERVER_UPDATE_SECRET,
         public=NAMESERVER_PUBLIC,
@@ -84,6 +86,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     d = Domain.objects.create(
         name=BASEDOMAIN,
         nameserver_ip=NAMESERVER_IP,
+        nameserver2_ip=NAMESERVER2_IP,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret='invalid=',  # we don't send updates there (and the real key is really secret)
         public=NAMESERVER_PUBLIC,

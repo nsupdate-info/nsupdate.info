@@ -197,11 +197,14 @@ def query_ns(fqdn, rdtype):
     :raises: see dns.resolver.Resolver.query
     """
     assert isinstance(fqdn, FQDN)
-    nameserver, origin = get_ns_info(fqdn)[0:2]
+    nameserver, nameserver2, origin = get_ns_info(fqdn)[0:3]
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
+    if nameserver2:
+        # if we have a secondary ns, prefer it for queries
+        resolver.nameservers.insert(0, nameserver2)
     resolver.search = []
     resolver.lifetime = RESOLVER_TIMEOUT
     # as we query directly the (authoritative) master dns, we do not desire
@@ -269,7 +272,7 @@ def get_ns_info(fqdn):
             # retry timeout is over, set it available again
             set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return d.nameserver_ip, fqdn.domain, domain, fqdn.host, domain, d.nameserver_update_secret, algorithm
+    return d.nameserver_ip, d.nameserver2_ip, fqdn.domain, domain, fqdn.host, domain, d.nameserver_update_secret, algorithm
 
 
 def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
@@ -286,7 +289,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     """
     assert isinstance(fqdn, FQDN)
     assert action in ['add', 'del', 'upd', ]
-    nameserver, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
+    nameserver, nameserver2, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
     upd = dns.update.Update(origin,
                             keyring=dns.tsigkeyring.from_text({keyname: key}),
                             keyalgorithm=algo)
