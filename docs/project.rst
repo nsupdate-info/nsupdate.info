@@ -27,7 +27,11 @@ Translations are done on Transifex - please collaborate there to avoid double wo
 
 https://www.transifex.com/projects/p/nsupdateinfo/
 
-Translation update workflow (start from a clean workdir):
+Please make sure to configure your notification settings so that you are
+notified when the translation project is updated (so you can react quickly and
+keep your translation fresh).
+
+Translations update workflow (start from a clean workdir):
 
 ::
 
@@ -35,6 +39,8 @@ Translation update workflow (start from a clean workdir):
     tx pull
     # update the translations with changes from the source code:
     django-admin.py makemessages -a
+    # compile the translations to .mo files
+    django-admin.py compilemessages
     # push updated translation files back to transifex:
     tx push -s -t
 

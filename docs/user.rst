@@ -13,7 +13,7 @@ update client.
 Usually this kind of software is built-in in your internet router (search for "dynamic DNS", "DDNS", "dyndns" on
 its user interface).
 
-Alternatively, you can also run a software on a PC / server (like ddclient for Linux).
+Alternatively, you can also run a software on a PC / server (like ddclient or inadyn for Linux).
 
 Or even just use your browser to update your IP via the web interface of the service.
 
@@ -352,9 +352,16 @@ Here are some clients that likely qualify:
   - good working, reliable
   - the official version is IPv4 only, IPv6 support needs a patched version
   - Linux & other POSIX systems
+* inadyn (>= 1.99.11)
+
+  - we offer configuration help for it, just copy & paste
+  - good working, reliable
+  - IPv4 only
+  - Linux & other POSIX systems
 * python-dyndnsc
 
-  - IPv4 and v6 support
+  - still alpha/beta, but works
+  - IPv4 and good IPv6 support
   - Mac OS X, Linux and FreeBSD
 * whatever your router / gateway / firewall has for dyndns / ddns
 

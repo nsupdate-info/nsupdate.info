@@ -229,10 +229,7 @@ class NicUpdateView(View):
         if not ipaddr:  # None or ''
             ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
         secure = request.is_secure()
-        if delete:
-            return _delete(host, ipaddr, secure, logger=logger)
-        else:
-            return _update(host, ipaddr, secure, logger=logger)
+        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
 
 
 class NicDeleteView(NicUpdateView):
@@ -287,10 +284,7 @@ class AuthorizedNicUpdateView(View):
         if not ipaddr:  # None or empty string
             ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
         secure = request.is_secure()
-        if delete:
-            return _delete(host, ipaddr, secure, logger=logger)
-        else:
-            return _update(host, ipaddr, secure, logger=logger)
+        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
 
 
 class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
@@ -306,28 +300,30 @@ class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
         return super(AuthorizedNicDeleteView, self).get(request, logger=logger, delete=delete)
 
 
-def _update(host, ipaddr, secure=False, logger=None):
+def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     """
-    common code shared by the 2 update views
+    common code shared by the 2 update/delete views
 
     :param host: host object
-    :param ipaddr: new ip addr (v4 or v6)
+    :param ipaddr: ip addr (v4 or v6)
     :param secure: True if we use TLS/https
     :param logger: a logger object
+    :param _delete: True for delete, False for update
     :return: Response object with dyndns2 response
     """
+    mode = ('update', 'delete')[_delete]
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
     fqdn = host.get_fqdn()
     if host.abuse or host.abuse_blocked:
-        msg = '%s - received update for host with abuse / abuse_blocked flag set' % (fqdn, )
+        msg = '%s - received %s for host with abuse / abuse_blocked flag set' % (fqdn, mode, )
         logger.warning(msg)
         host.register_client_result(msg, fault=False)
         return Response('abuse')
     if not host.available:
         # not available is like it doesn't exist
-        msg = '%s - received update for unavailable host' % (fqdn, )
+        msg = '%s - received %s for unavailable host' % (fqdn, mode, )
         logger.warning(msg)
         host.register_client_result(msg, fault=False)
         return Response('nohost')
@@ -337,6 +333,7 @@ def _update(host, ipaddr, secure=False, logger=None):
         # TODO: reproduce and submit traceback to issue 41
         ipaddr = str(ipaddr)
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
+        rdtype = 'A' if kind == 'ipv4' else 'AAAA'
     except (ValueError, UnicodeError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
@@ -346,7 +343,10 @@ def _update(host, ipaddr, secure=False, logger=None):
         return Response('dnserr')  # there should be a better response code for this
     host.poke(kind, secure)
     try:
-        update(fqdn, ipaddr)
+        if _delete:
+            delete(fqdn, rdtype)
+        else:
+            update(fqdn, ipaddr)
     except SameIpError:
         msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.warning(msg)
@@ -354,119 +354,75 @@ def _update(host, ipaddr, secure=False, logger=None):
         return Response('nochg %s' % ipaddr)
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
-        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
-            fqdn, msg, ipaddr, secure)
+        msg = '%s - received %s that resulted in a dns error [%s], ip: %s tls: %r' % (
+            fqdn, mode, msg, ipaddr, secure)
         logger.error(msg)
         host.register_server_result(msg, fault=True)
         return Response('dnserr')
     else:
-        msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
+        if _delete:
+            msg = '%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure)
+        else:
+            msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.info(msg)
         host.register_client_result(msg, fault=False)
-        # update related hosts
-        for rh in host.relatedhosts.all():
-            if rh.available:
-                if kind == 'ipv4':
-                    ifid = rh.interface_id_ipv4.strip()
-                    netmask = host.netmask_ipv4
-                else:  # kind == 'ipv6':
-                    ifid = rh.interface_id_ipv6.strip()
-                    netmask = host.netmask_ipv6
-                if not ifid:
-                    # ifid can be just left blank if no address record of this type is wanted
-                    continue
+        if _delete:
+            # XXX unclear what to do for "other services" we relay updates to
+            return Response('deleted %s' % rdtype)
+        else:  # update
+            _on_update_success(host, fqdn, kind, ipaddr, secure)
+            return Response('good %s' % ipaddr)
+
+
+def _on_update_success(host, fqdn, kind, ipaddr, secure):
+    """after updating the host in dns, do related other updates"""
+    # update related hosts
+    for rh in host.relatedhosts.all():
+        if rh.available:
+            if kind == 'ipv4':
+                ifid = rh.interface_id_ipv4.strip()
+                netmask = host.netmask_ipv4
+            else:  # kind == 'ipv6':
+                ifid = rh.interface_id_ipv6.strip()
+                netmask = host.netmask_ipv6
+            if not ifid:
+                # ifid can be just left blank if no address record of this type is wanted
+                continue
+            try:
+                ifid = IPAddress(ifid)
+                network = IPNetwork("%s/%d" % (ipaddr, netmask))
+                rh_ipaddr = str(IPAddress(network.network) + int(ifid))
+                rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
+            except AddrFormatError as e:
+                logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
+            else:
+                logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
                 try:
-                    ifid = IPAddress(ifid)
-                    network = IPNetwork("%s/%d" % (ipaddr, netmask))
-                    rh_ipaddr = str(IPAddress(network.network) + int(ifid))
-                    rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
-                except AddrFormatError as e:
-                    logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
-                else:
-                    logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
-                    try:
-                        update(rh_fqdn, rh_ipaddr)
-                    except SameIpError:
-                        msg = '%s - received no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
-                        logger.warning(msg)
-                        host.register_client_result(msg, fault=True)
-                    except (DnsUpdateError, NameServerNotAvailable) as e:
-                        msg = str(e)
-                        msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
-                            rh_fqdn, msg, rh_ipaddr, secure)
-                        logger.error(msg)
-                        host.register_server_result(msg, fault=True)
+                    update(rh_fqdn, rh_ipaddr)
+                except SameIpError:
+                    msg = '%s - received no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
+                    logger.warning(msg)
+                    host.register_client_result(msg, fault=True)
+                except (DnsUpdateError, NameServerNotAvailable) as e:
+                    msg = str(e)
+                    msg = '%s - received update that resulted in a dns error [%s], ip: %s tls: %r' % (
+                        rh_fqdn, msg, rh_ipaddr, secure)
+                    logger.error(msg)
+                    host.register_server_result(msg, fault=True)
 
-        # now check if there are other services we shall relay updates to:
-        for hc in host.serviceupdaterhostconfigs.all():
-            if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
-                or
-                kind == 'ipv6' and hc.give_ipv6 and hc.service.accept_ipv6):
-                kwargs = dict(
-                    name=hc.name, password=hc.password,
-                    hostname=hc.hostname, myip=ipaddr,
-                    server=hc.service.server, path=hc.service.path, secure=hc.service.secure,
-                )
-                try:
-                    ddns_client.dyndns2_update(**kwargs)
-                except Exception:
-                    # we never want to crash here
-                    kwargs.pop('password')
-                    logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
-        return Response('good %s' % ipaddr)
-
-
-def _delete(host, ipaddr, secure=False, logger=None):
-    """
-    common code shared by the 2 delete views
-
-    :param host: host object
-    :param ipaddr: ip addr (to determine record type A or AAAA)
-    :param secure: True if we use TLS/https
-    :param logger: a logger object
-    :return: Response object with dyndns2 response
-    """
-    # we are doing abuse / available checks rather late, so the client might
-    # get more specific responses (like 'badagent' or 'notfqdn') by earlier
-    # checks. it also avoids some code duplication if done here:
-    fqdn = host.get_fqdn()
-    if host.abuse or host.abuse_blocked:
-        msg = '%s - received delete for host with abuse / abuse_blocked flag set' % (fqdn, )
-        logger.warning(msg)
-        host.register_client_result(msg, fault=False)
-        return Response('abuse')
-    if not host.available:
-        # not available is like it doesn't exist
-        msg = '%s - received delete for unavailable host' % (fqdn, )
-        logger.warning(msg)
-        host.register_client_result(msg, fault=False)
-        return Response('nohost')
-    try:
-        # bug in dnspython: crashes if ipaddr is unicode, wants a str!
-        # https://github.com/rthalley/dnspython/issues/41
-        # TODO: reproduce and submit traceback to issue 41
-        ipaddr = str(ipaddr)
-        kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
-    except (ValueError, UnicodeError):
-        # invalid ip address string
-        # some people manage to even give a non-ascii string instead of an ip addr
-        msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
-        logger.warning(msg)
-        host.register_client_result(msg, fault=True)
-        return Response('dnserr')  # there should be a better response code for this
-    host.poke(kind, secure)
-    try:
-        rdtype = 'A' if kind == 'ipv4' else 'AAAA'
-        delete(fqdn, rdtype)
-        msg = '%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure)
-        logger.info(msg)
-        host.register_client_result(msg, fault=False)
-        # XXX unclear what to do for "other services" we relay updates to
-        return Response('deleted %s' % rdtype)
-    except (DnsUpdateError, NameServerNotAvailable) as e:
-        msg = str(e)
-        msg = '%s - received delete for record %s that resulted in a dns error [%s], tls: %r' % (
-            fqdn, rdtype, msg, secure)
-        logger.error(msg)
-        host.register_server_result(msg, fault=True)
-        return Response('dnserr')
+    # now check if there are other services we shall relay updates to:
+    for hc in host.serviceupdaterhostconfigs.all():
+        if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
+            or
+            kind == 'ipv6' and hc.give_ipv6 and hc.service.accept_ipv6):
+            kwargs = dict(
+                name=hc.name, password=hc.password,
+                hostname=hc.hostname, myip=ipaddr,
+                server=hc.service.server, path=hc.service.path, secure=hc.service.secure,
+            )
+            try:
+                ddns_client.dyndns2_update(**kwargs)
+            except Exception:
+                # we never want to crash here
+                kwargs.pop('password')
+                logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)

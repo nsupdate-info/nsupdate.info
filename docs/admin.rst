@@ -70,6 +70,14 @@ To create and initialize the database, use::
     python manage.py migrate
 
 
+Create the superuser account
+----------------------------
+
+To create the user who is administrator of the service, use::
+
+    python manage.py createsuperuser
+
+
 Start the development server
 ----------------------------
 
@@ -81,9 +89,8 @@ Start the development server
 Nameserver
 ----------
 
-Now as the server is running, you can log in using the database administrator
-account you created in the manage migrate step and use "admin" from the menu
-to start Django's admin.
+Now as the server is running, you can log in using the superuser account you
+just created and use "admin" from the menu to access Django's admin interface.
 
 You'll need to configure at least 1 nameserver / 1 zone to accept dynamic updates,
 see the "Domains" section in the "user" part of the manual.
@@ -131,12 +138,12 @@ django apps (wsgi apps) with the webserver you use.
 
 Django has nice generic documentation about this, see there:
 
-https://docs.djangoproject.com/en/1.6/howto/deployment/
+https://docs.djangoproject.com/en/1.7/howto/deployment/
 
 Even if you do not follow or fully read the deployment guide, make sure that
 you at least read the checklist:
 
-https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 
 HTTP Basic Auth
@@ -288,32 +295,33 @@ You need to run some commands regularly, we show how to do that on Linux (or
 other POSIX OSes) using user cronjobs (use crontab -e to edit it). Make sure
 it runs as the same user as the nsupdate.info wsgi application::
 
+    PYTHONPATH=/srv/nsupdate.info
     DJANGO_SETTINGS_MODULE=local_settings
     # reinitialize the test user:
-    50 2 * * * django-admin.py testuser
+    50 2 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py testuser
     # reset the fault counters:
-    55 2 * * * django-admin.py faults --flag-abuse=20 --reset-client --notify-user
+    55 2 * * 6 $HOME/env/bin/python $HOME/env/bin/django-admin.py faults --flag-abuse=150 --reset-client --notify-user
     # clear expired sessions from the database, use your correct settings module:
-    0  3 * * 1 django-admin.py clearsessions
+    0  3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py clearsessions
     # clear outdated registrations:
-    0  3 * * 2 django-admin.py cleanupregistration
+    30 3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py cleanupregistration
 
 
 Dealing with abuse
 ------------------
 
 In the regular jobs example in the previous section,
---flag-abuse=20 means that it'll set the abuse flag if the client fault counter
-is over 20 (and, for these cases, it'll also reset the fault counter back to 0).
+--flag-abuse=150 means that it'll set the abuse flag if the client fault counter
+is over 150 (and, for these cases, it'll also reset the fault counter back to 0).
 
 --reset-client additionally sets all client fault counters back to 0, so all
-counts are just "per day".
+counts are just "per week".
 
 --notify-user will send an email notification to the creator of the host if we
 set the abuse flag for it. The email will contain instructions for the user
 about how to fix the problem.
 
-So, if you run this daily, it means that more than 20 client faults per day are
+So, if you run this weekly, it means that more than 150 client faults per week are
 considered abuse (e.g. if someone runs a stupid cronjob to update the IP instead
 of a well-behaved update client).
 
@@ -321,7 +329,7 @@ Hosts with the abuse flag set won't accept updates, but the user will be able to
 see the abuse flag (as ABUSE on the web interface and also their update client
 should show it somehow), fix the problem on the client side and reset the abuse
 flag via the web interface. If the problem was not really fixed, then it will
-set the abuse flag again the next day.
+set the abuse flag again the next week.
 
 This procedure should make sure that users of the service run sane and correctly
 working update clients while being able to fix issues on their own without
