@@ -13,6 +13,7 @@ New Features:
 * if the abuse / abuse_blocked flag is set for a host, it is removed from DNS
 * users can delete their accounts, if they want to stop using the service
   (all hosts, domains, etc. created by this user will be deleted)
+* added admin UI for Related Hosts
 
 Fixes:
 
@@ -25,6 +26,9 @@ Other changes:
 * remove support for "south" migrations
 * add support for django 1.7's builtin migrations
 * misc. layout / UI improvments
+* misc. doc improvements
+* improved original strings in translations, use "trimmed" in django templates
+* upgraded bootstrap
 
 
 Release 0.9.1
