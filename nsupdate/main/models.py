@@ -220,6 +220,14 @@ class Host(models.Model):
         default='', blank=True, null=True,
         help_text=_("Latest result message relating to the server"))
 
+    # count api auth errors - maybe caused by host owner (misconfigured update client)
+    api_auth_faults = models.PositiveIntegerField(_("api auth faults"), default=0)
+    api_auth_result_msg = models.CharField(
+        _("api auth result msg"),
+        max_length=RESULT_MSG_LEN,
+        default='', blank=True, null=True,
+        help_text=_("Latest result message relating to api authentication"))
+
     # when we received the last update for v4/v6 addr
     last_update_ipv4 = models.DateTimeField(_("last update IPv4"), blank=True, null=True)
     last_update_ipv6 = models.DateTimeField(_("last update IPv6"), blank=True, null=True)
@@ -294,6 +302,12 @@ class Host(models.Model):
         if fault:
             self.server_faults += 1
         self.server_result_msg = result_fmt(msg)
+        self.save()
+
+    def register_api_auth_result(self, msg, fault=False):
+        if fault:
+            self.api_auth_faults += 1
+        self.api_auth_result_msg = result_fmt(msg)
         self.save()
 
     def generate_secret(self, secret=None):

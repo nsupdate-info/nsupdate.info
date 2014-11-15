@@ -139,9 +139,14 @@ def check_api_auth(username, password):
         host = Host.get_by_fqdn(fqdn)
     except ValueError:
         return None
-    if host is None or not check_password(password, host.update_secret):
-        return None
-    return host
+    if host is not None:
+        ok = check_password(password, host.update_secret)
+        success_msg = ('failure', 'success')[ok]
+        msg = "api authentication %s. [hostname: %s (given in basic auth)]" % (success_msg, fqdn, )
+        host.register_api_auth_result(msg, fault=not ok)
+        if ok:
+            return host
+    return None
 
 
 def check_session_auth(user, hostname):
