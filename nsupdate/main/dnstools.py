@@ -318,6 +318,10 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
         logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin, ))
         set_ns_availability(domain, False)
         raise DnsUpdateError("PeerBadSignature")
+    except dns.tsig.PeerBadKey:
+        logger.error("PeerBadKey - shared secret mismatch? zone: %s" % (origin, ))
+        set_ns_availability(domain, False)
+        raise DnsUpdateError("PeerBadKey")
     except dns.tsig.PeerBadTime:
         logger.error("PeerBadTime - DNS server did not like the time we sent. zone: %s" % (origin, ))
         set_ns_availability(domain, False)
