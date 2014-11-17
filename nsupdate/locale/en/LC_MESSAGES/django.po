@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-15 14:39+0100\n"
+"POT-Creation-Date: 2014-11-17 21:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -295,131 +295,352 @@ msgid ""
 "you registered with, and check your spam folder."
 msgstr ""
 
-#: main/models.py:38
+#: main/models.py:36
+msgid "name RegEx"
+msgstr ""
+
+#: main/models.py:39
 msgid "Blacklisted domain. Evaluated as regex (search)."
 msgstr ""
 
-#: main/models.py:75
+#: main/models.py:41 main/models.py:123 main/models.py:238 main/models.py:459
+#: main/models.py:508
+msgid "last update"
+msgstr ""
+
+#: main/models.py:42 main/models.py:124 main/models.py:239 main/models.py:460
+#: main/models.py:509
+msgid "created at"
+msgstr ""
+
+#: main/models.py:46 main/models.py:125 main/models.py:240 main/models.py:464
+#: main/models.py:513
+msgid "created by"
+msgstr ""
+
+#: main/models.py:52
+msgid "blacklisted host"
+msgstr ""
+
+#: main/models.py:53
+msgid "blacklisted hosts"
+msgstr ""
+
+#: main/models.py:81 main/models.py:150 main/models.py:361 main/models.py:433
+#: main/models.py:490
+msgid "name"
+msgstr ""
+
+#: main/models.py:84
 msgid "Name of the zone where dynamic hosts may get added"
 msgstr ""
 
-#: main/models.py:78
+#: main/models.py:86
+msgid "nameserver IP (primary)"
+msgstr ""
+
+#: main/models.py:88
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
 msgstr ""
 
-#: main/models.py:82
+#: main/models.py:90
+msgid "nameserver IP (secondary)"
+msgstr ""
+
+#: main/models.py:93
+msgid "IP where DNS queries for this zone will be sent to"
+msgstr ""
+
+#: main/models.py:95
+msgid "nameserver update secret"
+msgstr ""
+
+#: main/models.py:98
 msgid "Shared secret that allows updating this zone (base64 encoded)"
 msgstr ""
 
-#: main/models.py:86
+#: main/models.py:100
+msgid "nameserver update algorithm"
+msgstr ""
+
+#: main/models.py:103
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
 msgstr ""
 
-#: main/models.py:89
+#: main/models.py:105
+msgid "public"
+msgstr ""
+
+#: main/models.py:107
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
 msgstr ""
 
-#: main/models.py:95
+#: main/models.py:112 main/models.py:175 main/models.py:386
+msgid "available"
+msgstr ""
+
+#: main/models.py:114
 msgid ""
 "Check if nameserver is available/reachable - if not checked, we'll pause "
 "querying/updating this nameserver for a while"
 msgstr ""
 
-#: main/models.py:100
+#: main/models.py:117 main/models.py:166 main/models.py:371 main/models.py:437
+#: main/models.py:483
+msgid "comment"
+msgstr ""
+
+#: main/models.py:120
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will be also publicly shown."
 msgstr ""
 
-#: main/models.py:134
+#: main/models.py:144 main/models.py:160
+msgid "domain"
+msgstr ""
+
+#: main/models.py:145
+msgid "domains"
+msgstr ""
+
+#: main/models.py:159
 msgid "The name of your host."
 msgstr ""
 
-#: main/models.py:142 main/models.py:322
+#: main/models.py:162
+msgid "update secret"
+msgstr ""
+
+#: main/models.py:169 main/models.py:374
 msgid ""
 "Some arbitrary comment about your host, e.g  who / what / where this host is"
 msgstr ""
 
-#: main/models.py:149 main/models.py:333
+#: main/models.py:177 main/models.py:388
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
 msgstr ""
 
-#: main/models.py:153
+#: main/models.py:180
+msgid "netmask IPv4"
+msgstr ""
+
+#: main/models.py:182
 msgid "Netmask/Prefix length for IPv4."
 msgstr ""
 
-#: main/models.py:156
+#: main/models.py:184
+msgid "netmask IPv6"
+msgstr ""
+
+#: main/models.py:186
 msgid "Netmask/Prefix length for IPv6."
 msgstr ""
 
-#: main/models.py:166
+#: main/models.py:195
+msgid "abuse"
+msgstr ""
+
+#: main/models.py:197
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
 msgstr ""
 
-#: main/models.py:172
+#: main/models.py:202
+msgid "abuse blocked"
+msgstr ""
+
+#: main/models.py:204
 msgid "Checked to block a host for abuse."
 msgstr ""
 
-#: main/models.py:180
+#: main/models.py:208
+msgid "client faults"
+msgstr ""
+
+#: main/models.py:210
+msgid "client result msg"
+msgstr ""
+
+#: main/models.py:213
 msgid "Latest result message relating to the client"
 msgstr ""
 
-#: main/models.py:187
+#: main/models.py:216
+msgid "server faults"
+msgstr ""
+
+#: main/models.py:218
+msgid "server result msg"
+msgstr ""
+
+#: main/models.py:221
 msgid "Latest result message relating to the server"
 msgstr ""
 
-#: main/models.py:318
+#: main/models.py:224
+msgid "api auth faults"
+msgstr ""
+
+#: main/models.py:226
+msgid "api auth result msg"
+msgstr ""
+
+#: main/models.py:229
+msgid "Latest result message relating to api authentication"
+msgstr ""
+
+#: main/models.py:232
+msgid "last update IPv4"
+msgstr ""
+
+#: main/models.py:233
+msgid "last update IPv6"
+msgstr ""
+
+#: main/models.py:235
+msgid "TLS update IPv4"
+msgstr ""
+
+#: main/models.py:236
+msgid "TLS update IPv6"
+msgstr ""
+
+#: main/models.py:249 main/models.py:506
+msgid "host"
+msgstr ""
+
+#: main/models.py:250
+msgid "hosts"
+msgstr ""
+
+#: main/models.py:369
 msgid "The name of a host in same network as your main host."
 msgstr ""
 
-#: main/models.py:326
+#: main/models.py:376
+msgid "interface ID IPv4"
+msgstr ""
+
+#: main/models.py:379
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
 msgstr ""
 
-#: main/models.py:330
-msgid "The IPv6 interface ID of this host. Use IPv6 notation."
-msgstr ""
-
-#: main/models.py:373
-msgid "Service name"
-msgstr ""
-
-#: main/models.py:377
-msgid "Some arbitrary comment about the service"
-msgstr ""
-
-#: main/models.py:380
-msgid "Update Server [name or IP] of this service"
+#: main/models.py:381
+msgid "interface ID IPv6"
 msgstr ""
 
 #: main/models.py:384
+msgid "The IPv6 interface ID of this host. Use IPv6 notation."
+msgstr ""
+
+#: main/models.py:395
+msgid "main host"
+msgstr ""
+
+#: main/models.py:403
+msgid "related host"
+msgstr ""
+
+#: main/models.py:404
+msgid "related hosts"
+msgstr ""
+
+#: main/models.py:435
+msgid "Service name"
+msgstr ""
+
+#: main/models.py:440
+msgid "Some arbitrary comment about the service"
+msgstr ""
+
+#: main/models.py:442
+msgid "server"
+msgstr ""
+
+#: main/models.py:444
+msgid "Update Server [name or IP] of this service"
+msgstr ""
+
+#: main/models.py:446
+msgid "path"
+msgstr ""
+
+#: main/models.py:449
 msgid "Update Server URL path of this service"
 msgstr ""
 
-#: main/models.py:387
+#: main/models.py:451
+msgid "secure"
+msgstr ""
+
+#: main/models.py:453
 msgid "Use https / TLS to contact the Update Server?"
 msgstr ""
 
-#: main/models.py:407
+#: main/models.py:456
+msgid "accept IPv4"
+msgstr ""
+
+#: main/models.py:457
+msgid "accept IPv6"
+msgstr ""
+
+#: main/models.py:470
+msgid "service updater"
+msgstr ""
+
+#: main/models.py:471
+msgid "service updaters"
+msgstr ""
+
+#: main/models.py:475
+msgid "service"
+msgstr ""
+
+#: main/models.py:478
+msgid "hostname"
+msgstr ""
+
+#: main/models.py:481
 msgid "The hostname for that service (used in query string)"
 msgstr ""
 
-#: main/models.py:411
+#: main/models.py:486
 msgid "Some arbitrary comment about your host on that service"
 msgstr ""
 
-#: main/models.py:416
+#: main/models.py:492
 msgid "The name/id for that service (used for http basic auth)"
 msgstr ""
 
-#: main/models.py:419
+#: main/models.py:494
+msgid "password"
+msgstr ""
+
+#: main/models.py:496
 msgid "The password/secret for that service (used for http basic auth)"
+msgstr ""
+
+#: main/models.py:499
+msgid "give IPv4"
+msgstr ""
+
+#: main/models.py:500
+msgid "give IPv6"
+msgstr ""
+
+#: main/models.py:519
+msgid "service updater host config"
+msgstr ""
+
+#: main/models.py:520
+msgid "service updater host configs"
 msgstr ""
 
 #: main/templates/main/about.html:6
@@ -861,10 +1082,14 @@ msgid "Result Messages"
 msgstr ""
 
 #: main/templates/main/host.html:134
-msgid "Client Result Message"
+msgid "API Authentication Result Message"
 msgstr ""
 
 #: main/templates/main/host.html:136
+msgid "Client Result Message"
+msgstr ""
+
+#: main/templates/main/host.html:138
 msgid "Server Result Message"
 msgstr ""
 
