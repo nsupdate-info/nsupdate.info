@@ -55,7 +55,7 @@ setup(
     platforms='any',
     install_requires=install_requires + [
         'netaddr',
-        'django>=1.7',
+        'django>=1.7.1, <1.8',
         'django-bootstrap-form',
         'django-registration-redux',
         'django-extensions',
