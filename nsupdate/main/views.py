@@ -40,8 +40,8 @@ class GenerateSecretView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(GenerateSecretView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(GenerateSecretView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         # generate secret, store it hashed and return the plain secret for the context
         context['update_secret'] = self.object.generate_secret()
@@ -63,8 +63,8 @@ class GenerateNSSecretView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(GenerateNSSecretView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(GenerateNSSecretView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         context['shared_secret'] = self.object.generate_ns_secret()
         messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
@@ -74,8 +74,8 @@ class GenerateNSSecretView(UpdateView):
 class AboutView(TemplateView):
     template_name = "main/about.html"
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(AboutView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
         context['nav_about'] = True
         return context
 
@@ -91,8 +91,8 @@ class CustomTemplateView(TemplateView):
 class HomeView(TemplateView):
     template_name = "main/home.html"
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
         context['nav_home'] = True
         return context
 
@@ -104,9 +104,9 @@ class StatusView(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(StatusView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(
-            StatusView, self).get_context_data(*args, **kwargs)
+            StatusView, self).get_context_data(**kwargs)
         context['nav_status'] = True
         context['domains_total'] = Domain.objects.count()
         context['domains_unavailable'] = Domain.objects.filter(available=False).count()
@@ -165,8 +165,8 @@ class JsUpdateView(TemplateView):
         self.secret = password
         return super(JsUpdateView, self).get(request, *args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(JsUpdateView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(JsUpdateView, self).get_context_data(**kwargs)
         context['hostname'] = self.hostname
         context['secret'] = self.secret
         return context
@@ -179,8 +179,8 @@ class OverviewView(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(OverviewView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(OverviewView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(OverviewView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         context['hosts'] = Host.objects.filter(created_by=self.request.user)
         context['your_domains'] = Domain.objects.filter(
@@ -233,8 +233,8 @@ class AddHostView(CreateView):
         url = self.get_success_url() if success else reverse('overview')
         return HttpResponseRedirect(url)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(AddHostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(AddHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -263,8 +263,8 @@ class HostView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(HostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(HostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         context['remote_addr'] = normalize_ip(self.request.META['REMOTE_ADDR'])
         return context
@@ -289,8 +289,8 @@ class DeleteHostView(DeleteView):
     def get_success_url(self):
         return reverse('overview')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DeleteHostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DeleteHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -306,8 +306,8 @@ class RelatedHostOverviewView(TemplateView):
             raise PermissionDenied()  # or Http404
         return super(RelatedHostOverviewView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(RelatedHostOverviewView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(RelatedHostOverviewView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         context['main_host'] = self.__main_host
         context['related_hosts'] = RelatedHost.objects.filter(main_host=self.__main_host)
@@ -343,8 +343,8 @@ class AddRelatedHostView(CreateView):
         url = self.get_success_url()
         return HttpResponseRedirect(url)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(AddRelatedHostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(AddRelatedHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -373,8 +373,8 @@ class RelatedHostView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(RelatedHostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(RelatedHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -396,8 +396,8 @@ class DeleteRelatedHostView(DeleteView):
     def get_success_url(self):
         return reverse('related_host_overview', args=(self.object.main_host.pk, ))
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DeleteRelatedHostView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DeleteRelatedHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -421,8 +421,8 @@ class AddDomainView(CreateView):
         messages.add_message(self.request, messages.SUCCESS, 'Domain added.')
         return HttpResponseRedirect(self.get_success_url())
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(AddDomainView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(AddDomainView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -451,8 +451,8 @@ class DomainView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DomainView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DomainView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -474,8 +474,8 @@ class DeleteDomainView(DeleteView):
     def get_success_url(self):
         return reverse('overview')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DeleteDomainView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DeleteDomainView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
 
@@ -504,9 +504,9 @@ class UpdaterHostConfigOverviewView(CreateView):
         messages.add_message(self.request, messages.SUCCESS, 'Service Updater Host Configuration added.')
         return HttpResponseRedirect(self.get_success_url())
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(
-            UpdaterHostConfigOverviewView, self).get_context_data(*args, **kwargs)
+            UpdaterHostConfigOverviewView, self).get_context_data(**kwargs)
         context['updater_configs'] = ServiceUpdaterHostConfig.objects.filter(host=self.__host)
         return context
 
@@ -536,8 +536,8 @@ class UpdaterHostConfigView(UpdateView):
             raise PermissionDenied()  # or Http404
         return obj
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(UpdaterHostConfigView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(UpdaterHostConfigView, self).get_context_data(**kwargs)
         return context
 
 
@@ -559,8 +559,8 @@ class DeleteUpdaterHostConfigView(DeleteView):
         host_pk = self.object.host.pk
         return reverse('updater_hostconfig_overview', args=(host_pk,))
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DeleteUpdaterHostConfigView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DeleteUpdaterHostConfigView, self).get_context_data(**kwargs)
         return context
 
 

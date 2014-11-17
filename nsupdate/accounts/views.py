@@ -26,8 +26,8 @@ class UserProfileView(UpdateView):
     def get_success_url(self):
         return reverse('account_profile')
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(UserProfileView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileView, self).get_context_data(**kwargs)
         context['nav_user_profile'] = True
         return context
 
@@ -39,8 +39,8 @@ class DeleteUserView(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(DeleteUserView, self).dispatch(*args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(DeleteUserView, self).get_context_data(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(DeleteUserView, self).get_context_data(**kwargs)
         context['nav_user_profile'] = True
         return context
 
