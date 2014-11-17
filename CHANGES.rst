@@ -8,6 +8,26 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
+Release 0.11.0 (not released yet)
+---------------------------------
+
+New Features:
+
+* Hosts: show client authentication error/success on the host view
+* Domains: support optional secondary nameserver - if given, prefer it for
+  DNS queries
+
+Fixes:
+
+* none yet
+
+Other changes:
+
+* made form field labels translatable, added translations, added plurals
+* added tuning tips section to admin docs (not much yet)
+* some internal cleanups / refactorings
+
+
 Release 0.10.0
 --------------
 
