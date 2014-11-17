@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-15 14:39+0100\n"
-"PO-Revision-Date: 2014-11-15 13:22+0000\n"
-"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
+"POT-Creation-Date: 2014-11-17 20:28+0100\n"
+"PO-Revision-Date: 2014-11-17 08:47+0000\n"
+"Last-Translator: ykmm <ykmm@mediacom.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/nsupdateinfo/"
 "language/it/)\n"
 "Language: it\n"
@@ -23,13 +23,15 @@ msgstr ""
 
 #: accounts/templates/accounts/delete_user.html:7
 msgid "Delete your User Account"
-msgstr ""
+msgstr "Cancella il tuo Account Utente"
 
 #: accounts/templates/accounts/delete_user.html:11
 msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You can not undelete your data."
 msgstr ""
+"Sei sicuro di voler cancellare il tuo account utente e tutti i dati ad esso "
+"associati? Non sarà possibile annullare la cancellazione."
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:11
@@ -55,7 +57,7 @@ msgstr "Dissocia da Account remoto"
 #: accounts/templates/accounts/user_profile.html:35
 #: accounts/templates/accounts/user_profile.html:44
 msgid "Delete User Profile"
-msgstr ""
+msgstr "Cancella Profilo Utente"
 
 #: accounts/templates/accounts/user_profile.html:37
 msgid ""
@@ -63,6 +65,9 @@ msgid ""
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
 msgstr ""
+"Se vuoi smettere di utilizzare questo servizio e cancellare questo profilo "
+"utente e tutti i tuoi dati (in particolar modo tutti gli host ed i domini "
+"creati da questo utente), puoi farlo qui."
 
 #: accounts/templates/registration/activate.html:4
 #: accounts/templates/registration/activation_complete.html:3
