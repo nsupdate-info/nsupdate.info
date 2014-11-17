@@ -305,6 +305,8 @@ it runs as the same user as the nsupdate.info wsgi application::
     0  3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py clearsessions
     # clear outdated registrations:
     30 3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py cleanupregistration
+    # check whether the domain nameservers are reachable / answer queries:
+    0  4 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py domains --check --notify-user
 
 
 Dealing with abuse
@@ -342,6 +344,25 @@ While abuse_blocked is set, the service won't accept updates for this host.
 The user can see the ABUSE-BLOCKED status on the web interface, but can not
 change the flag.
 
+Dealing with badly configured domains
+-------------------------------------
+
+In the regular jobs example in the previous section,
+django-admin.py domains --check --notify-user means that we'll check all
+domains that are currently flagged as available.
+
+We query the nameserver configured for the domain and check if it answers a
+SOA query for this domain. If we can't reach the nameserver or it does not
+answer the query, we flag the domain as not available. We also flag it as
+not public (this only is a change if it was public before).
+If --notify-user is given, we notify the owner of the domain by email if we
+flag the domain as not available. Owner in this context means: the user who
+added the domain to our service.
+
+Please note that we can not check whether the nameserver accepts dynamic
+updates for the domain. The dns admin could have set arbitrary restrictions
+on this and we do not know them. So if you have a domain configured with the
+service, please make sure that dynamic updates really work.
 
 Database contents
 -----------------
