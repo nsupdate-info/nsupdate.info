@@ -1,12 +1,15 @@
 ChangeLog
 =========
 
-Release 0.10.0 (not released yet)
----------------------------------
+Important: when you update and your update crosses the 0.9.x / 0.10 boundary,
+you must first upgrade to 0.9.x and your database must be migrated to 0.9.x.
+AFTER that, you can upgrade to 0.10.x or any later version (and then run the
+migrations for that version). For upgrading and migration help, please see
+the docs that match the version you are upgrading to.
 
-Important: before upgrading to 0.10.0, your database must be migrated to
-latest 0.9.x release of nsupdate.info. So, if you do not run latest 0.9.x
-release already, first upgrade to that and run the migrations!
+
+Release 0.10.0
+--------------
 
 New Features:
 
@@ -14,16 +17,20 @@ New Features:
 * users can delete their accounts, if they want to stop using the service
   (all hosts, domains, etc. created by this user will be deleted)
 * added admin UI for Related Hosts
+* added "domains" management command to check the domains (reachability of
+  nameserver, does nameserver answer queries for the domain?)
 
 Fixes:
 
 * the link in the registration mail is now https if the site runs with https
+* avoid sending unneccessary "delete" updates to master nameserver - first
+  check if there is something to delete
 
 Other changes:
 
 * support and require Django >= 1.7
 * remove Python 2.6 support, require 2.7 or 3.3+
-* remove support for "south" migrations
+* remove support for "south" migrations (used for 0.9.x and before)
 * add support for django 1.7's builtin migrations
 * misc. layout / UI improvments
 * misc. doc improvements
