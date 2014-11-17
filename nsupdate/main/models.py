@@ -90,7 +90,7 @@ class Domain(models.Model):
         _("nameserver IP (secondary)"),
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         blank=True, null=True,
-        help_text=_("IP of additional nameserver (used for queries)"))
+        help_text=_("IP where DNS queries for this zone will be sent to"))
     nameserver_update_secret = models.CharField(
         _("nameserver update secret"),
         max_length=88,  # 512 bits base64 -> 88 bytes
@@ -233,7 +233,7 @@ class Host(models.Model):
     last_update_ipv6 = models.DateTimeField(_("last update IPv6"), blank=True, null=True)
     # how we received the last update for v4/v6 addr
     tls_update_ipv4 = models.BooleanField(_("TLS update IPv4"), default=False)
-    tls_update_ipv6 = models.BooleanField(_("TLS update IPv4"), default=False)
+    tls_update_ipv6 = models.BooleanField(_("TLS update IPv6"), default=False)
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
