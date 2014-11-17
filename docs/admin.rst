@@ -371,3 +371,19 @@ troubles with them, try this)::
 
 Of course, you'll also need to restart the django/wsgi processes, so the new
 code gets loaded.
+
+
+Tuning
+------
+
+If you get a lot of requests for /myip, the Python code handling this URL will
+be rather busy. If you use nginx, you may optionally tune this and respond to
+these requests directly from nginx without invoking any python code::
+
+  location /myip {
+    add_header Content-Type text/plain;
+    return 200 $remote_addr;
+  }
+
+You need to add this to all server blocks (IP v4, v6, both) that are dealing
+with requests for the service.
