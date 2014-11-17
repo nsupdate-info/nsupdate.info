@@ -346,6 +346,13 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
         return Response('dnserr')  # there should be a better response code for this
+    if mode == 'update' and ipaddr in settings.BAD_IPS_HOST:
+        msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
+        logger.warning(msg)
+        host.abuse = True
+        host.abuse_blocked = True
+        host.register_client_result(msg, fault=True)
+        return Response('abuse')
     host.poke(kind, secure)
     try:
         if _delete:
@@ -375,11 +382,11 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             # XXX unclear what to do for "other services" we relay updates to
             return Response('deleted %s' % rdtype)
         else:  # update
-            _on_update_success(host, fqdn, kind, ipaddr, secure)
+            _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
             return Response('good %s' % ipaddr)
 
 
-def _on_update_success(host, fqdn, kind, ipaddr, secure):
+def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
     """after updating the host in dns, do related other updates"""
     # update related hosts
     for rh in host.relatedhosts.all():

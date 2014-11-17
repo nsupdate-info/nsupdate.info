@@ -43,7 +43,13 @@ DATABASES = {
 
 SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
 
-BAD_AGENTS = set()  # useragent blacklist for /nic/update service
+# these useragents are unacceptable for /nic/update service
+BAD_AGENTS = set([])  # list can have str elements
+
+# these IPAdresses and/or IPNetworks are unacceptable for /nic/update service
+# like e.g. IPs of servers related to illegal activities
+from netaddr import IPSet, IPAddress, IPNetwork
+BAD_IPS_HOST = IPSet([])  # inner list can have IPAddress and IPNetwork elements
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

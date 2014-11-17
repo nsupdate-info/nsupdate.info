@@ -5,6 +5,7 @@ Tests for api package.
 import pytest
 
 import base64
+from netaddr import IPSet, IPAddress, IPNetwork
 
 from django.core.urlresolvers import reverse
 
@@ -202,6 +203,21 @@ def test_nic_update_authorized_badagent(client, settings):
                           HTTP_USER_AGENT='bad_agent')
     assert response.status_code == 200
     assert response.content == b'badagent'
+
+
+def test_nic_update_authorized_badip(client, settings):
+    settings.BAD_IPS_HOST = IPSet([IPAddress('7.7.7.7'), ])
+    # normal update, not on blacklist
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    assert content.startswith('good ') or content.startswith('nochg ')
+    # abusive update, ip on blacklist
+    response = client.get(reverse('nic_update') + '?myip=7.7.7.7',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'abuse'
 
 
 def test_nic_update_session_nosession(client):
