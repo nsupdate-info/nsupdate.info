@@ -63,9 +63,21 @@ sending 1 unconditional update every month. some dyndns2 compatible updaters
 can do that, too.
 """
 
+EMAIL_MSG_END_DELETED = """
+
+Explanation:
+You created the host on our service, but it has not been updated for a very long time.
+
+We sent you some email notifications about this, but you never reacted to them.
+Thus, we assume that you do not need the host any more and have DELETED it.
+
+Feel free to re-create it on our service in case you need it again at some
+time.
+"""
+
 EMAIL_MSG_STALE = EMAIL_MSG_START + LOG_MSG_STALE + EMAIL_MSG_END
 EMAIL_MSG_UNAVAILABLE = EMAIL_MSG_START + LOG_MSG_UNAVAILABLE + EMAIL_MSG_END
-EMAIL_MSG_DELETE = EMAIL_MSG_START + LOG_MSG_DELETE + EMAIL_MSG_END
+EMAIL_MSG_DELETE = EMAIL_MSG_START + LOG_MSG_DELETE + EMAIL_MSG_END_DELETED
 
 
 def check_staleness(h):
