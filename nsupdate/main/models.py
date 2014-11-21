@@ -170,7 +170,7 @@ class Host(models.Model):
 
     # available means that this host may be updated (or not, if False) -
     # gets set to False if abuse happens (client malfunctioning) or
-    # if updating this host triggers other errors:
+    # if updating this host triggers other errors or if host is considered stale:
     available = models.BooleanField(
         _("available"),
         default=True,
@@ -234,6 +234,10 @@ class Host(models.Model):
     # how we received the last update for v4/v6 addr
     tls_update_ipv4 = models.BooleanField(_("TLS update IPv4"), default=False)
     tls_update_ipv6 = models.BooleanField(_("TLS update IPv6"), default=False)
+
+    # for "hosts --stale-check --notify-user" management command
+    staleness = models.PositiveIntegerField(_("staleness"), default=0)
+    staleness_notification_timestamp = models.DateTimeField(_("staleness notification time"), blank=True, null=True)
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
