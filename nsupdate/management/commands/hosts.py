@@ -91,10 +91,6 @@ def check_staleness(h):
     :param h:
     :return: email_msg, log_msg
     """
-    # XXX for first tests, only work on one specific host
-    if h.name != "test-staleness":
-        return S_notstale, None, None
-
     email_msg = log_msg = None
     t_now = timezone.now()
     last_update_ipv4 = h.last_update_ipv4 or NEVER
