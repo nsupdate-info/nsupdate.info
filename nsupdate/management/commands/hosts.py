@@ -8,6 +8,7 @@ from optparse import make_option
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
+from django.utils import timezone
 
 from nsupdate.main.models import Host
 
@@ -18,7 +19,7 @@ S_notstale = 0  # staleness level telling host is NOT stale
 S_unavailable = 3  # staleness level leading to host being made unavailable
 S_delete = 5  # staleness level leading to host being deleted
 
-NEVER = datetime.fromtimestamp(DAY)  # 2.1.1970
+NEVER = datetime.fromtimestamp(DAY, timezone.utc)  # 2.1.1970
 
 LOG_MSG_STALE = "%(host)s has not seen IP updates since a long time, staleness: %(staleness)d -> please fix!"
 LOG_MSG_UNAVAILABLE = "%(host)s IP has still not been updated, staleness: %(staleness)d -> made host unavailable."
@@ -83,13 +84,13 @@ def check_staleness(h):
         return S_notstale, None, None
 
     email_msg = log_msg = None
-    t_now = datetime.utcnow()
+    t_now = timezone.now()
     last_update_ipv4 = h.last_update_ipv4 or NEVER
     last_update_ipv6 = h.last_update_ipv6 or NEVER
     last_update_ip = max(last_update_ipv4, last_update_ipv6)
     ip_age = (t_now - last_update_ip).total_seconds()
     staleness = old_staleness = h.staleness
-    last_notification = h.staleness_notification_timestamp
+    last_notification = h.staleness_notification_timestamp or NEVER
     notification_age = (t_now - last_notification).total_seconds()
     changed = False
     if ip_age < T_ip:
