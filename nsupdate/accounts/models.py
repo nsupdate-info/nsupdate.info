@@ -1,3 +1,44 @@
-from django.db import models
+"""
+models for account-related stuff
+"""
 
-# Create your models here.
+from django.db import models
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.contrib.auth.signals import user_logged_in
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import LANGUAGE_SESSION_KEY
+
+
+class UserProfile(models.Model):
+    """
+    stuff we need additionally to what Django stores in User model
+    """
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='profile',
+                                verbose_name=_('user'))
+    language = models.CharField(max_length=10, choices=settings.LANGUAGES,
+                                default='', blank=True, null=True,
+                                verbose_name=_('language'))
+
+    def __unicode__(self):
+        return u"profile for %s" % self.user.__unicode__()
+
+    class Meta:
+        verbose_name = _('user profile')
+        verbose_name_plural = _('user profiles')
+
+
+def create_user_profile(sender, instance=None, created=False, **kwargs):
+    # if a new user is created, create the UserProfile also:
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
+post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
+
+
+@receiver(user_logged_in)
+def lang(sender, user=None, request=None, **kwargs):
+    # if a user logs in, activate language preference from profile
+    request.session[LANGUAGE_SESSION_KEY] = user.profile.language

@@ -383,6 +383,9 @@ MESSAGE_TAGS = {
     constants.ERROR: 'alert-danger',
 }
 
+# translations - for details, see:
+# https://docs.djangoproject.com/en/dev/topics/i18n/translation/#message-files and
+# https://docs.djangoproject.com/en/dev/topics/i18n/translation/#how-django-discovers-language-preference
 # By default language is set to english - modify settings.py to set list of languages
 gettext_noop = lambda s: s
 LANGUAGES = (
@@ -390,6 +393,8 @@ LANGUAGES = (
     ('de', gettext_noop('German')),
     ('fr', gettext_noop('French')),
     ('it', gettext_noop('Italian')),
+    ('pl', gettext_noop('Polish')),
+    ('zh-cn', gettext_noop('Chinese (China)')),
 )
 
 # silences 1_6.W001 warning you get without this:

@@ -1,35 +1,45 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import UpdateView, TemplateView
-from django.contrib.auth import get_user_model, logout
+from django.views.generic import TemplateView
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
-from .forms import UserProfileForm
+from .forms import UserForm, UserProfileForm
+from .models import UserProfile
 
 
-class UserProfileView(UpdateView):
+class UserProfileView(TemplateView):
     template_name = "accounts/user_profile.html"
-    model = get_user_model()
-    fields = ['first_name', 'last_name', 'email']
-    form_class = UserProfileForm
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(UserProfileView, self).dispatch(*args, **kwargs)
 
-    def get_object(self, queryset=None):
-        return self.request.user
-
-    def get_success_url(self):
-        return reverse('account_profile')
-
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileView, self).get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
+        profile = UserProfile.objects.get(user=request.user)
+        profileform = UserProfileForm(instance=profile)
+        userform = UserForm(instance=request.user)
+        context = dict(userform=userform, profileform=profileform)
         context['nav_user_profile'] = True
-        return context
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        profile = UserProfile.objects.get(user=request.user)
+        profileform = UserProfileForm(data=request.POST, instance=profile)
+        userform = UserForm(data=request.POST, instance=request.user)
+        if userform.is_valid() and profileform.is_valid():
+            u = userform.save()
+            p = profileform.save(commit=False)
+            p.user = u
+            p.save()
+            return redirect(reverse('account_profile'))
+        else:
+            context = dict(userform=userform, profileform=profileform)
+            context['nav_user_profile'] = True
+            return self.render_to_response(context)
 
 
 class DeleteUserView(TemplateView):
