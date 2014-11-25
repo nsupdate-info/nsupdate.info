@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 
 
 def add_userprofiles(apps, schema_editor):
-    User = get_user_model()
+    User = apps.get_model("auth", "User")
     UserProfile = apps.get_model("accounts", "UserProfile")
     for user in User.objects.all():
         UserProfile.objects.get_or_create(user=user)
