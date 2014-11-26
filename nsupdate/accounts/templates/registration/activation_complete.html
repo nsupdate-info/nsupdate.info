@@ -5,5 +5,5 @@
 {% block content %}
 <h2>{% trans 'Thanks, activation complete!' %}</h2>
 <p>{% trans 'You may now login using the username and password you set at registration.' %}</p>
-<p><a href="{{ login_url }}"><button class="btn btn-primary" type="button">{% trans "Log in" %}</button></a></p>
+<p><a href="{% url "login" %}"><button class="btn btn-primary" type="button">{% trans "Log in" %}</button></a></p>
 {% endblock %}
