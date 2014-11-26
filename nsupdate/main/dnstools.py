@@ -216,9 +216,9 @@ def query_ns(fqdn, rdtype):
         ip = str(list(answer)[0])
         logger.debug("query: %s answer: %s" % (fqdn, ip))
         return ip
-    except (dns.resolver.Timeout, dns.resolver.NoNameservers):  # socket.error also?
-        logger.warning("timeout when querying for name '%s' in zone '%s' with rdtype '%s'." % (
-                       fqdn.host, origin, rdtype))
+    except (dns.resolver.Timeout, dns.resolver.NoNameservers) as e:  # socket.error also?
+        logger.warning("error when querying for name '%s' in zone '%s' with rdtype '%s' [%s]." % (
+                       fqdn.host, origin, rdtype, str(e)))
         set_ns_availability(origin, False)
         raise
 
