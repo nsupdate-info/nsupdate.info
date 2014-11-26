@@ -28,3 +28,5 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 INSTALLED_APPS += (
     'debug_toolbar',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
