@@ -148,11 +148,17 @@ def delete(fqdn, rdtype=None):
         try:
             # check if we have a DNS entry
             query_ns(fqdn, rdtype)
+            # there is a dns entry
+            ok = True
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             # no dns entry, it is already deleted
-            pass
-        else:
-            # there is a DNS entry, send a del
+            ok = False
+        except (dns.resolver.Timeout, dns.resolver.NoNameservers) as e:  # socket.error also?
+            # maybe could be caused by secondary DNS Timeout and master still ok?
+            # assume the delete is OK...
+            ok = True
+        if ok:
+            # send a del
             update_ns(fqdn, rdtype, action='del')
 
 
@@ -175,6 +181,10 @@ def update(fqdn, ipaddr, ttl=60):
         ok = ipaddr != current_ipaddr
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
         # no dns entry yet, ok
+        ok = True
+    except (dns.resolver.Timeout, dns.resolver.NoNameservers) as e:  # socket.error also?
+        # maybe could be caused by secondary DNS Timeout and master still ok?
+        # assume the update is OK...
         ok = True
     if ok:
         # only send an update if the ip really changed as the update
