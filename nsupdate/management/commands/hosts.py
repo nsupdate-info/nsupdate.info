@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Host
 
@@ -21,17 +22,17 @@ S_delete = 5  # staleness level leading to host being deleted
 
 NEVER = datetime.fromtimestamp(DAY, timezone.utc)  # 2.1.1970
 
-LOG_MSG_STALE = "%(host)s has not seen IP updates since a long time, staleness: %(staleness)d -> please fix!"
-LOG_MSG_UNAVAILABLE = "%(host)s IP has still not been updated, staleness: %(staleness)d -> made host unavailable."
-LOG_MSG_DELETE = "%(host)s IP has still not been updated, staleness: %(staleness)d -> deleted host."
+LOG_MSG_STALE = _("%(host)s has not seen IP updates since a long time, staleness: %(staleness)d -> please fix!")
+LOG_MSG_UNAVAILABLE = _("%(host)s IP has still not been updated, staleness: %(staleness)d -> made host unavailable.")
+LOG_MSG_DELETE = _("%(host)s IP has still not been updated, staleness: %(staleness)d -> deleted host.")
 
-EMAIL_MSG_START = """\
+EMAIL_MSG_START = _("""\
 Your host: %(host)s (comment: %(comment)s)
 
 Issue: \
-"""
+""")
 
-EMAIL_MSG_END = """
+EMAIL_MSG_END = _("""
 
 Explanation:
 You created the host on our service, but it has not been updated for a very long time.
@@ -61,9 +62,9 @@ Resolution:
 Hint: to avoid this issue for static or mostly-static IP hosts, consider
 sending 1 unconditional update every month. some dyndns2 compatible updaters
 can do that, too.
-"""
+""")
 
-EMAIL_MSG_END_DELETED = """
+EMAIL_MSG_END_DELETED = _("""
 
 Explanation:
 You created the host on our service, but it has not been updated for a very long time.
@@ -73,7 +74,7 @@ Thus, we assume that you do not need the host any more and have DELETED it.
 
 Feel free to re-create it on our service in case you need it again at some
 time.
-"""
+""")
 
 EMAIL_MSG_STALE = EMAIL_MSG_START + LOG_MSG_STALE + EMAIL_MSG_END
 EMAIL_MSG_UNAVAILABLE = EMAIL_MSG_START + LOG_MSG_UNAVAILABLE + EMAIL_MSG_END
@@ -160,7 +161,7 @@ class Command(BaseCommand):
                     if email_msg and notify_user:
                         from_addr = None  # will use DEFAULT_FROM_EMAIL
                         to_addr = creator.email
-                        subject = "issue with your host %(host)s" % dict(host=host)
+                        subject = _("issue with your host %(host)s") % dict(host=host)
                         email_msg = email_msg % dict(host=host, staleness=staleness, comment=comment)
                         send_mail(subject, email_msg, from_addr, [to_addr], fail_silently=True)
                     if log_msg:

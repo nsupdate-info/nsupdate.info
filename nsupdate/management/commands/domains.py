@@ -9,12 +9,13 @@ from optparse import make_option
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
+from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Domain
 from nsupdate.main.dnstools import FQDN, query_ns, NameServerNotAvailable
 
 
-MSG = """\
+MSG = _("""\
 Your domain: %(domain)s (comment: %(comment)s)
 
 Issue: The nameserver of the domain is not reachable and was set to not available
@@ -38,7 +39,7 @@ If you really want that domain to work and you really control that nameserver:
 Alternatively, if you do not use the domain with our service, delete the
 domain entry, so it is removed from our database. This will also remove all
 hosts that were added to this domain (if any).
-"""
+""")
 
 
 def check_dns(domain):
@@ -97,7 +98,7 @@ class Command(BaseCommand):
                         if notify_user:
                             from_addr = None  # will use DEFAULT_FROM_EMAIL
                             to_addr = creator.email
-                            subject = "issue with your domain %(domain)s" % dict(domain=domain)
+                            subject = _("issue with your domain %(domain)s") % dict(domain=domain)
                             msg = MSG % dict(domain=domain, comment=comment)
                             send_mail(subject, msg, from_addr, [to_addr], fail_silently=True)
                         msg = "setting unavailable flag for domain %s (created by %s)\n" % (domain, creator, )

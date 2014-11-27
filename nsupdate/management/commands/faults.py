@@ -7,11 +7,12 @@ from optparse import make_option
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
+from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Host
 
 
-ABUSE_MSG = """\
+ABUSE_MSG = _("""\
 Your host: %(fqdn)s (comment: %(comment)s)
 
 Issue: The abuse flag for your host was set.
@@ -42,7 +43,7 @@ Notes:
   a valid, well-behaved dyndns2-compatible update client
 - if you already used such a software and you ran into this problem,
   complain to whoever wrote it about it sending nochg updates
-"""
+""")
 
 
 class Command(BaseCommand):
@@ -141,7 +142,7 @@ class Command(BaseCommand):
                             if notify_user:
                                 from_addr = None  # will use DEFAULT_FROM_EMAIL
                                 to_addr = creator.email
-                                subject = "issue with your host %(fqdn)s" % dict(fqdn=fqdn)
+                                subject = _("issue with your host %(fqdn)s") % dict(fqdn=fqdn)
                                 msg = ABUSE_MSG % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
                                 send_mail(subject, msg, from_addr, [to_addr], fail_silently=True)
                     if reset_client:
