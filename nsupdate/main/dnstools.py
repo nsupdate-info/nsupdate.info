@@ -215,7 +215,9 @@ def query_ns(fqdn, rdtype):
     if nameserver2:
         # if we have a secondary ns, prefer it for queries
         resolver.nameservers.insert(0, nameserver2)
-    resolver.search = []
+    # we must put the root zone into the search list, so that if a fqdn without "."
+    # at the end comes in, it will append "." (and not the service server's domain).
+    resolver.search = [dns.name.root, ]
     resolver.lifetime = RESOLVER_TIMEOUT
     # as we query directly the (authoritative) master dns, we do not desire
     # recursion. But: RD (recursion desired) is the internal default for flags
