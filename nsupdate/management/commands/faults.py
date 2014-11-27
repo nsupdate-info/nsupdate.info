@@ -10,6 +10,7 @@ from django.db import transaction
 from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Host
+from nsupdate.utils.mail import translate_for_user, send_mail_to_user
 
 
 ABUSE_MSG = _("""\
@@ -140,11 +141,14 @@ class Command(BaseCommand):
                             self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
                                               fqdn, creator, faults_count))
                             if notify_user:
-                                from_addr = None  # will use DEFAULT_FROM_EMAIL
-                                to_addr = creator.email
-                                subject = _("issue with your host %(fqdn)s") % dict(fqdn=fqdn)
-                                msg = ABUSE_MSG % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
-                                send_mail(subject, msg, from_addr, [to_addr], fail_silently=True)
+                                subject, msg = translate_for_user(
+                                    creator,
+                                    _("issue with your host %(fqdn)s"),
+                                    ABUSE_MSG
+                                )
+                                subject = subject % dict(fqdn=fqdn)
+                                msg = msg % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
+                                send_mail_to_user(creator, subject, msg)
                     if reset_client:
                         h.client_faults = 0
                     if reset_server:

@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Domain
 from nsupdate.main.dnstools import FQDN, query_ns, NameServerNotAvailable
+from nsupdate.utils.mail import translate_for_user, send_mail_to_user
 
 
 MSG = _("""\
@@ -96,11 +97,14 @@ class Command(BaseCommand):
                         d.available = False  # see comment in check_dns()
                         d.public = False
                         if notify_user:
-                            from_addr = None  # will use DEFAULT_FROM_EMAIL
-                            to_addr = creator.email
-                            subject = _("issue with your domain %(domain)s") % dict(domain=domain)
-                            msg = MSG % dict(domain=domain, comment=comment)
-                            send_mail(subject, msg, from_addr, [to_addr], fail_silently=True)
+                            subject, msg = translate_for_user(
+                                creator,
+                                _("issue with your domain %(domain)s"),
+                                MSG
+                            )
+                            subject = subject % dict(domain=domain)
+                            msg = msg % dict(domain=domain, comment=comment)
+                            send_mail_to_user(creator, subject, msg)
                         msg = "setting unavailable flag for domain %s (created by %s)\n" % (domain, creator, )
                         self.stdout.write(msg)
                     d.save()

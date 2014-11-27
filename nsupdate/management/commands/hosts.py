@@ -6,12 +6,12 @@ from datetime import datetime
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
-from django.core.mail import send_mail
 from django.db import transaction
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from nsupdate.main.models import Host
+from nsupdate.utils.mail import translate_for_user, send_mail_to_user
 
 DAY = 24 * 3600  # [s]
 T_ip = 325 * DAY  # age of last ip update so we starts considering host as stale
@@ -159,11 +159,14 @@ class Command(BaseCommand):
                     creator = h.created_by
                     staleness, email_msg, log_msg = check_staleness(h)
                     if email_msg and notify_user:
-                        from_addr = None  # will use DEFAULT_FROM_EMAIL
-                        to_addr = creator.email
-                        subject = _("issue with your host %(host)s") % dict(host=host)
+                        subject, msg = translate_for_user(
+                            creator,
+                            _("issue with your host %(host)s"),
+                            email_msg
+                        )
+                        subject = subject % dict(host=host)
                         email_msg = email_msg % dict(host=host, staleness=staleness, comment=comment)
-                        send_mail(subject, email_msg, from_addr, [to_addr], fail_silently=True)
+                        send_mail_to_user(creator, subject, email_msg)
                     if log_msg:
                         log_msg = log_msg % dict(host=host, staleness=staleness, creator=creator)
                         self.stdout.write(log_msg)
