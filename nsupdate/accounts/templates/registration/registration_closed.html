@@ -1,0 +1,8 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}{% load bootstrap %}
+{% block title %}{% trans "Registration closed" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans 'The account registration is closed.' %}</h2>
+<p>{% blocktrans %}Registration is currently only possible by contacting the admin ({{ SERVICE_CONTACT }}). {% endblocktrans %}</p>
+{% endblock %}
