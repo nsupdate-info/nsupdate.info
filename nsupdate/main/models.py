@@ -1,6 +1,7 @@
 """
 models for hosts, domains, service updaters, ...
 """
+from __future__ import unicode_literals
 
 import re
 import time
@@ -17,6 +18,7 @@ from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from . import dnstools
 
@@ -31,6 +33,7 @@ def result_fmt(msg):
     return msg[:RESULT_MSG_LEN]
 
 
+@python_2_unicode_compatible
 class BlacklistedHost(models.Model):
     name_re = models.CharField(
         _('name RegEx'),
@@ -45,8 +48,8 @@ class BlacklistedHost(models.Model):
         related_name='blacklisted_domains',
         verbose_name=_('created by'))
 
-    def __unicode__(self):
-        return u"%s" % (self.name_re, )
+    def __str__(self):
+        return self.name_re
 
     class Meta:
         verbose_name = _('blacklisted host')
@@ -56,7 +59,7 @@ class BlacklistedHost(models.Model):
 def host_blacklist_validator(value):
     for bd in BlacklistedHost.objects.all():
         if re.search(bd.name_re, value):
-            raise ValidationError(u'This name is blacklisted')
+            raise ValidationError('This name is blacklisted')
 
 
 from collections import namedtuple
@@ -76,6 +79,7 @@ UPDATE_ALGORITHMS = {
 UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
+@python_2_unicode_compatible
 class Domain(models.Model):
     name = models.CharField(
         _("name"),
@@ -124,8 +128,8 @@ class Domain(models.Model):
     created = models.DateTimeField(_("created at"), auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"))
 
-    def __unicode__(self):
-        return u"%s" % (self.name, )
+    def __str__(self):
+        return self.name
 
     def generate_ns_secret(self):
         algorithm = self.nameserver_update_algorithm
@@ -145,6 +149,7 @@ class Domain(models.Model):
         verbose_name_plural = _('domains')
 
 
+@python_2_unicode_compatible
 class Host(models.Model):
     name = models.CharField(
         _("name"),
@@ -243,9 +248,8 @@ class Host(models.Model):
     created = models.DateTimeField(_("created at"), auto_now_add=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),)
 
-    def __unicode__(self):
-        return u"%s.%s" % (
-            self.name, self.domain.name)
+    def __str__(self):
+        return "%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
         unique_together = (('name', 'domain'), )
@@ -359,6 +363,7 @@ def post_save_host(sender, **kwargs):
 post_save.connect(post_save_host, sender=Host)
 
 
+@python_2_unicode_compatible
 class RelatedHost(models.Model):
     # host addr = network_of_main_host + interface_id
     name = models.CharField(
@@ -398,9 +403,8 @@ class RelatedHost(models.Model):
         related_name='relatedhosts',
         verbose_name=_("main host"))
 
-    def __unicode__(self):
-        return u"%s.%s" % (
-            self.name, self.main_host.__unicode__())
+    def __str__(self):
+        return "%s.%s" % (self.name, self.main_host.__unicode__())
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
@@ -432,6 +436,7 @@ class RelatedHost(models.Model):
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
 
 
+@python_2_unicode_compatible
 class ServiceUpdater(models.Model):
     name = models.CharField(
         _("name"),
@@ -468,13 +473,14 @@ class ServiceUpdater(models.Model):
         verbose_name=_("created by"))
 
     def __unicode__(self):
-        return u"%s" % (self.name, )
+        return self.name
 
     class Meta(object):
         verbose_name = _('service updater')
         verbose_name_plural = _('service updaters')
 
 
+@python_2_unicode_compatible
 class ServiceUpdaterHostConfig(models.Model):
     service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE, verbose_name=_("service"))
 
@@ -516,8 +522,8 @@ class ServiceUpdaterHostConfig(models.Model):
         related_name='serviceupdaterhostconfigs',
         verbose_name=_("created by"))
 
-    def __unicode__(self):
-        return u"%s (%s)" % (self.hostname, self.service.name, )
+    def __str__(self):
+        return "%s (%s)" % (self.hostname, self.service.name, )
 
     class Meta(object):
         verbose_name = _('service updater host config')
