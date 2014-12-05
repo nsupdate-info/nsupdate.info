@@ -277,9 +277,9 @@ class Host(models.Model):
         try:
             return dnstools.query_ns(self.get_fqdn(), record)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
-            return 'none'
+            return None
         except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable):
-            return 'error'
+            return _('error')
 
     def get_ipv4(self):
         return self.get_ip('ipv4')
