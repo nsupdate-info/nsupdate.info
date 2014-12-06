@@ -404,7 +404,7 @@ class RelatedHost(models.Model):
         verbose_name=_("main host"))
 
     def __str__(self):
-        return "%s.%s" % (self.name, self.main_host.__unicode__())
+        return "%s.%s" % (self.name, self.main_host)
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
@@ -472,7 +472,7 @@ class ServiceUpdater(models.Model):
         related_name='serviceupdater',
         verbose_name=_("created by"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta(object):
