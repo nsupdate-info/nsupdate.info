@@ -5,4 +5,3 @@ pytest
 pytest-django
 pytest-pep8
 Sphinx
-transifex-client
