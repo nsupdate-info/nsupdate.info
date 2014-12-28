@@ -10,6 +10,7 @@ from .models import Host, RelatedHost, Domain, BlacklistedHost, ServiceUpdater, 
 @admin.register(Domain)
 class DomainAdmin(admin.ModelAdmin):
     list_display = ("name", "public", "available", "created_by")
+    list_display_links = ("created_by", )
     list_filter = ("created", "public", "available")
     search_fields = ("name", "created_by__username", "created_by__email")
 
@@ -17,6 +18,7 @@ class DomainAdmin(admin.ModelAdmin):
 @admin.register(Host)
 class HostAdmin(admin.ModelAdmin):
     list_display = ("name", "domain", "created_by", "client_faults", "abuse", "abuse_blocked")
+    list_display_links = ("domain", "created_by")
     list_filter = ("created", "abuse", "abuse_blocked", "domain")
     search_fields = ("name", "created_by__username", "created_by__email")
 
@@ -24,22 +26,26 @@ class HostAdmin(admin.ModelAdmin):
 @admin.register(RelatedHost)
 class RelatedHostAdmin(admin.ModelAdmin):
     list_display = ("name", "main_host", "available", "comment")
+    list_display_links = ("main_host", )
     search_fields = ("name", "main_host__created_by__username", "main_host__created_by__email")
 
 
 @admin.register(BlacklistedHost)
 class BlacklistedHostAdmin(admin.ModelAdmin):
     list_display = ("name_re", "created_by")
+    list_display_links = ("created_by", )
     list_filter = ("created", )
 
 
 @admin.register(ServiceUpdater)
 class ServiceUpdaterAdmin(admin.ModelAdmin):
     list_display = ("name", "comment", "created_by")
+    list_display_links = ("created_by", )
     list_filter = ("created", )
 
 
 @admin.register(ServiceUpdaterHostConfig)
 class ServiceUpdaterHostConfigAdmin(admin.ModelAdmin):
     list_display = ("host", "service", "hostname", "comment", "created_by")
+    list_display_links = ("created_by", )
     list_filter = ("created", )
