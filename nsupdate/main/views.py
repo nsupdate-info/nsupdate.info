@@ -15,7 +15,7 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
-from django.core.exceptions import PermissionDenied
+from django.http import Http404
 from django.utils.timezone import now
 
 from . import dnstools
@@ -37,7 +37,7 @@ class GenerateSecretView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(GenerateSecretView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -60,7 +60,7 @@ class GenerateNSSecretView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(GenerateNSSecretView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -260,7 +260,7 @@ class HostView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(HostView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -283,7 +283,7 @@ class DeleteHostView(DeleteView):
         if obj.created_by != self.request.user or obj.abuse_blocked:
             # disallow deletion if abuse_blocked is set, otherwise the
             # abuser can just delete and recreate the host
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_success_url(self):
@@ -303,7 +303,7 @@ class RelatedHostOverviewView(TemplateView):
         try:
             self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
         except Host.DoesNotExist:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return super(RelatedHostOverviewView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -324,7 +324,7 @@ class AddRelatedHostView(CreateView):
         try:
             self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
         except Host.DoesNotExist:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return super(AddRelatedHostView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
@@ -370,7 +370,7 @@ class RelatedHostView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(RelatedHostView, self).get_object(*args, **kwargs)
         if obj.main_host.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -390,7 +390,7 @@ class DeleteRelatedHostView(DeleteView):
     def get_object(self, *args, **kwargs):
         obj = super(DeleteRelatedHostView, self).get_object(*args, **kwargs)
         if obj.main_host.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_success_url(self):
@@ -448,7 +448,7 @@ class DomainView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(DomainView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -468,7 +468,7 @@ class DeleteDomainView(DeleteView):
     def get_object(self, *args, **kwargs):
         obj = super(DeleteDomainView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_success_url(self):
@@ -490,7 +490,7 @@ class UpdaterHostConfigOverviewView(CreateView):
         try:
             self.__host = Host.objects.get(pk=kwargs.pop('pk', None), created_by=self.request.user)
         except Host.DoesNotExist:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return super(UpdaterHostConfigOverviewView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
@@ -533,7 +533,7 @@ class UpdaterHostConfigView(UpdateView):
     def get_object(self, *args, **kwargs):
         obj = super(UpdaterHostConfigView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_context_data(self, **kwargs):
@@ -552,7 +552,7 @@ class DeleteUpdaterHostConfigView(DeleteView):
     def get_object(self, *args, **kwargs):
         obj = super(DeleteUpdaterHostConfigView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user:
-            raise PermissionDenied()  # or Http404
+            raise Http404
         return obj
 
     def get_success_url(self):
