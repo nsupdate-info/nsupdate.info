@@ -1,8 +1,6 @@
 """
 models for hosts, domains, service updaters, ...
 """
-from __future__ import unicode_literals
-
 import re
 import time
 import base64
@@ -59,7 +57,7 @@ class BlacklistedHost(models.Model):
 def host_blacklist_validator(value):
     for bd in BlacklistedHost.objects.all():
         if re.search(bd.name_re, value):
-            raise ValidationError('This name is blacklisted')
+            raise ValidationError(u'This name is blacklisted')
 
 
 from collections import namedtuple
@@ -249,7 +247,7 @@ class Host(models.Model):
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),)
 
     def __str__(self):
-        return "%s.%s" % (self.name, self.domain.name)
+        return u"%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
         unique_together = (('name', 'domain'), )
@@ -404,7 +402,7 @@ class RelatedHost(models.Model):
         verbose_name=_("main host"))
 
     def __str__(self):
-        return "%s.%s" % (self.name, self.main_host)
+        return u"%s.%s" % (self.name, self.main_host.__unicode__())
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
@@ -523,7 +521,7 @@ class ServiceUpdaterHostConfig(models.Model):
         verbose_name=_("created by"))
 
     def __str__(self):
-        return "%s (%s)" % (self.hostname, self.service.name, )
+        return u"%s (%s)" % (self.hostname, self.service.name, )
 
     class Meta(object):
         verbose_name = _('service updater host config')
