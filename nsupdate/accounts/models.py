@@ -10,6 +10,7 @@ from django.contrib.auth.signals import user_logged_in
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import LANGUAGE_SESSION_KEY
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.six import text_type
 
 
 @python_2_unicode_compatible
@@ -24,7 +25,7 @@ class UserProfile(models.Model):
                                 verbose_name=_('language'))
 
     def __str__(self):
-        return u"profile for %s" % self.user.__unicode__()
+        return u"profile for %s" % text_type(self.user)
 
     class Meta:
         verbose_name = _('user profile')

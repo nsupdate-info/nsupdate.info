@@ -1,6 +1,7 @@
 """
 models for hosts, domains, service updaters, ...
 """
+
 import re
 import time
 import base64
@@ -17,6 +18,8 @@ from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.six import text_type
+
 
 from . import dnstools
 
@@ -402,7 +405,7 @@ class RelatedHost(models.Model):
         verbose_name=_("main host"))
 
     def __str__(self):
-        return u"%s.%s" % (self.name, self.main_host.__unicode__())
+        return u"%s.%s" % (self.name, text_type(self.main_host))
 
     class Meta(object):
         unique_together = (('name', 'main_host'), )
