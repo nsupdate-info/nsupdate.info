@@ -1,7 +1,6 @@
 """
 models for account-related stuff
 """
-from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
@@ -25,7 +24,7 @@ class UserProfile(models.Model):
                                 verbose_name=_('language'))
 
     def __str__(self):
-        return "profile for %s" % self.user
+        return u"profile for %s" % self.user.__unicode__()
 
     class Meta:
         verbose_name = _('user profile')
