@@ -27,6 +27,14 @@ Translations are done on Transifex - please collaborate there to avoid double wo
 
 https://www.transifex.com/projects/p/nsupdateinfo/
 
+You need the transifex-client package so you have the tx command:
+
+::
+
+    # currently only works on python 2.x, transifex-client github repo has 3.3 support
+    pip install transifex-client
+
+
 Please make sure to configure your notification settings so that you are
 notified when the translation project is updated (so you can react quickly and
 keep your translation fresh).
