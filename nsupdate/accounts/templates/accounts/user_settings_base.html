@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">Personal settings</h3>
+          </div>
+          <div class="list-group">
+              <a href="{% url 'account_profile' %}" class="list-group-item">Profile</a>
+              <a href="{% url 'account_settings' %}" class="list-group-item">Account settings</a>
+          </div>
+        </div>
+	</div>
+    <div class="col-md-9">
+         {% block settings_panel %}
+         {% endblock %}
+    </div>
+</div>
+{% endblock %}

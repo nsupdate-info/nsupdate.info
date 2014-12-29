@@ -5,13 +5,15 @@ from django.views.generic.base import TemplateView
 from registration.backends.default.views import ActivationView
 from registration.backends.default.views import RegistrationView
 
-from .views import UserProfileView, DeleteUserView
+from .views import UserProfileView, DeleteUserView, UserChangePasswordView
 
 
 urlpatterns = patterns(
     '',
     url(r'^profile/', UserProfileView.as_view(), name="account_profile"),
+    url(r'^settings/', UserChangePasswordView.as_view(), name='account_settings'),
     url(r'^delete/', DeleteUserView.as_view(), name="account_delete"),
+
     # registration start
     url(r'^activate/complete/$',
         TemplateView.as_view(template_name='registration/activation_complete.html'),

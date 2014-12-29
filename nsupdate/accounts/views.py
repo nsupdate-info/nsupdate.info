@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from django.contrib.auth import logout
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.core.urlresolvers import reverse
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import update_session_auth_hash
 
 from .forms import UserForm, UserProfileForm
 from .models import UserProfile
 
 
 class UserProfileView(TemplateView):
-    template_name = "accounts/user_profile.html"
+    template_name = "accounts/user_settings_profile.html"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -40,6 +46,31 @@ class UserProfileView(TemplateView):
             context = dict(userform=userform, profileform=profileform)
             context['nav_user_profile'] = True
             return self.render_to_response(context)
+
+
+class UserChangePasswordView(FormView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('account_settings')
+    template_name = 'accounts/user_settings_account.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UserChangePasswordView, self).dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super(UserChangePasswordView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        # Updating the password logs out all other sessions for the user
+        # except the current one if
+        # django.contrib.auth.middleware.SessionAuthenticationMiddleware
+        # is enabled.
+        update_session_auth_hash(self.request, form.user)
+        messages.add_message(self.request, messages.SUCCESS, _('Your password was changed!'))
+        return super(UserChangePasswordView, self).form_valid(form)
 
 
 class DeleteUserView(TemplateView):

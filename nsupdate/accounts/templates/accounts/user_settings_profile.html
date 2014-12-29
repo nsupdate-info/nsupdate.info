@@ -1,0 +1,24 @@
+{% extends "accounts/user_settings_base.html" %}
+{% load i18n %}{% load bootstrap %}
+
+{% block title %}{% trans 'Profile settings' %}{% endblock %}
+
+{% block settings_panel %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+      <h3 class="panel-title">{% trans 'Profile' %}</h3>
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal" role="form" method="post">
+        {% csrf_token %}
+        {{ userform|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
+        {{ profileform|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <input type="submit" class="btn btn-primary" value="{% trans "Submit" %}" />
+            </div>
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
