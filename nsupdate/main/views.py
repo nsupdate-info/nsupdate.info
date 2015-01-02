@@ -356,6 +356,10 @@ class RelatedHostView(UpdateView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        try:
+            self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
+        except Host.DoesNotExist:
+            raise Http404
         return super(RelatedHostView, self).dispatch(*args, **kwargs)
 
     def get_success_url(self):
@@ -369,7 +373,7 @@ class RelatedHostView(UpdateView):
 
     def get_object(self, *args, **kwargs):
         obj = super(RelatedHostView, self).get_object(*args, **kwargs)
-        if obj.main_host.created_by != self.request.user:
+        if obj.main_host.created_by != self.request.user or obj.main_host != self.__main_host:
             raise Http404
         return obj
 
@@ -385,11 +389,15 @@ class DeleteRelatedHostView(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        try:
+            self.__main_host = Host.objects.get(pk=kwargs.pop('mpk', None), created_by=self.request.user)
+        except Host.DoesNotExist:
+            raise Http404
         return super(DeleteRelatedHostView, self).dispatch(*args, **kwargs)
 
     def get_object(self, *args, **kwargs):
         obj = super(DeleteRelatedHostView, self).get_object(*args, **kwargs)
-        if obj.main_host.created_by != self.request.user:
+        if obj.main_host.created_by != self.request.user or obj.main_host != self.__main_host:
             raise Http404
         return obj
 
