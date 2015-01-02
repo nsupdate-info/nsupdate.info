@@ -125,5 +125,6 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     RelatedHost.objects.create(name=RELATED_HOST_NAME,
                                interface_id_ipv4="0.0.0.1", interface_id_ipv6="::1", main_host=h2)
 
+
 def pytest_runtest_setup(item):
     activate('en')
