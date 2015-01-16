@@ -76,10 +76,6 @@ Feel free to re-create it on our service in case you need it again at some
 time.
 """)
 
-EMAIL_MSG_STALE = EMAIL_MSG_START + LOG_MSG_STALE + EMAIL_MSG_END
-EMAIL_MSG_UNAVAILABLE = EMAIL_MSG_START + LOG_MSG_UNAVAILABLE + EMAIL_MSG_END
-EMAIL_MSG_DELETE = EMAIL_MSG_START + LOG_MSG_DELETE + EMAIL_MSG_END_DELETED
-
 
 def check_staleness(h):
     """
@@ -113,17 +109,20 @@ def check_staleness(h):
         staleness = old_staleness + 1
         if staleness >= S_delete:
             h.delete()
+            EMAIL_MSG_DELETE = u"%s%s%s" % (EMAIL_MSG_START, LOG_MSG_DELETE, EMAIL_MSG_END_DELETED)
             email_msg, log_msg = EMAIL_MSG_DELETE, LOG_MSG_DELETE
         elif staleness >= S_unavailable:
             h.staleness = staleness
             h.available = False  # TODO remove host from dns also
             h.staleness_notification_timestamp = t_now
             changed = True
+            EMAIL_MSG_UNAVAILABLE = u"%s%s%s" % (EMAIL_MSG_START, LOG_MSG_UNAVAILABLE, EMAIL_MSG_END)
             email_msg, log_msg = EMAIL_MSG_UNAVAILABLE, LOG_MSG_UNAVAILABLE
         else:
             h.staleness = staleness
             h.staleness_notification_timestamp = t_now
             changed = True
+            EMAIL_MSG_STALE = u"%s%s%s" % (EMAIL_MSG_START, LOG_MSG_STALE, EMAIL_MSG_END)
             email_msg, log_msg = EMAIL_MSG_STALE, LOG_MSG_STALE
     if changed:
         h.save()
