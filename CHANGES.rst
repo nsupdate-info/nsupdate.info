@@ -16,10 +16,22 @@ New Features:
 * Hosts: show client authentication error/success on the host view
 * Domains: support optional secondary nameserver - if given, prefer it for
   DNS queries
+* implement host IP blacklist, fixes #162
+* implement host staleness level + management script to check whether host IP
+  is being updated
+* add language to user profiles
+* add registration_closed template
 
 Fixes:
 
-* none yet
+* catching more exceptions
+* misc. UI fixes / improvements
+* misc. python3 compatibility fixes / improvements
+* fix resolving to not add the service server's domain, but just "."
+* timeout / retry timings adjusted
+* "Login" button at end of user registration does not work #183
+* catch IndexError when computing IP of related hosts, fixes #190
+* catch socket.error (e.g. "connection refused"), fixes #195
 
 Other changes:
 
