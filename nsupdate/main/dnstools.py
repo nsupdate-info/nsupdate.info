@@ -325,10 +325,15 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
                            rcode_text, action, name, origin, rdtype, ipaddr))
             raise DnsUpdateError(rcode_text)
         return response
+    # TODO simplify exception handling when https://github.com/rthalley/dnspython/pull/85 is merged/released
     except socket.error as e:
         logger.error("socket.error [%s] - zone: %s" % (str(e), origin, ))
         set_ns_availability(domain, False)
         raise DnsUpdateError("SocketError %d" % e.errno)
+    except EOFError as e:
+        logger.error("EOFError [%s] - zone: %s" % (str(e), origin, ))
+        set_ns_availability(domain, False)
+        raise DnsUpdateError("EOFError")
     except dns.exception.Timeout:
         logger.warning("timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
                        action, name, origin, rdtype, ipaddr))
