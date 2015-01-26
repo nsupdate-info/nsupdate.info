@@ -195,14 +195,15 @@ def update(fqdn, ipaddr, ttl=60):
         raise SameIpError
 
 
-def query_ns(fqdn, rdtype):
+def query_ns(fqdn, rdtype, prefer_primary=False):
     """
-    query a dns name from our master server
+    query a dns name from our DNS server(s)
 
     :param fqdn: fqdn to query the name server for
     :type fqdn: dnstools.FQDN
     :param rdtype: the query type
     :type rdtype: int or str
+    :param prefer_primary: whether we rather want to query the primary first
     :return: IP (as str)
     :raises: see dns.resolver.Resolver.query
     """
@@ -213,8 +214,8 @@ def query_ns(fqdn, rdtype):
     # want into the documented attributes:
     resolver.nameservers = [nameserver, ]
     if nameserver2:
-        # if we have a secondary ns, prefer it for queries
-        resolver.nameservers.insert(0, nameserver2)
+        pos = 1 if prefer_primary else 0
+        resolver.nameservers.insert(pos, nameserver2)
     # we must put the root zone into the search list, so that if a fqdn without "."
     # at the end comes in, it will append "." (and not the service server's domain).
     resolver.search = [dns.name.root, ]

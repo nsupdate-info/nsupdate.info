@@ -55,7 +55,7 @@ def check_dns(domain):
     """
     fqdn = FQDN(host=None, domain=domain)
     try:
-        query_ns(fqdn, 'SOA')
+        query_ns(fqdn, 'SOA', prefer_primary=True)
         queries_ok = True
     except (dns.resolver.Timeout, dns.resolver.NoNameservers,
             dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, NameServerNotAvailable):
