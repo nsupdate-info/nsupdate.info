@@ -38,6 +38,8 @@ Other changes:
 * made form field labels translatable, added translations, added plurals
 * added tuning tips section to admin docs (not much yet)
 * some internal cleanups / refactorings
+* use templated error pages for 400,403,404,500 http status codes
+* upgraded CDN links for bootstrap, jquery, font-awesome
 
 
 Release 0.10.0
