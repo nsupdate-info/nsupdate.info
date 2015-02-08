@@ -20,6 +20,9 @@ except KeyError:
     # a local_settings.py file that imports this file).
     pass
 
+# service contact for showing on the "about" page:
+SERVICE_CONTACT = 'your_email AT example DOT com'
+
 # sender address for e.g. user activation emails
 DEFAULT_FROM_EMAIL = "your_email@example.com"
 
@@ -40,8 +43,6 @@ DATABASES = {
         'PORT': ''              # Set to empty string for default.
     }
 }
-
-SERVICE_CONTACT = 'info AT nsupdate DOT info'  # shown on "about" page
 
 # these useragents are unacceptable for /nic/update service
 BAD_AGENTS = set([])  # list can have str elements
