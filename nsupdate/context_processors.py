@@ -37,7 +37,10 @@ def update_ips(request):
     s = request.session
     t_now = int(time.time())
     # update and keep fresh using info from the request we have anyway:
-    ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
+    try:
+        ipaddr = normalize_ip(request.META['HTTP_X_FORWARDED_FOR'])
+    except KeyError:
+        ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
     put_ip_into_session(s, ipaddr, max_age=MAX_IP_AGE / 2)
     # remove stale data to not show outdated IPs (e.g. after losing IPv6 connectivity):
     for key in ['ipv4', 'ipv6', ]:
