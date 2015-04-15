@@ -13,7 +13,7 @@ Create and activate a virtualenv for the installation (here with virtualenvwrapp
 
 Clone the repo and cd into::
 
-    git clone git@github.com:nsupdate-info/nsupdate.info.git nsupdate
+    git clone https://github.com/nsupdate-info/nsupdate.info.git nsupdate
     cd nsupdate
 
 
