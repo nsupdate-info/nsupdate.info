@@ -8,6 +8,22 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
+Release <TBD> (unreleased yet)
+------------------------------
+
+New Features:
+
+* Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
+
+Fixes:
+
+* ...
+
+Other changes:
+
+* ...
+
+
 Release 0.11.0
 --------------
 

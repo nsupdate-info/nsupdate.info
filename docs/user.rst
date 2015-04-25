@@ -185,7 +185,12 @@ You also see it prepends the related host's name to your mainhost's FQDN.
 For the related hosts's address, p is same prefix as above (the host is on same
 network), but r comes from what you entered as interface ID into the related
 host record.
-The interface ID must be a proper suffix notation. A proper suffix notation starts with `::`
+
+The interface ID must be a proper notation.
+For IPv6 a interface ID might look like `::rrrr:rrrr:rrrr:rrrr`,
+for IPv4 a interface ID might look like `r.r.r.r`.
+
+If you leave the interface ID field empty, that means not to create such a DNS record.
 
 In other words:
 
