@@ -411,7 +411,7 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
                 if not _delete:
                     logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
                 else:
-                    logger.info("deleting related host %s -> %s" % (rh_fqdn, ))
+                    logger.info("deleting related host %s" % (rh_fqdn, ))
                 try:
                     if not _delete:
                         update(rh_fqdn, rh_ipaddr)
