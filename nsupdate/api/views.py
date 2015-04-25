@@ -400,11 +400,11 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
                 netmask = host.netmask_ipv6
             _delete = not ifid  # leave ifid empty if you don't want this rh record
             try:
+                rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
                 if not _delete:
                     ifid = IPAddress(ifid)
                     network = IPNetwork("%s/%d" % (ipaddr, netmask))
                     rh_ipaddr = str(IPAddress(network.network) + int(ifid))
-                    rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
             except (IndexError, AddrFormatError) as e:
                 logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
             else:
