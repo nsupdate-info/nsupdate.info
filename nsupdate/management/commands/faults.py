@@ -141,8 +141,9 @@ class Command(BaseCommand):
                                 fqdn = h.get_fqdn()
                                 comment = h.comment
                                 creator = h.created_by
-                                self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
-                                                  fqdn, creator, faults_count))
+                                self.stdout.write(
+                                    "setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
+                                        fqdn, creator, faults_count))
                                 if notify_user:
                                     subject, msg = translate_for_user(
                                         creator,
