@@ -17,7 +17,7 @@ def translate_for_user(user, *msgs):
     :param msgs: list of lazy translatable strings
     :return: list of translated strings
     """
-    lang = user.profile.language
+    lang = user.profile.language or 'en'
     saved_lang = translation.get_language()
     try:
         translation.activate(lang)
