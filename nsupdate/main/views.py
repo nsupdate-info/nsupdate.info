@@ -6,6 +6,8 @@ views for the interactive web user interface
 import socket
 from datetime import timedelta
 
+import dns.name
+
 from django.db.models import Q
 from django.views.generic import View, TemplateView, CreateView
 from django.views.generic.edit import UpdateView, DeleteView
@@ -424,10 +426,17 @@ class AddDomainView(CreateView):
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.created_by = self.request.user
-        self.object.save()
-        messages.add_message(self.request, messages.SUCCESS, 'Domain added.')
-        return HttpResponseRedirect(self.get_success_url())
+        try:
+            dns.name.from_text(self.object.name, None)
+        except dns.name.EmptyLabel as err:
+            success, level, msg = False, messages.ERROR, 'Invalid domain name [%s]' % str(err)
+        else:
+            self.object.created_by = self.request.user
+            self.object.save()
+            success, level, msg = True, messages.SUCCESS, 'Domain added.'
+        messages.add_message(self.request, level, msg)
+        url = self.get_success_url() if success else reverse('overview')
+        return HttpResponseRedirect(url)
 
     def get_context_data(self, **kwargs):
         context = super(AddDomainView, self).get_context_data(**kwargs)
