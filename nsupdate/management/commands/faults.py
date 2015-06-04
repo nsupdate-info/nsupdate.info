@@ -2,6 +2,8 @@
 dealing with the fault counters and available/abuse/abuse_blocked flags
 """
 
+import traceback
+
 from optparse import make_option
 
 from django.core.management.base import BaseCommand
@@ -118,45 +120,53 @@ class Command(BaseCommand):
         reset_abuse_blocked = options['reset_abuse_blocked']
         flag_abuse = options['flag_abuse']
         notify_user = options['notify_user']
-        with transaction.atomic():
-            for h in Host.objects.all():
-                if show_client or show_server:
-                    output = u""
-                    if show_client:
-                        output += u"%-6d " % h.client_faults
-                    if show_server:
-                        output += u"%-6d " % h.server_faults
-                    output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
-                    self.stdout.write(output)
-                if (flag_abuse is not None or reset_client or reset_server or
-                    reset_available or reset_abuse or reset_abuse_blocked):
-                    if flag_abuse is not None:
-                        if h.client_faults > flag_abuse:
-                            h.abuse = True
-                            faults_count = h.client_faults
+        for h in Host.objects.all():
+            try:
+                with transaction.atomic():
+                    if show_client or show_server:
+                        output = u""
+                        if show_client:
+                            output += u"%-6d " % h.client_faults
+                        if show_server:
+                            output += u"%-6d " % h.server_faults
+                        output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
+                        self.stdout.write(output)
+                    if (flag_abuse is not None or reset_client or reset_server or
+                        reset_available or reset_abuse or reset_abuse_blocked):
+                        if flag_abuse is not None:
+                            if h.client_faults > flag_abuse:
+                                h.abuse = True
+                                faults_count = h.client_faults
+                                h.client_faults = 0
+                                fqdn = h.get_fqdn()
+                                comment = h.comment
+                                creator = h.created_by
+                                self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
+                                                  fqdn, creator, faults_count))
+                                if notify_user:
+                                    subject, msg = translate_for_user(
+                                        creator,
+                                        _("issue with your host %(fqdn)s"),
+                                        ABUSE_MSG
+                                    )
+                                    subject = subject % dict(fqdn=fqdn)
+                                    msg = msg % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
+                                    send_mail_to_user(creator, subject, msg)
+                        if reset_client:
                             h.client_faults = 0
-                            fqdn = h.get_fqdn()
-                            comment = h.comment
-                            creator = h.created_by
-                            self.stdout.write("setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
-                                              fqdn, creator, faults_count))
-                            if notify_user:
-                                subject, msg = translate_for_user(
-                                    creator,
-                                    _("issue with your host %(fqdn)s"),
-                                    ABUSE_MSG
-                                )
-                                subject = subject % dict(fqdn=fqdn)
-                                msg = msg % dict(fqdn=fqdn, comment=comment, faults_count=faults_count)
-                                send_mail_to_user(creator, subject, msg)
-                    if reset_client:
-                        h.client_faults = 0
-                    if reset_server:
-                        h.server_faults = 0
-                    if reset_available:
-                        h.available = True
-                    if reset_abuse:
-                        h.abuse = False
-                    if reset_abuse_blocked:
-                        h.abuse_blocked = False
-                    h.save()
+                        if reset_server:
+                            h.server_faults = 0
+                        if reset_available:
+                            h.available = True
+                        if reset_abuse:
+                            h.abuse = False
+                        if reset_abuse_blocked:
+                            h.abuse_blocked = False
+                        h.save()
+            except Exception:
+                try:
+                    msg = u"The following Exception occurred when processing host %s!\n" % (h.get_fqdn(), )
+                    self.stderr.write(msg)
+                except Exception:
+                    pass
+                traceback.print_exc()
