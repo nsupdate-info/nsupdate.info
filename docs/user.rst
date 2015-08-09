@@ -15,7 +15,7 @@ its user interface).
 
 Alternatively, you can also run a software on a PC / server (like ddclient or inadyn for Linux).
 
-Or even just use your browser to update your IP via the web interface of the service.
+Or even just use your browser to update your IP address via the web interface of the service.
 
 Note: please do not "update" your IP address if it did not change. Doing so is considered abusive use of the service.
 All sane dyndns2 clients only send an update if the IP address has changed.
@@ -26,7 +26,7 @@ When using a browser for administrating your hosts / domains via the web interfa
 
 * use https (for security)
 * have cookies enabled (we need them for keeping the session after you logged in)
-* have javascript enabled
+* have JavaScript enabled
 * use a sane browser, like Firefox, Chrome/Chromium or Safari
 
 Functionality of the Web Interface
@@ -36,21 +36,21 @@ Your current IP(s) + reverse DNS
 --------------------------------
 
 We show your current IP address(es).
-Depending on the type of your internet connection, this can be IP v4 or v6 or both (dual stack).
+Depending on the type of your Internet connection, this can be IP v4 or v6 or both (dual stack).
 If nothing shows up, you don't have that kind of IP address.
 
 We additionally show the result of a reverse DNS lookup ("rDNS") for your IP address(es).
-If nothing shows up, that IP does not have a reverse DNS record.
+If nothing shows up, that IP address does not have a reverse DNS record.
 
 We always show you the IP addresses where your requests come from. Under some circumstances, these might not be what
 you expect (e.g. presence or non-presence of NAT gateways, proxies, etc.).
 
-We detect your addresses by 2 means:
+We detect your addresses by two means:
 
-* your current remote address (where your accesses to the web interface come from) - the IP detected this way is
+* your current remote address (where your accesses to the web interface come from) - the IP address detected this way is
   immediately visible on the web interface.
 * if we don't already have the IP address from the remote address, we use an invisible fake "image" that your browser
-  loads from an IPv4-only or IPv6-only server - the IP detected by this method usually shows up after a few seconds.
+  loads from an IPv4-only or IPv6-only server - the IP address detected by this method usually shows up after a few seconds.
 
 We do some optimizations to not load these images too frequently, but also try to make sure we do not show you outdated
 information about your current IP addresses.
@@ -64,14 +64,14 @@ You need to create an account to use most of the functionality of the service.
 
 Your hosts / domains are only for you, so you need to identify to create or change them.
 
-You need to give a valid E-Mail address, as we send you a link you need to access to complete the registration.
+You need to give a valid email address, as we send you a link you need to access to complete the registration.
 
-We'll also use that E-Mail address in case you forget your login password or when there are technical issues
+We'll also use that email address in case you forget your login password or when there are technical issues
 with your hosts or domains.
 
 For your own safety, use https and a sane password.
 
-Be careful: in case you lose your login username/password and you also can't receive mail sent to the E-Mail address
+Be careful: in case you lose your login username/password and you also can't receive mail sent to the email address
 you gave when registering, you might not be able to regain access to your account / your hosts (neither automatically
 nor with help from service admin) as you likely can't prove that they are really yours / you are permitted to
 control them.
@@ -121,12 +121,12 @@ If you control an own nameserver / zone, you can use the service to dynamically 
 client.
 
 For this, it is required that the master nameserver of that zone accepts dynamic updates (RFC 2136) using a shared
-secret. If you run your own bind9 nameserver for your domain, we show you how to configure it for dynamic updates
+secret. If you run your own BIND 9 nameserver for your domain, we show you how to configure it for dynamic updates
 after you add a domain on nsupdate.info.
 
 You can either privately use such an own domain or alternatively even offer them publically for all users of the service.
 
-If you have cool domains, please offer publically!
+If you have any cool domains, then please offer them publically!
 
 Note: if you just register a domain at some domain seller (and the domain seller runs the DNS for you), you usually
 just get some web interface to manage the DNS records. Often, that nameserver is not configured to accept dynamic
@@ -221,7 +221,7 @@ Note:
 Other Services Updaters
 -----------------------
 
-Users can associate "other services" (3rd party services) updaters with their
+Users can associate "other services" (third-party services) updaters with their
 hosts and if we receive an update for such a host, we'll automatically send
 (dyndns2) updates to these other services.
 
@@ -235,8 +235,8 @@ Currently, Users can only use services that were made available by an admin
 Browser-based Update Client
 ---------------------------
 
-The service has a "built-in" browser/javascript-based update client that will
-query the IP and send update requests if the IP changes.
+The service has a "built-in" browser/JavaScript-based update client that will
+query the IP address and send update requests if the IP address changes.
 
 One typical scenario where this is useful:
 
@@ -379,7 +379,7 @@ Here are some clients that likely qualify:
 * nsupdate-info's browser-based updater
 
   - only for adhoc scenarios, not intended for long term use
-  - runs in your browser with javascript
+  - runs in your browser with JavaScript
 
 Known-Problematic
 -----------------

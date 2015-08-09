@@ -399,7 +399,7 @@ Tuning
 
 If you get a lot of requests for /myip, the Python code handling this URL will
 be rather busy. If you use nginx, you may optionally tune this and respond to
-these requests directly from nginx without invoking any python code::
+these requests directly from nginx without invoking any Python code::
 
   location /myip {
     add_header Content-Type text/plain;
