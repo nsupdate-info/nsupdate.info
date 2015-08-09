@@ -28,27 +28,27 @@ On the hosts overview page, we show whether we received the last update via TLS.
 Please note that if you like security, you also need to use https (with
 certificate verification) if you use the web-based method to query your IP
 address. If you use http, a powerful attacker could MITM your request and
-tell you a wrong IP, which your updater then would happily write into DNS.
+tell you a wrong IP address, which your updater then would happily write into DNS.
 
 
 Login with remote vs. local Account
 ===================================
 
 If you use a already existing remote account to log in into our service, you
-don't need to create a local profile (with username, E-Mail and password).
+don't need to create a local profile (with username, email and password).
 
 That way, we need to store less information about you - especially no password
 hash (and you also don't need to create a new password just for our service).
 So, this is a little more safe if you just consider our service.
 
-BUT: If you use some external service to log in, you of course need to trust
+But if you use some external service to log in, you of course need to trust
 them for this purpose as *they* are telling "yes, this is really you".
 
 Also, if you cancel the account on that external service and you don't have
-a local profile (login, E-Mail, password) with us, you will be unable to log
+a local profile (login, email, password) with us, you will be unable to log
 in afterwards or recover access to your hosts/domains.
 
-So maybe the best way is to first create a local profile (username, E-Mail,
+So maybe the best way is to first create a local profile (username, email,
 password), then log in and associate your other remote accounts with that
 local profile.
 
@@ -64,12 +64,12 @@ Do not re-use passwords, use a password system or a password manager.
 
 The interactive login password for the web site is stored using Django's
 default hasher mechanism, which is currently pbkdf2 (a very strong and
-intentionally slow password hash). Brute-Force attacks against such hashes are
+intentionally slow password hash). Brute-force attacks against such hashes are
 very slow, much slower than against simple hashes like (s)sha1/sha256 etc.
 
-It is NOT stored in clear text by nsupdate.info.
+It is **not** stored in clear text by nsupdate.info.
 
-If you lose the password, you'll have to do a password reset via e-mail.
+If you lose the password, you'll have to do a password reset via email.
 
 
 Automated update secret
