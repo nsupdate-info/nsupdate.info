@@ -62,5 +62,5 @@ If you find some issue, have some idea or some patch, please submit them via the
 
 Or even better: if you use git, fork our repo, make your changes and submit a pull request.
 
-For small fixes, you can even just edit the files on github (github will then fork, change and submit a pull request
+For small fixes, you can even just edit the files on GitHub (GitHub will then fork, change and submit a pull request
 automatically).
