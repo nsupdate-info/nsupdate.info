@@ -339,7 +339,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
         logger.warning("timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
                        action, name, origin, rdtype, ipaddr))
         set_ns_availability(domain, False)
-        raise
+        raise DnsUpdateError("Timeout")
     except dns.tsig.PeerBadSignature:
         logger.error("PeerBadSignature - shared secret mismatch? zone: %s" % (origin, ))
         set_ns_availability(domain, False)
