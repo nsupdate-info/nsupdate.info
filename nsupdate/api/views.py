@@ -405,7 +405,7 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
                     ifid = IPAddress(ifid)
                     network = IPNetwork("%s/%d" % (ipaddr, netmask))
                     rh_ipaddr = str(IPAddress(network.network) + int(ifid))
-            except (IndexError, AddrFormatError) as e:
+            except (IndexError, AddrFormatError, ValueError) as e:
                 logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
             else:
                 if not _delete:
