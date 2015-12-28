@@ -148,6 +148,7 @@ class Domain(models.Model):
     class Meta:
         verbose_name = _('domain')
         verbose_name_plural = _('domains')
+        ordering = ('name', )
 
 
 @python_2_unicode_compatible
@@ -257,6 +258,7 @@ class Host(models.Model):
         index_together = (('name', 'domain'), )
         verbose_name = _('host')
         verbose_name_plural = _('hosts')
+        ordering = ('domain', 'name')  # groupby domain and sort by name
 
     def get_fqdn(self):
         return dnstools.FQDN(self.name, self.domain.name)
@@ -411,6 +413,7 @@ class RelatedHost(models.Model):
         unique_together = (('name', 'main_host'), )
         verbose_name = _('related host')
         verbose_name_plural = _('related hosts')
+        ordering = ('main_host', 'name')
 
     def get_fqdn(self):
         main = self.main_host.get_fqdn()
