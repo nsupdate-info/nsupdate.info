@@ -13,7 +13,9 @@ SESSION_COOKIE_SECURE = WE_HAVE_TLS
 
 # these are the service host names we deal with
 BASEDOMAIN = 'nsupdate.info'
-WWW_HOST = BASEDOMAIN  # a host with a ipv4 and a ipv6 address
+# do NOT just use the BASEDOMAIN for WWW_HOST, or you will run into troubles
+# when you want to be on publicsuffix.org list and still be able to set cookies
+WWW_HOST = 'www.' + BASEDOMAIN  # a host with a ipv4 and a ipv6 address
 # hosts to enforce a v4 / v6 connection (to determine the respective ip)
 WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN  # a host with ONLY a ipv4 address
 WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN  # a host with ONLY a ipv6 address
