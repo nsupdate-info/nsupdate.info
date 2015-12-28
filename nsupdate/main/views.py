@@ -31,6 +31,7 @@ from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 
 class GenerateSecretView(UpdateView):
     model = Host
+    fields = "__all__"
     template_name = "main/generate_secret.html"
 
     @method_decorator(login_required)
@@ -54,6 +55,7 @@ class GenerateSecretView(UpdateView):
 
 class GenerateNSSecretView(UpdateView):
     model = Domain
+    fields = "__all__"
     template_name = "main/generate_ns_secret.html"
 
     @method_decorator(login_required)
