@@ -18,6 +18,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse
 from django.http import Http404
+from django import template
 from django.utils.timezone import now
 
 from . import dnstools
@@ -87,7 +88,11 @@ class CustomTemplateView(TemplateView):
 
     def dispatch(self, *args, **kwargs):
         self.template_name = 'main/custom/%s' % kwargs.get('template')
-        return super(CustomTemplateView, self).dispatch(*args, **kwargs)
+        try:
+            template.loader.select_template(self.template_name)
+            return super(CustomTemplateView, self).dispatch(*args, **kwargs)
+        except template.TemplateDoesNotExist:
+            raise Http404
 
 
 class HomeView(TemplateView):
