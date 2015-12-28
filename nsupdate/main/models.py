@@ -385,12 +385,12 @@ class RelatedHost(models.Model):
     interface_id_ipv4 = models.CharField(
         _("interface ID IPv4"),
         default='', blank=True, null=True,
-        max_length=16,  # 123.123.123.123
+        max_length=16,
         help_text=_("The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set record."))
     interface_id_ipv6 = models.CharField(
         _("interface ID IPv6"),
         default='', blank=True, null=True,
-        max_length=22,  # ::1234:5678:9abc:def0
+        max_length=40,
         help_text=_("The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set record."))
     available = models.BooleanField(
         _("available"),
