@@ -5,6 +5,7 @@
     <li><a href="#ddwrt" data-toggle="tab">DD-WRT</a></li>
     <li><a href="#ddclient" data-toggle="tab">ddclient</a></li>
     <li><a href="#inadyn" data-toggle="tab">inadyn</a></li>
+    <li><a href="#ipfire" data-toggle="tab">IPFire</a></li>
     <li><a href="#m0n0wall" data-toggle="tab">m0n0wall</a></li>
     <li><a href="#openwrt" data-toggle="tab">OpenWRT</a></li>
     <li><a href="#pfsense" data-toggle="tab">pfSense</a></li>
@@ -181,6 +182,24 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 </pre>
+    </div>
+    <div class="tab-pane" id="ipfire">
+        <h4>IPFire 2.17 Core Update 90</h4>
+        <p>Homepage: <a href="http://ipfire.org/">http://ipfire.org</a></p>
+        <h5>{% trans "Go to:" %}</h5>
+        <div class="well well-sm">
+            Services <i class="fa fa-long-arrow-right"></i>
+            Dynamic DNS
+        </div>
+        <h5>{% trans "Enter the following data (and click ADD afterwards):" %}</h5>
+        <table class="table">
+            <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+            <tr><td>Service</td><td>nsupdate.info</td></tr>
+            <tr><td>Enabled</td><td>(check)</td></tr>
+            <tr><td>Host Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
+        </table>
     </div>
     <div class="tab-pane" id="m0n0wall">
         <h4>m0n0wall</h4>
