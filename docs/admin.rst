@@ -408,3 +408,14 @@ these requests directly from nginx without invoking any python code::
 
 You need to add this to all server blocks (IP v4, v6, both) that are dealing
 with requests for the service.
+
+DNSSEC
+------
+
+There is no need for special support for DNSSEC in the nsupdate.info software,
+it is sufficient to configure your DNS server (e.g. BIND) to support and manage
+DNSSEC and it will just work.
+
+See there for more infos and links:
+
+https://github.com/nsupdate-info/nsupdate.info/issues/26
