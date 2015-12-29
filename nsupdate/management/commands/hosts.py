@@ -153,7 +153,7 @@ class Command(BaseCommand):
         with transaction.atomic():
             for h in Host.objects.all():
                 if stale_check:
-                    host = h.name + "." + h.domain
+                    host = h.name + "." + h.domain.name
                     comment = h.comment
                     creator = h.created_by
                     staleness, email_msg, log_msg = check_staleness(h)
