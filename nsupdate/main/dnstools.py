@@ -32,6 +32,7 @@ import dns.query
 import dns.update
 import dns.tsig
 import dns.tsigkeyring
+import dns.exception
 
 from django.utils.timezone import now
 
@@ -96,6 +97,31 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     """
     af = dns.inet.af_for_address(ipaddr)
     return keys[af == dns.inet.AF_INET6]
+
+
+def check_domain(domain):
+    fqdn = FQDN(host="connectivity-test", domain=domain)
+
+    from .models import Domain
+    d = Domain.objects.get(name=domain)
+    # temporarily set domain to available
+    domain_available_state = d.available
+    d.available = True
+    d.save()
+
+    try:
+        # add to primary
+        add(fqdn, "8.8.8.8")
+        # delete on primary
+        delete(fqdn)
+
+    except (dns.exception.DNSException, ) as e:
+        raise NameServerNotAvailable(str(e))
+
+    finally:
+        # reset domain available
+        d.available = domain_available_state
+        d.save()
 
 
 def add(fqdn, ipaddr, ttl=60):

@@ -4,8 +4,10 @@ form definitions (which fields are available, order, autofocus, ...)
 """
 
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
+from .dnstools import check_domain, NameServerNotAvailable
 
 
 class CreateHostForm(forms.ModelForm):
@@ -44,14 +46,33 @@ class EditRelatedHostForm(forms.ModelForm):
 class CreateDomainForm(forms.ModelForm):
     class Meta(object):
         model = Domain
-        fields = ['name', 'nameserver_ip', 'nameserver2_ip', 'nameserver_update_algorithm',
-                  'public', 'available', 'comment']
+        fields = ['name', 'nameserver_ip', 'nameserver2_ip', 'nameserver_update_algorithm', 'comment']
         widgets = {
             'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
 
 
 class EditDomainForm(forms.ModelForm):
+    def clean(self):
+        cleaned_data = super(EditDomainForm, self).clean()
+
+        if self.cleaned_data['available']:
+            try:
+                check_domain(self.instance.name)
+
+            except (NameServerNotAvailable, ):
+                raise forms.ValidationError(
+                    _("Failed to add/delete a test host on %(domain)s, check your DNS server configuration. "
+                      "This is a requirement for setting the available flag."),
+                    code='invalid',
+                    params={'domain': self.instance.name}
+                )
+
+        if cleaned_data['public'] and not cleaned_data['available']:
+            raise forms.ValidationError(
+                _("Domain must be available to be public"),
+                code='invalid')
+
     class Meta(object):
         model = Domain
         fields = ['comment', 'nameserver_ip', 'nameserver2_ip', 'public', 'available',

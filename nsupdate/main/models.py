@@ -115,7 +115,7 @@ class Domain(models.Model):
     # gets set to False if we have trouble reaching the nameserver
     available = models.BooleanField(
         _("available"),
-        default=True,
+        default=False,
         help_text=_("Check if nameserver is available/reachable - "
                     "if not checked, we'll pause querying/updating this nameserver for a while"))
     comment = models.CharField(
