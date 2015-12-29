@@ -3,6 +3,8 @@
 form definitions (which fields are available, order, autofocus, ...)
 """
 
+import binascii
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
@@ -44,6 +46,14 @@ class EditRelatedHostForm(forms.ModelForm):
 
 
 class CreateDomainForm(forms.ModelForm):
+    def clean_nameserver_update_secret(self):
+        secret = self.cleaned_data['nameserver_update_secret']
+        try:
+            binascii.a2b_base64(secret.encode(encoding="ascii", errors="strict"))
+        except (binascii.Error, UnicodeEncodeError):
+            raise forms.ValidationError(_("Enter a valid secret in base64 format."), code='invalid')
+        return secret
+
     class Meta(object):
         model = Domain
         fields = ['name', 'nameserver_ip', 'nameserver2_ip', 'nameserver_update_algorithm', 'comment']
