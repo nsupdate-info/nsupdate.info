@@ -191,11 +191,15 @@ class OverviewView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(OverviewView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
-        context['hosts'] = Host.objects.filter(created_by=self.request.user)
+        context['hosts'] = Host.objects.filter(created_by=self.request.user).select_related("domain")\
+            .only("name", "comment", "available", "client_faults", "server_faults", "abuse_blocked", "abuse",
+                  "last_update_ipv4", "tls_update_ipv4", "last_update_ipv6", "tls_update_ipv6", "domain__name")
         context['your_domains'] = Domain.objects.filter(
-            created_by=self.request.user)
+            created_by=self.request.user).select_related("created_by__username")\
+            .only("name", "public", "available", "comment", "created_by__username")
         context['public_domains'] = Domain.objects.filter(
-            public=True).exclude(created_by=self.request.user)
+            public=True).exclude(created_by=self.request.user).select_related("created_by")\
+            .only("name", "public", "available", "comment", "created_by__username")
         return context
 
 

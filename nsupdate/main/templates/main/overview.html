@@ -50,27 +50,31 @@
                             <br><span class="label label-warning">{% trans "Abuse" %}</span>
                         {% endif %}
                     </td>
-                    <td>{{ host.get_ipv4|default_if_none:_("none")}}
+                    {% with ipv4=host.get_ipv4 %}
+                    <td>{{ ipv4|default_if_none:_("none")}}
                         <br>
-                        {% if host.last_update_ipv4 and host.get_ipv4 %}
-                        ({{ host.last_update_ipv4|naturaltime }},
-                         {% if not host.tls_update_ipv4 %}
-                         <span class="label label-warning">{% trans "no" %} {% else %}
-                         <span class="label label-success">{% endif %}{% trans "TLS" %}</span>)
-                        {% elif host.get_ipv4 %}
-                        ({% trans "unknown" %})
+                        {% if host.last_update_ipv4 and ipv4 %}
+                          ({{ host.last_update_ipv4|naturaltime }},
+                          {% if not host.tls_update_ipv4 %}
+                          <span class="label label-warning">{% trans "no" %} {% else %}
+                          <span class="label label-success">{% endif %}{% trans "TLS" %}</span>)
+                        {% elif ipv4 %}
+                          ({% trans "unknown" %})
                         {% endif %}
+                    {% endwith %}
                     </td>
-                    <td>{{ host.get_ipv6|default_if_none:_("none") }}
+                    {% with ipv6=host.get_ipv6 %}
+                    <td>{{ ipv6|default_if_none:_("none") }}
                         <br>
-                        {% if host.last_update_ipv6 and host.get_ipv6 %}
-                        ({{ host.last_update_ipv6|naturaltime }},
-                         {% if not host.tls_update_ipv6 %}
-                         <span class="label label-warning">{% trans "no" %} {% else %}
-                         <span class="label label-success">{% endif %}{% trans "TLS" %}</span>)
-                        {% elif host.get_ipv6 %}
-                        ({% trans "unknown" %})
+                        {% if host.last_update_ipv6 and ipv6 %}
+                          ({{ host.last_update_ipv6|naturaltime }},
+                          {% if not host.tls_update_ipv6 %}
+                          <span class="label label-warning">{% trans "no" %} {% else %}
+                          <span class="label label-success">{% endif %}{% trans "TLS" %}</span>)
+                        {% elif ipv6 %}
+                          ({% trans "unknown" %})
                         {% endif %}
+                    {% endwith %}
                     </td>
                 </tr>
             {% empty %}
