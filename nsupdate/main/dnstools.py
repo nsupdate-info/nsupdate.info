@@ -24,6 +24,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 import socket
+import random
+import struct
 
 import dns.inet
 import dns.name
@@ -104,18 +106,16 @@ def check_domain(domain):
 
     from .models import Domain
     d = Domain.objects.get(name=domain)
-    # temporarily set domain to available
+    # temporarily set domain to available to allow add/update/deletes
     domain_available_state = d.available
     d.available = True
     d.save()
 
     try:
-        # add to primary
-        add(fqdn, "8.8.8.8")
-        # delete on primary
-        delete(fqdn)
+        # add host connectivity-test.<domain> with a random IP. See add()
+        add(fqdn, socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))))
 
-    except (dns.exception.DNSException, ) as e:
+    except (dns.exception.DNSException, DnsUpdateError) as e:
         raise NameServerNotAvailable(str(e))
 
     finally:
