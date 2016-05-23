@@ -286,7 +286,7 @@ config service "ipv4ddns"
             <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
             <tr><td>Update URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
-            <tr><td>Result Match</td><td>good|nochg</td></tr>
+            <tr><td>Result Match</td><td>good %IP%|nochg %IP%</td></tr>
             <tr><td>Description</td><td>update DDNS host with IP v4 address</td></tr>
         </table>
     </div>
