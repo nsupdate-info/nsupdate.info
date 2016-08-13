@@ -8,7 +8,6 @@ Note: do not directly use these settings, rather use "dev" or "prod".
 # project's settings on top of that. Due to this, no import * is required here.
 
 import os
-import django.conf.global_settings as DEFAULT_SETTINGS
 
 # To make this work, put a unique, long, random, secret string into your environment.
 # E.g. in ~/.bashrc: export SECRET_KEY="..."
@@ -109,12 +108,36 @@ STATICFILES_FINDERS = (
     # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-    # 'django.template.loaders.eggs.Loader',
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            # '/where/you/have/additional/templates',
+        ],
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                #'django.contrib.auth.context_processors.auth',
+                #'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.request',
+                'nsupdate.context_processors.add_settings',
+                'nsupdate.context_processors.update_ips',
+                #'django.template.context_processors.media',
+                #'django.template.context_processors.static',
+                #'django.template.context_processors.tz',
+                #'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
+            ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+        },
+    },
+]
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -127,28 +150,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.request',
-    'nsupdate.context_processors.add_settings',
-    'nsupdate.context_processors.update_ips',
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-)
-
 ROOT_URLCONF = 'nsupdate.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'nsupdate.wsgi.application'
-
-TEMPLATE_DIRS = (
-    # you can add site-specific template dirs here to customize nsupdate.info
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    # TEMPLATE_DIRS must be a tuple, so don't forget the trailing comma if you
-    # put a single entry in here!
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
