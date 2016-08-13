@@ -91,7 +91,7 @@ class CustomTemplateView(TemplateView):
     def dispatch(self, *args, **kwargs):
         self.template_name = 'main/custom/%s' % kwargs.get('template')
         try:
-            template.loader.select_template(self.template_name)
+            template.loader.select_template([self.template_name, ])
             return super(CustomTemplateView, self).dispatch(*args, **kwargs)
         except template.TemplateDoesNotExist:
             raise Http404
