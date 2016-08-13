@@ -236,6 +236,8 @@ class AddHostView(CreateView):
         except Domain.DoesNotExist:
             # should not happen: POST data had invalid (base)domain
             success, level, msg = False, messages.ERROR, 'Base domain does not exist.'
+        except dnstools.SameIpError:
+            success, level, msg = False, messages.ERROR, 'Host already exists in DNS.'
         except socket.error as err:
             success, level, msg = False, messages.ERROR, 'Communication to name server failed [%s]' % str(err)
         else:
