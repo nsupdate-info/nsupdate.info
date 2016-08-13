@@ -2,7 +2,6 @@ language: python
 python:
     - "2.7"
     - "pypy"
-    - "3.3"
     - "3.4"
     - "3.5"
 env:
@@ -23,9 +22,9 @@ matrix:
     - python: "2.7"
       env: DJANGO=1.8.1 COVERAGE="coverage run -m" TEST_K="" TEST_OPTS="--pep8"
 install:
-    - "pip install --use-mirrors Django==$DJANGO"
-    - "pip install --use-mirrors -r requirements.d/travis.txt"
-    - "pip install --use-mirrors -e ."
+    - "pip install Django==$DJANGO"
+    - "pip install -r requirements.d/travis.txt"
+    - "pip install -e ."
 script: $COVERAGE py.test $TEST_OPTS -k "$TEST_K" -m "not requires_sequential"
 after_success:
     - coveralls
