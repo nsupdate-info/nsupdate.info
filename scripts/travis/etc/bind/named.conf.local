@@ -1,0 +1,64 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+logging {
+    channel bind.log {
+        file "/var/lib/bind/bind.log";
+        // Set the severity to dynamic to see all the debug messages.
+        severity debug 3;
+    };
+    category update { bind.log; };
+    category update-security { bind.log; };
+    category security { bind.log; };
+    category dnssec { bind.log; };
+};
+
+key "nsupdate.info." {
+        algorithm hmac-sha512;
+        secret "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==";
+};
+
+key "tests.nsupdate.info." {
+        algorithm hmac-sha512;
+        secret "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ==";
+};
+
+zone "nsupdate.info" {
+        type master;
+        file "/etc/bind/zones/nsupdate.info";
+        update-policy {
+            // these "deny" entries are needed for the service domain,
+            // if you add another domain, you may want to check the need
+            // for other "deny" entries if the zone is not fully available.
+            // we don't allow updates to the infrastructure hosts:
+            deny  nsupdate.info.      name      nsupdate.info;
+            deny  nsupdate.info.      name  www.nsupdate.info;
+            deny  nsupdate.info.      name ipv4.nsupdate.info;
+            deny  nsupdate.info.      name ipv6.nsupdate.info;
+            // this host is for testing if the nameserver is configured correctly and reachable
+            grant nsupdate.info.      name connectivity-test.nsupdate.info A;
+            // but we allow updates to any other host:
+            grant nsupdate.info. subdomain nsupdate.info;
+        };
+};
+
+zone "tests.nsupdate.info" {
+        type master;
+        file "/etc/bind/zones/tests.nsupdate.info";
+        update-policy {
+            // these "deny" entries are needed for the service domain,
+            // if you add another domain, you may want to check the need
+            // for other "deny" entries if the zone is not fully available.
+            // we don't allow updates to the infrastructure hosts:
+            deny  tests.nsupdate.info.      name      tests.nsupdate.info;
+            deny  tests.nsupdate.info.      name  www.tests.nsupdate.info;
+            deny  tests.nsupdate.info.      name ipv4.tests.nsupdate.info;
+            deny  tests.nsupdate.info.      name ipv6.tests.nsupdate.info;
+            // but we allow updates to any other host:
+            grant tests.nsupdate.info. subdomain tests.nsupdate.info;
+        };
+};
