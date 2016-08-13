@@ -11,6 +11,8 @@ the docs that match the version you are upgrading to.
 Release 0.12.0 (unreleased yet)
 -------------------------------
 
+Note: dropped support for / testing on Python 3.3
+
 New Features:
 
 * Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
@@ -33,10 +35,15 @@ Fixes:
 * check_domain fixes: #246, #249, #253
 * test updates when a domain is set to available, #168
 * unicode error under python2.7, #242
+* fix SameIpError in host add form processing, fixes #267
+* update OpenWrt config example for Chaos Calmer, fixes #259
+* fix first param type of loader.select_template, fixes #255
 
 Other changes:
 
+* travis: drop py33, pip: remove --use-mirrors
 * update django requirement >=1.8.1 (LTS)
+* use TEMPLATES setting for Django 1.8+, remove outdated TEMPLATE_*
 * added python 3.5 to travis tests
 * use www.BASEDOMAIN for WWW_HOST, prepare for #224
 * submitted a pull request with "nsupdate.info" to publicsuffix.org, this
