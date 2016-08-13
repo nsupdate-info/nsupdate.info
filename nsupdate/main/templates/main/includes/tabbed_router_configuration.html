@@ -236,7 +236,7 @@ system ipv4@nsupdate.info
 </pre>
     </div>
     <div class="tab-pane" id="openwrt">
-        <h4>OpenWRT ({% trans "verified with" %} 14.07-rc3 "Barrier Breaker")</h4>
+        <h4>OpenWRT ({% trans "verified with" %} "Chaos Calmer")</h4>
         <pre># ddns-scripts configuration /etc/config/ddns
 
 config service "ipv4ddns"
@@ -244,7 +244,6 @@ config service "ipv4ddns"
     option interface "wan"
     option use_syslog "1"
 
-    option service_name "{{ WWW_HOST }}"
     option update_url "http://[USERNAME]:[PASSWORD]@{{ WWW_IPV4_HOST }}/nic/update?hostname=[DOMAIN]&myip=[IP]"
     option ip_source "web"
     option ip_url "http://{{ WWW_IPV4_HOST }}/myip"
