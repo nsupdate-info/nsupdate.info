@@ -14,7 +14,7 @@ Release 0.12.0 (unreleased yet)
 New Features:
 
 * Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
-* add ipfire help, fixes #209
+* add ipfire help, #209
 * avoid domains vs. hosts confusion - check dns availability, #168
 * admin: sort host and domains by name
 
@@ -25,9 +25,14 @@ Fixes:
 * emails should mention fqdn, #225
 * TemplateDoesNotExist exception, #222
 * "faults" management command: use atomic transaction PER HOST, #208
-* avoid that invalid domains get added, fixes #205
-* fix traceback when language in user profile is None, fixes #206
-* fix traceback when using a malformed nameserver secret #213
+* avoid that invalid domains get added, #205
+* fix traceback when language in user profile is None, #206
+* fix traceback when using a malformed nameserver secret, #213
+* downgrade django-registration-redux, fixes pw reset, #250
+* update pfSense tab to get IP from Result Match
+* check_domain fixes: #246, #249, #253
+* test updates when a domain is set to available, #168
+* unicode error under python2.7, #242
 
 Other changes:
 
@@ -41,6 +46,10 @@ Other changes:
 * use other cdn for Bootstrap
 * set SECRET_KEY in development configuration
 * add some words about DNSSEC to the docs, #26
+* do not use html registration emails
+* update font awesome and jquery, add subresource integrity, #23
+* optimize database query on overview page
+* sort hosts and domains by name, #192
 
 
 Release 0.11.0
