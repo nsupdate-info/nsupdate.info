@@ -5,7 +5,6 @@ settings for production
 from .base import *
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
 
 WE_HAVE_TLS = True  # True if you run a https site also, suggest that site to users if they work on the http site.
 CSRF_COOKIE_SECURE = WE_HAVE_TLS

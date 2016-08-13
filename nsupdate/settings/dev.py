@@ -5,7 +5,6 @@ settings for development / unit tests
 from .base import *
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 SECRET_KEY = 'UNSECURE_BECAUSE_WE_ARE_DEVELOPING'
 WE_HAVE_TLS = False  # True if you run a https site also, suggest that site to users if they work on the http site.
