@@ -6,22 +6,25 @@ https://nsupdate.info is a free dynamic DNS service.
 nsupdate.info is also the name of the software used to implement it.
 If you like, you can use it to host the service on your own server.
 
-Documentation: https://nsupdateinfo.readthedocs.org/
+Documentation: https://nsupdateinfo.readthedocs.io/
 
 Software project: https://github.com/nsupdate-info/nsupdate.info
 
+.. |doc| image:: https://readthedocs.org/projects/nsupdate/badge/?version=stable
+        :alt: Documentation
+        :target: https://nsupdateinfo.readthedocs.io/en/stable/
 
-.. image:: https://travis-ci.org/nsupdate-info/nsupdate.info.png
-    :target: https://travis-ci.org/nsupdate-info/nsupdate.info
+.. |build| image:: https://api.travis-ci.org/nsupdate-info/nsupdate.info.svg
+        :alt: Build Status
+        :target: https://travis-ci.org/nsupdate-info/nsupdate.info
 
-.. image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
+.. |coverage| image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
+        :alt: Test Coverage
         :target: https://coveralls.io/r/nsupdate-info/nsupdate.info
 
-.. image:: https://badge.fury.io/py/nsupdate.png
-    :target: http://badge.fury.io/py/nsupdate
-
-.. image:: https://pypip.in/d/nsupdate/badge.png
-        :target: https://crate.io/packages/nsupdate/
+.. |package| image:: https://badge.fury.io/py/nsupdate.png
+        :alt: PyPI Package
+        :target: http://badge.fury.io/py/nsupdate
 
 (build and coverage are for latest repo code, package and downloads are for PyPI release)
 
