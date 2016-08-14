@@ -118,16 +118,16 @@ TEMPLATES = [
             'context_processors': [
                 # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
                 # list if you haven't customized them:
-                #'django.contrib.auth.context_processors.auth',
-                #'django.template.context_processors.debug',
+                # 'django.contrib.auth.context_processors.auth',
+                # 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.request',
                 'nsupdate.context_processors.add_settings',
                 'nsupdate.context_processors.update_ips',
-                #'django.template.context_processors.media',
-                #'django.template.context_processors.static',
-                #'django.template.context_processors.tz',
-                #'django.contrib.messages.context_processors.messages',
+                # 'django.template.context_processors.media',
+                # 'django.template.context_processors.static',
+                # 'django.template.context_processors.tz',
+                # 'django.contrib.messages.context_processors.messages',
                 'social.apps.django_app.context_processors.backends',
                 'social.apps.django_app.context_processors.login_redirect',
             ],
