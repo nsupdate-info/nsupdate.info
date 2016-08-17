@@ -72,7 +72,7 @@ class EditDomainForm(forms.ModelForm):
 
             except (NameServerNotAvailable, ):
                 raise forms.ValidationError(
-                    _("Failed to add/delete a test host on %(domain)s, check your DNS server configuration. "
+                    _("Failed to add/delete host connectivity-test.%(domain)s, check your DNS server configuration. "
                       "This is a requirement for setting the available flag."),
                     code='invalid',
                     params={'domain': self.instance.name}
