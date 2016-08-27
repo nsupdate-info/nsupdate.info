@@ -64,6 +64,7 @@ class FQDN(namedtuple('FQDN', ['host', 'domain'])):
 
 Timeout = dns.resolver.Timeout
 NoNameservers = dns.resolver.NoNameservers
+DNSException = dns.exception.DNSException
 
 
 class SameIpError(ValueError):
