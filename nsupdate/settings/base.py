@@ -170,8 +170,8 @@ INSTALLED_APPS = (
     'nsupdate.api',
     'nsupdate.main',
     'bootstrapform',
-    'registration',
     'django.contrib.admin',
+    'registration',
     'django_extensions',
 )
 

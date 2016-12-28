@@ -3,7 +3,7 @@ dnspython
 netaddr
 django>=1.8.1, <1.9
 django-bootstrap-form
-django-registration-redux<1.2
+django-registration-redux
 django-extensions
 python-social-auth
 requests
