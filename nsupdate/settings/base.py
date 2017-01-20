@@ -122,14 +122,16 @@ TEMPLATES = [
                 # 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
                 'nsupdate.context_processors.add_settings',
                 'nsupdate.context_processors.update_ips',
                 # 'django.template.context_processors.media',
                 # 'django.template.context_processors.static',
                 # 'django.template.context_processors.tz',
                 # 'django.contrib.messages.context_processors.messages',
-                'social.apps.django_app.context_processors.backends',
-                'social.apps.django_app.context_processors.login_redirect',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -146,7 +148,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
@@ -163,7 +165,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'social.apps.django_app.default',
+    'social_django',
     'nsupdate.login',
     'nsupdate',
     'nsupdate.accounts',
@@ -265,16 +267,16 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe (remember_me is False)
 # python-social-auth settings
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.amazon.AmazonOAuth2',
-    'social.backends.bitbucket.BitbucketOAuth',
-    'social.backends.disqus.DisqusOAuth2',
-    'social.backends.dropbox.DropboxOAuth',
-    'social.backends.github.GithubOAuth2',
-    'social.backends.google.GoogleOAuth2',
-    'social.backends.reddit.RedditOAuth2',
-    'social.backends.soundcloud.SoundcloudOAuth2',
-    'social.backends.stackoverflow.StackoverflowOAuth2',
-    'social.backends.twitter.TwitterOAuth',
+    'social_core.backends.amazon.AmazonOAuth2',
+    'social_core.backends.bitbucket.BitbucketOAuth',
+    'social_core.backends.disqus.DisqusOAuth2',
+    'social_core.backends.dropbox.DropboxOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.reddit.RedditOAuth2',
+    'social_core.backends.soundcloud.SoundcloudOAuth2',
+    'social_core.backends.stackoverflow.StackoverflowOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 

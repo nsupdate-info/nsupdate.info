@@ -22,7 +22,7 @@ def remember_me_login(request, *args, **kw):
 
 urlpatterns = patterns(
     '',
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('social_django.urls', namespace='social')),
     url(r'^accounts/', include('nsupdate.login.urls')),
     # registration and user settings
     url(r'^account/', include('nsupdate.accounts.urls')),
