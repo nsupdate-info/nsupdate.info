@@ -57,9 +57,9 @@ setup(
         'netaddr',
         'django>=1.8.1, <1.9',
         'django-bootstrap-form',
-        'django-registration-redux<1.2',  # 1.2 breaks password reset and maybe other stuff
+        'django-registration-redux',
         'django-extensions',
-        'python-social-auth',
+        'social-auth-app-django',
         'requests',  # for our ddns_client
     ],
     classifiers=[
