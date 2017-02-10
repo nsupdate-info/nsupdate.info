@@ -35,8 +35,6 @@ matrix:
       env: DJANGO=1.8.1 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
     - python: "3.6"
       env: DJANGO=1.8.17
-  allow_failures:
-    - python: "3.6"
 
 install:
     - ./scripts/travis/install.sh
