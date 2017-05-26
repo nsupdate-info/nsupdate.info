@@ -264,8 +264,17 @@ SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_AGE = 14 * 24 * 60 * 60  # 14 days, in seconds (remember_me is True)
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe (remember_me is False)
 
-# python-social-auth settings
+# Allow SHA1 for host update secrets
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+    'django.contrib.auth.hashers.SHA1PasswordHasher',
+]
 
+# python-social-auth settings
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.amazon.AmazonOAuth2',
     'social_core.backends.bitbucket.BitbucketOAuth',

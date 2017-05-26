@@ -3,9 +3,10 @@ top-level url dispatching
 """
 
 from django.conf import settings
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
 
 
 def remember_me_login(request, *args, **kw):
@@ -20,8 +21,7 @@ def remember_me_login(request, *args, **kw):
     return auth_views.login(request, *args, **kw)
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url('', include('social_django.urls', namespace='social')),
     url(r'^accounts/', include('nsupdate.login.urls')),
     # registration and user settings
@@ -29,12 +29,9 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('nsupdate.main.urls')),
-)
+]
 
 if settings.DEBUG:
-    urlpatterns += patterns('django.contrib.staticfiles.views',
-                            url(r'^static/(?P<path>.*)$', 'serve'), )
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     import debug_toolbar
-    urlpatterns += patterns('',
-                            url(r'^__debug__/', include(debug_toolbar.urls)),
-    )
+    urlpatterns += (url(r'^__debug__/', include(debug_toolbar.urls)),)

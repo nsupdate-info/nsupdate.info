@@ -58,7 +58,7 @@
                     <ul class="nav navbar-nav pull-right">
                         {% if not request.user.is_authenticated %}
                             <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}"><i class="fa fa-asterisk fa-fw"></i> {% trans "Sign up" %}</a></li>
-                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'django.contrib.auth.views.login' %}"><i class="fa fa-sign-in fa-fw"></i> {% trans 'Log in' %}</a></li>
+                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw"></i> {% trans 'Log in' %}</a></li>
                         {% else %}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {{ request.user.username }} <b class="caret"></b></a>
@@ -68,7 +68,7 @@
                                     {% if request.user.is_staff %}
                                         <li><a href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'django.contrib.auth.views.logout_then_login' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Log out' %}</a></li>
+                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Log out' %}</a></li>
                                 </ul>
                             </li>
                         {% endif %}

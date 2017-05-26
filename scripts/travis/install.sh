@@ -19,6 +19,6 @@ sudo chattr +i /etc/resolv.conf
 #dig @127.0.0.1 tests.nsupdate.info SOA
 #sudo netstat -tulpen | grep 53
 
-pip install Django==$DJANGO
+#pip install Django==$DJANGO
 pip install -r requirements.d/travis.txt
 pip install -e .

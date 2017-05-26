@@ -14,7 +14,7 @@
     {{ form|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
     <div class="form-group">
     <div class="col-sm-offset-3 col-sm-8">
-        <input type="submit" class="btn btn-primary" value="{% trans 'Change my password' %}" /> <a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans 'Forgot your password?' %}</a>
+        <input type="submit" class="btn btn-primary" value="{% trans 'Change my password' %}" /> <a href="{% url 'password_reset' %}">{% trans 'Forgot your password?' %}</a>
     </div>
     </div>
 </form>
