@@ -2,6 +2,11 @@
 {% load i18n %}{% load bootstrap %}
 
 {% block content %}
+    <div class="alert alert-warning" role="alert">
+        <i class="fa fa-exclamation-triangle"
+           aria-hidden="true"></i> {% trans "This feature is for advanced users only! To use this feature, you need control over at least one nameserver which is able to accept dynamic updates (RFC 2136)." %}
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="well well-sm">
@@ -17,19 +22,22 @@
             <div class="well well-sm">
                 <h3>{% trans "Help" %}</h3>
                 <p>
-                   {% blocktrans trimmed %}
-                   Here you can add new domains (zones) which you control (and this is only useful if you
-                   have some own zone which you can update automatically).
-                   {% endblocktrans %}
+                    {% blocktrans trimmed %}
+                        Here you can add new domains (zones) which you control (and this is only
+                        useful if you
+                        have some own zone which you can update automatically).
+                    {% endblocktrans %}
                 </p>
                 <p>
-                   {% blocktrans trimmed %}
-                   You need to be able to configure the primary master nameserver of the zone so it accepts
-                   dynamic updates (via RFC 2136 "dynamic update" protocol) if the correct update secret is presented.
-                   {% endblocktrans %}
+                    {% blocktrans trimmed %}
+                        You need to be able to configure the primary master nameserver of the zone
+                        so it accepts
+                        dynamic updates (via RFC 2136 "dynamic update" protocol) if the correct
+                        update secret is presented.
+                    {% endblocktrans %}
                 </p>
                 <p>
-                   {% trans "We'll show you configuration examples after you add a domain." %}
+                    {% trans "We'll show you configuration examples after you add a domain." %}
                 </p>
             </div>
         </div>

@@ -85,6 +85,7 @@ class Domain(models.Model):
     name = models.CharField(
         _("name"),
         max_length=255,  # RFC 2181 (and also: max length of unique fields)
+        validators=[RegexValidator(regex=r"([a-zA-Z0-9-_]+\.)+[a-zA-Z0-9-_]{2,}", message=_("Invalid domain name"))],
         unique=True,
         help_text=_("Name of the zone where dynamic hosts may get added"))
     nameserver_ip = models.GenericIPAddressField(
