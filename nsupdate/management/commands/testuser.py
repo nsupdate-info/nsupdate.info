@@ -4,13 +4,13 @@ reinitialize the test user account (and clean up)
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'reinitialize the test user'
 
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
         user_model = get_user_model()
         try:
             u = user_model.objects.get(username='test')

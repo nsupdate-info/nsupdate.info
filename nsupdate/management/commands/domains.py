@@ -4,8 +4,6 @@ dealing with domains (Domain records in our database)
 
 import dns.resolver
 
-from optparse import make_option
-
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
@@ -14,7 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 from nsupdate.main.models import Domain
 from nsupdate.main.dnstools import FQDN, query_ns, NameServerNotAvailable
 from nsupdate.utils.mail import translate_for_user, send_mail_to_user
-
 
 MSG = _("""\
 Your domain: %(domain)s (comment: %(comment)s)
@@ -68,20 +65,17 @@ def check_dns(domain):
 class Command(BaseCommand):
     help = 'deal with domains'
 
-    option_list = BaseCommand.option_list + (
-        make_option('--check',
-                    action='store_true',
-                    dest='check',
-                    default=False,
-                    help='check whether nameserver for domain is reachable and answers queries',
-        ),
-        make_option('--notify-user',
-                    action='store_true',
-                    dest='notify_user',
-                    default=False,
-                    help='notify the user by email when domain gets flagged as unavailable',
-        ),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('--check',
+                            action='store_true',
+                            dest='check',
+                            default=False,
+                            help='check whether nameserver for domain is reachable and answers queries')
+        parser.add_argument('--notify-user',
+                            action='store_true',
+                            dest='notify_user',
+                            default=False,
+                            help='notify the user by email when domain gets flagged as unavailable')
 
     def handle(self, *args, **options):
         check = options['check']
@@ -105,6 +99,6 @@ class Command(BaseCommand):
                             subject = subject % dict(domain=domain)
                             msg = msg % dict(domain=domain, comment=comment)
                             send_mail_to_user(creator, subject, msg)
-                        msg = "setting unavailable flag for domain %s (created by %s)\n" % (domain, creator, )
+                        msg = "setting unavailable flag for domain %s (created by %s)\n" % (domain, creator,)
                         self.stdout.write(msg)
                     d.save()

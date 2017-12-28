@@ -3,7 +3,6 @@ dealing with hosts (Host records in our database)
 """
 
 from datetime import datetime
-from optparse import make_option
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -132,20 +131,17 @@ def check_staleness(h):
 class Command(BaseCommand):
     help = 'deal with hosts'
 
-    option_list = BaseCommand.option_list + (
-        make_option('--stale-check',
-                    action='store_true',
-                    dest='stale_check',
-                    default=False,
-                    help='check whether the host has been updated recently, increase staleness counter if not',
-        ),
-        make_option('--notify-user',
-                    action='store_true',
-                    dest='notify_user',
-                    default=False,
-                    help='notify the user by email when staleness counter increases',
-        ),
-    )
+    def add_arguments(self, parser):
+        parser.add_argument('--stale-check',
+                            action='store_true',
+                            dest='stale_check',
+                            default=False,
+                            help='check whether the host has been updated recently, increase staleness counter if not')
+        parser.add_argument('--notify-user',
+                            action='store_true',
+                            dest='notify_user',
+                            default=False,
+                            help='notify the user by email when staleness counter increases')
 
     def handle(self, *args, **options):
         stale_check = options['stale_check']
