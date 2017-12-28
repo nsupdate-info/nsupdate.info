@@ -12,7 +12,6 @@ from django.utils.translation import ugettext_lazy as _
 from nsupdate.main.models import Host
 from nsupdate.utils.mail import translate_for_user, send_mail_to_user
 
-
 ABUSE_MSG = _("""\
 Your host: %(fqdn)s (comment: %(comment)s)
 
@@ -52,51 +51,51 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('--show-server',
-                    action='store_true',
-                    dest='show_server',
-                    default=False,
-                    help='show server fault counters')
+                            action='store_true',
+                            dest='show_server',
+                            default=False,
+                            help='show server fault counters')
         parser.add_argument('--show-client',
-                    action='store_true',
-                    dest='show_client',
-                    default=False,
-                    help='show client fault counters')
+                            action='store_true',
+                            dest='show_client',
+                            default=False,
+                            help='show client fault counters')
         parser.add_argument('--reset-server',
-                    action='store_true',
-                    dest='reset_server',
-                    default=False,
-                    help='reset the server fault counters of all hosts')
+                            action='store_true',
+                            dest='reset_server',
+                            default=False,
+                            help='reset the server fault counters of all hosts')
         parser.add_argument('--reset-client',
-                    action='store_true',
-                    dest='reset_client',
-                    default=False,
-                    help='reset the client fault counters of all hosts')
+                            action='store_true',
+                            dest='reset_client',
+                            default=False,
+                            help='reset the client fault counters of all hosts')
         parser.add_argument('--reset-abuse',
-                    action='store_true',
-                    dest='reset_abuse',
-                    default=False,
-                    help='reset the abuse flag (to False) of all hosts')
+                            action='store_true',
+                            dest='reset_abuse',
+                            default=False,
+                            help='reset the abuse flag (to False) of all hosts')
         parser.add_argument('--reset-abuse-blocked',
-                    action='store_true',
-                    dest='reset_abuse_blocked',
-                    default=False,
-                    help='reset the abuse_blocked flag (to False) of all hosts')
+                            action='store_true',
+                            dest='reset_abuse_blocked',
+                            default=False,
+                            help='reset the abuse_blocked flag (to False) of all hosts')
         parser.add_argument('--reset-available',
-                    action='store_true',
-                    dest='reset_available',
-                    default=False,
-                    help='reset the available flag (to True) of all hosts')
+                            action='store_true',
+                            dest='reset_available',
+                            default=False,
+                            help='reset the available flag (to True) of all hosts')
         parser.add_argument('--flag-abuse',
-                    action='store',
-                    dest='flag_abuse',
-                    default=None,
-                    type='int',
-                    help='if client faults > N then set abuse flag and reset client faults')
+                            action='store',
+                            dest='flag_abuse',
+                            default=None,
+                            type=int,
+                            help='if client faults N then set abuse flag and reset client faults')
         parser.add_argument('--notify-user',
-                    action='store_true',
-                    dest='notify_user',
-                    default=False,
-                    help='notify the user by email when host gets flagged for abuse')
+                            action='store_true',
+                            dest='notify_user',
+                            default=False,
+                            help='notify the user by email when host gets flagged for abuse')
 
     def handle(self, *args, **options):
         show_client = options['show_client']
@@ -117,10 +116,10 @@ class Command(BaseCommand):
                             output += u"%-6d " % h.client_faults
                         if show_server:
                             output += u"%-6d " % h.server_faults
-                        output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(), )
+                        output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(),)
                         self.stdout.write(output)
                     if (flag_abuse is not None or reset_client or reset_server or
-                        reset_available or reset_abuse or reset_abuse_blocked):
+                            reset_available or reset_abuse or reset_abuse_blocked):
                         if flag_abuse is not None:
                             if h.client_faults > flag_abuse:
                                 h.abuse = True
@@ -154,7 +153,7 @@ class Command(BaseCommand):
                         h.save()
             except Exception:
                 try:
-                    msg = u"The following Exception occurred when processing host %s!\n" % (h.get_fqdn(), )
+                    msg = u"The following Exception occurred when processing host %s!\n" % (h.get_fqdn(),)
                     self.stderr.write(msg)
                 except Exception:
                     pass
