@@ -23,23 +23,23 @@ env:
       - TEST_OPTS=""
       - COVERAGE=""
     matrix:
-      - DJANGO=1.8.1
+      - DJANGO=1.11.8
 
 matrix:
   exclude:
     - python: "2.7"
-      env: DJANGO=1.8.1
+      env: DJANGO=1.11.8
     - python: "3.6"
-      env: DJANGO=1.8.1
+      env: DJANGO=1.11.8
     - python: "3.6-dev"
-      env: DJANGO=1.8.1
+      env: DJANGO=1.11.8
   include:
     - python: "2.7"
-      env: DJANGO=1.8.1 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
+      env: DJANGO=1.11.8 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
     - python: "3.6"
-      env: DJANGO=1.8.18
+      env: DJANGO=1.11.8
     - python: "3.6-dev"
-      env: DJANGO=1.11
+      env: DJANGO=2.0
 
 install:
     - ./scripts/travis/install.sh
