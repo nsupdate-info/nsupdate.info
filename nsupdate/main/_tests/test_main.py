@@ -6,7 +6,7 @@ from __future__ import print_function
 
 import pytest
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 USERNAME = 'test'

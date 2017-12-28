@@ -19,7 +19,7 @@ class UserProfile(models.Model):
     stuff we need additionally to what Django stores in User model
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='profile',
-                                verbose_name=_('user'))
+                                verbose_name=_('user'), on_delete=models.CASCADE)
     language = models.CharField(max_length=10, choices=settings.LANGUAGES,
                                 default='', blank=True, null=True,
                                 verbose_name=_('language'))

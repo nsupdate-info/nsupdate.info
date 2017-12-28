@@ -47,7 +47,7 @@ class BlacklistedHost(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='blacklisted_domains',
-        verbose_name=_('created by'))
+        verbose_name=_('created by'), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name_re
@@ -128,7 +128,7 @@ class Domain(models.Model):
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"))
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -249,7 +249,7 @@ class Host(models.Model):
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
         return u"%s.%s" % (self.name, self.domain.name)
@@ -475,7 +475,7 @@ class ServiceUpdater(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='serviceupdater',
-        verbose_name=_("created by"))
+        verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -525,7 +525,7 @@ class ServiceUpdaterHostConfig(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='serviceupdaterhostconfigs',
-        verbose_name=_("created by"))
+        verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
         return u"%s (%s)" % (self.hostname, self.service.name, )
