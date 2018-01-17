@@ -183,6 +183,32 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 </pre>
     </div>
+    <div class="tab-pane" id="dyndnsc">
+        <h4>dyndnsc</h4>
+        <pre># dyndnsc.ini
+
+[dyndnsc]
+configs = myconf_ipv4, myconf_ipv6
+
+[myconf_ipv4]
+# this will update your ipv4 address to the address
+# the detector dnswanip returns:
+use_preset = nsupdate.info:ipv4
+updater-hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-userid = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-password = {{ update_secret|default:"&lt;your secret&gt;" }}
+detector = webcheck4
+
+[myconf_ipv6]
+# this will update your ipv6 address to the address
+# the detector dnswanip returns:
+use_preset = nsupdate.info:ipv6
+updater-hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-userid = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-password = {{ update_secret|default:"&lt;your secret&gt;" }}
+detector = webcheck6
+
+</pre>
     <div class="tab-pane" id="ipfire">
         <h4>IPFire 2.17 Core Update 90</h4>
         <p>Homepage: <a href="http://ipfire.org/">http://ipfire.org</a></p>
