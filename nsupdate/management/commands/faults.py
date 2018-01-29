@@ -90,7 +90,7 @@ class Command(BaseCommand):
                             dest='flag_abuse',
                             default=None,
                             type=int,
-                            help='if client faults N then set abuse flag and reset client faults')
+                            help='if client faults > N then set abuse flag and reset client faults')
         parser.add_argument('--notify-user',
                             action='store_true',
                             dest='notify_user',
@@ -119,7 +119,7 @@ class Command(BaseCommand):
                         output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(),)
                         self.stdout.write(output)
                     if (flag_abuse is not None or reset_client or reset_server or
-                            reset_available or reset_abuse or reset_abuse_blocked):
+                        reset_available or reset_abuse or reset_abuse_blocked):
                         if flag_abuse is not None:
                             if h.client_faults > flag_abuse:
                                 h.abuse = True

@@ -247,6 +247,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_EMAIL_HTML = False  # we override the text, but not the html email template
 
 LOGIN_REDIRECT_URL = '/overview/'
+LOGOUT_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'DENY'  # for clickjacking middleware
 

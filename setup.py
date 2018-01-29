@@ -2,9 +2,6 @@
 setup for nsupdate package
 """
 
-import sys
-PY2 = sys.version_info[0] == 2
-
 from setuptools import setup, find_packages
 
 from nsupdate import version

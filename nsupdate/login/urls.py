@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import url
-from django.contrib.auth.views import login, logout_then_login, password_reset, password_reset_done, \
+from django.contrib.auth.views import login, logout, password_reset, password_reset_done, \
     password_reset_confirm, password_reset_complete
 
 urlpatterns = (
     # login and logout url
     url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
     # or use logout with template 'logout.html'
-    url(r'^logout/$', logout_then_login, name='logout'),
+    url(r'^logout/$', logout, name='logout'),
 
     # password reset urls
     url(r'^password_reset/$', password_reset, {'template_name': 'password_reset.html'},
