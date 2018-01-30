@@ -20,7 +20,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.six import text_type
 
-
 from . import dnstools
 
 RESULT_MSG_LEN = 255
@@ -47,7 +46,7 @@ class BlacklistedHost(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='blacklisted_domains',
-        verbose_name=_('created by'))
+        verbose_name=_('created by'), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name_re
@@ -64,6 +63,7 @@ def host_blacklist_validator(value):
 
 
 from collections import namedtuple
+
 UpdateAlgorithm = namedtuple("update_algorithm", "bitlength bind_name")
 
 UPDATE_ALGORITHM_DEFAULT = 'HMAC_SHA512'
@@ -128,7 +128,8 @@ class Domain(models.Model):
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"))
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='domains', verbose_name=_("created by"),
+                                   on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -149,7 +150,7 @@ class Domain(models.Model):
     class Meta:
         verbose_name = _('domain')
         verbose_name_plural = _('domains')
-        ordering = ('name', )
+        ordering = ('name',)
 
 
 @python_2_unicode_compatible
@@ -249,14 +250,15 @@ class Host(models.Model):
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='hosts', verbose_name=_("created by"),
+                                   on_delete=models.CASCADE)
 
     def __str__(self):
         return u"%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
-        unique_together = (('name', 'domain'), )
-        index_together = (('name', 'domain'), )
+        unique_together = (('name', 'domain'),)
+        index_together = (('name', 'domain'),)
         verbose_name = _('host')
         verbose_name_plural = _('hosts')
         ordering = ('domain', 'name')  # groupby domain and sort by name
@@ -345,9 +347,10 @@ def pre_delete_host(sender, **kwargs):
     except (dnstools.Timeout, dnstools.NameServerNotAvailable):
         # well, we tried to clean up, but we didn't reach the nameserver
         pass
-    except (dnstools.DnsUpdateError, ):
+    except (dnstools.DnsUpdateError,):
         # e.g. PeerBadSignature if host is protected by a key we do not have
         pass
+
 
 pre_delete.connect(pre_delete_host, sender=Host)
 
@@ -360,9 +363,10 @@ def post_save_host(sender, **kwargs):
         except (dnstools.Timeout, dnstools.NameServerNotAvailable):
             # well, we tried to clean up, but we didn't reach the nameserver
             pass
-        except (dnstools.DnsUpdateError, ):
+        except (dnstools.DnsUpdateError,):
             # e.g. PeerBadSignature if host is protected by a key we do not have
             pass
+
 
 post_save.connect(post_save_host, sender=Host)
 
@@ -411,7 +415,7 @@ class RelatedHost(models.Model):
         return u"%s.%s" % (self.name, text_type(self.main_host))
 
     class Meta(object):
-        unique_together = (('name', 'main_host'), )
+        unique_together = (('name', 'main_host'),)
         verbose_name = _('related host')
         verbose_name_plural = _('related hosts')
         ordering = ('main_host', 'name')
@@ -475,7 +479,7 @@ class ServiceUpdater(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='serviceupdater',
-        verbose_name=_("created by"))
+        verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -525,10 +529,10 @@ class ServiceUpdaterHostConfig(models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='serviceupdaterhostconfigs',
-        verbose_name=_("created by"))
+        verbose_name=_("created by"), on_delete=models.CASCADE)
 
     def __str__(self):
-        return u"%s (%s)" % (self.hostname, self.service.name, )
+        return u"%s (%s)" % (self.hostname, self.service.name,)
 
     class Meta(object):
         verbose_name = _('service updater host config')

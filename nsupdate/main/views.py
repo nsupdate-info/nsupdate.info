@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django import template
 from django.utils.timezone import now
@@ -195,7 +195,7 @@ class OverviewView(TemplateView):
             .only("name", "comment", "available", "client_faults", "server_faults", "abuse_blocked", "abuse",
                   "last_update_ipv4", "tls_update_ipv4", "last_update_ipv6", "tls_update_ipv6", "domain__name")
         context['your_domains'] = Domain.objects.filter(
-            created_by=self.request.user).select_related("created_by__username")\
+            created_by=self.request.user).select_related("created_by__profile")\
             .only("name", "public", "available", "comment", "created_by__username")
         context['public_domains'] = Domain.objects.filter(
             public=True).exclude(created_by=self.request.user).select_related("created_by")\
@@ -215,7 +215,7 @@ class AddHostView(CreateView):
     def get_success_url(self):
         return reverse('generate_secret_view', args=(self.object.pk,))
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(AddHostView, self).get_form(form_class)
         form.fields['domain'].queryset = Domain.objects.filter(
             Q(created_by=self.request.user) | Q(public=True))
@@ -347,7 +347,7 @@ class AddRelatedHostView(CreateView):
     def get_success_url(self):
         return reverse('related_host_overview', args=(self.object.main_host.pk, ))
 
-    def get_form(self, form_class):
+    def get_form(self, form_class=None):
         form = super(AddRelatedHostView, self).get_form(form_class)
         return form
 

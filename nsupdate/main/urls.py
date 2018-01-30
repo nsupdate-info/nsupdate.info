@@ -2,7 +2,7 @@
 main app url dispatching
 """
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from .views import (
     HomeView, OverviewView, HostView, AddHostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
@@ -14,8 +14,7 @@ from ..api.views import (
     NicDeleteView, AuthorizedNicDeleteView)
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = (
     # interactive web ui
     url(r'^$', HomeView.as_view(), name="home"),
     url(r'^about/$', AboutView.as_view(), name="about"),

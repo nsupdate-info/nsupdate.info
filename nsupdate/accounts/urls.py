@@ -1,4 +1,3 @@
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 
@@ -8,8 +7,7 @@ from registration.backends.default.views import RegistrationView
 from .views import UserProfileView, DeleteUserView, UserChangePasswordView
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = (
     url(r'^profile/', UserProfileView.as_view(), name="account_profile"),
     url(r'^settings/', UserChangePasswordView.as_view(), name='account_settings'),
     url(r'^delete/', DeleteUserView.as_view(), name="account_delete"),

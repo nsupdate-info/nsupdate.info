@@ -7,7 +7,7 @@ import pytest
 import base64
 from netaddr import IPSet, IPAddress, IPNetwork
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain

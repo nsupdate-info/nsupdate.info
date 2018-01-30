@@ -2,20 +2,12 @@
 setup for nsupdate package
 """
 
-import sys
-PY2 = sys.version_info[0] == 2
-
 from setuptools import setup, find_packages
 
 from nsupdate import version
 
 with open('README.rst') as f:
     readme_content = f.read()
-
-if PY2:
-    install_requires = ['dnspython', ]
-else:
-    install_requires = ['dnspython3', ]
 
 setup(
     name='nsupdate',
@@ -53,9 +45,10 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
-    install_requires=install_requires + [
+    install_requires=[
+        'dnspython',
         'netaddr',
-        'django>=1.8.1, <1.9',
+        'django~=1.11.0',
         'django-bootstrap-form',
         'django-registration-redux',
         'django-extensions',
