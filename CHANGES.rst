@@ -11,13 +11,13 @@ the docs that match the version you are upgrading to.
 Release 0.12.0 (unreleased yet)
 -------------------------------
 
-Note: dropped support for / testing on Python 3.3
-
 New Features:
 
 * Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
 * add ipfire help, #209
+* provide example configuration for 'dyndnsc'
 * avoid domains vs. hosts confusion - check dns availability, #168
+* add a simple domain name validator, #308
 * admin: sort host and domains by name
 
 Fixes:
@@ -40,13 +40,18 @@ Fixes:
 * api basic auth - ignore non-utf8 chars, #282
 * fix crash on ShortHeader and other DNSException subclasses, #247
 * more clear dns server configuration check error msg, #278
+* update DD-WRT config instructions, #300
 
 Other changes:
 
-* travis: drop py33, add py35, add py36
-* travis: test on trusty with sudo, against local bind9 dns
+* dropped support for / testing on Python 3.3
+* update django requirement to ~=1.11.0 (LTS), #293
+* travis:
+
+  - drop py33, add py35, add py36 and py36-dev
+  - test on trusty with sudo, against local bind9 dns
+  - test always using latest Django 1.11 minor version
 * pip: remove --use-mirrors
-* update django requirement >=1.8.1 (LTS)
 * use TEMPLATES setting for Django 1.8+, remove outdated TEMPLATE_*
 * use www.BASEDOMAIN for WWW_HOST, prepare for #224
 * submitted a pull request with "nsupdate.info" to publicsuffix.org, this
