@@ -1,4 +1,10 @@
-The nsupdate.info software is written and maintained by:
+The nsupdate.info software is currently maintained by:
+
+- elnappo <elnappoo@gmail.com>
+- Thomas Waldmann <tw@waldmann-edv.de>
+
+
+The nsupdate.info software was originally written by:
 
 - Arne Schauf <djangodash@asmaps.de>
 - Fabian Faessler <fabi@fabif.de>
@@ -8,6 +14,5 @@ The nsupdate.info software is written and maintained by:
 Contributions:
 - mandrag0ra <mandrag0ra@icloud.com> (i18n code, french translation)
 - ykmm <ykmm@mediacom.it> (italian translation)
-- elnappo <elnappoo@gmail.com> (misc. code, german translation)
 - Max <mail@max-vogl.de> (german translation)
 - Jonne Hass <me@jhass.eu> (support for IPv4-mapped IPv6 addresses)
