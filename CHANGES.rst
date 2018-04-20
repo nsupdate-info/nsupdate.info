@@ -11,13 +11,13 @@ the docs that match the version you are upgrading to.
 Release 0.12.0 (unreleased yet)
 -------------------------------
 
-Note: dropped support for / testing on Python 3.3
-
 New Features:
 
 * Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
 * add ipfire help, #209
+* provide example configuration for 'dyndnsc'
 * avoid domains vs. hosts confusion - check dns availability, #168
+* add a simple domain name validator, #308
 * admin: sort host and domains by name
 
 Fixes:
@@ -30,33 +30,45 @@ Fixes:
 * avoid that invalid domains get added, #205
 * fix traceback when language in user profile is None, #206
 * fix traceback when using a malformed nameserver secret, #213
-* downgrade django-registration-redux, fixes pw reset, #250
+* upgrade django-registration-redux, fixes pw reset, #250 #251 #252
 * update pfSense tab to get IP from Result Match
 * check_domain fixes: #246, #249, #253
 * test updates when a domain is set to available, #168
 * unicode error under python2.7, #242
-* fix SameIpError in host add form processing, fixes #267
-* update OpenWrt config example for Chaos Calmer, fixes #259
-* fix first param type of loader.select_template, fixes #255
+* fix SameIpError in host add form processing, #267
+* fix first param type of loader.select_template, #255
+* api basic auth - ignore non-utf8 chars, #282
+* fix crash on ShortHeader and other DNSException subclasses, #247
+* more clear dns server configuration check error msg, #278
+* update DD-WRT config instructions, #300
 
 Other changes:
 
-* travis: drop py33, pip: remove --use-mirrors
-* update django requirement >=1.8.1 (LTS)
+* dropped support for / testing on Python 3.3
+* update django requirement to ~=1.11.0 (LTS), #293
+* travis:
+
+  - drop py33, add py35, add py36 and py36-dev
+  - test on trusty with sudo, against local bind9 dns
+  - test always using latest Django 1.11 minor version
+* pip: remove --use-mirrors
 * use TEMPLATES setting for Django 1.8+, remove outdated TEMPLATE_*
-* added python 3.5 to travis tests
 * use www.BASEDOMAIN for WWW_HOST, prepare for #224
 * submitted a pull request with "nsupdate.info" to publicsuffix.org, this
   is needed to not run into rate limiting with letsencrypt.org:
   https://github.com/publicsuffix/list/pull/93
+* upgrade django-registration-redux, python-social-auth
 * upgrade Font Awesome, Bootstrap, jQuery
+* add subresource integrity, #23
 * use other cdn for Bootstrap
 * set SECRET_KEY in development configuration
 * add some words about DNSSEC to the docs, #26
 * do not use html registration emails
-* update font awesome and jquery, add subresource integrity, #23
 * optimize database query on overview page
 * sort hosts and domains by name, #192
+* update inadyn configuration to 2.1
+* update OpenWrt config example for Chaos Calmer, #259
+* update badges, new readthedocs.io url
 
 
 Release 0.11.0
