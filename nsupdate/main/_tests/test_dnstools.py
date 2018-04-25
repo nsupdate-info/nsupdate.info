@@ -119,11 +119,11 @@ class TestQuery(object):
 
 class TestReverseLookup(object):
     def test_rev_lookup_v4(self):
-        name, ip = 'google-public-dns-a.google.com', '8.8.8.8'
+        name, ip = '1dot1dot1dot1.cloudflare-dns.com', '1.1.1.1'
         assert rev_lookup(ip) == name
 
     def test_rev_lookup_v6(self):
-        name, ip = 'google-public-dns-a.google.com', '2001:4860:4860::8888'
+        name, ip = '1dot1dot1dot1.cloudflare-dns.com', '2606:4700:4700::1111'
         assert rev_lookup(ip) == name
 
 
