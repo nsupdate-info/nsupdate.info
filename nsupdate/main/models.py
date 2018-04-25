@@ -7,6 +7,7 @@ import time
 import base64
 
 import dns.resolver
+import dns.message
 
 from django.db import models
 from django.contrib.auth import get_user_model
@@ -288,7 +289,8 @@ class Host(models.Model):
             return dnstools.query_ns(self.get_fqdn(), record)
         except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
             return None
-        except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable):
+        except (dns.resolver.NoNameservers, dns.resolver.Timeout, dnstools.NameServerNotAvailable,
+                dns.message.UnknownTSIGKey):
             return _('error')
 
     def get_ipv4(self):
