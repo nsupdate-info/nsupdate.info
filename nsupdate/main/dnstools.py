@@ -28,6 +28,7 @@ import random
 import struct
 
 import dns.inet
+import dns.message
 import dns.name
 import dns.resolver
 import dns.query
@@ -256,7 +257,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
         ip = str(list(answer)[0])
         logger.debug("query: %s answer: %s" % (fqdn, ip))
         return ip
-    except (dns.resolver.Timeout, dns.resolver.NoNameservers) as e:  # socket.error also?
+    except (dns.resolver.Timeout, dns.resolver.NoNameservers, dns.message.UnknownTSIGKey) as e:  # socket.error also?
         logger.warning("error when querying for name '%s' in zone '%s' with rdtype '%s' [%s]." % (
                        fqdn.host, origin, rdtype, str(e)))
         set_ns_availability(origin, False)
