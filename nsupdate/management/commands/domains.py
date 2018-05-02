@@ -40,9 +40,9 @@ hosts that were added to this domain (if any).
 """)
 
 
-LOG_MSG_IS_AVAILABLE = _('Domain %%(domain)s is available.')
+LOG_MSG_IS_AVAILABLE = _('Domain %(domain)s is available.')
 LOG_MSG_HAS_HOSTS = _('Domain %%(domain)s is not available, but has %(hosts)d hosts.')
-LOG_MSG_DELETE = _('Domain %%(domain)s is not available and has no hosts -> deleted domain.')
+LOG_MSG_DELETE = _('Domain %(domain)s is not available and has no hosts -> deleted domain.')
 
 
 def check_dns(domain):
