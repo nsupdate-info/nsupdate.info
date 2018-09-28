@@ -63,6 +63,14 @@ class CreateDomainForm(forms.ModelForm):
 
 
 class EditDomainForm(forms.ModelForm):
+    def clean_nameserver_update_secret(self):
+        secret = self.cleaned_data['nameserver_update_secret']
+        try:
+            binascii.a2b_base64(secret.encode(encoding="ascii", errors="strict"))
+        except (binascii.Error, UnicodeEncodeError):
+            raise forms.ValidationError(_("Enter a valid secret in base64 format."), code='invalid')
+        return secret
+
     def clean(self):
         cleaned_data = super(EditDomainForm, self).clean()
 
