@@ -396,11 +396,12 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
     for rh in host.relatedhosts.all():
         if rh.available:
             if kind == 'ipv4':
-                ifid = rh.interface_id_ipv4.strip()
+                ifid = rh.interface_id_ipv4
                 netmask = host.netmask_ipv4
             else:  # kind == 'ipv6':
-                ifid = rh.interface_id_ipv6.strip()
+                ifid = rh.interface_id_ipv6
                 netmask = host.netmask_ipv6
+            ifid = ifid.strip() if ifid else ifid
             _delete = not ifid  # leave ifid empty if you don't want this rh record
             try:
                 rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
