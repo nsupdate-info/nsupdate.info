@@ -3,6 +3,7 @@ dealing with domains (Domain records in our database)
 """
 
 import dns.resolver
+import dns.message
 
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
@@ -60,7 +61,7 @@ def check_dns(domain):
         query_ns(fqdn, 'SOA', prefer_primary=True)
         queries_ok = True
     except (dns.resolver.Timeout, dns.resolver.NoNameservers,
-            dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, NameServerNotAvailable):
+            dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, NameServerNotAvailable, dns.message.UnknownTSIGKey):
         # note: currently the domain is also set to unavailable as a
         # side effect in query_ns()
         queries_ok = False
