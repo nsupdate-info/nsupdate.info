@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sudo apt-get update
+
 # we install a local bind9 to run the tests against:
 sudo apt-get -y install bind9 dnsutils e2fsprogs
 

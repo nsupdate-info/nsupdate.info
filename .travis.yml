@@ -4,7 +4,7 @@ language: python
 
 os: linux
 
-dist: trusty
+dist: xenial
 
 python:
     - "2.7"
