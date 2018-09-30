@@ -214,6 +214,8 @@ def update(fqdn, ipaddr, ttl=60):
         # maybe could be caused by secondary DNS Timeout and master still ok?
         # assume the update is OK...
         ok = True
+    except dns.message.UnknownTSIGKey:
+        raise DnsUpdateError("UnknownTSIGKey")
     if ok:
         # only send an update if the ip really changed as the update
         # causes write I/O on the nameserver and also traffic to the
