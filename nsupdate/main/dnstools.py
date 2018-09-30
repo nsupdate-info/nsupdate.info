@@ -16,6 +16,7 @@ UPDATE_TIMEOUT = float(os.environ.get('DNS_UPDATE_TIMEOUT', '20.0'))
 UNAVAILABLE_RETRY = 120.0
 
 
+import binascii
 import time
 from datetime import timedelta
 from collections import namedtuple
@@ -334,9 +335,13 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     assert isinstance(fqdn, FQDN)
     assert action in ['add', 'del', 'upd', ]
     nameserver, nameserver2, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
-    upd = dns.update.Update(origin,
-                            keyring=dns.tsigkeyring.from_text({keyname: key}),
-                            keyalgorithm=algo)
+    try:
+        keyring = dns.tsigkeyring.from_text({keyname: key})
+    except (UnicodeError, binascii.Error) as e:
+        msg = "Exception when building keyring for %s: [%s]" % (keyname, str(e))
+        logger.error(msg)
+        raise DnsUpdateError(msg)
+    upd = dns.update.Update(origin, keyring=keyring, keyalgorithm=algo)
     if action == 'add':
         assert ipaddr is not None
         upd.add(name, ttl, rdtype, ipaddr)
