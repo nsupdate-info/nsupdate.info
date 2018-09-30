@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# update pkg lists first, existing list items might be 404
+sudo apt-get -y update
+
 # we install a local bind9 to run the tests against:
 sudo apt-get -y install bind9 dnsutils e2fsprogs
 

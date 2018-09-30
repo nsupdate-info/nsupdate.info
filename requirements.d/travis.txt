@@ -2,7 +2,7 @@
 # this is mostly the stuff from dev.txt except a few packages not needed
 # on travis. the desired version of django is installed via .travis.yml.
 django-debug-toolbar
-pytest
+pytest>=3.6
 pytest-django
 pytest-pep8
 coveralls
