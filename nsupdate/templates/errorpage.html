@@ -1,10 +1,14 @@
-{% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ WWW_HOST }} - something went wrong...</title>
+    </head>
+    <body>
 
-{% block content %}
-    <div class="row">
-       {% block error %}
-       {% endblock %}
-    </div>
-{% endblock %}
+   {% block error %}
+   {% endblock %}
 
+    <a href="{% url 'home' %}">Back to {{ WWW_HOST }}.</a>
+    </body>
+</html>
