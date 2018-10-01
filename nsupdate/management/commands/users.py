@@ -77,6 +77,7 @@ class Command(BaseCommand):
             print_stats("before")
             for u in User.objects.all():
                 user = "%s <%s>" % (u.username, u.email)
+                log_msg = None
                 if stale_check:
                     log_msg = check_staleness(u)
                 if log_msg:
