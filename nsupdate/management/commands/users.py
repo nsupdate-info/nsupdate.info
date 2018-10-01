@@ -17,10 +17,10 @@ T_age = 365 * DAY  # min. age of last login for considering deletion of a user
 
 NEVER = datetime.fromtimestamp(DAY, timezone.utc)  # 2.1.1970
 
-LOG_MSG_DELETE = _("%%(user)s hasn't logged in for %(age)fy, has no hosts and no domains -> deleted user.")
-LOG_MSG_HAS_HOSTS = _("%%(user)s kept, has hosts. age: %(age)fy, hosts: %(hosts)d.")
-LOG_MSG_HAS_DOMAINS = _("%%(user)s kept, has domains. age: %(age)fy, hosts: %(hosts)d, domains: %(domains)d.")
-LOG_MSG_RECENTLY_USED = _("%(user)s kept, was used recently.")
+LOG_MSG_DELETE = _("%%(user)r hasn't logged in for %(age)fy, has no hosts and no domains -> deleted user.")
+LOG_MSG_HAS_HOSTS = _("%%(user)r kept, has hosts. age: %(age)fy, hosts: %(hosts)d.")
+LOG_MSG_HAS_DOMAINS = _("%%(user)r kept, has domains. age: %(age)fy, hosts: %(hosts)d, domains: %(domains)d.")
+LOG_MSG_RECENTLY_USED = _("%(user)r kept, was used recently.")
 
 
 def check_staleness(u):
