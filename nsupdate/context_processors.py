@@ -13,6 +13,7 @@ from .main.dnstools import put_ip_into_session
 from .main.iptools import normalize_ip
 
 from django.conf import settings
+from django.db import OperationalError
 
 MAX_IP_AGE = 180  # seconds
 
@@ -63,5 +64,11 @@ def update_ips(request):
         # if we have a new session (== not loaded from database / storage), we
         # MUST save it here to create its session_key as the base.html template
         # uses .session_key to build the URL for detectip:
-        s.save()
+        try:
+            s.save()
+        except OperationalError:
+            # if e.g. the database is locked (sqlite), do not blow up here,
+            # because it gives rather ugly tracebacks in the email even if django
+            # was just rendering the 404 template for the current request, see #356.
+            pass
     return {}
