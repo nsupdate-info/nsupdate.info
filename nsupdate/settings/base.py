@@ -51,6 +51,21 @@ BAD_AGENTS = set([])  # list can have str elements
 from netaddr import IPSet, IPAddress, IPNetwork
 BAD_IPS_HOST = IPSet([])  # inner list can have IPAddress and IPNetwork elements
 
+# nameservers used e.g. for MX lookups in the registration email validation.
+# google / cloudflare DNS IPs are only given as example / fallback -
+# please configure your own nameservers in your local settings file.
+NAMESERVERS = ['8.8.8.8', '1.1.1.1', ]
+
+# registration email validation: disallow specific email domains,
+# e.g. domains that have a non-working mx / that are frequently abused.
+# we use a multiline string here with one regex per line (used with re.search).
+# the domains given below are just examples, please configure your own
+# regexes in your local settings file.
+MAILDOMAIN_BLACKLIST = """
+mailcatch\.com$
+mailspam\.xyz$
+"""
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -245,6 +260,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_EMAIL_HTML = False  # we override the text, but not the html email template
+REGISTRATION_FORM = 'nsupdate.accounts.registration_form.RegistrationFormValidateEmail'
 
 LOGIN_REDIRECT_URL = '/overview/'
 LOGOUT_REDIRECT_URL = '/'
