@@ -82,5 +82,8 @@ class Command(BaseCommand):
                     log_msg = check_staleness(u)
                 if log_msg:
                     log_msg = log_msg % dict(user=user)
-                    self.stdout.write(log_msg)
+                    try:
+                        self.stdout.write(log_msg)
+                    except UnicodeError:
+                        pass
             print_stats("after")
