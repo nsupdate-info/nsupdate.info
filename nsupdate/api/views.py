@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 import json
 import base64
+from importlib import import_module
 
 from netaddr import IPAddress, IPNetwork
 from netaddr.core import AddrFormatError
@@ -17,7 +18,6 @@ from django.conf import settings
 from django.views.generic.base import View
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.decorators import login_required
-from django.contrib.sessions.backends.db import SessionStore
 from django.utils.decorators import method_decorator
 
 from ..utils import log, ddns_client
@@ -63,10 +63,11 @@ class DetectIpView(View):
         :param sessionid: sessionid from url used to find the correct session w/o session cookie
         :return: HttpResponse object
         """
+        engine = import_module(settings.SESSION_ENGINE)
         # we do not have the session as usual, as this is a different host,
         # so the session cookie is not received here - thus we access it via
         # the sessionid:
-        s = SessionStore(session_key=sessionid)
+        s = engine.SessionStore(session_key=sessionid)
         ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
         # as this is NOT the session automatically established and
         # also saved by the framework, we need to use save=True here
