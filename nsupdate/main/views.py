@@ -244,6 +244,9 @@ class AddHostView(CreateView):
             success, level, msg = False, messages.ERROR, 'Communication to name server failed [%s]' % str(err)
         else:
             self.object.created_by = self.request.user
+            dt_now = now()
+            self.object.last_update_ipv4 = dt_now
+            self.object.last_update_ipv6 = dt_now
             self.object.save()
             success, level, msg = True, messages.SUCCESS, 'Host added.'
         messages.add_message(self.request, level, msg)
