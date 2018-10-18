@@ -278,7 +278,7 @@ CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_NAME = 'sessionid'
 SESSION_COOKIE_PATH = '/'
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_AGE = 14 * 24 * 60 * 60  # 14 days, in seconds (remember_me is True)
+SESSION_COOKIE_AGE = 10 * 60 * 60  # 10 hours, in seconds (remember_me is True), see #381
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # more safe (remember_me is False)
 
 # Allow SHA1 for host update secrets
