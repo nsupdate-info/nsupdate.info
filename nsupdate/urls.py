@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^accounts/', include('nsupdate.login.urls')),
     # registration and user settings
     url(r'^account/', include('nsupdate.accounts.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include((admin.site.get_urls(), 'admin'), namespace='admin')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('nsupdate.main.urls')),
 ]
