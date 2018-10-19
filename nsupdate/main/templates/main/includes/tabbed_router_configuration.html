@@ -9,6 +9,7 @@
     <li><a href="#m0n0wall" data-toggle="tab">m0n0wall</a></li>
     <li><a href="#openwrt" data-toggle="tab">OpenWRT</a></li>
     <li><a href="#pfsense" data-toggle="tab">pfSense</a></li>
+    <li><a href="#speedporthybrid" data-toggle="tab">Speedport Hybrid</a></li>
     <li><a href="#browser" data-toggle="tab">Browser</a></li>
 </ul>
 
@@ -328,6 +329,20 @@ config service "ipv4ddns"
             <tr><td>Update URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
             <tr><td>Result Match</td><td>good %IP%|nochg %IP%</td></tr>
             <tr><td>Description</td><td>update DDNS host with IP v4 address</td></tr>
+        </table>
+    </div>
+    <div class="tab-pane" id="speedporthybrid">
+        <h4>Speedport Hybrid ({% trans "verified with" %} Firmware: 050124.03.07.001)</h4>
+        <h5>{% trans "Enter the following data:" %}</h5>
+        <table class="table">
+            <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+            <tr><td>Provider</td><td>other Provider</td></tr>
+            <tr><td>Domain name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
+            <tr><td>Update server address</td><td>https://{{ WWW_IPV4_HOST }}</td></tr>
+            <tr><td>Protocol</td><td>https</td></tr>
+            <tr><td>Port</td><td>443</td></tr>
         </table>
     </div>
     <div class="tab-pane" id="browser">
