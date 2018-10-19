@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blacklistedhost',
             name='created_by',
-            field=models.ForeignKey(related_name='blacklisted_domains', verbose_name='created by', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='blacklisted_domains', verbose_name='created by', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -83,7 +83,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='domain',
             name='created_by',
-            field=models.ForeignKey(related_name='domains', verbose_name='created by', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='domains', verbose_name='created by', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -167,13 +167,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='host',
             name='created_by',
-            field=models.ForeignKey(related_name='hosts', verbose_name='created by', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='hosts', verbose_name='created by', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
             model_name='host',
             name='domain',
-            field=models.ForeignKey(verbose_name='domain', to='main.Domain'),
+            field=models.ForeignKey(verbose_name='domain', to='main.Domain', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -269,7 +269,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='relatedhost',
             name='main_host',
-            field=models.ForeignKey(related_name='relatedhosts', verbose_name='main host', to='main.Host'),
+            field=models.ForeignKey(related_name='relatedhosts', verbose_name='main host', to='main.Host', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -305,7 +305,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='serviceupdater',
             name='created_by',
-            field=models.ForeignKey(related_name='serviceupdater', verbose_name='created by', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='serviceupdater', verbose_name='created by', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -353,7 +353,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='serviceupdaterhostconfig',
             name='created_by',
-            field=models.ForeignKey(related_name='serviceupdaterhostconfigs', verbose_name='created by', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(related_name='serviceupdaterhostconfigs', verbose_name='created by', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -371,7 +371,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='serviceupdaterhostconfig',
             name='host',
-            field=models.ForeignKey(related_name='serviceupdaterhostconfigs', verbose_name='host', to='main.Host'),
+            field=models.ForeignKey(related_name='serviceupdaterhostconfigs', verbose_name='host', to='main.Host', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AlterField(
@@ -401,7 +401,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='serviceupdaterhostconfig',
             name='service',
-            field=models.ForeignKey(verbose_name='service', to='main.ServiceUpdater'),
+            field=models.ForeignKey(verbose_name='service', to='main.ServiceUpdater', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]
