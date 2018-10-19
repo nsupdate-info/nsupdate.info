@@ -19,9 +19,9 @@ WWW_IPV6_HOST = 'ip6-localhost:8000'
 
 # ALLOWED_HOSTS is not needed here, as DEBUG is True
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-) + MIDDLEWARE_CLASSES
+) + MIDDLEWARE
 INTERNAL_IPS = ['127.0.0.1', '::1', ]  # needed for DebugToolbar!
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
