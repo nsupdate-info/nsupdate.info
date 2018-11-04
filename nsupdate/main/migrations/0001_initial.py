@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('name_re', models.CharField(help_text='Blacklisted domain. Evaluated as regex (search).', unique=True, max_length=255)),
                 ('last_update', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(related_name=u'blacklisted_domains', to=settings.AUTH_USER_MODEL)),
+                ('created_by', models.ForeignKey(related_name=u'blacklisted_domains', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('comment', models.CharField(default=b'', max_length=255, null=True, help_text='Some arbitrary comment about your domain. If your domain is public, the comment will be also publicly shown.', blank=True)),
                 ('last_update', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(related_name=u'domains', to=settings.AUTH_USER_MODEL)),
+                ('created_by', models.ForeignKey(related_name=u'domains', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -68,8 +68,8 @@ class Migration(migrations.Migration):
                 ('tls_update_ipv6', models.BooleanField(default=False)),
                 ('last_update', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(related_name=u'hosts', to=settings.AUTH_USER_MODEL)),
-                ('domain', models.ForeignKey(to='main.Domain')),
+                ('created_by', models.ForeignKey(related_name=u'hosts', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('domain', models.ForeignKey(to='main.Domain', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -84,7 +84,7 @@ class Migration(migrations.Migration):
                 ('interface_id_ipv4', models.CharField(default=b'', help_text='The IPv4 interface ID of this host. Use IPv4 notation.', max_length=16)),
                 ('interface_id_ipv6', models.CharField(default=b'', help_text='The IPv6 interface ID of this host. Use IPv6 notation.', max_length=22)),
                 ('available', models.BooleanField(default=True, help_text="Check if host is available/in use - if not checked, we won't accept updates for this host")),
-                ('main_host', models.ForeignKey(related_name=u'relatedhosts', to='main.Host')),
+                ('main_host', models.ForeignKey(related_name=u'relatedhosts', to='main.Host', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -103,7 +103,7 @@ class Migration(migrations.Migration):
                 ('accept_ipv6', models.BooleanField(default=False)),
                 ('last_update', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(related_name=u'serviceupdater', to=settings.AUTH_USER_MODEL)),
+                ('created_by', models.ForeignKey(related_name=u'serviceupdater', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -121,9 +121,9 @@ class Migration(migrations.Migration):
                 ('give_ipv6', models.BooleanField(default=False)),
                 ('last_update', models.DateTimeField(auto_now=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('created_by', models.ForeignKey(related_name=u'serviceupdaterhostconfigs', to=settings.AUTH_USER_MODEL)),
-                ('host', models.ForeignKey(related_name=u'serviceupdaterhostconfigs', to='main.Host')),
-                ('service', models.ForeignKey(to='main.ServiceUpdater')),
+                ('created_by', models.ForeignKey(related_name=u'serviceupdaterhostconfigs', to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
+                ('host', models.ForeignKey(related_name=u'serviceupdaterhostconfigs', to='main.Host', on_delete=models.CASCADE)),
+                ('service', models.ForeignKey(to='main.ServiceUpdater', on_delete=models.CASCADE)),
             ],
             options={
             },
