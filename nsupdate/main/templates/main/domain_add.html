@@ -37,6 +37,12 @@
                     {% endblocktrans %}
                 </p>
                 <p>
+                    {% blocktrans trimmed with psl_url='https://publicsuffix.org/' psl_text='Public Suffix List' %}
+                        If you create a new zone, you are strongly advised to consider submitting
+                        your zone to the <a href="{{ psl_url }}">{{ psl_text }}</a>.
+                    {% endblocktrans %}
+                </p>
+                <p>
                     {% trans "We'll show you configuration examples after you add a domain." %}
                 </p>
             </div>
