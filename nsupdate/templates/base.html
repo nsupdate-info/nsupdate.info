@@ -11,7 +11,7 @@
         <title>{% block title %}{{ WWW_HOST }}{% endblock %}</title>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/png" href="{% static 'favicon.png' %}" />
         <!-- note: keep jQuery and bootstrap js here,
@@ -58,7 +58,7 @@
                     <ul class="nav navbar-nav pull-right">
                         {% if not request.user.is_authenticated %}
                             <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}"><i class="fa fa-asterisk fa-fw"></i> {% trans "Sign up" %}</a></li>
-                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw"></i> {% trans 'Log in' %}</a></li>
+                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'login' %}"><i class="fa fa-sign-in-alt fa-fw"></i> {% trans 'Log in' %}</a></li>
                         {% else %}
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {{ request.user.username }} <b class="caret"></b></a>
@@ -68,7 +68,7 @@
                                     {% if request.user.is_staff %}
                                         <li><a href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a></li>
                                     {% endif %}
-                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> {% trans 'Log out' %}</a></li>
+                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt fa-fw"></i> {% trans 'Log out' %}</a></li>
                                 </ul>
                             </li>
                         {% endif %}
