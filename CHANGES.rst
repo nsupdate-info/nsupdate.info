@@ -14,11 +14,18 @@ Release 0.12.0 (unreleased yet)
 New Features:
 
 * Related Hosts: leave v4 or v6 interface ID empty to not create a DNS record
-* add ipfire help, #209
-* provide example configuration for 'dyndnsc'
+* added configuration help for:
+
+  - IPfire, #209
+  - EdgeOS, #86
+  - Speedport Hybrid, #286
+  - dyndnsc
 * avoid domains vs. hosts confusion - check dns availability, #168
 * add a simple domain name validator, #308
 * admin: sort host and domains by name
+* validate (domain of) email address in registration form, #284
+* implement django-admin domains --stale-check
+
 
 Fixes:
 
@@ -31,7 +38,6 @@ Fixes:
 * fix traceback when language in user profile is None, #206
 * fix traceback when using a malformed nameserver secret, #213
 * upgrade django-registration-redux, fixes pw reset, #250 #251 #252
-* update pfSense tab to get IP from Result Match
 * check_domain fixes: #246, #249, #253
 * test updates when a domain is set to available, #168
 * unicode error under python2.7, #242
@@ -41,22 +47,45 @@ Fixes:
 * fix crash on ShortHeader and other DNSException subclasses, #247
 * more clear dns server configuration check error msg, #278
 * update DD-WRT config instructions, #300
+* update pfSense tab to get IP from Result Match
+* avoid invalid IP address crash, #394
+* new host creation: set update timestamps to current time, #357
+* remove hardcoded db session engine, use SESSION_ENGINE
+* Python 3.7 and Django 2.x related fixes/changes
+
+  - use new MIDDLEWARE setting (since Django 1.10) instead of MIDDLEWARE_CLASSES
+  - setup.py: don't require a specific Django version, so 1.1 and 2.x works
+* add ugly workaround for crash in django-admin users --stale-check
+* django-admin.py users: avoid unicode issues by using %r, #350
+* django-admin.py users: initialize log_msg
+* no exceptions when context processor saves the session, #356
+* use a much simpler errorpage.html template, related to #356 #365
+* catch exceptions of dns.tsigkeyring.from_text(), #338, #319
+* do not strip interface_id_ipv(4|6) if empty/None, #355
+* use same cleaning for the secret in (Create|Edit)DomainForm, #338
+* django-admin domains --check: catch UnknownTSIGKey, #336
+* transform UnknownTSIGKey into DnsUpdateError, #337
+* fix placeholders in domains management script
+* work around UnknownTSIGKey exception blowing up the overview view
+
 
 Other changes:
 
-* dropped support for / testing on Python 3.3
+* dropped support for Python 3.3
+* added support for Python 3.6 and 3.7
 * update django requirement to ~=1.11.0 (LTS), #293
+* update django links in admin docs to point to 1.11
 * travis:
 
-  - drop py33, add py35, add py36 and py36-dev
+  - drop: py33, add: py35, py36, py36-dev, py37
   - test on trusty with sudo, against local bind9 dns
   - test always using latest Django 1.11 minor version
 * pip: remove --use-mirrors
 * use TEMPLATES setting for Django 1.8+, remove outdated TEMPLATE_*
 * use www.BASEDOMAIN for WWW_HOST, prepare for #224
-* submitted a pull request with "nsupdate.info" to publicsuffix.org, this
-  is needed to not run into rate limiting with letsencrypt.org:
-  https://github.com/publicsuffix/list/pull/93
+* added "nsupdate.info" to publicsuffix.org,
+  this is needed to not run into rate limiting with letsencrypt.org.
+* zone creation: add hint about public suffix list
 * upgrade django-registration-redux, python-social-auth
 * upgrade Font Awesome, Bootstrap, jQuery
 * add subresource integrity, #23
@@ -69,6 +98,8 @@ Other changes:
 * update inadyn configuration to 2.1
 * update OpenWrt config example for Chaos Calmer, #259
 * update badges, new readthedocs.io url
+* use error views without templating, #365
+* shorter default session expiry, #381
 
 
 Release 0.11.0
