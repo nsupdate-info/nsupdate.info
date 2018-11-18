@@ -343,7 +343,8 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         ipaddr = str(ipaddr)
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
-    except (ValueError, UnicodeError):
+        IPNetwork(ipaddr)  # raise AddrFormatError here if there is an issue with ipaddr, see #394
+    except (ValueError, UnicodeError, AddrFormatError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
         msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
