@@ -8,8 +8,8 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
-Release 0.12.0 (unreleased yet)
--------------------------------
+Release 0.12.0 (2018-11-18)
+---------------------------
 
 New Features:
 
@@ -102,8 +102,8 @@ Other changes:
 * shorter default session expiry, #381
 
 
-Release 0.11.0
---------------
+Release 0.11.0 (2015-02-15)
+---------------------------
 
 New Features:
 
@@ -136,8 +136,8 @@ Other changes:
 * upgraded CDN links for bootstrap, jquery, font-awesome
 
 
-Release 0.10.0
---------------
+Release 0.10.0 (2014-11-17)
+---------------------------
 
 New Features:
 
