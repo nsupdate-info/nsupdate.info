@@ -61,7 +61,7 @@ NAMESERVERS = ['8.8.8.8', '1.1.1.1', ]
 # we use a multiline string here with one regex per line (used with re.search).
 # the domains given below are just examples, please configure your own
 # regexes in your local settings file.
-MAILDOMAIN_BLACKLIST = """
+MAILDOMAIN_BLACKLIST = r"""
 mailcatch\.com$
 mailspam\.xyz$
 """
