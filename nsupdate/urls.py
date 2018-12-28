@@ -10,6 +10,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
 from django.http import HttpResponse
+from django.views.generic import RedirectView
 
 
 def remember_me_login(request, *args, **kw):
@@ -29,6 +30,8 @@ urlpatterns = [
     url(r'^accounts/', include('nsupdate.login.urls')),
     # registration and user settings
     url(r'^account/', include('nsupdate.accounts.urls')),
+    # https://wicg.github.io/change-password-url/index.html
+    url(r'^.well-known/change-password$', RedirectView.as_view(pattern_name='account_settings', permanent=False)),
     url(r'^admin/', include((admin.site.get_urls(), 'admin'), namespace='admin')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('nsupdate.main.urls')),
