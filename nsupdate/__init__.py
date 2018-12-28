@@ -4,6 +4,8 @@ nsupdate - dynamic DNS service
 
 import re
 
+from setuptools_scm import get_version
+
 
 class Version(tuple):  # pragma: no cover
     """
@@ -62,4 +64,4 @@ class Version(tuple):  # pragma: no cover
         return version_str
 
 
-version = Version(0, 12, 0)
+version = get_version()
