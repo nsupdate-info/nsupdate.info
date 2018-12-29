@@ -171,6 +171,7 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'nsupdate.urls'
@@ -272,6 +273,8 @@ LOGIN_REDIRECT_URL = '/overview/'
 LOGOUT_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'DENY'  # for clickjacking middleware
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
 
 CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 
