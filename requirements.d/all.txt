@@ -7,3 +7,4 @@ django-registration-redux
 django-extensions
 social-auth-app-django
 requests
+setuptools-scm

@@ -4,14 +4,13 @@ setup for nsupdate package
 
 from setuptools import setup, find_packages
 
-from nsupdate import version
 
 with open('README.rst') as f:
     readme_content = f.read()
 
 setup(
     name='nsupdate',
-    version=str(version),
+    use_scm_version=True,
     url='http://github.com/nsupdate-info/nsupdate.info/',
     license='BSD',
     author='The nsupdate.info Team (see AUTHORS)',
@@ -45,6 +44,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     platforms='any',
+    setup_requires=['setuptools_scm'],
     install_requires=[
         'dnspython',
         'netaddr',
@@ -54,6 +54,7 @@ setup(
         'django-extensions',
         'social-auth-app-django',
         'requests',  # for our ddns_client
+        'setuptools_scm'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
