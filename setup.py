@@ -18,7 +18,8 @@ setup(
     description='A dynamic DNS update service',
     long_description=readme_content,
     keywords="dyndns ddns dynamic dns django",
-    packages=find_packages(exclude=['_tests', ]),
+    packages=find_packages('src', exclude=['_tests', ]),
+    package_dir={'': 'src'},
     package_data={
         'nsupdate': [
             'templates/*.html',
