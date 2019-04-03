@@ -119,7 +119,11 @@ def basic_authenticate(auth):
     :return: username, password [unicode on py2, str on py3]
     """
     assert isinstance(auth, str)
-    authmeth, auth = auth.split(' ', 1)
+    try:
+        authmeth, auth = auth.split(' ', 1)
+    except ValueError:
+        # splitting failed, invalid auth string
+        return
     if authmeth.lower() != 'basic':
         return
     # we ignore bytes that do not decode. username (hostname) and password
