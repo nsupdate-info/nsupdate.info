@@ -18,9 +18,6 @@ matrix:
     - python: "2.7"
       dist: trusty
       env: DJANGO=1.11 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
-    - python: "3.4"
-      dist: trusty
-      env: DJANGO=1.11
     - python: "3.5"
       dist: trusty
       env: DJANGO=1.11
