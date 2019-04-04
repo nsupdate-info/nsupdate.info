@@ -46,7 +46,7 @@ setup(
     platforms='any',
     setup_requires=['setuptools_scm'],
     install_requires=[
-        'dnspython',
+        'dnspython<1.17.0',  # 1.16 is last with py27 support
         'netaddr',
         'django',
         'django-bootstrap-form',
