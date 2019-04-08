@@ -2,12 +2,12 @@
 
 [run]
 branch = True
-source = nsupdate
+source = src/nsupdate
 omit =
-    */migrations/*
-    */_tests/*
-    nsupdate/wsgi.py
-    nsupdate/settings/*
+    src/*/migrations/*
+    src/*/_tests/*
+    src/nsupdate/wsgi.py
+    src/nsupdate/settings/*
 
 [report]
 # Regexes for lines to exclude from consideration
