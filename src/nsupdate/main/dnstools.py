@@ -17,6 +17,7 @@ UNAVAILABLE_RETRY = 120.0
 
 
 import binascii
+import errno
 import time
 from datetime import timedelta
 from collections import namedtuple
@@ -276,13 +277,24 @@ def rev_lookup(ipaddr):
     :param ipaddr: ip address (str)
     :return: hostname (or empty string if lookup failed)
     """
-    name = ''
     if ipaddr:
-        try:
-            name = socket.gethostbyaddr(ipaddr)[0]
-        except socket.error:
-            pass
-    return name
+        retries = 4
+        delay = 0.02
+        while retries >= 0:
+            retries -= 1
+            try:
+                return socket.gethostbyaddr(ipaddr)[0]
+            except socket.error as err:
+                if err.errno in (errno.EPERM, ):
+                    # EPERM == 1 == unknown host
+                    break
+                if err.errno not in (errno.ENOENT, errno.EAGAIN):
+                    # ENOENT == 2 == UDP Packet lost?
+                    # EAGAIN == "try again"
+                    raise
+            time.sleep(delay)
+            delay *= 2
+    return ''
 
 
 def get_ns_info(fqdn):
