@@ -10,7 +10,9 @@ with open('README.rst') as f:
 
 setup(
     name='nsupdate',
-    use_scm_version=True,
+    use_scm_version={
+        'write_to': 'src/nsupdate/_version.py',
+    },
     url='http://github.com/nsupdate-info/nsupdate.info/',
     license='BSD',
     author='The nsupdate.info Team (see AUTHORS)',
