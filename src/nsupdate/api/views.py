@@ -134,7 +134,8 @@ def basic_authenticate(auth):
     return username, password
 
 
-def check_api_auth(username, password):
+@log.logger(__name__)
+def check_api_auth(username, password, logger=None):
     """
     Check username and password against our database.
 
