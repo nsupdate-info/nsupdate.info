@@ -146,6 +146,8 @@ def check_api_auth(username, password):
     try:
         host = Host.get_by_fqdn(fqdn)
     except ValueError:
+        # logging this at debug level because otherwise it fills our logs...
+        logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn, ))
         return None
     if host is not None:
         ok = check_password(password, host.update_secret)
@@ -154,6 +156,9 @@ def check_api_auth(username, password):
         host.register_api_auth_result(msg, fault=not ok)
         if ok:
             return host
+        # in case this fills our logs and we never see valid credentials, we can just kill
+        # the DB entry and this will fail earlier and get logged at debug level, see above.
+        logger.warning('%s - received bad credentials (password does not match)' % (fqdn, ))
     return None
 
 
@@ -215,7 +220,6 @@ class NicUpdateView(View):
             return Response('notfqdn')
         host = check_api_auth(username, password)
         if host is None:
-            logger.warning('%s - received bad credentials, username: %s' % (hostname, username, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         logger.info("authenticated by update secret for host %s" % username)
         if hostname is None:
