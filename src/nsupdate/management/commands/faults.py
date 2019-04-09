@@ -60,6 +60,11 @@ class Command(BaseCommand):
                             dest='show_client',
                             default=False,
                             help='show client fault counters')
+        parser.add_argument('--show-api-auth',
+                            action='store_true',
+                            dest='show_api_auth',
+                            default=False,
+                            help='show api auth fault counters')
         parser.add_argument('--reset-server',
                             action='store_true',
                             dest='reset_server',
@@ -70,6 +75,11 @@ class Command(BaseCommand):
                             dest='reset_client',
                             default=False,
                             help='reset the client fault counters of all hosts')
+        parser.add_argument('--reset-api-auth',
+                            action='store_true',
+                            dest='reset_api_auth',
+                            default=False,
+                            help='reset the api auth fault counters of all hosts')
         parser.add_argument('--reset-abuse',
                             action='store_true',
                             dest='reset_abuse',
@@ -100,8 +110,10 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         show_client = options['show_client']
         show_server = options['show_server']
+        show_api_auth = options['show_api_auth']
         reset_client = options['reset_client']
         reset_server = options['reset_server']
+        reset_api_auth = options['reset_api_auth']
         reset_available = options['reset_available']
         reset_abuse = options['reset_abuse']
         reset_abuse_blocked = options['reset_abuse_blocked']
@@ -116,9 +128,11 @@ class Command(BaseCommand):
                             output += u"%-6d " % h.client_faults
                         if show_server:
                             output += u"%-6d " % h.server_faults
+                        if show_api_auth:
+                            output += u"%-6d " % h.api_auth_faults
                         output += u"%s %s\n" % (h.created_by.username, h.get_fqdn(),)
                         self.stdout.write(output)
-                    if (flag_abuse is not None or reset_client or reset_server or
+                    if (flag_abuse is not None or reset_client or reset_server or reset_api_auth or
                         reset_available or reset_abuse or reset_abuse_blocked):
                         if flag_abuse is not None:
                             if h.client_faults > flag_abuse:
@@ -144,6 +158,8 @@ class Command(BaseCommand):
                             h.client_faults = 0
                         if reset_server:
                             h.server_faults = 0
+                        if reset_api_auth:
+                            h.api_auth_faults = 0
                         if reset_available:
                             h.available = True
                         if reset_abuse:
