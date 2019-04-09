@@ -206,7 +206,8 @@ class NicUpdateView(View):
         hostname = request.GET.get('hostname')
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
-            logger.warning('%s - received no auth' % (hostname, ))
+            # logging this at debug level because otherwise it fills our logs...
+            logger.debug('%s - received no auth' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = basic_authenticate(auth)
         if '.' not in username:  # username MUST be the fqdn
