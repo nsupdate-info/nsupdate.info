@@ -16,7 +16,7 @@ class DomainAdmin(admin.ModelAdmin):
 
 @admin.register(Host)
 class HostAdmin(admin.ModelAdmin):
-    list_display = ("name", "domain", "created_by", "client_faults", "abuse", "abuse_blocked")
+    list_display = ("name", "domain", "created_by", "client_faults", "api_auth_faults", "abuse", "abuse_blocked")
     list_filter = ("created", "abuse", "abuse_blocked", "domain")
     search_fields = ("name", "created_by__username", "created_by__email")
 
