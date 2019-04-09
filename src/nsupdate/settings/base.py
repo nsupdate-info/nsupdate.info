@@ -283,7 +283,7 @@ CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 # Settings for CSRF cookie.
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_COOKIE_PATH = '/'
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = True
 
 # Settings for session cookie.
 SESSION_COOKIE_NAME = 'sessionid'
