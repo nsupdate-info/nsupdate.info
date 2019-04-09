@@ -278,16 +278,22 @@ def rev_lookup(ipaddr):
     :return: hostname (or empty string if lookup failed)
     """
     if ipaddr:
-        retries = 2
+        retries = 4
+        delay = 0.02
         while retries >= 0:
             retries -= 1
             try:
                 return socket.gethostbyaddr(ipaddr)[0]
             except socket.error as err:
                 if err.errno in (errno.EPERM, ):
+                    # EPERM == 1 == unknown host
                     break
                 if err.errno not in (errno.ENOENT, errno.EAGAIN):
+                    # ENOENT == 2 == UDP Packet lost?
+                    # EAGAIN == "try again"
                     raise
+            time.sleep(delay)
+            delay *= 2
     return ''
 
 
