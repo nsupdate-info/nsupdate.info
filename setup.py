@@ -20,28 +20,8 @@ setup(
     keywords="dyndns ddns dynamic dns django",
     packages=find_packages('src', exclude=['_tests', ]),
     package_dir={'': 'src'},
-    package_data={
-        'nsupdate': [
-            'templates/*.html',
-            'templates/includes/*.html',
-            'static/*.html',
-            'static/*.png',
-            'static/css/*.css',
-            'locale/*/LC_MESSAGES/*',
-        ],
-        'nsupdate.accounts': [
-            'templates/accounts/*.html',
-            'templates/registration/*.html',
-            'templates/registration/*.txt',
-        ],
-        'nsupdate.login': [
-            'templates/*.html',
-        ],
-        'nsupdate.main': [
-            'templates/main/*.html',
-            'templates/main/includes/*.html',
-        ],
-    },
+    # See also the MANIFEST.in file.
+    # We want to install all the files in the package directories:
     include_package_data=True,
     zip_safe=False,
     platforms='any',

@@ -1,15 +1,9 @@
-include README.rst CHANGES.rst LICENSE AUTHORS
-include setup.cfg setup.py
-include conftest.py
-recursive-include docs *
-recursive-exclude docs *.pyc
-recursive-exclude docs *.pyo
-recursive-include nsupdate/locale *.po
-recursive-include nsupdate/locale *.mo
-recursive-include nsupdate/static *
-recursive-include nsupdate/templates *
-recursive-include nsupdate/login/templates *
-recursive-include nsupdate/main/templates *
-recursive-include nsupdate/accounts/templates *
-prune docs/_build
-
+# stuff we need to include into the sdist is handled automatically by
+# setuptools_scm - it includes all git-committed files.
+# but we want to include some non-committed files/dirs needed in
+# the sdist and exclude some committed files/dirs not needed in the sdist:
+exclude .gitattributes .gitignore .travis.yml
+exclude manage.py requirements.txt
+prune .tx
+prune logo
+prune scripts/travis
