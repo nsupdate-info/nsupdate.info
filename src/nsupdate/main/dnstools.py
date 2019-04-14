@@ -285,6 +285,10 @@ def rev_lookup(ipaddr):
             try:
                 return socket.gethostbyaddr(ipaddr)[0]
             except socket.error as err:
+                if err.errno in (-5, 4):
+                    # -5 / 4 == no address associated with hostname (invalid ip?)
+                    logger.warning("errno -5 when trying to reverse lookup %r" % ipaddr)
+                    break
                 if err.errno in (errno.EPERM, ):
                     # EPERM == 1 == unknown host
                     break
