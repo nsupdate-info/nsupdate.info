@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Caner Başaran <basaran.caner@protonmail.com>, 2015
+# H.Oktay Tefenli <otefenli@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-17 21:33+0100\n"
-"PO-Revision-Date: 2014-11-17 20:31+0000\n"
-"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
-"Language-Team: Turkish (http://www.transifex.com/projects/p/nsupdateinfo/"
-"language/tr/)\n"
-"Language: tr\n"
+"PO-Revision-Date: 2019-04-09 21:55+0000\n"
+"Last-Translator: TW <tw@waldmann-edv.de>\n"
+"Language-Team: Turkish (http://www.transifex.com/thomaswaldmann/nsupdateinfo/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: accounts/templates/accounts/delete_user.html:7
@@ -26,20 +27,20 @@ msgstr "..."
 msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You can not undelete your data."
-msgstr ""
+msgstr "Kullanıcı hesabınızı ve bu hizmette bulunan tüm verilerinizi silmek istediğinizden emin misiniz? Unutmayın!, veri silme işlemini geri alamazsınız."
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:11
 msgid "Confirm"
-msgstr ""
+msgstr "Doğrula"
 
 #: accounts/templates/accounts/user_profile.html:7
 msgid "User Profile of"
-msgstr ""
+msgstr "Kullanıcı Profili"
 
 #: accounts/templates/accounts/user_profile.html:14
 msgid "Submit"
-msgstr ""
+msgstr "Onayla"
 
 #: accounts/templates/accounts/user_profile.html:18
 msgid "Associate with remote Account"
@@ -52,66 +53,67 @@ msgstr ""
 #: accounts/templates/accounts/user_profile.html:35
 #: accounts/templates/accounts/user_profile.html:44
 msgid "Delete User Profile"
-msgstr ""
+msgstr "Kullanıcı Profilini Sil"
 
 #: accounts/templates/accounts/user_profile.html:37
 msgid ""
 "If you'ld like to stop using this service and delete this user profile and "
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
-msgstr ""
+msgstr "Bu hizmeti kullanmayı durdurmak ve bu kullanıcı profilini ve tüm verilerinizi silmek (özellikle bu kullanıcı tarafından oluşturulan tüm sunucuları ve alan adlarını) istiyorsanız, burada yapabilirsiniz."
 
 #: accounts/templates/registration/activate.html:4
 #: accounts/templates/registration/activation_complete.html:3
 msgid "Activation complete"
-msgstr ""
+msgstr "Etkinleştirme işlemi tamamlandı"
 
 #: accounts/templates/registration/activate.html:4
 msgid "Activation problem"
-msgstr ""
+msgstr "Etkinleştirme işlemi başarısız"
 
 #: accounts/templates/registration/activate.html:8
 #: accounts/templates/registration/activation_complete.html:6
 msgid "Thanks, activation complete!"
-msgstr ""
+msgstr "Çok teşekkürler, etkinleştirme tamamlandı!"
 
 #: accounts/templates/registration/activate.html:9
 #: accounts/templates/registration/activation_complete.html:7
 msgid ""
 "You may now login using the username and password you set at registration."
-msgstr ""
+msgstr "Şimdi, kaydolurken kullandığınız kullanıcı adı ve parolayı kullanarak oturum açabilirsiniz."
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html.py:24
 #: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
-msgstr ""
+msgstr "Oturum aç"
 
 #: accounts/templates/registration/activate.html:12
 msgid "Oops"
-msgstr ""
+msgstr "Hata oluştu"
 
 #: accounts/templates/registration/activate.html:13
 msgid ""
 "it seems that your activation key is invalid.  Please check the url again."
-msgstr ""
+msgstr "etkinleştirme anahtarınız geçersiz görünüyor. Lütfen bağlantınızı yeniden denetleyin."
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
-msgstr ""
+msgstr "Etkinleştirme epostası gönderildi"
 
 #: accounts/templates/registration/registration_complete.html:6
 msgid "An activation email has been sent."
-msgstr ""
+msgstr "Etkinleştirme epostası gönderildi"
 
 #: accounts/templates/registration/registration_complete.html:7
-msgid "Please check your email and click on the link to activate your account."
-msgstr ""
+msgid ""
+"Please check your email and click on the link to activate your account."
+msgstr "Lütfen epostanızı denetleyin ve hesabınızı etkinleştirmek için bağlantıya tıklayın."
 
 #: accounts/templates/registration/registration_form.html:3
 msgid "Register for an account"
-msgstr ""
+msgstr "Başka bir hesap oluştur"
 
 #: accounts/templates/registration/registration_form.html:8
 msgid "No registration required for testing"
@@ -128,12 +130,12 @@ msgstr ""
 #: accounts/templates/registration/registration_form.html:16
 #: main/templates/main/includes/tabbed_router_configuration.html:74
 msgid "Username:"
-msgstr ""
+msgstr "Kullanıcı Adı:"
 
 #: accounts/templates/registration/registration_form.html:17
 #: main/templates/main/includes/tabbed_router_configuration.html:75
 msgid "Password:"
-msgstr ""
+msgstr "Parola:"
 
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
@@ -160,39 +162,39 @@ msgstr ""
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
-msgstr ""
+msgstr "Yeni hesap oluştur"
 
 #: accounts/templates/registration/registration_form.html:43
 msgid ""
-"Username: should be related to your <em>person or organisation</em> (not: to "
-"the host(s) you want to register).<br> E-Mail address: must be a "
+"Username: should be related to your <em>person or organisation</em> (not: to"
+" the host(s) you want to register).<br> E-Mail address: must be a "
 "<em>working</em> one, we'll send you an activation E-Mail there.<br> "
 "Password: please use a sane one, we trust you."
 msgstr ""
 
 #: accounts/templates/registration/registration_form.html:56
 msgid "Send activation email"
-msgstr ""
+msgstr "Etkinleştirme epostası gönder"
 
 #: login/templates/login.html:8
 msgid "Login with a local Account"
-msgstr ""
+msgstr "Yerel hesapla oturum aç"
 
 #: login/templates/login.html:11
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
+msgstr "Kullanıcı adı ve parolanız eşleştirilemedi. Lütfen yeniden deneyin."
 
 #: login/templates/login.html:19
 msgid "Remember me"
-msgstr ""
+msgstr "Beni hatırla"
 
 #: login/templates/login.html:24
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Parolamı hatırla"
 
 #: login/templates/login.html:26
 msgid "Sign up for a new account..."
-msgstr ""
+msgstr "Yeni bir hesap için kaydol..."
 
 #: login/templates/login.html:33
 msgid "Login with a remote Account"
@@ -200,7 +202,7 @@ msgstr ""
 
 #: login/templates/logout.html:3 templates/base.html:71
 msgid "Log out"
-msgstr ""
+msgstr "Oturumu kapat"
 
 #: login/templates/logout.html:8
 msgid "Thanks for spending some quality time with the Web site today."
@@ -208,37 +210,37 @@ msgstr ""
 
 #: login/templates/logout.html:9
 msgid "Log in again"
-msgstr ""
+msgstr "Tekrar oturum aç"
 
 #: login/templates/password_change.html:3
 #: login/templates/password_change.html:6 templates/base.html:67
 msgid "Password change"
-msgstr ""
+msgstr "Parola değişikliği"
 
 #: login/templates/password_change.html:8
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
 msgstr ""
 
 #: login/templates/password_change.html:15
 #: login/templates/password_reset_confirm.html:14
 msgid "Change my password"
-msgstr ""
+msgstr "Parolamı değiştir"
 
 #: login/templates/password_change_done.html:3
 #: login/templates/password_change_done.html:6
 msgid "Password change successful"
-msgstr ""
+msgstr "Parola başarıyla değiştirildi"
 
 #: login/templates/password_change_done.html:7
 msgid "Your password was changed."
-msgstr ""
+msgstr "Parolanız değiştirildi"
 
 #: login/templates/password_reset.html:3 login/templates/password_reset.html:7
 #: login/templates/password_reset_confirm.html:3
 msgid "Password reset"
-msgstr ""
+msgstr "Parola sıfırlama"
 
 #: login/templates/password_reset.html:9
 msgid ""
@@ -248,12 +250,12 @@ msgstr ""
 
 #: login/templates/password_reset.html:17
 msgid "Reset my password"
-msgstr ""
+msgstr "Parolamı sıfırla"
 
 #: login/templates/password_reset_complete.html:3
 #: login/templates/password_reset_complete.html:6
 msgid "Password reset complete"
-msgstr ""
+msgstr "Parola sıfırlama işlemi tamamlandı"
 
 #: login/templates/password_reset_complete.html:7
 msgid "Your password has been set. You may go ahead and log in now."
@@ -261,28 +263,28 @@ msgstr ""
 
 #: login/templates/password_reset_confirm.html:7
 msgid "Enter new password"
-msgstr ""
+msgstr "Yeni parola girin"
 
 #: login/templates/password_reset_confirm.html:8
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr ""
+msgstr "Doğru yazdığınızdan emin olmak için, parolanızı yeniden girin. "
 
 #: login/templates/password_reset_confirm.html:21
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Parola sıfırlanamadı"
 
 #: login/templates/password_reset_confirm.html:22
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr ""
+msgstr "Parola sıfırlama bağlantısı geçersiz, daha önceden kullanılmış olabilir. Lütfen yeni bir parola sıfırlama isteğinde bulunun."
 
 #: login/templates/password_reset_done.html:3
 #: login/templates/password_reset_done.html:6
 msgid "Password reset successful"
-msgstr ""
+msgstr "Parola sıfırlama işlemi başarıyla tamamlandı"
 
 #: login/templates/password_reset_done.html:7
 msgid ""
@@ -298,7 +300,7 @@ msgstr ""
 
 #: main/models.py:36
 msgid "name RegEx"
-msgstr ""
+msgstr "RegEx adı"
 
 #: main/models.py:39
 msgid "Blacklisted domain. Evaluated as regex (search)."
@@ -307,30 +309,30 @@ msgstr ""
 #: main/models.py:41 main/models.py:123 main/models.py:238 main/models.py:459
 #: main/models.py:508
 msgid "last update"
-msgstr ""
+msgstr "son güncelleme"
 
 #: main/models.py:42 main/models.py:124 main/models.py:239 main/models.py:460
 #: main/models.py:509
 msgid "created at"
-msgstr ""
+msgstr "oluşturulan"
 
 #: main/models.py:46 main/models.py:125 main/models.py:240 main/models.py:464
 #: main/models.py:513
 msgid "created by"
-msgstr ""
+msgstr "oluşturan"
 
 #: main/models.py:52
 msgid "blacklisted host"
-msgstr ""
+msgstr "kara listedeki sunucu"
 
 #: main/models.py:53
 msgid "blacklisted hosts"
-msgstr ""
+msgstr "kara listedeki sunucular"
 
 #: main/models.py:81 main/models.py:150 main/models.py:361 main/models.py:433
 #: main/models.py:490
 msgid "name"
-msgstr ""
+msgstr "ad"
 
 #: main/models.py:84
 msgid "Name of the zone where dynamic hosts may get added"
@@ -338,7 +340,7 @@ msgstr ""
 
 #: main/models.py:86
 msgid "nameserver IP (primary)"
-msgstr ""
+msgstr "ad sunucusu IP'si (birincil)"
 
 #: main/models.py:88
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
@@ -346,7 +348,7 @@ msgstr ""
 
 #: main/models.py:90
 msgid "nameserver IP (secondary)"
-msgstr ""
+msgstr "ad sunucusu IP'si (ikincil)"
 
 #: main/models.py:93
 msgid "IP where DNS queries for this zone will be sent to"
@@ -401,15 +403,15 @@ msgstr ""
 
 #: main/models.py:144 main/models.py:160
 msgid "domain"
-msgstr ""
+msgstr "alan adı"
 
 #: main/models.py:145
 msgid "domains"
-msgstr ""
+msgstr "alan adları"
 
 #: main/models.py:159
 msgid "The name of your host."
-msgstr ""
+msgstr "Sunucunuzun adı"
 
 #: main/models.py:162
 msgid "update secret"
@@ -428,7 +430,7 @@ msgstr ""
 
 #: main/models.py:180
 msgid "netmask IPv4"
-msgstr ""
+msgstr "ağ maskesi IPv4"
 
 #: main/models.py:182
 msgid "Netmask/Prefix length for IPv4."
@@ -436,7 +438,7 @@ msgstr ""
 
 #: main/models.py:184
 msgid "netmask IPv6"
-msgstr ""
+msgstr "ağ maskesi IPv6"
 
 #: main/models.py:186
 msgid "Netmask/Prefix length for IPv6."
@@ -498,27 +500,27 @@ msgstr ""
 
 #: main/models.py:232
 msgid "last update IPv4"
-msgstr ""
+msgstr "IPv4 son günceleme"
 
 #: main/models.py:233
 msgid "last update IPv6"
-msgstr ""
+msgstr "IPv6 son günceleme"
 
 #: main/models.py:235
 msgid "TLS update IPv4"
-msgstr ""
+msgstr "IPv4 TLS güncelemesi"
 
 #: main/models.py:236
 msgid "TLS update IPv6"
-msgstr ""
+msgstr "IPv6 TLS güncelemesi"
 
 #: main/models.py:249 main/models.py:506
 msgid "host"
-msgstr ""
+msgstr "sunucu"
 
 #: main/models.py:250
 msgid "hosts"
-msgstr ""
+msgstr "sunucular"
 
 #: main/models.py:369
 msgid "The name of a host in same network as your main host."
@@ -542,19 +544,19 @@ msgstr ""
 
 #: main/models.py:395
 msgid "main host"
-msgstr ""
+msgstr "ana sunucu"
 
 #: main/models.py:403
 msgid "related host"
-msgstr ""
+msgstr "ilişkili sunucu"
 
 #: main/models.py:404
 msgid "related hosts"
-msgstr ""
+msgstr "ilişkili sunucular"
 
 #: main/models.py:435
 msgid "Service name"
-msgstr ""
+msgstr "Servis adı"
 
 #: main/models.py:440
 msgid "Some arbitrary comment about the service"
@@ -606,7 +608,7 @@ msgstr ""
 
 #: main/models.py:478
 msgid "hostname"
-msgstr ""
+msgstr "sunucu adı"
 
 #: main/models.py:481
 msgid "The hostname for that service (used in query string)"
@@ -647,16 +649,16 @@ msgstr ""
 #: main/templates/main/about.html:6
 #, python-format
 msgid "About the %(WWW_HOST)s service"
-msgstr ""
+msgstr "%(WWW_HOST)s hizmeti hakkında"
 
 #: main/templates/main/about.html:8
 msgid "What's this?"
-msgstr ""
+msgstr "Nedir?"
 
 #: main/templates/main/about.html:10
 #, python-format
 msgid "%(WWW_HOST)s is a <b>dynamic dns service</b>."
-msgstr ""
+msgstr "%(WWW_HOST)s bir <b>dinamik dns hizmetidir</b>."
 
 #: main/templates/main/about.html:13
 msgid ""
@@ -670,7 +672,7 @@ msgstr ""
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr ""
+msgstr "%(WWW_HOST)s <b>basit, kullanışlı, ücretsiz, kullanıcı dostu, güvenli ve özel yaşama saygılıdır</b>."
 
 #: main/templates/main/about.html:26
 msgid "Why another one?"
@@ -709,16 +711,16 @@ msgstr ""
 #: main/templates/main/about.html:47
 msgid ""
 "Also, we have <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open "
-"docs in new window\" target=\"_blank\">documentation</a> &mdash; there might "
-"be some interesting stuff for you in it that is not visible or obvious on "
+"docs in new window\" target=\"_blank\">documentation</a> &mdash; there might"
+" be some interesting stuff for you in it that is not visible or obvious on "
 "the user interface."
 msgstr ""
 
 #: main/templates/main/about.html:56
 msgid ""
-"If you are interested in the software project, have a look at the <a href="
-"\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on "
-"GitHub</a>."
+"If you are interested in the software project, have a look at the <a "
+"href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info "
+"project on GitHub</a>."
 msgstr ""
 
 #: main/templates/main/about.html:65
@@ -788,8 +790,8 @@ msgstr ""
 
 #: main/templates/main/about.html:103
 msgid ""
-"Visit the <a href=\"https://github.com/nsupdate-info/nsupdate.info"
-"\">nsupdate.info project on GitHub</a> to:"
+"Visit the <a href=\"https://github.com/nsupdate-"
+"info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
 msgstr ""
 
 #: main/templates/main/about.html:109
@@ -808,7 +810,7 @@ msgstr ""
 #: main/templates/main/delete_object.html:10
 #, python-format
 msgid "Are you sure you want to delete \"%(object)s\"?"
-msgstr ""
+msgstr "\"%(object)s\" silmek istediğinizden emin misiniz?"
 
 #: main/templates/main/domain.html:8
 msgid "Edit Domain"
@@ -841,8 +843,8 @@ msgstr ""
 
 #: main/templates/main/domain.html:25
 msgid ""
-"We'll generate a ready-to-use configuration for your name server, filled out "
-"with all values (including a new secret)."
+"We'll generate a ready-to-use configuration for your name server, filled out"
+" with all values (including a new secret)."
 msgstr ""
 
 #: main/templates/main/domain.html:31
@@ -875,7 +877,7 @@ msgstr ""
 #: main/templates/main/updater_hostconfig.html:24
 #: main/templates/main/updater_hostconfig_overview.html:47
 msgid "Help"
-msgstr ""
+msgstr "Yardım"
 
 #: main/templates/main/domain_add.html:20
 msgid ""
@@ -924,8 +926,8 @@ msgstr ""
 #: main/templates/main/generate_secret.html:10
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
-"have to generate a new one again. Everytime you visit this page a new secret "
-"will be generated and the old one becomes invalid."
+"have to generate a new one again. Everytime you visit this page a new secret"
+" will be generated and the old one becomes invalid."
 msgstr ""
 
 #: main/templates/main/generate_secret.html:21
@@ -934,52 +936,52 @@ msgstr ""
 
 #: main/templates/main/home.html:12
 msgid "Your current IP(s) + reverse DNS:"
-msgstr ""
+msgstr "Geçerli IP(ler)iniz + ters DNS:"
 
 #: main/templates/main/home.html:21
 msgid "the Dynamic DNS service you waited for."
-msgstr ""
+msgstr "Dinamik DNS hizmeti sizi bekliyor."
 
 #: main/templates/main/home.html:25
 msgid "Free and Nice"
-msgstr ""
+msgstr "Ücretsiz ve Hoş"
 
 #: main/templates/main/home.html:27
 msgid "is a free service."
-msgstr ""
+msgstr "ücretsiz bir hizmettir."
 
 #: main/templates/main/home.html:28
 msgid "Also, we won't annoy you with ads or spam."
-msgstr ""
+msgstr "Ayrıca reklam ve istenmeyen iletiler ile canınızı sıkmayacağız."
 
 #: main/templates/main/home.html:33
 msgid "Free and Open Source"
-msgstr ""
+msgstr "Özgür ve Açık Kaynak"
 
 #: main/templates/main/home.html:35
 msgid "nsupdate.info is free and open-source software."
-msgstr ""
+msgstr "nsupdate.info, özgür ve açık kaynak kodlu bir yazılımdır."
 
 #: main/templates/main/home.html:38
 msgid "nsupdate.info project on GitHub"
-msgstr ""
+msgstr "nsupdate.info GitHub proje sayfası"
 
 #: main/templates/main/home.html:43
 msgid "Awesome Code"
-msgstr ""
+msgstr "Müthiş Kod"
 
 #: main/templates/main/home.html:45
 msgid ""
 "Empowered by Python and Django,<br> we love to write clean and secure code."
-msgstr ""
+msgstr "Gücünü Python ve Django'dan alır,<br> temiz ve güvenli kod yazmayı seviyoruz."
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
-msgstr ""
+msgstr "Sunucuyu Düzenle"
 
 #: main/templates/main/host.html:14 main/templates/main/host.html.py:19
 msgid "Delete Host"
-msgstr ""
+msgstr "Sunucuyu Sil"
 
 #: main/templates/main/host.html:16
 msgid ""
@@ -989,8 +991,8 @@ msgstr ""
 
 #: main/templates/main/host.html:25
 msgid ""
-"We'll generate a ready-to-use configuration for your router / update client, "
-"filled out with all values (including a new secret)."
+"We'll generate a ready-to-use configuration for your router / update client,"
+" filled out with all values (including a new secret)."
 msgstr ""
 
 #: main/templates/main/host.html:31
@@ -1001,17 +1003,17 @@ msgstr ""
 
 #: main/templates/main/host.html:39
 msgid "Related Hosts"
-msgstr ""
+msgstr "İlişkili Sunucular"
 
 #: main/templates/main/host.html:41
 msgid ""
-"We can update additional host records (for other hosts in same network) when "
-"we receive an update for this host."
+"We can update additional host records (for other hosts in same network) when"
+" we receive an update for this host."
 msgstr ""
 
 #: main/templates/main/host.html:47
 msgid "Configure related Hosts"
-msgstr ""
+msgstr "İlişkili Sunucuyu Düzenle"
 
 #: main/templates/main/host.html:49
 msgid "Update other Services"
@@ -1032,8 +1034,9 @@ msgstr ""
 
 #: main/templates/main/host.html:58
 msgid ""
-"Usually you configure your router to follow the dyndns2 protocol. But if you "
-"know what you are doing, and you want to update manually, you can do it here."
+"Usually you configure your router to follow the dyndns2 protocol. But if you"
+" know what you are doing, and you want to update manually, you can do it "
+"here."
 msgstr ""
 
 #: main/templates/main/host.html:63
@@ -1048,7 +1051,7 @@ msgstr ""
 #: main/templates/main/related_host_overview.html:25
 #: main/templates/main/updater_hostconfig_overview.html:13
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: main/templates/main/host.html:66 main/templates/main/host.html.py:79
 #, python-format
@@ -1076,7 +1079,7 @@ msgstr ""
 #: main/templates/main/related_host_overview.html:30
 #: main/templates/main/updater_hostconfig_overview.html:14
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #: main/templates/main/host.html:132
 msgid "Result Messages"
@@ -1096,7 +1099,7 @@ msgstr ""
 
 #: main/templates/main/host_add.html:8
 msgid "Create a new Host"
-msgstr ""
+msgstr "Yeni Sunucu Oluştur"
 
 #: main/templates/main/host_add.html:12
 #: main/templates/main/related_host_add.html:12
@@ -1155,8 +1158,8 @@ msgid ""
 "connection to transfer your data (including your update secret). Depending "
 "on your update client (router firmware or PC software) <em>and</em> the "
 "specific nsupdate.info-based service, https might be not supported. So, if "
-"it does not work, you have the choice of using a different update client and/"
-"or a different service, or transmitting your data using an unencrypted "
+"it does not work, you have the choice of using a different update client "
+"and/or a different service, or transmitting your data using an unencrypted "
 "connection (using http: instead of https:)."
 msgstr ""
 
@@ -1206,7 +1209,8 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:70
 #: main/templates/main/includes/tabbed_router_configuration.html:286
 msgid ""
-"Important: Do not send an update if your IP did not change since last update!"
+"Important: Do not send an update if your IP did not change since last "
+"update!"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:72
@@ -1417,17 +1421,17 @@ msgstr ""
 
 #: main/templates/main/overview.html:8
 msgid "Your Hosts"
-msgstr ""
+msgstr "Sunucularınız"
 
 #: main/templates/main/overview.html:9
 msgid "Add Host"
-msgstr ""
+msgstr "Sunucu Ekle"
 
 #: main/templates/main/overview.html:15
 #: main/templates/main/related_host_overview.html:17
 #: main/templates/main/updater_hostconfig_overview.html:12
 msgid "Host"
-msgstr ""
+msgstr "Sunucu"
 
 #: main/templates/main/overview.html:17 main/templates/main/overview.html:93
 #: main/templates/main/related_host_overview.html:19
@@ -1461,7 +1465,7 @@ msgstr ""
 
 #: main/templates/main/overview.html:77
 msgid "No hosts yet."
-msgstr ""
+msgstr "Henüz sunucu yok."
 
 #: main/templates/main/overview.html:83
 msgid "Domains (yours first, then public)"
@@ -1493,17 +1497,17 @@ msgstr ""
 
 #: main/templates/main/related_host.html:8
 msgid "Edit related host"
-msgstr ""
+msgstr "İlgili Sunucuyu Düzenle"
 
 #: main/templates/main/related_host.html:14
 #: main/templates/main/related_host.html:19
 msgid "Delete related host"
-msgstr ""
+msgstr "İlişkili Sunucuyu Sil"
 
 #: main/templates/main/related_host.html:16
 msgid ""
-"Deleting a related host is not undoable. If you need it back, you'll have to "
-"add it again."
+"Deleting a related host is not undoable. If you need it back, you'll have to"
+" add it again."
 msgstr ""
 
 #: main/templates/main/related_host.html:25
@@ -1517,19 +1521,19 @@ msgstr ""
 
 #: main/templates/main/related_host_add.html:8
 msgid "Create a new related host"
-msgstr ""
+msgstr "Yeni İlişkili sunucu oluştur"
 
 #: main/templates/main/related_host_add.html:19
 msgid "Here you can add related hosts (e.g. other machines on same LAN)."
-msgstr ""
+msgstr "Buradan ilişkili sunucu ekleyebilirsiniz (örn: aynı ağ üzerindeki başka bir bilgisayar)"
 
 #: main/templates/main/related_host_overview.html:7
 msgid "Related hosts"
-msgstr ""
+msgstr "İlişkili sunucular"
 
 #: main/templates/main/related_host_overview.html:8
 msgid "Add related host"
-msgstr ""
+msgstr "İlişkili sunucu ekle"
 
 #: main/templates/main/related_host_overview.html:11
 msgid "Main host:"
@@ -1543,7 +1547,7 @@ msgstr ""
 
 #: main/templates/main/related_host_overview.html:54
 msgid "No related hosts yet."
-msgstr ""
+msgstr "Henüz ilişkili sunucu yok."
 
 #: main/templates/main/status.html:7
 msgid "Domains"
@@ -1735,15 +1739,15 @@ msgstr ""
 
 #: templates/base.html:51
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 #: templates/base.html:55
 msgid "Documentation"
-msgstr ""
+msgstr "Belgeler"
 
 #: templates/base.html:60
 msgid "Sign up"
-msgstr ""
+msgstr "Kaydol"
 
 #: templates/base.html:66
 msgid "Profile"
@@ -1770,8 +1774,8 @@ msgstr ""
 
 #: templates/base.html:125
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in "
-"your browser."
+"Some functionality on this site requires that you have JavaScript enabled in"
+" your browser."
 msgstr ""
 
 #: templates/includes/base_footer.html:3

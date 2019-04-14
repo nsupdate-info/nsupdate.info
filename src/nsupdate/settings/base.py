@@ -426,10 +426,11 @@ gettext_noop = lambda s: s
 LANGUAGES = (
     ('en', gettext_noop('English')),
     ('de', gettext_noop('German')),
+    ('el', gettext_noop('Greek')),
     ('fr', gettext_noop('French')),
     ('it', gettext_noop('Italian')),
-    ('pl', gettext_noop('Polish')),
-    ('zh-cn', gettext_noop('Chinese (China)')),
+    # ('es', gettext_noop('Spanish')),
+    # ('zh-cn', gettext_noop('Chinese (China)')),
 )
 
 # silences 1_6.W001 warning you get without this:

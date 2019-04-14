@@ -1,34 +1,32 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# porkness, 2014
-# porkness, 2014
+# porkness, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-17 21:33+0100\n"
-"PO-Revision-Date: 2014-11-17 20:31+0000\n"
-"Last-Translator: Thomas Waldmann <tw@waldmann-edv.de>\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/projects/p/"
-"nsupdateinfo/language/zh_CN/)\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2019-04-09 21:55+0000\n"
+"Last-Translator: TW <tw@waldmann-edv.de>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/thomaswaldmann/nsupdateinfo/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: accounts/templates/accounts/delete_user.html:7
 msgid "Delete your User Account"
-msgstr ""
+msgstr "删除您的帐号"
 
 #: accounts/templates/accounts/delete_user.html:11
 msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You can not undelete your data."
-msgstr ""
+msgstr "帐号删除后不可恢复，确定要删除您的帐号以及所有的关联数据吗？"
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:11
@@ -54,14 +52,14 @@ msgstr "解除与外部帐号的关联"
 #: accounts/templates/accounts/user_profile.html:35
 #: accounts/templates/accounts/user_profile.html:44
 msgid "Delete User Profile"
-msgstr ""
+msgstr "删除用户资料"
 
 #: accounts/templates/accounts/user_profile.html:37
 msgid ""
 "If you'ld like to stop using this service and delete this user profile and "
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
-msgstr ""
+msgstr "如果您不想继续使用该服务并删除这个帐号以及清空所有关联数据(特别是主机以及域名数据)，您可以在此进行该操作"
 
 #: accounts/templates/registration/activate.html:4
 #: accounts/templates/registration/activation_complete.html:3
@@ -75,13 +73,13 @@ msgstr "激活出现问题"
 #: accounts/templates/registration/activate.html:8
 #: accounts/templates/registration/activation_complete.html:6
 msgid "Thanks, activation complete!"
-msgstr ""
+msgstr "激活成功，感谢您的配合"
 
 #: accounts/templates/registration/activate.html:9
 #: accounts/templates/registration/activation_complete.html:7
 msgid ""
 "You may now login using the username and password you set at registration."
-msgstr ""
+msgstr "您现在可以使用您注册时填写的帐号和密码登录了。"
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
@@ -92,12 +90,12 @@ msgstr "登录"
 
 #: accounts/templates/registration/activate.html:12
 msgid "Oops"
-msgstr ""
+msgstr "哦？"
 
 #: accounts/templates/registration/activate.html:13
 msgid ""
 "it seems that your activation key is invalid.  Please check the url again."
-msgstr ""
+msgstr "这个激活码看上去无效，请检查URL然后重试"
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
@@ -105,11 +103,12 @@ msgstr "激活邮件已发送"
 
 #: accounts/templates/registration/registration_complete.html:6
 msgid "An activation email has been sent."
-msgstr ""
+msgstr "激活邮件已发送"
 
 #: accounts/templates/registration/registration_complete.html:7
-msgid "Please check your email and click on the link to activate your account."
-msgstr ""
+msgid ""
+"Please check your email and click on the link to activate your account."
+msgstr "请检查您的邮箱并点击激活链接以激活您的帐号。"
 
 #: accounts/templates/registration/registration_form.html:3
 msgid "Register for an account"
@@ -142,7 +141,7 @@ msgid ""
 "<b>Note:</b> if that doesn't work, the service administrator did not set up "
 "the test account yet or discontinued offering it. In that case, you can "
 "still just register a new account."
-msgstr ""
+msgstr "<b>注意：</b>如果测试帐号无法使用，可能是管理员没有建立或停用了测试帐号。这种情况下您依然可以建立自己的新帐号。"
 
 #: accounts/templates/registration/registration_form.html:26
 msgid "test account is <b>only</b> for testing"
@@ -152,13 +151,13 @@ msgstr "测试帐号<b>仅供</b>测试"
 msgid ""
 "Any data (hosts, domains, ...) entered using the test account might be "
 "removed at any time and without prior notice."
-msgstr ""
+msgstr "所有存入测试帐号的数据(主机，域名等)随时可能在不事先通知的情况下移除"
 
 #: accounts/templates/registration/registration_form.html:34
 msgid ""
 "So if you'ld like your stuff to stay, please register for a regular account "
 "after finishing your initial evaluation."
-msgstr ""
+msgstr "如果您想保留您的数据，请在初步评估结束后注册普通帐号"
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
@@ -166,11 +165,11 @@ msgstr "注册新帐号"
 
 #: accounts/templates/registration/registration_form.html:43
 msgid ""
-"Username: should be related to your <em>person or organisation</em> (not: to "
-"the host(s) you want to register).<br> E-Mail address: must be a "
+"Username: should be related to your <em>person or organisation</em> (not: to"
+" the host(s) you want to register).<br> E-Mail address: must be a "
 "<em>working</em> one, we'll send you an activation E-Mail there.<br> "
 "Password: please use a sane one, we trust you."
-msgstr ""
+msgstr "帐号：应选择与<em>您个人或者与您所属的团体</em>相对应的名字。\n(而不是您想注册的主机名)<br>\n邮箱：请填写<em>可用的</em>邮箱地址，我们将会向这个邮箱发送激活邮件。<br>\n密码：没有限制，但是请使用可靠的密码。"
 
 #: accounts/templates/registration/registration_form.html:56
 msgid "Send activation email"
@@ -219,8 +218,8 @@ msgstr "修改密码"
 
 #: login/templates/password_change.html:8
 msgid ""
-"Please enter your old password, for security's sake, and then enter your new "
-"password twice so we can verify you typed it in correctly."
+"Please enter your old password, for security's sake, and then enter your new"
+" password twice so we can verify you typed it in correctly."
 msgstr "为了帐号安全，请输入您的旧密码，然后请输入两次新密码以便确保输入正确"
 
 #: login/templates/password_change.html:15
@@ -246,9 +245,7 @@ msgstr "密码重置"
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr ""
-"忘记了您的密码？请在下方输入您的邮箱地址，我们将发送之后的密码重置步骤到您的"
-"邮箱。"
+msgstr "忘记了您的密码？请在下方输入您的邮箱地址，我们将发送之后的密码重置步骤到您的邮箱。"
 
 #: login/templates/password_reset.html:17
 msgid "Reset my password"
@@ -298,13 +295,11 @@ msgstr "我们已将密码重置步骤发到您的邮箱。"
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr ""
-"如果您没有收到邮件，请确认您所填写的是您在注册时使用的邮箱，并检查垃圾邮件文"
-"件夹"
+msgstr "如果您没有收到邮件，请确认您所填写的是您在注册时使用的邮箱，并检查垃圾邮件文件夹"
 
 #: main/models.py:36
 msgid "name RegEx"
-msgstr ""
+msgstr "域名正则表达式"
 
 #: main/models.py:39
 msgid "Blacklisted domain. Evaluated as regex (search)."
@@ -313,30 +308,30 @@ msgstr "该域名已被屏蔽（通过正则表达式（search）判定）"
 #: main/models.py:41 main/models.py:123 main/models.py:238 main/models.py:459
 #: main/models.py:508
 msgid "last update"
-msgstr ""
+msgstr "最后更新"
 
 #: main/models.py:42 main/models.py:124 main/models.py:239 main/models.py:460
 #: main/models.py:509
 msgid "created at"
-msgstr ""
+msgstr "创建于"
 
 #: main/models.py:46 main/models.py:125 main/models.py:240 main/models.py:464
 #: main/models.py:513
 msgid "created by"
-msgstr ""
+msgstr "创建者"
 
 #: main/models.py:52
 msgid "blacklisted host"
-msgstr ""
+msgstr "被屏蔽的主机"
 
 #: main/models.py:53
 msgid "blacklisted hosts"
-msgstr ""
+msgstr "被屏蔽的主机"
 
 #: main/models.py:81 main/models.py:150 main/models.py:361 main/models.py:433
 #: main/models.py:490
 msgid "name"
-msgstr ""
+msgstr "域名"
 
 #: main/models.py:84
 msgid "Name of the zone where dynamic hosts may get added"
@@ -344,7 +339,7 @@ msgstr "希望添加动态DNS服务的域名"
 
 #: main/models.py:86
 msgid "nameserver IP (primary)"
-msgstr ""
+msgstr "主域名服务器"
 
 #: main/models.py:88
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
@@ -352,15 +347,15 @@ msgstr "指定域名的动态DNS更新请求将会被发送到这个IP"
 
 #: main/models.py:90
 msgid "nameserver IP (secondary)"
-msgstr ""
+msgstr "次域名服务器"
 
 #: main/models.py:93
 msgid "IP where DNS queries for this zone will be sent to"
-msgstr ""
+msgstr "针对该域名的DNS请求将会被发送到这个IP"
 
 #: main/models.py:95
 msgid "nameserver update secret"
-msgstr ""
+msgstr "DNS服务器更新密钥"
 
 #: main/models.py:98
 msgid "Shared secret that allows updating this zone (base64 encoded)"
@@ -368,7 +363,7 @@ msgstr "用于验证域名更新的共享密钥（Base64编码）"
 
 #: main/models.py:100
 msgid "nameserver update algorithm"
-msgstr ""
+msgstr "DNS服务器更新算法"
 
 #: main/models.py:103
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
@@ -376,19 +371,17 @@ msgstr "HMAC_SHA512可适用于bind9（可在之后按需修改）"
 
 #: main/models.py:105
 msgid "public"
-msgstr ""
+msgstr "公共"
 
 #: main/models.py:107
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
-msgstr ""
-"选中后将允许所有用户在此域名下添加主机 - 如果没有选中，将只允许域名所有者添加"
-"主机"
+msgstr "选中后将允许所有用户在此域名下添加主机 - 如果没有选中，将只允许域名所有者添加主机"
 
 #: main/models.py:112 main/models.py:175 main/models.py:386
 msgid "available"
-msgstr ""
+msgstr "可用"
 
 #: main/models.py:114
 msgid ""
@@ -399,22 +392,21 @@ msgstr "域名服务器可用时请选中此项 - 如果没有选中将暂停该
 #: main/models.py:117 main/models.py:166 main/models.py:371 main/models.py:437
 #: main/models.py:483
 msgid "comment"
-msgstr ""
+msgstr "注释"
 
 #: main/models.py:120
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will be also publicly shown."
-msgstr ""
-"任何关于您的域名的注释信息。如果您的域名是公共域名，注释将会被公开显示。"
+msgstr "任何关于您的域名的注释信息。如果您的域名是公共域名，注释将会被公开显示。"
 
 #: main/models.py:144 main/models.py:160
 msgid "domain"
-msgstr ""
+msgstr "域名"
 
 #: main/models.py:145
 msgid "domains"
-msgstr ""
+msgstr "域名"
 
 #: main/models.py:159
 msgid "The name of your host."
@@ -422,7 +414,7 @@ msgstr "主机名"
 
 #: main/models.py:162
 msgid "update secret"
-msgstr ""
+msgstr "更新密钥"
 
 #: main/models.py:169 main/models.py:374
 msgid ""
@@ -437,7 +429,7 @@ msgstr "如果主机可用请选择此项 - 如果没有选中我们将不会接
 
 #: main/models.py:180
 msgid "netmask IPv4"
-msgstr ""
+msgstr "IPv4子网掩码"
 
 #: main/models.py:182
 msgid "Netmask/Prefix length for IPv4."
@@ -445,7 +437,7 @@ msgstr "IPv4子网掩码/前缀长度"
 
 #: main/models.py:184
 msgid "netmask IPv6"
-msgstr ""
+msgstr "IPv6子网掩码"
 
 #: main/models.py:186
 msgid "Netmask/Prefix length for IPv6."
@@ -453,19 +445,17 @@ msgstr "IPv6子网掩码/前缀长度"
 
 #: main/models.py:195
 msgid "abuse"
-msgstr ""
+msgstr "异常"
 
 #: main/models.py:197
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
-msgstr ""
-"如果我们发现您的使用有异常，此项将会变为选中状态 - 您可以在修复完所有您的客户"
-"端存在的问题之后取消此项"
+msgstr "如果我们发现您的使用有异常，此项将会变为选中状态 - 您可以在修复完所有您的客户端存在的问题之后取消此项"
 
 #: main/models.py:202
 msgid "abuse blocked"
-msgstr ""
+msgstr "屏蔽异常使用"
 
 #: main/models.py:204
 msgid "Checked to block a host for abuse."
@@ -473,11 +463,11 @@ msgstr "选中以标记异常使用"
 
 #: main/models.py:208
 msgid "client faults"
-msgstr ""
+msgstr "客户端异常"
 
 #: main/models.py:210
 msgid "client result msg"
-msgstr ""
+msgstr "客户端返回信息"
 
 #: main/models.py:213
 msgid "Latest result message relating to the client"
@@ -485,11 +475,11 @@ msgstr "最近的客户端相关信息"
 
 #: main/models.py:216
 msgid "server faults"
-msgstr ""
+msgstr "服务器端异常"
 
 #: main/models.py:218
 msgid "server result msg"
-msgstr ""
+msgstr "服务器端返回信息"
 
 #: main/models.py:221
 msgid "Latest result message relating to the server"
@@ -497,39 +487,39 @@ msgstr "最近的服务器端相关信息"
 
 #: main/models.py:224
 msgid "api auth faults"
-msgstr ""
+msgstr "API认证错误"
 
 #: main/models.py:226
 msgid "api auth result msg"
-msgstr ""
+msgstr "API认证返回信息"
 
 #: main/models.py:229
 msgid "Latest result message relating to api authentication"
-msgstr ""
+msgstr "最近的API认证结果信息"
 
 #: main/models.py:232
 msgid "last update IPv4"
-msgstr ""
+msgstr "IPv4地址最后更新时间"
 
 #: main/models.py:233
 msgid "last update IPv6"
-msgstr ""
+msgstr "IPv6地址最后更新时间"
 
 #: main/models.py:235
 msgid "TLS update IPv4"
-msgstr ""
+msgstr "IPv4地址更新(通过TLS)"
 
 #: main/models.py:236
 msgid "TLS update IPv6"
-msgstr ""
+msgstr "IPv6地址更新(通过TLS)"
 
 #: main/models.py:249 main/models.py:506
 msgid "host"
-msgstr ""
+msgstr "主机"
 
 #: main/models.py:250
 msgid "hosts"
-msgstr ""
+msgstr "主机"
 
 #: main/models.py:369
 msgid "The name of a host in same network as your main host."
@@ -537,19 +527,19 @@ msgstr ""
 
 #: main/models.py:376
 msgid "interface ID IPv4"
-msgstr ""
+msgstr "IPv4主机ID"
 
 #: main/models.py:379
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
-msgstr ""
+msgstr "该主机的IPv4主机ID。使用IPv4表示法。"
 
 #: main/models.py:381
 msgid "interface ID IPv6"
-msgstr ""
+msgstr "IPv6主机ID"
 
 #: main/models.py:384
 msgid "The IPv6 interface ID of this host. Use IPv6 notation."
-msgstr ""
+msgstr "该主机的IPv6主机ID。使用IPv6表示法。"
 
 #: main/models.py:395
 msgid "main host"
@@ -557,11 +547,11 @@ msgstr ""
 
 #: main/models.py:403
 msgid "related host"
-msgstr ""
+msgstr "相关主机"
 
 #: main/models.py:404
 msgid "related hosts"
-msgstr ""
+msgstr "相关主机"
 
 #: main/models.py:435
 msgid "Service name"
@@ -573,7 +563,7 @@ msgstr "任何与此服务相关的注释"
 
 #: main/models.py:442
 msgid "server"
-msgstr ""
+msgstr "服务器"
 
 #: main/models.py:444
 msgid "Update Server [name or IP] of this service"
@@ -581,7 +571,7 @@ msgstr "此服务的更新服务器[IP或域名]"
 
 #: main/models.py:446
 msgid "path"
-msgstr ""
+msgstr "路径"
 
 #: main/models.py:449
 msgid "Update Server URL path of this service"
@@ -589,7 +579,7 @@ msgstr "更新服务器的URL路径"
 
 #: main/models.py:451
 msgid "secure"
-msgstr ""
+msgstr "安全"
 
 #: main/models.py:453
 msgid "Use https / TLS to contact the Update Server?"
@@ -597,55 +587,55 @@ msgstr "是否使用HTTPS/TLS与更新服务器通信"
 
 #: main/models.py:456
 msgid "accept IPv4"
-msgstr ""
+msgstr "接受IPv4"
 
 #: main/models.py:457
 msgid "accept IPv6"
-msgstr ""
+msgstr "接受IPv6"
 
 #: main/models.py:470
 msgid "service updater"
-msgstr ""
+msgstr "服务更新"
 
 #: main/models.py:471
 msgid "service updaters"
-msgstr ""
+msgstr "服务更新"
 
 #: main/models.py:475
 msgid "service"
-msgstr ""
+msgstr "服务"
 
 #: main/models.py:478
 msgid "hostname"
-msgstr ""
+msgstr "主机名"
 
 #: main/models.py:481
 msgid "The hostname for that service (used in query string)"
-msgstr ""
+msgstr "此服务的主机名(用于请求字符串)"
 
 #: main/models.py:486
 msgid "Some arbitrary comment about your host on that service"
-msgstr ""
+msgstr "任何关于在该服务上的主机的注释"
 
 #: main/models.py:492
 msgid "The name/id for that service (used for http basic auth)"
-msgstr ""
+msgstr "该服务的名称/ID(用于HTTP基本认证)"
 
 #: main/models.py:494
 msgid "password"
-msgstr ""
+msgstr "密码"
 
 #: main/models.py:496
 msgid "The password/secret for that service (used for http basic auth)"
-msgstr ""
+msgstr "该服务的密码(用于HTTP基本认证)"
 
 #: main/models.py:499
 msgid "give IPv4"
-msgstr ""
+msgstr "提供IPv4"
 
 #: main/models.py:500
 msgid "give IPv6"
-msgstr ""
+msgstr "提供IPv6"
 
 #: main/models.py:519
 msgid "service updater host config"
@@ -674,15 +664,14 @@ msgid ""
 "You usually need it so your router (or other dyndns2-compatible client) can "
 "update a hostname, so you don't need to know or find out your current IP "
 "address."
-msgstr ""
+msgstr "您可以使用该服务，通过路由器(或其他兼容dyndns2的客户 端)更新您的主机域名，以此摆脱记忆/获取主机IP地址的烦恼。"
 
 #: main/templates/main/about.html:20
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr ""
-"%(WWW_HOST)s遵循<b>简单，可用，自由，友好，安全，尊重您的隐私</b>的原则"
+msgstr "%(WWW_HOST)s遵循<b>简单，可用，自由，友好，安全，尊重您的隐私</b>的原则"
 
 #: main/templates/main/about.html:26
 msgid "Why another one?"
@@ -708,7 +697,7 @@ msgstr "在一段时间不使用之后停止用户的主机解析或者关闭帐
 msgid ""
 "hiding the few free features almost undiscoverably between a ton of "
 "commercial-only features"
-msgstr ""
+msgstr "大力宣传付费服务，将少量的免费服务放在不起眼的地方"
 
 #: main/templates/main/about.html:42
 msgid "How is it?"
@@ -721,17 +710,17 @@ msgstr "您可以直接使用测试帐号进行测试（详见注册页面）"
 #: main/templates/main/about.html:47
 msgid ""
 "Also, we have <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open "
-"docs in new window\" target=\"_blank\">documentation</a> &mdash; there might "
-"be some interesting stuff for you in it that is not visible or obvious on "
+"docs in new window\" target=\"_blank\">documentation</a> &mdash; there might"
+" be some interesting stuff for you in it that is not visible or obvious on "
 "the user interface."
-msgstr ""
+msgstr "我们还提供了\n<a href=\"http://nsupdateinfo.readthedocs.org/\"\ntitle=\"在新窗口中打开文档\" target=\"_blank\">说明文档</a> &mdash;\n您可能可以在此发现一些让您感兴趣的在用户界面上\n不可见或者难以发现的内容"
 
 #: main/templates/main/about.html:56
 msgid ""
-"If you are interested in the software project, have a look at the <a href="
-"\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on "
-"GitHub</a>."
-msgstr ""
+"If you are interested in the software project, have a look at the <a "
+"href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info "
+"project on GitHub</a>."
+msgstr "如果您对这个项目感兴趣，请访问\n<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目的GitHub主页</a>"
 
 #: main/templates/main/about.html:65
 msgid "Fair use of the service"
@@ -770,7 +759,7 @@ msgstr "不要向我们的邮箱发送垃圾邮件"
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are related "
 "to unfair use of the service - at any time and without prior notice."
-msgstr ""
+msgstr "我们有权利在任何时候不经通知的移除滥用此服务的主机/帐号"
 
 #: main/templates/main/about.html:85
 msgid "No warranties"
@@ -800,9 +789,9 @@ msgstr "如果对项目存在疑问"
 
 #: main/templates/main/about.html:103
 msgid ""
-"Visit the <a href=\"https://github.com/nsupdate-info/nsupdate.info"
-"\">nsupdate.info project on GitHub</a> to:"
-msgstr ""
+"Visit the <a href=\"https://github.com/nsupdate-"
+"info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
+msgstr "请访问\n<a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info项目的GitHub主页</a>以："
 
 #: main/templates/main/about.html:109
 msgid "file issues on the issue tracker for bugs, ideas, patches."
@@ -830,8 +819,7 @@ msgstr "编辑域名"
 msgid ""
 "You can't change the domain name. If you want to have another domain name, "
 "you have to delete this domain and create a new one."
-msgstr ""
-"您不能更改域名，如果您想使用其他的域名，请删除这个域名并重新创建新的域名"
+msgstr "您不能更改域名，如果您想使用其他的域名，请删除这个域名并重新创建新的域名"
 
 #: main/templates/main/domain.html:11
 msgid ""
@@ -854,8 +842,8 @@ msgstr "显示配置"
 
 #: main/templates/main/domain.html:25
 msgid ""
-"We'll generate a ready-to-use configuration for your name server, filled out "
-"with all values (including a new secret)."
+"We'll generate a ready-to-use configuration for your name server, filled out"
+" with all values (including a new secret)."
 msgstr ""
 
 #: main/templates/main/domain.html:31
@@ -872,8 +860,7 @@ msgstr "删除域名"
 msgid ""
 "Deleting a domain is not undoable. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
-msgstr ""
-"删除域名操作不可撤销。如果您需要继续使用该域名，请重新添加并且配置新的密钥。"
+msgstr "删除域名操作不可撤销。如果您需要继续使用该域名，请重新添加并且配置新的密钥。"
 
 #: main/templates/main/domain_add.html:8
 msgid "Add a new Domain"
@@ -916,9 +903,7 @@ msgstr "已生成域名服务器共享密钥"
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
-msgstr ""
-"新的域名服务器共享密钥已生成成功。在您每次访问此网页时都会生成新的密钥并取代"
-"旧密钥"
+msgstr "新的域名服务器共享密钥已生成成功。在您每次访问此网页时都会生成新的密钥并取代旧密钥"
 
 #: main/templates/main/generate_ns_secret.html:10
 msgid "Algorithm:"
@@ -940,11 +925,9 @@ msgstr "已生成主机更新密钥"
 #: main/templates/main/generate_secret.html:10
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
-"have to generate a new one again. Everytime you visit this page a new secret "
-"will be generated and the old one becomes invalid."
-msgstr ""
-"新的主机更新密钥已生成成功。我们不会明文保存密钥，所以请立即保存它，如果密钥"
-"丢失您必须生成新的密钥。在您每次访问此网页时都会生成新的密钥并取代旧密钥。"
+"have to generate a new one again. Everytime you visit this page a new secret"
+" will be generated and the old one becomes invalid."
+msgstr "新的主机更新密钥已生成成功。我们不会明文保存密钥，所以请立即保存它，如果密钥丢失您必须生成新的密钥。在您每次访问此网页时都会生成新的密钥并取代旧密钥。"
 
 #: main/templates/main/generate_secret.html:21
 msgid "How to configure automated dynamic DNS updates?"
@@ -989,7 +972,7 @@ msgstr "优质，强大"
 #: main/templates/main/home.html:45
 msgid ""
 "Empowered by Python and Django,<br> we love to write clean and secure code."
-msgstr ""
+msgstr "由Python和Django强力驱动<br> 我们热衷于编写清晰和安全的代码。"
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
@@ -1003,13 +986,12 @@ msgstr "删除主机"
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
-msgstr ""
-"删除主机操作不可撤销。如果您需要继续使用该主机，请重新添加并且配置新的密钥。"
+msgstr "删除主机操作不可撤销。如果您需要继续使用该主机，请重新添加并且配置新的密钥。"
 
 #: main/templates/main/host.html:25
 msgid ""
-"We'll generate a ready-to-use configuration for your router / update client, "
-"filled out with all values (including a new secret)."
+"We'll generate a ready-to-use configuration for your router / update client,"
+" filled out with all values (including a new secret)."
 msgstr ""
 
 #: main/templates/main/host.html:31
@@ -1024,8 +1006,8 @@ msgstr ""
 
 #: main/templates/main/host.html:41
 msgid ""
-"We can update additional host records (for other hosts in same network) when "
-"we receive an update for this host."
+"We can update additional host records (for other hosts in same network) when"
+" we receive an update for this host."
 msgstr ""
 
 #: main/templates/main/host.html:47
@@ -1051,8 +1033,9 @@ msgstr ""
 
 #: main/templates/main/host.html:58
 msgid ""
-"Usually you configure your router to follow the dyndns2 protocol. But if you "
-"know what you are doing, and you want to update manually, you can do it here."
+"Usually you configure your router to follow the dyndns2 protocol. But if you"
+" know what you are doing, and you want to update manually, you can do it "
+"here."
 msgstr ""
 
 #: main/templates/main/host.html:63
@@ -1067,7 +1050,7 @@ msgstr ""
 #: main/templates/main/related_host_overview.html:25
 #: main/templates/main/updater_hostconfig_overview.html:13
 msgid "IPv4"
-msgstr ""
+msgstr "IPv4"
 
 #: main/templates/main/host.html:66 main/templates/main/host.html.py:79
 #, python-format
@@ -1087,7 +1070,7 @@ msgstr ""
 #: main/templates/main/host.html:75 main/templates/main/host.html.py:88
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: main/templates/main/host.html:79 main/templates/main/host.html.py:81
 #: main/templates/main/host.html:83 main/templates/main/overview.html:33
@@ -1095,33 +1078,33 @@ msgstr ""
 #: main/templates/main/related_host_overview.html:30
 #: main/templates/main/updater_hostconfig_overview.html:14
 msgid "IPv6"
-msgstr ""
+msgstr "IPv6"
 
 #: main/templates/main/host.html:132
 msgid "Result Messages"
-msgstr ""
+msgstr "返回信息"
 
 #: main/templates/main/host.html:134
 msgid "API Authentication Result Message"
-msgstr ""
+msgstr "API认证返回信息"
 
 #: main/templates/main/host.html:136
 msgid "Client Result Message"
-msgstr ""
+msgstr "客户端返回信息"
 
 #: main/templates/main/host.html:138
 msgid "Server Result Message"
-msgstr ""
+msgstr "服务器端返回信息"
 
 #: main/templates/main/host_add.html:8
 msgid "Create a new Host"
-msgstr ""
+msgstr "新建主机解析"
 
 #: main/templates/main/host_add.html:12
 #: main/templates/main/related_host_add.html:12
 #: main/templates/main/updater_hostconfig_overview.html:41
 msgid "Create"
-msgstr ""
+msgstr "建立"
 
 #: main/templates/main/host_add.html:19
 msgid "Here you can add new hosts (like routers, PCs, servers, ...)."
@@ -1174,8 +1157,8 @@ msgid ""
 "connection to transfer your data (including your update secret). Depending "
 "on your update client (router firmware or PC software) <em>and</em> the "
 "specific nsupdate.info-based service, https might be not supported. So, if "
-"it does not work, you have the choice of using a different update client and/"
-"or a different service, or transmitting your data using an unencrypted "
+"it does not work, you have the choice of using a different update client "
+"and/or a different service, or transmitting your data using an unencrypted "
 "connection (using http: instead of https:)."
 msgstr ""
 
@@ -1225,7 +1208,8 @@ msgstr ""
 #: main/templates/main/includes/tabbed_router_configuration.html:70
 #: main/templates/main/includes/tabbed_router_configuration.html:286
 msgid ""
-"Important: Do not send an update if your IP did not change since last update!"
+"Important: Do not send an update if your IP did not change since last "
+"update!"
 msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:72
@@ -1332,7 +1316,7 @@ msgstr ""
 
 #: main/templates/main/includes/tabbed_router_configuration.html:149
 msgid "(leave this field empty)"
-msgstr ""
+msgstr "(此处请留空)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:157
 msgid "ddclient is a popular dyndns update daemon on Linux."
@@ -1472,7 +1456,7 @@ msgstr "客户端/服务器"
 #: main/templates/main/related_host_overview.html:28
 #, python-format
 msgid "%(type)s Address"
-msgstr ""
+msgstr "%(type)s地址"
 
 #: main/templates/main/overview.html:30 main/templates/main/overview.html:35
 msgid "(last update)"
@@ -1521,8 +1505,8 @@ msgstr "删除关联主机"
 
 #: main/templates/main/related_host.html:16
 msgid ""
-"Deleting a related host is not undoable. If you need it back, you'll have to "
-"add it again."
+"Deleting a related host is not undoable. If you need it back, you'll have to"
+" add it again."
 msgstr "删除关联主机操作不可撤销。如果您需要恢复使用，请重新添加。"
 
 #: main/templates/main/related_host.html:25
@@ -1532,7 +1516,7 @@ msgid ""
 "address from it. To compute your related host's IPs, we just add the "
 "interface ID to the network address. Then we update the DNS records for the "
 "related host with these addresses."
-msgstr ""
+msgstr "我们将会通过您的更新请求获得您的IP地址。对于关联主机的IP，我们会通过在主IP地址后追加主机ID的方式得到。之后这些IP将会被写入DNS记录。"
 
 #: main/templates/main/related_host_add.html:8
 msgid "Create a new related host"
@@ -1789,8 +1773,8 @@ msgstr ""
 
 #: templates/base.html:125
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in "
-"your browser."
+"Some functionality on this site requires that you have JavaScript enabled in"
+" your browser."
 msgstr "本站部分功能需要调用浏览器的JavaScript功能"
 
 #: templates/includes/base_footer.html:3

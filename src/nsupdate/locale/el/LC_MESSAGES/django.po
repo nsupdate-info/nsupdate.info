@@ -3,167 +3,166 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Kcchouette, 2016,2019
-# mandrag0ra <mandrag0ra@icloud.com>, 2014,2019
-# TW <tw@waldmann-edv.de>, 2014
+# Dimitris Anogiatis <dosida@gmail.com>, 2015
+# ant.onois <tonybaliatsas@outlook.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-17 21:33+0100\n"
-"PO-Revision-Date: 2019-04-12 10:03+0000\n"
-"Last-Translator: mandrag0ra <mandrag0ra@icloud.com>\n"
-"Language-Team: French (http://www.transifex.com/thomaswaldmann/nsupdateinfo/language/fr/)\n"
+"PO-Revision-Date: 2019-04-12 13:24+0000\n"
+"Last-Translator: ant.onois <tonybaliatsas@outlook.com>\n"
+"Language-Team: Greek (http://www.transifex.com/thomaswaldmann/nsupdateinfo/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: accounts/templates/accounts/delete_user.html:7
 msgid "Delete your User Account"
-msgstr "Supprimer votre compte"
+msgstr "Σβήσε τον λογαριασμό σου"
 
 #: accounts/templates/accounts/delete_user.html:11
 msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You can not undelete your data."
-msgstr "Êtes vous sur de vouloir supprimer votre compte utilisateur et toutes vos données ? Vous ne pourrez plus récupérer ces données. "
+msgstr "Θέλετε σίγουρα να διαγράψετε τον λογαριασμό σας και όλα τα δεδομένα σας σε αυτή την υπηρεσία; Δεν θα μπορείτε να αναιρέσετε την ενέργεια."
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:11
 msgid "Confirm"
-msgstr "Confirmer"
+msgstr "Επιβεβαίωση"
 
 #: accounts/templates/accounts/user_profile.html:7
 msgid "User Profile of"
-msgstr "Profil utilisateur de"
+msgstr "Λογαριασμός του/της"
 
 #: accounts/templates/accounts/user_profile.html:14
 msgid "Submit"
-msgstr "Envoyer"
+msgstr "Υποβολή"
 
 #: accounts/templates/accounts/user_profile.html:18
 msgid "Associate with remote Account"
-msgstr "Associé au compte distant"
+msgstr "Συσχέτιση με απομακρυσμένο Λογαριασμό"
 
 #: accounts/templates/accounts/user_profile.html:25
 msgid "Disassociate from remote Account"
-msgstr "Dissocié du compte distant"
+msgstr "Ακύρωση συσχέτισης απομακρυσμένου Λογαριασμού"
 
 #: accounts/templates/accounts/user_profile.html:35
 #: accounts/templates/accounts/user_profile.html:44
 msgid "Delete User Profile"
-msgstr "Supprimer le profil utilisateur"
+msgstr "Διαγραφή Λογαριασμού Χρήστη"
 
 #: accounts/templates/accounts/user_profile.html:37
 msgid ""
 "If you'ld like to stop using this service and delete this user profile and "
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
-msgstr "Si vous souhaitez arrêter d'utiliser ce service, supprimer ce profil utilisateur et toutes ses données (tous les hôtes et tous les domaines créés par cet utilisateur), vous pouvez le faire ici."
+msgstr "Αν επιθυμείτε να σταματήσετε να χρησιμοποιείτε την υπηρεσία και να διαγράψετε το προφίλ χρήστη και όλα τα δεδομένα σας (συγκεκριμένα τους host και τα domain που δημιουργήθηκαν από αυτόν το χρήστη), μπορείτε να το κάνετε εδώ."
 
 #: accounts/templates/registration/activate.html:4
 #: accounts/templates/registration/activation_complete.html:3
 msgid "Activation complete"
-msgstr "Enregistrement terminé"
+msgstr "Η ενεργοποίηση ολοκληρώθηκε"
 
 #: accounts/templates/registration/activate.html:4
 msgid "Activation problem"
-msgstr "Problème lors de l'enregistrement"
+msgstr "Πρόβλημα με την ενεργοποίηση"
 
 #: accounts/templates/registration/activate.html:8
 #: accounts/templates/registration/activation_complete.html:6
 msgid "Thanks, activation complete!"
-msgstr "Merci, votre compte a été enregistré. "
+msgstr "Σας ευχαριστώ, η ενεργοποίηση ολοκληρώθηκε"
 
 #: accounts/templates/registration/activate.html:9
 #: accounts/templates/registration/activation_complete.html:7
 msgid ""
 "You may now login using the username and password you set at registration."
-msgstr "Vous pouvez maintenant vous connectez en utilisant votre login et mot de passe."
+msgstr "Μπορείτε τώρα να συνδεθήτε χρησιμοποιώντας το όνομα χρήστη και τον κωδικό που χρησιμοποιήσατε κατα την ενεργοποίηση"
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html.py:24
 #: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
-msgstr "Se connecter"
+msgstr "Σύνδεση"
 
 #: accounts/templates/registration/activate.html:12
 msgid "Oops"
-msgstr "Oops"
+msgstr "Ώπα"
 
 #: accounts/templates/registration/activate.html:13
 msgid ""
 "it seems that your activation key is invalid.  Please check the url again."
-msgstr "Il semblerait que votre clé d'action soit invalide. Merci de vérifier vos informations."
+msgstr "φαίνεται πως το κλειδί ενεργοποίησης δεν είναι έγκυρο. Παρακαλώ ελέγξτε πάλι την διεύθυνση url."
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
-msgstr "Email d'activation envoyé"
+msgstr "Το μήνυμα ενεργοποίησης στάλθηκε"
 
 #: accounts/templates/registration/registration_complete.html:6
 msgid "An activation email has been sent."
-msgstr "Un email d'activation a été envoyé."
+msgstr "Στάλθηκε ένα μύνημα ενεργοποίησης"
 
 #: accounts/templates/registration/registration_complete.html:7
 msgid ""
 "Please check your email and click on the link to activate your account."
-msgstr "Veuillez s'il vous plait vérifier vos email et cliquer sur le lien pour activer votre compte."
+msgstr "Παρακαλώ ελεγξτε το λογαριασμό του ηλεκτρονικού σας ταχυδρομείου και πατήστε στον σύνδεσμο ενεργοποίησης του λογαριασμού σας"
 
 #: accounts/templates/registration/registration_form.html:3
 msgid "Register for an account"
-msgstr "S'enregistrer"
+msgstr "Eγγραφείτε για τον λογαριασμό σας."
 
 #: accounts/templates/registration/registration_form.html:8
 msgid "No registration required for testing"
-msgstr "Il n'est pas nécessaire de s'enregistrer pour tester"
+msgstr "Δεν απαιτείται εγγραφή για δοκιμή"
 
 #: accounts/templates/registration/registration_form.html:10
 msgid "You can easily test the service and see what you get."
-msgstr "Vous pouvez facilement tester le service et voir ce qu'il propose."
+msgstr "Μπορείτε εύκολα να δοκιμάσετε την υπηρεσία και να δείτε τι προσφέρει."
 
 #: accounts/templates/registration/registration_form.html:13
 msgid "Just directly log in as:"
-msgstr "Connecter vous directement avec le compte:"
+msgstr "Απλά συνδεθείτε απευθείας ως:"
 
 #: accounts/templates/registration/registration_form.html:16
 #: main/templates/main/includes/tabbed_router_configuration.html:74
 msgid "Username:"
-msgstr "Username:"
+msgstr "Όνομα χρήστη:"
 
 #: accounts/templates/registration/registration_form.html:17
 #: main/templates/main/includes/tabbed_router_configuration.html:75
 msgid "Password:"
-msgstr "Mot de passe:"
+msgstr "Κωδικός:"
 
 #: accounts/templates/registration/registration_form.html:20
 msgid ""
 "<b>Note:</b> if that doesn't work, the service administrator did not set up "
 "the test account yet or discontinued offering it. In that case, you can "
 "still just register a new account."
-msgstr "<b>Note:</b> Si la connexion ne fonctionne pas, il est possible que l'administrateur n'est pas configuré le compte test ou a cessé de le proposer.Dans ce cas, n'hésitez pas à vous enregistrer."
+msgstr "<b>Σημείωση:</b> εάν δεν λειτουργεί, ο διαχειριστής της υπηρεσίας δεν έχει ρυθμίσει ακόμα τον δοκιμαστικό λογαριασμό ή σταμάτησε να τον προσφέρει. Σε αυτή την περίπτωση, μπορείτε να εγγραφείτε για έναν νέο λογαριασμό."
 
 #: accounts/templates/registration/registration_form.html:26
 msgid "test account is <b>only</b> for testing"
-msgstr "Le compte test ne sert <b>qu'</b>à tester"
+msgstr "ο λογαριασμός test είναι <b>μόνο</b> για δοκιμή"
 
 #: accounts/templates/registration/registration_form.html:28
 msgid ""
 "Any data (hosts, domains, ...) entered using the test account might be "
 "removed at any time and without prior notice."
-msgstr "Tous les enregistrements (hôtes, domaines,...) utilisés avec le compte test pourront être supprimé à n'importe quel moment, sans préavis."
+msgstr "Όσα δεδομένα (hosts, domains, ...) καταχωρούνται με χρήση του test λογαριασμού μπορεί να αφαιρεθούν σε οποιαδήποτε στιγμή χωρίς προειδοποίηση. "
 
 #: accounts/templates/registration/registration_form.html:34
 msgid ""
 "So if you'ld like your stuff to stay, please register for a regular account "
 "after finishing your initial evaluation."
-msgstr "Si vous souhaitez garder vos informations, veuillez s.v.p, vous enregistrer."
+msgstr "Οπότε αν επιθυμείτε οι εγγραφές σας να παραμείνουν, παρακαλώ εγγραφείτε για έναν κανονικό λογαριασμό αφότου τελειώσετε με τις αρχικές δοκιμές σας."
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
-msgstr "S'enregistrer"
+msgstr "Καταχώρηση νέου λογαριασμού"
 
 #: accounts/templates/registration/registration_form.html:43
 msgid ""
@@ -171,543 +170,543 @@ msgid ""
 " the host(s) you want to register).<br> E-Mail address: must be a "
 "<em>working</em> one, we'll send you an activation E-Mail there.<br> "
 "Password: please use a sane one, we trust you."
-msgstr "Nom d'utilisateur: devrait être <em>une personne ou une organisation</em> (et non un hôte que vous souhaitez enregistrer).<br>E-mail : doit être <em>valide</em>. Nous vous enverrons un lien d'activation à cette adresse e-mail.<br>Mot de passe: veuillez s.v.p utiliser un mot de passe fort, nous vous faisons confiance."
+msgstr "Όνομα χρήστη: πρέπει να σχετίζεται με<em>εσάς ή τον οργανισμό σας</em> (όχι: τους host(s) που θέλετε να καταχωρήσετε).<br> Διεύθυνση E-Mail: πρέπει να είναι ένα <em>πραγματικό</em> e-mail, θα σας στείλουμε ένα μήνυμα ενεργοποίησης εκεί.<br> Κωδικός: παρακαλώ χρησιμοποιήστε ένα λογικό κωδικό, σας εμπιστευόμαστε."
 
 #: accounts/templates/registration/registration_form.html:56
 msgid "Send activation email"
-msgstr "Envoyer un mail d'activation"
+msgstr "Αποστολή μηνύματος ενεργοποίησης"
 
 #: login/templates/login.html:8
 msgid "Login with a local Account"
-msgstr "Se connecter (avec un compte local)"
+msgstr "Σύνδεση με ένα τοπικό Λογαριασμό"
 
 #: login/templates/login.html:11
 msgid "Your username and password didn't match. Please try again."
-msgstr "Votre login et mot de passe ne correspondent pas. Veuillez réessayer."
+msgstr "Το όνομα χρήστη και ο κωδικός σας δεν ταιριάζουν. Παρακαλώ προσπάθηστε ξανά."
 
 #: login/templates/login.html:19
 msgid "Remember me"
-msgstr "Se souvenir de moi"
+msgstr "Να με θυμηθείς"
 
 #: login/templates/login.html:24
 msgid "Forgot your password?"
-msgstr "Mot de passe oublié ?"
+msgstr "Ξεχάσατε τον κωδικό σας;"
 
 #: login/templates/login.html:26
 msgid "Sign up for a new account..."
-msgstr "S'enregistrer"
+msgstr "Εγγραφείτε για ένα νέο λογαριασμό..."
 
 #: login/templates/login.html:33
 msgid "Login with a remote Account"
-msgstr "Se connecter (avec un compte distant)"
+msgstr "Σύνδεση με έναν απομακρυσμένο Λογαριασμό"
 
 #: login/templates/logout.html:3 templates/base.html:71
 msgid "Log out"
-msgstr "Se déconnecter"
+msgstr "Αποσύνδεση"
 
 #: login/templates/logout.html:8
 msgid "Thanks for spending some quality time with the Web site today."
-msgstr "Merci d'être passer par chez nous aujourd'hui."
+msgstr "Ευχαριστούμε που ξοδέψατε μερικό ποιοτικό χρόνο με τον Ιστοσελίδα σήμερα. "
 
 #: login/templates/logout.html:9
 msgid "Log in again"
-msgstr "Se reconnecter"
+msgstr "Συνδεθείτε πάλι"
 
 #: login/templates/password_change.html:3
 #: login/templates/password_change.html:6 templates/base.html:67
 msgid "Password change"
-msgstr "Mot de passe modifié"
+msgstr "Αλλαγή Κωδικού"
 
 #: login/templates/password_change.html:8
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new"
 " password twice so we can verify you typed it in correctly."
-msgstr "Veuillez d'abord saisir votre ancien mot de passe (question de sécurité..), puis choisissez vote nouveau mot de passe. Saisissez le deux fois (question de sureté...)"
+msgstr "Παρακαλώ εισάγετε τον παλιό κωδικό, για χάρη της ασφάλειας σας, και στη συνέχεια εισάγετε το νέο κωδικό δύο φορές έτσι ώστε να μπορέσουμε να επιβεβαιώσουμε ότι έχετε τον εχετε πληκτρολογήσει σωστά."
 
 #: login/templates/password_change.html:15
 #: login/templates/password_reset_confirm.html:14
 msgid "Change my password"
-msgstr "Modifier mon mot de passe"
+msgstr "Άλλαξε τον κωδικό μου"
 
 #: login/templates/password_change_done.html:3
 #: login/templates/password_change_done.html:6
 msgid "Password change successful"
-msgstr "Mot de passe modifié avec succès"
+msgstr "Επιτυχής αλλαγή κωδικού"
 
 #: login/templates/password_change_done.html:7
 msgid "Your password was changed."
-msgstr "Votre mot de passe a été modifié."
+msgstr "Ο κωδικός σας έχει αλλάξει"
 
 #: login/templates/password_reset.html:3 login/templates/password_reset.html:7
 #: login/templates/password_reset_confirm.html:3
 msgid "Password reset"
-msgstr "Mot de passe réinitialisé"
+msgstr "Επαναφορά κωδικού"
 
 #: login/templates/password_reset.html:9
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr "Mot de passe oublié ? Saisissez votre adresse mail  et nous vous enverrons les instructions pour en enregistrer un nouveau."
+msgstr "Ξεχάσατε τον κωδικό σας; Εισάγετε τη διεύθυνση του ηλεκτρονικού σας ταχυδρομείου παρακάτω και θα σας στείλουμε, μέσω αυτού, οδηγίες για τη ρύθμιση ενός νέου."
 
 #: login/templates/password_reset.html:17
 msgid "Reset my password"
-msgstr "Réinitialiser mon mot de passe"
+msgstr "Επανέφερε τον κωδικό μου"
 
 #: login/templates/password_reset_complete.html:3
 #: login/templates/password_reset_complete.html:6
 msgid "Password reset complete"
-msgstr "Réinitialisation du mot de passe terminé"
+msgstr "Η επαναφορά κωδικού ολοκληρώθηκε"
 
 #: login/templates/password_reset_complete.html:7
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Votre mot de passe a été enregistré. Vous pouvez maintenant vous connecter."
+msgstr "Ο κωδικός σας ρυθμίστηκε. Μπορείτε να συνδεθείτε τώρα."
 
 #: login/templates/password_reset_confirm.html:7
 msgid "Enter new password"
-msgstr "Saisissez votre nouveau mot de passe"
+msgstr "Εισάγετε νέο κωδικό"
 
 #: login/templates/password_reset_confirm.html:8
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "Veuillez saisir votre mot de passe deux fois"
+msgstr "Παρακαλώ καταχωρήστε των κωδικό σας δύο φορές ώστε να επιβεβαιώσουμε ότι τον πληκτρολογήσατε σωστά."
 
 #: login/templates/password_reset_confirm.html:21
 msgid "Password reset unsuccessful"
-msgstr "Réinitialisation du mot de passe : Houston nous avons un problème.."
+msgstr "Ανεπιτυχής επαναφορά κωδικού"
 
 #: login/templates/password_reset_confirm.html:22
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "Le lien de réinitialisation de mot de passe est invalide. A-t-il déjà été utilisé ? Veuillez faire une nouvelle de demande de réinitialisation."
+msgstr "Ο σύνδεσμος επαναφοράς κωδικού ήταν άκυρος, πιθανόν επειδή είχε ήδη χρησιμοποιηθεί. Παρακαλώ αιτηθείτε εκ νέου επαναφορά κωδικού."
 
 #: login/templates/password_reset_done.html:3
 #: login/templates/password_reset_done.html:6
 msgid "Password reset successful"
-msgstr "Mot de passe réinitialisé avec succès"
+msgstr "Επιτυχής επαναφορά κωδικού"
 
 #: login/templates/password_reset_done.html:7
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
-msgstr "Nous vous avons envoyez les instructions pour réinitialisation votre mot de passe. Vous devriez le recevoir rapidement."
+msgstr "Σας αποστείλαμε e-mail με οδηγίες για την ρύθμιση του κωδικού σας. Θα πρέπει να το λάβετε σύντομα."
 
 #: login/templates/password_reset_done.html:8
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr "Si vous n'avez pas reçu les instructions, veuillez s'il vous plait vérifier que vous avez entrer l'adresse email avec laquelle vous vous êtes enregistré. N'oubliez pas de vérifier qu'il n'est pas dans votre dossier de spam (On ne sait jamais...)"
+msgstr "Αν δεν λάβατε ένα email, παρακαλώ βεβαιωθείτε ότι έχετε καταχωρήσει την διεύθυνση με την οποία εγγραφήκατε, και ελέγξτε τον φάκελο ανεπιθύμητης αλληλογραφίας."
 
 #: main/models.py:36
 msgid "name RegEx"
-msgstr "Nom de la Regex"
+msgstr "όνομα RegEx"
 
 #: main/models.py:39
 msgid "Blacklisted domain. Evaluated as regex (search)."
-msgstr "Domaine blacklisté. Evalué à partir d'une regex."
+msgstr "Τομέας σε μαύρη λίστα. Αξιολογήθηκε σαν regex (αναζήτηση)."
 
 #: main/models.py:41 main/models.py:123 main/models.py:238 main/models.py:459
 #: main/models.py:508
 msgid "last update"
-msgstr "Dernière mise à jour"
+msgstr "τελευταία ενημέρωση"
 
 #: main/models.py:42 main/models.py:124 main/models.py:239 main/models.py:460
 #: main/models.py:509
 msgid "created at"
-msgstr "Créé à"
+msgstr "δημιουργήθηκε την"
 
 #: main/models.py:46 main/models.py:125 main/models.py:240 main/models.py:464
 #: main/models.py:513
 msgid "created by"
-msgstr "Créé par"
+msgstr "δημιουργήθηκε από"
 
 #: main/models.py:52
 msgid "blacklisted host"
-msgstr "Hôte blacklisté"
+msgstr "host σε μαύρη λίστα"
 
 #: main/models.py:53
 msgid "blacklisted hosts"
-msgstr "Hôtes blacklistés"
+msgstr "hosts σε μαύρη λίστα"
 
 #: main/models.py:81 main/models.py:150 main/models.py:361 main/models.py:433
 #: main/models.py:490
 msgid "name"
-msgstr "nom"
+msgstr "όνομα"
 
 #: main/models.py:84
 msgid "Name of the zone where dynamic hosts may get added"
-msgstr "Nom de la zone où vous pourrez ajouter des nom d'hôte dynamique"
+msgstr "Ονομασία ζώνης όπου μπορούν να προστεθούν δυναμικοί hosts"
 
 #: main/models.py:86
 msgid "nameserver IP (primary)"
-msgstr "IP serveur DNS (primaire)"
+msgstr "Διεύθυνση IP nameserver (πρωτεύουσα)"
 
 #: main/models.py:88
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
-msgstr "Adresse IP du serveur vers laquelle seront envoyées les mises à jour des DNS dynamiques pour cette zone"
+msgstr "IP στην οποία θα αποστέλλονται οι ενημερώσεις του δυναμικού DNS γι' αυτή την ζώνη"
 
 #: main/models.py:90
 msgid "nameserver IP (secondary)"
-msgstr "IP serveur DNS (secondaire)"
+msgstr "Διεύθυνση IP nameserver (δευτερεύουσα)"
 
 #: main/models.py:93
 msgid "IP where DNS queries for this zone will be sent to"
-msgstr "Adresse IP du serveur vers lesquelles les requêtes pour cette zone seront envoyées"
+msgstr "IP στην οποία θα αποστέλλονται ερωτήματα DNS γι' αυτή την ζώνη"
 
 #: main/models.py:95
 msgid "nameserver update secret"
-msgstr "clé de mise à jour du serveur"
+msgstr "μυστικός κωδικός ενημέρωσης του nameserver"
 
 #: main/models.py:98
 msgid "Shared secret that allows updating this zone (base64 encoded)"
-msgstr "Clé partagée permettant de mettre à jour cette zone (base64 encoded)"
+msgstr "Κοινός κωδικός που επιτρέπει την ενημέρωση αυτής της ζώνης (base64 κωδικοποίηση)"
 
 #: main/models.py:100
 msgid "nameserver update algorithm"
-msgstr "algorithme de mise à jour du serveur"
+msgstr "αλγόριθμος ενημέρωσης του nameserver"
 
 #: main/models.py:103
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
-msgstr "L'algorithme HMAC_SHA512 devrait suffire pour Bind9 (vous pouvez toujours le modifier plus tard si nécessaire)"
+msgstr "Ο HMAC_SHA512 είναι εντάξει για bind9 (μπορείτε να το αλλάξετε αργότερα, αν χρειάζεται)"
 
 #: main/models.py:105
 msgid "public"
-msgstr "publique"
+msgstr "δημόσιο"
 
 #: main/models.py:107
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
-msgstr "Cocher pour permettre à n'importe quel utilisateur d'ajouter un hôte dynamique à cette zone - Sinon, seul le propriétaire sera autoriser à le faire"
+msgstr "Επιλέξτε για να επιτρέψετε σε οποιονδήποτε χρήστη να προσθέτει δυναμικούς hosts σε αυτή την ζώνη - αν όχι, θα επιτρέψουμε μόνο στον ιδιοκτήτη να προσθέτει hosts"
 
 #: main/models.py:112 main/models.py:175 main/models.py:386
 msgid "available"
-msgstr "En ligne"
+msgstr "διαθέσιμο"
 
 #: main/models.py:114
 msgid ""
 "Check if nameserver is available/reachable - if not checked, we'll pause "
 "querying/updating this nameserver for a while"
-msgstr "Cocher si le serveur DNS est en ligne - Sinon, nous mettrons en pause les mises à jour pendant quelque temps"
+msgstr "Επιλέξτε αν ο nameserver είναι διαθέσιμος/προσβάσιμος - αν όχι, θα σταματήσουμε τα ερωτήματα/ενημερώσεις του namesarver για λίγο"
 
 #: main/models.py:117 main/models.py:166 main/models.py:371 main/models.py:437
 #: main/models.py:483
 msgid "comment"
-msgstr "Commentaire"
+msgstr "σχόλιο"
 
 #: main/models.py:120
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will be also publicly shown."
-msgstr "Commentaire à propos de votre domaine. Si votre domaine est publique, le commentaire le sera aussi."
+msgstr "Ένα οποιοδήποτε σχόλιο για τον τομέα σας. Αν ο τομέας σας είναι δημόσιος, το σχόλιο επίσης θα εμφανίζεται δημόσια."
 
 #: main/models.py:144 main/models.py:160
 msgid "domain"
-msgstr "Domaine"
+msgstr "τομέας"
 
 #: main/models.py:145
 msgid "domains"
-msgstr "Domaines"
+msgstr "τομείς"
 
 #: main/models.py:159
 msgid "The name of your host."
-msgstr "Le nom de votre hôte."
+msgstr "Το όνομα του host σας."
 
 #: main/models.py:162
 msgid "update secret"
-msgstr "mise à jour de la clé"
+msgstr "μυστικός κωδικός ενημέρωσης"
 
 #: main/models.py:169 main/models.py:374
 msgid ""
 "Some arbitrary comment about your host, e.g  who / what / where this host is"
-msgstr "Commentaire à propos de votre hôte ; Ex: Qui / Quoi / Où"
+msgstr "Ένα οποιοδήποτε σχόλιο για τον host σας, π.χ. ποιος / τι /που είναι αυτός ο host"
 
 #: main/models.py:177 main/models.py:388
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
-msgstr "Cocher si l'hôte est en ligne - Sinon, nous n'accepterons pas de mise à jour pour cet hôte"
+msgstr "Επιλέξτε αν ο host είναι διαθέσιμος/σε χρήση - αν όχι, δεν θα δεχόμαστε ενημερώσεις γι' αυτόν τον host"
 
 #: main/models.py:180
 msgid "netmask IPv4"
-msgstr "netmask IPv4"
+msgstr "μασκα δικτύου IPv4"
 
 #: main/models.py:182
 msgid "Netmask/Prefix length for IPv4."
-msgstr "Masque de sous-réseau IPv4"
+msgstr "Μασκα δικτύου / Μήκος προθέματος για IPv4."
 
 #: main/models.py:184
 msgid "netmask IPv6"
-msgstr "netmask IPv6"
+msgstr "μασκα δικτύου IPv6"
 
 #: main/models.py:186
 msgid "Netmask/Prefix length for IPv6."
-msgstr "Masque de sous-réseau IPv6"
+msgstr "Μασκα δικτύου / Μήκος προθέματος για IPv6."
 
 #: main/models.py:195
 msgid "abuse"
-msgstr "Abus"
+msgstr "κατάχρηση"
 
 #: main/models.py:197
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
-msgstr "Coché si nous pensons qu'il y a abus du service - Vous pouvez le décocher APRES avoir réglé tous les problèmes de votre côté"
+msgstr "Επιλεγμένο αν πιστεύουμε ότι κάνετε κατάχρηση της υπηρεσίας - μπορείτε να το αποεπιλέξετε ΑΦΟΤΟΥ διορθώσετε όλα τα προβλήματα από πλευρά σας"
 
 #: main/models.py:202
 msgid "abuse blocked"
-msgstr "Abus-Bloqué"
+msgstr "μπλοκαρισμένο λόγω κατάχρησης"
 
 #: main/models.py:204
 msgid "Checked to block a host for abuse."
-msgstr "Coché pour bloquer un hôte pour abus."
+msgstr "Επιλεγμένο για να μπλοκάρει έναν host για κατάχρηση."
 
 #: main/models.py:208
 msgid "client faults"
-msgstr "erreurs client"
+msgstr "σφάλματα πελάτη"
 
 #: main/models.py:210
 msgid "client result msg"
-msgstr "msg client"
+msgstr "μήνυμα αποτελέσματος πελάτη"
 
 #: main/models.py:213
 msgid "Latest result message relating to the client"
-msgstr "Dernier message reçu du client"
+msgstr "Τελευταίο μήνυμα αποτελέσματος σχετικά με τον πελάτη"
 
 #: main/models.py:216
 msgid "server faults"
-msgstr "erreurs serveur"
+msgstr "σφάλματα διακομιστή"
 
 #: main/models.py:218
 msgid "server result msg"
-msgstr "msg serveur"
+msgstr "μήνυμα αποτελέσματος εξυπηρετητή"
 
 #: main/models.py:221
 msgid "Latest result message relating to the server"
-msgstr "Dernier message reçu du serveur"
+msgstr "Τελευταίο μήνυμα αποτελέσματος σχετικά με τον εξυπηρετητή"
 
 #: main/models.py:224
 msgid "api auth faults"
-msgstr "erreur lors de l'authentification api"
+msgstr "σφάλματα API επικύρωσης "
 
 #: main/models.py:226
 msgid "api auth result msg"
-msgstr "msg d'authentification api"
+msgstr "καταληκτικό μήνυμα API επικύρωσης"
 
 #: main/models.py:229
 msgid "Latest result message relating to api authentication"
-msgstr "Dernier message lors de l’authentification api"
+msgstr "Πρόσφατο καταληκτικό μήνυμα σχετικά με το API επικύρωσης"
 
 #: main/models.py:232
 msgid "last update IPv4"
-msgstr "Dernière mise à jour IPv4"
+msgstr "τελευταία ενημέρωση IPv4"
 
 #: main/models.py:233
 msgid "last update IPv6"
-msgstr "Dernière mise à jour IPv6"
+msgstr "τελευταία ενημέρωση IPv6"
 
 #: main/models.py:235
 msgid "TLS update IPv4"
-msgstr "Mise à jour TLS IPv4"
+msgstr "ενημέρωση TLS IPv4"
 
 #: main/models.py:236
 msgid "TLS update IPv6"
-msgstr "Mise à jour TLS IPv6"
+msgstr "ενημέρωση TLS IPv6"
 
 #: main/models.py:249 main/models.py:506
 msgid "host"
-msgstr "hôte"
+msgstr "host"
 
 #: main/models.py:250
 msgid "hosts"
-msgstr "hôtes"
+msgstr "hosts"
 
 #: main/models.py:369
 msgid "The name of a host in same network as your main host."
-msgstr "Le nom d'un hôte figurant dans le même réseau que votre hôte principal."
+msgstr "Το όνομα ενός host στο ίδιο δίκτυο με τον κύριο σας host."
 
 #: main/models.py:376
 msgid "interface ID IPv4"
-msgstr "interface réseau IPv4"
+msgstr "ID διεπαφής IPv4"
 
 #: main/models.py:379
 msgid "The IPv4 interface ID of this host. Use IPv4 notation."
-msgstr "L'interface réseau IPv4 de cet hôte. "
+msgstr "Το IPv4 ID διεπαφής αυτού του host. Χρησιμοποιείστε IPv4 σημειολογία."
 
 #: main/models.py:381
 msgid "interface ID IPv6"
-msgstr "interface réseau IPv6"
+msgstr "ID διεπαφής IPv6"
 
 #: main/models.py:384
 msgid "The IPv6 interface ID of this host. Use IPv6 notation."
-msgstr "L'interface réseau IPv6 de cet hôte. "
+msgstr "Το IPv6 ID διεπαφής αυτού του host. Χρησιμοποιείστε IPv6 σημειολογία."
 
 #: main/models.py:395
 msgid "main host"
-msgstr "Hôte principal"
+msgstr "κύριος host"
 
 #: main/models.py:403
 msgid "related host"
-msgstr "hôte correspondant"
+msgstr "σχετιζόμενος host"
 
 #: main/models.py:404
 msgid "related hosts"
-msgstr "hôte correspondant"
+msgstr "σχετιζόμενοι hosts"
 
 #: main/models.py:435
 msgid "Service name"
-msgstr "Nom du service"
+msgstr "Όνομα υπηρεσίας"
 
 #: main/models.py:440
 msgid "Some arbitrary comment about the service"
-msgstr "Commentaire à propos du service"
+msgstr "Ένα οποιοδήποτε σχόλιο για αυτή την υπηρεσία"
 
 #: main/models.py:442
 msgid "server"
-msgstr "serveur"
+msgstr "διακομιστής"
 
 #: main/models.py:444
 msgid "Update Server [name or IP] of this service"
-msgstr "[Nom ou IP] du serveur de mise à jour du service"
+msgstr "Server Ενημέρωσης [όνομα ή IP] αυτής της υπηρεσίας"
 
 #: main/models.py:446
 msgid "path"
-msgstr "chemin"
+msgstr "διαδρομή"
 
 #: main/models.py:449
 msgid "Update Server URL path of this service"
-msgstr "URL de mise à jour du service"
+msgstr "Διαδρομή URL Server Ενημέρωσης αυτής της υπηρεσίας"
 
 #: main/models.py:451
 msgid "secure"
-msgstr "sécurisé"
+msgstr "Ασφαλής"
 
 #: main/models.py:453
 msgid "Use https / TLS to contact the Update Server?"
-msgstr "Utiliser https / TLS pour joindre le serveur de mise à jour ?"
+msgstr "Χρήση https / TLS για επικοινωνία με τον Sever Ενημέρωσης;"
 
 #: main/models.py:456
 msgid "accept IPv4"
-msgstr "accepte l'IPv4"
+msgstr "αποδοχή IPv4"
 
 #: main/models.py:457
 msgid "accept IPv6"
-msgstr "accepte l'IPv6"
+msgstr "αποδοχή IPv6"
 
 #: main/models.py:470
 msgid "service updater"
-msgstr "service de mise à jour"
+msgstr "σύστημα ενημέρωσης υπηρεσίας"
 
 #: main/models.py:471
 msgid "service updaters"
-msgstr "services de mise à jour"
+msgstr "συστήματα ενημέρωσης υπηρεσίας"
 
 #: main/models.py:475
 msgid "service"
-msgstr "service"
+msgstr "υπηρεσία"
 
 #: main/models.py:478
 msgid "hostname"
-msgstr "Nom d'hôte"
+msgstr "hostname"
 
 #: main/models.py:481
 msgid "The hostname for that service (used in query string)"
-msgstr "Le nom d'hôte pour ce service (utilisé dans l'URL pour la mise à jour)"
+msgstr "Το όνομα του host για αυτή την υπηρεσία (χρησιμοποιείται σε αλφαριθμητικό αναζήτησης ερωτήματος)"
 
 #: main/models.py:486
 msgid "Some arbitrary comment about your host on that service"
-msgstr "Commentaire à propos de votre hôte pour ce service"
+msgstr "Ένα οποιοδήποτε σχόλιο για τον host σας σε αυτή την υπηρεσία"
 
 #: main/models.py:492
 msgid "The name/id for that service (used for http basic auth)"
-msgstr "Le nom/id de ce service (utilisé pour l'authentification http)"
+msgstr "Το όνομα/αναγνωριστικό για αυτήν την υπηρεσία (χρησιμοποιείται για βασική ταυτοποίηση http)"
 
 #: main/models.py:494
 msgid "password"
-msgstr "mot de passe"
+msgstr "κωδικός"
 
 #: main/models.py:496
 msgid "The password/secret for that service (used for http basic auth)"
-msgstr "Le mot de passe de ce service (utilisé pour l'authentification http)"
+msgstr "Ο κωδικός/μυστικό για αυτήν την υπηρεσία (χρησιμοποιείται για βασική ταυτοποίηση http)"
 
 #: main/models.py:499
 msgid "give IPv4"
-msgstr "donner l'IPV4"
+msgstr "δώστε IPv4"
 
 #: main/models.py:500
 msgid "give IPv6"
-msgstr "donner l'IPV6"
+msgstr "δώστε IPv6"
 
 #: main/models.py:519
 msgid "service updater host config"
-msgstr "configuration du service de mise à jour"
+msgstr "αρχείο παραμέτρων του host για τον updater της υπηρεσίας"
 
 #: main/models.py:520
 msgid "service updater host configs"
-msgstr "configurations des services de mise à jour"
+msgstr "αρχεία παραμέτρων του host για τον updater της υπηρεσίας"
 
 #: main/templates/main/about.html:6
 #, python-format
 msgid "About the %(WWW_HOST)s service"
-msgstr "A propos du service %(WWW_HOST)s"
+msgstr "Σχετικά με την %(WWW_HOST)s υπηρεσία"
 
 #: main/templates/main/about.html:8
 msgid "What's this?"
-msgstr "Qu'est-ce que c'est ?"
+msgstr "Τι είναι αυτό;"
 
 #: main/templates/main/about.html:10
 #, python-format
 msgid "%(WWW_HOST)s is a <b>dynamic dns service</b>."
-msgstr "%(WWW_HOST)s est un <b>service de DNS dynamique</b>."
+msgstr "%(WWW_HOST)s είναι μια <b>δυναμική υπηρεσία DNS</b>."
 
 #: main/templates/main/about.html:13
 msgid ""
 "You usually need it so your router (or other dyndns2-compatible client) can "
 "update a hostname, so you don't need to know or find out your current IP "
 "address."
-msgstr "Il est généralement utile pour que votre routeur (ou tout autre client compatible dyndns2) puisse mettre à jour un nom de domaine ; Ainsi vous n'aurez plus besoin de connaitre ou de trouver votre adresse IP."
+msgstr "Συνήθως το χρειάζεστε ώστε το router σας (ή άλλος συμβατός με dyndns2 client) να μπορεί να ενημερώνει ένα όνομα host, ώστε να μην χρειάζεται να γνωρίζετε ή να πρέπει να βρείτε την τρέχουσα εξωτερική IP σας.  "
 
 #: main/templates/main/about.html:20
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr "%(WWW_HOST)s est <b> simple, utile, gratuit, facile, sécurisé et respectueux de votre vie privée</b>."
+msgstr "%(WWW_HOST)s είναι <b>απλό, χρήσιμο, δωρεάν, φιλικό, ασφαλή και σέβεται το προσωπικό σας απόρρητο </b>."
 
 #: main/templates/main/about.html:26
 msgid "Why another one?"
-msgstr "Pourquoi pas un autre ?"
+msgstr "Γιατί ακόμη ένας;"
 
 #: main/templates/main/about.html:28
 msgid "As far as we know, there was no service yet that is <em>not</em>:"
-msgstr "A notre connaissance, peu propose ce type de service <em>sans</em>:"
+msgstr "Απ' όσο ξέρουμε, δεν υπήρχε καμία υπηρεσία ακόμα που <em>δεν</em>:"
 
 #: main/templates/main/about.html:31
 msgid "nagging its users to make a paid subscription"
-msgstr "Harceler ses utilisateurs pour s'abonner à un compte payant"
+msgstr "παρενοχλεί τους χρηστές να γίνουν επί πληρωμή συνδρομητές"
 
 #: main/templates/main/about.html:32
 msgid "annoying its users with advertisements or spam"
-msgstr "Harceler ses utilisateurs avec du spam et de la publicité"
+msgstr "εκνευρίζοντας τους χρήστες της με διαφημίσεις και spam"
 
 #: main/templates/main/about.html:33
 msgid "cancelling hosts or accounts after a short period of non-usage"
-msgstr "Annuler des hôtes ou des comptes après une courte période sans utilisation"
+msgstr "ακυρώνοντας hosts ή λογαριασμούς μετά από μικρά διαστήματα μη-χρήσης"
 
 #: main/templates/main/about.html:35
 msgid ""
 "hiding the few free features almost undiscoverably between a ton of "
 "commercial-only features"
-msgstr "Cacher le peu de fonctions gratuites au milieu d'un tone de fonctions payantes"
+msgstr "κρύβοντας τις ελάχιστες δωρεάν λειτουργίες, δύσκολα να τις εντοπίσεις, ανάμεσα σε άπειρες εμπορικά διαθέσιμες μόνο δυνατότητες  "
 
 #: main/templates/main/about.html:42
 msgid "How is it?"
-msgstr "Comment ça marche ?"
+msgstr "Πως είναι;"
 
 #: main/templates/main/about.html:44
 msgid "You can just try it using the test account (see Register page)."
-msgstr "Vous pouvez le tester en utilisant le compte \"test\" (Voir page d'enregistrement)."
+msgstr "Μπορείς απλά να το δοκιμάσεις χρησιμοποιώντας τον test λογαριασμό (δες σελίδα Εγγραφής)"
 
 #: main/templates/main/about.html:47
 msgid ""
@@ -715,162 +714,162 @@ msgid ""
 "docs in new window\" target=\"_blank\">documentation</a> &mdash; there might"
 " be some interesting stuff for you in it that is not visible or obvious on "
 "the user interface."
-msgstr "Vous trouverez aussi toute la\t<a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open docs in new window\" target=\"_blank\">documentation</a> &mdash; Vous pourrez y trouver des informations intéressantes qui ne sont pas visible depuis l'interface utilisateur."
+msgstr "Επίσης, υπάρχει <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open docs in new window\" target=\"_blank\">εγχειρίδιο</a> &mdash; όπου μπορεί να υπάρχουν μερικά ενδιαφέροντα πράγματα για εσένα σε αυτό που να μην είναι ορατά ή προφανή στην διεπαφή χρήστη."
 
 #: main/templates/main/about.html:56
 msgid ""
 "If you are interested in the software project, have a look at the <a "
 "href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info "
 "project on GitHub</a>."
-msgstr "Si vous êtes intéressés par le projet, jetez un oeil <a href=\"https://github.com/nsupdate-info/nsupdate.info\">au projet nsupdate.info sur GitHub</a>."
+msgstr "Αν σε ενδιαφέρει το project του λογισμικού, ρίξε μια ματιά στο <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project στο GitHub</a>."
 
 #: main/templates/main/about.html:65
 msgid "Fair use of the service"
-msgstr "Utilisation sans abus"
+msgstr "Τίμια χρήση της υπηρεσίας"
 
 #: main/templates/main/about.html:67
 msgid "The only thing we expect from you is fair use of this service:"
-msgstr "La seule chose que nous attendons de vous est une utilisation sans abus :"
+msgstr "Το μόνο πράγμα που προσδοκούμε από εσένα είναι η τίμια χρήση της υπηρεσίας:"
 
 #: main/templates/main/about.html:70
 msgid "Don't abuse the service in any way."
-msgstr "N'en abusez pas d'une façon ou d'une autre."
+msgstr "Μην κάνεις κατάχρηση της υπηρεσία με οποιονδήποτε τρόπο."
 
 #: main/templates/main/about.html:71
 msgid "Don't update your hosts too often."
-msgstr "Ne mettez pas à jour vos hôtes trop souvent."
+msgstr "Μην ενημερώνεις τους hosts σου υπερβολικά συχνά."
 
 #: main/templates/main/about.html:72
 msgid "Don't do updates if your IP did not change."
-msgstr "Il n'est pas utile de mettre à jour si votre IP n'a pas changé."
+msgstr "Μην πραγματοποιείς ενημερώσεις της IP σου αν αυτή δεν έχει αλλάξει."
 
 #: main/templates/main/about.html:73
 msgid "Don't create lots of users or lots of hosts."
-msgstr "Ne créez pas 10 000 utilisateurs or hôtes."
+msgstr "Μην δημιουργείς πολλούς χρήστες ή πολλούς hosts."
 
 #: main/templates/main/about.html:74
 msgid ""
 "Don't use the service for any illegal or otherwise questionable purpose."
-msgstr "N'utilisez pas ce service pour des activités illégales ou à caractère préjudiciable."
+msgstr "Μην χρησιμοποιείς την υπηρεσία για παράνομους ή γενικά ύποπτους σκοπούς."
 
 #: main/templates/main/about.html:75
 msgid "Don't spam us via e-mail."
-msgstr "Ne nous spammer pas avec des e-mail."
+msgstr "Μην μας spam-άρεις με e-mail."
 
 #: main/templates/main/about.html:78
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are related "
 "to unfair use of the service - at any time and without prior notice."
-msgstr "Nous nous réservons le droit de supprimer un compte ou un hôte qui ne respecte pas une utilisation sans abus - à n'importe quel moment et sans notification."
+msgstr "Διατηρούμε το δικαίωμα να αφαιρέσουμε όποιον λογαριασμό ή hostname(s) που σχετίζονται με κατάχρηση της υπηρεσίας - σε οποιαδήποτε στιγμή και χωρίς προειδοποίηση."
 
 #: main/templates/main/about.html:85
 msgid "No warranties"
-msgstr "Pas de garantie"
+msgstr "Χωρίς εγγυήσεις"
 
 #: main/templates/main/about.html:87
 msgid "This is free software and a free service, there are no warranties."
-msgstr "Ce service reste un logiciel gratuit avec une utilisation gratuite. Difficile d'avoir des garanties."
+msgstr "Αυτό είναι ένα δωρεάν λογισμικό και δωρεάν υπηρεσία, δεν υπάρχουν εγγυήσεις."
 
 #: main/templates/main/about.html:90
 msgid "If it breaks, it breaks."
-msgstr "Si ça plante, ça plante."
+msgstr "Αν χαλάσει, χάλασε."
 
 #: main/templates/main/about.html:94
 msgid "Service Contact"
-msgstr "Information de contact"
+msgstr "Επαφή επικοινωνίας της Υπηρεσίας"
 
 #: main/templates/main/about.html:99
 msgid ""
 "Before contacting us via E-Mail, please read the docs, they exist for a "
 "reason."
-msgstr "Avant de nous contacter par mail, lisez la doc s.v.p ; Elle existe pour une bonne raison."
+msgstr "Πριν επικοινωνήσετε μαζί μας μέσω E-Mail, παρακαλούμε διαβάστε τα εγχειρίδια, υπάρχουν για κάποιον λόγο."
 
 #: main/templates/main/about.html:101
 msgid "Software Project Contact"
-msgstr "Contact du projet"
+msgstr "Επαφή επικοινωνίας του Project Λογισμικού"
 
 #: main/templates/main/about.html:103
 msgid ""
 "Visit the <a href=\"https://github.com/nsupdate-"
 "info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
-msgstr "Allez sur <a href=\"https://github.com/nsupdate-info/nsupdate.info\">le projet nsupdate.info sur GitHub</a> pour :"
+msgstr "Επισκεφθείτε το <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info project on GitHub</a> στο:"
 
 #: main/templates/main/about.html:109
 msgid "file issues on the issue tracker for bugs, ideas, patches."
-msgstr "<em>Issues</em> pour les bugs, idées ou patch."
+msgstr "υποβάλετε ζητήματα στον επιτηρητή ζητημάτων για bugs, ιδέες, διορθώσεις. "
 
 #: main/templates/main/about.html:110
 msgid "create pull requests for your contributions."
-msgstr "créer un <em>pull request</em> pour votre contributions."
+msgstr "δημιουργήστε μια αίτηση λήψης για να συνεισφέρετε. "
 
 #: main/templates/main/delete_object.html:7
 #, python-format
 msgid "Delete %(object)s"
-msgstr "Supprimer  %(object)s"
+msgstr "Διαγραφή %(object)s"
 
 #: main/templates/main/delete_object.html:10
 #, python-format
 msgid "Are you sure you want to delete \"%(object)s\"?"
-msgstr "Etes vous sur de vouloir supprimer \"%(object)s\"?"
+msgstr "Θέλετε σίγουρα να διαγράψετε το \"%(object)s\";"
 
 #: main/templates/main/domain.html:8
 msgid "Edit Domain"
-msgstr "Editer le domaine"
+msgstr "Μεταβολή Τομέα"
 
 #: main/templates/main/domain.html:9
 msgid ""
 "You can't change the domain name. If you want to have another domain name, "
 "you have to delete this domain and create a new one."
-msgstr "Vous ne pouvez pas modifier le nom de domaine. Si vous souhaitez avoir un autre nom de domaine, vous devez supprimer celui-ci et en créer un nouveau."
+msgstr "Δεν μπορείτε να αλλάξετε το όνομα τομέα. Εάν θέλετε να έχετε διαφορετικό όνομα τομέα, θα πρέπει να διαγράψετε αυτόν τον τομέα και να δημιουργήσετε ένα νέο."
 
 #: main/templates/main/domain.html:11
 msgid ""
 "Please note that update algorithm and update secret need to match. Just "
 "create a new secret after submitting this form with a changed update "
 "algorithm."
-msgstr "N'oubliez pas s.v.p que l'algorithme de mise à jour et la clé de mise à jour doit correspondre. Créez une nouvelle clé après avoir soumis ce formulaire avec un nouvel algorithme de mise à jour."
+msgstr "Παρακαλώ σημειώστε ότι ο αλγόριθμος ενημέρωσης και το μυστικό ενημέρωσης πρέπει να ταιριάζουν. Απλά δημιουργήστε ένα νέο μυστικό αφού υποβάλετε αυτή την φόρμα με αλλαγμένο αλγόριθμο ενημέρωσης."
 
 #: main/templates/main/domain.html:19 main/templates/main/host.html:12
 #: main/templates/main/host.html.py:73 main/templates/main/host.html:86
 #: main/templates/main/related_host.html:12
 #: main/templates/main/updater_hostconfig.html:12
 msgid "Update"
-msgstr "Mise à jour"
+msgstr "Ενημέρωση"
 
 #: main/templates/main/domain.html:23 main/templates/main/domain.html.py:37
 #: main/templates/main/host.html:23 main/templates/main/host.html.py:37
 msgid "Show Configuration"
-msgstr "Afficher la configuration"
+msgstr "Προβολή Παραμετροποίησης"
 
 #: main/templates/main/domain.html:25
 msgid ""
 "We'll generate a ready-to-use configuration for your name server, filled out"
 " with all values (including a new secret)."
-msgstr "Nous générerons une nouvelle configuration pour votre serveur, remplissez tous les champs (ainsi qu'une nouvelle clé)."
+msgstr "Θα δημιουργήσουμε μια έτοιμη-προς-χρήση παραμετροποίηση για τον nameserver σας, συμπληρωμένη με όλες τις παραμέτρους (συμπεριλαμβανομένου και του νέου μυστικού)."
 
 #: main/templates/main/domain.html:31
 msgid ""
 "We'll create a new shared secret - if you had one before, it will become "
 "invalid. You have to use the new secret in your name server configuration."
-msgstr "Nous créerons un nouvelle clé - Si vous en aviez précédemment un, il deviendra invalide. Vous devrez utilisez la nouvelle clé pour la configuration de votre serveur."
+msgstr "Θα δημιουργήσουμε ένα νέο κοινόχρηστο μυστικό - εάν είχατε κάποιο πριν, θα ακυρωθεί. Θα πρέπει να χρησιμοποιήσετε το νέο μυστικό στην παραμετροποίηση του nameserver σας."
 
 #: main/templates/main/domain.html:39 main/templates/main/domain.html.py:44
 msgid "Delete Domain"
-msgstr "Supprimer le domaine"
+msgstr "Διαγραφή Τομέα"
 
 #: main/templates/main/domain.html:41
 msgid ""
 "Deleting a domain is not undoable. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
-msgstr "Aucun retour arrière après avoir supprimer un domaine. Si vous en avez à nouveau besoin, vous devrez le recréer et configurer une nouvelle clé."
+msgstr "Η διαγραφή τομέα είναι μη αναστρέψιμη. Αν τον χρειαστείτε ξανά, θα πρέπει να τον προσθέσετε εκ νέου και να ρυθμίσετε ένα νέο κοινόχρηστο μυστικό."
 
 #: main/templates/main/domain_add.html:8
 msgid "Add a new Domain"
-msgstr "Ajouter un nouveau domaine"
+msgstr "Προσθήκη νέου Τομέα"
 
 #: main/templates/main/domain_add.html:12
 msgid "Add"
-msgstr "Ajouter"
+msgstr "Προσθήκη"
 
 #: main/templates/main/domain_add.html:18 main/templates/main/host_add.html:18
 #: main/templates/main/related_host.html:23
@@ -878,173 +877,173 @@ msgstr "Ajouter"
 #: main/templates/main/updater_hostconfig.html:24
 #: main/templates/main/updater_hostconfig_overview.html:47
 msgid "Help"
-msgstr "Aide"
+msgstr "Βοήθεια"
 
 #: main/templates/main/domain_add.html:20
 msgid ""
 "Here you can add new domains (zones) which you control (and this is only "
 "useful if you have some own zone which you can update automatically)."
-msgstr "Ici, vous pouvez ajouter de nouveau nom de domaine (zones) que vous contrôlez (ceci n'est utile que si vous avez votre propre zone qui peut être mis à jour automatiquement)."
+msgstr "Εδώ μπορείτε να προσθέσετε νέους τομείς (ζώνες) υπό τον έλεγχό σας (και αυτό είναι χρήσιμο μόνο αν έχετε κάποια δική σας ζώνη την οποία μπορείτε να ενημερώνετε αυτόματα)."
 
 #: main/templates/main/domain_add.html:26
 msgid ""
 "You need to be able to configure the primary master nameserver of the zone "
 "so it accepts dynamic updates (via RFC 2136 \"dynamic update\" protocol) if "
 "the correct update secret is presented."
-msgstr "Vous devez être en mesure de configurer votre serveur DNS primaire afin que la zone accepte des mises à jour automatique (via RFC 2136, <em>dynamic update protocol</em>) si la bonne clé de mise à jour est envoyée."
+msgstr "Θα πρέπει να είστε σε θέση να ρυθμίσετε τον πρωτεύον κύριο nameserver της ζώνης ώστε να δέχεται δυναμικές ενημερώσεις (κατά το RFC 2136 \"dynamic update\" πρωτόκολλο). "
 
 #: main/templates/main/domain_add.html:32
 msgid "We'll show you configuration examples after you add a domain."
-msgstr "Nous vous donnerons un exemple de configuration après l'ajout d'un domaine."
+msgstr "Θα σας δείξουμε παραδείγματα παραμετροποίησης αφότου προσθέσετε έναν τομέα."
 
 #: main/templates/main/generate_ns_secret.html:8
 msgid "Nameserver Shared Secret Generated"
-msgstr "Clé partagée du serveur DNS générée"
+msgstr "Δημιουργήθηκε Κοινόχρηστο Μυστικό Nameserver"
 
 #: main/templates/main/generate_ns_secret.html:9
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
-msgstr "Une nouvelle clé partagée a été générée. A chaque fois que vous visitez cette page, une nouvelle clé sera générée et l'ancienne deviendra invalide."
+msgstr "Το νέο κοινόχρηστο μυστικό του nameserver έχει δημιουργηθεί για εσάς. Κάθε φορά που επισέπτεστε αυτή την σελίδα ένα νέο μυστικό θα δημιουργείται και το παλιό θα ακυρώνεται."
 
 #: main/templates/main/generate_ns_secret.html:10
 msgid "Algorithm:"
-msgstr "Algorithme:"
+msgstr "Αλγόριθμος:"
 
 #: main/templates/main/generate_ns_secret.html:11
 #: main/templates/main/generate_secret.html:16
 msgid "Secret:"
-msgstr "Clé:"
+msgstr "Μυστικό:"
 
 #: main/templates/main/generate_ns_secret.html:18
 msgid "How to configure your bind9 nameserver to accept dynamic DNS updates?"
-msgstr "Comment configurer votre serveur Bind9 pour qu'il accepte des mise à jour dynamique de DNS?"
+msgstr "Πως να ρυθμίσετε τον bind9 nameserver σας να δέχεται δυναμικές ενημερώσεις DNS?"
 
 #: main/templates/main/generate_secret.html:8
 msgid "Host Secret Generated"
-msgstr "Clé d'hôte générée"
+msgstr " Δημιουργήθηκε Μυστικό του Host"
 
 #: main/templates/main/generate_secret.html:10
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
 "have to generate a new one again. Everytime you visit this page a new secret"
 " will be generated and the old one becomes invalid."
-msgstr "Nouvelle clé généré pour vous. Nous l'avons stocké <em>hashé</em> ; Sauvegardez là maintenant ou vous devez en générer une nouvelle. A chaque visite sur cette page, une nouvelle clé sera générée et l'ancienne deviendra invalide."
+msgstr "Ένα νέο μυστικό δημιουργήθηκε για εσάς. Το αποθηκεύουμε τεμαχισμένο, οπότε σώστε το τώρα, διαφορετικά θα πρέπει να δημιουργήσετε ένα νέο πάλι. Κάθε φορά που επισκέπτεστε αυτή την σελίδα ένα νέο μυστικό θα δημιουργείται και το παλιό θα ακυρώνεται."
 
 #: main/templates/main/generate_secret.html:21
 msgid "How to configure automated dynamic DNS updates?"
-msgstr "Comment configurer une mise à jour automatique d'un DNS dynamique?"
+msgstr "Πως να ρυθμίσετε αυτοματοποιημένες δυναμικές ενημερώσεις DNS?"
 
 #: main/templates/main/home.html:12
 msgid "Your current IP(s) + reverse DNS:"
-msgstr "Votre IP(s) actuelle + DNS inversé:"
+msgstr "Η τρέχουσα IP(s) + ανεστραμένη DNS:"
 
 #: main/templates/main/home.html:21
 msgid "the Dynamic DNS service you waited for."
-msgstr "le service de DNS dynamique que vous avez attendu."
+msgstr "η υπηρεσία Δυναμικού DNS που περιμένατε."
 
 #: main/templates/main/home.html:25
 msgid "Free and Nice"
-msgstr "Gratuit et agréable"
+msgstr "Δωρεάν και Καλή"
 
 #: main/templates/main/home.html:27
 msgid "is a free service."
-msgstr "est un service gratuit."
+msgstr "είναι μια δωρεάν υπηρεσία."
 
 #: main/templates/main/home.html:28
 msgid "Also, we won't annoy you with ads or spam."
-msgstr "Nous ne vous harcèlerons pas non plus avec de la pub ou du spam."
+msgstr "Επίσης, δεν θα σας ενοχλούμε με διαφημίσεις και spam."
 
 #: main/templates/main/home.html:33
 msgid "Free and Open Source"
-msgstr "Gratuit et Open Source"
+msgstr "Δωρεάν και Ανοιχτού Κώδικα"
 
 #: main/templates/main/home.html:35
 msgid "nsupdate.info is free and open-source software."
-msgstr "nsupdate.info est un logiciel gratuit et open-source."
+msgstr "Το nsupdate.info είναι δωρεάν και ελεύθερο λογισμικό."
 
 #: main/templates/main/home.html:38
 msgid "nsupdate.info project on GitHub"
-msgstr "Le projet nsupdate.info sur GitHub"
+msgstr "το nsupdate.info project στο GitHub"
 
 #: main/templates/main/home.html:43
 msgid "Awesome Code"
-msgstr "<em>Awesome</em> Code"
+msgstr "Φανταστικός Κώδικας"
 
 #: main/templates/main/home.html:45
 msgid ""
 "Empowered by Python and Django,<br> we love to write clean and secure code."
-msgstr "Développer avec Python et Django,<br> nous adorons écrire du code <em>\"propre\"</em> et sécurisé."
+msgstr "Με την δύναμη της Python και του Django,<br> αγαπάμε να γράφουμε καθαρό και ασφαλή κώδικα."
 
 #: main/templates/main/host.html:8
 msgid "Edit Host"
-msgstr "Editer l'hôte"
+msgstr "Διαμόρφωση Host"
 
 #: main/templates/main/host.html:14 main/templates/main/host.html.py:19
 msgid "Delete Host"
-msgstr "Supprimer l'hôte"
+msgstr "Διαγραφή Host"
 
 #: main/templates/main/host.html:16
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
-msgstr "Aucun retour arrière après la supprimer d'un hôte. Si vous en avez à nouveau besoin, vous devrez le recréer et configurer une nouvelle clé de mise à jour."
+msgstr "Η διαγραφή ενός host είναι μη αναστρέψιμη. Αν τον χρειαστείτε ξανά, θα πρέπει να τον προσθέσετε εκ νέου και να ρυθμίσετε ένα νέο κοινόχρηστο μυστικό."
 
 #: main/templates/main/host.html:25
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update client,"
 " filled out with all values (including a new secret)."
-msgstr "Nous générerons une configuration <em>prêt-à-l'emploi</em> pour votre routeur / client de mise à jour incluant toutes les informations nécessaires (nouvelle clé comprise)."
+msgstr "Θα δημιουργήσουμε μια έτοιμη-προς-χρήση παραμετροποίηση για τον router / πελάτη ενημέρωσής σας, συμπληρωμένη με όλες τις παραμέτρους (συμπεριλαμβανομένου και του νέου μυστικού)."
 
 #: main/templates/main/host.html:31
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid. "
 "You have to use the new secret in your router / update client configuration."
-msgstr "Nous créerons une nouvelle clé - Si vous en aviez une avant, elle deviendra invalide. Vous devez utiliser la nouvelle clé pour la configuration de votre routeur / logiciel de mise à jour."
+msgstr "Θα δημιουργήσουμε ένα νέο κοινόχρηστο μυστικό - εάν είχατε κάποιο πριν, θα ακυρωθεί. Θα πρέπει να χρησιμοποιήσετε το νέο μυστικό στην παραμετροποίηση του router / πελάτη ενημέρωσής σας."
 
 #: main/templates/main/host.html:39
 msgid "Related Hosts"
-msgstr "Hôtes"
+msgstr "Σχετιζόμενοι Hosts"
 
 #: main/templates/main/host.html:41
 msgid ""
 "We can update additional host records (for other hosts in same network) when"
 " we receive an update for this host."
-msgstr "Nous pouvons mettre à jour des hôtes supplémentaires (figurant sur le même réseau) lorsque nous recevons une mise à jour pour cet hôte"
+msgstr "Μπορούμε να ενημερώσουμε επιπλέον εγγραφές host (για άλλους hosts στο ίδιο δίκτυο) όταν λάβουμε μια ενημέρωση γι' αυτόν τον host."
 
 #: main/templates/main/host.html:47
 msgid "Configure related Hosts"
-msgstr "Configurer hôtes"
+msgstr "Παραμετροποίηση σχετιζόμενων Hosts"
 
 #: main/templates/main/host.html:49
 msgid "Update other Services"
-msgstr "Mise à jour des autres Services"
+msgstr "Ενημέρωση άλλων Υπηρεσιών"
 
 #: main/templates/main/host.html:50
 msgid ""
 "We can send updates to other services when we receive an update from you."
-msgstr "Nous pouvons envoyer des mises à jour à d'autres services lorsque nous recevons une mise à jour venant de vous."
+msgstr "Μπορούμε να στέλνουμε ενημερώσεις σε άλλες υπηρεσίες όταν λαμβάνουμε μια ενημέρωση από εσάς."
 
 #: main/templates/main/host.html:52
 msgid "Configure Updaters"
-msgstr "Configurer"
+msgstr "Ρυθμίστε Συστήματα Ενημέρωσης"
 
 #: main/templates/main/host.html:56
 msgid "Update Nameserver Records"
-msgstr "Mettre à jour les enregistrements DNS"
+msgstr "Ενημέρωσε τις εγγραφές του  Nameserver "
 
 #: main/templates/main/host.html:58
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol. But if you"
 " know what you are doing, and you want to update manually, you can do it "
 "here."
-msgstr "Normalement, vous configurerez votre routeur en utilisant le protocole dyndns2.\tMais si vous savez ce que vous faîtes et que vous souhaitez le mettre à jour manuellement, vous pouvez le faire ici."
+msgstr "Συνήθως ρυθμίζετε το router σας βάση του dyndns2 πρωτοκόλλου. Αλλά αν ξέρετε τι κάνετε, και θέλετε να ενημερώνετε χειροκίνητα, μπορείτε να το κάνετε εδώ. "
 
 #: main/templates/main/host.html:63
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
-msgstr "Ces champs ont été remplis avec la detection automatique de votre configuration actuelle."
+msgstr "Συμπληρώνουμε τα πεδία εισόδου για τις νέες διευθύνσεις με τις τρέχουσες απομακρυσμένες διευθύνσεις σας που ανιχνεύθηκαν. "
 
 #: main/templates/main/host.html:66 main/templates/main/host.html.py:68
 #: main/templates/main/host.html:70 main/templates/main/overview.html:28
@@ -1057,22 +1056,22 @@ msgstr "IPv4"
 #: main/templates/main/host.html:66 main/templates/main/host.html.py:79
 #, python-format
 msgid "Current %(type)s address from master nameserver"
-msgstr "Adresse %(type)s actuelle enregistrée sur le serveur DNS "
+msgstr "Τρέχουσα %(type)s διεύθυνση από τον κύριο nameserver"
 
 #: main/templates/main/host.html:68 main/templates/main/host.html.py:81
 #, python-format
 msgid "Set new %(type)s address"
-msgstr "Enregistrer une nouvelle adresse %(type)s"
+msgstr "Θέστε νέα %(type)s διεύθυνση"
 
 #: main/templates/main/host.html:70 main/templates/main/host.html.py:83
 #, python-format
 msgid "Give new %(type)s address"
-msgstr "Enregistrer une nouvelle adresse %(type)s"
+msgstr "Δώστε νέα %(type)s διεύθυνση"
 
 #: main/templates/main/host.html:75 main/templates/main/host.html.py:88
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
-msgstr "Supprimer"
+msgstr "Διαγραφή"
 
 #: main/templates/main/host.html:79 main/templates/main/host.html.py:81
 #: main/templates/main/host.html:83 main/templates/main/overview.html:33
@@ -1084,33 +1083,33 @@ msgstr "IPv6"
 
 #: main/templates/main/host.html:132
 msgid "Result Messages"
-msgstr "Résultat"
+msgstr "Μηνύματα αποτελέσματος"
 
 #: main/templates/main/host.html:134
 msgid "API Authentication Result Message"
-msgstr "Message de résultat de l'authentification à l'API"
+msgstr "Καταληκτικό μήνυμα API επικύρωσης"
 
 #: main/templates/main/host.html:136
 msgid "Client Result Message"
-msgstr "Résultat client"
+msgstr "Μήνυμα Αποτελέσματος Πελάτη"
 
 #: main/templates/main/host.html:138
 msgid "Server Result Message"
-msgstr "Résultat serveur"
+msgstr "Μήνυμα Αποτελέσματος Εξυπηρετητή"
 
 #: main/templates/main/host_add.html:8
 msgid "Create a new Host"
-msgstr "Créer un nouvel hôte"
+msgstr "Δημιουργία νέου Host"
 
 #: main/templates/main/host_add.html:12
 #: main/templates/main/related_host_add.html:12
 #: main/templates/main/updater_hostconfig_overview.html:41
 msgid "Create"
-msgstr "Créer"
+msgstr "Δημιουργία"
 
 #: main/templates/main/host_add.html:19
 msgid "Here you can add new hosts (like routers, PCs, servers, ...)."
-msgstr "Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des serveurs,...)."
+msgstr "Εδώ μπορείτε να προσθέσετε νέους hosts (όπως routers, PCs, servers, ...)."
 
 #: main/templates/main/host_add.html:22
 msgid ""
@@ -1118,39 +1117,39 @@ msgid ""
 "compatible updates to us when your IP changes. Routers usually have some "
 "builtin software that does this, but you can also use some software on "
 "another system (like a PC or server)."
-msgstr "Vous devez pouvoir configurer une de vos machines pour qu'elle envoie des mises à jour compatible avec le protocole dyndns2 lorsque votre IP change. Parfois, les routeur intègre un logiciel qui peut s'occuper de ça ; sinon, vous pouvez aussi utiliser un logiciel installé sur un autre système (Pc ou Serveur)."
+msgstr "Θα πρέπει να είστε σε θέση να ρυθμίσετε ένα από τα μηχανήματά σας ώστε να στέλνει συμβατές με dyndns2 ενημερώσεις σε εμάς όταν αλλάζει η IP σας. Τα router έχουν συνήθως ενσωματωμένο λογισμικό που το κάνει αυτό, αλλά μπορείτε επίσης να χρησιμοποιήσετε κάποιο λογισμικό σε ένα άλλο σύστημα (όπως ένα PC ή server)."
 
 #: main/templates/main/host_add.html:29
 msgid ""
 "Just make sure your update client either is customizable well enough or has "
 "specific support for our service."
-msgstr "Assurez vous simplement que votre client de mise à jour supporte nos services."
+msgstr "Απλά βεβαιωθείτε ότι ο πελάτης σας ενημέρωσης είναι αρκετά παραμετροποιήσιμος ή έχει συγκεκριμένη υποστήριξη για την υπηρεσία μας.  "
 
 #: main/templates/main/host_add.html:35
 msgid "We'll show you configuration examples after you add a host."
-msgstr "Nous afficherons un exemple de configuration après l'ajout d'un nouvel hôte."
+msgstr "Θα σας δείξουμε παραδείγματα ρύθμισης μόλις προσθέσετε έναν host."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:3
 msgid "General"
-msgstr "Général"
+msgstr "Γενικά"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:16
 msgid "General configuration hints"
-msgstr "Configuration générale"
+msgstr "Γενικές ενδείξεις ρυθμίσεων"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:18
 msgid ""
 "Usually, you should configure one system on your network to update the DNS. "
 "This can be either your router or a host on your network and it will run "
 "some software called the update client."
-msgstr "Vous devrez configurer un système sur votre réseau pour mettre à jours les DNS. Ce pourrait être votre routeur ou un hôte dans votre réseau local. Nous appellerons le logiciel utilisé le client de mise à jour."
+msgstr "Συνήθως, πρέπει να ρυθμίσετε ένα σύστημα στο δίκτυό σας να ενημερώνει τον DNS. Αυτό μπορεί να είναι είτε το router σας ή ένα μηχάνημα στο δίκτυό σας που θα τρέχει ένα λογισμικό που λέγεται πελάτης ενημέρωσης."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:25
 msgid ""
 "We have some specific configuration hints for some devices and update "
 "clients, please see the tabs above. If you don't find yours there, use the "
 "generic hints below."
-msgstr "Dans les onglets ci-dessus, vous trouverez des exemples de configurations pour certains routeurs et/ou client de mise à jour.\nSi vous ne trouvez pas le votre, vous pouvez utiliser la configuration générique ci-dessous."
+msgstr "Έχουμε κάποιες συγκεκριμένες υποδείξεις ρυθμίσεων ορισμένων συσκευών και πελατών ενημέρωσης, παρακαλώ δείτε τις άνωθεν καρτέλες. Εάν δεν μπορείτε να βρείτε την δική σας εδώ, χρησιμοποιήστε τις γενικές υποδείξει πιο κάτω."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:31
 msgid ""
@@ -1162,167 +1161,167 @@ msgid ""
 "it does not work, you have the choice of using a different update client "
 "and/or a different service, or transmitting your data using an unencrypted "
 "connection (using http: instead of https:)."
-msgstr "<b>Note importante de sécurité et de compatibilité</b>: Pour les URLs de mise à jour, nous donnons toujours le lien https (et non http) qui permettra une connexion cryptée pour transférer vos données (clé de mise à jour comprise). En fonction de votre client de mise à jour (firmware du routeur ou logiciel PC) <em>et</em> du service nsupdate, https pourrait ne pas être supporter. Dans ce cas, vous avez le choix entre utiliser un autre client de mise à jour et/ou un autre service, ou transmettre vos données en utilisant un connexion non cryptée (http ou lieu de https)."
+msgstr "<b>Σημαντική σημείωση για την ασφάλεια και συμβατότητα</b>: Για τα URLs ενημέρωσης, πάντα δίνουμε το https (όχι: http) URL καθώς αυτό θα χρησιμοποιήσει μια κρυπτογραφημένη σύνδεση να μεταφέρει τα δεδομένα σας (περιλαμβανομένου το μυστικού ενημέρωσης). Ανάλογα με τον πελάτη ενημέρωσης (υλικολογισμικό router ή λογισμικό PC) <em>και</em> την ρητά βασισμένη στο nsupdate.info υπηρεσία, το https ίσως να μην υποστηρίζεται. Οπότε, εάν δεν δουλεύει, έχετε την επιλογή να χρησιμοποιήσετε κάποιον άλλο πελάτη ενημέρωσης και/ή διαφορετική υπηρεσία, ή να μεταδώσετε τα δεδομένα σας χρησιμοποιώντας μη κρυπτογραφημένη σύνδεση (χρήση http: αντί του https:)."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:44
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
-msgstr "Votre client de mise à jour doit accéder au URLs suivantes pour mettre à jour les DNS:"
+msgstr "Ο πελάτης σας ενημέρωσης χρειάζεται να προσπελάσει τα ακόλουθα URLs για να ενημερώσει τον DNS:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:46
 msgid "For IPv4 updates:"
-msgstr "Pour mettre à jour IPv4:"
+msgstr "Για ενημερώσεις IPv4:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:50
 msgid "For IPv6 updates:"
-msgstr "Pour mettre à jour IPv6:"
+msgstr "Για ενημερώσεις IPv6:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:54
 msgid ""
 "The IPs will be determined automatically using the remote address our "
 "service is seeing (see below for more details)."
-msgstr "L'adresse IP sera détectée automatiquement par notre service\n(Voir détails ci-dessous)."
+msgstr "Οι IPs θα προσδιορισθούν αυτόματα χρησιμοποιώντας την απομακρυσμένη διεύθυνση που βλέπει η υπηρεσία μας (δείτε παρακάτω για περισσότερες λεπτομέρειες)."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:60
 msgid "Your update client has to do the following steps:"
-msgstr "Votre client de mise à jour devra procéder aux étapes suivantes:"
+msgstr "Ο πελάτης σας ενημέρωσης χρειάζεται να εκτελέσει τα ακόλουθα βήματα:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:64
 #: main/templates/main/includes/tabbed_router_configuration.html:287
 msgid "Check your current IP:"
-msgstr "Votre IP actuelle:"
+msgstr "Ελέγξτε την τρέχουσα IP σας:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:66
 #: main/templates/main/includes/tabbed_router_configuration.html:289
 msgid "to get your current IPv4 address"
-msgstr "Récupérer votre adresse IPV4 actuelle"
+msgstr "να πάρει την τρέχουσα IPv4 διεύθυνση σας"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:67
 #: main/templates/main/includes/tabbed_router_configuration.html:290
 msgid "to get your current IPv6 address"
-msgstr "Récupérer votre adresse IPV6 actuelle"
+msgstr "να πάρει την τρέχουσα IPv6 διεύθυνση σας"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:68
 #: main/templates/main/includes/tabbed_router_configuration.html:291
 msgid "to get your current IPv4 or IPv6 address"
-msgstr "Récupérer vos adresses IPV4 et IPV6 actuelles"
+msgstr "να πάρει την τρέχουσα IPv4 ή IPv6 διεύθυνση σας"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:70
 #: main/templates/main/includes/tabbed_router_configuration.html:286
 msgid ""
 "Important: Do not send an update if your IP did not change since last "
 "update!"
-msgstr "Important : Il n'est pas utile d'envoyer une mise à jour si votre IP n'a pas changé."
+msgstr "Σημαντικό: Μην στέλνετε ενημέρωση εάν η IP σας δεν έχει αλλάξει από την τελευταία ενημέρωση!"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:72
 msgid "Do HTTP Basic Auth with:"
-msgstr "Faire une authentification basique HTTP avec:"
+msgstr "Κάντε βασική HTTP ταυτοποίηση με:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:78
 msgid "Send a http GET request to:"
-msgstr "Envoyer une requête http GET à:"
+msgstr "Στείλτε μια αίτηση http GET στο:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:80
 msgid "(to update IPv4 A record in DNS)"
-msgstr "(pour mettre à jour un enregistrement DNS IPv4 A)"
+msgstr "(για ενημέρωση του IPv4 A record στον DNS)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:81
 msgid "(to update IPv6 AAAA record in DNS)"
-msgstr "(pour mettre à jour un enregistrement DNS IPv6 AAAA)"
+msgstr "(για ενημέρωση του IPv6 AAAA record στον DNS)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:84
 msgid "Optionally, we support some URL arguments:"
-msgstr "Vous pouvez ajouter en option des arguments dans l'URL:"
+msgstr "Προαιρετικά, υποστηρίζουμε μερικές μεταβλητές URL:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:87
 msgid ""
 "myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
 "autodetected IP is not the one you want to put into DNS, you need to give "
 "the wanted one explicitly using myip=...)"
-msgstr "myip=127.0.0.1 ou myip=::1 (nous détectons, par défaut, l'adresse IP. Si cette adresse IP n'est pas celle que vous souhaitez utiliser pour votre enregistrement DNS, vous devez nous la fournir explicitement en utilisant myip=...)"
+msgstr "myip=127.0.0.1 ή myip=::1  (από προεπιλογή, ανιχνεύουμε αυτόματα την IP. Αν η αυτόματη IP δεν είναι αυτή που θέλετε να βάλετε στον DNS, πρέπει να προσδιορίσετε την επιθυμητή ρητά με χρήση του myip=...)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:92
 msgid "(if not given: autodetect from http basic auth)"
-msgstr "(si non préciser: détection automatique depuis l'authentification http)"
+msgstr "(αν δεν δηλώθηκε: αυτόματη ανίχνευση από την βασική ταυτοποίηση http)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:95
 msgid "The response status and content will be:"
-msgstr "Le statut et contenu de réponse sera:"
+msgstr "Η απόκριση κατάστασης και περιεχομένου θα είναι:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:97
 msgid "new IP accepted"
-msgstr "Nouvelle IP acceptée"
+msgstr "νέα IP αποδεκτή"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:98
 msgid "IP accepted, but did not change since last update"
-msgstr "IP acceptée, mais n'a pas changer depuis la dernière mise à jour"
+msgstr "IP αποδεκτή, αλλά δεν έχει αλλάξει από την τελευταία ενημέρωση"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:99
 msgid "Incorrect authentication or no http basic auth header received"
-msgstr "Authentification incorrect ou aucune authentification reçue dans l'entête http"
+msgstr "Λάθος επικύρωση ή κεφαλίδα μη βασικής http ταυτοποίησης λήφθηκε"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:105
 msgid "and maybe others:"
-msgstr "et certainement d'autres:"
+msgstr "και ίσως άλλα:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:107
 #: main/templates/main/includes/tabbed_router_configuration.html:135
 #: main/templates/main/includes/tabbed_router_configuration.html:188
 msgid "Go to:"
-msgstr "Allez à:"
+msgstr "Πήγαινε σε:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:113
 #: main/templates/main/includes/tabbed_router_configuration.html:140
 #: main/templates/main/includes/tabbed_router_configuration.html:192
 #: main/templates/main/includes/tabbed_router_configuration.html:259
 msgid "Enter the following data:"
-msgstr "Saisissez les informations suivantes:"
+msgstr "Εισάγετε τα ακόλουθα δεδομένα:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:122
 msgid "If you have IPv4 and IPv6"
-msgstr "Si vous avez une adresse IPv4 et IPv6"
+msgstr "Εάν έχετε IPv4 και IPv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:123
 msgid "Set Update-URL to the following (two URLs, separated by one space)"
-msgstr "Configurez avec l'URL de mise à jour suivante (deux URLs, séparées par un espace)"
+msgstr "Βάλτε το URL-ενημέρωσης ως ακολούθως (δύο URLs. διαχωρισμένα με ένα κενό)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:125
 msgid "Forcing a dynamic DNS update"
-msgstr "Forcer une mise à jour DNS dynamique"
+msgstr "Εξαναγκασμός μιας δυναμικής ενημέρωσης DNS"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:126
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
-msgstr "Si vous souhaitez forcer une mise à jour dynamique, pour tester, vous pouvez le faire comme suit:"
+msgstr "Εάν θέλετε να κάνετε μια υποχρεωτική δυναμική ενημέρωση για σκοπούς ελέγχου, μπορείτε να το κάνετε ως εξής:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:128
 msgid "disable dynamic DNS, apply"
-msgstr "disable dynamic DNS, apply"
+msgstr "απενεργοποίηση δυναμικού DNS, εφαρμογή"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:129
 msgid "enable dynamic DNS, apply"
-msgstr "enable dynamic DNS, apply"
+msgstr "ενεργοποίηση δυναμικού DNS, εφαρμογή"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:130
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
-msgstr "(Fritz!Box envoie maintenant une mise à jour, elle peut être \"good\" (OK) ou \"nochg\" (inchangé) en fonction de l'adresse IP déjà enregistrée dans les DNS)"
+msgstr "(τώρα το Fritz!Box στέλνει μια ενημέρωση, μπορεί να είναι \"καλή\" ή \"γυμνή\" ανάλογα με το αν έχουμε ήδη αυτή την IP στον DNS)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:134
 #: main/templates/main/includes/tabbed_router_configuration.html:203
 #: main/templates/main/includes/tabbed_router_configuration.html:220
 msgid "verified with"
-msgstr "vérifié avec"
+msgstr "πιστοποιημένο με"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:149
 msgid "(leave this field empty)"
-msgstr "(laissez ce champ vide)"
+msgstr "(αφήστε αυτό το πεδίο κενό)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:157
 msgid "ddclient is a popular dyndns update daemon on Linux."
-msgstr "ddclient est un logiciel Linux assez répandu."
+msgstr "Ο ddclient είναι ένας δημοφιλής δαίμονας ενημέρωσης dyndns στο Linux."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:250
 msgid ""
@@ -1331,123 +1330,123 @@ msgid ""
 "(default: daily at 01:01). You can tweak this by editing /etc/crontab from "
 "where it invokes /etc/rc.dyndns.update - but be careful: do not invoke it "
 "too frequently and consider that this applies to all your DDNS updaters."
-msgstr "Note: si l'interface pfSense WAN n'a pas votre adresse IP publique et ne notifie pas les changement de votre adresse IP publique, les mises à jour seront retardées (01:01 par défaut). Vous pouvez outrepasser ceci par un crontab qui lancera /etc/rc.dyndns.update - Attention : ne le lancer pas trop souvent car il mettra à jour tous vos DDNS."
+msgstr "Παρακαλώ σημειώστε: αν η διεπαφή pfSense WAN δεν έχει την δημόσια IP σας και δεν αντιλαμβάνεται όταν αυτή αλλάζει, η ενημέρωση θα γίνεται με καθυστέρηση (προεπιλογή: καθημερινά στη 01:01). Μπορείτε να τροποποιήσετε αυτό αλλάζοντας το /etc/crontab όπου γίνεται η κλήση του /etc/rc.dyndns.update - αλλά προσέξτε: μην το καλείτε πολύ συχνά και λάβετε υπόψη ότι αυτό ισχύει για όλους τα συστήματά σας ενημέρωσης DDNS."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:262
 msgid "(do not select this)"
-msgstr "(Ne pas sélectionner)"
+msgstr "(μην επιλέξετε αυτό)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:264
 #: main/templates/main/includes/tabbed_router_configuration.html:265
 msgid "(most likely)"
-msgstr "(Plus probable)"
+msgstr "(το πιθανότερο)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:266
 msgid "(select this as long as you need it)"
-msgstr "(si nécessaire)"
+msgstr "(επιλέξτε αυτό εφόσον το χρειάζεστε)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:275
 msgid "Browser-based update client"
-msgstr "Client de mise à jour via un navigateur"
+msgstr "Πελάτης ενημέρωσης βασισμένος σε φυλλομετρητή"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:276
 msgid ""
 "These URLs invoke the built-in update client, which is intended for "
 "temporary and adhoc scenarios only. It periodically checks your IP and "
 "updates DNS if it changes."
-msgstr "Ces URLs font appel à un client de mise à jour, mais uniquement pour dans un contexte adhoc et temporaire. Il vérifiera régulièrement votre adresse IP et mettra à jour les DNS si elle venait à changer."
+msgstr "Αυτά τα URLs καλούν τον ενσωματωμένο πελάτη ενημέρωσης,  που προορίζεται για προσωρινά και adhoc σενάρια μόνο.  Ελέγχει περιοδικά την IP σας και ενημερώνει τον DNS εάν αλλάξει."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:281
 #: main/templates/main/includes/tabbed_router_configuration.html:295
 #: main/templates/main/includes/tabbed_router_configuration.html:301
 msgid "update DNS to point to remote IPv4 or IPv6 address"
-msgstr "met à jour les DNS pour pointer vers une adresse IPv4 ou IPv6"
+msgstr "ενημερώστε τον DNS να δείχνει στην απομακρυσμένη IPv4 ή IPv6 διεύθυνση"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:282
 #: main/templates/main/includes/tabbed_router_configuration.html:296
 #: main/templates/main/includes/tabbed_router_configuration.html:302
 msgid "similar, IPv4 only"
-msgstr "similaire, IPv4 uniquement"
+msgstr "ομοίως, μόνο IPv4"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:283
 #: main/templates/main/includes/tabbed_router_configuration.html:297
 #: main/templates/main/includes/tabbed_router_configuration.html:303
 msgid "similar, IPv6 only"
-msgstr "similaire, IPv6 uniquement"
+msgstr "ομοίως, μόνο IPv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:285
 msgid "URLs for browser / http user agent use"
-msgstr "Utilisation des URLs de mise à jour depuis un navigateur"
+msgstr "URLs για χρήση σε φυλλομετρητή / http μέσο χρήστη"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:293
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
-msgstr "Interactif - vous demandera un <em>username</em> (donnez le nom de domaine) et un <em>password</em> (donnez votre clé):"
+msgstr "Διαδραστικό - θα ζητήσει όνομα χρήστη (δώστε το όνομα host) και κωδικό (δώστε το μυστικό):"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:299
 msgid "Giving the http basic auth username and password in the URL:"
-msgstr "En mentionnant le nom d'utilisateur et le mot de passe dans l'URL:"
+msgstr "Δίνοντας το όνομα χρήστη και κωδικό βασικής επικύρωσης http στο URL:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:305
 msgid "As above, but manually specifying the IP address:"
-msgstr "Identique, mais en spécifiant manuellement l'adresse IP:"
+msgstr "Όπως παραπάνω, αλλά ορίζοντας χειροκίνητα την διεύθυνση IP:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:307
 msgid "update DNS to point to IPv4 127.0.0.1"
-msgstr "met à jour les DNS pour pointer vers l'adresse IPv4 127.0.0.1"
+msgstr "ενημερώστε τον DNS να δείχνει στην IPv4 127.0.0.1"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:308
 msgid "update DNS to point to IPv6 ::1"
-msgstr "met à jour les DNS pour pointer vers l'adresse IPv6 ::1"
+msgstr "ενημερώστε τον DNS να δείχνει στην IPv6 ::1"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:310
 msgid "Explanation of parameters:"
-msgstr "Explications des paramètres:"
+msgstr "Επεξήγηση παραμέτρων:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:313
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
-msgstr "votre FQDN (nom de domaine complètement qualifié), quelque chose comme example.%(WWW_HOST)s"
+msgstr "το πλήρως πιστοποιημένο όνομα host, κάτι όπως στο παράδειγμα.%(WWW_HOST)s"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:316
 msgid "the secret you have configured for this hostname"
-msgstr "La clé que vous avez configuré pour ce nom de domaine"
+msgstr "το μυστικό που ρυθμίσατε για αυτό το όνομα host"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:319
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but "
 "of course you need to use your real public IP instead of that."
-msgstr "Adresse IP: vous utilisons les adresse IP v4 et v6 de localhost comme exemple, mais vous devez bien entendu utiliser votre vrai adresse IP publique à la place."
+msgstr "Διευθύνσεις IP: χρησιμοποιούμε τις v4 και v6 διευθύνσεις τοπικού host στα παραδείγματα, αλλά φυσικά θα πρέπει να χρησιμοποιήσετε την πραγματική δημόσια IP σας αντί αυτών."
 
 #: main/templates/main/overview.html:8
 msgid "Your Hosts"
-msgstr "Vos hôtes"
+msgstr "Οι δικοί σας Hosts"
 
 #: main/templates/main/overview.html:9
 msgid "Add Host"
-msgstr "Ajouter un hôte"
+msgstr "Προσθήκη Host"
 
 #: main/templates/main/overview.html:15
 #: main/templates/main/related_host_overview.html:17
 #: main/templates/main/updater_hostconfig_overview.html:12
 msgid "Host"
-msgstr "Hôte"
+msgstr "Host"
 
 #: main/templates/main/overview.html:17 main/templates/main/overview.html:93
 #: main/templates/main/related_host_overview.html:19
 #: main/templates/main/updater_hostconfig_overview.html:15
 msgid "Comment"
-msgstr "Commentaire"
+msgstr "Σχόλιο"
 
 #: main/templates/main/overview.html:20 main/templates/main/overview.html:91
 #: main/templates/main/related_host_overview.html:21
 msgid "Available"
-msgstr "En ligne"
+msgstr "Διαθέσιμο"
 
 #: main/templates/main/overview.html:23
 msgid "Faults"
-msgstr "Erreurs"
+msgstr "Σφάλματα"
 
 #: main/templates/main/overview.html:25
 msgid "C / S"
@@ -1458,58 +1457,58 @@ msgstr "C / S"
 #: main/templates/main/related_host_overview.html:28
 #, python-format
 msgid "%(type)s Address"
-msgstr "Adresse %(type)s"
+msgstr "%(type)s Διευθύνσεις"
 
 #: main/templates/main/overview.html:30 main/templates/main/overview.html:35
 msgid "(last update)"
-msgstr "(Dernière mise à jour)"
+msgstr "(τελευταία ενημέρωση)"
 
 #: main/templates/main/overview.html:77
 msgid "No hosts yet."
-msgstr "Aucun hôte pour le moment."
+msgstr "Χωρίς hosts ακόμα."
 
 #: main/templates/main/overview.html:83
 msgid "Domains (yours first, then public)"
-msgstr "Domaines (Le vôtre d'abord, puis ceux des utilisateurs)"
+msgstr "Τομείς (πρώτα ο δικός σας, μετά ο δημόσιος)"
 
 #: main/templates/main/overview.html:84
 msgid "Add Domain"
-msgstr "Ajouter un domaine"
+msgstr "Προσθήκη Τομέα"
 
 #: main/templates/main/overview.html:89
 msgid "Domain"
-msgstr "Domaine"
+msgstr "Τομέας"
 
 #: main/templates/main/overview.html:90 main/templates/main/status.html:11
 msgid "Public"
-msgstr "Publique"
+msgstr "Δημόσιο"
 
 #: main/templates/main/overview.html:92
 msgid "Owner"
-msgstr "Propriétaire"
+msgstr "Ιδιοκτήτης"
 
 #: main/templates/main/overview.html:105
 msgid "No domains from you yet."
-msgstr "Vous n'avez pas encore de domaine."
+msgstr "Κανένας τομέας από εσάς ακόμα."
 
 #: main/templates/main/overview.html:116
 msgid "No public domains from other users yet."
-msgstr "Aucun domaine publique venant d'autre utilisateurs pour le moment."
+msgstr "Κανένα δημόσιος τομέας από άλλους χρήστες ακόμα."
 
 #: main/templates/main/related_host.html:8
 msgid "Edit related host"
-msgstr "Editer l'hôte"
+msgstr "Τροποποίηση σχετιζόμενου host"
 
 #: main/templates/main/related_host.html:14
 #: main/templates/main/related_host.html:19
 msgid "Delete related host"
-msgstr "Supprimer l'hôte"
+msgstr "Διαγραφή σχετιζόμενου host"
 
 #: main/templates/main/related_host.html:16
 msgid ""
 "Deleting a related host is not undoable. If you need it back, you'll have to"
 " add it again."
-msgstr "Aucun retour arrière après la suppression d'un hôte. Si vous en avez à nouveau besoin, vous devrez le recréer."
+msgstr "Η διαγραφή ενός σχετιζόμενου host είναι μη αναστρέψιμη. Αν τον χρειαστείτε ξανά, θα πρέπει να τον προσθέσετε εκ νέου."
 
 #: main/templates/main/related_host.html:25
 #: main/templates/main/related_host_add.html:22
@@ -1518,275 +1517,275 @@ msgid ""
 "address from it. To compute your related host's IPs, we just add the "
 "interface ID to the network address. Then we update the DNS records for the "
 "related host with these addresses."
-msgstr "Lorsque nous recevons une mise à jour de votre hôte principal, nous calculons votre adresse réseau. Pour calculer les adresses IP de vos hôtes, nous ajoutons juste l'ID de l'interface à l'adresse réseau. Puis nous mettons à jour les enregistrements DNS des différents hôtes avec ces adresses."
+msgstr "Όταν λαμβάνουμε μια ενημέρωση από τον κύριο host σας, υπολογίζουμε την διεύθυνση δικτύου σας από αυτόν. Για να υπολογίσουμε τις IP των σχετιζόμενων hosts σας, απλά προσθέτουμε το ID της διεπαφής στην διεύθυνση δικτύου. Έπειτα ενημερώνουμε τις εγγραφές DNS του σχετιζόμενου host με αυτές τις διευθύνσεις."
 
 #: main/templates/main/related_host_add.html:8
 msgid "Create a new related host"
-msgstr "Créer un nouvel hôte"
+msgstr "Δημιουργήστε ένα νέο σχετιζόμενο host"
 
 #: main/templates/main/related_host_add.html:19
 msgid "Here you can add related hosts (e.g. other machines on same LAN)."
-msgstr "Ici, vous pouvez ajouter de nouveaux hôtes (comme un routeur, des PC, des serveurs, d'autres machines sur le même réseau local)."
+msgstr "Εδώ μπορείτε να προσθέσετε σχετιζόμενους hosts (π.χ. άλλες μηχανές στο ίδιο LAN)."
 
 #: main/templates/main/related_host_overview.html:7
 msgid "Related hosts"
-msgstr "Hôtes"
+msgstr "Σχετιζόμενοι hosts"
 
 #: main/templates/main/related_host_overview.html:8
 msgid "Add related host"
-msgstr "Ajouter un hôte"
+msgstr "Προσθήκη σχετιζόμενου host"
 
 #: main/templates/main/related_host_overview.html:11
 msgid "Main host:"
-msgstr "Hôte principal"
+msgstr "Κύριος host:"
 
 #: main/templates/main/related_host_overview.html:25
 #: main/templates/main/related_host_overview.html:30
 #, python-format
 msgid "%(type)s interface ID"
-msgstr "Interface réseau %(type)s"
+msgstr "%(type)s ID διεπαφής"
 
 #: main/templates/main/related_host_overview.html:54
 msgid "No related hosts yet."
-msgstr "Aucun hôte pour le moment."
+msgstr "Δεν υπάρχουν σχετιζόμενοι hosts ακόμα."
 
 #: main/templates/main/status.html:7
 msgid "Domains"
-msgstr "Domaines"
+msgstr "Τομείς"
 
 #: main/templates/main/status.html:9 main/templates/main/status.html.py:20
 #: main/templates/main/status.html:37
 msgid "Total"
-msgstr "Total"
+msgstr "Σύνολο"
 
 #: main/templates/main/status.html:13 main/templates/main/status.html.py:22
 msgid "Unavailable"
-msgstr "Injoignable"
+msgstr "Μη διαθέσιμο"
 
 #: main/templates/main/status.html:13
 msgid "Down"
-msgstr "Hors service"
+msgstr "Εκτός λειτουργίας"
 
 #: main/templates/main/status.html:18
 msgid "Hosts"
-msgstr "Hôtes"
+msgstr "Hosts"
 
 #: main/templates/main/status.html:22
 msgid "Abuse"
-msgstr "Abus"
+msgstr "Κατάχρηση"
 
 #: main/templates/main/status.html:22
 msgid "Abuse-Blocked"
-msgstr "Abus-Bloqué"
+msgstr "Κατάχρηση-Μπλοκαρισμένο "
 
 #: main/templates/main/status.html:24 main/templates/main/status.html.py:41
 msgid "2d"
-msgstr "2j"
+msgstr "2ημ."
 
 #: main/templates/main/status.html:24 main/templates/main/status.html.py:26
 #: main/templates/main/status.html:28 main/templates/main/status.html.py:30
 #, python-format
 msgid "IPv4 (tls) / IPv6 (tls) updated last %(period)s"
-msgstr "Dernière mise à jour IPv4 (tls) / IPv6 (tls) : %(period)s"
+msgstr "Τελευταία ενημέρωση IPv4 (tls) / IPv6 (tls)  %(period)s"
 
 #: main/templates/main/status.html:26 main/templates/main/status.html.py:43
 msgid "2w"
-msgstr "2s"
+msgstr "2εβδ."
 
 #: main/templates/main/status.html:28 main/templates/main/status.html.py:45
 msgid "2m"
-msgstr "2m"
+msgstr "2μην."
 
 #: main/templates/main/status.html:30 main/templates/main/status.html.py:47
 msgid "2y"
-msgstr "2a"
+msgstr "2χρ."
 
 #: main/templates/main/status.html:35
 msgid "Users"
-msgstr "Utilisateurs"
+msgstr "Χρήστες"
 
 #: main/templates/main/status.html:39
 msgid "Active"
-msgstr "Actif"
+msgstr "Ενεργοί"
 
 #: main/templates/main/status.html:41 main/templates/main/status.html.py:43
 #: main/templates/main/status.html:45 main/templates/main/status.html.py:47
 #, python-format
 msgid "logged in / created in last %(period)s"
-msgstr "Connecté / créé depuis %(period)s"
+msgstr "συνδέθηκαν σε / δημιουργήθηκαν σε τελευταία %(period)s"
 
 #: main/templates/main/update.html:6
 msgid "Browser-based Updater"
-msgstr "Browser-based Updater"
+msgstr "Σύστημα ενημέρωση μέσω φυλλομετρητή"
 
 #: main/templates/main/update.html:8
 #, python-format
 msgid ""
 "Host %(hostname)s will get automatically updated as long as you keep this "
 "window open."
-msgstr "L'hôte %(hostname) sera mis à jour automatiquement, aussi longtemps que vous laisserez cette fenêtre ouverte."
+msgstr "Ο host %(hostname)s θα ενημερώνεται αυτόματα όσο αυτό το παράθυρο είναι ανοιχτό."
 
 #: main/templates/main/update.html:14
 msgid "The browser based updater only works if javascript is enabled."
-msgstr "La mise à jour automatique via le navigateur ne fonctionne que si javascript est activé."
+msgstr "Το σύστημα ενημέρωσης μέσω φυλλομετρητή λειτουργεί μόνο αν είναι ενεργή η javascript."
 
 #: main/templates/main/update.html:17
 msgid "Updater Status"
-msgstr "Status"
+msgstr "Κατάσταση συστήματος ενημέρωσης"
 
 #: main/templates/main/update.html:19
 msgid "My IP:"
-msgstr "Mon IP:"
+msgstr "Η IP μου:"
 
 #: main/templates/main/update.html:21
 msgid "Last update response:"
-msgstr "Réponse lors de la dernière mise à jour:"
+msgstr "Τελευταία απόκριση ενημέρωσης:"
 
 #: main/templates/main/updater_hostconfig.html:8
 msgid "Edit Updater Configuration"
-msgstr "Editer la configuration du client de mise à jour"
+msgstr "Τροποποίησης Ρύθμισης Συστήματος Ενημέρωσης"
 
 #: main/templates/main/updater_hostconfig.html:14
 msgid "Delete Updater Configuration"
-msgstr "Supprimer la configuration du client de mise à jour"
+msgstr "Διαγραφή Ρύθμισης Συστήματος Ενημέρωσης"
 
 #: main/templates/main/updater_hostconfig.html:16
 msgid ""
 "Deleting a updater configuration is not undoable. If you need it back, "
 "you'll have to add it again."
-msgstr "Aucun retour arrière après la suppression de la configuration du client de mise à jour. Si vous en avez à nouveau besoin, vous devrez le recréer."
+msgstr "Η διαγραφή ενός συστήματος ενημέρωσης είναι μη αναστρέψιμη. Αν το χρειαστείτε ξανά, θα πρέπει να το προσθέσετε εκ νέου."
 
 #: main/templates/main/updater_hostconfig.html:26
 #, python-format
 msgid "Here you can edit the configuration of the \"%(servicename)s\" updater."
-msgstr "Vous pouvez éditer ici la configuration du service de mise à jour \"%(servicename)s\" "
+msgstr "Εδώ μπορείτε να τροποποιήσετε την παραμετροποίηση του \"%(servicename)s\" συστήματος ενημέρωσης."
 
 #: main/templates/main/updater_hostconfig.html:31
 msgid ""
 "The values you need here are the same ones as you would usually enter in "
 "your router or update client."
-msgstr "Les informations nécessaire ici sont généralement les mêmes que vous utilisez pour votre routeur ou client de mise à jour."
+msgstr "Η τιμές που χρειάζεστε εδώ είναι οι ίδιες που θα καταχωρούσατε συνήθως  στο router σας ή τον πελάτη ενημέρωσης."
 
 #: main/templates/main/updater_hostconfig.html:36
 #, python-format
 msgid ""
 "You get these values after registering with the \"%(object.service.name)s\" "
 "service and (likely) configuring that service to accept updates."
-msgstr "Vous obtiendrez généralement ces informations après vous être enregistré sur le service \"%(object.service.name)s\" et l'avoir configurer pour accepter les mises à jour."
+msgstr "Λαμβάνετε αυτές τις τιμές αφότου εγγραφείτε με την \"%(object.service.name)s\" υπηρεσία και (συνήθως) ρυθμίζοντας την να λαμβάνει ενημερώσεις."
 
 #: main/templates/main/updater_hostconfig_overview.html:7
 msgid "Your updater configurations for other services"
-msgstr "Configuration de la mise à jour des autres services"
+msgstr "Οι ρυθμίσεις σας για σύστημα ενημέρωσης άλλων υπηρεσιών"
 
 #: main/templates/main/updater_hostconfig_overview.html:11
 msgid "Service"
-msgstr "Service"
+msgstr "Υπηρεσία"
 
 #: main/templates/main/updater_hostconfig_overview.html:13
 #: main/templates/main/updater_hostconfig_overview.html:14
 #, python-format
 msgid "give %(type)s"
-msgstr "Enregistrer %(type)s"
+msgstr "δώστε %(type)s"
 
 #: main/templates/main/updater_hostconfig_overview.html:27
 msgid "No other services to update yet."
-msgstr "Aucun autre service à mettre à jour pour l'instant"
+msgstr "Όχι άλλες υπηρεσίες προς ενημέρωση ακόμα."
 
 #: main/templates/main/updater_hostconfig_overview.html:37
 msgid "Create a new updater configuration"
-msgstr "Créer une nouvelle configuration "
+msgstr "Δημιουργήστε μια νέα ρύθμιση συστήματος ενημέρωσης"
 
 #: main/templates/main/updater_hostconfig_overview.html:48
 msgid ""
 "Here you can add new configurations for 3rd party services you like to get "
 "updated."
-msgstr "Vous pouvez ajouter ici une nouvelle configuration d'une service tiers que vous souhaitez mettre à jour."
+msgstr "Εδώ μπορείτε να εισάγετε νέες ρυθμίσεις για υπηρεσίες 3ων τις οποίες θέλετε να ενημερώνετε."
 
 #: main/templates/main/updater_hostconfig_overview.html:50
 msgid "We will send an update to them each time you update your host with us."
-msgstr "Nous leur enverrons une mise à jour à chaque fois que vous mettrez à jour votre hôte depuis notre service."
+msgstr "Θα στέλνουμε μια ενημέρωση σε κάθε μια από αυτές κάθε φορά που ενημερώνετε τον host σας με εμάς."
 
 #: settings/base.py:383
 msgid "English"
-msgstr "English"
+msgstr "Αγγλικά"
 
 #: settings/base.py:384
 msgid "German"
-msgstr "Allemand"
+msgstr "Γερμανικά"
 
 #: settings/base.py:385
 msgid "French"
-msgstr "French"
+msgstr "Γαλλικά"
 
 #: settings/base.py:386
 msgid "Italian"
-msgstr "Italien"
+msgstr "Ιταλικά"
 
 #: settings/dev.py:37
 msgid "Polish"
-msgstr "Polonnais"
+msgstr "Πολωνικά"
 
 #: templates/base.html:40
 msgid "Home"
-msgstr "Accueil"
+msgstr "Αρχική"
 
 #: templates/base.html:44
 msgid "Overview"
-msgstr "Général"
+msgstr "Επισκόπηση"
 
 #: templates/base.html:47
 msgid "Status"
-msgstr "Status"
+msgstr "Κατάσταση"
 
 #: templates/base.html:51
 msgid "About"
-msgstr "A propos"
+msgstr "Περί"
 
 #: templates/base.html:55
 msgid "Documentation"
-msgstr "Documentation"
+msgstr "Τεκμηρίωση"
 
 #: templates/base.html:60
 msgid "Sign up"
-msgstr "S'enregistrer"
+msgstr "Εγγραφή"
 
 #: templates/base.html:66
 msgid "Profile"
-msgstr "Profile"
+msgstr "Προφίλ"
 
 #: templates/base.html:69
 msgid "Admin interface"
-msgstr "Interface admin"
+msgstr "Διεπαφή Διαχειριστή"
 
 #: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
-msgstr "Votre connexion (http) n'est pas cryptée et donc pas sécurisée."
+msgstr "Η (http) σύνδεση είναι μη κρυπτογραφημένη και συνεπώς μη ασφαλής."
 
 #: templates/base.html:110
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
-msgstr "Utilisez s.v.p notre <a href=\"https://%(WWW_HOST)s/\">site sécurisé</a>."
+msgstr "Παρακαλώ χρησιμοποιήστε τον <a href=\"https://%(WWW_HOST)s/\">ασφαλή https ιστότοπο μας</a>."
 
 #: templates/base.html:115
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site, expect malfunctioning on the http site."
-msgstr "Certains cookies requis ne fonctionneront qu'à travers le site sécurisé (https), certaines fonctions seront donc indisponible à travers le site non sécurisé (http)."
+msgstr "Τουλάχιστον μερικά από τα απαραίτητα cookies θα λειτουργούν μόνο στον ασφαλή https ιστότοπο, να αναμένετε δυσλειτουργία στον http ιστότοπο."
 
 #: templates/base.html:125
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in"
 " your browser."
-msgstr "Certaines fonctionnalités nécessiteront que Javascript soit activé dans votre navigateur."
+msgstr "Μερικές λειτουργίες σε αυτόν τον ιστότοπο απαιτούν να έχετε ενεργοποιημένη την JavaScript στον φυλλομετρητή σας."
 
 #: templates/includes/base_footer.html:3
 msgid "Powered by nsupdate.info"
-msgstr "Powered by nsupdate.info"
+msgstr "Χορηγία της nsupdate.info"
 
 #: templates/includes/base_footer.html:5
 msgid "Valid HTML"
-msgstr "Valid HTML"
+msgstr "Έγκυρη HTML"
 
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
-msgstr "Valid CSS"
+msgstr "Έγκυρα CSS"
