@@ -27,14 +27,14 @@ from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session
 from ..main.iptools import normalize_ip
 
 
-def Response(content):
+def Response(content, status=200):
     """
     shortcut for text/plain HttpResponse
 
     :param content: plain text content for the response
-    :return: HttpResonse object
+    :return: HttpResponse object
     """
-    return HttpResponse(content, content_type='text/plain')
+    return HttpResponse(content, status=status, content_type='text/plain')
 
 
 @log.logger(__name__)
@@ -210,6 +210,8 @@ class NicUpdateView(View):
         :return: HttpResponse object
         """
         hostname = request.GET.get('hostname')
+        if hostname in settings.BAD_HOSTS:
+            return Response('abuse', status=403)
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
             # logging this at debug level because otherwise it fills our logs...
@@ -219,6 +221,8 @@ class NicUpdateView(View):
         if '.' not in username:  # username MUST be the fqdn
             # specifically point to configuration errors on client side
             return Response('notfqdn')
+        if username in settings.BAD_HOSTS:
+            return Response('abuse', status=403)
         host = check_api_auth(username, password)
         if host is None:
             return basic_challenge("authenticate to update DNS", 'badauth')
