@@ -51,6 +51,12 @@ BAD_AGENTS = set([])  # list can have str elements
 from netaddr import IPSet, IPAddress, IPNetwork
 BAD_IPS_HOST = IPSet([])  # inner list can have IPAddress and IPNetwork elements
 
+# when encountering these hostnames (fqdn), block them early/silently from
+# api usage. avoid any database access, so if someone tries to update
+# every 5s, the database won't be locked all the time and we can at least
+# delete the host from django admin.
+BAD_HOSTS = set([])
+
 # nameservers used e.g. for MX lookups in the registration email validation.
 # google / cloudflare DNS IPs are only given as example / fallback -
 # please configure your own nameservers in your local settings file.
