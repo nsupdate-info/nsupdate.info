@@ -8,6 +8,33 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
+Release 0.13.0 (not released yet)
+---------------------------------
+
+New Features:
+
+- add BAD_HOSTS setting to lock out nasty clients from the update api
+  without causing database accesses.
+- django-admin faults: show/reset api auth faults counter
+- add api_auth_faults column to django admin's Hosts view
+
+Fixes:
+
+- fixed misc. crashes
+
+Other changes:
+
+- drop support for python 3.4, fixes #406 - you need either 2.7 or 3.5+.
+- require django >= 1.11.0, run travis-ci tests on django 2.2
+- django compatibility improvements
+- translation updates (removed incomplete ones, added complete ones)
+- improve logging
+- setuptools-scm managing the version and manifest
+- src/ based project layout
+- Add A Well-Known URL for Changing Passwords
+- Add rel="noopener" to target="_blank" links
+
+
 Release 0.12.0 (2018-11-18)
 ---------------------------
 
