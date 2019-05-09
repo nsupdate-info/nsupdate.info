@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n static bootstrap %}
 {% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-6">
-        <h2>{% trans "Login with a local Account" %}</h2>
+        <h2><img src="{% static "img/logo.svg" %}" alt="nsupdate.info logo" height="35" width="35"> {% trans "Login with a local Account" %}</h2>
         <hr />
         {% if form.errors %}
         <p>{% trans "Your username and password didn't match. Please try again." %}</p>
