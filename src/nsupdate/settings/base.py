@@ -167,10 +167,12 @@ MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'nsupdate.urls'
@@ -272,13 +274,16 @@ LOGIN_REDIRECT_URL = '/overview/'
 LOGOUT_REDIRECT_URL = '/'
 
 X_FRAME_OPTIONS = 'DENY'  # for clickjacking middleware
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+REFERRER_POLICY = 'same-origin'
 
 CSRF_FAILURE_VIEW = 'nsupdate.main.views.csrf_failure_view'
 
 # Settings for CSRF cookie.
 CSRF_COOKIE_NAME = 'csrftoken'
 CSRF_COOKIE_PATH = '/'
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = True
 
 # Settings for session cookie.
 SESSION_COOKIE_NAME = 'sessionid'

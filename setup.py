@@ -33,6 +33,7 @@ setup(
         'netaddr',
         'django>=1.11.0',
         'django-bootstrap-form',
+        'django-referrer-policy',
         'django-registration-redux',
         'django-extensions',
         'social-auth-app-django',
