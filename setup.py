@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'dnspython<1.17.0',  # 1.16 is last with py27 support
         'netaddr',
-        'django>=1.11.0',
+        'django>=2.2.0',
         'django-bootstrap-form',
         'django-registration-redux',
         'django-extensions',
