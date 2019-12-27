@@ -227,6 +227,11 @@ To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
 
 Now proceed with manage migrate as shown above.
 
+Disable User Registration
+-------------------------
+If you want to disable user registration, put this into YOUR settings::
+
+    REGISTRATION_OPEN = False
 
 Customization of the Web UI
 ===========================
