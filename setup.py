@@ -29,9 +29,9 @@ setup(
     platforms='any',
     setup_requires=['setuptools_scm'],
     install_requires=[
-        'dnspython<1.17.0',  # 1.16 is last with py27 support
+        'dnspython',
         'netaddr',
-        'django>=1.11.0',
+        'django>=2.2.0',
         'django-bootstrap-form',
         'django-referrer-policy',
         'django-registration-redux',
@@ -47,12 +47,11 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Internet :: Name Service (DNS)',
     ],
 )
