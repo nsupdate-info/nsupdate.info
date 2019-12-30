@@ -15,18 +15,18 @@ env:
 
 matrix:
   include:
-    - python: "2.7"
-      dist: trusty
-      env: DJANGO=1.11 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
     - python: "3.5"
-      dist: trusty
-      env: DJANGO=1.11
+      dist: xenial
+      env: DJANGO=2.2
     - python: "3.6"
-      dist: trusty
-      env: DJANGO=1.11
+      dist: xenial
+      env: DJANGO=2.2
     - python: "3.7"
       dist: xenial
       env: DJANGO=2.2
+    - python: "3.8"
+      dist: xenial
+      env: DJANGO=2.2 COVERAGE="coverage run -m" TEST_K="not ddns_client" TEST_OPTS="--pep8"
 
 install:
     - ./scripts/travis/install.sh
