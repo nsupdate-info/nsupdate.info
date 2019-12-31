@@ -2,6 +2,7 @@ FROM debian:stable-slim
 LABEL maintainer="it@nkey.com.br"
 
 ARG BUILD=prod
+ARG DOCKER_DIR=./misc/contrib/docker
 ARG uwsgi_uid=700
 ARG uwsgi_gid=700
 
@@ -72,11 +73,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy helper files
-COPY build/django/create-superuser.py /nsupdate/src/nsupdate/management/commands/create-superuser.py
-COPY build/uwsgi.ini /nsupdate/uwsgi.ini
-COPY build/confd/ /etc/confd/
-COPY build/setup.sh /
-COPY build/docker-entrypoint.sh /var/local/
+COPY $DOCKER_DIR/build/django/create-superuser.py /nsupdate/src/nsupdate/management/commands/create-superuser.py
+COPY $DOCKER_DIR/build/uwsgi.ini /nsupdate/uwsgi.ini
+COPY $DOCKER_DIR/build/confd/ /etc/confd/
+COPY $DOCKER_DIR/build/setup.sh /
+COPY $DOCKER_DIR/build/docker-entrypoint.sh /var/local/
 
 # Set the permissions according to env options
 RUN chmod a+x /var/local/docker-entrypoint.sh
