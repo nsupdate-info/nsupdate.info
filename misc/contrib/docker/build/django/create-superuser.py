@@ -1,9 +1,10 @@
-# Title:   create-superuser.py
-# Link:    https://gist.github.com/c00kiemon5ter/7806c1eac8c6a3e82f061ec32a55c702
+# Title: create-superuser.py
+# Link: https://gist.github.com/c00kiemon5ter/7806c1eac8c6a3e82f061ec32a55c702
 # License: None (Public Domain)
 
 from django.contrib.auth.management.commands import createsuperuser
 from django.core.management import CommandError
+
 
 class Command(createsuperuser.Command):
     help = 'Create a superuser with a password non-interactively'
@@ -28,12 +29,14 @@ class Command(createsuperuser.Command):
 
         if not password or not username or not email:
             raise CommandError(
-                    "--username, --password, and --email are required options")
+                "--username, --password, and --email are required options")
 
         if username and options.get('preserve'):
-            exists = self.UserModel._default_manager.db_manager(database).filter(username=username).exists()
+            exists = self.UserModel._default_manager.db_manager(
+                database).filter(username=username).exists()
             if exists:
-                self.stdout.write("User exists, exiting normally due to --preserve")
+                self.stdout.write(
+                    "User exists, exiting normally due to --preserve")
                 return
 
         user_data = {
@@ -43,7 +46,7 @@ class Command(createsuperuser.Command):
         }
 
         self.UserModel._default_manager.db_manager(
-                database).create_superuser(**user_data)
+            database).create_superuser(**user_data)
 
         if options.get('verbosity', 0) >= 1:
             self.stdout.write("Superuser created successfully.")
