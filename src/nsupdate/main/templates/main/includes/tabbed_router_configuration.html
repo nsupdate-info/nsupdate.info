@@ -254,20 +254,20 @@ detector = webcheck6
         <h4> Copy and paste the following into a new script name of your choosing and schedule it to run when you want. 
         <pre>
 ###################################################################################
+# nsupdate.info Dynamic DNS Updater for Mikrotik Routers
+# Version .01 Initial Release 2019-12-29
+# https://github.com/abclution/nsupdate.info_DynamicDNSClientForMikrotik
+# This script is a work in progress and considered beta but functional.
 # "Compliant" IPv4 & IPv6 Dynamic DNS Update Script for Mikrotik with Nsupdate.info Services
 # In theory, fully compliant based on Nsupdate rules, but hey, its free, YMMV!
-
 # Things to note: 
-
 # Problem: If your domain has no IP set or is set "Abuse" status, this script will likely fail / not work.
 # Solution: Fix your "Abuse status" in the web control panel, and/or set an initial IP.
-
 # Problem: You only have IPv4 or IPv6, not both.
 # Solution: The script will probably fail, Mikrotik likes to stop running scripts if ANYTHING goes wrong. Goodluck!
-
 # Please enter only your full Dynamic DNS Hostname & Secret
-:local DDNSHostname {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
-:local DDNSSecret {{ update_secret|default:"&lt;your secret&gt;" }}
+:local DDNSHostname 
+:local DDNSSecret 
 :put "-----------------------------------------"
 ## IPv4 Update code begin.
 :local DDNSHostnameIPv4 [:resolve $DDNSHostname];
