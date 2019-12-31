@@ -12,18 +12,13 @@ prod:
 	cd $(BASE_DIR); docker build --build-arg BUILD=prod --build-arg uwsgi_uid=$(UWSGI_UID) --build-arg uwsgi_gid=$(UWSGI_GID) --build-arg DOCKER_DIR=$(DOCKER_DIR) -t $(MAINTAINER)/$(TAG):$(VER) --rm -f $(DOCKER_DIR)/build/Dockerfile .
 	docker tag $(MAINTAINER)/$(TAG):$(VER) $(MAINTAINER)/$(TAG):prod
 
-release:
+release: prod release_latest
 	docker push $(MAINTAINER)/$(TAG):$(VER)
-	docker push $(MAINTAINER)/$(TAG):prod
 	@echo "*** Don't forget to create a tag by creating an official GitHub release."
 
 release_latest:
 	docker tag $(MAINTAINER)/$(TAG):$(VER) $(MAINTAINER)/$(TAG):latest
 	docker push $(MAINTAINER)/$(TAG):latest
-
-release_stable:
-	docker tag $(MAINTAINER)/$(TAG):$(VER) $(MAINTAINER)/$(TAG):stable
-	docker push $(MAINTAINER)/$(TAG):stable
 
 dev:
 	cd $(BASE_DIR); docker build --build-arg BUILD=dev --build-arg uwsgi_uid=$(UWSGI_UID) --build-arg uwsgi_gid=$(UWSGI_GID) --build-arg DOCKER_DIR=$(DOCKER_DIR) -t $(MAINTAINER)/$(TAG):$(VER)-dev --rm -f $(DOCKER_DIR)/build/Dockerfile .
