@@ -16,7 +16,7 @@ ALLOWED_HOSTS=['localhost', '127.0.0.1', '[::1]', '{{ getenv "BASEDOMAIN" }}']
 {{ if getenv "DB_NAME"}}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': '{{getenv "DB_NAME"}}',  # database name
         'USER': '{{getenv "DB_USER"}}',
         'PASSWORD': '{{getenv "DB_PASS"}}',

@@ -1,7 +1,0 @@
-.tx/
-docs/
-logo/
-scripts/
-.coveragerc
-.travis.yml
-Makefile

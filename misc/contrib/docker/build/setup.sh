@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-#Quit on error.
+# Quit on error.
 set -e
 # Treat undefined variables as errors.
 set -u
