@@ -7,6 +7,11 @@ AFTER that, you can upgrade to 0.10.x or any later version (and then run the
 migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
+Release 0.13.0-alternative
+---------------------------------
+
+New Features:
+ - use a http user different from the fqdn of the host due to limitation in the length of the username from some routers
 
 Release 0.13.0 (not released yet)
 ---------------------------------

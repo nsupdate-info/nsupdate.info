@@ -5,6 +5,8 @@ models for hosts, domains, service updaters, ...
 import re
 import time
 import base64
+from datetime import datetime
+import random
 
 import dns.resolver
 import dns.message
@@ -153,6 +155,13 @@ class Domain(models.Model):
         verbose_name_plural = _('domains')
         ordering = ('name',)
 
+_HOST_HTTP_USER_MAX_LENGTH=30 # limit comes from an external application not accepting longer username
+def _http_user_generator():
+    dt = datetime.utcnow().strftime('%Y%m%d%H%m%S%f')
+    maxrange = pow(10, _HOST_HTTP_USER_MAX_LENGTH-len(dt))
+    randvalue = random.randrange(0, maxrange)
+    return f'{randvalue}{dt}'.zfill(_HOST_HTTP_USER_MAX_LENGTH)
+
 
 @python_2_unicode_compatible
 class Host(models.Model):
@@ -168,6 +177,13 @@ class Host(models.Model):
         ],
         help_text=_("The name of your host."))
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, verbose_name=_("domain"))
+    http_user = models.CharField(
+        _("http user"),
+        max_length=_HOST_HTTP_USER_MAX_LENGTH,  # username used for http basic auth
+        unique=True,
+        null=False,
+        default=_http_user_generator
+    )
     update_secret = models.CharField(
         _("update secret"),
         max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
@@ -266,6 +282,18 @@ class Host(models.Model):
 
     def get_fqdn(self):
         return dnstools.FQDN(self.name, self.domain.name)
+
+    @classmethod
+    def get_by_http_user(cls, username, **kwargs):
+        try:
+            host = Host.objects.get(http_user=username, **kwargs)
+        except Host.DoesNotExist:
+            return None
+        except Host.MultipleObjectsReturned:
+            # should not happen, see Host.http_user should have unique=True
+            raise ValueError("get_by_http_user(%s) found more than 1 host" % fqdn)
+        else:
+            return host
 
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):

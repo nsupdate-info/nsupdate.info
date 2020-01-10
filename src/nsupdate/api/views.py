@@ -139,18 +139,18 @@ def check_api_auth(username, password, logger=None):
     """
     Check username and password against our database.
 
-    :param username: http basic auth username (== fqdn)
+    :param username: http basic auth username
     :param password: update password
     :return: host object if authenticated, None otherwise.
     """
-    fqdn = username
     try:
-        host = Host.get_by_fqdn(fqdn)
+        host = Host.get_by_http_user(username)
     except ValueError:
         # logging this at debug level because otherwise it fills our logs...
-        logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn, ))
+        logger.debug('%s - received bad credentials' % (username, ))
         return None
     if host is not None:
+        fqdn = host.get_fqdn()
         ok = check_password(password, host.update_secret)
         success_msg = ('failure', 'success')[ok]
         msg = "api authentication %s. [hostname: %s (given in basic auth)]" % (success_msg, fqdn, )
@@ -218,19 +218,17 @@ class NicUpdateView(View):
             logger.debug('%s - received no auth' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = basic_authenticate(auth)
-        if '.' not in username:  # username MUST be the fqdn
-            # specifically point to configuration errors on client side
-            return Response('notfqdn')
-        if username in settings.BAD_HOSTS:
-            return Response('abuse', status=403)
         host = check_api_auth(username, password)
         if host is None:
             return basic_challenge("authenticate to update DNS", 'badauth')
-        logger.info("authenticated by update secret for host %s" % username)
+        fqdn = str(host.get_fqdn())
+        if fqdn in settings.BAD_HOSTS:
+            return Response('abuse', status=403)
+        logger.info("authenticated by update secret for host %s" % fqdn)
         if hostname is None:
             # as we use update_username == hostname, we can fall back to that:
-            hostname = username
-        elif hostname != username:
+            hostname = fqdn
+        elif hostname != fqdn:
             if '.' not in hostname:
                 # specifically point to configuration errors on client side
                 result = 'notfqdn'
@@ -238,7 +236,7 @@ class NicUpdateView(View):
                 # maybe this host is owned by same person, but we can't know.
                 result = 'nohost'  # or 'badauth'?
             msg = ("rejecting to update wrong host %s (given in query string) "
-                   "[instead of %s (given in basic auth)]" % (hostname, username))
+                   "[instead of %s (given in basic auth as user %s)]" % (hostname, fqdn, username))
             logger.warning(msg)
             host.register_client_result(msg, fault=True)
             return Response(result)
