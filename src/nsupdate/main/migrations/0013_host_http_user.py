@@ -16,6 +16,7 @@ def gen_http_user(apps, schema_editor):
         row.http_user = http_user
     for row in all_hosts:
         row.save(update_fields=['http_user'])
+
 class Migration(migrations.Migration):
 
     dependencies = [
