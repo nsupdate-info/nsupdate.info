@@ -41,7 +41,7 @@ from django.utils.translation import activate
 from nsupdate.main.dnstools import update_ns, FQDN
 
 def to_http_user(hostname):
-    return str(hostname[:_HOST_HTTP_USER_MAX_LENGTH]).zfill(_HOST_HTTP_USER_MAX_LENGTH)
+    return str(hostname)[:_HOST_HTTP_USER_MAX_LENGTH].zfill(_HOST_HTTP_USER_MAX_LENGTH)
 
 @pytest.yield_fixture(scope="function")
 def ddns_hostname():
