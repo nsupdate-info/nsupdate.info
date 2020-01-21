@@ -141,7 +141,7 @@ class Domain(models.Model):
         user_model = get_user_model()
         secret = user_model.objects.make_random_password(length=bitlength // 8)
         secret = secret.encode('utf-8')
-        self.nameserver_update_secret = secret_base64 = base64.b64encode(secret)
+        self.nameserver_update_secret = secret_base64 = base64.b64encode(secret).decode('utf-8')
         self.save()
         return secret_base64
 
