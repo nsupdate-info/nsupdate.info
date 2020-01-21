@@ -155,10 +155,14 @@ class Domain(models.Model):
         verbose_name_plural = _('domains')
         ordering = ('name',)
 
-_HOST_HTTP_USER_MAX_LENGTH=30 # limit comes from an external application not accepting longer username must be same than in Host.max_length
+
+# limit comes from an external application not accepting longer username must be same than in Host.max_length
+_HOST_HTTP_USER_MAX_LENGTH = 30
+
+
 def _http_user_generator():
     dt = datetime.utcnow().strftime('%Y%m%d%H%m%S%f')
-    maxrange = pow(10, _HOST_HTTP_USER_MAX_LENGTH-len(dt))
+    maxrange = pow(10, _HOST_HTTP_USER_MAX_LENGTH - len(dt))
     randvalue = random.randrange(0, maxrange)
     username = '{randvalue}{dt}'.format(randvalue=randvalue, dt=dt).zfill(_HOST_HTTP_USER_MAX_LENGTH)
     return username
