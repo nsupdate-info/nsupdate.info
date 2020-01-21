@@ -13,7 +13,7 @@ from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 from nsupdate.api.views import basic_authenticate
 
-from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET, TEST_SECRET2
+from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET, TEST_SECRET2, to_http_user
 
 USERNAME = 'test'
 PASSWORD = 'pass'
@@ -45,7 +45,7 @@ def make_basic_auth_header(username, password):
     # note: the coding dance in the next lines is to make sure we get str type
     # on python 2 as well as on python 3 as str is the type we get in the auth
     # object when practically running with a real web server.
-    user_pass = u'%s:%s' % (username, password)
+    user_pass = u'%s:%s' % (to_http_user(username), password)
     return 'Basic ' + str(base64.b64encode(user_pass.encode('utf-8')).decode('ascii'))
 
 
