@@ -102,7 +102,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     h = Host(name=hostname, domain=dt, created_by=u, netmask_ipv4=29, netmask_ipv6=64, http_user=to_http_user(hostname))
     h.generate_secret(secret=TEST_SECRET)
     hostname2 = TEST_HOST2.host
-    h2 = Host(name=hostname2, domain=dt, created_by=u2, netmask_ipv4=29, netmask_ipv6=64, http_user=to_http_user(hostname))
+    h2 = Host(name=hostname2, domain=dt, created_by=u2, netmask_ipv4=29, netmask_ipv6=64, http_user=to_http_user(hostname2))
     h2.generate_secret(secret=TEST_SECRET2)
 
     # "update other service" ddns_client feature
