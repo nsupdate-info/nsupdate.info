@@ -86,13 +86,6 @@ def test_nic_update_authorized_not_fqdn_hostname(client):
     assert response.content == b'notfqdn'
 
 
-def test_nic_update_authorized_not_fqdn_username(client):
-    response = client.get(reverse('nic_update'),
-                          HTTP_AUTHORIZATION=make_basic_auth_header('test', TEST_SECRET))
-    assert response.status_code == 200
-    assert response.content == b'notfqdn'
-
-
 def test_nic_update_authorized_invalid_ip1(client):
     response = client.get(reverse('nic_update') + '?myip=1234',
                           HTTP_AUTHORIZATION=make_basic_auth_header(to_http_user(TEST_HOST), TEST_SECRET))
