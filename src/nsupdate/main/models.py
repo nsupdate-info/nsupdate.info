@@ -160,7 +160,7 @@ def _http_user_generator():
     dt = datetime.utcnow().strftime('%Y%m%d%H%m%S%f')
     maxrange = pow(10, _HOST_HTTP_USER_MAX_LENGTH-len(dt))
     randvalue = random.randrange(0, maxrange)
-    username = f'{randvalue}{dt}'.zfill(_HOST_HTTP_USER_MAX_LENGTH)
+    username = '{randvalue}{dt}'.format(randvalue=randvalue, dt=dt).zfill(_HOST_HTTP_USER_MAX_LENGTH)
     return username
 
 
