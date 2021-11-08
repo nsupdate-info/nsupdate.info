@@ -62,12 +62,13 @@ BAD_HOSTS = set([])
 # please configure your own nameservers in your local settings file.
 NAMESERVERS = ['8.8.8.8', '1.1.1.1', ]
 
-# registration email validation: disallow specific email domains,
+# registration email validation: disallow specific email patterns,
 # e.g. domains that have a non-working mx / that are frequently abused.
 # we use a multiline string here with one regex per line (used with re.search).
-# the domains given below are just examples, please configure your own
+# the patterns given below are just examples, please configure your own
 # regexes in your local settings file.
-MAILDOMAIN_BLACKLIST = r"""
+EMAIL_BLACKLIST = r"""
+foobar@example\.org$
 mailcatch\.com$
 mailspam\.xyz$
 """
