@@ -105,14 +105,16 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     return keys[af == dns.inet.AF_INET6]
 
 
-def check_domain(domain):
+def check_domain(domain, nameserver_ip):
     fqdn = FQDN(host="connectivity-test", domain=domain)
 
     from .models import Domain
     d = Domain.objects.get(name=domain)
-    # temporarily set domain to available to allow add/update/deletes
+    # temporarily update domain to allow add/update/deletes
     domain_available_state = d.available
+    domain_nameserver_ip = d.nameserver_ip
     d.available = True
+    d.nameserver_ip = nameserver_ip
     d.save()
 
     try:
@@ -123,8 +125,9 @@ def check_domain(domain):
         raise NameServerNotAvailable(str(e))
 
     finally:
-        # reset domain available
+        # reset domain
         d.available = domain_available_state
+        d.nameserver_ip = domain_nameserver_ip
         d.save()
 
 

@@ -22,6 +22,7 @@ Fixes:
 
 - fixed misc. crashes
 - fixed Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret leading to trying to insert the string representation of the bytes object, so 91 characters in a varchar(88)
+- fixed connectivity test when editing domains, #479
 
 Other changes:
 
