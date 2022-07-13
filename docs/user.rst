@@ -216,6 +216,8 @@ Note:
   make sure you send this device's IPv6 address with the update (myip=...) or
   run the updater on that device and make sure the request originates from
   the IPv6 address you want in DNS.
+* if you want the related host to point to the same IPv4 address as the main
+  host (which is often the router), use 0 as the interface ID.
 
 
 Other Services Updaters
