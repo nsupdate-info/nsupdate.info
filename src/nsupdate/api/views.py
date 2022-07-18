@@ -251,8 +251,9 @@ class NicUpdateView(View):
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or ''
             ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
+        ipprefix = request.GET.get('ipprefix')
         secure = request.is_secure()
-        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
+        return _update_or_delete(host, ipaddr, secure, ipprefix=ipprefix, logger=logger, _delete=delete)
 
 
 class NicDeleteView(NicUpdateView):
@@ -306,8 +307,9 @@ class AuthorizedNicUpdateView(View):
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or empty string
             ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
+        ipprefix = request.GET.get('ipprefix')
         secure = request.is_secure()
-        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
+        return _update_or_delete(host, ipaddr, secure, ipprefix=ipprefix, logger=logger, _delete=delete)
 
 
 class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
@@ -323,12 +325,13 @@ class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
         return super(AuthorizedNicDeleteView, self).get(request, logger=logger, delete=delete)
 
 
-def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
+def _update_or_delete(host, ipaddr, secure=False, ipprefix=None, logger=None, _delete=False):
     """
     common code shared by the 2 update/delete views
 
     :param host: host object
     :param ipaddr: ip addr (v4 or v6)
+    :param ipprefix: ip6 prefix/netmask (v4 or v6, must be of same kind as ipaddr)
     :param secure: True if we use TLS/https
     :param logger: a logger object
     :param _delete: True for delete, False for update
@@ -362,6 +365,13 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
         IPNetwork(ipaddr)  # raise AddrFormatError here if there is an issue with ipaddr, see #394
+        if ipprefix:
+            ipprefix = str(ipprefix)
+            # do not allow to mix the kinds
+            network = IPNetwork(ipprefix)
+            if check_ip(str(network.ip)) != kind:
+                logger.warning("network kind of prefix is wrong")
+                raise ValueError("invalid kind")
     except (ValueError, UnicodeError, AddrFormatError):
         # invalid ip address string
         # some people manage to even give a non-ascii string instead of an ip addr
@@ -405,29 +415,32 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             # XXX unclear what to do for "other services" we relay updates to
             return Response('deleted %s' % rdtype)
         else:  # update
-            _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
+            _on_update_success(host, fqdn, kind, ipaddr, ipprefix, secure, logger)
             return Response('good %s' % ipaddr)
 
 
-def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
+def _on_update_success(host, fqdn, kind, ipaddr, ipprefix, secure, logger):
     """after updating the host in dns, do related other updates"""
     # update related hosts
+
+    if ipprefix:
+        network = IPNetwork(ipprefix)
+    else:
+        netmask = host.netmask_ipv4 if kind == 'ipv4' else host.netmask_ipv6
+        network = IPNetwork("%s/%d" % (ipaddr, netmask))
     rdtype = 'A' if kind == 'ipv4' else 'AAAA'
     for rh in host.relatedhosts.all():
         if rh.available:
             if kind == 'ipv4':
                 ifid = rh.interface_id_ipv4
-                netmask = host.netmask_ipv4
             else:  # kind == 'ipv6':
                 ifid = rh.interface_id_ipv6
-                netmask = host.netmask_ipv6
             ifid = ifid.strip() if ifid else ifid
             _delete = not ifid  # leave ifid empty if you don't want this rh record
             try:
                 rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
                 if not _delete:
                     ifid = IPAddress(ifid)
-                    network = IPNetwork("%s/%d" % (ipaddr, netmask))
                     rh_ipaddr = str(IPAddress(network.network) + int(ifid))
             except (IndexError, AddrFormatError, ValueError) as e:
                 logger.warning("trouble computing address of related host %s [%s]" % (rh, e))

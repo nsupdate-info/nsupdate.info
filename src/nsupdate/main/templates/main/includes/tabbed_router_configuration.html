@@ -125,7 +125,7 @@
         </table>
         <h5>{% trans "If you have IPv4 and IPv6" %}</h5>
         {% trans "Set Update-URL to the following (two URLs, separated by one space)" %}
-        <div class="well well-sm">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
+        <div class="well well-sm">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update?ipprefix=&lt;ip6lanprefix&gt;</div>
         <h5>{% trans "Forcing a dynamic DNS update" %}</h5>
         {% trans "If you want to force a dynamic update for testing purposes, you can do it like this:" %}
         <ul>

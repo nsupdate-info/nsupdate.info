@@ -150,6 +150,18 @@ def test_nic_update_authorized_myip_v4(client):
     # now check if it updated the ipv4 related hosts also:
     assert query_ns(TEST_HOST_RELATED, 'A') == '1.2.3.1'  # 1.2.3.4/29 + 0.0.0.1
 
+    # custom prefix (with custom netmask)
+    response = client.get(reverse('nic_update') + '?myip=4.3.2.1&ipprefix=1.2.3.4/8',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST_RELATED, 'A') == '1.0.0.1'  # 1.2.3.4/29 + 0.0.0.1
+
+    # mismatching prefix type
+    response = client.get(reverse('nic_update') + '?myip=4.3.2.1&ipprefix=3000::/16',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
+
 
 def test_nic_update_authorized_myip_v6(client):
     response = client.get(reverse('nic_update') + '?myip=2000::2',
@@ -169,6 +181,18 @@ def test_nic_update_authorized_myip_v6(client):
     assert response.content == b'nochg 2000::3'
     # now check if it updated the ipv4 related hosts also:
     assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2000::1'  # 2000::3/64 + ::1
+
+    # custom prefix (with custom netmask)
+    response = client.get(reverse('nic_update') + '?myip=2000::4&ipprefix=3000:ffff:ffff::/16',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '3000::1'  # 3000::/16 + ::1
+
+    # mismatching prefix type
+    response = client.get(reverse('nic_update') + '?myip=2000::4&ipprefix=127.0.0.1/16',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert response.content == b'dnserr'
 
 
 @pytest.mark.requires_sequential
