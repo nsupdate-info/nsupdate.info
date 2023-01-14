@@ -4,4 +4,6 @@ django-debug-toolbar
 pytest>=3.6
 pytest-django
 pytest-pep8
+pylint
+pylint-django
 Sphinx

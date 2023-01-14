@@ -53,3 +53,9 @@ NOTE: This is also needed before development because the command generates `./sr
 2. Create database using `pipenv run ./manage.py migrate`
 3. Create a superuser with `pipenv run ./manage.py createsuperuser`
 4. Run the server with `pipenv run ./manage.py runserver`
+
+# Lint
+
+Run [pylint](https://pylint.readthedocs.io/en/stable/) in error-only mode to check any problems: `pipenv run pylint src/nsupdate`
+
+NOTE: The project does not use pylint for formatting. Disabling the `errors-only` mode in `.pylintrc` will show a lot of warnings.
