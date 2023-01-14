@@ -8,7 +8,7 @@ import dns.message
 from django.core.management.base import BaseCommand
 from django.core.mail import send_mail
 from django.db import transaction
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from nsupdate.main.models import Domain, Host
 from nsupdate.main.dnstools import FQDN, query_ns, NameServerNotAvailable

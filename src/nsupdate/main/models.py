@@ -17,7 +17,7 @@ from django.conf import settings
 from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from . import dnstools
 

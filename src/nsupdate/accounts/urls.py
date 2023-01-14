@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import re_path
 from django.views.generic.base import TemplateView
 
 from registration.backends.default.views import ActivationView
@@ -8,12 +8,12 @@ from .views import UserProfileView, DeleteUserView, UserChangePasswordView
 
 
 urlpatterns = (
-    url(r'^profile/', UserProfileView.as_view(), name="account_profile"),
-    url(r'^settings/', UserChangePasswordView.as_view(), name='account_settings'),
-    url(r'^delete/', DeleteUserView.as_view(), name="account_delete"),
+    re_path(r'^profile/', UserProfileView.as_view(), name="account_profile"),
+    re_path(r'^settings/', UserChangePasswordView.as_view(), name='account_settings'),
+    re_path(r'^delete/', DeleteUserView.as_view(), name="account_delete"),
 
     # registration start
-    url(r'^activate/complete/$',
+    re_path(r'^activate/complete/$',
         TemplateView.as_view(template_name='registration/activation_complete.html'),
         name='registration_activation_complete'),
     # Activation keys get matched by \w+ instead of the more specific
@@ -21,16 +21,16 @@ urlpatterns = (
     # that way it can return a sensible "invalid key" message instead of a
     # confusing 404.
 
-    url(r'^activate/(?P<activation_key>\w+)/$',
+    re_path(r'^activate/(?P<activation_key>\w+)/$',
         ActivationView.as_view(),
         name='registration_activate'),
-    url(r'^register/$',
+    re_path(r'^register/$',
         RegistrationView.as_view(),
         name='registration_register'),
-    url(r'^register/complete/$',
+    re_path(r'^register/complete/$',
         TemplateView.as_view(template_name='registration/registration_complete.html'),
         name='registration_complete'),
-    url(r'^register/closed/$',
+    re_path(r'^register/closed/$',
         TemplateView.as_view(template_name='registration/registration_closed.html'),
         name='registration_disallowed'),
     # registration end
