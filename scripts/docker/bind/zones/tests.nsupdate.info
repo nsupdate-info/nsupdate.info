@@ -1,0 +1,18 @@
+$ORIGIN .
+$TTL 3600	; 1 hour
+tests.nsupdate.info	IN SOA	ns1.tests.nsupdate.info. root.tests.nsupdate.info. (
+				2016081401 ; serial
+				7200       ; refresh (2 hours)
+				1800       ; retry (30 minutes)
+				604800     ; expire (1 week)
+				60         ; minimum (1 minute)
+				)
+			NS	127.0.0.1.
+			A	127.0.0.1
+			AAAA	::1
+
+$ORIGIN tests.nsupdate.info.
+ipv4			A	1.2.3.4
+ipv6			AAAA	::1
+www	    		A	1.2.3.4
+		    	AAAA	::1
