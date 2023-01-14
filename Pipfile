@@ -21,6 +21,8 @@ pytest = ">=3.6"
 pytest-django = "*"
 pytest-pep8 = "*"
 sphinx = "*"
+pylint = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.10"
