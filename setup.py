@@ -32,7 +32,7 @@ setup(
     install_requires=[
         'dnspython',
         'netaddr',
-        'django>=2.2.0',
+        'django>=3.0.0',
         'django-bootstrap-form',
         'django-referrer-policy',
         'django-registration-redux',
