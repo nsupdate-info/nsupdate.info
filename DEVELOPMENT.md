@@ -59,3 +59,10 @@ NOTE: This is also needed before development because the command generates `./sr
 Run [pylint](https://pylint.readthedocs.io/en/stable/) in error-only mode to check any problems: `pipenv run pylint src/nsupdate`
 
 NOTE: The project does not use pylint for formatting. Disabling the `errors-only` mode in `.pylintrc` will show a lot of warnings.
+
+# Run tests
+
+Tests need to run inside Docker because they depend on specific bind9 config on 127.0.0.1:53.
+
+1. Build the docker image using: `docker build -t nsupdate scripts/docker/` once
+2. Then run tests via `docker run --dns 127.0.0.1 -v $PWD:/app nsupdate`
