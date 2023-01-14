@@ -2,8 +2,6 @@
 top-level url dispatching
 """
 
-import six
-
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -55,7 +53,7 @@ def http_error(request, status, exception=None):
         except (AttributeError, IndexError):
             pass
         else:
-            if isinstance(message, six.text_type):
+            if isinstance(message, str):
                 exception_repr = message
     else:
         # we do not have an exception for 500
