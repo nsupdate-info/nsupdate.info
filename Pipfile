@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dnspython = "*"
+netaddr = "*"
+django = "~=2.2.0"
+django-bootstrap-form = "*"
+django-referrer-policy = "*"
+django-registration-redux = "*"
+django-extensions = "*"
+social-auth-app-django = "*"
+requests = "*"
+setuptools-scm = "*"
+
+[dev-packages]
+django-debug-toolbar = "*"
+pytest = ">=3.6"
+pytest-django = "*"
+pytest-pep8 = "*"
+sphinx = "*"
+
+[requires]
+python_version = "3.10"
