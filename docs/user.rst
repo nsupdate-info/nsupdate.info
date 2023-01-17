@@ -360,7 +360,7 @@ Here are some clients that likely qualify:
 
   - we offer configuration help for it, just copy & paste
   - good working, reliable
-  - the official version is IPv4 only, IPv6 support needs a patched version
+  - IPv4 and IPv6 support
   - Linux & other POSIX systems
 * inadyn (>= 1.99.11)
 
