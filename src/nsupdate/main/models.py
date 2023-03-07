@@ -165,7 +165,7 @@ class Host(models.Model):
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, verbose_name=_("domain"))
     update_secret = models.CharField(
         _("update secret"),
-        max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
+        max_length=128,  # secret gets hashed (on save) to salted sha1, "sha1" + "$" + 22 chars salt + "$" + 40 chars sha1 = 68 chars
     )
     comment = models.CharField(
         _("comment"),
