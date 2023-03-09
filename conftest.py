@@ -7,6 +7,7 @@ import pytest
 from random import randint
 
 from nsupdate.main.dnstools import FQDN
+from nsupdate.main.models import _HOST_HTTP_USER_MAX_LENGTH
 
 from django.conf import settings
 
@@ -38,6 +39,10 @@ SECURE = False  # TLS/SNI support on python 2.x sucks :(
 from django.utils.translation import activate
 
 from nsupdate.main.dnstools import update_ns, FQDN
+
+
+def to_http_user(hostname):
+    return str(hostname)[:_HOST_HTTP_USER_MAX_LENGTH].zfill(_HOST_HTTP_USER_MAX_LENGTH)
 
 
 @pytest.yield_fixture(scope="function")
@@ -96,10 +101,12 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     )
     # a Host for api / session update tests
     hostname = TEST_HOST.host
-    h = Host(name=hostname, domain=dt, created_by=u, netmask_ipv4=29, netmask_ipv6=64)
+    h = Host(name=hostname, domain=dt, created_by=u, netmask_ipv4=29, netmask_ipv6=64,
+             http_user=to_http_user(TEST_HOST))
     h.generate_secret(secret=TEST_SECRET)
     hostname2 = TEST_HOST2.host
-    h2 = Host(name=hostname2, domain=dt, created_by=u2, netmask_ipv4=29, netmask_ipv6=64)
+    h2 = Host(name=hostname2, domain=dt, created_by=u2, netmask_ipv4=29, netmask_ipv6=64,
+              http_user=to_http_user(TEST_HOST2))
     h2.generate_secret(secret=TEST_SECRET2)
 
     # "update other service" ddns_client feature

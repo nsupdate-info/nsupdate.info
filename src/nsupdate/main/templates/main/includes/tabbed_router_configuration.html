@@ -49,11 +49,11 @@
         </p>
         {% trans "For IPv4 updates:" %}
         <div class="well well-sm">
-            <a href="https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
+            <a href="https://{{ host.http_user|default:"&lt;your host http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.http_user|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
         </div>
         {% trans "For IPv6 updates:" %}
         <div class="well well-sm">
-            <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
+            <a href="https://{{ host.http_user|default:'&lt;your host http user&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.http_user|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
         </div>
         {% blocktrans trimmed %}
         The IPs will be determined automatically using the remote address our service is seeing
@@ -75,7 +75,7 @@
             </li>
             <li>{% trans "Do HTTP Basic Auth with:" %}
                 <ul>
-                    <li>{% trans "Username:" %} {{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}</li>
+                    <li>{% trans "Username:" %} {{ host.http_user|default:"&lt;your host http user&gt;" }}</li>
                     <li>{% trans "Password:" %} {{ update_secret|default:"&lt;your secret&gt;" }}</li>
                 </ul>
             </li>
@@ -120,7 +120,7 @@
             <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
             <tr><td>Update-URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
             <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
-            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
         <h5>{% trans "If you have IPv4 and IPv6" %}</h5>
@@ -146,7 +146,7 @@
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>DDNS Service</td><td>Custom</td></tr>
             <tr><td>DYNDNS Server</td><td>{{ WWW_IPV4_HOST }}</td></tr>
-            <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Username</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
             <tr><td>Hostname</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>URL</td><td>/nic/update?</td></tr>
@@ -168,7 +168,7 @@ protocol=dyndns2
 use=web, web=http://{{ WWW_IPV4_HOST }}/myip
 ssl=yes  # yes = use https for updates
 server={{ WWW_IPV4_HOST }}
-login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+login={{ host.http_user|default:"&lt;your http user&gt;" }}
 password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 
@@ -181,7 +181,7 @@ password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #usev6=if, if=eth0
 #ssl=yes  # yes = use https for updates
 #server={{ WWW_IPV6_HOST }}
-#login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+#login={{ host.http_user|default:"&lt;your http user&gt;" }}
 #password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 </pre>
@@ -198,7 +198,7 @@ configs = myconf_ipv4, myconf_ipv6
 # the detector dnswanip returns:
 use_preset = nsupdate.info:ipv4
 updater-hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
-updater-userid = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-userid = {{ host.http_user|default:"&lt;your http user&gt;" }}
 updater-password = {{ update_secret|default:"&lt;your secret&gt;" }}
 detector = webcheck4
 
@@ -207,7 +207,7 @@ detector = webcheck4
 # the detector dnswanip returns:
 use_preset = nsupdate.info:ipv6
 updater-hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
-updater-userid = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+updater-userid = {{ host.http_user|default:"&lt;your http user&gt;" }}
 updater-password = {{ update_secret|default:"&lt;your secret&gt;" }}
 detector = webcheck6
 
@@ -220,7 +220,7 @@ detector = webcheck6
         interface pppoe0 {
             service custom-nsupdate {
                 host-name {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
-                login {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+                login {{ host.http_user|default:"&lt;your http user&gt;" }}
                 password {{ update_secret|default:"&lt;your secret&gt;" }}
                 protocol dyndns2
                 server {{ WWW_IPV4_HOST }}
@@ -244,7 +244,7 @@ detector = webcheck6
             <tr><td>Service</td><td>nsupdate.info</td></tr>
             <tr><td>Enabled</td><td>(check)</td></tr>
             <tr><td>Host Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
-            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
     </div>
@@ -261,7 +261,7 @@ detector = webcheck6
             <tr><td>Service Type</td><td>DynDNS</td></tr>
             <tr><td>Hostname</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Server</td><td>{{ WWW_IPV4_HOST }}</td></tr>
-            <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Username</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
     </div>
@@ -275,7 +275,7 @@ period 300
 
 system ipv4@nsupdate.info
     ssl
-    username {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+    username {{ host.http_user|default:"&lt;your http user&gt;" }}
     password {{ update_secret|default:"&lt;your secret&gt;" }}
     alias {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 
@@ -288,7 +288,7 @@ period       = 300
 
 provider ipv4@nsupdate.info {
     ssl      = true
-    username = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+    username = {{ host.http_user|default:"&lt;your http user&gt;" }}
     password = {{ update_secret|default:"&lt;your secret&gt;" }}
     hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 }
@@ -310,7 +310,7 @@ config service "ipv4ddns"
     option ip_url "http://{{ WWW_IPV4_HOST }}/myip"
 
     option domain "{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}"
-    option username "{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}"
+    option username "{{ host.http_user|default:"&lt;your http user&gt;" }}"
     option password "{{ update_secret|default:"&lt;your secret&gt;" }}"
 
     # for https support, first install wget with ssl support and
@@ -343,7 +343,7 @@ config service "ipv4ddns"
             <tr><td>Interface to monitor</td><td>WAN {% trans "(most likely)" %}</td></tr>
             <tr><td>Interface to send from</td><td>WAN {% trans "(most likely)" %}</td></tr>
             <tr><td>Verbose logging</td><td>{% trans "(select this as long as you need it)" %}</td></tr>
-            <tr><td>Username</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>Username</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
             <tr><td>Update URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
             <tr><td>Result Match</td><td>good %IP%|nochg %IP%</td></tr>
@@ -357,7 +357,7 @@ config service "ipv4ddns"
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
             <tr><td>Provider</td><td>other Provider</td></tr>
             <tr><td>Domain name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
-            <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>User name</td><td>{{ host.http_user|default:"&lt;your http user&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
             <tr><td>Update server address</td><td>https://{{ WWW_IPV4_HOST }}</td></tr>
             <tr><td>Protocol</td><td>https</td></tr>
@@ -371,9 +371,9 @@ config service "ipv4ddns"
         It periodically checks your IP and updates DNS if it changes.
         {% endblocktrans %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">{% trans "similar, IPv4 only" %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">{% trans "similar, IPv6 only" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/update">{% trans "similar, IPv4 only" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/update">{% trans "similar, IPv6 only" %}</a></li>
         </ul>
         <h4>{% trans "URLs for browser / http user agent use" %}</h4>
         {% trans "Important: Do not send an update if your IP did not change since last update!" %}
@@ -391,14 +391,14 @@ config service "ipv4ddns"
         </ul>
         {% trans "Giving the http basic auth username and password in the URL:" %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">{% trans "similar, IPv4 only" %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update">{% trans "similar, IPv6 only" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update">{% trans "update DNS to point to remote IPv4 or IPv6 address" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">{% trans "similar, IPv4 only" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV6_HOST }}/nic/update">{% trans "similar, IPv6 only" %}</a></li>
         </ul>
         {% trans "As above, but manually specifying the IP address:" %}
         <ul>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1">{% trans "update DNS to point to IPv4 127.0.0.1" %}</a></li>
-            <li><a href="https://{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1">{% trans "update DNS to point to IPv6 ::1" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=127.0.0.1">{% trans "update DNS to point to IPv4 127.0.0.1" %}</a></li>
+            <li><a href="https://{{ host.http_user|default:"&lt;your http user&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_HOST }}/nic/update?myip=::1">{% trans "update DNS to point to IPv6 ::1" %}</a></li>
         </ul>
         {% trans "Explanation of parameters:" %}
         <ul>
