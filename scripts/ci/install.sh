@@ -17,9 +17,9 @@ sudo rm -f /etc/resolv.conf
 sudo cp scripts/ci/etc/resolv.conf /etc/
 sudo chattr +i /etc/resolv.conf
 
-dig @127.0.0.1 nsupdate.info SOA
-dig @127.0.0.1 tests.nsupdate.info SOA
-sudo netstat -tulpen | grep 53
+# dig @127.0.0.1 nsupdate.info SOA
+# dig @127.0.0.1 tests.nsupdate.info SOA
+# sudo netstat -tulpen | grep 53
 
 pip install Django~=$DJANGO
 pip install -r requirements.d/ci.txt
