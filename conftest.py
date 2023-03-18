@@ -40,7 +40,7 @@ from django.utils.translation import activate
 from nsupdate.main.dnstools import update_ns, FQDN
 
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def ddns_hostname():
     """
     get a random hostname for tests and make sure it is removed from dns
@@ -53,7 +53,7 @@ def ddns_hostname():
     update_ns(fqdn, 'AAAA', action='del')
 
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def ddns_fqdn(ddns_hostname):
     yield FQDN(ddns_hostname, TESTDOMAIN)
 
