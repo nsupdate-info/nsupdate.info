@@ -5,6 +5,7 @@ local_settings.py
 .coverage
 .idea/
 .cache/
+.tox/
 *.sqlite
 *.egg-info
 dist/

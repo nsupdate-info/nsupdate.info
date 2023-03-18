@@ -2,8 +2,9 @@
 # setuptools_scm - it includes all git-committed files.
 # but we want to include some non-committed files/dirs needed in
 # the sdist and exclude some committed files/dirs not needed in the sdist:
-exclude .gitattributes .gitignore .travis.yml
+exclude .gitattributes .gitignore
 exclude manage.py requirements.txt
 prune .tx
+prune .github
 prune logo
-prune scripts/travis
+prune scripts/ci

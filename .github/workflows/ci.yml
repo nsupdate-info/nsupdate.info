@@ -80,17 +80,12 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
-    - name: Install OS packages
+    - name: Install and configure bind
       run: |
-        DJANGO=2.2 bash scripts/travis/install.sh
-
-    - name: Install Python requirements
+        bash scripts/ci/install-bind.sh
+    - name: Install Python tools and tox
       run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install -r requirements.d/dev.txt
-    - name: Install nsupdate.info
-      run: |
-        pip install -e .
+        python -m pip install --upgrade pip setuptools wheel tox
     - name: run tox env
       run: |
         tox --skip-missing-interpreters
