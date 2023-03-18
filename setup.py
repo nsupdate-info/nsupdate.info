@@ -38,7 +38,8 @@ setup(
         'django-extensions',
         'social-auth-app-django',
         'requests',  # for our ddns_client
-        'setuptools_scm'
+        'setuptools_scm',
+        'six',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
