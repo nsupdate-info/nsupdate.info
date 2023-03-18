@@ -82,7 +82,7 @@ jobs:
 
     - name: Install OS packages
       run: |
-        DJANGO=2.2 bash scripts/travis/install.sh
+        DJANGO=2.2 bash scripts/ci/install.sh
 
     - name: Install Python requirements
       run: |
