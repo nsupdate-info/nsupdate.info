@@ -80,9 +80,9 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
-    - name: Install OS packages
+    - name: Install and configure bind
       run: |
-        DJANGO=2.2 bash scripts/ci/install.sh
+        bash scripts/ci/install-bind.sh
 
     - name: Install Python requirements
       run: |
