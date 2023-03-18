@@ -13,7 +13,6 @@ sudo cp scripts/ci/etc/bind/zones/* /etc/bind/zones/
 sudo chown bind.bind /etc/bind/zones/*
 sudo service bind9 restart
 
-sudo dpkg -P ubuntu-minimal resolvconf
 sudo rm -f /etc/resolv.conf
 sudo cp scripts/ci/etc/resolv.conf /etc/
 sudo chattr +i /etc/resolv.conf
