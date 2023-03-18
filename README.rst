@@ -16,9 +16,9 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
         :alt: Documentation
         :target: https://nsupdateinfo.readthedocs.io/en/stable/
 
-.. |build| image:: https://api.travis-ci.org/nsupdate-info/nsupdate.info.svg
+.. |build| image:: https://github.com/nsupdate-info/nsupdate.info/workflows/CI/badge.svg?branch=master
         :alt: Build Status
-        :target: https://travis-ci.org/nsupdate-info/nsupdate.info
+        :target: https://github.com/nsupdate-info/nsupdate.info/actions
 
 .. |coverage| image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
         :alt: Test Coverage
