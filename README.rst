@@ -12,7 +12,7 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
 
 |doc| |build| |coverage| |package|
 
-.. |doc| image:: https://readthedocs.org/projects/nsupdate/badge/?version=stable
+.. |doc| image:: https://readthedocs.org/projects/nsupdateinfo/badge/?version=stable
         :alt: Documentation
         :target: https://nsupdateinfo.readthedocs.io/en/stable/
 
