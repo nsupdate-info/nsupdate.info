@@ -20,9 +20,9 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
         :alt: Build Status
         :target: https://github.com/nsupdate-info/nsupdate.info/actions
 
-.. |coverage| image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
+.. |coverage| image:: https://codecov.io/gh/nsupdate-info/nsupdate.info/branch/master/graph/badge.svg?token=3qFlVUxINM
         :alt: Test Coverage
-        :target: https://coveralls.io/r/nsupdate-info/nsupdate.info
+        :target: https://codecov.io/gh/nsupdate-info/nsupdate.info
 
 .. |package| image:: https://badge.fury.io/py/nsupdate.png
         :alt: PyPI Package
