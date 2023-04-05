@@ -33,7 +33,7 @@ pipenv requirements --exclude-markers > requirements.d/all.txt
 pipenv requirements --exclude-markers --dev-only > requirements.d/dev.txt
 ```
 
-Verify the updated dependencies don't include any security vulnerabilities
+Verify the updated dependencies don't include any security vulnerabilities:
 
 ```
 pipenv check
@@ -41,8 +41,8 @@ pipenv check
 
 # Build locally
 
-1. Install `build` (see [docs](https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives) for example via `pacman -S python-build` on ArchLinux
-2. Afterwards run the command to generate pip packgases in `dist/`: `pyproject-build`
+1. Install `build` (see [docs](https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives) for example), e.g. via `pacman -S python-build` on ArchLinux
+2. Afterwards, run the command to generate pip packages in `dist/`: `pyproject-build`
 
 NOTE: This is also needed before development because the command generates `./src/nsupdate/_version.py`.
 
@@ -62,7 +62,8 @@ NOTE: The project does not use pylint for formatting. Disabling the `errors-only
 
 # Run tests
 
-Tests need to run inside Docker because they depend on specific bind9 config on 127.0.0.1:53.
+Tests need to run inside Docker because they depend on a bind9 nameserver
+running a specific configuration on 127.0.0.1:53.
 
-1. Build the docker image using: `docker build -t nsupdate scripts/docker/` once
+1. Build the docker image once, using: `docker build -t nsupdate scripts/docker/`
 2. Then run tests via `docker run --dns 127.0.0.1 -v $PWD:/app nsupdate`
