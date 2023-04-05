@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 
 LANGUAGE_SESSION_KEY = "_language"
 
+
 class UserProfile(models.Model):
     """
     stuff we need additionally to what Django stores in User model

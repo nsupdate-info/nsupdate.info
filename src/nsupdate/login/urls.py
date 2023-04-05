@@ -11,15 +11,15 @@ urlpatterns = (
 
     # password reset urls
     re_path(r'^password_reset/$',
-        PasswordResetView.as_view(template_name='password_reset.html'),
-        name='password_reset'),
+            PasswordResetView.as_view(template_name='password_reset.html'),
+            name='password_reset'),
     re_path(r'^password_reset_done/$',
-        PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
-        name='password_reset_done'),
+            PasswordResetDoneView.as_view(template_name='password_reset_done.html'),
+            name='password_reset_done'),
     re_path(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$',
-        PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
-        name='password_reset_confirm'),
+            PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),
+            name='password_reset_confirm'),
     re_path(r'^password_reset_complete/$',
-        PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
-        name='password_reset_complete'),
+            PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),
+            name='password_reset_complete'),
 )
