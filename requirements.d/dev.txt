@@ -6,4 +6,6 @@ pytest-django
 pytest-cov
 tox
 wheel
+pylint
+pylint-django
 Sphinx

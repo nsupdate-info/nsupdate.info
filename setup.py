@@ -32,7 +32,7 @@ setup(
     install_requires=[
         'dnspython',
         'netaddr',
-        'django>=2.2.0',
+        'django>=3.2.0',
         'django-bootstrap-form',
         'django-referrer-policy',
         'django-registration-redux',
@@ -40,7 +40,6 @@ setup(
         'social-auth-app-django',
         'requests',  # for our ddns_client
         'setuptools_scm',
-        'six',
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

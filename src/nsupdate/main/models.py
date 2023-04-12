@@ -18,8 +18,6 @@ from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.six import text_type
 
 from . import dnstools
 
@@ -34,7 +32,6 @@ def result_fmt(msg):
     return msg[:RESULT_MSG_LEN]
 
 
-@python_2_unicode_compatible
 class BlacklistedHost(models.Model):
     name_re = models.CharField(
         _('name RegEx'),
@@ -81,7 +78,6 @@ UPDATE_ALGORITHMS = {
 UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
-@python_2_unicode_compatible
 class Domain(models.Model):
     name = models.CharField(
         _("name"),
@@ -154,7 +150,6 @@ class Domain(models.Model):
         ordering = ('name',)
 
 
-@python_2_unicode_compatible
 class Host(models.Model):
     name = models.CharField(
         _("name"),
@@ -373,7 +368,6 @@ def post_save_host(sender, **kwargs):
 post_save.connect(post_save_host, sender=Host)
 
 
-@python_2_unicode_compatible
 class RelatedHost(models.Model):
     # host addr = network_of_main_host + interface_id
     name = models.CharField(
@@ -414,7 +408,7 @@ class RelatedHost(models.Model):
         verbose_name=_("main host"))
 
     def __str__(self):
-        return u"%s.%s" % (self.name, text_type(self.main_host))
+        return u"%s.%s" % (self.name, str(self.main_host))
 
     class Meta(object):
         unique_together = (('name', 'main_host'),)
@@ -447,7 +441,6 @@ class RelatedHost(models.Model):
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
 
 
-@python_2_unicode_compatible
 class ServiceUpdater(models.Model):
     name = models.CharField(
         _("name"),
@@ -491,7 +484,6 @@ class ServiceUpdater(models.Model):
         verbose_name_plural = _('service updaters')
 
 
-@python_2_unicode_compatible
 class ServiceUpdaterHostConfig(models.Model):
     service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE, verbose_name=_("service"))
 
