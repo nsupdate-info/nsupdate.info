@@ -43,6 +43,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'  # == 32bit integer
+
 # these useragents are unacceptable for /nic/update service
 BAD_AGENTS = set([])  # list can have str elements
 
