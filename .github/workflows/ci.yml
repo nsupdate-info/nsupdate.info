@@ -47,6 +47,9 @@ jobs:
       matrix:
         include:
             - os: ubuntu-22.04
+              python-version: '3.7'
+              toxenv: py37
+            - os: ubuntu-22.04
               python-version: '3.8'
               toxenv: py38
             - os: ubuntu-22.04
