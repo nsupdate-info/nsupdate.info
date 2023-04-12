@@ -76,7 +76,7 @@ class EditDomainForm(forms.ModelForm):
 
         if self.cleaned_data['available']:
             try:
-                check_domain(self.instance.name)
+                check_domain(self.instance.name, cleaned_data['nameserver_ip'])
 
             except (NameServerNotAvailable, ):
                 raise forms.ValidationError(
