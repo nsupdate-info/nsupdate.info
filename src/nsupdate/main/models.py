@@ -3,6 +3,7 @@ models for hosts, domains, service updaters, ...
 """
 
 import re
+import secrets
 import time
 import base64
 
@@ -30,6 +31,10 @@ def result_fmt(msg):
     """
     msg = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(time.time())) + ' ' + msg
     return msg[:RESULT_MSG_LEN]
+
+
+def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
+    return ''.join(secrets.choice(allowed_chars) for i in range(length))
 
 
 class BlacklistedHost(models.Model):
@@ -135,7 +140,7 @@ class Domain(models.Model):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
         user_model = get_user_model()
-        secret = user_model.objects.make_random_password(length=bitlength // 8)
+        secret = make_random_password(length=bitlength // 8)
         secret = secret.encode('utf-8')
         self.nameserver_update_secret = secret_base64 = base64.b64encode(secret).decode('utf-8')
         self.save()
@@ -253,8 +258,13 @@ class Host(models.Model):
         return u"%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
+        # deprecated, but works:
         unique_together = (('name', 'domain'),)
         index_together = (('name', 'domain'),)
+        # this seems to be the new way, but it does not work:
+        # ValueError: Found wrong number (2) of indexes for main_host(name, domain_id).
+        # constraints = [models.constraints.UniqueConstraint(fields=['name', 'domain'], name='unique_host_domain')]
+        # indexes = [models.Index(fields=['name', 'domain'])]
         verbose_name = _('host')
         verbose_name_plural = _('hosts')
         ordering = ('domain', 'name')  # groupby domain and sort by name
@@ -328,7 +338,7 @@ class Host(models.Model):
         # secure anyway.
         if secret is None:
             user_model = get_user_model()
-            secret = user_model.objects.make_random_password()
+            secret = make_random_password()
         self.update_secret = make_password(
             secret,
             hasher='sha1'
