@@ -31,7 +31,6 @@ You need the transifex-client package so you have the tx command:
 
 ::
 
-    # currently only works on python 2.x, transifex-client github repo has 3.3 support
     pip install transifex-client
 
 

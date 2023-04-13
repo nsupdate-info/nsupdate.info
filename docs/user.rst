@@ -359,20 +359,17 @@ Here are some clients that likely qualify:
 * ddclient
 
   - we offer configuration help for it, just copy & paste
-  - good working, reliable
   - IPv4 and IPv6 support
   - Linux & other POSIX systems
-* inadyn (>= 1.99.11)
+* inadyn
 
   - we offer configuration help for it, just copy & paste
-  - good working, reliable
-  - IPv4 only
+  - IPv4 and IPv6 support
   - Linux & other POSIX systems
 * python-dyndnsc
 
-  - still alpha/beta, but works
-  - IPv4 and good IPv6 support
-  - Mac OS X, Linux and FreeBSD
+  - IPv4 and IPv6 support
+  - macOS, Linux and BSD
 * whatever your router / gateway / firewall has for dyndns / ddns
 
   - quality of update client implementations varies widely
