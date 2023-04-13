@@ -32,15 +32,22 @@
     <div class="col-md-6">
         <h2>{% trans "Login with a remote Account" %}</h2>
         <hr />
-        <div class="btn-toolbar" role="toolbar">
-        {% for backend in backends.backends %}
-            <div class="btn-group">
-                <a class="btn btn-default" role="button" href="{% url 'social:begin' backend %}">
-                    <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
-                </a>
+        {% if backends.backends %}
+            <div class="btn-toolbar" role="toolbar">
+            {% for backend in backends.backends %}
+                <div class="btn-group">
+                    <a class="btn btn-default" role="button" href="{% url 'social:begin' backend %}">
+                        <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
+                    </a>
+                </div>
+            {% endfor %}
             </div>
-        {% endfor %}
-        </div>
+        {% else %}
+            <div class="jumbotron">
+            <p>{% trans "No remote account logins enabled." %}</p>
+            <p>{% trans "Please login with a local account." %}</p>
+            </div>
+        {% endif %}
     </div>
 </div>
 

@@ -305,16 +305,16 @@ PASSWORD_HASHERS = [
 
 # python-social-auth settings
 AUTHENTICATION_BACKENDS = (
-    # 'social_core.backends.amazon.AmazonOAuth2',
-    # 'social_core.backends.bitbucket.BitbucketOAuth',
-    # 'social_core.backends.disqus.DisqusOAuth2',
-    # 'social_core.backends.dropbox.DropboxOAuth2V2',
-    # 'social_core.backends.github.GithubOAuth2',
-    # 'social_core.backends.google.GoogleOAuth2',
-    # 'social_core.backends.reddit.RedditOAuth2',
-    # 'social_core.backends.soundcloud.SoundcloudOAuth2',
-    # 'social_core.backends.stackoverflow.StackoverflowOAuth2',
-    # 'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.amazon.AmazonOAuth2',
+    'social_core.backends.bitbucket.BitbucketOAuth',
+    'social_core.backends.disqus.DisqusOAuth2',
+    'social_core.backends.dropbox.DropboxOAuth2V2',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.reddit.RedditOAuth2',
+    'social_core.backends.soundcloud.SoundcloudOAuth2',
+    'social_core.backends.stackoverflow.StackoverflowOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
