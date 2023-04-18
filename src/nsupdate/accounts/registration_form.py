@@ -27,14 +27,14 @@ email_blacklist = settings.EMAIL_BLACKLIST.strip().splitlines()
 def check_mx(domain):
     valid = False
     try:
-        mx_answers = resolver.query(domain, 'MX')
+        mx_answers = resolver.resolve(domain, 'MX', search=True)
         # domain exists in DNS, domain has MX
         mx_entries = sorted([(mx_rdata.preference, mx_rdata.exchange) for mx_rdata in mx_answers])
         for preference, mx in mx_entries:
             try:
-                addr_answers = resolver.query(mx, 'A')
+                addr_answers = resolver.resolve(mx, 'A', search=True)
             except dns.resolver.NoAnswer:
-                addr_answers = resolver.query(mx, 'AAAA')
+                addr_answers = resolver.resolve(mx, 'AAAA', search=True)
             # MX has IP addr
             mx_addrs = [addr_rdata.address for addr_rdata in addr_answers]
             for mx_addr in mx_addrs:
