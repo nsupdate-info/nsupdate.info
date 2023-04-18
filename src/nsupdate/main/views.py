@@ -240,7 +240,7 @@ class AddHostView(CreateView):
             success, level, msg = False, messages.ERROR, 'Host already exists in DNS.'
         except dnstools.DNSException as e:
             success, level, msg = False, messages.ERROR, 'DNSException [%s]' % str(e)
-        except socket.error as err:
+        except OSError as err:  # was: socket.error (deprecated)
             success, level, msg = False, messages.ERROR, 'Communication to name server failed [%s]' % str(err)
         else:
             self.object.created_by = self.request.user
