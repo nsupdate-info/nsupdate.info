@@ -240,7 +240,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     :type rdtype: int or str
     :param prefer_primary: whether we rather want to query the primary first
     :return: IP (as str)
-    :raises: see dns.resolver.Resolver.query
+    :raises: see dns.resolver.Resolver.resolve
     """
     assert isinstance(fqdn, FQDN)
     nameserver, nameserver2, origin = get_ns_info(fqdn)[0:3]
@@ -260,11 +260,12 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     # (used if flags = None is given). Thus, we explicitly give flags (all off):
     resolver.flags = 0
     try:
-        answer = resolver.query(str(fqdn), rdtype)
+        answer = resolver.resolve(str(fqdn), rdtype, search=True)
         ip = str(list(answer)[0])
         logger.debug("query: %s answer: %s" % (fqdn, ip))
         return ip
-    except (dns.resolver.Timeout, dns.resolver.NoNameservers, dns.message.UnknownTSIGKey) as e:  # OSError (socket.error) also?
+    except (dns.resolver.Timeout, dns.resolver.LifetimeTimeout,
+            dns.resolver.NoNameservers, dns.message.UnknownTSIGKey) as e:  # OSError (socket.error) also?
         logger.warning("error when querying for name '%s' in zone '%s' with rdtype '%s' [%s]." % (
                        fqdn.host, origin, rdtype, str(e)))
         set_ns_availability(origin, False)
