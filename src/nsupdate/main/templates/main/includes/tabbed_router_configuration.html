@@ -281,19 +281,29 @@ system ipv4@nsupdate.info
 
 # note: no IPv6 support in inadyn yet.
 </pre>
-        <h4>inadyn ({% trans "verified with" %} 2.1)</h4>
+        <h4>inadyn ({% trans "verified with" %} 2.10.0)</h4>
         <pre># /etc/inadyn.conf
 
 period       = 300
 
-provider ipv4@nsupdate.info {
+# use either ipv4 or ipv6 configuration below
+#provider ipv4@nsupdate.info {
+#    ssl      = true
+#    username = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+#    password = {{ update_secret|default:"&lt;your secret&gt;" }}
+#    hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+#}
+
+# IPv6 supported in inadyn, but no pre-defined provider
+custom ipv6@nsupdate.info {
     ssl      = true
     username = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
     password = {{ update_secret|default:"&lt;your secret&gt;" }}
     hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+    ddns-server = {{ WWW_IPV6_HOST }}
+    ddns-path = "/nic/update?hostname=%h&myip=%i"
 }
 
-# note: no IPv6 support in inadyn yet.
 </pre>
     </div>
     <div class="tab-pane" id="openwrt">
