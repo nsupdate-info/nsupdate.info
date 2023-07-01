@@ -287,6 +287,7 @@ system ipv4@nsupdate.info
 period       = 300
 
 # use either ipv4 or ipv6 configuration below
+# IPv4 support
 #provider ipv4@nsupdate.info {
 #    ssl      = true
 #    username = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
@@ -294,14 +295,12 @@ period       = 300
 #    hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 #}
 
-# IPv6 supported in inadyn, but no pre-defined provider
-custom ipv6@nsupdate.info {
+# IPv6 support
+provider ipv6@nsupdate.info {
     ssl      = true
     username = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
     password = {{ update_secret|default:"&lt;your secret&gt;" }}
     hostname = {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
-    ddns-server = {{ WWW_IPV6_HOST }}
-    ddns-path = "/nic/update?hostname=%h&myip=%i"
 }
 
 </pre>
