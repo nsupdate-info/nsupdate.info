@@ -50,7 +50,7 @@ additionally with all commands that need it::
 
     export DJANGO_SETTINGS_MODULE=local_settings  # this is YOUR settings file
     or
-    django-admin.py --settings=local_settings ...
+    django-admin --settings=local_settings ...
     python manage.py --settings=local_settings ...
 
 
@@ -67,7 +67,7 @@ Initialize the database
 
 To create and initialize the database, use::
 
-    python manage.py migrate
+    django-admin migrate
 
 
 Create the superuser account
@@ -75,7 +75,7 @@ Create the superuser account
 
 To create the user who is administrator of the service, use::
 
-    python manage.py createsuperuser
+    django-admin createsuperuser
 
 
 Start the development server
@@ -83,7 +83,7 @@ Start the development server
 
 ::
 
-    python manage.py runserver
+    django-admin runserver
 
 
 Nameserver
@@ -138,12 +138,12 @@ django apps (wsgi apps) with the webserver you use.
 
 Django has nice generic documentation about this, see there:
 
-https://docs.djangoproject.com/en/1.11/howto/deployment/
+https://docs.djangoproject.com/en/4.2/howto/deployment/
 
 Even if you do not follow or fully read the deployment guide, make sure that
 you at least read the checklist:
 
-https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 
 HTTP Basic Auth
@@ -173,7 +173,7 @@ to configure STATIC_ROOT for that::
 And then, run this::
 
     umask 0022  # make sure group and others keep r and x, but not w
-    python manage.py collectstatic
+    django-admin collectstatic
 
 This will copy all the static files into STATIC_ROOT.
 
@@ -225,7 +225,7 @@ To make nsupdate.info (Django) use PostgreSQL, put this into YOUR settings::
     }
 
 
-Now proceed with manage migrate as shown above.
+Now proceed with django-admin migrate as shown above.
 
 Disable User Registration
 -------------------------
@@ -302,16 +302,17 @@ it runs as the same user as the nsupdate.info wsgi application::
 
     PYTHONPATH=/srv/nsupdate.info
     DJANGO_SETTINGS_MODULE=local_settings
+    PATH=/srv/nsupdate.info/env/bin:$PATH
     # reinitialize the test user:
-    50 2 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py testuser
+    50 2 * * * django-admin testuser
     # reset the fault counters:
-    55 2 * * 6 $HOME/env/bin/python $HOME/env/bin/django-admin.py faults --flag-abuse=150 --reset-client --notify-user
+    55 2 * * 6 django-admin faults --flag-abuse=150 --reset-client --notify-user
     # clear expired sessions from the database, use your correct settings module:
-    0  3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py clearsessions
+    0  3 * * * django-admin clearsessions
     # clear outdated registrations:
-    30 3 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py cleanupregistration
+    30 3 * * * django-admin cleanupregistration
     # check whether the domain nameservers are reachable / answer queries:
-    0  4 * * * $HOME/env/bin/python $HOME/env/bin/django-admin.py domains --check --notify-user
+    0  4 * * * django-admin domains --check --notify-user
 
 
 Dealing with abuse
@@ -386,14 +387,14 @@ important hints.
 
 After upgrading the code, you'll usually need to run::
 
-    python manage.py migrate
+    django-admin migrate
 
 This fixes your database schema so it is compatible with the new code.
 
 Maybe you also need the next command (we bundle .mo files, but if you run into
 troubles with them, try this)::
 
-    python manage.py compilemessages
+    django-admin compilemessages
 
 Of course, you'll also need to restart the django/wsgi processes, so the new
 code gets loaded.

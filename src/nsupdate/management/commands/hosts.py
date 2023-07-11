@@ -7,7 +7,7 @@ from datetime import datetime
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from nsupdate.main.models import Host
 from nsupdate.utils.mail import translate_for_user, send_mail_to_user

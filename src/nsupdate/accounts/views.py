@@ -10,7 +10,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import update_session_auth_hash
 
 from .forms import UserForm, UserProfileForm
