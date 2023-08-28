@@ -1,5 +1,5 @@
 """
-nsupdate - dynamic DNS service
+nsupdate - a dynamic DNS service
 """
 
 import re
