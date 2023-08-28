@@ -4,7 +4,7 @@ nsupdate - dynamic DNS service
 
 import re
 
-from ._version import version
+from ._version import version, version_tuple
 
 
 class Version(tuple):  # pragma: no cover
