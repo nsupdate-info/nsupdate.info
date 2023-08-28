@@ -48,7 +48,7 @@ copyright = u'2013-2023, The nsupdate.info Team'
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
-from nsupdate import version as nsupdate_version
+from nsupdate import version_tuple as nsupdate_version
 # The short X.Y version.
 version = '%d.%d' % nsupdate_version[:2]
 # The full version, including alpha/beta/rc tags.
