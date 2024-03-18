@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 dnspython = "*"
 netaddr = "*"
-django = "~=4.2.10"
+django = "~=4.2.11"
 django-bootstrap-form = "*"
 django-referrer-policy = "*"
 django-registration-redux = "*"
