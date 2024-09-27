@@ -17,6 +17,7 @@ New Features:
   without causing database accesses.
 - django-admin faults: show/reset api auth faults counter
 - add api_auth_faults column to django admin's Hosts view
+- support ipprefix argument to pass the netmask and prefix for related domains explicitly
 
 Fixes:
 
@@ -327,7 +328,7 @@ Other changes:
   you can use custom templates for this)
 * added some ugly logos (if you can do better ones, please help)
   https://github.com/nsupdate-info/nsupdate.info/issues/78
-* replaced "SSL" by "TLS" everywhere.      
+* replaced "SSL" by "TLS" everywhere.
   SSL is the old/outdated name. Since 1999, it's called TLS.
 * updated to latest versions on CDN: jquery, bootstrap, font-awesome
 
