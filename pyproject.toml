@@ -1,3 +1,69 @@
+[project]
+name = "nsupdate"
+dynamic = ["version"]
+authors = [{name="The nsupdate.info Team (see AUTHORS)", email="info@nsupdate.info"}, ]
+description = "A dynamic DNS update service"
+readme = "README.rst"
+keywords = ["dyndns", "ddns", "dynamic dns", "django"]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Web Environment',
+    'Framework :: Django',
+    'License :: OSI Approved :: BSD License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Topic :: Internet :: Name Service (DNS)',
+]
+license = {text="BSD"}
+requires-python = ">=3.8, <3.13"
+dependencies = [
+    'dnspython',
+    'netaddr',
+    'django >=4.2.0, <4.3.0',
+    'django-bootstrap-form',
+    'django-referrer-policy',
+    'django-registration-redux',
+    'django-extensions',
+    'social-auth-app-django',
+    'requests',  # for our ddns_client
+]
+
+[project.urls]
+Homepage = "https://github.com/nsupdate-info/nsupdate.info/"
+
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/nsupdate/_version.py"
+
+[tool.pytest.ini_options]
+markers = ["requires_sequential"]
+
+[tool.flake8]
+ignore = [
+    "E124",
+    "E125",
+    "E129",
+    "E402",
+    "E501",
+    "E722",
+    "E731",
+    "F401",
+    "F403",
+    "F405",
+    "F811",
+    "F841",
+    "W503",
+    "W504",
+]
+max_line_length = 120
+exclude = ['build', 'dist', '.git', '.idea', '.cache', '.mypy_cache', '.tox', 'docs', 'migrations']
+
