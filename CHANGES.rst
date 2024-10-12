@@ -13,28 +13,51 @@ Release 0.13.0 (not released yet)
 
 New Features:
 
+- update generated inadyn.conf for IPv6 support, #528
+- add a link to the user in host view of django admin, #440
 - add BAD_HOSTS setting to lock out nasty clients from the update api
   without causing database accesses.
+- enable blacklisting of email addresses (now with regex support)
 - django-admin faults: show/reset api auth faults counter
 - add api_auth_faults column to django admin's Hosts view
 
 Fixes:
 
 - fixed misc. crashes
-- fixed Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret leading to trying to insert the string representation of the bytes object, so 91 characters in a varchar(88)
-- fixed connectivity test when editing domains, #479
+- fixed connectivity test when editing domains, #479 #523
+- strip prefix-length / netmask if present, fixes #470
+- rewrite socket error handling, #522
+- fix Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret
+- try longer timeout for dns resolver / updates
 
 Other changes:
 
-- drop support for python 3.4, fixes #406 - you need either 2.7 or 3.5+.
-- require django >= 1.11.0, run travis-ci tests on django 2.2
-- django compatibility improvements
+- require Python >= 3.8, <= 3.11.
+- require Django 4.2.x (LTS version).
 - translation updates (removed incomplete ones, added complete ones)
 - improve logging
 - setuptools-scm managing the version and manifest
 - src/ based project layout
-- Add A Well-Known URL for Changing Passwords
-- Add rel="noopener" to target="_blank" links
+- add a well-known URL for changing passwords
+- add rel="noopener" to target="_blank" links
+- add Referrer-Policy, X-XSS-Protection and X-Content-Type-Option HTTP headers, #281
+- set HTTPONLY to CSRF cookies
+- update fontawesome, bootstrap and jquery, #444
+- add missing migration files
+- update update_secret database field length for salted hash
+- add hint if there are no social logins enabled
+- update to DropboxOAuth2V2
+- docs:
+
+  - include note about IPv4 interface ID
+  - add docs/project.rst (development commands)
+  - integrate new logo, thanks to @mirzazulfan, #78
+  - add docs on how to disable user registration, #438
+  - always use django-admin (not django-admin.py) in docs, update URLs
+- tests:
+
+  - use GitHub actions instead of travis CI.
+  - add testing in docker.
 
 
 Release 0.12.0 (2018-11-18)
