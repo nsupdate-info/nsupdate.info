@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'nsupdate.info'
-copyright = u'2013-2023, The nsupdate.info Team'
+copyright = u'2013-2024, The nsupdate.info Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
