@@ -5,6 +5,7 @@ pytest
 pytest-django
 pytest-cov
 tox
+build
 wheel
 pylint
 pylint-django
