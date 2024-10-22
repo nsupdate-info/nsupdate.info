@@ -12,17 +12,17 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
 
 |doc| |build| |coverage| |package|
 
-.. |doc| image:: https://readthedocs.org/projects/nsupdate/badge/?version=stable
+.. |doc| image:: https://readthedocs.org/projects/nsupdateinfo/badge/?version=stable
         :alt: Documentation
         :target: https://nsupdateinfo.readthedocs.io/en/stable/
 
-.. |build| image:: https://api.travis-ci.org/nsupdate-info/nsupdate.info.svg
+.. |build| image:: https://github.com/nsupdate-info/nsupdate.info/workflows/CI/badge.svg?branch=master
         :alt: Build Status
-        :target: https://travis-ci.org/nsupdate-info/nsupdate.info
+        :target: https://github.com/nsupdate-info/nsupdate.info/actions
 
-.. |coverage| image:: https://coveralls.io/repos/nsupdate-info/nsupdate.info/badge.png
+.. |coverage| image:: https://codecov.io/gh/nsupdate-info/nsupdate.info/branch/master/graph/badge.svg?token=3qFlVUxINM
         :alt: Test Coverage
-        :target: https://coveralls.io/r/nsupdate-info/nsupdate.info
+        :target: https://codecov.io/gh/nsupdate-info/nsupdate.info
 
 .. |package| image:: https://badge.fury.io/py/nsupdate.png
         :alt: PyPI Package

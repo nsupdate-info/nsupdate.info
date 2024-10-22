@@ -44,8 +44,7 @@ from nsupdate.main.dnstools import update_ns, FQDN
 def to_http_user(hostname):
     return str(hostname)[:_HOST_HTTP_USER_MAX_LENGTH].zfill(_HOST_HTTP_USER_MAX_LENGTH)
 
-
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def ddns_hostname():
     """
     get a random hostname for tests and make sure it is removed from dns
@@ -58,7 +57,7 @@ def ddns_hostname():
     update_ns(fqdn, 'AAAA', action='del')
 
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def ddns_fqdn(ddns_hostname):
     yield FQDN(ddns_hostname, TESTDOMAIN)
 

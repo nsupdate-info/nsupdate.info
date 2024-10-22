@@ -43,6 +43,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'  # == 32bit integer
+
 # these useragents are unacceptable for /nic/update service
 BAD_AGENTS = set([])  # list can have str elements
 
@@ -62,12 +64,13 @@ BAD_HOSTS = set([])
 # please configure your own nameservers in your local settings file.
 NAMESERVERS = ['8.8.8.8', '1.1.1.1', ]
 
-# registration email validation: disallow specific email domains,
+# registration email validation: disallow specific email patterns,
 # e.g. domains that have a non-working mx / that are frequently abused.
 # we use a multiline string here with one regex per line (used with re.search).
-# the domains given below are just examples, please configure your own
+# the patterns given below are just examples, please configure your own
 # regexes in your local settings file.
-MAILDOMAIN_BLACKLIST = r"""
+EMAIL_BLACKLIST = r"""
+foobar@example\.org$
 mailcatch\.com$
 mailspam\.xyz$
 """
@@ -87,10 +90,6 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -307,7 +306,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.amazon.AmazonOAuth2',
     'social_core.backends.bitbucket.BitbucketOAuth',
     'social_core.backends.disqus.DisqusOAuth2',
-    'social_core.backends.dropbox.DropboxOAuth',
+    'social_core.backends.dropbox.DropboxOAuth2V2',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.reddit.RedditOAuth2',

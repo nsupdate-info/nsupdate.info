@@ -6,7 +6,7 @@ form definitions (which fields are available, order, autofocus, ...)
 import binascii
 
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 from .dnstools import check_domain, NameServerNotAvailable
@@ -74,9 +74,9 @@ class EditDomainForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(EditDomainForm, self).clean()
 
-        if self.cleaned_data['available']:
+        if self.cleaned_data['available'] and 'nameserver_ip' in cleaned_data:
             try:
-                check_domain(self.instance.name)
+                check_domain(self.instance.name, cleaned_data['nameserver_ip'])
 
             except (NameServerNotAvailable, ):
                 raise forms.ValidationError(

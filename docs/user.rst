@@ -216,6 +216,8 @@ Note:
   make sure you send this device's IPv6 address with the update (myip=...) or
   run the updater on that device and make sure the request originates from
   the IPv6 address you want in DNS.
+* if you want the related host to point to the same IPv4 address as the main
+  host (which is often the router), use 0 as the interface ID.
 
 
 Other Services Updaters
@@ -357,20 +359,17 @@ Here are some clients that likely qualify:
 * ddclient
 
   - we offer configuration help for it, just copy & paste
-  - good working, reliable
-  - the official version is IPv4 only, IPv6 support needs a patched version
+  - IPv4 and IPv6 support
   - Linux & other POSIX systems
-* inadyn (>= 1.99.11)
+* inadyn
 
   - we offer configuration help for it, just copy & paste
-  - good working, reliable
-  - IPv4 only
+  - IPv4 and IPv6 support
   - Linux & other POSIX systems
 * python-dyndnsc
 
-  - still alpha/beta, but works
-  - IPv4 and good IPv6 support
-  - Mac OS X, Linux and FreeBSD
+  - IPv4 and IPv6 support
+  - macOS, Linux and BSD
 * whatever your router / gateway / firewall has for dyndns / ddns
 
   - quality of update client implementations varies widely

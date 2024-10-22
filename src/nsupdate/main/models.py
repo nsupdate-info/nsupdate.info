@@ -3,6 +3,7 @@ models for hosts, domains, service updaters, ...
 """
 
 import re
+import secrets
 import time
 import base64
 from datetime import datetime
@@ -19,9 +20,7 @@ from django.conf import settings
 from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-from django.utils.six import text_type
+from django.utils.translation import gettext_lazy as _
 
 from . import dnstools
 
@@ -36,7 +35,10 @@ def result_fmt(msg):
     return msg[:RESULT_MSG_LEN]
 
 
-@python_2_unicode_compatible
+def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
+    return ''.join(secrets.choice(allowed_chars) for i in range(length))
+
+
 class BlacklistedHost(models.Model):
     name_re = models.CharField(
         _('name RegEx'),
@@ -83,7 +85,6 @@ UPDATE_ALGORITHMS = {
 UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
-@python_2_unicode_compatible
 class Domain(models.Model):
     name = models.CharField(
         _("name"),
@@ -141,9 +142,9 @@ class Domain(models.Model):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
         user_model = get_user_model()
-        secret = user_model.objects.make_random_password(length=bitlength // 8)
+        secret = make_random_password(length=bitlength // 8)
         secret = secret.encode('utf-8')
-        self.nameserver_update_secret = secret_base64 = base64.b64encode(secret)
+        self.nameserver_update_secret = secret_base64 = base64.b64encode(secret).decode('utf-8')
         self.save()
         return secret_base64
 
@@ -168,7 +169,6 @@ def _http_user_generator():
     return username
 
 
-@python_2_unicode_compatible
 class Host(models.Model):
     name = models.CharField(
         _("name"),
@@ -191,7 +191,7 @@ class Host(models.Model):
     )
     update_secret = models.CharField(
         _("update secret"),
-        max_length=64,  # secret gets hashed (on save) to salted sha1, 58 bytes str len
+        max_length=128,  # secret gets hashed (on save) to salted sha1, "sha1" + "$" + 22 chars salt + "$" + 40 chars sha1 = 68 chars
     )
     comment = models.CharField(
         _("comment"),
@@ -279,8 +279,13 @@ class Host(models.Model):
         return u"%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
+        # deprecated, but works:
         unique_together = (('name', 'domain'),)
         index_together = (('name', 'domain'),)
+        # this seems to be the new way, but it does not work:
+        # ValueError: Found wrong number (2) of indexes for main_host(name, domain_id).
+        # constraints = [models.constraints.UniqueConstraint(fields=['name', 'domain'], name='unique_host_domain')]
+        # indexes = [models.Index(fields=['name', 'domain'])]
         verbose_name = _('host')
         verbose_name_plural = _('hosts')
         ordering = ('domain', 'name')  # groupby domain and sort by name
@@ -366,7 +371,7 @@ class Host(models.Model):
         # secure anyway.
         if secret is None:
             user_model = get_user_model()
-            secret = user_model.objects.make_random_password()
+            secret = make_random_password()
         self.update_secret = make_password(
             secret,
             hasher='sha1'
@@ -406,7 +411,6 @@ def post_save_host(sender, **kwargs):
 post_save.connect(post_save_host, sender=Host)
 
 
-@python_2_unicode_compatible
 class RelatedHost(models.Model):
     # host addr = network_of_main_host + interface_id
     name = models.CharField(
@@ -447,7 +451,7 @@ class RelatedHost(models.Model):
         verbose_name=_("main host"))
 
     def __str__(self):
-        return u"%s.%s" % (self.name, text_type(self.main_host))
+        return u"%s.%s" % (self.name, str(self.main_host))
 
     class Meta(object):
         unique_together = (('name', 'main_host'),)
@@ -480,7 +484,6 @@ class RelatedHost(models.Model):
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
 
 
-@python_2_unicode_compatible
 class ServiceUpdater(models.Model):
     name = models.CharField(
         _("name"),
@@ -524,7 +527,6 @@ class ServiceUpdater(models.Model):
         verbose_name_plural = _('service updaters')
 
 
-@python_2_unicode_compatible
 class ServiceUpdaterHostConfig(models.Model):
     service = models.ForeignKey(ServiceUpdater, on_delete=models.CASCADE, verbose_name=_("service"))
 

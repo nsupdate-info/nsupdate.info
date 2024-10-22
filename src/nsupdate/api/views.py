@@ -353,6 +353,10 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         # https://github.com/rthalley/dnspython/issues/41
         # TODO: reproduce and submit traceback to issue 41
         ipaddr = str(ipaddr)
+        if '/' in ipaddr:
+            # looks like there is a trailing /xx prefix length / netmask - get rid of it.
+            # by doing this we support myip=<ip6lanprefix> of FritzBox.
+            ipaddr = ipaddr.rsplit('/')[0]
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
         IPNetwork(ipaddr)  # raise AddrFormatError here if there is an issue with ipaddr, see #394

@@ -1,7 +1,12 @@
 # packages needed for development
 -r all.txt
 django-debug-toolbar
-pytest>=3.6
+pytest
 pytest-django
-pytest-pep8
+pytest-cov
+tox
+build
+wheel
+pylint
+pylint-django
 Sphinx

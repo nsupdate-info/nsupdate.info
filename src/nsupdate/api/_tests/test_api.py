@@ -176,7 +176,7 @@ def test_nic_update_authorized_update_other_services(client):
     assert response.status_code == 200
     # must be good (was different IP)
     assert response.content == b'good 1.2.3.4'
-    # XXX test below can not run in parallel (like on travis-ci.org) if updating same
+    # XXX test below can not run in parallel (like on github) if updating same
     # "other service" target host
     # now check if it updated the other service also:
     assert query_ns(TEST_HOST_OTHER, 'A') == '1.2.3.4'

@@ -31,7 +31,6 @@ You need the transifex-client package so you have the tx command:
 
 ::
 
-    # currently only works on python 2.x, transifex-client github repo has 3.3 support
     pip install transifex-client
 
 
@@ -64,3 +63,93 @@ Or even better: if you use git, fork our repo, make your changes and submit a pu
 
 For small fixes, you can even just edit the files on github (github will then fork, change and submit a pull request
 automatically).
+
+
+Dependency management
+=====================
+
+Get `Pipenv <https://pipenv.pypa.io/en/latest/installation/>`_ and checkout the
+`Pipenv Command Reference <https://pipenv.pypa.io/en/latest/commands/>`_.
+
+Install new dependencies
+------------------------
+
+See `the pipenv docs <https://pipenv.pypa.io/en/latest/commands/#install>`_.
+
+::
+
+    pipenv install mypkg
+
+
+Spawn a shell with correct python paths
+---------------------------------------
+
+::
+
+    pipenv shell
+
+Exit the shell with ``exit``.
+
+Dependency maintenance
+----------------------
+
+Update requirements.txt files including transitive dependencies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+    pipenv update
+
+NOTE: This is not done today and only a suggestion.
+
+::
+
+    pipenv requirements --exclude-markers > requirements.d/all.txt
+    pipenv requirements --exclude-markers --dev-only > requirements.d/dev.txt
+
+Verify the updated dependencies don't include any security vulnerabilities:
+
+::
+
+    pipenv check
+
+
+Build locally
+=============
+
+1. Install `build` (see `its docs <https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives>`_
+   for example), e.g. via ``pacman -S python-build`` on ArchLinux.
+2. Afterwards, run the command to generate pip packages in ``dist/``::
+
+    pyproject-build
+
+NOTE: This is also needed before development because the command generates ``./src/nsupdate/_version.py``.
+
+Run locally
+===========
+
+#. Install dependencies ``pipenv install --dev``
+#. Generate ``src/nsupdate/_version.py`` file by running ``pyproject-build``
+#. Create database using ``pipenv run ./manage.py migrate``
+#. Create a superuser with ``pipenv run ./manage.py createsuperuser``
+#. Run the server with ``pipenv run ./manage.py runserver``
+
+Lint
+====
+
+Run `pylint <https://pylint.readthedocs.io/en/stable/>`_ in
+error-only mode to check any problems::
+
+    pipenv run pylint src/nsupdate
+
+NOTE: The project does not use pylint for formatting.
+      Disabling the ``errors-only`` mode in ``.pylintrc`` will show a lot of warnings.
+
+Run tests
+=========
+
+Tests need to run inside Docker because they depend on a ``bind9`` nameserver
+running a specific configuration on ``127.0.0.1:53``.
+
+#. Build the docker image once, using: ``docker build -t nsupdate scripts/docker/``
+#. Then run tests via ``docker run --dns 127.0.0.1 -v $PWD:/app nsupdate``

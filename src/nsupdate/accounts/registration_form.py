@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 from django import forms
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from registration.forms import RegistrationForm
 
@@ -21,20 +21,20 @@ resolver.lifetime = 5.0
 resolver.nameservers = settings.NAMESERVERS
 
 
-maildomain_blacklist = settings.MAILDOMAIN_BLACKLIST.strip().splitlines()
+email_blacklist = settings.EMAIL_BLACKLIST.strip().splitlines()
 
 
 def check_mx(domain):
     valid = False
     try:
-        mx_answers = resolver.query(domain, 'MX')
+        mx_answers = resolver.resolve(domain, 'MX', search=True)
         # domain exists in DNS, domain has MX
         mx_entries = sorted([(mx_rdata.preference, mx_rdata.exchange) for mx_rdata in mx_answers])
         for preference, mx in mx_entries:
             try:
-                addr_answers = resolver.query(mx, 'A')
+                addr_answers = resolver.resolve(mx, 'A', search=True)
             except dns.resolver.NoAnswer:
-                addr_answers = resolver.query(mx, 'AAAA')
+                addr_answers = resolver.resolve(mx, 'AAAA', search=True)
             # MX has IP addr
             mx_addrs = [addr_rdata.address for addr_rdata in addr_answers]
             for mx_addr in mx_addrs:
@@ -49,9 +49,9 @@ def check_mx(domain):
     return valid
 
 
-def check_blacklist(domain):
-    for blacklisted_re in maildomain_blacklist:
-        if re.search(blacklisted_re, domain):
+def check_blacklist(email):
+    for blacklisted_re in email_blacklist:
+        if re.search(blacklisted_re, email):
             return False
     return True
 
@@ -68,7 +68,7 @@ class RegistrationFormValidateEmail(RegistrationForm):
             valid_mx = check_mx(domain)
         except Exception as e:
             logger.exception('RegistrationFormValidateEmail raised an exception:')
-        not_blacklisted = check_blacklist(domain)
+        not_blacklisted = check_blacklist(email)
         if valid_mx and not_blacklisted:
             return email
         logger.info('RegistrationFormValidateEmail: rejecting email address %r' % email)
