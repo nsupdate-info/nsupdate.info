@@ -301,7 +301,7 @@ class Host(models.Model):
             return None
         except Host.MultipleObjectsReturned:
             # should not happen, see Host.http_user should have unique=True
-            raise ValueError("get_by_http_user(%s) found more than 1 host" % fqdn)
+            raise ValueError("get_by_http_user(%s) found more than 1 host" % username)
         else:
             return host
 
