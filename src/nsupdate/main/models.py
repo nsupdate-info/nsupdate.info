@@ -6,6 +6,8 @@ import re
 import secrets
 import time
 import base64
+from datetime import datetime
+import random
 
 import dns.resolver
 import dns.message
@@ -155,6 +157,18 @@ class Domain(models.Model):
         ordering = ('name',)
 
 
+# limit comes from an external application not accepting longer username must be same than in Host.max_length
+_HOST_HTTP_USER_MAX_LENGTH = 30
+
+
+def _http_user_generator():
+    dt = datetime.utcnow().strftime('%Y%m%d%H%m%S%f')
+    maxrange = pow(10, _HOST_HTTP_USER_MAX_LENGTH - len(dt))
+    randvalue = random.randrange(0, maxrange)
+    username = '{randvalue}{dt}'.format(randvalue=randvalue, dt=dt).zfill(_HOST_HTTP_USER_MAX_LENGTH)
+    return username
+
+
 class Host(models.Model):
     name = models.CharField(
         _("name"),
@@ -168,6 +182,13 @@ class Host(models.Model):
         ],
         help_text=_("The name of your host."))
     domain = models.ForeignKey(Domain, on_delete=models.CASCADE, verbose_name=_("domain"))
+    http_user = models.CharField(
+        _("http user"),
+        max_length=_HOST_HTTP_USER_MAX_LENGTH,  # username used for http basic auth
+        unique=True,
+        null=False,
+        default=_http_user_generator
+    )
     update_secret = models.CharField(
         _("update secret"),
         max_length=128,  # secret gets hashed (on save) to salted sha1, "sha1" + "$" + 22 chars salt + "$" + 40 chars sha1 = 68 chars
@@ -271,6 +292,18 @@ class Host(models.Model):
 
     def get_fqdn(self):
         return dnstools.FQDN(self.name, self.domain.name)
+
+    @classmethod
+    def get_by_http_user(cls, username, **kwargs):
+        try:
+            host = Host.objects.get(http_user=username, **kwargs)
+        except Host.DoesNotExist:
+            return None
+        except Host.MultipleObjectsReturned:
+            # should not happen, see Host.http_user should have unique=True
+            raise ValueError("get_by_http_user(%s) found more than 1 host" % username)
+        else:
+            return host
 
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):
