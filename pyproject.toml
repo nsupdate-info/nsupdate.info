@@ -9,19 +9,18 @@ classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Framework :: Django',
-    'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
     'Topic :: Internet :: Name Service (DNS)',
 ]
-license = {text="BSD"}
-requires-python = ">=3.8, <3.13"
+license = "BSD-3-Clause"
+requires-python = ">=3.9, <3.14"
 dependencies = [
     'dnspython',
     'netaddr',
@@ -38,7 +37,7 @@ dependencies = [
 Homepage = "https://github.com/nsupdate-info/nsupdate.info/"
 
 [build-system]
-requires = ["setuptools", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=77.0.0", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
@@ -67,3 +66,72 @@ ignore = [
 max_line_length = 120
 exclude = ['build', 'dist', '.git', '.idea', '.cache', '.mypy_cache', '.tox', 'docs', 'migrations']
 
+[tool.coverage.run]
+branch = true
+source = ["src/nsupdate"]
+omit = [
+    "src/*/migrations/*",
+    "src/*/_tests/*",
+    "src/nsupdate/wsgi.py",
+    "src/nsupdate/settings/*",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
+ignore_errors = true
+
+[tool.pylint.main]
+# In error mode, messages with a category besides ERROR or FATAL are
+# suppressed, and no reports are done by default. Error mode is compatible with
+# disabling specific errors.
+errors-only = true
+
+# List of plugins (as comma separated values of python module names) to load,
+# usually to register additional checkers.
+load-plugins = ["pylint_django"]
+
+django-settings-module = "nsupdate.settings.dev"
+
+[tool.pylint.master]
+init-hook = "import sys; sys.path.append('.')"
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py{39,310,311,312,313},flake8
+isolated_build = True
+
+[testenv]
+deps = -rrequirements.d/dev.txt
+setenv =
+    DNS_RESOLVER_TIMEOUT=15.0
+    DNS_UPDATE_TIMEOUT=30.0
+commands = pytest -v -rs -k "not ddns_client" -m "not requires_sequential" --cov=nsupdate --pyargs {posargs:nsupdate}
+package = editable-legacy
+passenv = *
+
+[testenv:flake8]
+skip_sdist = true
+skip_install = true
+changedir =
+deps =
+    flake8
+    flake8-pyproject
+commands = flake8 src scripts conftest.py
+"""

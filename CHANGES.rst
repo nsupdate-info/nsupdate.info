@@ -32,7 +32,7 @@ Fixes:
 
 Other changes:
 
-- require Python >= 3.8, <= 3.11.
+- require Python >= 3.9, <= 3.13.
 - require Django 4.2.x (LTS version).
 - translation updates (removed incomplete ones, added complete ones)
 - improve logging

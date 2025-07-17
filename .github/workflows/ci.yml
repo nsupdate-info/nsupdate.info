@@ -47,9 +47,6 @@ jobs:
       matrix:
         include:
             - os: ubuntu-22.04
-              python-version: '3.8'
-              toxenv: py38
-            - os: ubuntu-22.04
               python-version: '3.9'
               toxenv: py39
             - os: ubuntu-22.04
@@ -61,6 +58,9 @@ jobs:
             - os: ubuntu-24.04
               python-version: '3.12'
               toxenv: py312
+            - os: ubuntu-24.04
+              python-version: '3.13'
+              toxenv: py313
 
     env:
       TOXENV: ${{ matrix.toxenv }}
