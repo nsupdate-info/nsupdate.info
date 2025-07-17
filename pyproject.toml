@@ -96,6 +96,21 @@ exclude_lines = [
 ]
 ignore_errors = true
 
+[tool.pylint.main]
+# In error mode, messages with a category besides ERROR or FATAL are
+# suppressed, and no reports are done by default. Error mode is compatible with
+# disabling specific errors.
+errors-only = true
+
+# List of plugins (as comma separated values of python module names) to load,
+# usually to register additional checkers.
+load-plugins = ["pylint_django"]
+
+django-settings-module = "nsupdate.settings.dev"
+
+[tool.pylint.master]
+init-hook = "import sys; sys.path.append('.')"
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
