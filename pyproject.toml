@@ -13,15 +13,15 @@ classifiers = [
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.8',
     'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
     'Topic :: Internet :: Name Service (DNS)',
 ]
 license = {text="BSD"}
-requires-python = ">=3.8, <3.13"
+requires-python = ">=3.9, <3.14"
 dependencies = [
     'dnspython',
     'netaddr',
@@ -66,4 +66,3 @@ ignore = [
 ]
 max_line_length = 120
 exclude = ['build', 'dist', '.git', '.idea', '.cache', '.mypy_cache', '.tox', 'docs', 'migrations']
-
