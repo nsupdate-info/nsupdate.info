@@ -9,7 +9,6 @@ classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Environment :: Web Environment',
     'Framework :: Django',
-    'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
@@ -20,7 +19,7 @@ classifiers = [
     'Programming Language :: Python :: 3.13',
     'Topic :: Internet :: Name Service (DNS)',
 ]
-license = {text="BSD"}
+license = "BSD-3-Clause"
 requires-python = ">=3.9, <3.14"
 dependencies = [
     'dnspython',
@@ -38,7 +37,7 @@ dependencies = [
 Homepage = "https://github.com/nsupdate-info/nsupdate.info/"
 
 [build-system]
-requires = ["setuptools", "setuptools_scm[toml]>=6.2"]
+requires = ["setuptools>=77.0.0", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
