@@ -66,6 +66,36 @@ ignore = [
 max_line_length = 120
 exclude = ['build', 'dist', '.git', '.idea', '.cache', '.mypy_cache', '.tox', 'docs', 'migrations']
 
+[tool.coverage.run]
+branch = true
+source = ["src/nsupdate"]
+omit = [
+    "src/*/migrations/*",
+    "src/*/_tests/*",
+    "src/nsupdate/wsgi.py",
+    "src/nsupdate/settings/*",
+]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover",
+
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
+ignore_errors = true
+
 [tool.tox]
 legacy_tox_ini = """
 [tox]
@@ -77,7 +107,7 @@ deps = -rrequirements.d/dev.txt
 setenv =
     DNS_RESOLVER_TIMEOUT=15.0
     DNS_UPDATE_TIMEOUT=30.0
-commands = pytest -v -rs -k "not ddns_client" -m "not requires_sequential" --cov=nsupdate --cov-config=.coveragerc --pyargs {posargs:nsupdate}
+commands = pytest -v -rs -k "not ddns_client" -m "not requires_sequential" --cov=nsupdate --pyargs {posargs:nsupdate}
 package = editable-legacy
 passenv = *
 
@@ -90,4 +120,3 @@ deps =
     flake8-pyproject
 commands = flake8 src scripts conftest.py
 """
-
