@@ -65,3 +65,29 @@ ignore = [
 ]
 max_line_length = 120
 exclude = ['build', 'dist', '.git', '.idea', '.cache', '.mypy_cache', '.tox', 'docs', 'migrations']
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py{39,310,311,312,313},flake8
+isolated_build = True
+
+[testenv]
+deps = -rrequirements.d/dev.txt
+setenv =
+    DNS_RESOLVER_TIMEOUT=15.0
+    DNS_UPDATE_TIMEOUT=30.0
+commands = pytest -v -rs -k "not ddns_client" -m "not requires_sequential" --cov=nsupdate --cov-config=.coveragerc --pyargs {posargs:nsupdate}
+package = editable-legacy
+passenv = *
+
+[testenv:flake8]
+skip_sdist = true
+skip_install = true
+changedir =
+deps =
+    flake8
+    flake8-pyproject
+commands = flake8 src scripts conftest.py
+"""
+
