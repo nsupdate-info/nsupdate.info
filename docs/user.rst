@@ -10,10 +10,9 @@ Update client
 The best way to use the service for updating a hostname with a dynamic address is to have a dyndns2 compatible
 update client.
 
-Usually this kind of software is built-in in your internet router (search for "dynamic DNS", "DDNS", "dyndns" on
-its user interface).
+Usually this kind of software is built into your Internet router (search for "Dynamic DNS", "DDNS", or "DynDNS" in its user interface).
 
-Alternatively, you can also run a software on a PC / server (like ddclient or inadyn for Linux).
+Alternatively, you can also run software on a PC/server (like ddclient or inadyn for Linux).
 
 Or even just use your browser to update your IP via the web interface of the service.
 
@@ -26,7 +25,7 @@ When using a browser for administrating your hosts / domains via the web interfa
 
 * use https (for security)
 * have cookies enabled (we need them for keeping the session after you logged in)
-* have javascript enabled
+* have JavaScript enabled
 * use a sane browser, like Firefox, Chrome/Chromium or Safari
 
 Functionality of the Web Interface
@@ -36,7 +35,7 @@ Your current IP(s) + reverse DNS
 --------------------------------
 
 We show your current IP address(es).
-Depending on the type of your internet connection, this can be IP v4 or v6 or both (dual stack).
+Depending on the type of your Internet connection, this can be IPv4 or IPv6 or both (dual stack).
 If nothing shows up, you don't have that kind of IP address.
 
 We additionally show the result of a reverse DNS lookup ("rDNS") for your IP address(es).
@@ -45,7 +44,7 @@ If nothing shows up, that IP does not have a reverse DNS record.
 We always show you the IP addresses where your requests come from. Under some circumstances, these might not be what
 you expect (e.g. presence or non-presence of NAT gateways, proxies, etc.).
 
-We detect your addresses by 2 means:
+We detect your addresses by two means:
 
 * your current remote address (where your accesses to the web interface come from) - the IP detected this way is
   immediately visible on the web interface.
@@ -64,9 +63,9 @@ You need to create an account to use most of the functionality of the service.
 
 Your hosts / domains are only for you, so you need to identify to create or change them.
 
-You need to give a valid E-Mail address, as we send you a link you need to access to complete the registration.
+You need to give a valid email address, as we send you a link you need to access to complete the registration.
 
-We'll also use that E-Mail address in case you forget your login password or when there are technical issues
+We'll also use that email address in case you forget your login password or when there are technical issues
 with your hosts or domains.
 
 For your own safety, use https and a sane password.
@@ -121,12 +120,12 @@ If you control an own nameserver / zone, you can use the service to dynamically 
 client.
 
 For this, it is required that the master nameserver of that zone accepts dynamic updates (RFC 2136) using a shared
-secret. If you run your own bind9 nameserver for your domain, we show you how to configure it for dynamic updates
+secret. If you run your own BIND 9 nameserver for your domain, we show you how to configure it for dynamic updates
 after you add a domain on nsupdate.info.
 
-You can either privately use such an own domain or alternatively even offer them publically for all users of the service.
+You can either privately use such an own domain or alternatively even offer them publicly for all users of the service.
 
-If you have cool domains, please offer publically!
+If you have cool domains, please offer publicly!
 
 Note: if you just register a domain at some domain seller (and the domain seller runs the DNS for you), you usually
 just get some web interface to manage the DNS records. Often, that nameserver is not configured to accept dynamic
@@ -150,7 +149,7 @@ Related Hosts
 In short: update a whole bunch of DNS records for other hosts on same LAN.
 
 This is a feature most interesting for IPv6 users, but the same mechanism also
-works for IPv4 (it is just rather rare that you get a IPv4 network and you need
+works for IPv4 (it is just rather rare that you get an IPv4 network and you need
 dynamic DNS). So, let's assume IPv6 from now on.
 
 On your main host entry you can configure the IPv6 prefix length (think of netmask).
@@ -187,8 +186,8 @@ network), but r comes from what you entered as interface ID into the related
 host record.
 
 The interface ID must be a proper notation.
-For IPv6 a interface ID might look like `::rrrr:rrrr:rrrr:rrrr`,
-for IPv4 a interface ID might look like `r.r.r.r`.
+For IPv6 an interface ID might look like `::rrrr:rrrr:rrrr:rrrr`,
+for IPv4 an interface ID might look like `r.r.r.r`.
 
 If you leave the interface ID field empty, that means not to create such a DNS record.
 
@@ -237,7 +236,7 @@ Currently, Users can only use services that were made available by an admin
 Browser-based Update Client
 ---------------------------
 
-The service has a "built-in" browser/javascript-based update client that will
+The service has a "built-in" browser/JavaScript-based update client that will
 query the IP and send update requests if the IP changes.
 
 One typical scenario where this is useful:
@@ -269,7 +268,7 @@ Note:
 
   - the first one is generic and will use either IP v4 or v6,
   - the other 2 are specific and will either enforce usage of IP v4, or v6.
-* this whole browser-based mechanism is only for adhoc and temporary use - if
+* this whole browser-based mechanism is only for ad hoc and temporary use - if
   you need something permanently or repeatingly, please configure a real update
   client
 * if you can't electronically give the URL to the client, you can also give:
@@ -300,14 +299,14 @@ What does the "available" and "faults c/s" column say?
   wrong. in the end, that might flag that host as abusive: you'll see "abuse" or
   "abuse_blocked" in that case (visit host view to deselect "abuse" flag).
 
-Now click on the hostname to go to the detailled host view.
+Now click on the hostname to go to the detailed host view.
 
 There, at the bottom, you will see the last messages that were generated about
 your client (whether it is updating ok or causing errors/warnings) and about
 the domain's DNS server (in case it can't be reached or is malfunctioning or
 rejects updates). The date/time given is UTC.
 
-But please note: we can not show you issues with your credentials there (like
+But please note: we cannot show you issues with your credentials there (like
 when you configured your update client with wrong values for http basic authentication).
 
 
@@ -328,12 +327,12 @@ Address update for your host is not working (but worked before)
 If this is the case, first check these things (and then the ones listed above):
 
 * if you use an updater that does not conform to the dyndns2 standard, it might be that your host got flagged as
-  abusive. Go to the detailled view of your host and see whether abuse is checked. If it is, fix / change your
+  abusive. Go to the detailed view of your host and see whether abuse is checked. If it is, fix/change your
   updater then uncheck the abuse flag and save.
 * if the client fault counter on the overview page keeps rising, you didn't fix the issue - try again.
 * if it keeps getting flagged as abusive, you didn't fix the issue - try again.
-* if you have a local network with multiple machines that shared one internet connection, it is sufficient to enable
-  an update client on one of the machines (preferably your internet router or a machine that is on most of the time).
+* if you have a local network with multiple machines that share one Internet connection, it is sufficient to enable
+  an update client on one of the machines (preferably your Internet router or a machine that is on most of the time).
   if you run update clients on multiple machines, this may cause them sending nochg updates frequently and your host
   might get flagged as abusive due to that.
 
@@ -377,8 +376,8 @@ Here are some clients that likely qualify:
   - no need to run additional software on other machines in that network
 * nsupdate-info's browser-based updater
 
-  - only for adhoc scenarios, not intended for long term use
-  - runs in your browser with javascript
+  - only for ad hoc scenarios, not intended for long-term use
+  - runs in your browser with JavaScript
 
 Known-Problematic
 -----------------
