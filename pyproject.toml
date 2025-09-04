@@ -112,26 +112,38 @@ django-settings-module = "nsupdate.settings.dev"
 init-hook = "import sys; sys.path.append('.')"
 
 [tool.tox]
-legacy_tox_ini = """
-[tox]
-envlist = py{39,310,311,312,313},flake8
-isolated_build = True
+env_list = [
+  "py39",
+  "py310",
+  "py311",
+  "py312",
+  "py313",
+  "flake8",
+]
 
-[testenv]
-deps = -rrequirements.d/dev.txt
-setenv =
-    DNS_RESOLVER_TIMEOUT=15.0
-    DNS_UPDATE_TIMEOUT=30.0
-commands = pytest -v -rs -k "not ddns_client" -m "not requires_sequential" --cov=nsupdate --pyargs {posargs:nsupdate}
-package = editable-legacy
-passenv = *
+[tool.tox.env]
 
-[testenv:flake8]
-skip_sdist = true
+[tool.tox.env.pass_env]
+"*" = true
+
+[tool.tox.env.set_env]
+DNS_RESOLVER_TIMEOUT = "15.0"
+DNS_UPDATE_TIMEOUT = "30.0"
+
+[tool.tox.env.py]
+# default test environment for all pyXX
+package = "editable"
+deps = ["-rrequirements.d/dev.txt"]
+commands = [
+  ["pytest", "-v", "-rs", "-k", "not ddns_client", "-m", "not requires_sequential", "--cov=nsupdate", "--pyargs", "{posargs:nsupdate}"],
+]
+
+[tool.tox.env.flake8]
 skip_install = true
-changedir =
-deps =
-    flake8
-    flake8-pyproject
-commands = flake8 src scripts conftest.py
-"""
+deps = [
+  "flake8",
+  "flake8-pyproject",
+]
+commands = [
+  ["flake8", "src", "scripts", "conftest.py"],
+]
