@@ -1,5 +1,5 @@
 """
-models for account-related stuff
+Models for account-related data.
 """
 
 from django.db import models
@@ -14,7 +14,7 @@ LANGUAGE_SESSION_KEY = "_language"
 
 class UserProfile(models.Model):
     """
-    stuff we need additionally to what Django stores in User model
+    Additional data we need beyond what Django stores in the User model.
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True, related_name='profile',
                                 verbose_name=_('user'), on_delete=models.CASCADE)
@@ -31,7 +31,7 @@ class UserProfile(models.Model):
 
 
 def create_user_profile(sender, instance=None, created=False, **kwargs):
-    # if a new user is created, create the UserProfile also:
+    # If a new user is created, create the UserProfile as well.
     if created:
         UserProfile.objects.create(user=instance)
 
@@ -41,5 +41,5 @@ post_save.connect(create_user_profile, sender=settings.AUTH_USER_MODEL)
 
 @receiver(user_logged_in)
 def lang(sender, user=None, request=None, **kwargs):
-    # if a user logs in, activate language preference from profile
+    # If a user logs in, activate the language preference from the profile.
     request.session[LANGUAGE_SESSION_KEY] = user.profile.language

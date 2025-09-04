@@ -7,7 +7,7 @@ from .models import UserProfile
 
 
 class UserForm(forms.ModelForm):
-    class Meta(object):
+    class Meta:
         model = get_user_model()
         fields = ['first_name', 'last_name', 'email']
         widgets = {
@@ -16,6 +16,6 @@ class UserForm(forms.ModelForm):
 
 
 class UserProfileForm(forms.ModelForm):
-    class Meta(object):
+    class Meta:
         model = UserProfile
-        fields = ['language', ]
+        fields = ['language']

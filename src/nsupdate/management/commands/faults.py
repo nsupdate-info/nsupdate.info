@@ -1,5 +1,5 @@
 """
-dealing with the fault counters and available/abuse/abuse_blocked flags
+Deal with the fault counters and the available/abuse/abuse_blocked flags.
 """
 
 import traceback
@@ -47,65 +47,65 @@ Notes:
 
 
 class Command(BaseCommand):
-    help = 'deal with the faults counters'
+    help = 'Deal with the fault counters.'
 
     def add_arguments(self, parser):
         parser.add_argument('--show-server',
                             action='store_true',
                             dest='show_server',
                             default=False,
-                            help='show server fault counters')
+                            help='Show server fault counters.')
         parser.add_argument('--show-client',
                             action='store_true',
                             dest='show_client',
                             default=False,
-                            help='show client fault counters')
+                            help='Show client fault counters.')
         parser.add_argument('--show-api-auth',
                             action='store_true',
                             dest='show_api_auth',
                             default=False,
-                            help='show api auth fault counters')
+                            help='Show API auth fault counters.')
         parser.add_argument('--reset-server',
                             action='store_true',
                             dest='reset_server',
                             default=False,
-                            help='reset the server fault counters of all hosts')
+                            help='Reset the server fault counters of all hosts.')
         parser.add_argument('--reset-client',
                             action='store_true',
                             dest='reset_client',
                             default=False,
-                            help='reset the client fault counters of all hosts')
+                            help='Reset the client fault counters of all hosts.')
         parser.add_argument('--reset-api-auth',
                             action='store_true',
                             dest='reset_api_auth',
                             default=False,
-                            help='reset the api auth fault counters of all hosts')
+                            help='Reset the API auth fault counters of all hosts.')
         parser.add_argument('--reset-abuse',
                             action='store_true',
                             dest='reset_abuse',
                             default=False,
-                            help='reset the abuse flag (to False) of all hosts')
+                            help='Reset the abuse flag (to False) of all hosts.')
         parser.add_argument('--reset-abuse-blocked',
                             action='store_true',
                             dest='reset_abuse_blocked',
                             default=False,
-                            help='reset the abuse_blocked flag (to False) of all hosts')
+                            help='Reset the abuse_blocked flag (to False) of all hosts.')
         parser.add_argument('--reset-available',
                             action='store_true',
                             dest='reset_available',
                             default=False,
-                            help='reset the available flag (to True) of all hosts')
+                            help='Reset the available flag (to True) of all hosts.')
         parser.add_argument('--flag-abuse',
                             action='store',
                             dest='flag_abuse',
                             default=None,
                             type=int,
-                            help='if client faults > N then set abuse flag and reset client faults')
+                            help='If client faults > N, set the abuse flag and reset client faults.')
         parser.add_argument('--notify-user',
                             action='store_true',
                             dest='notify_user',
                             default=False,
-                            help='notify the user by email when host gets flagged for abuse')
+                            help='Notify the user by email when the host gets flagged for abuse.')
 
     def handle(self, *args, **options):
         show_client = options['show_client']
@@ -122,7 +122,7 @@ class Command(BaseCommand):
         for h in Host.objects.all():
             try:
                 with transaction.atomic():
-                    if show_client or show_server:
+                    if show_client or show_server or show_api_auth:
                         output = u""
                         if show_client:
                             output += u"%-6d " % h.client_faults
@@ -143,12 +143,12 @@ class Command(BaseCommand):
                                 comment = h.comment
                                 creator = h.created_by
                                 self.stdout.write(
-                                    "setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
+                                    "Setting abuse flag for host %s (created by %s, client faults: %d)\n" % (
                                         fqdn, creator, faults_count))
                                 if notify_user:
                                     subject, msg = translate_for_user(
                                         creator,
-                                        _("issue with your host %(fqdn)s"),
+                                        _("Issue with your host %(fqdn)s"),
                                         ABUSE_MSG
                                     )
                                     subject = subject % dict(fqdn=fqdn)

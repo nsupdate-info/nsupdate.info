@@ -88,8 +88,8 @@ class DeleteUserView(TemplateView):
     def post(self, request, *args, **kwargs):
         user = request.user
         if user.is_active:
-            # if admin set the user to inactive, the user may not delete his own account
-            # this is important for abuse handling: abusers shall not be able to delete
+            # If an admin set the user to inactive, the user may not delete their own account.
+            # This is important for abuse handling: abusers shall not be able to delete
             # their account (and all hosts/domains) and then just recreate them without
             # abuse_blocked flags set by the admin.
             user.delete()

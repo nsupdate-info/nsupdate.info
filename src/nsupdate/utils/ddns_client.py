@@ -1,34 +1,34 @@
 """
-dyndns2 client
+DynDNS2 client utilities.
 """
 
 import logging
 logger = logging.getLogger(__name__)
 
 import requests
-from requests import Timeout, ConnectionError  # keep, is imported from here
+from requests import Timeout, ConnectionError  # Keep; re-exported from here.
 
 
-TIMEOUT = 30.0  # timeout for http request response [s]
+TIMEOUT = 30.0  # Timeout for HTTP request response [s].
 
 
 def dyndns2_update(name, password,
                    server, hostname=None, myip=None,
                    path='/nic/update', secure=True, timeout=TIMEOUT):
     """
-    send a dyndns2-compatible update request
+    Send a DynDNS2-compatible update request.
 
-    :param name: for http basic auth
-    :param password: for http basic auth
-    :param server: server to send the update to
-    :param hostname: hostname we want to update
-    :param myip: the new ip address for hostname
-    :param path: url path (default: '/nic/update')
-    :param secure: whether to use tls for the request (default: True)
-                   note: if you use secure=False, it will transmit
-                   the given data unencrypted.
-    :param timeout: how long to wait until response has to begin
-    :return:
+    :param name: Username for HTTP basic auth
+    :param password: Password for HTTP basic auth
+    :param server: Server to send the update to
+    :param hostname: Hostname to update
+    :param myip: The new IP address for the hostname
+    :param path: URL path (default: '/nic/update')
+    :param secure: Whether to use TLS for the request (default: True)
+                   Note: If you use secure=False, the given data will be
+                   transmitted unencrypted.
+    :param timeout: How long to wait until the response begins
+    :return: Tuple (status_code, response_text)
     """
     params = {}
     if hostname is not None:
