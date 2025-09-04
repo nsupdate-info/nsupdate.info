@@ -1,5 +1,5 @@
 """
-register our models for Django's admin
+Register our models with Django's admin.
 """
 
 from django.contrib import admin

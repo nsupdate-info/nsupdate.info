@@ -1,5 +1,5 @@
 """
-main app url dispatching
+Main application URL routing.
 """
 
 from django.urls import re_path
@@ -15,7 +15,7 @@ from ..api.views import (
 
 
 urlpatterns = (
-    # interactive web ui
+    # Interactive web UI
     re_path(r'^$', HomeView.as_view(), name="home"),
     re_path(r'^about/$', AboutView.as_view(), name="about"),
     re_path(r'^custom/(?P<template>[\w.]+)$', CustomTemplateView.as_view(), name="custom"),
@@ -40,15 +40,15 @@ urlpatterns = (
     re_path(r'^updater_hostconfig/(?P<pk>\d+)/$', UpdaterHostConfigView.as_view(), name='updater_hostconfig'),
     re_path(r'^updater_hostconfig/(?P<pk>\d+)/delete/$', DeleteUpdaterHostConfigView.as_view(),
             name='delete_updater_hostconfig'),
-    # internal use by the web ui
+    # Internal use by the web UI
     re_path(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView.as_view(), name='detectip'),
     re_path(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),
     re_path(r'^nic/update_authorized$', AuthorizedNicUpdateView.as_view(), name='nic_update_authorized'),
     re_path(r'^nic/delete_authorized$', AuthorizedNicDeleteView.as_view(), name='nic_delete_authorized'),
-    # api (for update clients)
+    # API (for update clients)
     re_path(r'^myip$', myip_view, name='myip'),
     re_path(r'^nic/update$', NicUpdateView.as_view(), name='nic_update'),
-    re_path(r'^nic/delete$', NicDeleteView.as_view(), name='nic_delete'),  # api extension
-    # for bots
+    re_path(r'^nic/delete$', NicDeleteView.as_view(), name='nic_delete'),  # API extension
+    # For bots
     re_path(r'^robots.txt$', RobotsTxtView.as_view(), name='robots'),
 )

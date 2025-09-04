@@ -1,5 +1,5 @@
 """
-Tests for main views module.
+Tests for the main views module.
 """
 
 from __future__ import print_function
@@ -44,7 +44,7 @@ def test_views_anon(client):
         ('updater_hostconfig_overview', dict(pk=1), 302),
         ('updater_hostconfig', dict(pk=1), 302),
         ('delete_updater_hostconfig', dict(pk=1), 302),
-        # interactive updater shows http basic auth popup
+        # Interactive updater shows an HTTP Basic Auth popup
         ('update', dict(), 401),
     ]:
         print("%s, %s, %s" % (view, kwargs, status_code))

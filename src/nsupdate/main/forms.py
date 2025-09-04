@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-form definitions (which fields are available, order, autofocus, ...)
+Form definitions (available fields, order, auto-focus, ...).
 """
 
 import binascii
@@ -88,7 +88,7 @@ class EditDomainForm(forms.ModelForm):
 
         if cleaned_data['public'] and not cleaned_data['available']:
             raise forms.ValidationError(
-                _("Domain must be available to be public"),
+                _("Domain must be available to be public."),
                 code='invalid')
 
     class Meta(object):
