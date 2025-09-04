@@ -14,7 +14,7 @@ PASSWORD = 'pass'
 
 def test_views_anon(client):
     for view, kwargs, status_code in [
-        # stuff that requires being logged-in redirects to the login view:
+        # Views that require authentication redirect to the login view:
         ('account_profile', dict(), 302),
         ('account_settings', dict(), 302),
         ('account_delete', dict(), 302),

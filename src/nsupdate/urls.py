@@ -1,5 +1,5 @@
 """
-top-level url dispatching
+Top-level URL dispatcher.
 """
 
 from django.conf import settings
@@ -13,8 +13,8 @@ from django.views.generic import RedirectView
 
 def remember_me_login(request, *args, **kw):
     """
-    Wraps the default login view function. If user does not want to be
-    remembered, we change the cookie to a session cookie that gets cleared
+    Wrap the default login view function. If the user does not want to be
+    remembered, change the cookie to a session cookie, which is cleared
     when the browser is closed.
     """
     if request.method == 'POST':
@@ -41,8 +41,8 @@ if settings.DEBUG:
     urlpatterns += [re_path(r'^__debug__/', include(debug_toolbar.urls)), ]
 
 
-# we have expensive context processors and do not want to invoke them for the
-# http error views, so we must not use templates (nor the django default views).
+# We have expensive context processors and do not want to invoke them for the
+# HTTP error views, so we must not use templates (or the Django default views).
 
 def http_error(request, status, exception=None):
     if exception is not None:
@@ -56,7 +56,7 @@ def http_error(request, status, exception=None):
             if isinstance(message, str):
                 exception_repr = message
     else:
-        # we do not have an exception for 500
+        # We do not have an exception for HTTP 500.
         exception_repr = 'Server Error'
     body = """\
 <h1>%(exception)s (error %(status)d)</h1>

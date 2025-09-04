@@ -1,5 +1,5 @@
 """
-Tests for mail module.
+Tests for the mail module.
 """
 
 from django.contrib.auth import get_user_model

@@ -72,7 +72,7 @@ DNSException = dns.exception.DNSException
 
 class SameIpError(ValueError):
     """
-    raised if an IP address is already present in DNS and and update was
+    raised if an IP address is already present in DNS and an update was
     requested, but is not needed.
     """
 

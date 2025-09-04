@@ -1,5 +1,5 @@
 """
-register our models for Django's admin
+Register our models for Django's admin.
 """
 
 from django.contrib import admin
@@ -7,16 +7,16 @@ from django.contrib import admin
 from .models import UserProfile
 
 
-# XXX this is a bit ugly, as there are separate admins for profiles and users:
+# XXX This is a bit ugly, as there are separate admins for profiles and users:
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ("user", "language", )
     search_fields = ("language", "user__username")
 
 
-# this would be prettier, but could not get it to work with:
-# - creating a user in the admin with or without filling in the profile
-# - creating a user via user registration
+# This would be prettier, but we could not get it to work with:
+# - Creating a user in the admin with or without filling in the profile
+# - Creating a user via user registration
 #
 # from django.contrib.auth.admin import UserAdmin
 # from django.contrib.auth.models import User

@@ -14,7 +14,7 @@ The web interface will warn you if you use it via http. If WE_HAVE_TLS is
 set to True, it will suggest you better use the https site and link there.
 
 Additionally, the service administrator can implement a redirect from the
-http to the https site within the webserver configuration for the WWW_HOST.
+http to the https site within the web server configuration for the WWW_HOST.
 The redirect should **not** be implemented for WWW_IPV4_HOST and WWW_IPV6_HOST
 as it is unknown whether all update clients can deal with a redirect (and
 support TLS).
@@ -34,7 +34,7 @@ tell you a wrong IP, which your updater then would happily write into DNS.
 Login with remote vs. local Account
 ===================================
 
-If you use a already existing remote account to log in into our service, you
+If you use an already existing remote account to log in to our service, you
 don't need to create a local profile (with username, E-Mail and password).
 
 That way, we need to store less information about you - especially no password
@@ -82,7 +82,7 @@ hash).
 
 Considering that a lot of routers or update clients store this secret in clear
 text in their configuration and often transmit it using unencrypted http (and
-not https), this secret is not too safe anyway. We also wanted to save some cpu
+not https), this secret is not too safe anyway. We also wanted to save some CPU
 cycles here and rather not use pbkdf2 for this regularly and automatically used
 secret.
 
@@ -183,7 +183,7 @@ Django's SECRET_KEY
 Django's SECRET_KEY needs to be a long, random and secret string (it is
 usually set up by the administrator of the site).
 
-The builtin default settings will try to read SECRET_KEY from an environment
+The built-in default settings will try to read SECRET_KEY from an environment
 variable of same name. If there is no such environment variable, the SECRET_KEY
 will be undefined.
 

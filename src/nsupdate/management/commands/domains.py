@@ -1,5 +1,5 @@
 """
-dealing with domains (Domain records in our database)
+Deal with domains (Domain records in our database).
 """
 
 import dns.resolver
@@ -48,13 +48,13 @@ LOG_MSG_DELETE = _('Domain %(domain)s is not available and has no hosts -> delet
 
 def check_dns(domain):
     """
-    checks if the nameserver is reachable and answers queries for the domain.
+    Check whether the nameserver is reachable and answers queries for the domain.
 
-    note: we can't reasonably check for dynamic updates as the dns admin might
+    Note: We can't reasonably check for dynamic updates as the DNS admin might
     have put restrictions on which hosts are allowed to be updated.
 
-    :param domain: domain name
-    :return: available status
+    :param domain: Domain name
+    :return: Available status
     """
     fqdn = FQDN(host=None, domain=domain)
     try:
@@ -62,17 +62,17 @@ def check_dns(domain):
         queries_ok = True
     except (dns.resolver.Timeout, dns.resolver.NoNameservers,
             dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, NameServerNotAvailable, dns.message.UnknownTSIGKey):
-        # note: currently the domain is also set to unavailable as a
-        # side effect in query_ns()
+        # Note: Currently the domain is also set to unavailable as a
+        # side effect in query_ns().
         queries_ok = False
     return queries_ok
 
 
 def check_staleness(d):
     """
-    checks the staleness of Domain d (is not available and has no hosts) and if it is stale, delete it.
+    Check the staleness of domain d (is not available and has no hosts) and, if it is stale, delete it.
 
-    Return log msg (can be None).
+    Return log message (can be None).
 
     :param d: Domain instance
     :return: log_msg
@@ -84,31 +84,31 @@ def check_staleness(d):
         if host_count > 0:
             log_msg = LOG_MSG_HAS_HOSTS % dict(hosts=host_count)
         else:
-            # is not available and has no hosts
+            # Not available and has no hosts.
             d.delete()
             log_msg = LOG_MSG_DELETE
     return log_msg
 
 
 class Command(BaseCommand):
-    help = 'deal with domains'
+    help = 'Deal with domains.'
 
     def add_arguments(self, parser):
         parser.add_argument('--check',
                             action='store_true',
                             dest='check',
                             default=False,
-                            help='check whether nameserver for domain is reachable and answers queries')
+                            help='Check whether the nameserver for the domain is reachable and answers queries.')
         parser.add_argument('--notify-user',
                             action='store_true',
                             dest='notify_user',
                             default=False,
-                            help='notify the user by email when domain gets flagged as unavailable')
+                            help='Notify the user by email when the domain gets flagged as unavailable.')
         parser.add_argument('--stale-check',
                             action='store_true',
                             dest='stale_check',
                             default=False,
-                            help='check whether domain is available or has hosts, delete if not')
+                            help='Check whether the domain is available or has hosts; delete if not.')
 
     def handle(self, *args, **options):
         check = options['check']
@@ -127,13 +127,13 @@ class Command(BaseCommand):
                         if notify_user:
                             subject, msg = translate_for_user(
                                 creator,
-                                _("issue with your domain %(domain)s"),
+                                _("Issue with your domain %(domain)s"),
                                 MSG
                             )
                             subject = subject % dict(domain=domain)
                             msg = msg % dict(domain=domain, comment=comment)
                             send_mail_to_user(creator, subject, msg)
-                        msg = "setting unavailable flag for domain %s (created by %s)\n" % (domain, creator,)
+                        msg = "Setting unavailable flag for domain %s (created by %s)\n" % (domain, creator,)
                         self.stdout.write(msg)
                     d.save()
                 if stale_check:

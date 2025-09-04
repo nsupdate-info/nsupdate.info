@@ -1,11 +1,11 @@
 """
-Django settings for nsupdate project
+Django settings for the nsupdate project.
 
-Note: do not directly use these settings, rather use "dev" or "prod".
+Note: Do not directly use these settings; use "dev" or "prod" instead.
 """
 
-# Note: django internally first loads its own defaults and then loads the
-# project's settings on top of that. Due to this, no import * is required here.
+# Note: Django internally first loads its own defaults and then loads the
+# project's settings on top of that. Due to this, no "import *" is required here.
 
 import os
 
@@ -45,13 +45,13 @@ DATABASES = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'  # == 32bit integer
 
-# these useragents are unacceptable for /nic/update service
-BAD_AGENTS = set([])  # list can have str elements
+# These user agents are unacceptable for the /nic/update service.
+BAD_AGENTS = set([])  # List can have str elements.
 
-# these IPAdresses and/or IPNetworks are unacceptable for /nic/update service
-# like e.g. IPs of servers related to illegal activities
+# These IP addresses and/or IP networks are unacceptable for the /nic/update service,
+# like, e.g., IPs of servers related to illegal activities.
 from netaddr import IPSet, IPAddress, IPNetwork
-BAD_IPS_HOST = IPSet([])  # inner list can have IPAddress and IPNetwork elements
+BAD_IPS_HOST = IPSet([])  # Inner list can have IPAddress and IPNetwork elements.
 
 # when encountering these hostnames (fqdn), block them early/silently from
 # api usage. avoid any database access, so if someone tries to update
@@ -62,7 +62,7 @@ BAD_HOSTS = set([])
 # nameservers used e.g. for MX lookups in the registration email validation.
 # google / cloudflare DNS IPs are only given as example / fallback -
 # please configure your own nameservers in your local settings file.
-NAMESERVERS = ['8.8.8.8', '1.1.1.1', ]
+NAMESERVERS = ['8.8.8.8', '1.1.1.1']
 
 # registration email validation: disallow specific email patterns,
 # e.g. domains that have a non-working mx / that are frequently abused.
@@ -417,7 +417,7 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    In this case foo field's value will be stored when user follows this link
 #    <a href="{% url socialauth_begin 'github' %}?foo=bar">...</a>.
 
-# we need slightly different classes for bootstrap3 than the default ones
+# We need slightly different classes for Bootstrap 3 than the default ones.
 from django.contrib.messages import constants
 MESSAGE_TAGS = {
     constants.DEBUG: '',
@@ -442,5 +442,5 @@ LANGUAGES = (
     # ('zh-cn', gettext_noop('Chinese (China)')),
 )
 
-# silences 1_6.W001 warning you get without this:
+# Silences the 1_6.W001 warning you get without this.
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'

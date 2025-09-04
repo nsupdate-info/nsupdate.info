@@ -1,5 +1,5 @@
 """
-nsupdate - a dynamic DNS service
+nsupdate — a dynamic DNS service.
 """
 
 import re
@@ -11,21 +11,21 @@ class Version(tuple):  # pragma: no cover
     """
     Version objects store versions like 1.2.3a4 in a structured
     way and support version comparisons and direct version component access.
-    1: major version (digits only)
-    2: minor version (digits only)
-    3: (maintenance) release version (digits only)
-    a4: optional additional version specification (str)
+    1: Major version (digits only)
+    2: Minor version (digits only)
+    3: (Maintenance) release version (digits only)
+    a4: Optional additional version specification (str)
 
-    See PEP386 for more details.
-    TODO: use 3rd party code for PEP386 version numbers later.
+    See PEP 386 for more details.
+    TODO: Use third-party code for PEP 386 version numbers later.
 
     You can create a Version instance either by giving the components, like:
-        Version(1,2,3,'a4')
+        Version(1, 2, 3, 'a4')
     or by giving the composite version string, like:
         Version(version="1.2.3a4").
 
     Version subclasses tuple, so comparisons to tuples should work.
-    Also, we inherit all the comparison logic from tuple base class.
+    Also, we inherit all the comparison logic from the tuple base class.
     """
     VERSION_RE = re.compile(
         r"""

@@ -42,13 +42,13 @@ Translations update workflow (start from a clean workdir):
 
 ::
 
-    # pull all translations from transifex:
+    # pull all translations from Transifex:
     tx pull
     # update the translations with changes from the source code:
-    django-admin.py makemessages -a
+    django-admin makemessages -a
     # compile the translations to .mo files
-    django-admin.py compilemessages
-    # push updated translation files back to transifex:
+    django-admin compilemessages
+    # push updated translation files back to Transifex:
     tx push -s -t
 
 
@@ -61,7 +61,7 @@ If you find some issue, have some idea or some patch, please submit them via the
 
 Or even better: if you use git, fork our repo, make your changes and submit a pull request.
 
-For small fixes, you can even just edit the files on github (github will then fork, change and submit a pull request
+For small fixes, you can even just edit the files on GitHub (GitHub will then fork, change and submit a pull request
 automatically).
 
 
@@ -81,7 +81,7 @@ See `the pipenv docs <https://pipenv.pypa.io/en/latest/commands/#install>`_.
     pipenv install mypkg
 
 
-Spawn a shell with correct python paths
+Spawn a shell with correct Python paths
 ---------------------------------------
 
 ::
@@ -118,7 +118,7 @@ Build locally
 =============
 
 1. Install `build` (see `its docs <https://packaging.python.org/en/latest/tutorials/packaging-projects/#generating-distribution-archives>`_
-   for example), e.g. via ``pacman -S python-build`` on ArchLinux.
+   for example), e.g. via ``pacman -S python-build`` on Arch Linux.
 2. Afterwards, run the command to generate pip packages in ``dist/``::
 
     pyproject-build
@@ -148,8 +148,8 @@ NOTE: The project does not use pylint for formatting.
 Run tests
 =========
 
-Tests need to run inside Docker because they depend on a ``bind9`` nameserver
+Tests need to run inside Docker because they depend on a ``BIND 9`` nameserver
 running a specific configuration on ``127.0.0.1:53``.
 
-#. Build the docker image once, using: ``docker build -t nsupdate scripts/docker/``
+#. Build the Docker image once, using: ``docker build -t nsupdate scripts/docker/``
 #. Then run tests via ``docker run --dns 127.0.0.1 -v $PWD:/app nsupdate``
