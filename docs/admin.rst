@@ -239,7 +239,7 @@ Customization of the Web UI
 You likely will need to customize the Web UI a bit, here is how.
 
 Overriding the built-in templates
---------------------------------
+---------------------------------
 If you want to add/modify footers or headers or if you need to add stuff
 into the HEAD element of the HTML, you can override some includes we made
 to support this use case.

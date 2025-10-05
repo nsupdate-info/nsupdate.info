@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView, \
     PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
 urlpatterns = (
-    # Login and logout URLs
+    # login and logout URLs
     re_path(r'^login/$', LoginView.as_view(template_name='login.html'), name='login'),
     # Alternatively, use the logout view with the 'logout.html' template
     re_path(r'^logout/$', LogoutView.as_view(), name='logout'),

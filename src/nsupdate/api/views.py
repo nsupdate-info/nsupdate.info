@@ -126,7 +126,7 @@ def basic_authenticate(auth):
         return
     if authmeth.lower() != 'basic':
         return
-    # We ignore bytes that do not decode. Username (hostname) and password
+    # We ignore bytes that do not decode. username (hostname) and password
     # (update secret) both have to be ASCII; everything else is a configuration
     # error on the user's side.
     auth = base64.b64decode(auth.strip()).decode('utf-8', errors='ignore')
