@@ -258,13 +258,9 @@ class Host(models.Model):
         return u"%s.%s" % (self.name, self.domain.name)
 
     class Meta(object):
-        # deprecated, but works:
-        unique_together = (('name', 'domain'),)
-        index_together = (('name', 'domain'),)
-        # this seems to be the new way, but it does not work:
-        # ValueError: Found wrong number (2) of indexes for main_host(name, domain_id).
-        # constraints = [models.constraints.UniqueConstraint(fields=['name', 'domain'], name='unique_host_domain')]
-        # indexes = [models.Index(fields=['name', 'domain'])]
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'domain'], name='unique_host_domain'),
+        ]
         verbose_name = _('host')
         verbose_name_plural = _('hosts')
         ordering = ('domain', 'name')  # groupby domain and sort by name
@@ -421,7 +417,9 @@ class RelatedHost(models.Model):
         return u"%s.%s" % (self.name, str(self.main_host))
 
     class Meta(object):
-        unique_together = (('name', 'main_host'),)
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'main_host'], name='unique_relatedhost_name_mainhost'),
+        ]
         verbose_name = _('related host')
         verbose_name_plural = _('related hosts')
         ordering = ('main_host', 'name')
