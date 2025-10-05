@@ -147,3 +147,11 @@ deps = [
 commands = [
   ["flake8", "src", "scripts", "conftest.py"],
 ]
+
+[tool.sphinx]
+source-dir = "docs/"
+build-dir = "docs/_build"
+all_files = true
+
+[tool.sphinx.upload]
+upload-dir = "docs/_build/html"
