@@ -1,31 +1,31 @@
 """
-Tests for ddns_client module.
+Tests for the ddns_client module.
 """
 
 import pytest
 
 from ..ddns_client import dyndns2_update, Timeout, ConnectionError
 
-# see also conftest.py
+# See also conftest.py.
 BASEDOMAIN = 'nsupdate.info'
 HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
 INVALID_HOSTNAME = 'nsupdate-ddns-client-nohost.' + BASEDOMAIN
-USER, PASSWORD = HOSTNAME, 'yUTvxjRwNu'  # no problem, is only used for this unit test
+USER, PASSWORD = HOSTNAME, 'yUTvxjRwNu'  # No problem; used only for this unit test.
 SERVER = 'ipv4.' + BASEDOMAIN
-SECURE = False  # TLS/SNI support on python 2.x sucks :(
+SECURE = False  # TLS/SNI support on Python 2.x is unreliable.
 
 
 class TestDynDns2Client(object):
     def test_timeout(self):
         with pytest.raises(Timeout):
-            # this assumes that the service can't respond in 1us and thus times out
+            # Assume the service can't respond in 1 µs and thus times out.
             dyndns2_update('wrong', 'wrong', SERVER,
                            hostname='wrong', myip='1.2.3.4', secure=SECURE,
                            timeout=0.000001)
 
     def test_connrefused(self):
         with pytest.raises(ConnectionError):
-            # this assumes that there is no service running on 127.0.0.42
+            # Assume there is no service running on 127.0.0.42.
             dyndns2_update('wrong', 'wrong', '127.0.0.42',
                            hostname='wrong', myip='1.2.3.4', secure=SECURE,
                            timeout=2.0)

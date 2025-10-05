@@ -1,5 +1,5 @@
 """
-logger decorator to enable logging of infos from django's HttpRequest object.
+Logger decorator to enable logging of information from Django's HttpRequest object.
 
 Usage:
 
@@ -7,9 +7,9 @@ Usage:
 
     @log.logger(__name__)
     def home(request, logger=None):
-        logger.info('user performed some action')
+        logger.info('User performed some action')
 
-    Class based views work the same way, just decorate/modify the view's METHOD(s).
+    Class-based views work the same way; just decorate or modify the view's method(s).
 
     Logging formatter configuration:
 
@@ -18,7 +18,7 @@ Usage:
 
 Based on code from (but heavily modified/refactored):
     https://derrickpetzold.com/p/django-requst-logging-json/
-    which is (c) Derrick Petzold - with a Creative Commons BY-SA license.
+    which is (c) Derrick Petzold — Creative Commons BY-SA license.
 """
 
 import logging
@@ -28,13 +28,13 @@ from django.http.request import HttpRequest
 
 def _get_attrdict(obj, basename, excluded=None):
     """
-    get a dictionary of (basename-prefixed) attribute names/values,
-    excluding the excluded names, internal stuff and callables.
+    Get a dictionary of (basename-prefixed) attribute names/values,
+    excluding the excluded names, internal attributes, and callables.
 
-    :param obj: the object to inspect
-    :param basename: the prefix for the names in the result dictionary
-    :param excluded: excluded attribute names, do not even touch [set or list]
-    :return: dict names: values
+    :param obj: The object to inspect
+    :param basename: The prefix for the names in the result dictionary
+    :param excluded: Excluded attribute names; do not even touch (set or list)
+    :return: Dict of names to values
     """
     if excluded is None:
         excluded = set()
@@ -53,13 +53,13 @@ def _get_attrdict(obj, basename, excluded=None):
 
 def _get_elementdict(dct, basename, excluded=None):
     """
-    get a dictionary of (basename-prefixed) dictionary elements,
+    Get a dictionary of (basename-prefixed) dictionary elements,
     excluding the excluded names.
 
-    :param dct: the dict to inspect
-    :param basename: the prefix for the names in the result dictionary
-    :param excluded: excluded dictionary keys [set or list]
-    :return: dict names: values
+    :param dct: The dict to inspect
+    :param basename: The prefix for the names in the result dictionary
+    :param excluded: Excluded dictionary keys (set or list)
+    :return: Dict of names to values
     """
     if excluded is None:
         excluded = set()
@@ -69,10 +69,10 @@ def _get_elementdict(dct, basename, excluded=None):
 
 def _build_request_info(request):
     """
-    build a dictionary with extra information extracted from request object
+    Build a dictionary with extra information extracted from the request object.
 
-    :param request: django HttpRequest object or None
-    :return: dict names: values
+    :param request: Django HttpRequest object or None
+    :return: Dict of names to values
     """
     d = {}
     if request:
@@ -80,11 +80,11 @@ def _build_request_info(request):
         d.update(_get_attrdict(request, "request.", ['raw_post_data', ]))
         d.update(_get_attrdict(request.session, "request.session."))
         d.update(_get_attrdict(request.user, "request.user."))
-    # note: avoid KeyErrors at least for the default logging format string.
-    # using a defaultdict as d does not help, as it gets iterated and keys/values
-    # transferred into a normal dict and then the logging format() is still
+    # Note: Avoid KeyErrors at least for the default logging format string.
+    # Using a defaultdict as d does not help, as it gets iterated and keys/values
+    # are transferred into a normal dict and then the logging format() is still
     # failing when it encounters an unknown key.
-    # XXX this is ugly and prone to fail for other format strings
+    # XXX This is ugly and prone to fail for other format strings.
     for key in ['request.META.REMOTE_ADDR',
                 'request.META.HTTP_USER_AGENT',
                 ]:
@@ -95,22 +95,22 @@ def _build_request_info(request):
 
 def get_logger(name, request=None):
     """
-    get a logger providing extra information from request,
-    use this if the decorator is not practicable.
+    Get a logger providing extra information from the request.
+    Use this if the decorator is not practical.
 
-    :param name: name of the logger
-    :param request: django's HttpRequest object
-    :return: logger instance
+    :param name: Name of the logger
+    :param request: Django's HttpRequest object
+    :return: Logger instance
     """
     return logging.LoggerAdapter(logging.getLogger(name), _build_request_info(request))
 
 
 def logger(name):
     """
-    decorator to provide extra information from request to logging
+    Decorator to provide extra information from the request to logging.
 
-    :param name: name of the logger
-    :return: decorated function/method
+    :param name: Name of the logger
+    :return: Decorated function or method
     """
     def wrap(func):
         def caller(*args, **kwargs):

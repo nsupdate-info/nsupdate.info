@@ -203,16 +203,16 @@ New Features:
 Fixes:
 
 * the link in the registration mail is now https if the site runs with https
-* avoid sending unneccessary "delete" updates to master nameserver - first
-  check if there is something to delete
+* avoid sending unnecessary "delete" updates to the master nameserver - first
+  check whether there is something to delete
 
 Other changes:
 
 * support and require Django >= 1.7
 * remove Python 2.6 support, require 2.7 or 3.3+
 * remove support for "south" migrations (used for 0.9.x and before)
-* add support for django 1.7's builtin migrations
-* misc. layout / UI improvments
+* add support for Django 1.7's built-in migrations
+* misc. layout / UI improvements
 * misc. doc improvements
 * improved original strings in translations, use "trimmed" in django templates
 * upgraded bootstrap
@@ -275,7 +275,7 @@ New Features:
   But please note: if you fail to configure your credentials correctly in your
   update client, we can NOT show that there as we need them to load your host
   record from the database (and to know it is really YOU who is talking to us).
-* add OpenWRT configuration help
+* add OpenWrt configuration help
 * add search field to Host and Domain admin
 
 Fixes:

@@ -41,7 +41,7 @@ to change afterwards.::
     from nsupdate.settings.dev import *
     SECRET_KEY='S3CR3T'
 
-IMPORTANT: you usually need to tell django what settings you want to use.
+IMPORTANT: you usually need to tell Django what settings you want to use.
 
 We won't document this for every single command in this documentation, but
 we'll assume that you either set DJANGO_SETTINGS_MODULE environment variable
@@ -99,8 +99,8 @@ see the "Domains" section in the "user" part of the manual.
 Installation (for production)
 =============================
 
-You usually will use a production webserver like apache or nginx (not Django's
-builtin "runserver").
+You usually will use a production web server like Apache or Nginx (not Django's
+built-in "runserver").
 
 If you want to use a virtualenv: see the hints for development installation.
 
@@ -110,7 +110,7 @@ requirements file (will install less packages than for development)::
     pip install -r requirements.d/prod.txt
     pip install -e .
 
-Alternatively, you can just install the latest release from pypi::
+Alternatively, you can just install the latest release from PyPI::
 
     pip install nsupdate
 
@@ -125,16 +125,16 @@ Also, you will need to review the settings in the nsupdate.settings.prod
 module and override everything that is different for your setup into your
 local_settings.py file.
 
-Note: if you do not setup ALLOWED_HOSTS correctly, your will just see status
+Note: if you do not set up ALLOWED_HOSTS correctly, you will just see status
 400 errors.
 
 WSGI
 ----
 
-Module nsupdate.wsgi contains the wsgi "application" object.
+Module nsupdate.wsgi contains the WSGI "application" object.
 
-Please consult the webserver / django docs how to configure it and how to run
-django apps (wsgi apps) with the webserver you use.
+Please consult the web server / Django docs on how to configure it and how to run
+Django apps (WSGI apps) with the web server you use.
 
 Django has nice generic documentation about this, see there:
 
@@ -238,18 +238,18 @@ Customization of the Web UI
 
 You likely will need to customize the Web UI a bit, here is how.
 
-Overriding the builtin templates
---------------------------------
+Overriding the built-in templates
+---------------------------------
 If you want to add/modify footers or headers or if you need to add stuff
-into the HEAD element of the html, you can override some includes we made
-to support this usecase.
+into the HEAD element of the HTML, you can override some includes we made
+to support this use case.
 
-Create an custom template directory (not within the repository / code
+Create a custom template directory (not within the repository / code
 directory) and add it to your settings, e.g.::
 
     TEMPLATE_DIRS = ('/srv/nsupdate.info/templates', )
 
-Below that template directory, you can override the builtin templates by
+Below that template directory, you can override the built-in templates by
 just using the same relative name, e.g.:
 
 * includes/base_footer.html (footer of all web UI views)
@@ -261,11 +261,11 @@ directories located below the code directory into YOUR custom template
 directory and then slightly modify it.
 
 As the templates might be cached in memory, you may need to restart your
-wsgi process to have them reloaded.
+WSGI process to have them reloaded.
 
 Note: it is advised that you keep local customizations to a minimum as if you
-override builtin templates with your customized copies, you will have to keep
-your copies in sync with future changes we make to the builtin ones.
+override built-in templates with your customized copies, you will have to keep
+your copies in sync with future changes we make to the built-in ones.
 
 Custom templates
 ----------------
@@ -297,8 +297,8 @@ Maintenance
 Regular jobs
 ------------
 You need to run some commands regularly, we show how to do that on Linux (or
-other POSIX OSes) using user cronjobs (use crontab -e to edit it). Make sure
-it runs as the same user as the nsupdate.info wsgi application::
+other POSIX OSes) using user cron jobs (use crontab -e to edit it). Make sure
+it runs as the same user as the nsupdate.info WSGI application::
 
     PYTHONPATH=/srv/nsupdate.info
     DJANGO_SETTINGS_MODULE=local_settings
@@ -330,7 +330,7 @@ set the abuse flag for it. The email will contain instructions for the user
 about how to fix the problem.
 
 So, if you run this weekly, it means that more than 150 client faults per week are
-considered abuse (e.g. if someone runs a stupid cronjob to update the IP instead
+considered abuse (e.g. if someone runs a stupid cron job to update the IP instead
 of a well-behaved update client).
 
 Hosts with the abuse flag set won't accept updates, but the user will be able to
@@ -354,7 +354,7 @@ Dealing with badly configured domains
 -------------------------------------
 
 In the regular jobs example in the previous section,
-django-admin.py domains --check --notify-user means that we'll check all
+django-admin domains --check --notify-user means that we'll check all
 domains that are currently flagged as available.
 
 We query the nameserver configured for the domain and check if it answers a
@@ -365,8 +365,8 @@ If --notify-user is given, we notify the owner of the domain by email if we
 flag the domain as not available. Owner in this context means: the user who
 added the domain to our service.
 
-Please note that we can not check whether the nameserver accepts dynamic
-updates for the domain. The dns admin could have set arbitrary restrictions
+Please note that we cannot check whether the nameserver accepts dynamic
+updates for the domain. The DNS admin could have set arbitrary restrictions
 on this and we do not know them. So if you have a domain configured with the
 service, please make sure that dynamic updates really work.
 

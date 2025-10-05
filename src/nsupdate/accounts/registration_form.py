@@ -16,7 +16,7 @@ import dns.name
 
 
 resolver = dns.resolver.Resolver()
-resolver.search = [dns.name.root, ]
+resolver.search = [dns.name.root]
 resolver.lifetime = 5.0
 resolver.nameservers = settings.NAMESERVERS
 
@@ -28,23 +28,23 @@ def check_mx(domain):
     valid = False
     try:
         mx_answers = resolver.resolve(domain, 'MX', search=True)
-        # domain exists in DNS, domain has MX
+        # Domain exists in DNS and has an MX record.
         mx_entries = sorted([(mx_rdata.preference, mx_rdata.exchange) for mx_rdata in mx_answers])
         for preference, mx in mx_entries:
             try:
                 addr_answers = resolver.resolve(mx, 'A', search=True)
             except dns.resolver.NoAnswer:
                 addr_answers = resolver.resolve(mx, 'AAAA', search=True)
-            # MX has IP addr
+            # MX has an IP address.
             mx_addrs = [addr_rdata.address for addr_rdata in addr_answers]
             for mx_addr in mx_addrs:
-                if mx_addr not in (u'127.0.0.1', u'::1', u'0.0.0.0', ):
+                if mx_addr not in (u'127.0.0.1', u'::1', u'0.0.0.0'):
                     valid = True
                     break
             if valid:
                 break
-    except (dns.resolver.Timeout, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.NXDOMAIN, ):
-        # expected exceptions (e.g. due to non-existing or misconfigured crap domains)
+    except (dns.resolver.Timeout, dns.resolver.NoAnswer, dns.resolver.NoNameservers, dns.resolver.NXDOMAIN):
+        # Expected exceptions (e.g., due to non-existent or misconfigured domains).
         pass
     return valid
 
@@ -59,7 +59,7 @@ def check_blacklist(email):
 class RegistrationFormValidateEmail(RegistrationForm):
     def clean_email(self):
         """
-        Validate the supplied email address to avoid undeliverable email and mailer daemon spam.
+        Validate the supplied email address to avoid undeliverable email and mailer-daemon spam.
         """
         email = self.cleaned_data.get('email')
         valid_mx = False

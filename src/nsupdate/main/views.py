@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-views for the interactive web user interface
+Views for the interactive web user interface.
 """
 
 import socket
@@ -301,7 +301,7 @@ class DeleteHostView(DeleteView):
     def get_object(self, *args, **kwargs):
         obj = super(DeleteHostView, self).get_object(*args, **kwargs)
         if obj.created_by != self.request.user or obj.abuse_blocked:
-            # disallow deletion if abuse_blocked is set, otherwise the
+            # Disallow deletion if abuse_blocked is set; otherwise, the
             # abuser can just delete and recreate the host
             raise Http404
         return obj

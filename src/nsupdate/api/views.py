@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-views for the (usually non-interactive, automated) web api
+Views for the (usually non-interactive, automated) web API.
 """
 
 import logging
@@ -29,9 +29,9 @@ from ..main.iptools import normalize_ip
 
 def Response(content, status=200):
     """
-    shortcut for text/plain HttpResponse
+    Shortcut for a text/plain HttpResponse.
 
-    :param content: plain text content for the response
+    :param content: Plain-text content for the response
     :return: HttpResponse object
     """
     return HttpResponse(content, status=status, content_type='text/plain')
@@ -40,9 +40,9 @@ def Response(content, status=200):
 @log.logger(__name__)
 def myip_view(request, logger=None):
     """
-    return the IP address (can be v4 or v6) of the client requesting this view.
+    Return the IP address (IPv4 or IPv6) of the client requesting this view.
 
-    :param request: django request object
+    :param request: Django request object
     :return: HttpResponse object
     """
     # Note: keeping this as a function-based view, as it is frequently used -
@@ -56,21 +56,21 @@ class DetectIpView(View):
     @log.logger(__name__)
     def get(self, request, sessionid, logger=None):
         """
-        Put the IP address (can be v4 or v6) of the client requesting this view
+        Put the IP address (IPv4 or IPv6) of the client requesting this view
         into the client's session.
 
-        :param request: django request object
-        :param sessionid: sessionid from url used to find the correct session w/o session cookie
+        :param request: Django request object
+        :param sessionid: Session ID from the URL used to find the correct session without a session cookie
         :return: HttpResponse object
         """
         engine = import_module(settings.SESSION_ENGINE)
-        # we do not have the session as usual, as this is a different host,
-        # so the session cookie is not received here - thus we access it via
-        # the sessionid:
+        # We do not have the session as usual, as this is a different host,
+        # so the session cookie is not received here; thus we access it via
+        # the session ID:
         s = engine.SessionStore(session_key=sessionid)
         ipaddr = normalize_ip(request.META['REMOTE_ADDR'])
-        # as this is NOT the session automatically established and
-        # also saved by the framework, we need to use save=True here
+        # As this is NOT the session automatically established and
+        # also saved by the framework, we need to use save=True here.
         put_ip_into_session(s, ipaddr, save=True)
         logger.debug("detected remote address: %s for session %s" % (ipaddr, sessionid))
         return HttpResponse(status=204)
@@ -80,11 +80,11 @@ class AjaxGetIps(View):
     @log.logger(__name__)
     def get(self, request, logger=None):
         """
-        Get the IP addresses of the client from the session via AJAX
+        Get the client's IP addresses from the session via AJAX
         (so we don't need to reload the view in case we just invalidated stale IPs
         and triggered new detection).
 
-        :param request: django request object
+        :param request: Django request object
         :return: HttpResponse object
         """
         response = dict(
@@ -99,10 +99,10 @@ class AjaxGetIps(View):
 
 def basic_challenge(realm, content='Authorization Required'):
     """
-    Construct a 401 response requesting http basic auth.
+    Construct a 401 response requesting HTTP Basic Auth.
 
-    :param realm: realm string (displayed by the browser)
-    :param content: request body content
+    :param realm: Realm string (displayed by the browser)
+    :param content: Request body content
     :return: HttpResponse object
     """
     response = Response(content)
@@ -113,9 +113,9 @@ def basic_challenge(realm, content='Authorization Required'):
 
 def basic_authenticate(auth):
     """
-    Get username and password from http basic auth string.
+    Get username and password from an HTTP Basic Auth string.
 
-    :param auth: http basic auth string [str on py2, str on py3]
+    :param auth: HTTP Basic Auth string [str on py2, str on py3]
     :return: username, password [unicode on py2, str on py3]
     """
     assert isinstance(auth, str)
@@ -126,9 +126,9 @@ def basic_authenticate(auth):
         return
     if authmeth.lower() != 'basic':
         return
-    # we ignore bytes that do not decode. username (hostname) and password
-    # (update secret) both have to be ascii, everything else is a configuration
-    # error on user side.
+    # We ignore bytes that do not decode. username (hostname) and password
+    # (update secret) both have to be ASCII; everything else is a configuration
+    # error on the user's side.
     auth = base64.b64decode(auth.strip()).decode('utf-8', errors='ignore')
     username, password = auth.split(':', 1)
     return username, password
@@ -137,11 +137,11 @@ def basic_authenticate(auth):
 @log.logger(__name__)
 def check_api_auth(username, password, logger=None):
     """
-    Check username and password against our database.
+    Check the username and password against our database.
 
-    :param username: http basic auth username (== fqdn)
-    :param password: update password
-    :return: host object if authenticated, None otherwise.
+    :param username: HTTP Basic Auth username (== FQDN)
+    :param password: Update password
+    :return: Host object if authenticated, None otherwise.
     """
     fqdn = username
     try:
@@ -167,9 +167,9 @@ def check_session_auth(user, hostname):
     """
     Check our database whether the hostname is owned by the user.
 
-    :param user: django user object
-    :param hostname: fqdn
-    :return: host object if hostname is owned by this user, None otherwise.
+    :param user: Django user object
+    :param hostname: FQDN
+    :return: Host object if the hostname is owned by this user, None otherwise.
     """
     fqdn = hostname
     try:
@@ -185,27 +185,27 @@ class NicUpdateView(View):
     @log.logger(__name__)
     def get(self, request, logger=None, delete=False):
         """
-        dyndns2 compatible /nic/update API.
+        DynDNS2-compatible /nic/update API.
 
         Example URLs:
 
-        Will request username (fqdn) and password (secret) from user,
-        for interactive testing / updating:
+        Will request username (FQDN) and password (secret) from the user,
+        for interactive testing/updating:
         https://nsupdate.info/nic/update
 
-        You can put it also into the url, so the browser will automatically
-        send the http basic auth with the request:
+        You can also include it in the URL, so the browser will automatically
+        send the HTTP Basic Auth with the request:
         https://fqdn:secret@nsupdate.info/nic/update
 
         If the request does not come from the correct IP, you can give it as
         a query parameter.
-        You can also give the hostname/fqdn as a query parameter (this is
-        supported for api compatibility only), but then it MUST match the fqdn
-        used for http basic auth's username part, because the secret only
-        allows you to update this single fqdn).
+        You can also give the hostname/FQDN as a query parameter (this is
+        supported for API compatibility only), but then it MUST match the FQDN
+        used for HTTP Basic Auth's username part, because the secret only
+        allows you to update this single FQDN).
         https://fqdn:secret@nsupdate.info/nic/update?hostname=fqdn&myip=1.2.3.4
 
-        :param request: django request object
+        :param request: Django request object
         :param delete: False means update, True means delete - used by NicDeleteView
         :return: HttpResponse object
         """

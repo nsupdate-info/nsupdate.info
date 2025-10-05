@@ -1,5 +1,5 @@
 """
-models for hosts, domains, service updaters, ...
+Models for hosts, domains, and service updaters.
 """
 
 import re
@@ -27,7 +27,7 @@ RESULT_MSG_LEN = 255
 
 def result_fmt(msg):
     """
-    format the message for storage into client/server_result_msg fields
+    Format the message for storage in client/server_result_msg fields.
     """
     msg = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime(time.time())) + ' ' + msg
     return msg[:RESULT_MSG_LEN]
@@ -39,10 +39,10 @@ def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEF
 
 class BlacklistedHost(models.Model):
     name_re = models.CharField(
-        _('name RegEx'),
+        _('name regex'),
         max_length=255,
         unique=True,
-        help_text=_('Blacklisted domain. Evaluated as regex (search).'))
+        help_text=_('Blacklisted domain. Evaluated as a regex (search).'))
 
     last_update = models.DateTimeField(_('last update'), auto_now=True)
     created = models.DateTimeField(_('created at'), auto_now_add=True)
@@ -62,7 +62,7 @@ class BlacklistedHost(models.Model):
 def host_blacklist_validator(value):
     for bd in BlacklistedHost.objects.all():
         if re.search(bd.name_re, value):
-            raise ValidationError(u'This name is blacklisted')
+            raise ValidationError(u'This name is blacklisted.')
 
 
 from collections import namedtuple
@@ -126,7 +126,7 @@ class Domain(models.Model):
         max_length=255,  # should be enough
         default='', blank=True, null=True,
         help_text=_("Some arbitrary comment about your domain. "
-                    "If your domain is public, the comment will be also publicly shown."))
+                    "If your domain is public, the comment will also be publicly shown."))
 
     last_update = models.DateTimeField(_("last update"), auto_now=True)
     created = models.DateTimeField(_("created at"), auto_now_add=True)
@@ -176,7 +176,7 @@ class Host(models.Model):
         _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
+        help_text=_("Some arbitrary comment about your host, e.g. who / what / where this host is"))
 
     # available means that this host may be updated (or not, if False) -
     # gets set to False if abuse happens (client malfunctioning) or
@@ -394,7 +394,7 @@ class RelatedHost(models.Model):
         _("comment"),
         max_length=255,  # should be enough
         default='', blank=True, null=True,
-        help_text=_("Some arbitrary comment about your host, e.g  who / what / where this host is"))
+        help_text=_("Some arbitrary comment about your host, e.g. who / what / where this host is"))
     interface_id_ipv4 = models.CharField(
         _("interface ID IPv4"),
         default='', blank=True, null=True,

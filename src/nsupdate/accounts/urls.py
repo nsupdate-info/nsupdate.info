@@ -12,7 +12,7 @@ urlpatterns = (
     re_path(r'^settings/', UserChangePasswordView.as_view(), name='account_settings'),
     re_path(r'^delete/', DeleteUserView.as_view(), name="account_delete"),
 
-    # registration start
+    # Registration start
     re_path(r'^activate/complete/$',
             TemplateView.as_view(template_name='registration/activation_complete.html'),
             name='registration_activation_complete'),
@@ -33,5 +33,5 @@ urlpatterns = (
     re_path(r'^register/closed/$',
             TemplateView.as_view(template_name='registration/registration_closed.html'),
             name='registration_disallowed'),
-    # registration end
+    # Registration end
 )

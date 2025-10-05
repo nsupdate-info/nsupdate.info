@@ -1,5 +1,5 @@
 """
-Misc. IP tools: normalize, handle mapped addresses
+Miscellaneous IP tools: normalize and handle mapped addresses.
 """
 
 from netaddr import IPAddress
@@ -7,11 +7,11 @@ from netaddr import IPAddress
 
 def normalize_mapped_address(ipaddr):
     """
-    Converts a IPv4-mapped IPv6 address into a IPv4 address. Handles both the
+    Convert an IPv4-mapped IPv6 address into an IPv4 address. Handles both the
     ::ffff:192.0.2.128 format as well as the deprecated ::192.0.2.128 format.
 
     :param ipaddr: IP address [str]
-    :return: normalized IP address [str]
+    :return: Normalized IP address [str]
     """
     ipaddr = IPAddress(ipaddr)
     if ipaddr.is_ipv4_compat() or ipaddr.is_ipv4_mapped():

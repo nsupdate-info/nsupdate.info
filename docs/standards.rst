@@ -26,4 +26,4 @@ api, but removes the A or AAAA record in DNS instead of updating it.
 
 While the update API would actually use the given IP address to put it into
 an A or AAAA record, the delete API uses it only to determine the address
-type, whether it is IPv6 or v6 and then deletes the A or AAAA record.
+type, whether it is IPv4 or IPv6 and then deletes the A or AAAA record.
