@@ -12,7 +12,7 @@ HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
 INVALID_HOSTNAME = 'nsupdate-ddns-client-nohost.' + BASEDOMAIN
 USER, PASSWORD = HOSTNAME, 'yUTvxjRwNu'  # No problem; used only for this unit test.
 SERVER = 'ipv4.' + BASEDOMAIN
-SECURE = False  # TLS/SNI support on Python 2.x is unreliable.
+SECURE = False  # Do not use TLS for these tests.
 
 
 class TestDynDns2Client(object):

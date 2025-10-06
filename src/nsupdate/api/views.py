@@ -116,7 +116,7 @@ def basic_authenticate(auth):
     """
     Get username and password from an HTTP Basic Auth string.
 
-    :param auth: HTTP Basic Auth string [str on py2, str on py3]
+    :param auth: HTTP Basic Auth string (str)
     :return: (username, password) tuple on success; None on invalid/malformed headers
     """
     assert isinstance(auth, str)

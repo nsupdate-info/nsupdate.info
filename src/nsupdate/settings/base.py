@@ -389,7 +389,6 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    urllib2.urlopen uses socket.getdefaulttimeout() value by default, so setting socket.setdefaulttimeout(...) will
 #    affect urlopen when this setting is not defined, otherwise this setting takes precedence. Also this might affect
 #    other places in Django.
-#    timeout argument was introduced in python 2.6 according to urllib2 documentation
 
 # SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_DOMAINS = ['foo.com', 'bar.com']
 #    Supply a list of domain names to be white-listed. Any user with an email address on any of the allowed domains will
