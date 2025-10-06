@@ -377,7 +377,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
         return Response('dnserr')  # there should be a better response code for this
-    if mode == 'update' and ipaddr in settings.BAD_IPS_HOST:
+    if mode == 'update' and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
         host.abuse = True
