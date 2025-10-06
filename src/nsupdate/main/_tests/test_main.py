@@ -4,7 +4,6 @@ Tests for the main views module.
 
 from __future__ import print_function
 
-import pytest
 
 from django.urls import reverse
 

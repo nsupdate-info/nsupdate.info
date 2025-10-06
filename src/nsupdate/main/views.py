@@ -3,7 +3,6 @@
 Views for the interactive web user interface.
 """
 
-import socket
 from datetime import timedelta
 
 import dns.name

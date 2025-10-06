@@ -50,7 +50,7 @@ BAD_AGENTS = set([])  # List can have str elements.
 
 # These IP addresses and/or IP networks are unacceptable for the /nic/update service,
 # like, e.g., IPs of servers related to illegal activities.
-from netaddr import IPSet, IPAddress, IPNetwork
+from netaddr import IPSet
 BAD_IPS_HOST = IPSet([])  # Inner list can have IPAddress and IPNetwork elements.
 
 # when encountering these hostnames (fqdn), block them early/silently from

@@ -5,7 +5,7 @@ Tests for the API package.
 import pytest
 
 import base64
-from netaddr import IPSet, IPAddress, IPNetwork
+from netaddr import IPSet, IPAddress
 
 from django.urls import reverse
 
@@ -13,7 +13,7 @@ from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 from nsupdate.api.views import basic_authenticate
 
-from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET, TEST_SECRET2
+from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
 
 USERNAME = 'test'
 PASSWORD = 'pass'
