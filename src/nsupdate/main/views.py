@@ -169,9 +169,10 @@ class JsUpdateView(TemplateView):
         auth = request.META.get('HTTP_AUTHORIZATION')
         if auth is None:
             return basic_challenge("authenticate to update DNS", 'badauth')
-        username, password = basic_authenticate(auth)
-        self.hostname = username
-        self.secret = password
+        creds = basic_authenticate(auth)
+        if not creds:
+            return basic_challenge("authenticate to update DNS", 'badauth')
+        self.hostname, self.secret = creds
         return super(JsUpdateView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

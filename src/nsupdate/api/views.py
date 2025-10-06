@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 import json
 import base64
+import binascii
 from importlib import import_module
 
 from netaddr import IPAddress, IPNetwork
@@ -116,21 +117,24 @@ def basic_authenticate(auth):
     Get username and password from an HTTP Basic Auth string.
 
     :param auth: HTTP Basic Auth string [str on py2, str on py3]
-    :return: username, password [unicode on py2, str on py3]
+    :return: (username, password) tuple on success; None on invalid/malformed headers
     """
     assert isinstance(auth, str)
     try:
-        authmeth, auth = auth.split(' ', 1)
+        authmeth, payload = auth.split(' ', 1)
     except ValueError:
-        # splitting failed, invalid auth string
+        # invalid auth header format
         return
     if authmeth.lower() != 'basic':
         return
-    # We ignore bytes that do not decode. username (hostname) and password
-    # (update secret) both have to be ASCII; everything else is a configuration
-    # error on the user's side.
-    auth = base64.b64decode(auth.strip()).decode('utf-8', errors='ignore')
-    username, password = auth.split(':', 1)
+    try:
+        decoded_bytes = base64.b64decode(payload.strip())
+    except (binascii.Error, ValueError):
+        return
+    decoded = decoded_bytes.decode('utf-8', errors='ignore')
+    if ':' not in decoded:
+        return
+    username, password = decoded.split(':', 1)
     return username, password
 
 
@@ -217,7 +221,11 @@ class NicUpdateView(View):
             # logging this at debug level because otherwise it fills our logs...
             logger.debug('%s - received no auth' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
-        username, password = basic_authenticate(auth)
+        creds = basic_authenticate(auth)
+        if not creds:
+            logger.debug('%s - received malformed auth header' % (hostname, ))
+            return basic_challenge("authenticate to update DNS", 'badauth')
+        username, password = creds
         if '.' not in username:  # username MUST be the fqdn
             # specifically point to configuration errors on client side
             return Response('notfqdn')
