@@ -5,7 +5,6 @@ Deal with the fault counters and the available/abuse/abuse_blocked flags.
 import traceback
 
 from django.core.management.base import BaseCommand
-from django.core.mail import send_mail
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
