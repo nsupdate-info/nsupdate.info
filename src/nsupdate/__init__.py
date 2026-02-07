@@ -4,7 +4,7 @@ nsupdate — a dynamic DNS service.
 
 import re
 
-from ._version import version, version_tuple
+from ._version import version, version_tuple  # Keep; re-exported public API
 
 
 class Version(tuple):  # pragma: no cover

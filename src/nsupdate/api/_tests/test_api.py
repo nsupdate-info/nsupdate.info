@@ -5,7 +5,7 @@ Tests for the API package.
 import pytest
 
 import base64
-from netaddr import IPSet, IPAddress, IPNetwork
+from netaddr import IPSet, IPAddress
 
 from django.urls import reverse
 
@@ -13,7 +13,7 @@ from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 from nsupdate.api.views import basic_authenticate
 
-from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET, TEST_SECRET2
+from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
 
 USERNAME = 'test'
 PASSWORD = 'pass'
@@ -38,21 +38,18 @@ def make_basic_auth_header(username, password):
     """
     Create a Basic Authentication header.
 
-    :param username: Username [unicode on py2, str on py3]
-    :param password: Password [unicode on py2, str on py3]
-    :return: Basic auth header [str on py2, str on py3]
+    :param username: Username (str)
+    :param password: Password (str)
+    :return: Basic auth header (str)
     """
-    # Note: The coding dance in the next lines is to make sure we get str type
-    # on Python 2 as well as on Python 3, as str is the type we get in the auth
-    # object when practically running with a real web server.
-    user_pass = u'%s:%s' % (username, password)
-    return 'Basic ' + str(base64.b64encode(user_pass.encode('utf-8')).decode('ascii'))
+    token = base64.b64encode(f"{username}:{password}".encode()).decode()
+    return f"Basic {token}"
 
 
 def test_basic_auth():
     user_pass = "username", "secret"
     h = make_basic_auth_header(*user_pass)
-    assert isinstance(h, str)  # Must be str on py2; must be str on py3!
+    assert isinstance(h, str)
     assert basic_authenticate(h) == user_pass
 
 

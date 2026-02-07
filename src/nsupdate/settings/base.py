@@ -50,7 +50,7 @@ BAD_AGENTS = set([])  # List can have str elements.
 
 # These IP addresses and/or IP networks are unacceptable for the /nic/update service,
 # like, e.g., IPs of servers related to illegal activities.
-from netaddr import IPSet, IPAddress, IPNetwork
+from netaddr import IPSet
 BAD_IPS_HOST = IPSet([])  # Inner list can have IPAddress and IPNetwork elements.
 
 # when encountering these hostnames (fqdn), block them early/silently from
@@ -389,7 +389,6 @@ SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 #    urllib2.urlopen uses socket.getdefaulttimeout() value by default, so setting socket.setdefaulttimeout(...) will
 #    affect urlopen when this setting is not defined, otherwise this setting takes precedence. Also this might affect
 #    other places in Django.
-#    timeout argument was introduced in python 2.6 according to urllib2 documentation
 
 # SOCIAL_AUTH_<BACKEND_NAME>_WHITELISTED_DOMAINS = ['foo.com', 'bar.com']
 #    Supply a list of domain names to be white-listed. Any user with an email address on any of the allowed domains will

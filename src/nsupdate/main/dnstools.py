@@ -17,7 +17,6 @@ UNAVAILABLE_RETRY = 120.0
 
 
 import binascii
-import errno
 import time
 from datetime import timedelta
 from collections import namedtuple

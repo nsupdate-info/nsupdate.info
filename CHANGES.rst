@@ -46,7 +46,9 @@ Other changes:
 - add missing migration files
 - update update_secret database field length for salted hash
 - add hint if there are no social logins enabled
-- update to DropboxOAuth2V2
+- update to DropboxOAuth2V2, remove non-existing BitbucketOAuth
+- migrate misc. setup/config files to pyproject.toml
+- update license identifier to "BSD-3-Clause" in pyproject.toml
 - docs:
 
   - include note about IPv4 interface ID
@@ -54,6 +56,7 @@ Other changes:
   - integrate new logo, thanks to @mirzazulfan, #78
   - add docs on how to disable user registration, #438
   - always use django-admin (not django-admin.py) in docs, update URLs
+  - fix typos and grammar
 - tests:
 
   - use GitHub actions instead of travis CI.

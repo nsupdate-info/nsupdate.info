@@ -6,7 +6,6 @@ import dns.resolver
 import dns.message
 
 from django.core.management.base import BaseCommand
-from django.core.mail import send_mail
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
