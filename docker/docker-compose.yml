@@ -1,0 +1,12 @@
+services:
+  nsupdate.info:
+    build: .
+    container_name: nsupdate.info
+    volumes:
+      - ./config:/config
+      - ./local_settings.py:/nsupdate/src/local_settings.py
+    ports:
+      - 8916:8000
+    restart: unless-stopped
+    env_file:
+      - .env_prod
