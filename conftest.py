@@ -33,7 +33,7 @@ PASSWORD = 'pass'
 HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
 _PASSWORD = 'yUTvxjRwNu'  # no problem, is only used for this unit test
 SERVER = 'ipv4.' + BASEDOMAIN
-SECURE = False  # TLS/SNI support on python 2.x sucks :(
+SECURE = False  # Do not use TLS for these tests.
 
 from django.utils.translation import activate
 
