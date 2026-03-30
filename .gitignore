@@ -9,3 +9,6 @@ local_settings.py
 *.sqlite
 *.egg-info
 dist/
+docs/_build/
+src/nsupdate/_version.py
+.*.sw?
