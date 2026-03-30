@@ -71,7 +71,7 @@ class GenerateNSSecretView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(GenerateNSSecretView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
-        context['shared_secret'] = self.object.generate_ns_secret()
+        context['key_name'], context['shared_secret'] = self.object.generate_ns_secret()
         messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
         return context
 

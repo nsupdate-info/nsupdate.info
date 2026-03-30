@@ -11,6 +11,9 @@ from django.utils.translation import gettext_lazy as _
 from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 from .dnstools import check_domain, NameServerNotAvailable
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 class CreateHostForm(forms.ModelForm):
     class Meta(object):
@@ -56,7 +59,12 @@ class CreateDomainForm(forms.ModelForm):
 
     class Meta(object):
         model = Domain
-        fields = ['name', 'nameserver_ip', 'nameserver2_ip', 'nameserver_update_algorithm', 'comment']
+        fields = ['name',
+                  'public', 'available',
+                  'nameserver_ip', 'nameserver_port', 'nameserver_protocol',
+                  'nameserver2_ip', 'nameserver2_port', 'nameserver2_protocol',
+                  'nameserver_update_key_name', 'nameserver_update_algorithm', 'nameserver_update_secret',
+                  'comment']
         widgets = {
             'name': forms.widgets.TextInput(attrs=dict(autofocus=None)),
         }
@@ -73,17 +81,23 @@ class EditDomainForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(EditDomainForm, self).clean()
+        logger.warning("cleaned_data: " + str(cleaned_data))
 
-        if self.cleaned_data['available'] and 'nameserver_ip' in cleaned_data:
+        if self.cleaned_data['available']:
             try:
-                check_domain(self.instance.name, cleaned_data['nameserver_ip'])
+                check_domain(self.instance.name, cleaned_data)
 
-            except (NameServerNotAvailable, ):
+            except NameServerNotAvailable as e:
                 raise forms.ValidationError(
-                    _("Failed to add/delete host connectivity-test.%(domain)s, check your DNS server configuration. "
-                      "This is a requirement for setting the available flag."),
+                    _("Failed to add/delete host connectivity-test.%(domain)s, check your DNS server configuration.") +
+                    " " +
+                    _("This is a requirement for setting the available flag.") +
+                    " (%(error_detail)s)",
                     code='invalid',
-                    params={'domain': self.instance.name}
+                    params={
+                        'domain': self.instance.name,
+                        'error_detail': str(e)
+                    }
                 )
 
         if cleaned_data['public'] and not cleaned_data['available']:
@@ -93,8 +107,13 @@ class EditDomainForm(forms.ModelForm):
 
     class Meta(object):
         model = Domain
-        fields = ['comment', 'nameserver_ip', 'nameserver2_ip', 'public', 'available',
-                  'nameserver_update_algorithm', 'nameserver_update_secret']
+        fields = ['name',
+                  'public', 'available',
+                  'nameserver_ip', 'nameserver_port', 'nameserver_protocol',
+                  'nameserver2_ip', 'nameserver2_port', 'nameserver2_protocol',
+                  'nameserver_update_key_name', 'nameserver_update_algorithm', 'nameserver_update_secret',
+                  'comment'
+        ]
 
 
 class CreateUpdaterHostConfigForm(forms.ModelForm):
