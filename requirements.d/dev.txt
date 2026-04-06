@@ -4,7 +4,7 @@ django-debug-toolbar
 pytest
 pytest-django
 pytest-cov
-tox<4.30
+tox
 build
 wheel
 pylint
