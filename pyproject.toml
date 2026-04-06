@@ -24,7 +24,7 @@ requires-python = ">=3.10, <3.15"
 dependencies = [
     'dnspython',
     'netaddr',
-    'django >=4.2.0, <4.3.0',
+    'django >=5.2.0, <5.3.0',
     'django-bootstrap-form',
     'django-referrer-policy',
     'django-registration-redux',
