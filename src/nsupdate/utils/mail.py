@@ -21,8 +21,8 @@ def translate_for_user(user, *msgs):
     saved_lang = translation.get_language()
     try:
         translation.activate(lang)
-        # Using the message triggers lazy translation.
-        return [msg + u'' for msg in msgs]
+        # Force evaluation of lazy translation objects by casting to str.
+        return [str(msg) for msg in msgs]
     finally:
         translation.activate(saved_lang)
 
