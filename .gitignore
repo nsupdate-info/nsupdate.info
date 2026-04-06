@@ -9,3 +9,4 @@ local_settings.py
 *.sqlite
 *.egg-info
 dist/
+docs/_build/
