@@ -29,7 +29,7 @@ Configuration
 nsupdate.info Service
 ---------------------
 
-First, please read the nsupdate/settings/*.py files - they contain a lot of
+First, please read the ``nsupdate/settings/*.py`` files - they contain a lot of
 settings you can use to customize your nsupdate.info installation. dev is for
 a development setup, prod is for a production setup and base has settings that
 are common for both.
@@ -44,7 +44,7 @@ to change afterwards.::
 IMPORTANT: you usually need to tell Django what settings you want to use.
 
 We won't document this for every single command in this documentation, but
-we'll assume that you either set DJANGO_SETTINGS_MODULE environment variable
+we'll assume that you either set ``DJANGO_SETTINGS_MODULE`` environment variable
 so it points to your settings module or that you give the --settings parameter
 additionally with all commands that need it::
 
@@ -125,7 +125,7 @@ Also, you will need to review the settings in the nsupdate.settings.prod
 module and override everything that is different for your setup into your
 local_settings.py file.
 
-Note: if you do not set up ALLOWED_HOSTS correctly, you will just see status
+Note: if you do not set up ``ALLOWED_HOSTS`` correctly, you will just see status
 400 errors.
 
 WSGI
@@ -159,14 +159,14 @@ web servers may need special settings for this::
 Static Files
 ------------
 
-As soon as you switch off DEBUG, Django won't serve static files any more,
+As soon as you switch off ``DEBUG``, Django won't serve static files any more,
 thus you need to arrange /static/ file serving by your web server.
 
 We assume here that you configured your web server to serve /static/ URL from
 /srv/nsupdate.info/htdocs/static/ directory.
 
 Django helps you to put all the static files into that directory, you just need
-to configure STATIC_ROOT for that::
+to configure ``STATIC_ROOT`` for that::
 
     STATIC_ROOT = '/srv/nsupdate.info/htdocs/static'
 
@@ -175,9 +175,9 @@ And then, run this::
     umask 0022  # make sure group and others keep r and x, but not w
     django-admin collectstatic
 
-This will copy all the static files into STATIC_ROOT.
+This will copy all the static files into ``STATIC_ROOT``.
 
-Now, you must set DEBUG=False so it doesn't leak information from tracebacks
+Now, you must set ``DEBUG=False`` so it doesn't leak information from tracebacks
 to the outside world.
 
 Make sure your static files really work.
