@@ -2,7 +2,7 @@
 Deal with hosts (Host records in our database).
 """
 
-from datetime import datetime
+import datetime
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -19,7 +19,7 @@ S_notstale = 0  # Staleness level meaning the host is NOT stale.
 S_unavailable = 3  # Staleness level that makes the host unavailable.
 S_delete = 5  # Staleness level that leads to the host being deleted.
 
-NEVER = datetime.fromtimestamp(DAY, timezone.utc)  # 2.1.1970
+NEVER = datetime.datetime.fromtimestamp(DAY, datetime.timezone.utc)  # 2.1.1970
 
 LOG_MSG_STALE = _("%(host)s has not seen IP updates for a long time; staleness: %(staleness)d -> please fix!")
 LOG_MSG_UNAVAILABLE = _("%(host)s IP has still not been updated, staleness: %(staleness)d -> made host unavailable.")

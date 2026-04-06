@@ -2,7 +2,7 @@
 Deal with users (User records in our database).
 """
 
-from datetime import datetime
+import datetime
 
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
@@ -15,7 +15,7 @@ from nsupdate.main.models import Host, Domain
 DAY = 24 * 3600  # [s]
 T_age = 365 * DAY  # min. age of last login for considering deletion of a user
 
-NEVER = datetime.fromtimestamp(DAY, timezone.utc)  # 2.1.1970
+NEVER = datetime.datetime.fromtimestamp(DAY, datetime.timezone.utc)  # 2.1.1970
 
 LOG_MSG_DELETE = _("%%(user)r hasn't logged in for %(age)fy, has no hosts and no domains -> deleted user.")
 LOG_MSG_HAS_HOSTS = _("%%(user)r kept, has hosts. age: %(age)fy, hosts: %(hosts)d.")
