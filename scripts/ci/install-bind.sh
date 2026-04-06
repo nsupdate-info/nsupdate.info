@@ -9,16 +9,16 @@ sudo apt-get -y install bind9 bind9-dnsutils bind9-host e2fsprogs
 echo "named.conf.local"
 cat /etc/bind/named.conf.local
 sudo cp scripts/ci/etc/bind/named.conf.local /etc/bind/
-sudo chown bind.bind /etc/bind/named.conf.local
+sudo chown bind:bind /etc/bind/named.conf.local
 
 echo "named.conf.options"
 cat /etc/bind/named.conf.options
 sudo cp scripts/ci/etc/bind/named.conf.options /etc/bind/
-sudo chown bind.bind /etc/bind/named.conf.options
+sudo chown bind:bind /etc/bind/named.conf.options
 
 sudo ln -s /var/lib/bind /etc/bind/zones
 sudo cp scripts/ci/etc/bind/zones/* /etc/bind/zones/
-sudo chown bind.bind /etc/bind/zones/*
+sudo chown bind:bind /etc/bind/zones/*
 
 sudo service bind9 restart
 
