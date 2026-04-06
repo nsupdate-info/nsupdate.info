@@ -17,7 +17,7 @@ from netaddr.core import AddrFormatError
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic.base import View
-from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import check_password, verify_password
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -155,7 +155,11 @@ def check_api_auth(username, password, logger=None):
         logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn, ))
         return None
     if host is not None:
-        ok = check_password(password, host.update_secret)
+        ok, must_update = verify_password(password, host.update_secret, preferred='weakargon2')
+        if ok and must_update:
+            # If password is correct but uses a not desired hasher, change it now to the desired one.
+            host.generate_secret(password)
+
         success_msg = ('failure', 'success')[ok]
         msg = "api authentication %s. [hostname: %s (given in basic auth)]" % (success_msg, fqdn, )
         host.register_api_auth_result(msg, fault=not ok)

@@ -62,12 +62,9 @@ Interactive login password
 We recommend that you use a rather strong and not guessable password for this.
 Do not re-use passwords, use a password system or a password manager.
 
-The interactive login password for the web site is stored using Django's
-default hasher mechanism, which is currently pbkdf2 (a very strong and
-intentionally slow password hash). Brute-Force attacks against such hashes are
-very slow, much slower than against simple hashes like (s)sha1/sha256 etc.
-
-It is NOT stored in clear text by nsupdate.info.
+The interactive login password for the web site is stored using a strong argon2
+hasher when using the ``PASSWORD_HASHERS`` setting as we provide it in
+``nsupdate.settings.base``.
 
 If you lose the password, you'll have to do a password reset via e-mail.
 
@@ -76,17 +73,13 @@ Automated update secret
 -----------------------
 
 The automated update secret for routers or other update clients is a
-random and automatically generated secret. We store it using the sha1 hasher
-of Django (which in fact is salted-sha1, a not very strong, but fast-to-compute
-hash).
+random and automatically generated secret. We store it using a weak argon2
+hasher.
 
-Considering that a lot of routers or update clients store this secret in clear
-text in their configuration and often transmit it using unencrypted http (and
-not https), this secret is not too safe anyway. We also wanted to save some CPU
-cycles here and rather not use pbkdf2 for this regularly and automatically used
-secret.
-
-It is not stored in clear text by nsupdate.info.
+The hasher is intentionally relatively weak compared to the standard (strong)
+argon2 hasher to avoid server overload and slow processing of dyndns update
+requests. It is still about 1000x stronger than the salted-sha1 we used in the
+past.
 
 If you lose the secret, you'll have to generate a new one and change it in your
 update client also.

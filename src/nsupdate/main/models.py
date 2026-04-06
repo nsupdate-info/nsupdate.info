@@ -328,16 +328,18 @@ class Host(models.Model):
         self.save()
 
     def generate_secret(self, secret=None):
-        # note: we use a quick hasher for the update_secret as expensive
-        # more modern hashes might put too much load on the servers. also
-        # many update clients might use http without tls, so it is not too
-        # secure anyway.
+        # note: we use a quick hasher for the update_secret as expensive,
+        # more secure hashes might put too much load on the servers.
+        # we deal with lots of automated requests here, and not all update
+        # clients are well-behaved.
         if secret is None:
             user_model = get_user_model()
             secret = make_random_password()
+        # Because Django removed the "sha1" hasher we used in the past AND we need something
+        # fast for the update secrets, we want "weakargon2" now.
         self.update_secret = make_password(
             secret,
-            hasher='sha1'
+            hasher='weakargon2'
         )
         self.save()
         return secret

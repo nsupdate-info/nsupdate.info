@@ -12,6 +12,7 @@ django-referrer-policy = "*"
 django-registration-redux = "*"
 django-extensions = "*"
 social-auth-app-django = "*"
+argon2-cffi = "*"
 requests = "*"
 setuptools-scm = "*"
 
