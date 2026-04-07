@@ -1,20 +1,20 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load bootstrap4 %}
 
 {% block content %}
     <div class="row">
         <div class="col-md-6">
-            <div class="well well-sm">
+            <div class="card card-body p-2 mb-4">
                 <h3>{% trans "Create a new Host" %}</h3>
                 <form method="post" action="">
                     {% csrf_token %}
-                    {{ form|bootstrap }}
+                    {% bootstrap_form form %}
                     <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
                 </form>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="well well-sm">
+            <div class="card card-body p-2 mb-4">
                 <h3>{% trans "Help" %}</h3>
                 <p>{% trans "Here you can add new hosts (like routers, PCs, servers, ...)." %}
                 </p>

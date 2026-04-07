@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load bootstrap4 %}
 
 {% block content %}
     <div class="row">
@@ -8,7 +8,7 @@
             <h3>{% trans "Edit related host" %}</h3>
             <form method="post" action="">
                 {% csrf_token %}
-                {{ form|bootstrap }}
+                {% bootstrap_form form %}
                 <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
             </form>
             <h3>{% trans "Delete related host" %}</h3>

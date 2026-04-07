@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static bootstrap %}
+{% load i18n static bootstrap4 %}
 {% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block content %}
@@ -10,20 +10,21 @@
         {% if form.errors %}
         <p>{% trans "Your username and password didn't match. Please try again." %}</p>
         {% endif %}
-        <form class="form-horizontal" role="form" method="post" action="{% url 'login' %}">
+        <form role="form" method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            {{ form|bootstrap_horizontal:"col-sm-3 col-lg-3" }}
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
-                    <input id="id_remember_me" name="remember_me" type="checkbox">
-                    <label class="control-label " for="id_remember_me">{% trans "Remember me" %}</label>
+            {% bootstrap_form form layout='horizontal' horizontal_label_class='col-sm-3 col-lg-3' horizontal_field_class='col-sm-9 col-lg-9' %}
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">
+                    <div class="form-check">
+                        <input id="id_remember_me" name="remember_me" type="checkbox" class="form-check-input">
+                        <label class="form-check-label" for="id_remember_me">{% trans "Remember me" %}</label>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-9">
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">
                     <input type="submit" class="btn btn-primary" value="{% trans 'Log in' %}" /> <a href="{% url 'password_reset' %}">{% trans 'Forgot your password?' %}</a>
-                    <p></p>
-                    <p><a href="{% url 'registration_register' %}">{% trans "Sign up for a new account..." %}</a></p>
+                    <p class="mt-3"><a href="{% url 'registration_register' %}">{% trans "Sign up for a new account..." %}</a></p>
                 </div>
             </div>
         </form>
@@ -36,14 +37,14 @@
             <div class="btn-toolbar" role="toolbar">
             {% for backend in backends.backends %}
                 <div class="btn-group">
-                    <a class="btn btn-default" role="button" href="{% url 'social:begin' backend %}">
+                    <a class="btn btn-secondary" role="button" href="{% url 'social:begin' backend %}">
                         <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
                     </a>
                 </div>
             {% endfor %}
             </div>
         {% else %}
-            <div class="jumbotron">
+            <div class="jumbotron p-4">
             <p>{% trans "No remote account logins enabled." %}</p>
             <p>{% trans "Please login with a local account." %}</p>
             </div>
