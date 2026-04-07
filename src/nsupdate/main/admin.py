@@ -24,12 +24,14 @@ class HostAdmin(admin.ModelAdmin):
 
     search_fields = ("name", "created_by__username", "created_by__email")
 
+    @admin.display(
+        description='created by'
+    )
     def created_by_link(self, obj):
         return mark_safe('<a href="{}">{}</a>'.format(
             reverse("admin:auth_user_change", args=(obj.created_by.pk,)),
             obj.created_by.username
         ))
-    created_by_link.short_description = 'created by'
 
 
 @admin.register(RelatedHost)
