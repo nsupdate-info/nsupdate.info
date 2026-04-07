@@ -193,7 +193,7 @@ INSTALLED_APPS = (
     'nsupdate.accounts',
     'nsupdate.api',
     'nsupdate.main',
-    'bootstrap4',
+    'django_bootstrap5',
     'django.contrib.admin',
     'registration',
     'django_extensions',

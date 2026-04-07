@@ -1,4 +1,4 @@
-{% load static i18n bootstrap4 %}
+{% load static i18n django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +9,7 @@
 
         <title>{% block title %}{{ WWW_HOST }}{% endblock %}</title>
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" />
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/svg+xml" sizes="any" href="{% static "img/favicon.svg" %}">
@@ -20,7 +20,7 @@
         -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         {% include "includes/base_head.html" %}
         {% block html_head %}{% endblock %}
     </head>
@@ -29,12 +29,12 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
                 <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static "img/logo_header.svg" %}" alt="nsupdate.info logo"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item{% if nav_home %} active{% endif %}">
                             <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home fa-fw"></i> {% trans "Home" %}</a>
                         </li>
@@ -60,8 +60,8 @@
                             <li class="nav-item{% if nav_login %} active{% endif %}"><a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt fa-fw"></i> {% trans 'Log in' %}</a></li>
                         {% else %}
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarUserDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarUserDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
                                     <a class="dropdown-item" href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> {% trans 'Profile' %}</a>
                                     <a class="dropdown-item" href="{% url 'account_settings' %}"><i class="fa fa-key fa-fw"></i> {% trans 'Password change' %}</a>
                                     {% if request.user.is_staff %}
@@ -74,8 +74,8 @@
                             </li>
                         {% endif %}
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarLangDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }}</a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarLangDropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarLangDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }}</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarLangDropdown">
                             {% get_language_info_list for LANGUAGES as langs %}
                             {% for lang in langs %}
                                 {% if lang.code != LANGUAGE_CODE %}
@@ -113,26 +113,20 @@
                                     expect malfunctioning on the http site.
                                     {% endblocktrans %}
                                 {% endif %}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         {% endif %}
                         <noscript>
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 {% trans "Some functionality on this site requires that you have JavaScript enabled in your browser." %}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </noscript>
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
                                     {{ message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             {% endfor %}
                         {% endif %}
