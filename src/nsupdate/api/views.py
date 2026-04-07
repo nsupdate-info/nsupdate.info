@@ -220,7 +220,7 @@ class NicUpdateView(View):
         hostname = request.GET.get('hostname')
         if hostname in settings.BAD_HOSTS:
             return Response('abuse', status=403)
-        auth = request.META.get('HTTP_AUTHORIZATION')
+        auth = request.headers.get('authorization')
         if auth is None:
             # logging this at debug level because otherwise it fills our logs...
             logger.debug('%s - received no auth' % (hostname, ))
@@ -254,7 +254,7 @@ class NicUpdateView(View):
             logger.warning(msg)
             host.register_client_result(msg, fault=True)
             return Response(result)
-        agent = request.META.get('HTTP_USER_AGENT', 'unknown')
+        agent = request.headers.get('user-agent', 'unknown')
         if agent in settings.BAD_AGENTS:
             msg = '%s - received update from bad user agent %r' % (hostname, agent)
             logger.warning(msg)

@@ -165,7 +165,7 @@ class JsUpdateView(TemplateView):
     template_name = "main/update.html"
 
     def get(self, request, *args, **kwargs):
-        auth = request.META.get('HTTP_AUTHORIZATION')
+        auth = request.headers.get('authorization')
         if auth is None:
             return basic_challenge("authenticate to update DNS", 'badauth')
         creds = basic_authenticate(auth)
