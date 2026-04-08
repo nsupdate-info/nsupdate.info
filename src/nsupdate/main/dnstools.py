@@ -390,19 +390,19 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
         return response
     # TODO simplify exception handling when https://github.com/rthalley/dnspython/pull/85 is merged/released
     except OSError as e:  # was: socket.error (deprecated)
-        dns_update_error(domain, e, "OSError [%s] - zone: %s" % (str(e), origin))
+        dns_update_error(domain, e, f"OSError [{str(e)}] - zone: {origin}")
     except EOFError as e:
-        dns_update_error(domain, e, "EOFError [%s] - zone: %s" % (str(e), origin))
+        dns_update_error(domain, e, f"EOFError [{str(e)}] - zone: {origin}")
     except dns.exception.Timeout as e:
-        dns_update_error(domain, e, "timeout when performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (action, name, origin, rdtype, ipaddr))
+        dns_update_error(domain, e, f"timeout when performing {action} for name {name} and origin {origin} with rdtype {rdtype} and ipaddr {ipaddr}")
     except dns.tsig.PeerBadSignature as e:
-        dns_update_error(domain, e, "PeerBadSignature - shared secret mismatch? zone: %s" % origin)
+        dns_update_error(domain, e, f"PeerBadSignature - shared secret mismatch? zone: {origin}")
     except dns.tsig.PeerBadKey as e:
-        dns_update_error(domain, e, "PeerBadKey - shared secret mismatch? zone: %s" % origin)
+        dns_update_error(domain, e, f"PeerBadKey - shared secret mismatch? zone: {origin}")
     except dns.tsig.PeerBadTime as e:
-        dns_update_error(domain, e, "PeerBadTime - DNS server did not like the time we sent. zone: %s" % origin)
+        dns_update_error(domain, e, f"PeerBadTime - DNS server did not like the time we sent. zone: {origin}")
     except dns.message.UnknownTSIGKey as e:
-        dns_update_error(domain, e, "UnknownTSIGKey [%s] - zone: %s" % (str(e), origin))
+        dns_update_error(domain, e, f"UnknownTSIGKey [{str(e)}] - zone: {origin}")
     except dns.exception.DNSException as e:
         dns_update_error(domain, str(e))
 
