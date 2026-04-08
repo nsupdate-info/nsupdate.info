@@ -390,9 +390,9 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
         return response
     # TODO simplify exception handling when https://github.com/rthalley/dnspython/pull/85 is merged/released
     except OSError as e:  # was: socket.error (deprecated)
-        dns_update_error(domain, e, f"OSError [{str(e)}] - zone: {origin}")
+        dns_update_error(domain, e, f"OSError [{e}] - zone: {origin}")
     except EOFError as e:
-        dns_update_error(domain, e, f"EOFError [{str(e)}] - zone: {origin}")
+        dns_update_error(domain, e, f"EOFError [{e}] - zone: {origin}")
     except dns.exception.Timeout as e:
         dns_update_error(domain, e, f"timeout when performing {action} for name {name} and origin {origin} with rdtype {rdtype} and ipaddr {ipaddr}")
     except dns.tsig.PeerBadSignature as e:
@@ -402,7 +402,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     except dns.tsig.PeerBadTime as e:
         dns_update_error(domain, e, f"PeerBadTime - DNS server did not like the time we sent. zone: {origin}")
     except dns.message.UnknownTSIGKey as e:
-        dns_update_error(domain, e, f"UnknownTSIGKey [{str(e)}] - zone: {origin}")
+        dns_update_error(domain, e, f"UnknownTSIGKey [{e}] - zone: {origin}")
     except dns.exception.DNSException as e:
         dns_update_error(domain, e, str(e))
 
