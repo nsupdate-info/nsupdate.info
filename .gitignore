@@ -3,10 +3,16 @@
 *.pyc
 local_settings.py
 .coverage
-.idea/
 .cache/
 .tox/
 *.sqlite
 *.egg-info
 dist/
 docs/_build/
+src/nsupdate/_version.py
+
+# idea
+.idea/
+
+# vi(m)
+.*.sw?
