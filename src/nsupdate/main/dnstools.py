@@ -404,7 +404,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     except dns.message.UnknownTSIGKey as e:
         dns_update_error(domain, e, f"UnknownTSIGKey [{str(e)}] - zone: {origin}")
     except dns.exception.DNSException as e:
-        dns_update_error(domain, str(e))
+        dns_update_error(domain, e, str(e))
 
 
 def set_ns_availability(domain, available):
