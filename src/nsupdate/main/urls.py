@@ -41,7 +41,7 @@ urlpatterns = (
     re_path(r'^updater_hostconfig/(?P<pk>\d+)/delete/$', DeleteUpdaterHostConfigView.as_view(),
             name='delete_updater_hostconfig'),
     # Internal use by the web UI
-    re_path(r'^detectip/(?P<sessionid>\w+)/$', DetectIpView.as_view(), name='detectip'),
+    re_path(r'^detectip/(?P<token>\w+)/$', DetectIpView.as_view(), name='detectip'),
     re_path(r'^ajax_get_ips/$', AjaxGetIps.as_view(), name="ajax_get_ips"),
     re_path(r'^nic/update_authorized$', AuthorizedNicUpdateView.as_view(), name='nic_update_authorized'),
     re_path(r'^nic/delete_authorized$', AuthorizedNicDeleteView.as_view(), name='nic_delete_authorized'),

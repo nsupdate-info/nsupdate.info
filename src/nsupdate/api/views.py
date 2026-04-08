@@ -26,6 +26,7 @@ from ..main.models import Host
 from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session,
                              SameIpError, DnsUpdateError, NameServerNotAvailable)
 from ..main.iptools import normalize_ip
+from .utils import get_session_key_from_token
 
 
 def Response(content, status=200):
@@ -55,15 +56,19 @@ def myip_view(request, logger=None):
 
 class DetectIpView(View):
     @log.logger(__name__)
-    def get(self, request, sessionid, logger=None):
+    def get(self, request, token, logger=None):
         """
         Put the IP address (IPv4 or IPv6) of the client requesting this view
         into the client's session.
 
         :param request: Django request object
-        :param sessionid: Session ID from the URL used to find the correct session without a session cookie
+        :param token: Temporary token used to find the correct session without a session cookie
         :return: HttpResponse object
         """
+        sessionid = get_session_key_from_token(token)
+        if sessionid is None:
+            logger.debug("no session found for token %s" % token)
+            return HttpResponse(status=204)
         engine = import_module(settings.SESSION_ENGINE)
         # We do not have the session as usual, as this is a different host,
         # so the session cookie is not received here; thus we access it via
@@ -73,7 +78,7 @@ class DetectIpView(View):
         # As this is NOT the session automatically established and
         # also saved by the framework, we need to use save=True here.
         put_ip_into_session(s, ipaddr, save=True)
-        logger.debug("detected remote address: %s for session %s" % (ipaddr, sessionid))
+        logger.debug("detected remote address: %s for session %s (token %s)" % (ipaddr, sessionid, token))
         return HttpResponse(status=204)
 
 
