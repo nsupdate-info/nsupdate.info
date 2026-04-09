@@ -13,54 +13,57 @@ Release 0.13.0 (not released yet)
 
 New Features:
 
-- update generated inadyn.conf for IPv6 support, #528
-- add a link to the user in host view of django admin, #440
-- add BAD_HOSTS setting to lock out nasty clients from the update api
-  without causing database accesses.
-- enable blacklisting of email addresses (now with regex support)
-- django-admin faults: show/reset api auth faults counter
-- add api_auth_faults column to django admin's Hosts view
+- Update generated inadyn.conf for IPv6 support, #528
+- Add BAD_HOSTS setting to lock out nasty clients from the update API
+  without causing database accesses, #429.
+- Enable blacklisting of email addresses (now with regex support)
+- Add a link to the user in host view of Django admin, #440
+- Add api_auth_faults column to Django admin's Hosts view, #426
+- django-admin faults: show/reset API auth faults counter, #420
 
 Fixes:
 
-- fixed misc. crashes
-- fixed connectivity test when editing domains, #479 #523
-- strip prefix-length / netmask if present, fixes #470
-- rewrite socket error handling, #522
-- fix Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret
-- try longer timeout for dns resolver / updates
+- Security: fix session ID leak in IP detection, #625
+- Security: fix mass assignment risk by changing UpdateView to DetailView, #624
+- Fix misc. crashes, #428
+- Fix connectivity test when editing domains, #479 #492 #523 #524
+- Strip prefix-length / netmask if present, #470
+- Rewrite socket error handling, #522
+- Fix Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret, #454
+- Try longer timeout for DNS resolver / updates
+- Capitalize languages in dropdown menu, #627
+- Django: add missing migration files, #443, #454, #608
 
 Other changes:
 
-- require Python >= 3.10, <= 3.14.
-- require Django 4.2.x (LTS version).
-- translation updates (removed incomplete ones, added complete ones)
-- improve logging
-- setuptools-scm managing the version and manifest
-- src/ based project layout
-- add a well-known URL for changing passwords
-- add rel="noopener" to target="_blank" links
-- add Referrer-Policy, X-XSS-Protection and X-Content-Type-Option HTTP headers, #281
-- set HTTPONLY to CSRF cookies
-- update fontawesome, bootstrap and jquery, #444
-- add missing migration files
-- update update_secret database field length for salted hash
-- add hint if there are no social logins enabled
-- update to DropboxOAuth2V2, remove non-existing BitbucketOAuth
-- migrate misc. setup/config files to pyproject.toml
-- update license identifier to "BSD-3-Clause" in pyproject.toml
+- Require Python >= 3.10, <= 3.14.
+- Upgrade to Django 5.2 LTS, Bootstrap 5.3.8, jQuery 4.0.0, Font Awesome 7.2.0, #613 #615
+- Use argon2id for password and secret hashing, auto-upgrade the hashes
+  at user login time and host dyndns update time, #611
+- Update update_secret database field length for salted hash, #443, #529
+- Translation updates (removed incomplete ones, added complete ones)
+- Improve logging, #422
+- Add a well-known URL for changing passwords
+- Add rel="noopener" to target="_blank" links
+- Add Referrer-Policy, X-XSS-Protection and X-Content-Type-Options HTTP headers, #281, #410
+- Set HTTPONLY to CSRF cookies, #410
+- Add hint if there are no social logins enabled, #520
+- Update to DropboxOAuth2V2, remove non-existing BitbucketOAuth, #516
+- Migrate misc. setup/config files to pyproject.toml, #568, #591
+- Update license identifier to "BSD-3-Clause" in pyproject.toml, #566
 - docs:
 
-  - include note about IPv4 interface ID
-  - add docs/project.rst (development commands)
-  - integrate new logo, thanks to @mirzazulfan, #78
-  - add docs on how to disable user registration, #438
-  - always use django-admin (not django-admin.py) in docs, update URLs
-  - fix typos and grammar
+  - Include note about IPv4 interface ID, #495
+  - Add docs/project.rst (development commands), #516
+  - Integrate new logo, thanks to @mirzazulfan, #78, #431
+  - Add docs on how to disable user registration, #438
+  - Always use django-admin (not django-admin.py) in docs, update URLs, #443
+  - Update workflow for translations, use the new Transifex CLI (Go), #622
+  - Fix typos and grammar, #586
 - tests:
 
-  - use GitHub actions instead of travis CI.
-  - add testing in docker.
+  - Use GitHub Actions instead of Travis CI, #506, #507
+  - Add testing in Docker, #408, #516
 
 
 Release 0.12.0 (2018-11-18)
