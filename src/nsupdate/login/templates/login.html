@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n static bootstrap4 %}
+{% load i18n static django_bootstrap5 %}
 {% block title %}{% trans "Log in" %}{% endblock %}
 
 {% block content %}
@@ -44,7 +44,7 @@
             {% endfor %}
             </div>
         {% else %}
-            <div class="jumbotron p-4">
+            <div class="p-3 mb-2 jumbotron-replacement rounded-3">
             <p>{% trans "No remote account logins enabled." %}</p>
             <p>{% trans "Please login with a local account." %}</p>
             </div>
