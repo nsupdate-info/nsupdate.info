@@ -16,3 +16,6 @@ src/nsupdate/_version.py
 
 # vi(m)
 .*.sw?
+
+# macOS
+.DS_Store
