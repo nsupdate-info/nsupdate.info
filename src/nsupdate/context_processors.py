@@ -11,6 +11,7 @@ import time
 
 from .main.dnstools import put_ip_into_session
 from .main.iptools import normalize_ip
+from .api.utils import generate_detectip_token
 
 from django.conf import settings
 from django.db import OperationalError
@@ -26,6 +27,9 @@ def add_settings(request):
     context['SERVICE_CONTACT'] = settings.SERVICE_CONTACT  # About view
     context['WE_HAVE_TLS'] = settings.WE_HAVE_TLS
     context['COOKIE_SECURE'] = settings.SESSION_COOKIE_SECURE or settings.CSRF_COOKIE_SECURE
+    if not request.session.get('ipv4') or not request.session.get('ipv6'):
+        if request.session.session_key:
+            context['detectip_token'] = generate_detectip_token(request.session.session_key)
     return context
 
 
