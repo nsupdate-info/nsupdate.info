@@ -84,7 +84,7 @@
                                         <input type="hidden" name="language" value="{{ lang.code }}" />
                                     </form>
                                     <a class="dropdown-item" href="#" onclick="document.getElementById('setLang{{ forloop.counter }}').submit();return false;">
-                                        {{ lang.name_local }} ({{ lang.name }}) [{{ lang.code }}]
+                                        {{ lang.name_local|capfirst }} ({{ lang.name }}) [{{ lang.code }}]
                                     </a>
                                 {% endif %}
                             {% endfor %}
