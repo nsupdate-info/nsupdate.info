@@ -279,7 +279,7 @@ specific content, some legalese, ...), do it like that:
 * add files like main/custom/foo.html to that directory::
 
     {% extends "base.html" %}
-    {% load bootstrap %}
+    {% load django_bootstrap5 %}
     {% block content %}
     This is content rendered from template "foo.html".
     {% endblock %}
