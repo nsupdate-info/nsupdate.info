@@ -138,12 +138,12 @@ Django apps (WSGI apps) with the web server you use.
 
 Django has nice generic documentation about this, see there:
 
-https://docs.djangoproject.com/en/4.2/howto/deployment/
+https://docs.djangoproject.com/en/5.2/howto/deployment/
 
 Even if you do not follow or fully read the deployment guide, make sure that
 you at least read the checklist:
 
-https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 
 HTTP Basic Auth
