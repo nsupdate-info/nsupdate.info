@@ -1,5 +1,5 @@
 body {
-    padding-top: 70px;
+    padding-top: 4.5rem;
 }
 
 html, body {
@@ -8,11 +8,17 @@ html, body {
 }
 
 .navbar-brand {
-  padding: 8px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .navbar-brand>img {
-  height: 100%;
+  height: 50px;
   width: auto;
+}
+
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .wrap {

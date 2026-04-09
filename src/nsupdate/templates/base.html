@@ -1,4 +1,4 @@
-{% load static i18n bootstrap %}
+{% load static i18n django_bootstrap5 %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,103 +9,98 @@
 
         <title>{% block title %}{{ WWW_HOST }}{% endblock %}</title>
 
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet" integrity="sha384-EXatlQyrOJgDaM9/a74ArMzy7/2bTMSrZj8ID1IPeVmc3GncfCugefCFWSLj8JL/" crossorigin="anonymous">
         <link href="{% static 'css/nsupdate.css' %}" rel="stylesheet">
         <link rel="icon" type="image/svg+xml" sizes="any" href="{% static "img/favicon.svg" %}">
         <link rel="icon" type="image/png" href="{% static "img/favicon_32.png" %}" sizes="32x32">
         <link rel="icon" type="image/png" href="{% static "img/favicon_96.png" %}" sizes="96x96">
-        <!-- note: keep jQuery and bootstrap js here,
+        <!-- note: keep jQuery, Popper and bootstrap js here,
                    stuff in the include / block right below might depend on it!
         -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@4.0.0/dist/jquery.min.js" integrity="sha384-fgGyf7Mo7DURSOMnOy7ed+dkq5Job205Gnzu6QIg0BOHKaqt4D76Dt8VlDCzcMHV" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         {% include "includes/base_head.html" %}
         {% block html_head %}{% endblock %}
     </head>
 
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static "img/logo_header.svg" %}" alt="nsupdate.info logo"></a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li{% if nav_home %} class="active"{% endif %}>
-                            <a href="{% url 'home' %}"><i class="fa fa-home fa-fw"></i> {% trans "Home" %}</a>
+                <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static "img/logo_header.svg" %}" alt="nsupdate.info logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item{% if nav_home %} active{% endif %}">
+                            <a class="nav-link" href="{% url 'home' %}"><i class="fa fa-home fa-fw"></i> {% trans "Home" %}</a>
                         </li>
                         {% if request.user.is_authenticated %}
-                        <li{% if nav_overview %} class="active"{% endif %}>
-                            <a href="{% url 'overview' %}"><i class="fa fa-list fa-fw"></i> {% trans "Overview" %}</a>
+                        <li class="nav-item{% if nav_overview %} active{% endif %}">
+                            <a class="nav-link" href="{% url 'overview' %}"><i class="fa fa-list fa-fw"></i> {% trans "Overview" %}</a>
                         </li>
-                        <li{% if nav_status %} class="active"{% endif %}>
-                            <a href="{% url 'status' %}"><i class="fa fa-list fa-fw"></i> {% trans "Status" %}</a>
+                        <li class="nav-item{% if nav_status %} active{% endif %}">
+                            <a class="nav-link" href="{% url 'status' %}"><i class="fa fa-list fa-fw"></i> {% trans "Status" %}</a>
                         </li>
                         {% endif %}
-                        <li{% if nav_about %} class="active"{% endif %}>
-                            <a href="{% url 'about' %}"><i class="fa fa-comment fa-fw"></i> {% trans "About" %}</a>
+                        <li class="nav-item{% if nav_about %} active{% endif %}">
+                            <a class="nav-link" href="{% url 'about' %}"><i class="fa fa-comment fa-fw"></i> {% trans "About" %}</a>
                         </li>
-                        <li>
+                        <li class="nav-item">
                             <a href="http://nsupdateinfo.readthedocs.org/"
-                               class="navbar-link" title="Open docs in new window" target="_blank" rel="noopener"><i class="fa fa-eye fa-fw"></i> {% trans "Documentation" %}</a>
+                               class="nav-link" title="Open docs in new window" target="_blank" rel="noopener"><i class="fa fa-eye fa-fw"></i> {% trans "Documentation" %}</a>
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav pull-right">
+                    <ul class="navbar-nav">
                         {% if not request.user.is_authenticated %}
-                            <li{% if nav_register %} class="active"{% endif %}><a href="{% url 'registration_register' %}"><i class="fa fa-asterisk fa-fw"></i> {% trans "Sign up" %}</a></li>
-                            <li{% if nav_login %} class="active"{% endif %}><a href="{% url 'login' %}"><i class="fa fa-sign-in-alt fa-fw"></i> {% trans 'Log in' %}</a></li>
+                            <li class="nav-item{% if nav_register %} active{% endif %}"><a class="nav-link" href="{% url 'registration_register' %}"><i class="fa fa-asterisk fa-fw"></i> {% trans "Sign up" %}</a></li>
+                            <li class="nav-item{% if nav_login %} active{% endif %}"><a class="nav-link" href="{% url 'login' %}"><i class="fa fa-sign-in-alt fa-fw"></i> {% trans 'Log in' %}</a></li>
                         {% else %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {{ request.user.username }} <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> {% trans 'Profile' %}</a></li>
-                                    <li><a href="{% url 'account_settings' %}"><i class="fa fa-key fa-fw"></i> {% trans 'Password change' %}</a></li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarUserDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+                                    <a class="dropdown-item" href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> {% trans 'Profile' %}</a>
+                                    <a class="dropdown-item" href="{% url 'account_settings' %}"><i class="fa fa-key fa-fw"></i> {% trans 'Password change' %}</a>
                                     {% if request.user.is_staff %}
-                                        <li><a href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a></li>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a>
                                     {% endif %}
-                                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out-alt fa-fw"></i> {% trans 'Log out' %}</a></li>
-                                </ul>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt fa-fw"></i> {% trans 'Log out' %}</a>
+                                </div>
                             </li>
                         {% endif %}
-                    </ul>
-                    <ul class="nav navbar-nav pull-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarLangDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }}</a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarLangDropdown">
                             {% get_language_info_list for LANGUAGES as langs %}
                             {% for lang in langs %}
                                 {% if lang.code != LANGUAGE_CODE %}
-                                <li>
-                                    <form name="setLang{{ lang.name.split|join:"_" }}" action="{% url 'set_language' %}" method="post">
+                                    <form id="setLang{{ forloop.counter }}" action="{% url 'set_language' %}" method="post" style="display:none">
                                         {% csrf_token %}
                                         <input type="hidden" name="language" value="{{ lang.code }}" />
                                     </form>
-                                    <a href="#" onclick="document.setLang{{ lang.name.split|join:"_" }}.submit();return false;">
+                                    <a class="dropdown-item" href="#" onclick="document.getElementById('setLang{{ forloop.counter }}').submit();return false;">
                                         {{ lang.name_local }} ({{ lang.name }}) [{{ lang.code }}]
                                     </a>
-                                </li>
                                 {% endif %}
                             {% endfor %}
-                            </ul>
+                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div>
+        </nav>
         {% block header %}{% endblock %}
         <div class="container content wrap">
             <div class="row">
                 <div class="col-lg-12">
                     <div id="message_box">
                         {% if not request.is_secure %}
-                            <div class="alert alert-danger">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {% trans "Your (http) connection is unencrypted and thus insecure." %}
                                 {% if WE_HAVE_TLS %}
                                     {% blocktrans trimmed %}
@@ -118,19 +113,20 @@
                                     expect malfunctioning on the http site.
                                     {% endblocktrans %}
                                 {% endif %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         {% endif %}
                         <noscript>
-                            <div class="alert alert-warning">
-                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 {% trans "Some functionality on this site requires that you have JavaScript enabled in your browser." %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         </noscript>
                         {% if messages %}
                             {% for message in messages %}
-                                <div class="alert {{ message.tags }}">
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
                                     {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             {% endfor %}
                         {% endif %}

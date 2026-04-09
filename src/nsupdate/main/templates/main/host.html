@@ -1,14 +1,18 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load django_bootstrap5 %}
 
 {% block content %}
     <div class="row">
-        <h3>{{ host.get_fqdn }}</h3>
+        <div class="col-12">
+            <h3>{{ host.get_fqdn }}</h3>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4">
             <h3>{% trans "Edit Host" %}</h3>
-            <form method="post" action="">
+            <form role="form" method="post" action="">
                 {% csrf_token %}
-                {{ form|bootstrap }}
+                {% bootstrap_form form %}
                 <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
             </form>
             <h3>{% trans "Delete Host" %}</h3>
@@ -72,7 +76,7 @@
                 </div>
                 <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
                 <span id="update_result_v4"></span>
-                <button type="button" class="btn" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
+                <button type="button" class="btn btn-secondary" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
                 <span id="delete_result_v4"></span>
                 <p></p>
                 <div class="form-group">
@@ -85,7 +89,7 @@
                 </div>
                 <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
                 <span id="update_result_v6"></span>
-                <button type="button" class="btn" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
+                <button type="button" class="btn btn-secondary" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
                 <span id="delete_result_v6"></span>
             <script>
                 update_host_v4 = function(host) {

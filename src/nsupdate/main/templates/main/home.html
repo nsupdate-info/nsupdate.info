@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load django_bootstrap5 %}
 {% load static %}
 
 {% block html_head %}
@@ -8,7 +8,7 @@
 
 {% block content %}
     {% include "main/includes/home_top.html" %}
-    <div class="jumbotron">
+    <div class="jumbotron p-4">
         <h4>{% trans "Your current IP(s) + reverse DNS:" %}</h4>
         <h1>IPv4: <span id="ipv4">{{ request.session.ipv4 }}</span></h1>
         <h4>rDNS: <span id="ipv4_rdns" class="ipv4addr">{{ request.session.ipv4_rdns }}</span></h4>

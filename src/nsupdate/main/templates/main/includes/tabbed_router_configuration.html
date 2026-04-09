@@ -1,22 +1,22 @@
-{% load i18n %}{% load bootstrap %}
-<ul class="nav nav-tabs" id="myTab">
-    <li class="active"><a href="#generic" data-toggle="tab">{% trans "General" %}</a></li>
-    <li><a href="#avm" data-toggle="tab">AVM Fritz!Box</a></li>
-    <li><a href="#ddwrt" data-toggle="tab">DD-WRT</a></li>
-    <li><a href="#ddclient" data-toggle="tab">ddclient</a></li>
-    <li><a href="#dyndnsc" data-toggle="tab">dyndnsc</a></li>
-    <li><a href="#edgeos" data-toggle="tab">EdgeOS</a></li>
-    <li><a href="#inadyn" data-toggle="tab">inadyn</a></li>
-    <li><a href="#ipfire" data-toggle="tab">IPFire</a></li>
-    <li><a href="#m0n0wall" data-toggle="tab">m0n0wall</a></li>
-    <li><a href="#openwrt" data-toggle="tab">OpenWRT</a></li>
-    <li><a href="#pfsense" data-toggle="tab">pfSense</a></li>
-    <li><a href="#speedporthybrid" data-toggle="tab">Speedport Hybrid</a></li>
-    <li><a href="#browser" data-toggle="tab">Browser</a></li>
+{% load i18n %}{% load django_bootstrap5 %}
+<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+    <li class="nav-item"><a class="nav-link active" id="generic-tab" href="#generic" data-bs-toggle="tab" role="tab" aria-controls="generic" aria-selected="true">{% trans "General" %}</a></li>
+    <li class="nav-item"><a class="nav-link" id="avm-tab" href="#avm" data-bs-toggle="tab" role="tab" aria-controls="avm" aria-selected="false">AVM Fritz!Box</a></li>
+    <li class="nav-item"><a class="nav-link" id="ddwrt-tab" href="#ddwrt" data-bs-toggle="tab" role="tab" aria-controls="ddwrt" aria-selected="false">DD-WRT</a></li>
+    <li class="nav-item"><a class="nav-link" id="ddclient-tab" href="#ddclient" data-bs-toggle="tab" role="tab" aria-controls="ddclient" aria-selected="false">ddclient</a></li>
+    <li class="nav-item"><a class="nav-link" id="dyndnsc-tab" href="#dyndnsc" data-bs-toggle="tab" role="tab" aria-controls="dyndnsc" aria-selected="false">dyndnsc</a></li>
+    <li class="nav-item"><a class="nav-link" id="edgeos-tab" href="#edgeos" data-bs-toggle="tab" role="tab" aria-controls="edgeos" aria-selected="false">EdgeOS</a></li>
+    <li class="nav-item"><a class="nav-link" id="inadyn-tab" href="#inadyn" data-bs-toggle="tab" role="tab" aria-controls="inadyn" aria-selected="false">inadyn</a></li>
+    <li class="nav-item"><a class="nav-link" id="ipfire-tab" href="#ipfire" data-bs-toggle="tab" role="tab" aria-controls="ipfire" aria-selected="false">IPFire</a></li>
+    <li class="nav-item"><a class="nav-link" id="m0n0wall-tab" href="#m0n0wall" data-bs-toggle="tab" role="tab" aria-controls="m0n0wall" aria-selected="false">m0n0wall</a></li>
+    <li class="nav-item"><a class="nav-link" id="openwrt-tab" href="#openwrt" data-bs-toggle="tab" role="tab" aria-controls="openwrt" aria-selected="false">OpenWRT</a></li>
+    <li class="nav-item"><a class="nav-link" id="pfsense-tab" href="#pfsense" data-bs-toggle="tab" role="tab" aria-controls="pfsense" aria-selected="false">pfSense</a></li>
+    <li class="nav-item"><a class="nav-link" id="speedporthybrid-tab" href="#speedporthybrid" data-bs-toggle="tab" role="tab" aria-controls="speedporthybrid" aria-selected="false">Speedport Hybrid</a></li>
+    <li class="nav-item"><a class="nav-link" id="browser-tab" href="#browser" data-bs-toggle="tab" role="tab" aria-controls="browser" aria-selected="false">Browser</a></li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane active" id="generic">
+    <div class="tab-pane fade show active" id="generic" role="tabpanel" aria-labelledby="generic-tab">
         <h4>{% trans "General configuration hints" %}</h4>
         <p>
             {% blocktrans trimmed %}
@@ -48,11 +48,11 @@
             {% trans "Your update client needs to access the following URLs to update the DNS:" %}
         </p>
         {% trans "For IPv4 updates:" %}
-        <div class="well well-sm">
+        <div class="card card-body p-2 mb-3">
             <a href="https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
         </div>
         {% trans "For IPv6 updates:" %}
-        <div class="well well-sm">
+        <div class="card card-body p-2 mb-3">
             <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV6_HOST }}/nic/update</a>
         </div>
         {% blocktrans trimmed %}
@@ -125,7 +125,7 @@
         </table>
         <h5>{% trans "If you have IPv4 and IPv6" %}</h5>
         {% trans "Set Update-URL to the following (two URLs, separated by one space)" %}
-        <div class="well well-sm">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
+        <div class="card card-body p-2 mb-3">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
         <h5>{% trans "Forcing a dynamic DNS update" %}</h5>
         {% trans "If you want to force a dynamic update for testing purposes, you can do it like this:" %}
         <ul>

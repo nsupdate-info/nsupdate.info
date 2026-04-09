@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load django_bootstrap5 %}
 
 {% block content %}
     <div class="row">
@@ -8,7 +8,7 @@
             <h3>{% trans "Edit Updater Configuration" %}</h3>
             <form method="post" action="">
                 {% csrf_token %}
-                {{ form|bootstrap }}
+                {% bootstrap_form form %}
                 <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
             </form>
             <h3>{% trans "Delete Updater Configuration" %}</h3>
@@ -20,24 +20,26 @@
             </form>
         </div>
         <div class="col-lg-6">
-            <div class="well well-sm">
-                <h3>{% trans "Help" %}</h3>
-                <p>
-                    {% blocktrans trimmed with servicename=object.service.name %}
-                    Here you can edit the configuration of the "{{ servicename }}" updater.
-                    {% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans trimmed %}
-                    The values you need here are the same ones as you would usually enter in your router or update client.
-                    {% endblocktrans %}
-                </p>
-                <p>
-                    {% blocktrans trimmed %}
-                    You get these values after registering with the "{{ object.service.name }}" service
-                    and (likely) configuring that service to accept updates.
-                    {% endblocktrans %}
-                </p>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">{% trans "Help" %}</h3>
+                    <p class="card-text">
+                        {% blocktrans trimmed with servicename=object.service.name %}
+                        Here you can edit the configuration of the "{{ servicename }}" updater.
+                        {% endblocktrans %}
+                    </p>
+                    <p class="card-text">
+                        {% blocktrans trimmed %}
+                        The values you need here are the same ones as you would usually enter in your router or update client.
+                        {% endblocktrans %}
+                    </p>
+                    <p class="card-text">
+                        {% blocktrans trimmed %}
+                        You get these values after registering with the "{{ object.service.name }}" service
+                        and (likely) configuring that service to accept updates.
+                        {% endblocktrans %}
+                    </p>
+                </div>
             </div>
         </div>
     </div>

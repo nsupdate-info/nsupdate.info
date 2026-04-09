@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-{% load i18n %}{% load bootstrap %}
+{% load i18n %}{% load django_bootstrap5 %}
 
 {% block content %}
     <div class="row">
-       <h1>{% blocktrans %}About the {{ WWW_HOST }} service{% endblocktrans %}</h1>
+        <div class="col-12">
+            <h1>{% blocktrans %}About the {{ WWW_HOST }} service{% endblocktrans %}</h1>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-4">
             <h2>{% trans "What's this?" %}</h2>
             <p>
