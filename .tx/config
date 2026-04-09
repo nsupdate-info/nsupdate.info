@@ -1,8 +1,10 @@
 [main]
-host = https://www.transifex.com
+host = https://app.transifex.com
 
-[nsupdateinfo.djangopo]
-file_filter = src/nsupdate/locale/<lang>/LC_MESSAGES/django.po
-source_file = src/nsupdate/locale/en/LC_MESSAGES/django.po
-source_lang = en
+[o:thomaswaldmann:p:nsupdateinfo:r:djangopo]
+file_filter            = src/nsupdate/locale/<lang>/LC_MESSAGES/django.po
+source_file            = src/nsupdate/locale/en/LC_MESSAGES/django.po
+source_lang            = en
+replace_edited_strings = false
+keep_translations      = false
 

@@ -25,14 +25,11 @@ Translations
 
 Translations are done on Transifex - please collaborate there to avoid double work / workflow issues:
 
-https://www.transifex.com/projects/p/nsupdateinfo/
+https://app.transifex.com/thomaswaldmann/nsupdateinfo/dashboard/
 
-You need the transifex-client package so you have the tx command:
+You need the transifex client so you have the tx command, see:
 
-::
-
-    pip install transifex-client
-
+https://developers.transifex.com/docs/cli
 
 Please make sure to configure your notification settings so that you are
 notified when the translation project is updated (so you can react quickly and
