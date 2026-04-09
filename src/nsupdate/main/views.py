@@ -8,7 +8,7 @@ from datetime import timedelta
 import dns.name
 
 from django.db.models import Q
-from django.views.generic import View, TemplateView, CreateView
+from django.views.generic import View, TemplateView, CreateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -28,9 +28,8 @@ from .forms import (CreateHostForm, EditHostForm, CreateRelatedHostForm, EditRel
 from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
 
 
-class GenerateSecretView(UpdateView):
+class GenerateSecretView(DetailView):
     model = Host
-    fields = "__all__"
     template_name = "main/generate_secret.html"
 
     @method_decorator(login_required)
@@ -52,9 +51,8 @@ class GenerateSecretView(UpdateView):
         return context
 
 
-class GenerateNSSecretView(UpdateView):
+class GenerateNSSecretView(DetailView):
     model = Domain
-    fields = "__all__"
     template_name = "main/generate_ns_secret.html"
 
     @method_decorator(login_required)
