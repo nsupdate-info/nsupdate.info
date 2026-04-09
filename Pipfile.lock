@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e7e7a0daf36dbf49d57d34329e9afc795a96110063590957b8f9e05750ace215"
+            "sha256": "d793ae7754ab2e62952fd27a9b741aed8d4e82505bc6317df7e0f4ba6d272c60"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -309,7 +309,6 @@
                 "sha256:fdd1736fed309b4300346f88f74cd120c27c56852c3838cab416e7a166f67298",
                 "sha256:ffca7aa1d00cf7d6469b988c581598f2259e46215e0140af408966a24cf086ce"
             ],
-            "index": "pypi",
             "markers": "python_version >= '3.8' and python_full_version not in '3.9.0, 3.9.1'",
             "version": "==46.0.7"
         },
@@ -323,12 +322,12 @@
         },
         "django": {
             "hashes": [
-                "sha256:4d07aaf1c62f9984842b67c2874ebbf7056a17be253860299b93ae1881faad65",
-                "sha256:4ebc7a434e3819db6cf4b399fb5b3f536310a30e8486f08b66886840be84b37c"
+                "sha256:5788fce61da23788a8ce6f02583765ab060d396720924789f97fa42119d37f7a",
+                "sha256:a31589db5188d074c63f0945c3888fad104627dfcc236fb2b97f71f89da33bc4"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.8'",
-            "version": "==4.2.30"
+            "markers": "python_version >= '3.10'",
+            "version": "==5.2.13"
         },
         "django-bootstrap-form": {
             "hashes": [
@@ -465,12 +464,12 @@
         },
         "social-auth-app-django": {
             "hashes": [
-                "sha256:d1f4286d5ca1e512c9b2f686e7ecb2a0128148f1a33d853b69dc07b58508362e",
-                "sha256:db70b972faeb10ee1ec83d0dc7dbd0558d5f5830417bba317b712b10ff58d031"
+                "sha256:43ca88cc5cd9161710896165ced58b3155e8aafaaff847e859879194770f138d",
+                "sha256:c695501fcbf6fe87f68f5a79e379abe853662f5129e7ec6cb758a75d5b28c888"
             ],
             "index": "pypi",
-            "markers": "python_version >= '3.9'",
-            "version": "==5.4.3"
+            "markers": "python_version >= '3.10'",
+            "version": "==5.6.0"
         },
         "social-auth-core": {
             "hashes": [
