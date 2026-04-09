@@ -165,7 +165,7 @@ class JsUpdateView(TemplateView):
     template_name = "main/update.html"
 
     def get(self, request, *args, **kwargs):
-        auth = request.META.get('HTTP_AUTHORIZATION')
+        auth = request.headers.get('authorization')
         if auth is None:
             return basic_challenge("authenticate to update DNS", 'badauth')
         creds = basic_authenticate(auth)
@@ -195,7 +195,7 @@ class OverviewView(TemplateView):
             .only("name", "comment", "available", "client_faults", "server_faults", "abuse_blocked", "abuse",
                   "last_update_ipv4", "tls_update_ipv4", "last_update_ipv6", "tls_update_ipv6", "domain__name")
         context['your_domains'] = Domain.objects.filter(
-            created_by=self.request.user).select_related("created_by__profile")\
+            created_by=self.request.user).select_related("created_by")\
             .only("name", "public", "available", "comment", "created_by__username")
         context['public_domains'] = Domain.objects.filter(
             public=True).exclude(created_by=self.request.user).select_related("created_by")\

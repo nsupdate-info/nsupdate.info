@@ -1,11 +1,12 @@
 # packages always needed
 dnspython
 netaddr
-django~=4.2.0
+django~=5.2.0
 django-bootstrap-form
 django-referrer-policy
 django-registration-redux
 django-extensions
 social-auth-app-django
+argon2-cffi
 requests
 setuptools-scm
