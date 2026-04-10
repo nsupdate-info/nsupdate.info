@@ -145,7 +145,7 @@ deps = [
   "flake8-pyproject",
 ]
 commands = [
-  ["flake8", "src", "scripts", "conftest.py"],
+  ["flake8", "src", "scripts"],
 ]
 
 [tool.sphinx]

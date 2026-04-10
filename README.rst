@@ -16,7 +16,7 @@ Software project: https://github.com/nsupdate-info/nsupdate.info
         :alt: Documentation
         :target: https://nsupdateinfo.readthedocs.io/en/stable/
 
-.. |build| image:: https://github.com/nsupdate-info/nsupdate.info/workflows/CI/badge.svg?branch=master
+.. |build| image:: https://github.com/nsupdate-info/nsupdate.info/actions/workflows/ci.yml/badge.svg?branch=master
         :alt: Build Status
         :target: https://github.com/nsupdate-info/nsupdate.info/actions
 

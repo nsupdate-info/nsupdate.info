@@ -13,7 +13,7 @@ from nsupdate.main.dnstools import query_ns, FQDN
 from nsupdate.main.models import Domain
 from nsupdate.api.views import basic_authenticate
 
-from conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
+from nsupdate.conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
 
 USERNAME = 'test'
 PASSWORD = 'pass'

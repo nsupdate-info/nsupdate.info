@@ -4,7 +4,7 @@ from django.contrib.auth.hashers import check_password
 
 from nsupdate.main.models import Host
 from nsupdate.api.views import check_api_auth
-from conftest import TEST_HOST, TEST_SECRET
+from nsupdate.conftest import TEST_HOST, TEST_SECRET
 
 
 @pytest.mark.django_db
