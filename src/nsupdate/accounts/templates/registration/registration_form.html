@@ -4,60 +4,60 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-5">
-    <h2>{% trans "No registration required for testing" %}</h2>
-    <p>
-        {% trans "You can easily test the service and see what you get." %}
-    </p>
-    <p>
-        {% trans "Just directly log in as:" %}
-    </p>
-    <ul>
-        <li>{% trans "Username:" %} test</li>
-        <li>{% trans "Password:" %} test</li>
-    </ul>
-    <p>
-        {% blocktrans trimmed %}
-        <b>Note:</b> if that doesn't work, the service administrator did not set up
-        the test account yet or discontinued offering it. In that case, you can
-        still just register a new account.
-        {% endblocktrans %}
-    </p>
-    <h2>{% trans "test account is <b>only</b> for testing" %}</h2>
-    <p>
-        {% blocktrans trimmed %}
-        Any data (hosts, domains, ...) entered using the test account might be removed
-        at any time and without prior notice.
-        {% endblocktrans %}
-    </p>
-    <p>
-        {% blocktrans trimmed %}
-        So if you'ld like your stuff to stay, please register for a regular account after
-        finishing your initial evaluation.
-        {% endblocktrans %}
-    </p>
-  </div>
-  <div class="col-md-7">
-    <h2>{% trans "Register new account" %}</h2>
-    <p>
-        {% blocktrans trimmed %}
-        Username: should be related to your <em>person or organisation</em>
-        (not: to the host(s) you want to register).<br>
-        E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
-        Password: please use a sane one, we trust you.
-        {% endblocktrans %}
-    </p>
-    <br>
-    <form class="p-3 mb-2 jumbotron-replacement rounded-3" role="form" method="post" action="">
-        {% csrf_token %}
-        {% bootstrap_form form layout='horizontal' horizontal_label_class='col-sm-3 col-lg-3' horizontal_field_class='col-sm-9 col-lg-9' %}
-        <div class="form-group row">
-            <div class="offset-sm-3 col-sm-9">
-                <input type="submit" class="btn btn-primary" value="{% trans "Send activation email" %}" />
+    <div class="col-md-5">
+        <h2>{% trans "No registration required for testing" %}</h2>
+        <p>
+            {% trans "You can easily test the service and see what you get." %}
+        </p>
+        <p>
+            {% trans "Just directly log in as:" %}
+        </p>
+        <ul>
+            <li>{% trans "Username:" %} test</li>
+            <li>{% trans "Password:" %} test</li>
+        </ul>
+        <p>
+            {% blocktrans trimmed %}
+            <b>Note:</b> if that doesn't work, the service administrator did not set up
+            the test account yet or discontinued offering it. In that case, you can
+            still just register a new account.
+            {% endblocktrans %}
+        </p>
+        <h2>{% trans "test account is <b>only</b> for testing" %}</h2>
+        <p>
+            {% blocktrans trimmed %}
+            Any data (hosts, domains, ...) entered using the test account might be removed
+            at any time and without prior notice.
+            {% endblocktrans %}
+        </p>
+        <p>
+            {% blocktrans trimmed %}
+            So if you'ld like your stuff to stay, please register for a regular account after
+            finishing your initial evaluation.
+            {% endblocktrans %}
+        </p>
+    </div>
+    <div class="col-md-7">
+        <h2>{% trans "Register new account" %}</h2>
+        <p>
+            {% blocktrans trimmed %}
+            Username: should be related to your <em>person or organisation</em>
+            (not: to the host(s) you want to register).<br>
+            E-Mail address: must be a <em>working</em> one, we'll send you an activation E-Mail there.<br>
+            Password: please use a sane one, we trust you.
+            {% endblocktrans %}
+        </p>
+        <br>
+        <form class="p-3 mb-2 jumbotron-replacement rounded-3" role="form" method="post" action="">
+            {% csrf_token %}
+            {% bootstrap_form form layout='horizontal' horizontal_label_class='col-sm-3 col-lg-3' horizontal_field_class='col-sm-9 col-lg-9' %}
+            <div class="form-group row">
+                <div class="offset-sm-3 col-sm-9">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Send activation email" %}" />
+                </div>
             </div>
-        </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <script type="text/javascript">document.getElementById("id_username").focus();</script>
 {% endblock %}

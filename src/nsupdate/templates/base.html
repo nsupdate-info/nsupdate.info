@@ -61,7 +61,7 @@
                         {% else %}
                             <li class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarUserDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-fw"></i> {{ request.user.username }}</a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarUserDropdown">
                                     <a class="dropdown-item" href="{% url 'account_profile' %}"><i class="fa fa-cogs fa-fw"></i> {% trans 'Profile' %}</a>
                                     <a class="dropdown-item" href="{% url 'account_settings' %}"><i class="fa fa-key fa-fw"></i> {% trans 'Password change' %}</a>
                                     {% if request.user.is_staff %}
@@ -79,18 +79,18 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarLangDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }}</a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarLangDropdown">
-                            {% get_language_info_list for LANGUAGES as langs %}
-                            {% for lang in langs %}
-                                {% if lang.code != LANGUAGE_CODE %}
-                                    <form id="setLang{{ forloop.counter }}" action="{% url 'set_language' %}" method="post" style="display:none">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="language" value="{{ lang.code }}" />
-                                    </form>
-                                    <a class="dropdown-item" href="#" onclick="document.getElementById('setLang{{ forloop.counter }}').submit();return false;">
-                                        {{ lang.name_local|capfirst }} ({{ lang.name }}) [{{ lang.code }}]
-                                    </a>
-                                {% endif %}
-                            {% endfor %}
+                                {% get_language_info_list for LANGUAGES as langs %}
+                                {% for lang in langs %}
+                                    {% if lang.code != LANGUAGE_CODE %}
+                                        <form id="setLang{{ forloop.counter }}" action="{% url 'set_language' %}" method="post" style="display:none">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="language" value="{{ lang.code }}" />
+                                        </form>
+                                        <a class="dropdown-item" href="#" onclick="document.getElementById('setLang{{ forloop.counter }}').submit();return false;">
+                                            {{ lang.name_local|capfirst }} ({{ lang.name }}) [{{ lang.code }}]
+                                        </a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </li>
                     </ul>
@@ -143,7 +143,7 @@
 
         <div class="footer">
             <div class="container">
-            {% include "includes/base_footer.html" %}
+                {% include "includes/base_footer.html" %}
             </div>
         </div>
         <div id="ip_detection" style="display: none">
