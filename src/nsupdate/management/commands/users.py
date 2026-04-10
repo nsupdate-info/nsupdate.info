@@ -35,7 +35,11 @@ def check_staleness(u):
     """
     t_now = timezone.now()
     t_last_login = u.last_login or NEVER
-    age = (t_now - t_last_login).total_seconds()
+    t_date_joined = u.date_joined or NEVER
+    age_last_login = (t_now - t_last_login).total_seconds()
+    age_date_joined = (t_now - t_date_joined).total_seconds()
+    # a user is stale if BOTH last_login and date_joined are old
+    age = min(age_last_login, age_date_joined)
     if age < T_age:
         log_msg = LOG_MSG_RECENTLY_USED
     else:
