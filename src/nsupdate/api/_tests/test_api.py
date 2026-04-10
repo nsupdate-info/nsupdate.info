@@ -306,3 +306,57 @@ def test_detect_ip_invalid_session(client):
 def test_ajax_get_ips(client):
     response = client.get(reverse('ajax_get_ips'))
     assert response.status_code == 200
+
+
+def test_nic_update_multiple_ips(client):
+    # Test with multiple IPs (v4 and v6)
+    # 1. Clean case: both good (using new IPs)
+    v4 = '1.2.3.4'
+    v6 = '2001:db8::1'
+    myip = f'{v4},{v6}'
+    response = client.get(reverse('nic_update') + f'?myip={myip}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    if content == 'dnserr':
+        pytest.skip("DNS server not available in test environment")
+    assert content == f'good {v4},{v6}'
+
+    # 2. Clean case: both nochg
+    response = client.get(reverse('nic_update') + f'?myip={myip}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    if content == 'dnserr':
+        pytest.skip("DNS server not available in test environment")
+    assert content == f'nochg {v4},{v6}'
+
+    # 3. Mixed case: one good, one nochg
+    v4_new = '1.2.3.5'
+    myip_mixed = f'{v4_new},{v6}'
+    response = client.get(reverse('nic_update') + f'?myip={myip_mixed}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    if content == 'dnserr':
+        pytest.skip("DNS server not available in test environment")
+    # _make_response returns multiple lines for mixed cases
+    assert content == f'good {v4_new}\nnochg {v6}'
+
+
+def test_nic_delete_multiple_ips(client):
+    # Test with multiple IPs (v4 and v6) for deletion
+    v4 = '1.2.3.4'
+    v6 = '2001:db8::1'
+    # First make sure they exist
+    client.get(reverse('nic_update') + f'?myip={v4},{v6}',
+               HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+
+    myip = '0.0.0.0,::'  # DynDNS2 convention for deleting A and AAAA
+    response = client.get(reverse('nic_delete') + f'?myip={myip}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    if content == 'dnserr':
+        pytest.skip("DNS server not available in test environment")
+    assert content == 'deleted A,AAAA'
