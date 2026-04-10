@@ -2,7 +2,7 @@
 Tests for the faults command.
 """
 
-from conftest import TEST_HOST
+from nsupdate.conftest import TEST_HOST
 
 from django.core import management
 from nsupdate.main.models import Host
