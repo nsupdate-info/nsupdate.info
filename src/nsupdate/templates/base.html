@@ -69,7 +69,10 @@
                                         <a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa fa-wrench fa-fw"></i> {% trans 'Admin interface' %}</a>
                                     {% endif %}
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out-alt fa-fw"></i> {% trans 'Log out' %}</a>
+                                    <form id="logout-form" action="{% url 'logout' %}" method="post" style="display:none">
+                                        {% csrf_token %}
+                                    </form>
+                                    <a class="dropdown-item" href="#" onclick="document.getElementById('logout-form').submit();return false;"><i class="fa fa-sign-out-alt fa-fw"></i> {% trans 'Log out' %}</a>
                                 </div>
                             </li>
                         {% endif %}
