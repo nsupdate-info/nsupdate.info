@@ -3,4 +3,4 @@ Introduction
 ============
 
 .. include:: ../README.rst
-.. include:: ../CHANGES.rst
+.. include:: ./CHANGES.rst
