@@ -194,6 +194,53 @@ def check_session_auth(user, hostname):
     return host
 
 
+def _strip_ip(ipaddr):
+    """strip away spaces and trailing /xx prefix length / netmask"""
+    ipaddr = str(ipaddr).strip()
+    if '/' in ipaddr:
+        # there is a trailing /xx prefix length / netmask - get rid of it.
+        # by doing this we support myip=<ip6lanprefix> of FritzBox.
+        ipaddr = ipaddr.rsplit('/')[0]
+    return ipaddr
+
+
+def _make_response(results):
+    """
+    The extension to myip=ip1,ip2 is a bit problematic as the dyndns2 standard
+    does neither define that nor how the response shall look like.
+    """
+    single_results = 'abuse', 'badagent', 'badauth', 'notfqdn', 'nohost', 'dnserr'
+    for code in single_results:
+        if code in results:
+            return Response(code)
+    nochg_ips = []
+    updated_ips = []
+    deleted_records = []
+    for result in results:
+        if result.startswith('nochg '):
+            nochg_ips.append(result[6:])
+        elif result.startswith('good '):
+            updated_ips.append(result[5:])
+        elif result.startswith('deleted '):
+            deleted_records.append(result[8:])
+        else:
+            raise ValueError(f"unexpected result: {result!r}")
+    len_results = len(results)
+    # clean cases, all the same
+    if len_results == len(nochg_ips):
+        return Response('nochg ' + ','.join(nochg_ips))  # nothing changed
+    if len_results == len(deleted_records):
+        return Response('deleted ' + ','.join(deleted_records))  # deleted all records
+    if len_results == len(updated_ips):
+        return Response('good ' + ','.join(updated_ips))  # all updated
+    # mixed cases, need to return all results
+    response_lines = []
+    [response_lines.append('good %s' % updated_ip) for updated_ip in updated_ips]
+    [response_lines.append('nochg %s' % nochg_ip) for nochg_ip in nochg_ips]
+    [response_lines.append('deleted %s' % deleted_record) for deleted_record in deleted_records]
+    return Response('\n'.join(response_lines))
+
+
 class NicUpdateView(View):
     @log.logger(__name__)
     def get(self, request, logger=None, delete=False):
@@ -265,11 +312,28 @@ class NicUpdateView(View):
             logger.warning(msg)
             host.register_client_result(msg, fault=True)
             return Response('badagent')
+        remote_addr = normalize_ip(request.META.get('REMOTE_ADDR'))
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or ''
-            ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
+            ipaddrs = [remote_addr, ]
+        else:
+            # handle multiple comma-separated IPs, see issue 501
+            # we should update all valid IP addresses it gets.
+            # usually it will be 1 (v4 or v6) or 2 (v4 and v6) addresses.
+            ipaddrs = []
+            for ip in ipaddr.split(','):
+                ip = _strip_ip(ip)
+                try:
+                    check_ip(ip)
+                    ipaddrs.append(ip)
+                except ValueError:
+                    continue
+            if not ipaddrs:
+                # if none of the given IPs are valid, we update to the remote_addr
+                ipaddrs = [remote_addr, ]
         secure = request.is_secure()
-        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
+        results = [_update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
+        return _make_response(results)
 
 
 class NicDeleteView(NicUpdateView):
@@ -320,11 +384,27 @@ class AuthorizedNicUpdateView(View):
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         # note: we do not check the user agent here as this is interactive
         # and logged-in usage - thus misbehaved user agents are no problem.
+        remote_addr = normalize_ip(request.META.get('REMOTE_ADDR'))
         ipaddr = request.GET.get('myip')
         if not ipaddr:  # None or empty string
-            ipaddr = normalize_ip(request.META.get('REMOTE_ADDR'))
+            ipaddrs = [remote_addr, ]
+        else:
+            # handle multiple comma-separated IPs, see issue 501
+            # we should update all valid IP addresses it gets.
+            # usually it will be 1 (v4 or v6) or 2 (v4 and v6) addresses.
+            ipaddrs = []
+            for ip in ipaddr.split(','):
+                ip = _strip_ip(ip)
+                try:
+                    check_ip(ip)
+                    ipaddrs.append(ip)
+                except ValueError:
+                    continue
+            if not ipaddrs:
+                ipaddrs = [remote_addr, ]
         secure = request.is_secure()
-        return _update_or_delete(host, ipaddr, secure, logger=logger, _delete=delete)
+        results = [_update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
+        return _make_response(results)
 
 
 class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
@@ -349,7 +429,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     :param secure: True if we use TLS/https
     :param logger: a logger object
     :param _delete: True for delete, False for update
-    :return: Response object with dyndns2 response
+    :return: dyndns2 response string
     """
     mode = ('update', 'delete')[_delete]
     # we are doing abuse / available checks rather late, so the client might
@@ -360,22 +440,15 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         msg = '%s - received %s for host with abuse / abuse_blocked flag set' % (fqdn, mode, )
         logger.warning(msg)
         host.register_client_result(msg, fault=False)
-        return Response('abuse')
+        return 'abuse'
     if not host.available:
         # not available is like it doesn't exist
         msg = '%s - received %s for unavailable host' % (fqdn, mode, )
         logger.warning(msg)
         host.register_client_result(msg, fault=False)
-        return Response('nohost')
+        return 'nohost'
     try:
-        # bug in dnspython: crashes if ipaddr is unicode, wants a str!
-        # https://github.com/rthalley/dnspython/issues/41
-        # TODO: reproduce and submit traceback to issue 41
-        ipaddr = str(ipaddr)
-        if '/' in ipaddr:
-            # looks like there is a trailing /xx prefix length / netmask - get rid of it.
-            # by doing this we support myip=<ip6lanprefix> of FritzBox.
-            ipaddr = ipaddr.rsplit('/')[0]
+        ipaddr = _strip_ip(ipaddr)
         kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
         rdtype = 'A' if kind == 'ipv4' else 'AAAA'
         IPNetwork(ipaddr)  # raise AddrFormatError here if there is an issue with ipaddr, see #394
@@ -385,14 +458,14 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
-        return Response('dnserr')  # there should be a better response code for this
+        return 'dnserr'  # there should be a better response code for this
     if mode == 'update' and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
         host.abuse = True
         host.abuse_blocked = True
         host.register_client_result(msg, fault=True)
-        return Response('abuse')
+        return 'abuse'
     host.poke(kind, secure)
     try:
         if _delete:
@@ -403,14 +476,14 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
-        return Response('nochg %s' % ipaddr)
+        return 'nochg %s' % ipaddr
     except (DnsUpdateError, NameServerNotAvailable) as e:
         msg = str(e)
         msg = '%s - received %s that resulted in a dns error [%s], ip: %s tls: %r' % (
             fqdn, mode, msg, ipaddr, secure)
         logger.error(msg)
         host.register_server_result(msg, fault=True)
-        return Response('dnserr')
+        return 'dnserr'
     else:
         if _delete:
             msg = '%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure)
@@ -420,10 +493,10 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=False)
         if _delete:
             # XXX unclear what to do for "other services" we relay updates to
-            return Response('deleted %s' % rdtype)
+            return 'deleted %s' % rdtype
         else:  # update
             _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
-            return Response('good %s' % ipaddr)
+            return 'good %s' % ipaddr
 
 
 def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
