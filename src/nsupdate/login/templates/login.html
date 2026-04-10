@@ -35,18 +35,18 @@
         <hr />
         {% if backends.backends %}
             <div class="btn-toolbar" role="toolbar">
-            {% for backend in backends.backends %}
-                <div class="btn-group">
-                    <a class="btn btn-secondary" role="button" href="{% url 'social:begin' backend %}">
-                        <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
-                    </a>
-                </div>
-            {% endfor %}
+                {% for backend in backends.backends %}
+                    <div class="btn-group">
+                        <a class="btn btn-secondary" role="button" href="{% url 'social:begin' backend %}">
+                            <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
         {% else %}
             <div class="p-3 mb-2 jumbotron-replacement rounded-3">
-            <p>{% trans "No remote account logins enabled." %}</p>
-            <p>{% trans "Please login with a local account." %}</p>
+                <p>{% trans "No remote account logins enabled." %}</p>
+                <p>{% trans "Please login with a local account." %}</p>
             </div>
         {% endif %}
     </div>
