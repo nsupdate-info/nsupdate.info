@@ -162,25 +162,31 @@
         </p>
         <pre># /etc/ddclient.conf
 
-# this will update your ipv4 address to the address
-# the web service sees requests coming from:
+# For ddclient >= 3.11
+# --------------------
+
+# Global / shared settings
 protocol=dyndns2
-use=web, web=http://{{ WWW_IPV4_HOST }}/myip
-ssl=yes  # yes = use https for updates
-server={{ WWW_IPV4_HOST }}
+ssl=yes
 login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 password='{{ update_secret|default:"&lt;your secret&gt;" }}'
+server={{ WWW_IPV4_HOST }}
+
+# IPv4
+usev4=webv4, webv4=http://{{ WWW_IPV4_HOST }}/myip
 {{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 
-# ddclient releases <= 3.8.1 do not support IPv6,
-# but there is a patch for IPv6 from Eduardo Trapani.
-# using such a patched ddclient, the following should work:
-#
-# this will update your IPv6 address to the interface address:
+# IPv6 (please fix the interface name)
+usev6=ifv6, ifv6=eth0
+{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
+
+# For ddclient < 3.11
+# -------------------
+
 #protocol=dyndns2
-#usev6=if, if=eth0
-#ssl=yes  # yes = use https for updates
-#server={{ WWW_IPV6_HOST }}
+#use=web, web=http://ipv4.nsupdate.info/myip
+#ssl=yes
+#server=ipv4.nsupdate.info
 #login={{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
 #password='{{ update_secret|default:"&lt;your secret&gt;" }}'
 #{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}
