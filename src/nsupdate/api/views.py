@@ -17,7 +17,7 @@ from netaddr.core import AddrFormatError
 from django.http import HttpResponse
 from django.conf import settings
 from django.views.generic.base import View
-from django.contrib.auth.hashers import check_password, verify_password
+from django.contrib.auth.hashers import verify_password
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
