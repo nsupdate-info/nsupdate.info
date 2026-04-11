@@ -31,7 +31,7 @@ def check_staleness(u):
     Return log message (can be None).
 
     :param u: User instance
-    :return: deleted, log_msg
+    :return: log_msg
     """
     t_now = timezone.now()
     t_last_login = u.last_login or NEVER
