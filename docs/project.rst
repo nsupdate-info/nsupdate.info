@@ -35,10 +35,11 @@ Please make sure to configure your notification settings so that you are
 notified when the translation project is updated (so you can react quickly and
 keep your translation fresh).
 
-Translations update workflow (start from a clean workdir):
+Translations update workflow
+----------------------------
 
 ::
-
+    # start from a clean workdir, then
     # pull all translations from Transifex:
     tx pull
     # update the translations with changes from the source code:
@@ -150,3 +151,43 @@ running a specific configuration on ``127.0.0.1:53``.
 
 #. Build the Docker image once, using: ``docker build -t nsupdate scripts/docker/``
 #. Then run tests via ``docker run --dns 127.0.0.1 -v $PWD:/app nsupdate``
+
+
+How to release
+==============
+
+To make a new release, follow this checklist:
+
+1. Check if everything is ready for a release:
+
+   - all issues for this milestone are closed.
+   - check if there are any pending fixes for security issues.
+   - check Github actions CI - are all tests passing?
+   - documentation is up-to-date.
+   - ``CHANGES.rst`` is up-to-date.
+   - Render CHANGES.rst via make html and check for markup errors.
+   - did the code run on the prod website for a while? check server logs.
+
+2. Handle Django migrations:
+
+   - Check if there are any pending model changes: ``./manage.py makemigrations``.
+   - Ensure migrations are tested.
+
+3. Handle translations:
+
+   - Follow the `Translations update workflow`_ to pull latest translations from Transifex,
+     update them from source, and push back.
+
+4. Create the release:
+
+   - Update version and date in ``CHANGES.rst``.
+   - Tag the release in git: ``git tag -s -m "tagged/signed release x.y.z" x.y.z``
+   - Push the tag to GitHub: ``git push --tags``.
+   - Build the release packages: ``python -m build``.
+   - Create a release on Github, upload the sdist.
+   - Upload the package to PyPI: ``twine upload dist/*.tar.gz``.
+
+5. After the release:
+
+   - Close release milestone on Github.
+   - Announce the release.
