@@ -269,11 +269,11 @@ class Host(models.Model):
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):
         # Assuming subdomain has no dots (.) the fqdn is split at the first dot
-        splitted = fqdn.split('.', 1)
-        if len(splitted) != 2:
+        fqdn_parts = fqdn.split('.', 1)
+        if len(fqdn_parts) != 2:
             raise ValueError("get_by_fqdn(%s): FQDN has to contain (at least) one dot" % fqdn)
         try:
-            host = Host.objects.get(name=splitted[0], domain__name=splitted[1], **kwargs)
+            host = Host.objects.get(name=fqdn_parts[0], domain__name=fqdn_parts[1], **kwargs)
         except Host.DoesNotExist:
             return None
         except Host.MultipleObjectsReturned:
