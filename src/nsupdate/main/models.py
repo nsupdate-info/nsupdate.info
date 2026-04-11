@@ -66,7 +66,7 @@ def host_blacklist_validator(value):
 
 from collections import namedtuple
 
-UpdateAlgorithm = namedtuple("update_algorithm", "bitlength bind_name")
+UpdateAlgorithm = namedtuple("UpdateAlgorithm", "bitlength bind_name")
 
 UPDATE_ALGORITHM_DEFAULT = 'HMAC_SHA512'
 UPDATE_ALGORITHMS = {
