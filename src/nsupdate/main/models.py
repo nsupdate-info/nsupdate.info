@@ -124,7 +124,7 @@ class Domain(models.Model):
     comment = models.CharField(
         _("comment"),
         max_length=255,  # should be enough
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Some arbitrary comment about your domain. "
                     "If your domain is public, the comment will also be publicly shown."))
 
@@ -175,7 +175,7 @@ class Host(models.Model):
     comment = models.CharField(
         _("comment"),
         max_length=255,  # should be enough
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Some arbitrary comment about your host, e.g. who / what / where this host is"))
 
     # available means that this host may be updated (or not, if False) -
@@ -219,7 +219,7 @@ class Host(models.Model):
     client_result_msg = models.CharField(
         _("client result msg"),
         max_length=RESULT_MSG_LEN,
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Latest result message relating to the client"))
 
     # count server faults that happened when updating this host
@@ -227,7 +227,7 @@ class Host(models.Model):
     server_result_msg = models.CharField(
         _("server result msg"),
         max_length=RESULT_MSG_LEN,
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Latest result message relating to the server"))
 
     # count api auth errors - maybe caused by host owner (misconfigured update client)
@@ -235,7 +235,7 @@ class Host(models.Model):
     api_auth_result_msg = models.CharField(
         _("api auth result msg"),
         max_length=RESULT_MSG_LEN,
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Latest result message relating to api authentication"))
 
     # when we received the last update for v4/v6 addr
@@ -391,7 +391,7 @@ class RelatedHost(models.Model):
     comment = models.CharField(
         _("comment"),
         max_length=255,  # should be enough
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Some arbitrary comment about your host, e.g. who / what / where this host is"))
     interface_id_ipv4 = models.CharField(
         _("interface ID IPv4"),
@@ -459,7 +459,7 @@ class ServiceUpdater(models.Model):
     comment = models.CharField(
         _("comment"),
         max_length=255,  # should be enough
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Some arbitrary comment about the service"))
     server = models.CharField(
         _("server"),
@@ -505,7 +505,7 @@ class ServiceUpdaterHostConfig(models.Model):
     comment = models.CharField(
         _("comment"),
         max_length=255,  # should be enough
-        default='', blank=True, null=True,
+        default='', blank=True,
         help_text=_("Some arbitrary comment about your host on that service"))
     # credentials for http basic auth for THAT service (not for us),
     # we need to store the password in plain text, we can't hash it
