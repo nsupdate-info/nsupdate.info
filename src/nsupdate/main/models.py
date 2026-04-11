@@ -33,7 +33,7 @@ def result_fmt(msg):
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
-    return ''.join(secrets.choice(allowed_chars) for i in range(length))
+    return ''.join(secrets.choice(allowed_chars) for _ in range(length))
 
 
 class BlacklistedHost(models.Model):
@@ -66,7 +66,7 @@ def host_blacklist_validator(value):
 
 from collections import namedtuple
 
-UpdateAlgorithm = namedtuple("update_algorithm", "bitlength bind_name")
+UpdateAlgorithm = namedtuple("UpdateAlgorithm", "bitlength bind_name")
 
 UPDATE_ALGORITHM_DEFAULT = 'HMAC_SHA512'
 UPDATE_ALGORITHMS = {
@@ -269,11 +269,11 @@ class Host(models.Model):
     @classmethod
     def get_by_fqdn(cls, fqdn, **kwargs):
         # Assuming subdomain has no dots (.) the fqdn is split at the first dot
-        splitted = fqdn.split('.', 1)
-        if len(splitted) != 2:
+        fqdn_parts = fqdn.split('.', 1)
+        if len(fqdn_parts) != 2:
             raise ValueError("get_by_fqdn(%s): FQDN has to contain (at least) one dot" % fqdn)
         try:
-            host = Host.objects.get(name=splitted[0], domain__name=splitted[1], **kwargs)
+            host = Host.objects.get(name=fqdn_parts[0], domain__name=fqdn_parts[1], **kwargs)
         except Host.DoesNotExist:
             return None
         except Host.MultipleObjectsReturned:
