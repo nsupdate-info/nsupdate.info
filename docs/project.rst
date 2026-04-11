@@ -119,7 +119,7 @@ Build locally
    for example), e.g. via ``pacman -S python-build`` on Arch Linux.
 2. Afterwards, run the command to generate pip packages in ``dist/``::
 
-    pyproject-build
+    python -m build
 
 NOTE: This is also needed before development because the command generates ``./src/nsupdate/_version.py``.
 
@@ -127,7 +127,7 @@ Run locally
 ===========
 
 #. Install dependencies ``pipenv install --dev``
-#. Generate ``src/nsupdate/_version.py`` file by running ``pyproject-build``
+#. Generate ``src/nsupdate/_version.py`` file by running ``python -m build``
 #. Create database using ``pipenv run ./manage.py migrate``
 #. Create a superuser with ``pipenv run ./manage.py createsuperuser``
 #. Run the server with ``pipenv run ./manage.py runserver``

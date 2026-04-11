@@ -49,7 +49,7 @@
         </p>
         {% trans "For IPv4 updates:" %}
         <div class="card card-body p-2 mb-3">
-            <a href="https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:"&lt;your fqdn&gt;" }}:{{ update_secret|default:"&lt;your secret&gt;" }}@{{ WWW_IPV4_HOST }}/nic/update</a>
+            <a href="https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV4_HOST }}/nic/update">https://{{ host.get_fqdn|default:'&lt;your fqdn&gt;' }}:{{ update_secret|default:'&lt;your secret&gt;' }}@{{ WWW_IPV4_HOST }}/nic/update</a>
         </div>
         {% trans "For IPv6 updates:" %}
         <div class="card card-body p-2 mb-3">
@@ -259,7 +259,8 @@ detector = webcheck6
         <p>Homepage: <a href="http://m0n0.ch/wall/">http://m0n0.ch/wall</a></p>
         <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
-            Services <i class="fa fa-long-arrow-alt-right"></i>Dynamic DNS
+            Services <i class="fa fa-long-arrow-alt-right"></i>
+            Dynamic DNS
         </div>
         <h5>{% trans "Enter the following data:" %}</h5>
         <table class="table">

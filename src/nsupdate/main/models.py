@@ -11,7 +11,6 @@ import dns.resolver
 import dns.message
 
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 from django.conf import settings
@@ -139,7 +138,6 @@ class Domain(models.Model):
     def generate_ns_secret(self):
         algorithm = self.nameserver_update_algorithm
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
-        user_model = get_user_model()
         secret = make_random_password(length=bitlength // 8)
         secret = secret.encode('utf-8')
         self.nameserver_update_secret = secret_base64 = base64.b64encode(secret).decode('utf-8')
@@ -333,7 +331,6 @@ class Host(models.Model):
         # we deal with lots of automated requests here, and not all update
         # clients are well-behaved.
         if secret is None:
-            user_model = get_user_model()
             secret = make_random_password()
         # Because Django removed the "sha1" hasher we used in the past AND we need something
         # fast for the update secrets, we want "weakargon2" now.
