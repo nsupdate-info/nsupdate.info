@@ -33,7 +33,7 @@ def result_fmt(msg):
 
 
 def make_random_password(length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
-    return ''.join(secrets.choice(allowed_chars) for i in range(length))
+    return ''.join(secrets.choice(allowed_chars) for _ in range(length))
 
 
 class BlacklistedHost(models.Model):
