@@ -320,7 +320,7 @@ msgstr "Inserisci una nuova password"
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "Inserisci a password due volte così possiamo verificare che sia stata digitata correttamente."
+msgstr "Inserisci la password due volte così possiamo verificare che sia stata digitata correttamente."
 
 #: login/templates/password_reset_confirm.html:21
 msgid "Password reset unsuccessful"
