@@ -3,50 +3,72 @@
 
 {% block content %}
     <div class="row">
-        <h3>{{ domain.name }}</h3>
+        <div class="col-12">
+            <h3>{{ domain.name }}</h3>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
-            <h3>{% trans "Edit Domain" %}</h3>
-            <p>{% trans "You can't change the domain name. If you want to have another domain name, you have to delete this domain and create a new one." %}</p>
-            <p>
-                {% blocktrans trimmed %}
-                Please note that update algorithm and update secret need to match.
-                Just create a new secret after submitting this form with a changed update algorithm.
-                {% endblocktrans %}
-            </p>
-            <form role="form" method="post" action="">
-                {% csrf_token %}
-                {% bootstrap_form form layout='horizontal' horizontal_label_class='col-sm-3 col-lg-3' horizontal_field_class='col-sm-9 col-lg-9' %}
-                <div class="form-group row">
-                    <div class="offset-sm-3 col-sm-9">
-                        <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
-                    </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Edit Domain" %}</h3>
                 </div>
-            </form>
+                <div class="card-body">
+                    <p>{% trans "You can't change the domain name. If you want to have another domain name, you have to delete this domain and create a new one." %}</p>
+                    <p>
+                        {% blocktrans trimmed %}
+                        Please note that update algorithm and update secret need to match.
+                        Just create a new secret after submitting this form with a changed update algorithm.
+                        {% endblocktrans %}
+                    </p>
+                    <form role="form" method="post" action="">
+                        {% csrf_token %}
+                        {% bootstrap_form form layout='horizontal' horizontal_label_class='col-sm-3 col-lg-3' horizontal_field_class='col-sm-9 col-lg-9' %}
+                        <div class="form-group row">
+                            <div class="offset-sm-3 col-sm-9">
+                                <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <h3>{% trans "Show Configuration" %}</h3>
-            <p>
-                {% blocktrans trimmed %}
-                We'll generate a ready-to-use configuration for your name server,
-                filled out with all values (including a new secret).
-                {% endblocktrans %}
-            </p>
-            <p class="text-warning">
-                {% blocktrans trimmed %}
-                We'll create a new shared secret - if you had one before, it will become invalid.
-                You have to use the new secret in your name server configuration.
-                {% endblocktrans %}
-            </p>
-            <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
-                <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
-            </form>
-            <h3>{% trans "Delete Domain" %}</h3>
-            <p class="text-danger">
-                {% trans "Deleting a domain is not undoable. If you need it back, you'll have to add it again and configure a new shared secret." %}
-            </p>
-            <form method="get" action="{% url 'delete_domain' domain.pk %}">
-                <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete Domain" %}</button>
-            </form>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Show Configuration" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        {% blocktrans trimmed %}
+                        We'll generate a ready-to-use configuration for your name server,
+                        filled out with all values (including a new secret).
+                        {% endblocktrans %}
+                    </p>
+                    <p class="text-warning">
+                        {% blocktrans trimmed %}
+                        We'll create a new shared secret - if you had one before, it will become invalid.
+                        You have to use the new secret in your name server configuration.
+                        {% endblocktrans %}
+                    </p>
+                    <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
+                        <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Delete Domain" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-danger">
+                        {% trans "Deleting a domain is not undoable. If you need it back, you'll have to add it again and configure a new shared secret." %}
+                    </p>
+                    <form method="get" action="{% url 'delete_domain' domain.pk %}">
+                        <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete Domain" %}</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

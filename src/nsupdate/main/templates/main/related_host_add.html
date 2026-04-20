@@ -4,9 +4,11 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Create a new related host" %}</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="card-title">{% trans "Create a new related host" %}</h3>
                     <form method="post" action="">
                         {% csrf_token %}
                         {% bootstrap_form form %}
@@ -16,9 +18,11 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Help" %}</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="card-title">{% trans "Help" %}</h3>
                     <p class="card-text">{% trans "Here you can add related hosts (e.g. other machines on same LAN)." %}</p>
                     <p class="card-text">
                         {% blocktrans trimmed %}

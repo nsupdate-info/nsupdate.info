@@ -3,12 +3,16 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
-            <h3>
-                {% trans "Your Hosts" %}
-                <a href="{% url 'add_host' %}" class="btn btn-primary btn-sm ms-3">{% trans "Add Host" %}</a>
-            </h3>
-            <table class="table">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="m-0">
+                        {% trans "Your Hosts" %}
+                        <a href="{% url 'add_host' %}" class="btn btn-primary btn-sm ms-3">{% trans "Add Host" %}</a>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table mb-0">
             <thead>
                 <tr>
                     <th>
@@ -80,14 +84,20 @@
             {% empty %}
                 <tr><td colspan="5">{% trans "No hosts yet." %}</td></tr>
             {% endfor %}
-            </table>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div class="col-md-12">
-            <h3>
-                {% trans "Domains (yours first, then public)" %}
-                <a href="{% url 'add_domain' %}" class="btn btn-secondary btn-sm ms-3">{% trans "Add Domain" %}</a>
-            </h3>
-            <table class="table">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="m-0">
+                        {% trans "Domains (yours first, then public)" %}
+                        <a href="{% url 'add_domain' %}" class="btn btn-secondary btn-sm ms-3">{% trans "Add Domain" %}</a>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table mb-0">
                 <thead>
                     <tr>
                         <th>{% trans "Domain" %}</th>
@@ -119,7 +129,9 @@
                 {% empty %}
                     <tr><td colspan="5">{% trans "No public domains from other users yet." %}</td></tr>
                 {% endfor %}
-            </table>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
