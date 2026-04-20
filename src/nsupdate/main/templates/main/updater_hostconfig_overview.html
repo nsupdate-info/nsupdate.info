@@ -4,8 +4,12 @@
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
-            <h3>{% trans "Your updater configurations for other services" %}</h3>
-            <table class="table">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Your updater configurations for other services" %}</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table mb-0">
             <thead>
                 <tr>
                     <th>{% trans "Service" %}</th>
@@ -26,16 +30,20 @@
             {% empty %}
                 <tr><td colspan="5">{% trans "No other services to update yet." %}</td></tr>
             {% endfor %}
-            </table>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <hr>
 
     <div class="row">
         <div class="col-lg-6">
-            <div class="card mb-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Create a new updater configuration" %}</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="card-title">{% trans "Create a new updater configuration" %}</h3>
                     <form method="post" action="">
                         {% csrf_token %}
                         {% bootstrap_form form %}
@@ -45,9 +53,11 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card mb-3">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Help" %}</h3>
+                </div>
                 <div class="card-body">
-                    <h3 class="card-title">{% trans "Help" %}</h3>
                     <p class="card-text">{% trans "Here you can add new configurations for 3rd party services you like to get updated." %}
                     </p>
                     <p class="card-text">{% trans "We will send an update to them each time you update your host with us." %}

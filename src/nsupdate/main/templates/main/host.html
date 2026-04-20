@@ -9,88 +9,130 @@
     </div>
     <div class="row">
         <div class="col-md-4">
-            <h3>{% trans "Edit Host" %}</h3>
-            <form role="form" method="post" action="">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
-            </form>
-            <h3>{% trans "Delete Host" %}</h3>
-            <p class="text-danger">
-                {% trans "Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret." %}
-            </p>
-            <form method="get" action="{% url 'delete_host' host.pk %}">
-                <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete Host" %}</button>
-            </form>
-        </div>
-        <div  class="col-md-4">
-            <h3>{% trans "Show Configuration" %}</h3>
-            <p>
-                {% blocktrans trimmed %}
-                We'll generate a ready-to-use configuration for your router / update
-                client, filled out with all values (including a new secret).
-                {% endblocktrans %}
-            </p>
-            <p class="text-warning">
-                {% blocktrans trimmed %}
-                We'll create a new secret - if you had one before, it will become invalid.
-                You have to use the new secret in your router / update client configuration.
-                {% endblocktrans %}
-            </p>
-            <form action="{% url 'generate_secret_view' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
-            </form>
-            <h3>{% trans "Related Hosts" %}</h3>
-            <p>
-                {% blocktrans trimmed %}
-                We can update additional host records (for other hosts in same network)
-                when we receive an update for this host.
-                {% endblocktrans %}
-            </p>
-            <form action="{% url 'related_host_overview' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">{% trans "Configure related Hosts" %}</button>
-            </form>
-            <h3>{% trans "Update other Services" %}</h3>
-            <p>{% trans "We can send updates to other services when we receive an update from you." %}</p>
-            <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
-                <button type="submit" class="btn btn-primary">{% trans "Configure Updaters" %}</button>
-            </form>
-        </div>
-        <div  class="col-md-4">
-            <h3>{% trans "Update Nameserver Records" %}</h3>
-            <p>
-                {% blocktrans trimmed %}
-                Usually you configure your router to follow the dyndns2 protocol.
-                But if you know what you are doing, and you want to update manually, you can do it here.
-                {% endblocktrans %}
-               <br>
-               {% trans "We populated the input fields for the new addresses with your currently detected remote addresses." %}
-            </p>
-                <div class="form-group">
-                    <label for="current_ipv4">{% blocktrans with type=_("IPv4") %}Current {{ type }} address from master nameserver{% endblocktrans %}</label>
-                    <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.get_ipv4 }}" disabled>
-                    <label for="myipv4">{% blocktrans with type=_("IPv4") %}Set new {{ type }} address{% endblocktrans %}</label>
-                    <input class="form-control" type="text" id="myipv4" name="myipv4"
-                           placeholder="{% blocktrans with type=_("IPv4") %}Give new {{ type }} address{% endblocktrans %}"
-                           value="{{ request.session.ipv4 }}" required autofocus>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Edit Host" %}</h3>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
-                <span id="update_result_v4"></span>
-                <button type="button" class="btn btn-secondary" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
-                <span id="delete_result_v4"></span>
-                <p></p>
-                <div class="form-group">
-                    <label for="current_ipv6">{% blocktrans with type=_("IPv6") %}Current {{ type }} address from master nameserver{% endblocktrans %}</label>
-                    <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.get_ipv6 }}" disabled>
-                    <label for="myipv6">{% blocktrans with type=_("IPv6") %}Set new {{ type }} address{% endblocktrans %}</label>
-                    <input class="form-control" type="text" id="myipv6" name="myipv6"
-                           placeholder="{% blocktrans with type=_("IPv6") %}Give new {{ type }} address{% endblocktrans %}"
-                           value="{{ request.session.ipv6 }}" required>
+                <div class="card-body">
+                    <form role="form" method="post" action="">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+                    </form>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
-                <span id="update_result_v6"></span>
-                <button type="button" class="btn btn-secondary" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
-                <span id="delete_result_v6"></span>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Delete Host" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p class="text-danger">
+                        {% trans "Deleting a host is not undoable. If you need it back, you'll have to add it again and configure a new update secret." %}
+                    </p>
+                    <form method="get" action="{% url 'delete_host' host.pk %}">
+                        <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete Host" %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Show Configuration" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        {% blocktrans trimmed %}
+                        We'll generate a ready-to-use configuration for your router / update
+                        client, filled out with all values (including a new secret).
+                        {% endblocktrans %}
+                    </p>
+                    <p class="text-warning">
+                        {% blocktrans trimmed %}
+                        We'll create a new secret - if you had one before, it will become invalid.
+                        You have to use the new secret in your router / update client configuration.
+                        {% endblocktrans %}
+                    </p>
+                    <form action="{% url 'generate_secret_view' host.pk %}" method="get">
+                        <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Related Hosts" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        {% blocktrans trimmed %}
+                        We can update additional host records (for other hosts in same network)
+                        when we receive an update for this host.
+                        {% endblocktrans %}
+                    </p>
+                    <form action="{% url 'related_host_overview' host.pk %}" method="get">
+                        <button type="submit" class="btn btn-primary">{% trans "Configure related Hosts" %}</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Update other Services" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p>{% trans "We can send updates to other services when we receive an update from you." %}</p>
+                    <form action="{% url 'updater_hostconfig_overview' host.pk %}" method="get">
+                        <button type="submit" class="btn btn-primary">{% trans "Configure Updaters" %}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Update Nameserver Records" %}</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        {% blocktrans trimmed %}
+                        Usually you configure your router to follow the dyndns2 protocol.
+                        But if you know what you are doing, and you want to update manually, you can do it here.
+                        {% endblocktrans %}
+                       <br>
+                       {% trans "We populated the input fields for the new addresses with your currently detected remote addresses." %}
+                    </p>
+                    <div class="form-group mb-3">
+                        <label for="current_ipv4">{% blocktrans with type=_("IPv4") %}Current {{ type }} address from master nameserver{% endblocktrans %}</label>
+                        <input class="form-control" type="text" id="current_ipv4" name="current_ipv4" value="{{ host.get_ipv4 }}" disabled>
+                        <label for="myipv4" class="mt-2">{% blocktrans with type=_("IPv4") %}Set new {{ type }} address{% endblocktrans %}</label>
+                        <input class="form-control" type="text" id="myipv4" name="myipv4"
+                               placeholder="{% blocktrans with type=_("IPv4") %}Give new {{ type }} address{% endblocktrans %}"
+                               value="{{ request.session.ipv4 }}" required autofocus>
+                    </div>
+                    <div class="mb-4">
+                        <button type="button" class="btn btn-primary" onclick="update_host_v4('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
+                        <span id="update_result_v4"></span>
+                        <button type="button" class="btn btn-secondary" onclick="delete_host_v4('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
+                        <span id="delete_result_v4"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="current_ipv6">{% blocktrans with type=_("IPv6") %}Current {{ type }} address from master nameserver{% endblocktrans %}</label>
+                        <input class="form-control" type="text" id="current_ipv6" name="current_ipv6" value="{{ host.get_ipv6 }}" disabled>
+                        <label for="myipv6" class="mt-2">{% blocktrans with type=_("IPv6") %}Set new {{ type }} address{% endblocktrans %}</label>
+                        <input class="form-control" type="text" id="myipv6" name="myipv6"
+                               placeholder="{% blocktrans with type=_("IPv6") %}Give new {{ type }} address{% endblocktrans %}"
+                               value="{{ request.session.ipv6 }}" required>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="update_host_v6('{{ host.get_fqdn }}')">{% trans "Update" %}</button>
+                        <span id="update_result_v6"></span>
+                        <button type="button" class="btn btn-secondary" onclick="delete_host_v6('{{ host.get_fqdn }}')">{% trans "Delete" %}</button>
+                        <span id="delete_result_v6"></span>
+                    </div>
+                </div>
+            </div>
             <script>
                 update_host_v4 = function(host) {
                     $('#update_result_v4').text('updating...');
@@ -133,15 +175,27 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <h3>{% trans "Result Messages" %}</h3>
-            <form>
-                <label for="api_auth_result_msg">{% trans "API Authentication Result Message" %}</label>
-                <input class="form-control" type="text" maxlength="255" id="api_auth_result_msg" value="{{ host.api_auth_result_msg }}" disabled>
-                <label for="client_result_msg">{% trans "Client Result Message" %}</label>
-                <input class="form-control" type="text" maxlength="255" id="client_result_msg" value="{{ host.client_result_msg }}" disabled>
-                <label for="server_result_msg">{% trans "Server Result Message" %}</label>
-                <input class="form-control" type="text" maxlength="255" id="server_result_msg" value="{{ host.server_result_msg }}" disabled>
-            </form>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="m-0">{% trans "Result Messages" %}</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="api_auth_result_msg">{% trans "API Authentication Result Message" %}</label>
+                            <input class="form-control" type="text" maxlength="255" id="api_auth_result_msg" value="{{ host.api_auth_result_msg }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="client_result_msg">{% trans "Client Result Message" %}</label>
+                            <input class="form-control" type="text" maxlength="255" id="client_result_msg" value="{{ host.client_result_msg }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <label for="server_result_msg">{% trans "Server Result Message" %}</label>
+                            <input class="form-control" type="text" maxlength="255" id="server_result_msg" value="{{ host.server_result_msg }}" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
