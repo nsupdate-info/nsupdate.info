@@ -276,7 +276,7 @@ Note:
   - when clients visits that URL, it will ask for username and password:
 
     - User name: yourname-adhoc.basedomain
-    - Password: secret
+    - Password: <your-update-secret>
   - let the client check "Last update response". Should be "good" (or "nochg")
     plus same IP as shown below "My IP". If it shows something else, then there
     likely was a typo in the user name or password.
