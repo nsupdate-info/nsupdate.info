@@ -70,7 +70,7 @@ with your hosts or domains.
 
 For your own safety, use https and a sane password.
 
-Be careful: in case you lose your login username/password and you also can't receive mail sent to the E-Mail address
+Be careful: in case you lose your login username/password and you also can't receive mail sent to the email address
 you gave when registering, you might not be able to regain access to your account / your hosts (neither automatically
 nor with help from service admin) as you likely can't prove that they are really yours / you are permitted to
 control them.
@@ -200,8 +200,9 @@ If you leave the interface ID field empty, that means not to create such a DNS r
 Note:
 
 * enter the static interface ID (usually you can get it from the rear 4 words
-  of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr). The r part is
-  usually derived from your hardware MAC address and does not change.
+  of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr, where each `r`
+  is a hexadecimal digit 0-9 or a-f). This part is usually derived from your
+  hardware MAC address and does not change.
 * make sure your device has a IPv6 address with global scope, some prefix that
   starts with a "2" and precisely that rrrr:rrrr:rrrr:rrrr value
 * you only need a dyndns2 updater on one device (called mainhost in this
@@ -253,9 +254,9 @@ One typical scenario where this is useful:
 
 How to optimize this scenario:
 
-* go to the "yourname-adhoc" entry and use "Show Configuration"
-* copy and paste the URL shown in the "Browser" tab of the configuration help
-  panel, under headline "Browser-based update client"
+* go to the **yourname-adhoc** entry and use **Show Configuration**
+* copy and paste the URL shown in the **Browser** tab of the configuration help
+  panel, under headline **Browser-based update client**
 * optional: try it yourself in your browser
 * give this URL to your client (E-Mail, Chat, ...), tell the client to open it
   with a browser and keep that page open in the browser until you're finished.
@@ -276,7 +277,7 @@ Note:
   - when clients visits that URL, it will ask for username and password:
 
     - User name: yourname-adhoc.basedomain
-    - Password: secret
+    - Password: <your-update-secret>
   - let the client check "Last update response". Should be "good" (or "nochg")
     plus same IP as shown below "My IP". If it shows something else, then there
     likely was a typo in the user name or password.
