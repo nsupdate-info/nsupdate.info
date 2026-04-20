@@ -226,7 +226,7 @@ msgstr "Qualsiasi dato (host, domini, ...) inserito utilizzando l'account di tes
 msgid ""
 "So if you'ld like your stuff to stay, please register for a regular account "
 "after finishing your initial evaluation."
-msgstr "Quindi, se desideri che le tue configurazioni non vengano rimosse, per cortesia registrat un account regolare dopo aver finito di valutare la qualità del servizio."
+msgstr "Quindi, se desideri che le tue configurazioni non vengano rimosse, per cortesia registra un account regolare dopo aver finito di valutare la qualità del servizio."
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
