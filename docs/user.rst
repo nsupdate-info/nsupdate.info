@@ -102,7 +102,7 @@ IP v4 and v6 addresses work completely independently of each other, you need to 
 both. If you want to be specific about which IP address you update, use our IPv4-only or IPv6-only host to make sure
 it is the v4 (or v6) address.
 
-After configuring a new update client, please keep an eye one the Faults column on the overview page.
+After configuring a new update client, please keep an eye on the Faults column on the overview page.
 It shows 2 values: C: <client faults> S: <server faults>
 
 An increasing number of client faults usually means you (or the software you use) are doing something wrong
@@ -111,7 +111,7 @@ An increasing number of client faults usually means you (or the software you use
 An increasing number of server faults means there is either something wrong with the nameserver or the
 connection to it or it is rejecting the updates for your hostname.
 
-At the bottom of the host view, we also show the last result messages for authentication (of course only if at can be
+At the bottom of the host view, we also show the last result messages for authentication (of course only if it can be
 related to that host), for the client result, for the server result. Check if everything looks ok there.
 
 Adding Domains
