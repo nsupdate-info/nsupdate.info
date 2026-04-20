@@ -200,8 +200,9 @@ If you leave the interface ID field empty, that means not to create such a DNS r
 Note:
 
 * enter the static interface ID (usually you can get it from the rear 4 words
-  of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr). The r part is
-  usually derived from your hardware MAC address and does not change.
+  of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr, where each `r`
+  is a hexadecimal digit 0-9 or a-f). This part is usually derived from your
+  hardware MAC address and does not change.
 * make sure your device has a IPv6 address with global scope, some prefix that
   starts with a "2" and precisely that rrrr:rrrr:rrrr:rrrr value
 * you only need a dyndns2 updater on one device (called mainhost in this
