@@ -253,9 +253,9 @@ One typical scenario where this is useful:
 
 How to optimize this scenario:
 
-* go to the "yourname-adhoc" entry and use "Show Configuration"
-* copy and paste the URL shown in the "Browser" tab of the configuration help
-  panel, under headline "Browser-based update client"
+* go to the **yourname-adhoc** entry and use **Show Configuration**
+* copy and paste the URL shown in the **Browser** tab of the configuration help
+  panel, under headline **Browser-based update client**
 * optional: try it yourself in your browser
 * give this URL to your client (E-Mail, Chat, ...), tell the client to open it
   with a browser and keep that page open in the browser until you're finished.
