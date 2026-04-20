@@ -102,7 +102,7 @@ IP v4 and v6 addresses work completely independently of each other, you need to 
 both. If you want to be specific about which IP address you update, use our IPv4-only or IPv6-only host to make sure
 it is the v4 (or v6) address.
 
-After configuring a new update client, please keep an eye one the Faults column on the overview page.
+After configuring a new update client, please keep an eye on the Faults column on the overview page.
 It shows 2 values: C: <client faults> S: <server faults>
 
 An increasing number of client faults usually means you (or the software you use) are doing something wrong
