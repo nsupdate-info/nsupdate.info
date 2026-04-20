@@ -426,7 +426,7 @@ msgstr "IP nameserver (primario)"
 
 #: main/models.py:95
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
-msgstr "Indirizzp IP dove verranno inviati gli aggiornamenti DNS dinamici per questa zona."
+msgstr "Indirizzo IP dove verranno inviati gli aggiornamenti DNS dinamici per questa zona."
 
 #: main/models.py:97
 msgid "nameserver IP (secondary)"
