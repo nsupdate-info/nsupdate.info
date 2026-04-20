@@ -171,11 +171,11 @@
                 <script type="text/javascript">
                 $(document).ready(function() {
                     {% if not request.session.ipv4 %}
-                        $('#ip_detection').add(
+                        $('#ip_detection').append(
                             '<img src="//{{ WWW_IPV4_HOST }}/detectip/{{ detectip_token }}/" >');
                     {% endif %}
                     {% if not request.session.ipv6 %}
-                        $('#ip_detection').add(
+                        $('#ip_detection').append(
                             '<img src="//{{ WWW_IPV6_HOST }}/detectip/{{ detectip_token }}/" >');
                     {% endif %}
                     function insert_ips() {
