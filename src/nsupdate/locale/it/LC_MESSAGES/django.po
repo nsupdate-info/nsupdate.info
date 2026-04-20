@@ -12,15 +12,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-17 21:33+0100\n"
+"POT-Creation-Date: 2026-04-20 22:52+0200\n"
 "PO-Revision-Date: 2014-07-14 15:19+0000\n"
-"Last-Translator: TW <tw@waldmann-edv.de>, 2014\n"
+"Last-Translator: ykmm <ykmm@mediacom.it>, 2014\n"
 "Language-Team: Italian (http://app.transifex.com/thomaswaldmann/nsupdateinfo/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+#: accounts/models.py:20
+msgid "user"
+msgstr ""
+
+#: accounts/models.py:23
+msgid "language"
+msgstr ""
+
+#: accounts/models.py:29
+msgid "user profile"
+msgstr ""
+
+#: accounts/models.py:30
+msgid "user profiles"
+msgstr ""
+
+#: accounts/registration_form.py:75
+msgid "Enter a valid email address."
+msgstr ""
 
 #: accounts/templates/accounts/delete_user.html:7
 msgid "Delete your User Account"
@@ -37,33 +57,63 @@ msgstr "Sei sicuro di voler cancellare il tuo account utente e tutti i dati ad e
 msgid "Confirm"
 msgstr "Conferma"
 
-#: accounts/templates/accounts/user_profile.html:7
-msgid "User Profile of"
-msgstr "Profilo utente di"
+#: accounts/templates/accounts/user_settings_account.html:4
+msgid "Account settings"
+msgstr ""
 
-#: accounts/templates/accounts/user_profile.html:14
-msgid "Submit"
-msgstr "Salva"
+#: accounts/templates/accounts/user_settings_account.html:9
+msgid "Change password"
+msgstr ""
 
-#: accounts/templates/accounts/user_profile.html:18
+#: accounts/templates/accounts/user_settings_account.html:17
+#: login/templates/password_reset_confirm.html:14
+msgid "Change my password"
+msgstr "Cambia la password"
+
+#: accounts/templates/accounts/user_settings_account.html:17
+#: login/templates/login.html:26
+msgid "Forgot your password?"
+msgstr "Password dimenticata?"
+
+#: accounts/templates/accounts/user_settings_account.html:25
+msgid "Social Auth"
+msgstr ""
+
+#: accounts/templates/accounts/user_settings_account.html:28
 msgid "Associate with remote Account"
 msgstr "Associa ad Account remoto"
 
-#: accounts/templates/accounts/user_profile.html:25
+#: accounts/templates/accounts/user_settings_account.html:35
 msgid "Disassociate from remote Account"
 msgstr "Dissocia da Account remoto"
 
-#: accounts/templates/accounts/user_profile.html:35
-#: accounts/templates/accounts/user_profile.html:44
-msgid "Delete User Profile"
-msgstr "Cancella Profilo Utente"
+#: accounts/templates/accounts/user_settings_account.html:47
+msgid "Delete account"
+msgstr ""
 
-#: accounts/templates/accounts/user_profile.html:37
+#: accounts/templates/accounts/user_settings_account.html:50
 msgid ""
 "If you'ld like to stop using this service and delete this user profile and "
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
 msgstr "Se vuoi smettere di utilizzare questo servizio e cancellare questo profilo utente e tutti i tuoi dati (in particolar modo tutti gli host ed i domini creati da questo utente), puoi farlo qui."
+
+#: accounts/templates/accounts/user_settings_account.html:56
+msgid "Delete User Profile"
+msgstr "Cancella Profilo Utente"
+
+#: accounts/templates/accounts/user_settings_profile.html:4
+msgid "Profile settings"
+msgstr ""
+
+#: accounts/templates/accounts/user_settings_profile.html:9
+#: templates/base.html:66
+msgid "Profile"
+msgstr "Profilo"
+
+#: accounts/templates/accounts/user_settings_profile.html:18
+msgid "Submit"
+msgstr "Salva"
 
 #: accounts/templates/registration/activate.html:4
 #: accounts/templates/registration/activation_complete.html:3
@@ -87,7 +137,7 @@ msgstr "Adesso puoi eseguire You may now l'accesso utilizzando il nome utente e 
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
-#: login/templates/login.html:3 login/templates/login.html.py:24
+#: login/templates/login.html:3 login/templates/login.html:26
 #: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
 msgstr "Log in"
@@ -100,6 +150,21 @@ msgstr "Ops"
 msgid ""
 "it seems that your activation key is invalid.  Please check the url again."
 msgstr "sembra che la chiave di attivazione non sia valida. Controlla nuovamente l'url."
+
+#: accounts/templates/registration/registration_closed.html:3
+msgid "Registration closed"
+msgstr ""
+
+#: accounts/templates/registration/registration_closed.html:6
+msgid "The account registration is closed."
+msgstr ""
+
+#: accounts/templates/registration/registration_closed.html:7
+#, python-format
+msgid ""
+"Registration is currently only possible by contacting the admin "
+"(%(SERVICE_CONTACT)s). "
+msgstr ""
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
@@ -131,12 +196,12 @@ msgid "Just directly log in as:"
 msgstr "Effettua semplicemente la login come:"
 
 #: accounts/templates/registration/registration_form.html:16
-#: main/templates/main/includes/tabbed_router_configuration.html:74
+#: main/templates/main/includes/tabbed_router_configuration.html:78
 msgid "Username:"
 msgstr "Nome utente:"
 
 #: accounts/templates/registration/registration_form.html:17
-#: main/templates/main/includes/tabbed_router_configuration.html:75
+#: main/templates/main/includes/tabbed_router_configuration.html:79
 msgid "Password:"
 msgstr "Password:"
 
@@ -179,6 +244,10 @@ msgstr "Nome utente: dovrebbe essere collegato alla tua <em>persona o organizzaz
 msgid "Send activation email"
 msgstr "Invio dell'email di attivazione."
 
+#: accounts/views.py:70
+msgid "Your password was changed!"
+msgstr ""
+
 #: login/templates/login.html:8
 msgid "Login with a local Account"
 msgstr "Login con un Account locale"
@@ -187,23 +256,27 @@ msgstr "Login con un Account locale"
 msgid "Your username and password didn't match. Please try again."
 msgstr "La tua username e la password non corrispondono. Riprova."
 
-#: login/templates/login.html:19
+#: login/templates/login.html:20
 msgid "Remember me"
 msgstr "Ricordami"
 
-#: login/templates/login.html:24
-msgid "Forgot your password?"
-msgstr "Password dimenticata?"
-
-#: login/templates/login.html:26
+#: login/templates/login.html:27
 msgid "Sign up for a new account..."
 msgstr "Sottoscrivi un nuovo account..."
 
-#: login/templates/login.html:33
+#: login/templates/login.html:34
 msgid "Login with a remote Account"
 msgstr "Esegui la login con un Account remoto"
 
-#: login/templates/logout.html:3 templates/base.html:71
+#: login/templates/login.html:48
+msgid "No remote account logins enabled."
+msgstr ""
+
+#: login/templates/login.html:49
+msgid "Please login with a local account."
+msgstr ""
+
+#: login/templates/logout.html:3 templates/base.html:76
 msgid "Log out"
 msgstr "Disconnessione"
 
@@ -214,31 +287,6 @@ msgstr "Grazie per aver passato del tempo con il sito Web oggi."
 #: login/templates/logout.html:9
 msgid "Log in again"
 msgstr "Esegui nuovamente la login"
-
-#: login/templates/password_change.html:3
-#: login/templates/password_change.html:6 templates/base.html:67
-msgid "Password change"
-msgstr "Cambio password"
-
-#: login/templates/password_change.html:8
-msgid ""
-"Please enter your old password, for security's sake, and then enter your new"
-" password twice so we can verify you typed it in correctly."
-msgstr "Inserisci la tua vecchia password, per motivi di sicurezza, ed in seguito inserisci la nuova password due volte così possiamo verificare che sia stata digitata correttamente."
-
-#: login/templates/password_change.html:15
-#: login/templates/password_reset_confirm.html:14
-msgid "Change my password"
-msgstr "Cambia la password"
-
-#: login/templates/password_change_done.html:3
-#: login/templates/password_change_done.html:6
-msgid "Password change successful"
-msgstr "Cambio password eseguito"
-
-#: login/templates/password_change_done.html:7
-msgid "Your password was changed."
-msgstr "La tua password è stata cambiata."
 
 #: login/templates/password_reset.html:3 login/templates/password_reset.html:7
 #: login/templates/password_reset_confirm.html:3
@@ -301,507 +349,554 @@ msgid ""
 "you registered with, and check your spam folder."
 msgstr "Se non hai ricevuto una mail, verifica di aver inserito l'indirizzo che hai usato per la registrazione e controlla anche la tua cartella per lo spam."
 
-#: main/models.py:36
-msgid "name RegEx"
-msgstr "RegEx nome"
+#: main/forms.py:54 main/forms.py:71
+msgid "Enter a valid secret in base64 format."
+msgstr ""
 
-#: main/models.py:39
-msgid "Blacklisted domain. Evaluated as regex (search)."
-msgstr "Dominio in blacklist. Valutato come regex (ricerca)."
+#: main/forms.py:83
+#, python-format
+msgid ""
+"Failed to add/delete host connectivity-test.%(domain)s, check your DNS "
+"server configuration. This is a requirement for setting the available flag."
+msgstr ""
 
-#: main/models.py:41 main/models.py:123 main/models.py:238 main/models.py:459
-#: main/models.py:508
+#: main/forms.py:91
+msgid "Domain must be available to be public."
+msgstr ""
+
+#: main/hashers.py:50
+msgid "algorithm"
+msgstr ""
+
+#: main/hashers.py:51
+msgid "salt"
+msgstr ""
+
+#: main/hashers.py:52
+msgid "hash"
+msgstr ""
+
+#: main/models.py:41
+msgid "name regex"
+msgstr ""
+
+#: main/models.py:44
+msgid "Blacklisted domain. Evaluated as a regex (search)."
+msgstr ""
+
+#: main/models.py:46 main/models.py:130 main/models.py:250 main/models.py:479
+#: main/models.py:528
 msgid "last update"
 msgstr "ultimo aggiornamento"
 
-#: main/models.py:42 main/models.py:124 main/models.py:239 main/models.py:460
-#: main/models.py:509
+#: main/models.py:47 main/models.py:131 main/models.py:251 main/models.py:480
+#: main/models.py:529
 msgid "created at"
 msgstr "creato presso"
 
-#: main/models.py:46 main/models.py:125 main/models.py:240 main/models.py:464
-#: main/models.py:513
+#: main/models.py:51 main/models.py:132 main/models.py:252 main/models.py:484
+#: main/models.py:533
 msgid "created by"
 msgstr "creato da"
 
-#: main/models.py:52
+#: main/models.py:57
 msgid "blacklisted host"
 msgstr "host in blacklist"
 
-#: main/models.py:53
+#: main/models.py:58
 msgid "blacklisted hosts"
 msgstr "hosts in blacklist"
 
-#: main/models.py:81 main/models.py:150 main/models.py:361 main/models.py:433
-#: main/models.py:490
+#: main/models.py:87 main/models.py:158 main/models.py:379 main/models.py:453
+#: main/models.py:510
 msgid "name"
 msgstr "nome"
 
-#: main/models.py:84
+#: main/models.py:89
+msgid "Invalid domain name"
+msgstr ""
+
+#: main/models.py:91
 msgid "Name of the zone where dynamic hosts may get added"
 msgstr "Nome della zona dove gli host dinamici possono essere aggiunti."
 
-#: main/models.py:86
+#: main/models.py:93
 msgid "nameserver IP (primary)"
 msgstr "IP nameserver (primario)"
 
-#: main/models.py:88
+#: main/models.py:95
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
 msgstr "Indirizzp IP dove verranno inviati gli aggiornamenti DNS dinamici per questa zona."
 
-#: main/models.py:90
+#: main/models.py:97
 msgid "nameserver IP (secondary)"
 msgstr "IP nameserver (secondario)"
 
-#: main/models.py:93
+#: main/models.py:100
 msgid "IP where DNS queries for this zone will be sent to"
 msgstr "IP al quale verranno mandate le interrogazioni DNS"
 
-#: main/models.py:95
+#: main/models.py:102
 msgid "nameserver update secret"
 msgstr "aggiorna segreto per il nameserver"
 
-#: main/models.py:98
+#: main/models.py:105
 msgid "Shared secret that allows updating this zone (base64 encoded)"
 msgstr "Chiave segreta condivisa che permette l'aggiornamento di questa zona (codificata in base64)"
 
-#: main/models.py:100
+#: main/models.py:107
 msgid "nameserver update algorithm"
 msgstr "algoritmo di aggiornamento per il nameserver"
 
-#: main/models.py:103
+#: main/models.py:110
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
 msgstr "HMAC_SHA512 va bene per bind9 (se necessario puoi modificarlo successivamente)"
 
-#: main/models.py:105
+#: main/models.py:112
 msgid "public"
 msgstr "pubblico"
 
-#: main/models.py:107
+#: main/models.py:114
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
 msgstr "Spunta per permettere qualsiasi utente di aggiungere host dinamici a questa zona - se non spuntato permetteremo solo al proprietario di aggiungere host"
 
-#: main/models.py:112 main/models.py:175 main/models.py:386
+#: main/models.py:119 main/models.py:183 main/models.py:404
 msgid "available"
 msgstr "disponibile"
 
-#: main/models.py:114
+#: main/models.py:121
 msgid ""
 "Check if nameserver is available/reachable - if not checked, we'll pause "
 "querying/updating this nameserver for a while"
 msgstr "Spunta se il nameserver è disponibile/raggiungibile - se non spuntato metteremo in pausa quessto nameserver per un po'"
 
-#: main/models.py:117 main/models.py:166 main/models.py:371 main/models.py:437
-#: main/models.py:483
+#: main/models.py:124 main/models.py:174 main/models.py:389 main/models.py:457
+#: main/models.py:503
 msgid "comment"
 msgstr "commento"
 
-#: main/models.py:120
+#: main/models.py:127
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
-"comment will be also publicly shown."
-msgstr "Un commmento relativo al tuo dominio. Se il tuo dominio è pubblico, anche il commento verrà mostrato pubblicamente."
+"comment will also be publicly shown."
+msgstr ""
 
-#: main/models.py:144 main/models.py:160
+#: main/models.py:151 main/models.py:168
 msgid "domain"
 msgstr "dominio"
 
-#: main/models.py:145
+#: main/models.py:152
 msgid "domains"
 msgstr "domini"
 
-#: main/models.py:159
+#: main/models.py:167
 msgid "The name of your host."
 msgstr "Il nome del tuo host."
 
-#: main/models.py:162
+#: main/models.py:170
 msgid "update secret"
 msgstr "aggiorna segreto"
 
-#: main/models.py:169 main/models.py:374
+#: main/models.py:177 main/models.py:392
 msgid ""
-"Some arbitrary comment about your host, e.g  who / what / where this host is"
-msgstr "Un commento relativo al tuo host, es: chi / cosa / dove è questo host"
+"Some arbitrary comment about your host, e.g. who / what / where this host is"
+msgstr ""
 
-#: main/models.py:177 main/models.py:388
+#: main/models.py:185 main/models.py:406
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
 msgstr "Spunta se l'host è disponibile/in uso - se non spuntato, non accettermo aggiornamenti per questo host"
 
-#: main/models.py:180
+#: main/models.py:188
 msgid "netmask IPv4"
 msgstr "netmask IPv4"
 
-#: main/models.py:182
+#: main/models.py:190
 msgid "Netmask/Prefix length for IPv4."
 msgstr "Lunghezza Netmask/Prefisso per IPv4."
 
-#: main/models.py:184
+#: main/models.py:192
 msgid "netmask IPv6"
 msgstr "netmask IPv6"
 
-#: main/models.py:186
+#: main/models.py:194
 msgid "Netmask/Prefix length for IPv6."
 msgstr "Lunghezza Netmask/Prefisso per IPv6."
 
-#: main/models.py:195
+#: main/models.py:203
 msgid "abuse"
 msgstr "abuso"
 
-#: main/models.py:197
+#: main/models.py:205
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
 msgstr "Spuntato se riteniamo che stai abusando del servizio - puoi rimuovere questa spunta DOPO aver sistemato le problematiche lato tuo"
 
-#: main/models.py:202
+#: main/models.py:210
 msgid "abuse blocked"
 msgstr "bloccato per abuso"
 
-#: main/models.py:204
+#: main/models.py:212
 msgid "Checked to block a host for abuse."
 msgstr "Spuntato per bloccare un host causa abuso."
 
-#: main/models.py:208
+#: main/models.py:216
 msgid "client faults"
 msgstr "fallimenti client"
 
-#: main/models.py:210
+#: main/models.py:218
 msgid "client result msg"
 msgstr "messaggio di risultato del client"
 
-#: main/models.py:213
+#: main/models.py:221
 msgid "Latest result message relating to the client"
 msgstr "L'ultimo messaggio di risultato relativo al client"
 
-#: main/models.py:216
+#: main/models.py:224
 msgid "server faults"
 msgstr "fallimenti server"
 
-#: main/models.py:218
+#: main/models.py:226
 msgid "server result msg"
 msgstr "messaggio di risultato del server"
 
-#: main/models.py:221
+#: main/models.py:229
 msgid "Latest result message relating to the server"
 msgstr "L'ultimo messaggio di risultato relativo al server"
 
-#: main/models.py:224
+#: main/models.py:232
 msgid "api auth faults"
 msgstr "fallimenti api autenticazione"
 
-#: main/models.py:226
+#: main/models.py:234
 msgid "api auth result msg"
 msgstr "messaggio di risultato api"
 
-#: main/models.py:229
+#: main/models.py:237
 msgid "Latest result message relating to api authentication"
 msgstr "Ultimo messaggio di risultato relativo all'autenticazione api"
 
-#: main/models.py:232
+#: main/models.py:240
 msgid "last update IPv4"
 msgstr "ultimo aggiornamento IPv4"
 
-#: main/models.py:233
+#: main/models.py:241
 msgid "last update IPv6"
 msgstr "ultimo aggiornamento IPv6"
 
-#: main/models.py:235
+#: main/models.py:243
 msgid "TLS update IPv4"
 msgstr "TLS aggiornamento IPv4"
 
-#: main/models.py:236
+#: main/models.py:244
 msgid "TLS update IPv6"
 msgstr "TLS aggiornamento IPv6"
 
-#: main/models.py:249 main/models.py:506
+#: main/models.py:247
+msgid "staleness"
+msgstr ""
+
+#: main/models.py:248
+msgid "staleness notification time"
+msgstr ""
+
+#: main/models.py:262 main/models.py:526
 msgid "host"
 msgstr "host"
 
-#: main/models.py:250
+#: main/models.py:263
 msgid "hosts"
 msgstr "hosts"
 
-#: main/models.py:369
+#: main/models.py:293
+msgid "error"
+msgstr ""
+
+#: main/models.py:387
 msgid "The name of a host in same network as your main host."
 msgstr "Nome di un host nella stessa rete del tuo host principale."
 
-#: main/models.py:376
+#: main/models.py:394
 msgid "interface ID IPv4"
 msgstr "ID interfaccia IPv4"
 
-#: main/models.py:379
-msgid "The IPv4 interface ID of this host. Use IPv4 notation."
-msgstr "L'ID dell'interfaccia IPv4 di questo host. Utilizza la notazione IPv4."
+#: main/models.py:397
+msgid ""
+"The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set "
+"record."
+msgstr ""
 
-#: main/models.py:381
+#: main/models.py:399
 msgid "interface ID IPv6"
 msgstr "ID interfaccia IPv6"
 
-#: main/models.py:384
-msgid "The IPv6 interface ID of this host. Use IPv6 notation."
-msgstr "L'ID dell'interfaccia IPv6 di questo host. Utilizza la notazione IPv6."
+#: main/models.py:402
+msgid ""
+"The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set "
+"record."
+msgstr ""
 
-#: main/models.py:395
+#: main/models.py:413
 msgid "main host"
 msgstr "host principale"
 
-#: main/models.py:403
+#: main/models.py:422
 msgid "related host"
 msgstr "host collegato"
 
-#: main/models.py:404
+#: main/models.py:423
 msgid "related hosts"
 msgstr "hosts collegati"
 
-#: main/models.py:435
+#: main/models.py:455
 msgid "Service name"
 msgstr "Nome del servizio"
 
-#: main/models.py:440
+#: main/models.py:460
 msgid "Some arbitrary comment about the service"
 msgstr "Un commento a piacere relativo al servizio"
 
-#: main/models.py:442
+#: main/models.py:462
 msgid "server"
 msgstr "server"
 
-#: main/models.py:444
+#: main/models.py:464
 msgid "Update Server [name or IP] of this service"
 msgstr "Aggiorna il Server [nome o indirizzo IP] di questo servizio"
 
-#: main/models.py:446
+#: main/models.py:466
 msgid "path"
 msgstr "percorso"
 
-#: main/models.py:449
+#: main/models.py:469
 msgid "Update Server URL path of this service"
 msgstr "Aggiorna il percorso URL del Server di questo servizio"
 
-#: main/models.py:451
+#: main/models.py:471
 msgid "secure"
 msgstr "sicuro"
 
-#: main/models.py:453
+#: main/models.py:473
 msgid "Use https / TLS to contact the Update Server?"
 msgstr "Usare https / TLS per contattare il Server di aggiornamento?"
 
-#: main/models.py:456
+#: main/models.py:476
 msgid "accept IPv4"
 msgstr "accetta IPv4"
 
-#: main/models.py:457
+#: main/models.py:477
 msgid "accept IPv6"
 msgstr "accetta IPv6"
 
-#: main/models.py:470
+#: main/models.py:490
 msgid "service updater"
 msgstr "meccanismo di aggiornamento del servizio"
 
-#: main/models.py:471
+#: main/models.py:491
 msgid "service updaters"
 msgstr "meccanismi di aggiornamento del servizio"
 
-#: main/models.py:475
+#: main/models.py:495
 msgid "service"
 msgstr "servizio"
 
-#: main/models.py:478
+#: main/models.py:498
 msgid "hostname"
 msgstr "hostname"
 
-#: main/models.py:481
+#: main/models.py:501
 msgid "The hostname for that service (used in query string)"
 msgstr "L'hostname per il servizio (utilizzato nella stringa di query)"
 
-#: main/models.py:486
+#: main/models.py:506
 msgid "Some arbitrary comment about your host on that service"
 msgstr "Un commento a piacere relativo all'host sul servizio"
 
-#: main/models.py:492
+#: main/models.py:512
 msgid "The name/id for that service (used for http basic auth)"
 msgstr "Il nome/id per il servizio (utilizzato per http basic auth)"
 
-#: main/models.py:494
+#: main/models.py:514
 msgid "password"
 msgstr "password"
 
-#: main/models.py:496
+#: main/models.py:516
 msgid "The password/secret for that service (used for http basic auth)"
 msgstr "La password/chiave segreta per il servizio (utilizzato per http basic auth)"
 
-#: main/models.py:499
+#: main/models.py:519
 msgid "give IPv4"
 msgstr "fornisci IPv4"
 
-#: main/models.py:500
+#: main/models.py:520
 msgid "give IPv6"
 msgstr "fornisci IPv6"
 
-#: main/models.py:519
+#: main/models.py:539
 msgid "service updater host config"
 msgstr "configurazione host meccanismo di aggiornamento del servizio"
 
-#: main/models.py:520
+#: main/models.py:540
 msgid "service updater host configs"
 msgstr "configurazioni host meccanismo di aggiornamento del servizio"
 
-#: main/templates/main/about.html:6
+#: main/templates/main/about.html:7
 #, python-format
 msgid "About the %(WWW_HOST)s service"
 msgstr "A proposito del srvizio %(WWW_HOST)s"
 
-#: main/templates/main/about.html:8
+#: main/templates/main/about.html:14
 msgid "What's this?"
 msgstr "Che cos'è?"
 
-#: main/templates/main/about.html:10
+#: main/templates/main/about.html:18
 #, python-format
 msgid "%(WWW_HOST)s is a <b>dynamic dns service</b>."
 msgstr "%(WWW_HOST)s è un <b>servizio di dns dinamico</b>."
 
-#: main/templates/main/about.html:13
+#: main/templates/main/about.html:21
 msgid ""
 "You usually need it so your router (or other dyndns2-compatible client) can "
 "update a hostname, so you don't need to know or find out your current IP "
 "address."
 msgstr "Solitamente serve affinchè il tuo router (o qualsiasi client compatibile con dyndns2) possa aggiornare l'hostname, in modo che non devi conoscere o scoprire il tuo indirizzo IP attuale."
 
-#: main/templates/main/about.html:20
+#: main/templates/main/about.html:28
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
 msgstr "%(WWW_HOST)s è <b>semplice, utilizzabile, gratuito, amichevole, sicuro e rispetta la tua privacy</b>."
 
-#: main/templates/main/about.html:26
+#: main/templates/main/about.html:38
 msgid "Why another one?"
 msgstr "Perchè un altro?"
 
-#: main/templates/main/about.html:28
+#: main/templates/main/about.html:42
 msgid "As far as we know, there was no service yet that is <em>not</em>:"
 msgstr "Per quanto ne sappiamo, non esiste un servizio che <em>non</em>:"
 
-#: main/templates/main/about.html:31
+#: main/templates/main/about.html:45
 msgid "nagging its users to make a paid subscription"
 msgstr "importuna gli utenti per sottoscrivere un abbonamento a pagamento."
 
-#: main/templates/main/about.html:32
+#: main/templates/main/about.html:46
 msgid "annoying its users with advertisements or spam"
 msgstr "infastidisce gli utenti con pubblicità o spam"
 
-#: main/templates/main/about.html:33
+#: main/templates/main/about.html:47
 msgid "cancelling hosts or accounts after a short period of non-usage"
 msgstr "cancella gli host dopo un breve periodo di non utilizzo"
 
-#: main/templates/main/about.html:35
+#: main/templates/main/about.html:49
 msgid ""
 "hiding the few free features almost undiscoverably between a ton of "
 "commercial-only features"
 msgstr "nasconde le funzionalità gratuite in mezzo a centinaia di funzionalità a pagamento"
 
-#: main/templates/main/about.html:42
+#: main/templates/main/about.html:60
 msgid "How is it?"
 msgstr "Com'è?"
 
-#: main/templates/main/about.html:44
+#: main/templates/main/about.html:64
 msgid "You can just try it using the test account (see Register page)."
 msgstr "Puoi provarlo semplicemente utilizzando l'account di test (verifica la pagina di Registrazione)."
 
-#: main/templates/main/about.html:47
+#: main/templates/main/about.html:67
 msgid ""
 "Also, we have <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open "
-"docs in new window\" target=\"_blank\">documentation</a> &mdash; there might"
-" be some interesting stuff for you in it that is not visible or obvious on "
-"the user interface."
-msgstr "Inoltre, abbiamo <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Apri la documentazione in una nuova finestra\" target=\"_blank\">documentazione</a> &mdash; potrebbe esserci del materiale interessante che non è visibile (o facilmente indiviuabile) dall'interfaccia utente."
+"docs in new window\" target=\"_blank\" rel=\"noopener\">documentation</a> "
+"&mdash; there might be some interesting stuff for you in it that is not "
+"visible or obvious on the user interface."
+msgstr ""
 
-#: main/templates/main/about.html:56
+#: main/templates/main/about.html:76
 msgid ""
 "If you are interested in the software project, have a look at the <a "
 "href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info "
 "project on GitHub</a>."
 msgstr "Se sei interessato in questo progetto software, da un occhiata al <a href=\"https://github.com/nsupdate-info/nsupdate.info\">progetto nsupdate.info su GitHub</a>."
 
-#: main/templates/main/about.html:65
+#: main/templates/main/about.html:89
 msgid "Fair use of the service"
 msgstr "Corretto utilizzo del servizio"
 
-#: main/templates/main/about.html:67
+#: main/templates/main/about.html:93
 msgid "The only thing we expect from you is fair use of this service:"
 msgstr "L'unica richiesta che ti facciamo è un utilizzo corretto di questo servizio:"
 
-#: main/templates/main/about.html:70
+#: main/templates/main/about.html:96
 msgid "Don't abuse the service in any way."
 msgstr "Non abusare del servizio in alcun modo."
 
-#: main/templates/main/about.html:71
+#: main/templates/main/about.html:97
 msgid "Don't update your hosts too often."
 msgstr "Non aggiornare i tuoi host con troppa frequenza."
 
-#: main/templates/main/about.html:72
+#: main/templates/main/about.html:98
 msgid "Don't do updates if your IP did not change."
 msgstr "Non effettuare aggiornamenti se l'indirizzo IP non è cambiato."
 
-#: main/templates/main/about.html:73
+#: main/templates/main/about.html:99
 msgid "Don't create lots of users or lots of hosts."
 msgstr "Non creare troppi utenti o troppi host."
 
-#: main/templates/main/about.html:74
+#: main/templates/main/about.html:100
 msgid ""
 "Don't use the service for any illegal or otherwise questionable purpose."
 msgstr "Non utilizzarlo per scopi illegali o discutibili."
 
-#: main/templates/main/about.html:75
+#: main/templates/main/about.html:101
 msgid "Don't spam us via e-mail."
 msgstr "Non mandarci spam via email."
 
-#: main/templates/main/about.html:78
+#: main/templates/main/about.html:104
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are related "
 "to unfair use of the service - at any time and without prior notice."
 msgstr "Ci riserviamo il diritto di rimuovere qualsiasi account o hostname che non rispettano l'utilizzo corretto del servizio - in qualsiasi momento e senza preavviso."
 
-#: main/templates/main/about.html:85
+#: main/templates/main/about.html:115
 msgid "No warranties"
 msgstr "Non ci sono garanzie"
 
-#: main/templates/main/about.html:87
+#: main/templates/main/about.html:119
 msgid "This is free software and a free service, there are no warranties."
 msgstr "Il software ed il servizio sono gratuiti, non ci sono garanzie di alcun tipo."
 
-#: main/templates/main/about.html:90
+#: main/templates/main/about.html:122
 msgid "If it breaks, it breaks."
 msgstr "Se si rompe, si rompe."
 
-#: main/templates/main/about.html:94
+#: main/templates/main/about.html:130
 msgid "Service Contact"
 msgstr "Contatto di servizio"
 
-#: main/templates/main/about.html:99
+#: main/templates/main/about.html:137
 msgid ""
 "Before contacting us via E-Mail, please read the docs, they exist for a "
 "reason."
 msgstr "Prima di contattarci via email, per cortesia leggi la documentazione, esiste per un motivo."
 
-#: main/templates/main/about.html:101
+#: main/templates/main/about.html:139
 msgid "Software Project Contact"
 msgstr "Contatto del progetto software"
 
-#: main/templates/main/about.html:103
+#: main/templates/main/about.html:141
 msgid ""
 "Visit the <a href=\"https://github.com/nsupdate-"
 "info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
 msgstr "Visita il <a href=\"https://github.com/nsupdate-info/nsupdate.info\">progetto nsupdate.info su GitHub</a> presso:"
 
-#: main/templates/main/about.html:109
+#: main/templates/main/about.html:147
 msgid "file issues on the issue tracker for bugs, ideas, patches."
 msgstr "crea ticket sul sistema di ticketing per bug, idee e correzioni."
 
-#: main/templates/main/about.html:110
+#: main/templates/main/about.html:148
 msgid "create pull requests for your contributions."
 msgstr "crea un pull request per aggiungere i tuoi contributi."
 
@@ -832,108 +927,122 @@ msgid ""
 "algorithm."
 msgstr "Nota: l'algoritmo di aggiornamento e la chiave segreta di update devono coincidere. Crea una nuova chive segreta dopo aver sottomesso questa form con un algoritmo di aggiornamento diverso."
 
-#: main/templates/main/domain.html:19 main/templates/main/host.html:12
-#: main/templates/main/host.html.py:73 main/templates/main/host.html:86
+#: main/templates/main/domain.html:21 main/templates/main/host.html:16
+#: main/templates/main/host.html:77 main/templates/main/host.html:90
 #: main/templates/main/related_host.html:12
 #: main/templates/main/updater_hostconfig.html:12
 msgid "Update"
 msgstr "Aggiorna"
 
-#: main/templates/main/domain.html:23 main/templates/main/domain.html.py:37
-#: main/templates/main/host.html:23 main/templates/main/host.html.py:37
+#: main/templates/main/domain.html:27 main/templates/main/domain.html:41
+#: main/templates/main/host.html:27 main/templates/main/host.html:41
 msgid "Show Configuration"
 msgstr "Mostra la Configurazione"
 
-#: main/templates/main/domain.html:25
+#: main/templates/main/domain.html:29
 msgid ""
 "We'll generate a ready-to-use configuration for your name server, filled out"
 " with all values (including a new secret)."
 msgstr "Verrà generata una configurazione pronta per l'uso per il tuo nameserver, con tutti i valori compilati (compresa la nuova chiave segreta)."
 
-#: main/templates/main/domain.html:31
+#: main/templates/main/domain.html:35
 msgid ""
 "We'll create a new shared secret - if you had one before, it will become "
 "invalid. You have to use the new secret in your name server configuration."
 msgstr "Verrà creata una nuova chiave segreta - se ne avevi già una, verrà invalidata. Dovrai utilizzare la nuova chiave segreta nella configurazione del tuo nameserver."
 
-#: main/templates/main/domain.html:39 main/templates/main/domain.html.py:44
+#: main/templates/main/domain.html:43 main/templates/main/domain.html:48
 msgid "Delete Domain"
 msgstr "Cancella il Dominio"
 
-#: main/templates/main/domain.html:41
+#: main/templates/main/domain.html:45
 msgid ""
 "Deleting a domain is not undoable. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
 msgstr "Non è possibile annullare la cancellazione di un dominio. Se ti serve nuovamente dovrai aggiungerlo nuovamente e configurare una nuova chiave segreta condivisa."
 
-#: main/templates/main/domain_add.html:8
+#: main/templates/main/domain_add.html:7
+msgid ""
+"This feature is for advanced users only! To use this feature, you need "
+"control over at least one nameserver which is able to accept dynamic updates"
+" (RFC 2136)."
+msgstr ""
+
+#: main/templates/main/domain_add.html:13
 msgid "Add a new Domain"
 msgstr "Aggiungi un nuovo Dominio"
 
-#: main/templates/main/domain_add.html:12
+#: main/templates/main/domain_add.html:17
 msgid "Add"
 msgstr "Aggiungi"
 
-#: main/templates/main/domain_add.html:18 main/templates/main/host_add.html:18
+#: main/templates/main/domain_add.html:23 main/templates/main/host_add.html:18
 #: main/templates/main/related_host.html:23
-#: main/templates/main/related_host_add.html:18
-#: main/templates/main/updater_hostconfig.html:24
-#: main/templates/main/updater_hostconfig_overview.html:47
+#: main/templates/main/related_host_add.html:21
+#: main/templates/main/updater_hostconfig.html:25
+#: main/templates/main/updater_hostconfig_overview.html:50
 msgid "Help"
 msgstr "Aiuto"
 
-#: main/templates/main/domain_add.html:20
+#: main/templates/main/domain_add.html:25
 msgid ""
 "Here you can add new domains (zones) which you control (and this is only "
 "useful if you have some own zone which you can update automatically)."
 msgstr "Qui puoi aggiungere nuovi domini (zone) che controlli (questo è utile se hai delle zone tue che puoi aggiornare automaticamente)."
 
-#: main/templates/main/domain_add.html:26
+#: main/templates/main/domain_add.html:32
 msgid ""
 "You need to be able to configure the primary master nameserver of the zone "
 "so it accepts dynamic updates (via RFC 2136 \"dynamic update\" protocol) if "
 "the correct update secret is presented."
 msgstr "Devi poter configurare il nameserver principale per la zona in modo che accetti aggiornamenti dinamici (tramite il protocollo RFC 2136 \"dynamic update\") se la chiave segreta corretta di aggiornamento è presentata."
 
-#: main/templates/main/domain_add.html:32
+#: main/templates/main/domain_add.html:40
+#, python-format
+msgid ""
+"If you create a new zone, you are strongly advised to consider submitting "
+"your zone to the <a href=\"%(psl_url)s\">%(psl_text)s</a>."
+msgstr ""
+
+#: main/templates/main/domain_add.html:46
 msgid "We'll show you configuration examples after you add a domain."
 msgstr "Ti mostreremo gli esempi di configurazione dopo che avrai aggiunto un dominio."
 
-#: main/templates/main/generate_ns_secret.html:8
+#: main/templates/main/generate_ns_secret.html:9
 msgid "Nameserver Shared Secret Generated"
 msgstr "Generata chiave segreta condivisa per il nameserver."
 
-#: main/templates/main/generate_ns_secret.html:9
+#: main/templates/main/generate_ns_secret.html:10
 msgid ""
 "New nameserver shared secret generated for you. Everytime you visit this "
 "page a new secret will be generated and the old one becomes invalid."
 msgstr "Generata nuova chiave segreta condivisa per te. Ogni volta che visiti questa pagina una nuova chiave segreta verrà generata e quella vecchià verrà invalidata."
 
-#: main/templates/main/generate_ns_secret.html:10
+#: main/templates/main/generate_ns_secret.html:11
 msgid "Algorithm:"
 msgstr "Algoritmo:"
 
-#: main/templates/main/generate_ns_secret.html:11
-#: main/templates/main/generate_secret.html:16
+#: main/templates/main/generate_ns_secret.html:12
+#: main/templates/main/generate_secret.html:17
 msgid "Secret:"
 msgstr "Chiave segreta:"
 
-#: main/templates/main/generate_ns_secret.html:18
+#: main/templates/main/generate_ns_secret.html:21
 msgid "How to configure your bind9 nameserver to accept dynamic DNS updates?"
 msgstr "Come configurare il tuo nameserver bind9 per accettare aggiornamenti DNS dinamici?"
 
-#: main/templates/main/generate_secret.html:8
+#: main/templates/main/generate_secret.html:9
 msgid "Host Secret Generated"
 msgstr "Chiave segreta Host Generata"
 
-#: main/templates/main/generate_secret.html:10
+#: main/templates/main/generate_secret.html:11
 msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
 "have to generate a new one again. Everytime you visit this page a new secret"
 " will be generated and the old one becomes invalid."
 msgstr "Nuova chiave segreta generate per te. La memorizziamo in un has, devi salvarla adesso o dovrai generarne una nuova. Ogni volta che visiti questa pagina una nuova chiave segreta verrà generata e la vecchia verrà invalidata."
 
-#: main/templates/main/generate_secret.html:21
+#: main/templates/main/generate_secret.html:24
 msgid "How to configure automated dynamic DNS updates?"
 msgstr "Come configurare gli aggiornamenti automatizzati per il DNS dinamico?"
 
@@ -945,158 +1054,158 @@ msgstr "Il tuo indirizzo IP e il reverse DNS attuali:"
 msgid "the Dynamic DNS service you waited for."
 msgstr "Il servizio di DNS Dinamico che stavi aspettando."
 
-#: main/templates/main/home.html:25
+#: main/templates/main/home.html:27
 msgid "Free and Nice"
 msgstr "Gratuito e Piacevole"
 
-#: main/templates/main/home.html:27
+#: main/templates/main/home.html:29
 msgid "is a free service."
 msgstr "è un servizio gratuito."
 
-#: main/templates/main/home.html:28
+#: main/templates/main/home.html:30
 msgid "Also, we won't annoy you with ads or spam."
 msgstr "Inoltre, non ti infastidiremo con pubblicità o spam."
 
-#: main/templates/main/home.html:33
+#: main/templates/main/home.html:35
 msgid "Free and Open Source"
 msgstr "Libero e Open Source."
 
-#: main/templates/main/home.html:35
+#: main/templates/main/home.html:37
 msgid "nsupdate.info is free and open-source software."
 msgstr "nsupdate.info è un software libero e open-source."
 
-#: main/templates/main/home.html:38
+#: main/templates/main/home.html:40
 msgid "nsupdate.info project on GitHub"
 msgstr "il progetto nsupdate.info su GitHub"
 
-#: main/templates/main/home.html:43
+#: main/templates/main/home.html:45
 msgid "Awesome Code"
 msgstr "Codice fantastico"
 
-#: main/templates/main/home.html:45
+#: main/templates/main/home.html:47
 msgid ""
 "Empowered by Python and Django,<br> we love to write clean and secure code."
 msgstr "Empowered by Python and Django,<br> ci piace scrivere codice pulito e sicuro."
 
-#: main/templates/main/host.html:8
+#: main/templates/main/host.html:12
 msgid "Edit Host"
 msgstr "Modifica Host"
 
-#: main/templates/main/host.html:14 main/templates/main/host.html.py:19
+#: main/templates/main/host.html:18 main/templates/main/host.html:23
 msgid "Delete Host"
 msgstr "Cancella Host"
 
-#: main/templates/main/host.html:16
+#: main/templates/main/host.html:20
 msgid ""
 "Deleting a host is not undoable. If you need it back, you'll have to add it "
 "again and configure a new update secret."
 msgstr "Cancellare un host non è una operazione che si può annullare. Se ti serve ancora, dovrai aggiungerla nuovamente e configurare una nuova chiave segreta."
 
-#: main/templates/main/host.html:25
+#: main/templates/main/host.html:29
 msgid ""
 "We'll generate a ready-to-use configuration for your router / update client,"
 " filled out with all values (including a new secret)."
 msgstr "Verrà generata una configurazione prota all'uso per il tuo router / client di aggiornamento con tutti i parametri compilati (compresa la chiave segreta)."
 
-#: main/templates/main/host.html:31
+#: main/templates/main/host.html:35
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid. "
 "You have to use the new secret in your router / update client configuration."
 msgstr "Verrà creata una nuova chiave segreta - se ne avevi già una, verrà invalidata. Dovrai utilizzare la nuova chiave segreta nella configurazione del tuo router / client di aggiornamento."
 
-#: main/templates/main/host.html:39
+#: main/templates/main/host.html:43
 msgid "Related Hosts"
 msgstr "Host Associati"
 
-#: main/templates/main/host.html:41
+#: main/templates/main/host.html:45
 msgid ""
 "We can update additional host records (for other hosts in same network) when"
 " we receive an update for this host."
 msgstr "Possiamo aggiornare record host addizionali (per altri host nella stessa rete) quando riceviamo un aggiornamento per questo host."
 
-#: main/templates/main/host.html:47
+#: main/templates/main/host.html:51
 msgid "Configure related Hosts"
 msgstr "Configura gli Host associati"
 
-#: main/templates/main/host.html:49
+#: main/templates/main/host.html:53
 msgid "Update other Services"
 msgstr "Aggiorna altri Servizi"
 
-#: main/templates/main/host.html:50
+#: main/templates/main/host.html:54
 msgid ""
 "We can send updates to other services when we receive an update from you."
 msgstr "Possiamo inviare aggiornamenti ad altri servizi quando ne riceviamo uno da te."
 
-#: main/templates/main/host.html:52
+#: main/templates/main/host.html:56
 msgid "Configure Updaters"
 msgstr "Configura Updater"
 
-#: main/templates/main/host.html:56
+#: main/templates/main/host.html:60
 msgid "Update Nameserver Records"
 msgstr "Aggiorna Record dei Nameserver"
 
-#: main/templates/main/host.html:58
+#: main/templates/main/host.html:62
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol. But if you"
 " know what you are doing, and you want to update manually, you can do it "
 "here."
 msgstr "Solitamente devi configurre il tuo router per rispettare il protocollo dyndns2. Ma se sai quello che stai facendo, e vuoi eseguire un aggiornamento manuale, puoi farlo qui."
 
-#: main/templates/main/host.html:63
+#: main/templates/main/host.html:67
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
 msgstr "Abbiamo compilato i campi di input per i nuovi indirizzi con gli attuali indirizzi remoti rilevati."
 
-#: main/templates/main/host.html:66 main/templates/main/host.html.py:68
-#: main/templates/main/host.html:70 main/templates/main/overview.html:28
+#: main/templates/main/host.html:70 main/templates/main/host.html:72
+#: main/templates/main/host.html:74 main/templates/main/overview.html:28
 #: main/templates/main/related_host_overview.html:23
 #: main/templates/main/related_host_overview.html:25
 #: main/templates/main/updater_hostconfig_overview.html:13
 msgid "IPv4"
 msgstr "IPv4"
 
-#: main/templates/main/host.html:66 main/templates/main/host.html.py:79
+#: main/templates/main/host.html:70 main/templates/main/host.html:83
 #, python-format
 msgid "Current %(type)s address from master nameserver"
 msgstr "Indirizzo %(type)s dal nameserver master"
 
-#: main/templates/main/host.html:68 main/templates/main/host.html.py:81
+#: main/templates/main/host.html:72 main/templates/main/host.html:85
 #, python-format
 msgid "Set new %(type)s address"
 msgstr "Imposta nuovo indirizzo %(type)s"
 
-#: main/templates/main/host.html:70 main/templates/main/host.html.py:83
+#: main/templates/main/host.html:74 main/templates/main/host.html:87
 #, python-format
 msgid "Give new %(type)s address"
 msgstr "Assegna nuovo indirizzo %(type)s"
 
-#: main/templates/main/host.html:75 main/templates/main/host.html.py:88
+#: main/templates/main/host.html:79 main/templates/main/host.html:92
 #: main/templates/main/updater_hostconfig.html:19
 msgid "Delete"
 msgstr "Cancella"
 
-#: main/templates/main/host.html:79 main/templates/main/host.html.py:81
-#: main/templates/main/host.html:83 main/templates/main/overview.html:33
+#: main/templates/main/host.html:83 main/templates/main/host.html:85
+#: main/templates/main/host.html:87 main/templates/main/overview.html:33
 #: main/templates/main/related_host_overview.html:28
 #: main/templates/main/related_host_overview.html:30
 #: main/templates/main/updater_hostconfig_overview.html:14
 msgid "IPv6"
 msgstr "IPv6"
 
-#: main/templates/main/host.html:132
+#: main/templates/main/host.html:136
 msgid "Result Messages"
 msgstr "Messaggi Restituiti"
 
-#: main/templates/main/host.html:134
+#: main/templates/main/host.html:138
 msgid "API Authentication Result Message"
 msgstr "Messaggio Di Risultato Da Api Autenticazione"
 
-#: main/templates/main/host.html:136
+#: main/templates/main/host.html:140
 msgid "Client Result Message"
 msgstr "Messaggio Restituito dal Client"
 
-#: main/templates/main/host.html:138
+#: main/templates/main/host.html:142
 msgid "Server Result Message"
 msgstr "Messaggio Restituito dal Server"
 
@@ -1105,8 +1214,8 @@ msgid "Create a new Host"
 msgstr "Crea un nuovo Host"
 
 #: main/templates/main/host_add.html:12
-#: main/templates/main/related_host_add.html:12
-#: main/templates/main/updater_hostconfig_overview.html:41
+#: main/templates/main/related_host_add.html:13
+#: main/templates/main/updater_hostconfig_overview.html:42
 msgid "Create"
 msgstr "Crea"
 
@@ -1136,25 +1245,25 @@ msgstr "Ti mostreremo degli esempi di configurazione dopo che avrai aggiunto un 
 msgid "General"
 msgstr "Generale"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:16
+#: main/templates/main/includes/tabbed_router_configuration.html:20
 msgid "General configuration hints"
 msgstr "Suggerimenti generali di configurazione"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:18
+#: main/templates/main/includes/tabbed_router_configuration.html:22
 msgid ""
 "Usually, you should configure one system on your network to update the DNS. "
 "This can be either your router or a host on your network and it will run "
 "some software called the update client."
 msgstr "Solitamente, dovresti configurare un sistema sulla tua rete per aggiornare il DNS. Questo può essere un router o un host sulla tua rete sul quale gira qualche tipo di software chiamato il client di aggiornamento."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:25
+#: main/templates/main/includes/tabbed_router_configuration.html:29
 msgid ""
 "We have some specific configuration hints for some devices and update "
 "clients, please see the tabs above. If you don't find yours there, use the "
 "generic hints below."
 msgstr "Abbiamo qualche suggerimento specifico di configurazione per alcuni dispositivi o client di aggiornamento, consultare i tab qui sopra. Se non trovi quello per il tuo dispositivo, utilizza i suggerimenti generici qui sotto."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:31
+#: main/templates/main/includes/tabbed_router_configuration.html:35
 msgid ""
 "<b>Important note about security and compatibility</b>: For update URLs, we "
 "always give the https (not: http) URL as that will use an encrypted "
@@ -1166,167 +1275,179 @@ msgid ""
 "connection (using http: instead of https:)."
 msgstr "<b>Nota importante per sicurezza e compatibilità</b>: Per le URL di aggiornamento, forniamo sempre gli indirizzi https (non http): poichè utilizza connessioni criptate per trasferire i tuoi dati (compresa la chiave segreta di aggiornamento). A seconda del tuo client di aggiornamento (firmware router o software PC) <em>e</em> dello specifico servizio basato su nsupdate.info, https potrebbe non essere supportato. Pertanto, se non funziona, puoi utilizzare un client di aggiornamento diverso e/o un servizio differente, oppure trasmettere i tuoi dati su una connessione non criptata (utilizzando http: invece che https:)."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:44
+#: main/templates/main/includes/tabbed_router_configuration.html:48
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
 msgstr "Il tuo client di aggiornamento deve accedere alle seguenti URL per aggiornare il DNS:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:46
+#: main/templates/main/includes/tabbed_router_configuration.html:50
 msgid "For IPv4 updates:"
 msgstr "Per gli aggiornamenti IPv4:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:50
+#: main/templates/main/includes/tabbed_router_configuration.html:54
 msgid "For IPv6 updates:"
 msgstr "Per gli aggiornamenti IPv6:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:54
+#: main/templates/main/includes/tabbed_router_configuration.html:58
 msgid ""
 "The IPs will be determined automatically using the remote address our "
 "service is seeing (see below for more details)."
 msgstr "Gli indirizzi IP verranno rilevati automaticamente utilizzando l'indirizzo remoto che il nostro servizio acquisisce (guarda sotto per dettagli)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:60
+#: main/templates/main/includes/tabbed_router_configuration.html:64
 msgid "Your update client has to do the following steps:"
 msgstr "Il tuo client di aggiornamento deve effettuare i seguenti passi:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:64
-#: main/templates/main/includes/tabbed_router_configuration.html:287
+#: main/templates/main/includes/tabbed_router_configuration.html:68
+#: main/templates/main/includes/tabbed_router_configuration.html:397
 msgid "Check your current IP:"
 msgstr "Verifica il tuo indirizzo IP corrente:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:66
-#: main/templates/main/includes/tabbed_router_configuration.html:289
+#: main/templates/main/includes/tabbed_router_configuration.html:70
+#: main/templates/main/includes/tabbed_router_configuration.html:399
 msgid "to get your current IPv4 address"
 msgstr "per ottenere il tuo indirizzo IPV4 attuale"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:67
-#: main/templates/main/includes/tabbed_router_configuration.html:290
+#: main/templates/main/includes/tabbed_router_configuration.html:71
+#: main/templates/main/includes/tabbed_router_configuration.html:400
 msgid "to get your current IPv6 address"
 msgstr "per ottenere il tuo indirizzo IPV6 attuale"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:68
-#: main/templates/main/includes/tabbed_router_configuration.html:291
+#: main/templates/main/includes/tabbed_router_configuration.html:72
+#: main/templates/main/includes/tabbed_router_configuration.html:401
 msgid "to get your current IPv4 or IPv6 address"
 msgstr "per ottenere il tuo indirizzo IPV4 o IPV6 attuale"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:70
-#: main/templates/main/includes/tabbed_router_configuration.html:286
+#: main/templates/main/includes/tabbed_router_configuration.html:74
+#: main/templates/main/includes/tabbed_router_configuration.html:396
 msgid ""
 "Important: Do not send an update if your IP did not change since last "
 "update!"
 msgstr "Importante: Non inviare un aggiornamento se il tuo indirizzo IP non è cambiato dall'ultimo aggiornamento."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:72
+#: main/templates/main/includes/tabbed_router_configuration.html:76
 msgid "Do HTTP Basic Auth with:"
 msgstr "Esegui l'autenticazione HTTP Basic Auth con:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:78
+#: main/templates/main/includes/tabbed_router_configuration.html:82
 msgid "Send a http GET request to:"
 msgstr "Invia una richiesta GET http a:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:80
+#: main/templates/main/includes/tabbed_router_configuration.html:84
 msgid "(to update IPv4 A record in DNS)"
 msgstr "(per aggiornare il record A IPv4 nel DNS)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:81
+#: main/templates/main/includes/tabbed_router_configuration.html:85
 msgid "(to update IPv6 AAAA record in DNS)"
 msgstr "(per aggiornare il record AAAA IPv6 nel DNS)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:84
+#: main/templates/main/includes/tabbed_router_configuration.html:88
 msgid "Optionally, we support some URL arguments:"
 msgstr "In aggiunta, supportiamo alcuni parametri URL opzionali:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:87
+#: main/templates/main/includes/tabbed_router_configuration.html:91
 msgid ""
 "myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
 "autodetected IP is not the one you want to put into DNS, you need to give "
 "the wanted one explicitly using myip=...)"
 msgstr "myip=127.0.0.1 or myip=::1  (di default, rileviamo automaticamente l'indirizzo IP. Se l'indirizzo IP rilevato automaticamente non è quello che vuoi inserire nel DNS dovrai fornirne uno esplicitamente utilizzando myip=...)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:92
+#: main/templates/main/includes/tabbed_router_configuration.html:96
 msgid "(if not given: autodetect from http basic auth)"
 msgstr "(se non fornito: rileva automaticamente da http basic auth)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:95
+#: main/templates/main/includes/tabbed_router_configuration.html:99
 msgid "The response status and content will be:"
 msgstr "Lo status della risposta e il contenuto saranno:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:97
+#: main/templates/main/includes/tabbed_router_configuration.html:101
 msgid "new IP accepted"
 msgstr "nuovo indirizzo IP accettato"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:98
+#: main/templates/main/includes/tabbed_router_configuration.html:102
 msgid "IP accepted, but did not change since last update"
 msgstr "indirizzo IP accettato, ma non è cambiato dall'ultimo update"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:99
+#: main/templates/main/includes/tabbed_router_configuration.html:103
 msgid "Incorrect authentication or no http basic auth header received"
 msgstr "Autenticazione errata o nessun header di http basic auth ricevuto"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:105
+#: main/templates/main/includes/tabbed_router_configuration.html:109
 msgid "and maybe others:"
 msgstr "e forse altri:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:107
-#: main/templates/main/includes/tabbed_router_configuration.html:135
-#: main/templates/main/includes/tabbed_router_configuration.html:188
+#: main/templates/main/includes/tabbed_router_configuration.html:111
+#: main/templates/main/includes/tabbed_router_configuration.html:140
+#: main/templates/main/includes/tabbed_router_configuration.html:243
+#: main/templates/main/includes/tabbed_router_configuration.html:261
 msgid "Go to:"
 msgstr "Vai a:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:113
-#: main/templates/main/includes/tabbed_router_configuration.html:140
-#: main/templates/main/includes/tabbed_router_configuration.html:192
-#: main/templates/main/includes/tabbed_router_configuration.html:259
+#: main/templates/main/includes/tabbed_router_configuration.html:117
+#: main/templates/main/includes/tabbed_router_configuration.html:145
+#: main/templates/main/includes/tabbed_router_configuration.html:266
+#: main/templates/main/includes/tabbed_router_configuration.html:355
+#: main/templates/main/includes/tabbed_router_configuration.html:372
 msgid "Enter the following data:"
 msgstr "Inserisci i seguenti dati:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:122
+#: main/templates/main/includes/tabbed_router_configuration.html:126
 msgid "If you have IPv4 and IPv6"
 msgstr "Se hai IPv4 e IPv6"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:123
-msgid "Set Update-URL to the following (two URLs, separated by one space)"
-msgstr "Imposta la URL di aggiornamento (due URL, separate da uno spazio)"
+#: main/templates/main/includes/tabbed_router_configuration.html:127
+msgid "Set Update URL to the following:"
+msgstr ""
 
-#: main/templates/main/includes/tabbed_router_configuration.html:125
+#: main/templates/main/includes/tabbed_router_configuration.html:129
+msgid "Please also check our documentation about related hosts."
+msgstr ""
+
+#: main/templates/main/includes/tabbed_router_configuration.html:130
 msgid "Forcing a dynamic DNS update"
 msgstr "Forzando un aggiornamento DNS dinamico"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:126
+#: main/templates/main/includes/tabbed_router_configuration.html:131
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
 msgstr "Se vuoi forzare un aggiornamento dinamico a scopo di test, puoi fare come indicato qui di seguito:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:128
+#: main/templates/main/includes/tabbed_router_configuration.html:133
 msgid "disable dynamic DNS, apply"
 msgstr "disattiva DNS dinamico, applica"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:129
+#: main/templates/main/includes/tabbed_router_configuration.html:134
 msgid "enable dynamic DNS, apply"
 msgstr "attiva DNS dinamico, applica"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:130
+#: main/templates/main/includes/tabbed_router_configuration.html:135
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
 msgstr "(adesso la Fritz|Box invia un aggiornamento, può essere \"good\" o \"nochg\" a seconda se abbiamo o meno già tale indirizzo IP nel DNS)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:134
-#: main/templates/main/includes/tabbed_router_configuration.html:203
-#: main/templates/main/includes/tabbed_router_configuration.html:220
+#: main/templates/main/includes/tabbed_router_configuration.html:139
+#: main/templates/main/includes/tabbed_router_configuration.html:277
+#: main/templates/main/includes/tabbed_router_configuration.html:292
+#: main/templates/main/includes/tabbed_router_configuration.html:317
+#: main/templates/main/includes/tabbed_router_configuration.html:371
 msgid "verified with"
 msgstr "verificato con"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:149
+#: main/templates/main/includes/tabbed_router_configuration.html:154
 msgid "(leave this field empty)"
 msgstr "(lasciare questo campo vuoto)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:157
+#: main/templates/main/includes/tabbed_router_configuration.html:162
 msgid "ddclient is a popular dyndns update daemon on Linux."
 msgstr "ddclient è un demone di aggiornamento dyndns popolare per Linux."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:250
+#: main/templates/main/includes/tabbed_router_configuration.html:248
+msgid "Enter the following data (and click ADD afterwards):"
+msgstr ""
+
+#: main/templates/main/includes/tabbed_router_configuration.html:346
 msgid ""
 "Please note: if the pfSense WAN interface does not have your public IP and "
 "does not notice your public IP changing, the update will be done delayed "
@@ -1335,88 +1456,88 @@ msgid ""
 "too frequently and consider that this applies to all your DDNS updaters."
 msgstr "Nota: se l'interfaccia WAN di pfSense non ha il tuo indirizzo IP pubblico e non rileva cambiamenti per esso, l'aggiornamento verrà posticipato (default: ogni giorno alle 01:01). Puoi modificare questo valore nel file /etc/crontab nella riga in cui viene richiamato /etc/rc.dyndns.update - attenzione a non richiamare il comando con troppa frequenza e considera che questo si applica a tutti i tuoi aggiornamenti DDNS."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:262
+#: main/templates/main/includes/tabbed_router_configuration.html:358
 msgid "(do not select this)"
 msgstr "(non selezionare)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:264
-#: main/templates/main/includes/tabbed_router_configuration.html:265
+#: main/templates/main/includes/tabbed_router_configuration.html:360
+#: main/templates/main/includes/tabbed_router_configuration.html:361
 msgid "(most likely)"
 msgstr "(il più probabile)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:266
+#: main/templates/main/includes/tabbed_router_configuration.html:362
 msgid "(select this as long as you need it)"
 msgstr "(selezionalo solo se ti serve)"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:275
+#: main/templates/main/includes/tabbed_router_configuration.html:385
 msgid "Browser-based update client"
 msgstr "Client di update nel browser"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:276
+#: main/templates/main/includes/tabbed_router_configuration.html:386
 msgid ""
 "These URLs invoke the built-in update client, which is intended for "
 "temporary and adhoc scenarios only. It periodically checks your IP and "
 "updates DNS if it changes."
 msgstr "Queste URL invocano il client di aggiornamento integrato, da utilizzare solo per scenari adhoc e temporanei. Verifica periodicamente il tuo indirizzo IP e aggiorna il DNS se dovesse cambiare."
 
-#: main/templates/main/includes/tabbed_router_configuration.html:281
-#: main/templates/main/includes/tabbed_router_configuration.html:295
-#: main/templates/main/includes/tabbed_router_configuration.html:301
+#: main/templates/main/includes/tabbed_router_configuration.html:391
+#: main/templates/main/includes/tabbed_router_configuration.html:405
+#: main/templates/main/includes/tabbed_router_configuration.html:411
 msgid "update DNS to point to remote IPv4 or IPv6 address"
 msgstr "aggiorna il DNS per puntare all'indirizzo remoto IPv4 o IPv6"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:282
-#: main/templates/main/includes/tabbed_router_configuration.html:296
-#: main/templates/main/includes/tabbed_router_configuration.html:302
+#: main/templates/main/includes/tabbed_router_configuration.html:392
+#: main/templates/main/includes/tabbed_router_configuration.html:406
+#: main/templates/main/includes/tabbed_router_configuration.html:412
 msgid "similar, IPv4 only"
 msgstr "simile, ma solo IPv4"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:283
-#: main/templates/main/includes/tabbed_router_configuration.html:297
-#: main/templates/main/includes/tabbed_router_configuration.html:303
+#: main/templates/main/includes/tabbed_router_configuration.html:393
+#: main/templates/main/includes/tabbed_router_configuration.html:407
+#: main/templates/main/includes/tabbed_router_configuration.html:413
 msgid "similar, IPv6 only"
 msgstr "simile, ma solo IPv6"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:285
+#: main/templates/main/includes/tabbed_router_configuration.html:395
 msgid "URLs for browser / http user agent use"
 msgstr "Lista URL da usare nel browser o nel client di update http"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:293
+#: main/templates/main/includes/tabbed_router_configuration.html:403
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
 msgstr "Interattivo - chiederemo il nome utente (fornisci l'hostname) e la password (fornisci la chiave segreta):"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:299
+#: main/templates/main/includes/tabbed_router_configuration.html:409
 msgid "Giving the http basic auth username and password in the URL:"
 msgstr "Fornire username e password per http basic auth nell'URL:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:305
+#: main/templates/main/includes/tabbed_router_configuration.html:415
 msgid "As above, but manually specifying the IP address:"
 msgstr "Come sopra, ma indicando gli indirizzi IP manualmente:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:307
+#: main/templates/main/includes/tabbed_router_configuration.html:417
 msgid "update DNS to point to IPv4 127.0.0.1"
 msgstr "aggiorna il DNS per farlo puntare a IPv4 127.0.0.1"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:308
+#: main/templates/main/includes/tabbed_router_configuration.html:418
 msgid "update DNS to point to IPv6 ::1"
 msgstr "aggiorna il DNS per farlo puntare a IPv6 ::1"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:310
+#: main/templates/main/includes/tabbed_router_configuration.html:420
 msgid "Explanation of parameters:"
 msgstr "Spigazione dei parametri:"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:313
+#: main/templates/main/includes/tabbed_router_configuration.html:423
 #, python-format
 msgid "your fully qualified hostname, something like example.%(WWW_HOST)s"
 msgstr "il tuo hostname FQDN, qualcosa tipo example.%(WWW_HOST)s"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:316
+#: main/templates/main/includes/tabbed_router_configuration.html:426
 msgid "the secret you have configured for this hostname"
 msgstr "la chiave segreta che hai configurato per questo nome host"
 
-#: main/templates/main/includes/tabbed_router_configuration.html:319
+#: main/templates/main/includes/tabbed_router_configuration.html:429
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but "
 "of course you need to use your real public IP instead of that."
@@ -1436,13 +1557,13 @@ msgstr "Aggiungi Host"
 msgid "Host"
 msgstr "Host"
 
-#: main/templates/main/overview.html:17 main/templates/main/overview.html:93
+#: main/templates/main/overview.html:17 main/templates/main/overview.html:97
 #: main/templates/main/related_host_overview.html:19
 #: main/templates/main/updater_hostconfig_overview.html:15
 msgid "Comment"
 msgstr "Commento"
 
-#: main/templates/main/overview.html:20 main/templates/main/overview.html:91
+#: main/templates/main/overview.html:20 main/templates/main/overview.html:95
 #: main/templates/main/related_host_overview.html:21
 msgid "Available"
 msgstr "Disponibile"
@@ -1466,35 +1587,59 @@ msgstr "Indirizzo %(type)s"
 msgid "(last update)"
 msgstr "(ultimo aggiornamento)"
 
-#: main/templates/main/overview.html:77
+#: main/templates/main/overview.html:48 main/templates/main/status.html:32
+msgid "Abuse-Blocked"
+msgstr "Bloccato per abuso"
+
+#: main/templates/main/overview.html:50 main/templates/main/status.html:32
+msgid "Abuse"
+msgstr "Abuso"
+
+#: main/templates/main/overview.html:54 main/templates/main/overview.html:67
+msgid "none"
+msgstr ""
+
+#: main/templates/main/overview.html:59 main/templates/main/overview.html:72
+msgid "no"
+msgstr ""
+
+#: main/templates/main/overview.html:60 main/templates/main/overview.html:73
+msgid "TLS"
+msgstr ""
+
+#: main/templates/main/overview.html:62 main/templates/main/overview.html:75
+msgid "unknown"
+msgstr ""
+
+#: main/templates/main/overview.html:81
 msgid "No hosts yet."
 msgstr "Nessun host definito."
 
-#: main/templates/main/overview.html:83
+#: main/templates/main/overview.html:87
 msgid "Domains (yours first, then public)"
 msgstr "Domini (prima il tuo, poi quelli pubblici)"
 
-#: main/templates/main/overview.html:84
+#: main/templates/main/overview.html:88
 msgid "Add Domain"
 msgstr "Aggiungi Dominio"
 
-#: main/templates/main/overview.html:89
+#: main/templates/main/overview.html:93
 msgid "Domain"
 msgstr "Dominio"
 
-#: main/templates/main/overview.html:90 main/templates/main/status.html:11
+#: main/templates/main/overview.html:94 main/templates/main/status.html:15
 msgid "Public"
 msgstr "Pubblico"
 
-#: main/templates/main/overview.html:92
+#: main/templates/main/overview.html:96
 msgid "Owner"
 msgstr "Proprietario"
 
-#: main/templates/main/overview.html:105
+#: main/templates/main/overview.html:109
 msgid "No domains from you yet."
 msgstr "Non ci sono domini per te ancora."
 
-#: main/templates/main/overview.html:116
+#: main/templates/main/overview.html:120
 msgid "No public domains from other users yet."
 msgstr "Non ci sono domini pubblici per altri ancora."
 
@@ -1514,7 +1659,7 @@ msgid ""
 msgstr "Cancellare un host associato non è una operazione annullabile. Se ne avrai nuovamente bisogno dovrai reinserirlo."
 
 #: main/templates/main/related_host.html:25
-#: main/templates/main/related_host_add.html:22
+#: main/templates/main/related_host_add.html:24
 msgid ""
 "When we receive an update for your main host, we compute your network "
 "address from it. To compute your related host's IPs, we just add the "
@@ -1522,11 +1667,11 @@ msgid ""
 "related host with these addresses."
 msgstr "Quando riceviamo un aggiornamento per il tuo host principale, ne ricaviamo il tuo indirizzo di rete. Per calcolare l'indirizzo IP dell'host associato, aggiungiamo semplicemente l'ID dell'interfaccia all'indirizzo della rete. Successivamente aggiorniamo il record DNS per l'host corrispondente con questi nuovi indirizzi."
 
-#: main/templates/main/related_host_add.html:8
+#: main/templates/main/related_host_add.html:9
 msgid "Create a new related host"
 msgstr "Crea un nuovo host associato"
 
-#: main/templates/main/related_host_add.html:19
+#: main/templates/main/related_host_add.html:22
 msgid "Here you can add related hosts (e.g. other machines on same LAN)."
 msgstr "Qui puoi aggiungere host associati (es: altre macchine sulla stessa LAN)."
 
@@ -1552,67 +1697,59 @@ msgstr "ID interfaccia %(type)s"
 msgid "No related hosts yet."
 msgstr "Nessun host associato è stato definito."
 
-#: main/templates/main/status.html:7
+#: main/templates/main/status.html:9
 msgid "Domains"
 msgstr "Domini"
 
-#: main/templates/main/status.html:9 main/templates/main/status.html.py:20
-#: main/templates/main/status.html:37
+#: main/templates/main/status.html:13 main/templates/main/status.html:30
+#: main/templates/main/status.html:53
 msgid "Total"
 msgstr "Totale"
 
-#: main/templates/main/status.html:13 main/templates/main/status.html.py:22
+#: main/templates/main/status.html:17 main/templates/main/status.html:32
 msgid "Unavailable"
 msgstr "Indisponibile"
 
-#: main/templates/main/status.html:13
+#: main/templates/main/status.html:17
 msgid "Down"
 msgstr "Inattivo"
 
-#: main/templates/main/status.html:18
+#: main/templates/main/status.html:26
 msgid "Hosts"
 msgstr "Host"
 
-#: main/templates/main/status.html:22
-msgid "Abuse"
-msgstr "Abuso"
-
-#: main/templates/main/status.html:22
-msgid "Abuse-Blocked"
-msgstr "Bloccato per abuso"
-
-#: main/templates/main/status.html:24 main/templates/main/status.html.py:41
+#: main/templates/main/status.html:34 main/templates/main/status.html:57
 msgid "2d"
 msgstr "2 gg"
 
-#: main/templates/main/status.html:24 main/templates/main/status.html.py:26
-#: main/templates/main/status.html:28 main/templates/main/status.html.py:30
+#: main/templates/main/status.html:34 main/templates/main/status.html:36
+#: main/templates/main/status.html:38 main/templates/main/status.html:40
 #, python-format
 msgid "IPv4 (tls) / IPv6 (tls) updated last %(period)s"
 msgstr "Ultimo aggiornamento IPv4 (tls) / IPv6 (tls) %(period)s"
 
-#: main/templates/main/status.html:26 main/templates/main/status.html.py:43
+#: main/templates/main/status.html:36 main/templates/main/status.html:59
 msgid "2w"
 msgstr "2 sett"
 
-#: main/templates/main/status.html:28 main/templates/main/status.html.py:45
+#: main/templates/main/status.html:38 main/templates/main/status.html:61
 msgid "2m"
 msgstr "2 mesi"
 
-#: main/templates/main/status.html:30 main/templates/main/status.html.py:47
+#: main/templates/main/status.html:40 main/templates/main/status.html:63
 msgid "2y"
 msgstr "2 anni"
 
-#: main/templates/main/status.html:35
+#: main/templates/main/status.html:49
 msgid "Users"
 msgstr "Utenti"
 
-#: main/templates/main/status.html:39
+#: main/templates/main/status.html:55
 msgid "Active"
 msgstr "Attivo"
 
-#: main/templates/main/status.html:41 main/templates/main/status.html.py:43
-#: main/templates/main/status.html:45 main/templates/main/status.html.py:47
+#: main/templates/main/status.html:57 main/templates/main/status.html:59
+#: main/templates/main/status.html:61 main/templates/main/status.html:63
 #, python-format
 msgid "logged in / created in last %(period)s"
 msgstr "connesso / creato nell'ultimo %(period)s"
@@ -1658,18 +1795,18 @@ msgid ""
 "you'll have to add it again."
 msgstr "Non è possibile annullare la cancellazione della cofigurazione di un Updater. Se ti serve nuovamente dovrai ricrearla."
 
-#: main/templates/main/updater_hostconfig.html:26
+#: main/templates/main/updater_hostconfig.html:27
 #, python-format
 msgid "Here you can edit the configuration of the \"%(servicename)s\" updater."
 msgstr "Qui puoi modificare la configurazione dell'updater \"%(servicename)s\"."
 
-#: main/templates/main/updater_hostconfig.html:31
+#: main/templates/main/updater_hostconfig.html:32
 msgid ""
 "The values you need here are the same ones as you would usually enter in "
 "your router or update client."
 msgstr "I valori di cui hai bisogno qui sono gli stessi che utilizzeresti olitamente nella configurazione del tuo router o client di aggiornamento."
 
-#: main/templates/main/updater_hostconfig.html:36
+#: main/templates/main/updater_hostconfig.html:37
 #, python-format
 msgid ""
 "You get these values after registering with the \"%(object.service.name)s\" "
@@ -1694,39 +1831,233 @@ msgstr "invia %(type)s"
 msgid "No other services to update yet."
 msgstr "Nessuno servizio da aggiornare."
 
-#: main/templates/main/updater_hostconfig_overview.html:37
+#: main/templates/main/updater_hostconfig_overview.html:38
 msgid "Create a new updater configuration"
 msgstr "Crea una nuova configurazione updater"
 
-#: main/templates/main/updater_hostconfig_overview.html:48
+#: main/templates/main/updater_hostconfig_overview.html:51
 msgid ""
 "Here you can add new configurations for 3rd party services you like to get "
 "updated."
 msgstr "Qui puoi inserire le configurazione per servizi di terze parti che vuoi vengano aggiornate."
 
-#: main/templates/main/updater_hostconfig_overview.html:50
+#: main/templates/main/updater_hostconfig_overview.html:53
 msgid "We will send an update to them each time you update your host with us."
 msgstr "Invieremo un aggiornamento ogni volta che aggiorni il tuo host con noi."
 
-#: settings/base.py:383
+#: management/commands/domains.py:16
+#, python-format
+msgid ""
+"Your domain: %(domain)s (comment: %(comment)s)\n"
+"\n"
+"Issue: The nameserver of the domain is not reachable and was set to not available\n"
+"       (and also to not public, in case it was public).\n"
+"\n"
+"Explanation:\n"
+"You created the domain on our service and entered a primary nameserver IP for it.\n"
+"We tried to query that nameserver but it either was not reachable or it did not\n"
+"answer queries for this domain.\n"
+"\n"
+"Resolution:\n"
+"If you really want that domain to work and you really control that nameserver:\n"
+"\n"
+"1. fix the nameserver so it responds to queries for this domain\n"
+"2. make sure the nameserver is reachable from us\n"
+"3. make sure it accepts dynamic updates for hosts in this domain\n"
+"4. make sure it uses the same secret as configured on the service\n"
+"5. set the domain to \"available\" on the service\n"
+"6. check if the \"public\" flag is correctly\n"
+"\n"
+"Alternatively, if you do not use the domain with our service, delete the\n"
+"domain entry, so it is removed from our database. This will also remove all\n"
+"hosts that were added to this domain (if any).\n"
+msgstr ""
+
+#: management/commands/domains.py:43
+#, python-format
+msgid "Domain %(domain)s is available."
+msgstr ""
+
+#: management/commands/domains.py:44
+#, python-format
+msgid "Domain %%(domain)s is not available, but has %(hosts)d hosts."
+msgstr ""
+
+#: management/commands/domains.py:45
+#, python-format
+msgid "Domain %(domain)s is not available and has no hosts -> deleted domain."
+msgstr ""
+
+#: management/commands/domains.py:129
+#, python-format
+msgid "Issue with your domain %(domain)s"
+msgstr ""
+
+#: management/commands/faults.py:14
+#, python-format
+msgid ""
+"Your host: %(fqdn)s (comment: %(comment)s)\n"
+"\n"
+"Issue: The abuse flag for your host was set.\n"
+"\n"
+"Explanation:\n"
+"The abuse flag usually gets set if your update client sends way too many\n"
+"updates although your IP address did not change.\n"
+"\n"
+"Your update client sent %(faults_count)d faulty updates since we last checked.\n"
+"We have reset the faults counter to 0 now, but we are rejecting updates\n"
+"for this host until you resolve the issue.\n"
+"\n"
+"Resolution:\n"
+"You can easily do this on your own:\n"
+"1. fix or replace the update client on this host - it must not send\n"
+"   updates if the IP did not change\n"
+"2. visit the service web interface and remove the abuse flag for this host\n"
+"\n"
+"Notes:\n"
+"- this is usually caused by a misbehaving / faulty update client\n"
+"  (on your PC / server or router / firewall)\n"
+"- the dyndns2 standard explicitly states that frequently sending\n"
+"  nochg updates is considered abuse of the service\n"
+"- you are using way more resources on the service than really needed\n"
+"- for Linux and similar OSes, you can use the ddclient software - we\n"
+"  give copy&paste-ready configuration help for it on our web UI\n"
+"- if you need something else, use anything that can be considered\n"
+"  a valid, well-behaved dyndns2-compatible update client\n"
+"- if you already used such a software and you ran into this problem,\n"
+"  complain to whoever wrote it about it sending nochg updates\n"
+msgstr ""
+
+#: management/commands/faults.py:150
+#, python-format
+msgid "Issue with your host %(fqdn)s"
+msgstr ""
+
+#: management/commands/hosts.py:24
+#, python-format
+msgid ""
+"%(host)s has not seen IP updates for a long time; staleness: %(staleness)d "
+"-> please fix!"
+msgstr ""
+
+#: management/commands/hosts.py:25
+#, python-format
+msgid ""
+"%(host)s IP has still not been updated, staleness: %(staleness)d -> made "
+"host unavailable."
+msgstr ""
+
+#: management/commands/hosts.py:26
+#, python-format
+msgid ""
+"%(host)s IP has still not been updated, staleness: %(staleness)d -> deleted "
+"host."
+msgstr ""
+
+#: management/commands/hosts.py:28
+#, python-format
+msgid ""
+"Your host: %(host)s (comment: %(comment)s)\n"
+"\n"
+"Issue: "
+msgstr ""
+
+#: management/commands/hosts.py:34
+msgid ""
+"\n"
+"\n"
+"Explanation:\n"
+"You created the host on our service, but it has not been updated for a very long time.\n"
+"\n"
+"That might be because:\n"
+"* You don't use the host/service anymore, but forgot to delete the host.\n"
+"* The host IP never changed and thus did not require an update.\n"
+"* Your update credentials are wrong and thus updates are not working.\n"
+"* Your updater is malfunctioning and not sending updates.\n"
+"\n"
+"We can't know the reason. But please understand that we do not want to\n"
+"accumulate unused hosts in our database, so please help resolve this issue.\n"
+"\n"
+"We will send some notifications like this to remind you to resolve this.\n"
+"If you do not react and resolve this, your host will first be made unavailable\n"
+"and later it will be deleted.\n"
+"\n"
+"Resolution:\n"
+"* If you still use the host:\n"
+"  - If your host was switched to unavailable, you first need to manually set\n"
+"    it to available again (via the web interface).\n"
+"  - Send an update for it (you can do that via the web interface or by just\n"
+"    accessing the update URL or by forcing your update software to send an\n"
+"    update). An update with the same IP is acceptable in this case.\n"
+"* If you do not use the host anymore, please delete it from the service.\n"
+"\n"
+"Hint: To avoid this issue for static or mostly static IP hosts, consider\n"
+"sending one unconditional update every month. Some DynDNS2-compatible updaters\n"
+"can do that, too.\n"
+msgstr ""
+
+#: management/commands/hosts.py:66
+msgid ""
+"\n"
+"\n"
+"Explanation:\n"
+"You created the host on our service, but it has not been updated for a very long time.\n"
+"\n"
+"We sent you some email notifications about this, but you never reacted to them.\n"
+"Thus, we assume that you do not need the host anymore and have DELETED it.\n"
+"\n"
+"Feel free to re-create it on our service in case you need it again at some\n"
+"time.\n"
+msgstr ""
+
+#: management/commands/hosts.py:159
+#, python-format
+msgid "Issue with your host %(host)s"
+msgstr ""
+
+#: management/commands/users.py:20
+#, python-format
+msgid ""
+"%%(user)r hasn't logged in for %(age)fy, has no hosts and no domains -> "
+"deleted user."
+msgstr ""
+
+#: management/commands/users.py:21
+#, python-format
+msgid "%%(user)r kept, has hosts. age: %(age)fy, hosts: %(hosts)d."
+msgstr ""
+
+#: management/commands/users.py:22
+#, python-format
+msgid ""
+"%%(user)r kept, has domains. age: %(age)fy, hosts: %(hosts)d, domains: "
+"%(domains)d."
+msgstr ""
+
+#: management/commands/users.py:23
+#, python-format
+msgid "%(user)r kept, was used recently."
+msgstr ""
+
+#: settings/base.py:440 utils/_tests/test_mail.py:16
 msgid "English"
 msgstr "Inglese"
 
-#: settings/base.py:384
+#: settings/base.py:441 utils/_tests/test_mail.py:16
 msgid "German"
 msgstr "Tedesco"
 
-#: settings/base.py:385
+#: settings/base.py:442
+msgid "Greek"
+msgstr ""
+
+#: settings/base.py:443
 msgid "French"
 msgstr "Francese"
 
-#: settings/base.py:386
+#: settings/base.py:444
 msgid "Italian"
 msgstr "Italiano"
-
-#: settings/dev.py:37
-msgid "Polish"
-msgstr "Polacco"
 
 #: templates/base.html:40
 msgid "Home"
@@ -1752,11 +2083,11 @@ msgstr "Documentazione"
 msgid "Sign up"
 msgstr "Registrati"
 
-#: templates/base.html:66
-msgid "Profile"
-msgstr "Profilo"
+#: templates/base.html:67
+msgid "Password change"
+msgstr "Cambio password"
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "Admin interface"
 msgstr "Interfaccia amministrativa"
 
