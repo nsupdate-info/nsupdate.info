@@ -106,26 +106,27 @@
         </ul>
     </div>
     <div class="tab-pane" id="avm">
-        <h4>Fritz!Box 6360, 7390 {% trans "and maybe others:" %}</h4>
+        <h4>Fritz!Box 6591, Fritz!OS 8.21 {% trans "and maybe others:" %}</h4>
         <hr>
         <h5>{% trans "Go to:" %}</h5>
         <div class="well well-sm">
             Internet <i class="fa fa-long-arrow-alt-right"></i>
             Permit Access <i class="fa fa-long-arrow-alt-right"></i>
-            Dynamic DNS
+            DynDNS
         </div>
         <h5>{% trans "Enter the following data:" %}</h5>
         <table class="table">
             <thead><tr><th>Setting</th><th>Value</th></tr></thead>
-            <tr><td>Dynamic DNS provider</td><td>Custom</td></tr>
-            <tr><td>Update-URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
-            <tr><td>Domain Name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
+            <tr><td>DynDNS enabled</td><td>[X]</td></tr>
+            <tr><td>Update URL</td><td>https://{{ WWW_IPV4_HOST }}/nic/update</td></tr>
+            <tr><td>Domain names</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>User name</td><td>{{ host.get_fqdn|default:"&lt;your hostname&gt;" }}</td></tr>
             <tr><td>Password</td><td>{{ update_secret|default:"&lt;your secret&gt;" }}</td></tr>
         </table>
         <h5>{% trans "If you have IPv4 and IPv6" %}</h5>
-        {% trans "Set Update-URL to the following (two URLs, separated by one space)" %}
-        <div class="card card-body p-2 mb-3">https://{{ WWW_IPV4_HOST }}/nic/update https://{{ WWW_IPV6_HOST }}/nic/update</div>
+        {% trans "Set Update URL to the following:" %}
+        <div class="card card-body p-2 mb-3">https://{{ WWW_HOST }}/nic/update?myip=&lt;ipaddr&gt;,&lt;ip6lanprefix&gt;</div>
+        {% trans "Please also check our documentation about related hosts." %}
         <h5>{% trans "Forcing a dynamic DNS update" %}</h5>
         {% trans "If you want to force a dynamic update for testing purposes, you can do it like this:" %}
         <ul>
