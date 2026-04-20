@@ -133,7 +133,7 @@ msgstr "Grazie, l'attivazione è completa!"
 #: accounts/templates/registration/activation_complete.html:7
 msgid ""
 "You may now login using the username and password you set at registration."
-msgstr "Adesso puoi eseguire You may now l'accesso utilizzando il nome utente e la password che hai impostato durate la registrazione."
+msgstr "Adesso puoi effettuare l'accesso utilizzando il nome utente e la password che hai impostato durante la registrazione."
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
