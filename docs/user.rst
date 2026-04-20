@@ -149,12 +149,16 @@ Related Hosts
 In short: update a whole bunch of DNS records for other hosts on same LAN.
 
 This is a feature most interesting for IPv6 users, but the same mechanism also
-works for IPv4 (it is just rather rare that you get an IPv4 network and you need
-dynamic DNS). So, let's assume IPv6 from now on.
+works for IPv4.
 
-On your main host entry you can configure the IPv6 prefix length (think of netmask).
-Usually you'll get a /64 network from your ISP, so keep the default of "64" there
-and only change it if you know better.
+On your main host entry you can configure the "netmasks" for IPv4 and IPv6:
+
+For IPv6, if you get a /59 IPv6 network from your ISP for your LAN devices,
+you enter 59 in the "Netmask ipv6" field.
+
+For IPv4, if you get a single IPv4 address from your ISP (the usual case for home
+users), the IPv4 netmask on the main host should be 32. If you get multiple public
+IPv4 addresses, e.g. a /29 network, put 29 in the "Netmask ipv4" field.
 
 The specific prefix you get from your ISP might be static or may change now and
 then (for better privacy or other reasons - and in that case, you really need
@@ -162,41 +166,35 @@ the related hosts feature).
 
 You need to configure a dyndns2 compatible updater on some device on your LAN
 and the updater needs to send this device's global IPv6 address to the service.
+Sending only the IPv6 prefix will also work, but then the main host will have
+a rather useless AAAA record just containing the prefix.
 
 So far, nothing special, upon receiving an update the service will then update
 DNS like this:
 
 ::
 
-    mainhost.nsupdate.info -> pppp:pppp:pppp:pppp:iiii:iiii:iiii:iiii
-
-p are prefix parts, i are host/interface parts of the address.
+    mainhost.nsupdate.info A    <ipv4 address like received in the update request>
+    mainhost.nsupdate.info AAAA <ipv6 address like received in the update request>
 
 Additionally, the service will go over all related hosts entries for mainhost
 and does more DNS updates based on this computation:
 
 ::
 
-    relatedhost.mainhost.nsupdate.info -> pppp:pppp:pppp:pppp:rrrr:rrrr:rrrr:rrrr
+    relatedhost.mainhost.nsupdate.info A    <ipv4 & netmask4 + interface_id4>
+    relatedhost.mainhost.nsupdate.info AAAA <ipv6 & netmask6 + interface_id6>
 
 You also see it prepends the related host's name to your mainhost's FQDN.
 
-For the related hosts's address, p is same prefix as above (the host is on same
-network), but r comes from what you entered as interface ID into the related
-host record.
+The related hosts's address is based on the received address, masked by the netmask
+plus the interface id of the related host added.
 
-The interface ID must be a proper notation.
+The interface ID must be in the proper format:
 For IPv6 an interface ID might look like `::rrrr:rrrr:rrrr:rrrr`,
 for IPv4 an interface ID might look like `r.r.r.r`.
 
 If you leave the interface ID field empty, that means not to create such a DNS record.
-
-In other words:
-
-::
-
-    related_fqdn = relatedhost_name.mainhost_fqdn
-    related_address = mainhost_address_prefix + interface_id
 
 
 Note:
@@ -216,7 +214,8 @@ Note:
   run the updater on that device and make sure the request originates from
   the IPv6 address you want in DNS.
 * if you want the related host to point to the same IPv4 address as the main
-  host (which is often the router), use 0 as the interface ID.
+  host (which is often the router), use 0.0.0.0 as the interface ID.
+* if you put nothing as the IPv4 interface ID, it won't get an A record.
 
 
 Other Services Updaters
