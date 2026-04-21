@@ -460,8 +460,20 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=True)
         return 'dnserr'  # there should be a better response code for this
 
-    if not _delete and kind == 'ipv6' and IPAddress(ipaddr) == IPNetwork("%s/%d" % (ipaddr, host.netmask_ipv6)).network:
-        _delete = True
+    # If we receive an update request with an address that has only the network prefix,
+    # but the interface id is all-zero, we will NOT update DNS with a useless A or AAAA record,
+    # but rather delete any A or AAAA record we already might have, see issue #648.
+    if not _delete:
+        if kind == 'ipv4':
+            netmask = host.netmask_ipv4
+            single_ip = netmask == 32  # the usual case for home routers
+        elif kind == 'ipv6':
+            netmask = host.netmask_ipv6
+            single_ip = netmask == 128  # rather theoretical case, but who knows...
+        else:
+            raise ValueError('unknown ip address kind: %s' % kind)
+        if not single_ip and IPNetwork("%s/%d" % (ipaddr, netmask)).network == IPAddress(ipaddr):
+            _delete = True
 
     if mode == 'update' and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
