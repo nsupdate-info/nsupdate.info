@@ -63,7 +63,7 @@ You need to create an account to use most of the functionality of the service.
 
 Your hosts / domains are only for you, so you need to identify to create or change them.
 
-You need to give a valid email address, as we send you a link you need to access to complete the registration.
+You need to give a valid email address, as we send you a verification link that you must access to complete the registration.
 
 We'll also use that email address in case you forget your login password or when there are technical issues
 with your hosts or domains.
@@ -203,8 +203,9 @@ Note:
   of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr, where each `r`
   is a hexadecimal digit 0-9 or a-f). This part is usually derived from your
   hardware MAC address and does not change.
-* make sure your device has a IPv6 address with global scope, some prefix that
-  starts with a "2" and precisely that rrrr:rrrr:rrrr:rrrr value
+* make sure your device has a IPv6 address with global scope (typically in
+  2000::/3, often starting with "2" or "3") and precisely that
+  rrrr:rrrr:rrrr:rrrr value
 * you only need a dyndns2 updater on one device (called mainhost in this
   example), but the updater needs to find out an address with the same prefix
   as seen on your LAN (should be easy if the updater runs on a LAN device, but
@@ -333,8 +334,8 @@ If this is the case, first check these things (and then the ones listed above):
 * if it keeps getting flagged as abusive, you didn't fix the issue - try again.
 * if you have a local network with multiple machines that share one Internet connection, it is sufficient to enable
   an update client on one of the machines (preferably your Internet router or a machine that is on most of the time).
-  if you run update clients on multiple machines, this may cause them sending nochg updates frequently and your host
-  might get flagged as abusive due to that.
+  if you run update clients on multiple machines, this may cause them sending frequent nochg updates (updates that
+  report "no change"), and your host might get flagged as abusive due to that.
 
 Something else?
 ---------------
