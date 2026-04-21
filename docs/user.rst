@@ -203,8 +203,9 @@ Note:
   of the address that looks like FE80::rrrr:rrrr:rrrr:rrrr, where each `r`
   is a hexadecimal digit 0-9 or a-f). This part is usually derived from your
   hardware MAC address and does not change.
-* make sure your device has a IPv6 address with global scope, some prefix that
-  starts with a "2" and precisely that rrrr:rrrr:rrrr:rrrr value
+* make sure your device has a IPv6 address with global scope (typically in
+  2000::/3, often starting with "2" or "3") and precisely that
+  rrrr:rrrr:rrrr:rrrr value
 * you only need a dyndns2 updater on one device (called mainhost in this
   example), but the updater needs to find out an address with the same prefix
   as seen on your LAN (should be easy if the updater runs on a LAN device, but
