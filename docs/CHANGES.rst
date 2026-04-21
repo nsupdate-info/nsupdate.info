@@ -8,8 +8,8 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
-Release 0.13.0 (not released yet)
----------------------------------
+Release 0.13.0 (2026-04-21)
+---------------------------
 
 New Features:
 

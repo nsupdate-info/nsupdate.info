@@ -2,7 +2,9 @@
 
 ## Supported Versions
 
-Only current master branch is supported.
+Only latest 0.13.x release is supported with security updates.
+
+If you find something in master branch, please report it also.
 
 ## Reporting a Vulnerability
 

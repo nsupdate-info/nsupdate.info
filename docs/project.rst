@@ -39,6 +39,7 @@ Translations update workflow
 ----------------------------
 
 ::
+
     # start from a clean workdir, then
     # pull all translations from Transifex:
     tx pull
@@ -69,18 +70,14 @@ automatically).
 Dependency management
 =====================
 
-Get `Pipenv <https://pipenv.pypa.io/en/latest/installation/>`_ and checkout the
-`Pipenv Command Reference <https://pipenv.pypa.io/en/latest/commands/>`_.
+Check the `Pipenv Docs <https://docs.pipenv.org/>`_.
 
 Install new dependencies
 ------------------------
 
-See `the pipenv docs <https://pipenv.pypa.io/en/latest/commands/#install>`_.
-
 ::
 
     pipenv install mypkg
-
 
 Spawn a shell with correct Python paths
 ---------------------------------------
@@ -113,7 +110,6 @@ Verify the updated dependencies don't include any security vulnerabilities:
 ::
 
     pipenv check
-
 
 Build locally
 =============
@@ -171,17 +167,24 @@ To make a new release, follow this checklist:
    - Render CHANGES.rst via make html and check for markup errors.
    - did the code run on the prod website for a while? check server logs.
 
-2. Handle Django migrations:
+2. Check Pipfile, update Pipfile.lock:
+
+   - activate project's virtualenv: ``pipenv shell``
+   - update dependencies according to Pipfile: ``pipenv install``
+   - regenerate Pipfile.lock: ``pipenv lock``
+   - add/commit Pipfile.lock
+
+3. Handle Django migrations:
 
    - Check if there are any pending model changes: ``./manage.py makemigrations``.
    - Ensure migrations are tested.
 
-3. Handle translations:
+4. Handle translations:
 
    - Follow the `Translations update workflow`_ to pull latest translations from Transifex,
      update them from source, and push back.
 
-4. Create the release:
+5. Create the release:
 
    - Update version and date in ``CHANGES.rst``.
    - Tag the release in git: ``git tag -s -m "tagged/signed release x.y.z" x.y.z``
@@ -190,7 +193,7 @@ To make a new release, follow this checklist:
    - Create a release on Github, upload the sdist.
    - Upload the package to PyPI: ``twine upload dist/*.tar.gz``.
 
-5. After the release:
+6. After the release:
 
    - Close release milestone on Github.
    - Announce the release.
