@@ -13,7 +13,14 @@ Release 0.13.0 (not released yet)
 
 New Features:
 
+- New dark theme
+- Update/delete requests: support myip=ip1,ip2, #501
+- Update requests: strip prefix-length / netmask if present, #470.
+  This makes it possible to send ip6lanprefix as myip, for example.
 - Update generated inadyn.conf for IPv6 support, #528
+- Update Fritz!Box router config help v4/v6, #353
+- Update ddclient configuration help, #539.
+  ddclient 3.11+ will send 1 http request using: myip=ipv4,ipv6
 - Add BAD_HOSTS setting to lock out nasty clients from the update API
   without causing database accesses, #429.
 - Enable blacklisting of email addresses (now with regex support)
@@ -26,18 +33,20 @@ Fixes:
 - Security: fix session ID leak in IP detection, #625
 - Security: fix mass assignment risk by changing UpdateView to DetailView, #624
 - Fix misc. crashes, #428
-- Fix connectivity test when editing domains, #479 #492 #523 #524
-- Strip prefix-length / netmask if present, #470
+- Fix connectivity test when editing domains, #479, #492, #523, #524
 - Rewrite socket error handling, #522
 - Fix Domain.generate_ns_secret() storing bytes object into Domain.nameserver_update_secret, #454
 - Try longer timeout for DNS resolver / updates
 - Capitalize languages in dropdown menu, #627
 - Django: add missing migration files, #443, #454, #608
+- Logout: use POST request
+- Fix user stale detection, #601
+- Models: use null=False, #458, preventing comments and other text fields from showing up as None
 
 Other changes:
 
 - Require Python >= 3.10, <= 3.14.
-- Upgrade to Django 5.2 LTS, Bootstrap 5.3.8, jQuery 4.0.0, Font Awesome 7.2.0, #613 #615
+- Upgrade to Django 5.2 LTS, Bootstrap 5.3.8, jQuery 4.0.0, Font Awesome 7.2.0, #613, #615
 - Use argon2id for password and secret hashing, auto-upgrade the hashes
   at user login time and host dyndns update time, #611
 - Update update_secret database field length for salted hash, #443, #529
@@ -51,15 +60,21 @@ Other changes:
 - Update to DropboxOAuth2V2, remove non-existing BitbucketOAuth, #516
 - Migrate misc. setup/config files to pyproject.toml, #568, #591
 - Update license identifier to "BSD-3-Clause" in pyproject.toml, #566
+- Use https for misc. links
 - docs:
 
+  - Move CHANGES.rst to docs/
   - Include note about IPv4 interface ID, #495
-  - Add docs/project.rst (development commands), #516
-  - Integrate new logo, thanks to @mirzazulfan, #78, #431
+  - Clarify related hosts, #352
   - Add docs on how to disable user registration, #438
   - Always use django-admin (not django-admin.py) in docs, update URLs, #443
-  - Update workflow for translations, use the new Transifex CLI (Go), #622
   - Fix typos and grammar, #586
+  - Integrate new logo, thanks to @mirzazulfan, #78, #431
+  - Add docs/project.rst (development commands), #516
+  - Update workflow for translations, use the new Transifex CLI (Go), #622
+  - Add "how to release"
+  - README: update CI status badge URL, #630
+  - Misc. other documentation updates and fixes
 - tests:
 
   - Use GitHub Actions instead of Travis CI, #506, #507
