@@ -333,8 +333,8 @@ If this is the case, first check these things (and then the ones listed above):
 * if it keeps getting flagged as abusive, you didn't fix the issue - try again.
 * if you have a local network with multiple machines that share one Internet connection, it is sufficient to enable
   an update client on one of the machines (preferably your Internet router or a machine that is on most of the time).
-  if you run update clients on multiple machines, this may cause them sending nochg updates frequently and your host
-  might get flagged as abusive due to that.
+  if you run update clients on multiple machines, this may cause them sending frequent nochg updates (updates that
+  report "no change"), and your host might get flagged as abusive due to that.
 
 Something else?
 ---------------
