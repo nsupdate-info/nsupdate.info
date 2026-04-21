@@ -62,7 +62,7 @@
                 </div>
                 <div class="card-body">
                     <p class="text-danger">
-                        {% trans "Deleting a domain is not undoable. If you need it back, you'll have to add it again and configure a new shared secret." %}
+                        {% trans "Deleting a domain cannot be undone. If you need it back, you'll have to add it again and configure a new shared secret." %}
                     </p>
                     <form method="get" action="{% url 'delete_domain' domain.pk %}">
                         <button type="submit" class="btn btn-primary btn-danger">{% trans "Delete Domain" %}</button>
