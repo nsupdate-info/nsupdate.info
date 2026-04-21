@@ -42,11 +42,14 @@ Translations update workflow
     # start from a clean workdir, then
     # pull all translations from Transifex:
     tx pull
+    # required: change directory to where the locale folder is located:
+    cd src/nsupdate
     # update the translations with changes from the source code:
     django-admin makemessages -a
-    # compile the translations to .mo files
+    # compile the translations to .mo files:
     django-admin compilemessages
     # push updated translation files back to Transifex:
+    cd ../..
     tx push -s -t
 
 

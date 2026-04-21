@@ -32,7 +32,7 @@ If you really want that domain to work and you really control that nameserver:
 3. make sure it accepts dynamic updates for hosts in this domain
 4. make sure it uses the same secret as configured on the service
 5. set the domain to "available" on the service
-6. check if the "public" flag is correctly
+6. check if the "public" flag is correct
 
 Alternatively, if you do not use the domain with our service, delete the
 domain entry, so it is removed from our database. This will also remove all
