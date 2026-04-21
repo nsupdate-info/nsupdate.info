@@ -459,6 +459,10 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         logger.warning(msg)
         host.register_client_result(msg, fault=True)
         return 'dnserr'  # there should be a better response code for this
+
+    if not _delete and kind == 'ipv6' and IPAddress(ipaddr) == IPNetwork("%s/%d" % (ipaddr, host.netmask_ipv6)).network:
+        _delete = True
+
     if mode == 'update' and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
