@@ -141,7 +141,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 1rem;
 }
 
-.jumbotron-replacement h3, 
+.jumbotron-replacement h3,
 .jumbotron-replacement h4 {
     color: var(--text-secondary);
 }
