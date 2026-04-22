@@ -7,4 +7,3 @@ source_file            = src/nsupdate/locale/en/LC_MESSAGES/django.po
 source_lang            = en
 replace_edited_strings = false
 keep_translations      = false
-

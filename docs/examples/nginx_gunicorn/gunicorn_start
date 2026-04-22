@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export MPLCONFIGDIR="/srv/nsupdate/run/"
- 
+
 NAME="nsupdate.info"                               # Name of the application
 DJANGODIR=/srv/nsupdate/nsupdate/nsupdate          # Django project directory
 SOCKFILE=/srv/nsupdate/run/gunicorn.sock           # communication socket
@@ -12,19 +12,19 @@ NUM_WORKERS=1                                      # how many worker processes s
                                                    # note: use 1 for sqlite database, more for postgres
 DJANGO_SETTINGS_MODULE=local_settings              # which settings file should Django use
 DJANGO_WSGI_MODULE=nsupdate.wsgi                   # WSGI module name
- 
+
 echo "Starting $NAME"
- 
+
 # Activate the virtual environment
 cd $DJANGODIR
 source /srv/nsupdate/bin/activate
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
- 
+
 # Create the run directory if it doesn't exist
 RUNDIR=$(dirname $SOCKFILE)
 test -d $RUNDIR || mkdir -p $RUNDIR
- 
+
 # Start your Django Unicorn
 # Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
 exec /srv/nsupdate/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
@@ -34,4 +34,3 @@ exec /srv/nsupdate/bin/gunicorn ${DJANGO_WSGI_MODULE}:application \
   --log-level=debug \
   --bind=unix:$SOCKFILE \
   --pid $PIDFILE
-
