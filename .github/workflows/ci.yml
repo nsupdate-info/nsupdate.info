@@ -7,7 +7,7 @@ permissions:
 
 on:
   push:
-    branches: [ master ]
+    branches: [ 0.13-maint ]
     paths:
     - '**.py'
     - '**.yml'
@@ -16,7 +16,7 @@ on:
     - 'requirements.d/*'
     - '!docs/**'
   pull_request:
-    branches: [ master ]
+    branches: [ 0.13-maint ]
     paths:
     - '**.py'
     - '**.yml'

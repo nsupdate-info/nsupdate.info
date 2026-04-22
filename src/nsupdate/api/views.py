@@ -431,7 +431,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     :param _delete: True for delete, False for update
     :return: dyndns2 response string
     """
-    mode = ('update', 'delete')[_delete]
+    mode = ('update', 'delete')[_delete]  # only use this for logging
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
@@ -472,10 +472,14 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             single_ip = netmask == 128  # rather theoretical case, but who knows...
         else:
             raise ValueError('unknown ip address kind: %s' % kind)
-        if not single_ip and IPNetwork("%s/%d" % (ipaddr, netmask)).network == IPAddress(ipaddr):
-            _delete = True
+        # we do not want to update A/AAAA records with network addresses:
+        is_network = not single_ip and IPNetwork("%s/%d" % (ipaddr, netmask)).network == IPAddress(ipaddr)
+        if is_network:
+            logger.info('%s - received %s for host %s, but address has only network prefix, deleting instead' % (fqdn, mode, ipaddr, ))
+    else:
+        is_network = False
 
-    if mode == 'update' and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
+    if not _delete and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
         host.abuse = True
@@ -484,7 +488,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         return 'abuse'
     host.poke(kind, secure)
     try:
-        if _delete:
+        if _delete or is_network:
             delete(fqdn, rdtype)
         else:
             update(fqdn, ipaddr)
