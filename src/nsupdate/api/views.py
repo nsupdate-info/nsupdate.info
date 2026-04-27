@@ -327,7 +327,7 @@ class NicUpdateView(View):
                     check_ip(ip)
                     ipaddrs.append(ip)
                 except ValueError:
-                    continue
+                    return Response('dnserr')
             if not ipaddrs:
                 # if none of the given IPs are valid, we update to the remote_addr
                 ipaddrs = [remote_addr, ]
