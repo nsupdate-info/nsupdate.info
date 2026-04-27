@@ -12,7 +12,7 @@ import dns.message
 
 from django.db import models
 from django.core.exceptions import ValidationError
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.db.models.signals import pre_delete, post_save
 from django.contrib.auth.hashers import make_password
@@ -82,7 +82,31 @@ UPDATE_ALGORITHMS = {
 UPDATE_ALGORITHM_CHOICES = [(k, k) for k in UPDATE_ALGORITHMS]
 
 
+class RangeIntegerField(models.IntegerField):
+    def __init__(self, *args, **kwargs):
+        validators = kwargs.pop("validators", [])
+
+        # turn min_value and max_value params into validators
+        min_value = kwargs.pop("min_value", None)
+        if min_value is not None:
+            validators.append(MinValueValidator(min_value))
+        max_value = kwargs.pop("max_value", None)
+        if max_value is not None:
+            validators.append(MaxValueValidator(max_value))
+
+        kwargs["validators"] = validators
+
+        super().__init__(*args, **kwargs)
+
+
 class Domain(models.Model):
+    class Protocol(models.TextChoices):
+        UDP = "udp", "udp"
+        TCP = "tcp", "tcp"
+        DOT = "dot", "DoT (dns-over-tls)"
+        DOH = "doh", "DoH (dns-over-https)"
+        DOQ = "doq", "DoQ (dns-over-quic)"
+
     name = models.CharField(
         _("name"),
         max_length=255,  # RFC 2181 (and also: max length of unique fields)
@@ -93,21 +117,48 @@ class Domain(models.Model):
         _("nameserver IP (primary)"),
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         help_text=_("IP where the dynamic DNS updates for this zone will be sent to"))
+    nameserver_protocol = models.CharField(
+        _("nameserver protocol (primary)"),
+        choices=Protocol.choices,
+        default=Protocol.TCP,
+        max_length=4,
+        help_text=_("Protocol to use"))
+    nameserver_port = RangeIntegerField(
+        _("nameserver port to use (primary)"),
+        default=53,
+        min_value=1, max_value=65535,
+        help_text=_("Port to use"))
     nameserver2_ip = models.GenericIPAddressField(
         _("nameserver IP (secondary)"),
         max_length=40,  # ipv6 = 8 * 4 digits + 7 colons
         blank=True, null=True,
         help_text=_("IP where DNS queries for this zone will be sent to"))
-    nameserver_update_secret = models.CharField(
-        _("nameserver update secret"),
-        max_length=88,  # 512 bits base64 -> 88 bytes
+    nameserver2_protocol = models.CharField(
+        _("nameserver protocol (secondary)"),
+        choices=Protocol.choices,
+        default=Protocol.TCP,
+        max_length=4,
+        help_text=_("Protocol to use"))
+    nameserver2_port = RangeIntegerField(
+        _("nameserver port to use (secondary)"),
+        default=53,
+        min_value=1, max_value=65535,
+        help_text=_("Port to use"))
+    nameserver_update_key_name = models.CharField(
+        _("nameserver update key name"),
+        max_length=128,
         default='',
-        help_text=_("Shared secret that allows updating this zone (base64 encoded)"))
+        help_text=_("Name of the key as it exists in bind.conf . Must be the same as it is in the bind configuration."))
     nameserver_update_algorithm = models.CharField(
         _("nameserver update algorithm"),
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES
         default=UPDATE_ALGORITHM_DEFAULT, choices=UPDATE_ALGORITHM_CHOICES,
         help_text=_("HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"))
+    nameserver_update_secret = models.CharField(
+        _("nameserver update secret"),
+        max_length=88,  # 512 bits base64 -> 88 bytes
+        default='',
+        help_text=_("Shared secret that allows updating this zone (base64 encoded)"))
     public = models.BooleanField(
         _("public"),
         default=False,
@@ -140,9 +191,10 @@ class Domain(models.Model):
         bitlength = UPDATE_ALGORITHMS[algorithm].bitlength
         secret = make_random_password(length=bitlength // 8)
         secret = secret.encode('utf-8')
+        self.nameserver_update_key_name = self.name
         self.nameserver_update_secret = secret_base64 = base64.b64encode(secret).decode('utf-8')
         self.save()
-        return secret_base64
+        return self.nameserver_update_key_name, secret_base64
 
     def get_bind9_algorithm(self):
         return UPDATE_ALGORITHMS.get(self.nameserver_update_algorithm).bind_name
