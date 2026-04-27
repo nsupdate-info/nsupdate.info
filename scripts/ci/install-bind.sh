@@ -4,7 +4,15 @@
 sudo apt-get -y update
 
 # we install a local bind9 to run the tests against:
-sudo apt-get -y install bind9 bind9-dnsutils bind9-host e2fsprogs
+sudo apt-get -y install bind9 bind9-dnsutils bind9-host e2fsprogs openssl
+
+# generate ephemeral TLS cert for BIND DoT
+sudo openssl req -x509 -nodes -days 30 -newkey rsa:2048 \
+    -keyout /etc/bind/nsupdate.info.key \
+    -out /etc/bind/nsupdate.info.crt \
+    -subj "/CN=localhost"
+sudo chown bind:bind /etc/bind/nsupdate.info.key /etc/bind/nsupdate.info.crt
+sudo chmod 600 /etc/bind/nsupdate.info.key
 
 echo "named.conf.local"
 cat /etc/bind/named.conf.local
@@ -19,6 +27,9 @@ sudo chown bind:bind /etc/bind/named.conf.options
 sudo ln -s /var/lib/bind /etc/bind/zones
 sudo cp scripts/ci/etc/bind/zones/* /etc/bind/zones/
 sudo chown bind:bind /etc/bind/zones/*
+
+echo "checking named configuration"
+sudo named-checkconf /etc/bind/named.conf
 
 sudo service bind9 restart
 
@@ -35,7 +46,10 @@ sudo chattr +i /etc/resolv.conf
 
 dig @127.0.0.1 nsupdate.info SOA
 dig @127.0.0.1 tests.nsupdate.info SOA
-sudo netstat -tulpen | grep 53
+
+sudo netstat -tulpen | grep :53
+sudo netstat -tulpen | grep :853
+sudo netstat -tulpen | grep :443
 
 nslookup 1.1.1.1
 host 1.1.1.1

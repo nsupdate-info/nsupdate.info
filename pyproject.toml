@@ -22,7 +22,7 @@ classifiers = [
 license = "BSD-3-Clause"
 requires-python = ">=3.10, <3.15"
 dependencies = [
-    'dnspython',
+    'dnspython[doh]',
     'netaddr',
     'django >=5.2.0, <5.3.0',
     'django-bootstrap5',
