@@ -1,5 +1,23 @@
+tls local-tls {
+	cert-file "/etc/bind/nsupdate.info.crt";
+	key-file "/etc/bind/nsupdate.info.key";
+};
+
+http local-http {
+	endpoints { "/dns-query"; };
+};
+
 options {
 	directory "/var/cache/bind";
+
+	listen-on port 853 tls local-tls { any; };
+	listen-on-v6 port 853 tls local-tls { any; };
+
+	listen-on port 443 tls local-tls http local-http { any; };
+	listen-on-v6 port 443 tls local-tls http local-http { any; };
+
+	listen-on port 53 { any; };
+	listen-on-v6 port 53 { any; };
 
 	// If there is a firewall between you and nameservers you want
 	// to talk to, you may need to fix the firewall to allow multiple
@@ -19,6 +37,4 @@ options {
 	// you will need to update your keys.  See https://www.isc.org/bind-keys
 	//========================================================================
 	dnssec-validation auto;
-
-	listen-on-v6 { any; };
 };
