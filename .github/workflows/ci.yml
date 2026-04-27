@@ -11,6 +11,7 @@ on:
     paths:
     - '**.py'
     - '**.yml'
+    - '**.toml'
     - '**.cfg'
     - '**.ini'
     - 'requirements.d/*'
@@ -20,6 +21,7 @@ on:
     paths:
     - '**.py'
     - '**.yml'
+    - '**.toml'
     - '**.cfg'
     - '**.ini'
     - 'requirements.d/*'
