@@ -2,6 +2,7 @@
 Utility functions / classes do dnspython. Might be offered to dnspython for an inclusion.
 """
 
+import dns.exception
 import dns.nameserver
 
 
@@ -126,10 +127,10 @@ def make_nameserver(ip, port, protocol):
         case "tcp":
             return TcpNameServer(ip, port)
         case "dot":
-            return dns.nameserver.DoTNameServer(ip, port)
+            return dns.nameserver.DoTNameserver(ip, port)
         case "doh":
-            return dns.nameserver.DoHNameServer(ip, port)
+            return dns.nameserver.DoHNameserver(ip, port)
         case "doq":
-            return dns.nameserver.DoQNameServer(ip, port)
+            return dns.nameserver.DoQNameserver(ip, port)
         case _:
-            raise dns.nameserver.SyntaxError(f"invalid protocol {protocol}")
+            raise dns.exception.SyntaxError(f"invalid protocol {protocol}")
