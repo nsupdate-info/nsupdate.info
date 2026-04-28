@@ -10,7 +10,7 @@ import dns.name
 from django.db.models import Q
 from django.views.generic import View, TemplateView, CreateView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotAllowed
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib import messages
@@ -47,12 +47,20 @@ class GenerateSecretView(DetailView):
             raise Http404
         return obj
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # generate secret, store it hashed and return the plain secret for the context
+        update_secret = self.object.generate_secret()
+        messages.add_message(self.request, messages.SUCCESS, 'Host secret created.')
+        context = self.get_context_data(object=self.object, update_secret=update_secret)
+        return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(['POST'])
+
     def get_context_data(self, **kwargs):
         context = super(GenerateSecretView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
-        # generate secret, store it hashed and return the plain secret for the context
-        context['update_secret'] = self.object.generate_secret()
-        messages.add_message(self.request, messages.SUCCESS, 'Host secret created.')
         return context
 
 
@@ -70,11 +78,19 @@ class GenerateNSSecretView(DetailView):
             raise Http404
         return obj
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        shared_secret = self.object.generate_ns_secret()
+        messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
+        context = self.get_context_data(object=self.object, shared_secret=shared_secret)
+        return self.render_to_response(context)
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(['POST'])
+
     def get_context_data(self, **kwargs):
         context = super(GenerateNSSecretView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
-        context['shared_secret'] = self.object.generate_ns_secret()
-        messages.add_message(self.request, messages.SUCCESS, 'Nameserver shared secret created.')
         return context
 
 

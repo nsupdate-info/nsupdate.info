@@ -51,7 +51,8 @@
                         You have to use the new secret in your name server configuration.
                         {% endblocktrans %}
                     </p>
-                    <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="get">
+                    <form action="{% url 'generate_ns_secret_view' domain.pk %}" method="post">
+                        {% csrf_token %}
                         <button type="submit" class="btn btn-primary btn-warning">{% trans "Show Configuration" %}</button>
                     </form>
                 </div>
