@@ -81,7 +81,7 @@ class EditDomainForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(EditDomainForm, self).clean()
-        logger.warning("cleaned_data: " + str(cleaned_data))
+        logger.debug("cleaned_data: " + str(cleaned_data))
 
         if self.cleaned_data['available']:
             try:

@@ -148,7 +148,7 @@ class Domain(models.Model):
         _("nameserver update key name"),
         max_length=128,
         default='',
-        help_text=_("Name of the key as it exists in bind.conf . Must be the same as it is in the bind configuration."))
+        help_text=_("Name of the key as it is in your name server configuration, also key names are part of the signature."))
     nameserver_update_algorithm = models.CharField(
         _("nameserver update algorithm"),
         max_length=16,  # see elements of UPDATE_ALGORITHM_CHOICES

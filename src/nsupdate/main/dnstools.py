@@ -22,7 +22,7 @@ from datetime import timedelta
 from collections import namedtuple
 
 import logging
-logger = logging.getLogger('')
+logger = logging.getLogger(__name__)
 
 import traceback
 
@@ -43,6 +43,8 @@ import dns.exception
 
 from django.utils.timezone import now
 from django.forms.models import model_to_dict
+
+from nsupdate.utils.dnspython import UdpNameServer, TcpNameServer, make_nameserver
 
 
 class FQDN(namedtuple('FQDN', ['host', 'domain'])):
@@ -93,135 +95,6 @@ class NameServerNotAvailable(Exception):
     """
 
 
-class UdpNameServer(dns.nameserver.AddressAndPortNameserver):
-    def __init__(self, address: str, port: int = 53):
-        super().__init__(address, port)
-
-    def kind(self):
-        return "udp"
-
-    def query(
-        self,
-        request: dns.message.QueryMessage,
-        timeout: float,
-        source: str | None = None,
-        source_port: int = 0,
-        one_rr_per_rrset: bool = False,
-        ignore_trailing: bool = False,
-        max_size: int | None = None
-    ) -> dns.message.Message:
-        response = dns.query.udp(
-            request,
-            self.address,
-            timeout=timeout,
-            port=self.port,
-            source=source,
-            source_port=source_port,
-            raise_on_truncation=True,
-            one_rr_per_rrset=one_rr_per_rrset,
-            ignore_trailing=ignore_trailing,
-            ignore_errors=True,
-            ignore_unexpected=True,
-        )
-        return response
-
-    async def async_query(
-        self,
-        request: dns.message.QueryMessage,
-        timeout: float,
-        source: str | None = None,
-        source_port: int = 0,
-        backend: dns.asyncbackend.Backend | None = None,
-        one_rr_per_rrset: bool = False,
-        ignore_trailing: bool = False,
-        max_size: int | None = None
-    ) -> dns.message.Message:
-        response = await dns.asyncquery.udp(
-            request,
-            self.address,
-            timeout=timeout,
-            port=self.port,
-            source=source,
-            source_port=source_port,
-            raise_on_truncation=True,
-            backend=backend,
-            one_rr_per_rrset=one_rr_per_rrset,
-            ignore_trailing=ignore_trailing,
-            ignore_errors=True,
-            ignore_unexpected=True,
-        )
-        return response
-
-
-class TcpNameServer(dns.nameserver.AddressAndPortNameserver):
-    def __init__(self, address: str, port: int = 53):
-        super().__init__(address, port)
-
-    def kind(self):
-        return "tcp"
-
-    def query(
-        self,
-        request: dns.message.QueryMessage,
-        timeout: float,
-        source: str | None = None,
-        source_port: int = 0,
-        one_rr_per_rrset: bool = False,
-        ignore_trailing: bool = False,
-        max_size: int | None = None
-    ) -> dns.message.Message:
-        response = dns.query.tcp(
-            request,
-            self.address,
-            timeout=timeout,
-            port=self.port,
-            source=source,
-            source_port=source_port,
-            one_rr_per_rrset=one_rr_per_rrset,
-            ignore_trailing=ignore_trailing,
-        )
-        return response
-
-    async def async_query(
-        self,
-        request: dns.message.QueryMessage,
-        timeout: float,
-        source: str | None,
-        source_port: int,
-        backend: dns.asyncbackend.Backend | None = None,
-        one_rr_per_rrset: bool = False,
-        ignore_trailing: bool = False,
-        max_size: int | None = None
-    ) -> dns.message.Message:
-        response = await dns.asyncquery.tcp(
-            request,
-            self.address,
-            timeout=timeout,
-            port=self.port,
-            source=source,
-            source_port=source_port,
-            backend=backend,
-            one_rr_per_rrset=one_rr_per_rrset,
-            ignore_trailing=ignore_trailing,
-        )
-        return response
-
-
-def make_nameserver(ip, port, protocol):
-    if protocol == "udp":
-        return UdpNameServer(ip, port)
-    elif protocol == "tcp":
-        return TcpNameServer(ip, port)
-    elif protocol == "dot":
-        return dns.nameserver.DoTNameServer(ip, port)
-    elif protocol == "doh":
-        return dns.nameserver.DoHNameServer(ip, port)
-    elif protocol == "doq":
-        return dns.nameserver.DoQNameServer(ip, port)
-    else:
-        raise DnsUpdateError("invalid protocol")
-
-
 def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     """
     Check if a string is a valid ip address and also
@@ -238,36 +111,35 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
 
 
 def check_domain(domain_name, domain_data):
-    logger.debug(("check_domain", domain_name, domain_data))
     fqdn = FQDN(host="connectivity-test", domain=domain_name)
 
     from .models import Domain
-    d = Domain.objects.get(name=domain_name)
+    domain = Domain.objects.get(name=domain_name)
     # temporarily update domain to allow add/update/deletes
-    domain_available_state = d.available
-    domain_nameserver_ip = d.nameserver_ip
-    d.available = True
-    d.nameserver_ip = domain_data["nameserver_ip"]
-    d.nameserver_port = domain_data["nameserver_port"]
-    d.nameserver_protocol = domain_data["nameserver_protocol"]
-    d.nameserver2_ip = domain_data["nameserver2_ip"]
-    d.nameserver2_port = domain_data["nameserver2_port"]
-    d.nameserver2_protocol = domain_data["nameserver2_protocol"]
-    d.save()
+    domain_available_state = domain.available
+    domain_nameserver_ip = domain.nameserver_ip
+    domain.available = True
+    domain.nameserver_ip = domain_data["nameserver_ip"]
+    domain.nameserver_port = domain_data["nameserver_port"]
+    domain.nameserver_protocol = domain_data["nameserver_protocol"]
+    domain.nameserver2_ip = domain_data["nameserver2_ip"]
+    domain.nameserver2_port = domain_data["nameserver2_port"]
+    domain.nameserver2_protocol = domain_data["nameserver2_protocol"]
+    domain.save()
 
     try:
         # add host connectivity-test.<domain> with a random IP. See add()
         add(fqdn, socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))))
 
     except (dns.exception.DNSException, DnsUpdateError) as e:
-        logger.error("Dns error, raising upward: " + str(e))
+        logger.error("DNS error, raising upward: " + str(e))
         raise NameServerNotAvailable(str(e))
 
     finally:
         # reset domain
-        d.available = domain_available_state
-        d.nameserver_ip = domain_nameserver_ip
-        d.save()
+        domain.available = domain_available_state
+        domain.nameserver_ip = domain_nameserver_ip
+        domain.save()
 
 
 def add(fqdn, ipaddr, ttl=60):
@@ -384,9 +256,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     """
     assert isinstance(fqdn, FQDN)
     nameserver, nameserver2, origin = get_ns_info(fqdn)[0:3]
-    logger.debug("query_ns: %s" % (str(nameserver)))
-    logger.debug("query_ns: %s" % (str(nameserver2)))
-    logger.debug("query_ns: %s" % (str(origin)))
+    logger.debug("query_ns: ns={nameserver} ns2={nameserver2} origin={origin} fqdn={fqdn}")
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
@@ -402,7 +272,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     # recursion. But: RD (recursion desired) is the internal default for flags
     # (used if flags = None is given). Thus, we explicitly give flags (all off):
     resolver.flags = 0
-    logger.debug("query_ns: fqdn: %s" % str(fqdn))
+    logger.debug("query_ns: fqdn={fqdn}")
     try:
         answer = resolver.resolve(str(fqdn), rdtype, search=True)
         ip = str(list(answer)[0])
@@ -526,10 +396,8 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     elif action == 'upd':
         assert ipaddr is not None
         upd.replace(name, ttl, rdtype, ipaddr)
-    logger.warning("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (action, name, origin, rdtype, ipaddr))
-    dns_update_error = False
+    logger.debug("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (action, name, origin, rdtype, ipaddr))
     try:
-        # response = dns.query.tcp(upd, nameserver, timeout=UPDATE_TIMEOUT)
         response = nameserver.query(upd, timeout=UPDATE_TIMEOUT)
         rcode = response.rcode()
         if rcode != dns.rcode.NOERROR:
