@@ -515,13 +515,13 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             # XXX unclear what to do for "other services" we relay updates to
             return 'deleted %s' % rdtype
         else:  # update
-            _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
+            _update_related_hosts(host, fqdn, kind, ipaddr, secure, logger)
+            _update_services(host, kind, ipaddr, logger)
             return 'good %s' % ipaddr
 
 
-def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
-    """after updating the host in dns, do related other updates"""
-    # update related hosts
+def _update_related_hosts(host, fqdn, kind, ipaddr, secure, logger):
+    # update related hosts in DNS, if any
     rdtype = 'A' if kind == 'ipv4' else 'AAAA'
     for rh in host.relatedhosts.all():
         if rh.available:
@@ -566,7 +566,9 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
                     logger.error(msg)
                     host.register_server_result(msg, fault=True)
 
-    # now check if there are other services we shall relay updates to:
+
+def _update_services(host, kind, ipaddr, logger):
+    # relay updates to other services, if any:
     for hc in host.serviceupdaterhostconfigs.all():
         if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
             or
