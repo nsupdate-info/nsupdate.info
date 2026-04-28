@@ -442,6 +442,7 @@ LANGUAGES = (
     ('el', gettext_noop('Greek')),
     ('fr', gettext_noop('French')),
     ('it', gettext_noop('Italian')),
+    ('hu', gettext_noop('Hungarian')),
 )
 
 # Silences the 1_6.W001 warning you get without this.
