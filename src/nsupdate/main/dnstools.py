@@ -260,7 +260,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
-    resolver.nameservers = [nameserver, nameserver2]
+    resolver.nameservers = [nameserver, ]
     if nameserver2:
         pos = 1 if prefer_primary else 0
         resolver.nameservers.insert(pos, nameserver2)

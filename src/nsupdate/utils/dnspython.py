@@ -5,12 +5,6 @@ Utility functions / classes do dnspython. Might be offered to dnspython for an i
 import dns.nameserver
 
 
-class DnsUtilsUpdateError(ValueError):
-    """
-    raised by utils/dnspython.py if DNS update return code is not NOERROR
-    """
-
-
 class UdpNameServer(dns.nameserver.AddressAndPortNameserver):
     def __init__(self, address: str, port: int = 53):
         super().__init__(address, port)
@@ -126,6 +120,7 @@ class TcpNameServer(dns.nameserver.AddressAndPortNameserver):
 
 
 def make_nameserver(ip, port, protocol):
+    protocol = protocol.lower()
     if protocol == "udp":
         return UdpNameServer(ip, port)
     elif protocol == "tcp":
@@ -137,4 +132,4 @@ def make_nameserver(ip, port, protocol):
     elif protocol == "doq":
         return dns.nameserver.DoQNameServer(ip, port)
     else:
-        raise DnsUtilsUpdateError("invalid protocol")
+        raise dns.nameserver.SyntaxError("invalid protocol {protocol}")
