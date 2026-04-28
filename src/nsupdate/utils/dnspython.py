@@ -120,16 +120,16 @@ class TcpNameServer(dns.nameserver.AddressAndPortNameserver):
 
 
 def make_nameserver(ip, port, protocol):
-    protocol = protocol.lower()
-    if protocol == "udp":
+    match protocol.lower():
+      case "udp":
         return UdpNameServer(ip, port)
-    elif protocol == "tcp":
+      case "tcp":
         return TcpNameServer(ip, port)
-    elif protocol == "dot":
+      case "dot":
         return dns.nameserver.DoTNameServer(ip, port)
-    elif protocol == "doh":
+      case "doh":
         return dns.nameserver.DoHNameServer(ip, port)
-    elif protocol == "doq":
+      case "doq":
         return dns.nameserver.DoQNameServer(ip, port)
-    else:
-        raise dns.nameserver.SyntaxError("invalid protocol {protocol}")
+      case _:
+        raise dns.nameserver.SyntaxError(f"invalid protocol {protocol}")

@@ -256,7 +256,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     """
     assert isinstance(fqdn, FQDN)
     nameserver, nameserver2, origin = get_ns_info(fqdn)[0:3]
-    logger.debug("query_ns: ns={nameserver} ns2={nameserver2} origin={origin} fqdn={fqdn}")
+    logger.debug(f"query_ns: ns={nameserver} ns2={nameserver2} origin={origin} fqdn={fqdn}")
     resolver = dns.resolver.Resolver(configure=False)
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
@@ -272,7 +272,7 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     # recursion. But: RD (recursion desired) is the internal default for flags
     # (used if flags = None is given). Thus, we explicitly give flags (all off):
     resolver.flags = 0
-    logger.debug("query_ns: fqdn={fqdn}")
+    logger.debug(f"query_ns: fqdn={fqdn}")
     try:
         answer = resolver.resolve(str(fqdn), rdtype, search=True)
         ip = str(list(answer)[0])
