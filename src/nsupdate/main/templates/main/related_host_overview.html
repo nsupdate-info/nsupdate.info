@@ -10,7 +10,7 @@
                         <a href="{% url 'add_related_host' main_host.pk %}" class="btn btn-primary btn-sm ms-3">{% trans "Add related host" %}</a>
                         <form action="{% url 'update_related_hosts' main_host.pk %}" method="post" class="d-inline">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-primary btn-sm">{% trans "update DNS" %}</button>
+                            <button type="submit" class="btn btn-primary btn-sm">{% trans "Update DNS" %}</button>
                         </form>
                     </h3>
                 </div>
