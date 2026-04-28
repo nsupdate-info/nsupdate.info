@@ -21,11 +21,16 @@ from django import template
 from django.utils.timezone import now
 
 from . import dnstools
+from .dnstools import FQDN, query_ns, update_related_hosts
 from .iptools import normalize_ip
 
 from .forms import (CreateHostForm, EditHostForm, CreateRelatedHostForm, EditRelatedHostForm,
                     CreateDomainForm, EditDomainForm, CreateUpdaterHostConfigForm, EditUpdaterHostConfigForm)
 from .models import Host, RelatedHost, Domain, ServiceUpdaterHostConfig
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class GenerateSecretView(DetailView):
@@ -399,6 +404,26 @@ class RelatedHostView(UpdateView):
         context = super(RelatedHostView, self).get_context_data(**kwargs)
         context['nav_overview'] = True
         return context
+
+
+class UpdateRelatedHostsView(View):
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        try:
+            main_host = Host.objects.get(pk=kwargs.get('mpk'), created_by=request.user)
+        except Host.DoesNotExist:
+            raise Http404
+        fqdn = FQDN(main_host.name, main_host.domain.name)
+        # update related hosts based on main host's DNS entries
+        for rdtype, kind in [('A', 'ipv4'), ('AAAA', 'ipv6')]:
+            try:
+                ipaddr = query_ns(fqdn, rdtype)
+            except Exception:
+                pass
+            else:
+                update_related_hosts(main_host, fqdn, kind, ipaddr, logger)
+        messages.add_message(request, messages.SUCCESS, 'Related hosts updated based on DNS.')
+        return HttpResponseRedirect(reverse('related_host_overview', args=(main_host.pk, )))
 
 
 class DeleteRelatedHostView(DeleteView):

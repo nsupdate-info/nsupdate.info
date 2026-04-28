@@ -8,7 +8,7 @@ from .views import (
     HomeView, OverviewView, HostView, AddHostView, DeleteHostView, AboutView, GenerateSecretView, GenerateNSSecretView,
     RobotsTxtView, DomainView, AddDomainView, DeleteDomainView, StatusView, JsUpdateView,
     UpdaterHostConfigOverviewView, UpdaterHostConfigView, DeleteUpdaterHostConfigView,
-    RelatedHostOverviewView, RelatedHostView, AddRelatedHostView, DeleteRelatedHostView, CustomTemplateView)
+    RelatedHostOverviewView, RelatedHostView, AddRelatedHostView, UpdateRelatedHostsView, DeleteRelatedHostView, CustomTemplateView)
 from ..api.views import (
     myip_view, DetectIpView, AjaxGetIps, NicUpdateView, AuthorizedNicUpdateView,
     NicDeleteView, AuthorizedNicDeleteView)
@@ -30,6 +30,7 @@ urlpatterns = (
     re_path(r'^host/(?P<mpk>\d+)/related/$', RelatedHostOverviewView.as_view(), name='related_host_overview'),
     re_path(r'^host/(?P<mpk>\d+)/related/(?P<pk>\d+)/$', RelatedHostView.as_view(), name='related_host_view'),
     re_path(r'^host/(?P<mpk>\d+)/related/add/$', AddRelatedHostView.as_view(), name='add_related_host'),
+    re_path(r'^host/(?P<mpk>\d+)/related/update/$', UpdateRelatedHostsView.as_view(), name='update_related_hosts'),
     re_path(r'^host/(?P<mpk>\d+)/related/(?P<pk>\d+)/delete/$', DeleteRelatedHostView.as_view(),
             name='delete_related_host'),
     re_path(r'^domain/(?P<pk>\d+)/$', DomainView.as_view(), name='domain_view'),
