@@ -61,7 +61,7 @@ Register / Login / Logout
 -------------------------
 You need to create an account to use most of the functionality of the service.
 
-Your hosts / domains are only for you, so you need to identify to create or change them.
+Your hosts / domains are only for you, so you need to authenticate to create or change them.
 
 You need to give a valid email address, because we send you a verification link that you must access to complete the registration.
 
