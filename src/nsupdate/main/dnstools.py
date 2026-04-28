@@ -378,7 +378,7 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     :raises: DnsUpdateError, Timeout
     """
     assert isinstance(fqdn, FQDN)
-    assert action in ['add', 'del', 'upd']
+    assert action in ['add', 'del', 'upd', ]
     nameserver, nameserver2, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
     logger.debug("update_ns: (%s,%s,%s)" % (keyname, key, algo))
     try:
