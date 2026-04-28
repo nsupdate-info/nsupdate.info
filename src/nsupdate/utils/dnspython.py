@@ -1,5 +1,5 @@
 """
-Utility functions / classes do dnspython. Might be offered to dnspython for an inclusion.
+Utility functions / classes for dnspython. Might be once offered to dnspython for as a PR.
 """
 
 import dns.exception
@@ -120,7 +120,7 @@ class TcpNameServer(dns.nameserver.AddressAndPortNameserver):
         return response
 
 
-def make_nameserver(ip, port, protocol):
+def make_nameserver(protocol, ip, port):
     match protocol.lower():
         case "udp":
             return UdpNameServer(ip, port)
