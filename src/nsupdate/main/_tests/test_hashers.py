@@ -46,7 +46,7 @@ def test_weak_argon2_hasher():
     from django.contrib.auth.hashers import make_password, check_password
     password = "testpassword123"
     encoded = make_password(password, hasher='weakargon2')
-    # Format: weakargon2$argon2id$v=19$m=8,t=1,p=1$...
+    # Format: weakargon2$argon2id$v=19$m=1024,t=1,p=1$...
     assert encoded.startswith("weakargon2$argon2id$")
-    assert "m=8,t=1,p=1" in encoded
+    assert "m=1024,t=1,p=1" in encoded
     assert check_password(password, encoded)

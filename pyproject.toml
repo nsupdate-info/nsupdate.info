@@ -22,7 +22,7 @@ classifiers = [
 license = "BSD-3-Clause"
 requires-python = ">=3.10, <3.15"
 dependencies = [
-    'dnspython',
+    'dnspython[doh]',
     'netaddr',
     'django >=5.2.0, <5.3.0',
     'django-bootstrap5',
@@ -44,6 +44,9 @@ build-backend = "setuptools.build_meta"
 write_to = "src/nsupdate/_version.py"
 
 [tool.pytest.ini_options]
+addopts = "--color=yes"
+DJANGO_SETTINGS_MODULE = "nsupdate.settings.dev"
+pythonpath = ["src"]
 markers = ["requires_sequential"]
 
 [tool.flake8]
@@ -121,18 +124,11 @@ env_list = [
   "flake8",
 ]
 
-[tool.tox.env]
-
-[tool.tox.env.pass_env]
-"*" = true
-
-[tool.tox.env.set_env]
-DNS_RESOLVER_TIMEOUT = "15.0"
-DNS_UPDATE_TIMEOUT = "30.0"
-
-[tool.tox.env.py]
+[tool.tox.env_run_base]
 # default test environment for all pyXX
 package = "editable"
+pass_env = ["*"]
+set_env = { DNS_RESOLVER_TIMEOUT = "15.0", DNS_UPDATE_TIMEOUT = "30.0" }
 deps = ["-rrequirements.d/dev.txt"]
 commands = [
   ["pytest", "-v", "-rs", "-k", "not ddns_client", "-m", "not requires_sequential", "--cov=nsupdate", "--pyargs", "{posargs:nsupdate}"],
