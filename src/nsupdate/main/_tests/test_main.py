@@ -64,12 +64,12 @@ def test_views_logged_in(client):
         ('robots', dict(), 200),
         ('status', dict(), 200),
         ('overview', dict(), 200),
-        ('generate_secret_view', dict(pk=1), 200),
-        ('generate_secret_view', dict(pk=2), 404),
-        ('generate_secret_view', dict(pk=100), 404),
-        ('generate_ns_secret_view', dict(pk=1), 200),
-        ('generate_ns_secret_view', dict(pk=2), 404),
-        ('generate_ns_secret_view', dict(pk=100), 404),
+        ('generate_secret_view', dict(pk=1), 405),
+        ('generate_secret_view', dict(pk=2), 405),
+        ('generate_secret_view', dict(pk=100), 405),
+        ('generate_ns_secret_view', dict(pk=1), 405),
+        ('generate_ns_secret_view', dict(pk=2), 405),
+        ('generate_ns_secret_view', dict(pk=100), 405),
         ('host_view', dict(pk=1), 200),
         ('host_view', dict(pk=2), 404),
         ('host_view', dict(pk=100), 404),
@@ -121,3 +121,10 @@ def test_views_logged_in(client):
     response = client.post(reverse('update_related_hosts', kwargs=dict(mpk=1)))
     assert response.status_code == 302
     assert response.url == reverse('related_host_overview', args=(1,))
+
+    for view, kwargs in [
+        ('generate_secret_view', dict(pk=1)),
+        ('generate_ns_secret_view', dict(pk=1)),
+    ]:
+        response = client.post(reverse(view, kwargs=kwargs))
+        assert response.status_code == 200
