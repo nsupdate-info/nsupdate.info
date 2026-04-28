@@ -33,6 +33,7 @@ def test_views_anon(client):
         ('add_related_host', dict(mpk=1), 302),
         ('add_related_host', dict(mpk=2), 302),
         ('add_related_host', dict(mpk=100), 302),
+        ('update_related_hosts', dict(mpk=1), 405),
         ('delete_related_host', dict(mpk=1, pk=1), 302),
         ('domain_view', dict(pk=1), 302),
         ('domain_view', dict(pk=2), 302),
@@ -49,6 +50,10 @@ def test_views_anon(client):
         print("%s, %s, %s" % (view, kwargs, status_code))
         response = client.get(reverse(view, kwargs=kwargs))
         assert response.status_code == status_code
+
+    response = client.post(reverse('update_related_hosts', kwargs=dict(mpk=1)))
+    assert response.status_code == 302
+    assert response.url.startswith('/accounts/login/')
 
 
 def test_views_logged_in(client):
@@ -83,6 +88,9 @@ def test_views_logged_in(client):
         ('add_related_host', dict(mpk=1), 200),
         ('add_related_host', dict(mpk=2), 404),
         ('add_related_host', dict(mpk=100), 404),
+        ('update_related_hosts', dict(mpk=1), 405),  # 405 because it only allows POST
+        ('update_related_hosts', dict(mpk=2), 405),
+        ('update_related_hosts', dict(mpk=100), 405),
         ('delete_related_host', dict(mpk=1, pk=1), 200),
         ('delete_related_host', dict(mpk=2, pk=1), 404),
         ('delete_related_host', dict(mpk=100, pk=1), 404),
@@ -109,3 +117,7 @@ def test_views_logged_in(client):
         print("%s, %s, %s" % (view, kwargs, status_code))
         response = client.get(reverse(view, kwargs=kwargs))
         assert response.status_code == status_code
+
+    response = client.post(reverse('update_related_hosts', kwargs=dict(mpk=1)))
+    assert response.status_code == 302
+    assert response.url == reverse('related_host_overview', args=(1,))
