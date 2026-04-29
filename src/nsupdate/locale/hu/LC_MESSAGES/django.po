@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-21 16:20+0200\n"
+"POT-Creation-Date: 2026-04-29 00:43+0200\n"
 "PO-Revision-Date: 2014-07-14 15:19+0000\n"
 "Last-Translator: Peter Horvath <horvath.akos.peter@gmail.com>, 2026\n"
 "Language-Team: Hungarian (http://app.transifex.com/thomaswaldmann/nsupdateinfo/language/hu/)\n"
@@ -924,14 +924,14 @@ msgid ""
 msgstr "Kérjük ügyelj rá, hogy a változtatási algoritmus és a változtatás titkának egyeznie kell. A formula elküldése után csak hozz létre egy új titkot."
 
 #: main/templates/main/domain.html:29 main/templates/main/host.html:20
-#: main/templates/main/host.html:115 main/templates/main/host.html:129
+#: main/templates/main/host.html:116 main/templates/main/host.html:130
 #: main/templates/main/related_host.html:20
 #: main/templates/main/updater_hostconfig.html:20
 msgid "Update"
 msgstr "Frissítés"
 
-#: main/templates/main/domain.html:39 main/templates/main/domain.html:55
-#: main/templates/main/host.html:42 main/templates/main/host.html:58
+#: main/templates/main/domain.html:39 main/templates/main/domain.html:56
+#: main/templates/main/host.html:42 main/templates/main/host.html:59
 msgid "Show Configuration"
 msgstr "Konfiguráció megjelenítése"
 
@@ -947,11 +947,11 @@ msgid ""
 "invalid. You have to use the new secret in your name server configuration."
 msgstr "Létrehozunk egy új közös titkot - ha volt már, az érvénytelenné válik. A DNS konfigurációdban az új titkot kell majd használnod."
 
-#: main/templates/main/domain.html:61 main/templates/main/domain.html:68
+#: main/templates/main/domain.html:62 main/templates/main/domain.html:69
 msgid "Delete Domain"
 msgstr "Domén törlése"
 
-#: main/templates/main/domain.html:65
+#: main/templates/main/domain.html:66
 msgid ""
 "Deleting a domain cannot be undone. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
@@ -1109,99 +1109,99 @@ msgid ""
 "You have to use the new secret in your router / update client configuration."
 msgstr "Új titkot hozunk létre - ha már van egy, az érvénytelenné válik. Az új titkot kell majd használnod a router-edben, vagy a változtatásokat végző kliensed beállításaiban."
 
-#: main/templates/main/host.html:65
+#: main/templates/main/host.html:66
 msgid "Related Hosts"
 msgstr "Kapcsolódó hosztok"
 
-#: main/templates/main/host.html:69
+#: main/templates/main/host.html:70
 msgid ""
 "We can update additional host records (for other hosts in same network) when"
 " we receive an update for this host."
 msgstr "További hoszt rekordokat változtathatunk meg (más hosztokhoz ugyanazon a hálózaton), ha ehhez a hoszthoz egy változtatás érkezik."
 
-#: main/templates/main/host.html:75
+#: main/templates/main/host.html:76
 msgid "Configure related Hosts"
 msgstr "Kapcsolódó hosztok beállítása"
 
-#: main/templates/main/host.html:82
+#: main/templates/main/host.html:83
 msgid "Update other Services"
 msgstr "Más szolgáltatások beállítása"
 
-#: main/templates/main/host.html:85
+#: main/templates/main/host.html:86
 msgid ""
 "We can send updates to other services when we receive an update from you."
 msgstr "Küldhetünk változtatásokat más szolgáltatásokhoz is, amennyiben tőled egy változtatás érkezik."
 
-#: main/templates/main/host.html:87
+#: main/templates/main/host.html:88
 msgid "Configure Updaters"
 msgstr "Frissítők beállítása"
 
-#: main/templates/main/host.html:95
+#: main/templates/main/host.html:96
 msgid "Update Nameserver Records"
 msgstr "Névszerver rekordok megváltoztatása"
 
-#: main/templates/main/host.html:99
+#: main/templates/main/host.html:100
 msgid ""
 "Usually you configure your router to follow the dyndns2 protocol. But if you"
 " know what you are doing, and you want to update manually, you can do it "
 "here."
 msgstr "Általában a routeredet a dyndns2 protokoll használatára állítsd be. De ha tudod mit teszel, és kézzel szeretnéd beállítani, akkor itt megteheted."
 
-#: main/templates/main/host.html:104
+#: main/templates/main/host.html:105
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
 msgstr "Az új címekhez az input mezőket a jelenleg detektált címedhez állítottuk be."
 
-#: main/templates/main/host.html:107 main/templates/main/host.html:109
-#: main/templates/main/host.html:111 main/templates/main/overview.html:32
-#: main/templates/main/related_host_overview.html:27
-#: main/templates/main/related_host_overview.html:29
+#: main/templates/main/host.html:108 main/templates/main/host.html:110
+#: main/templates/main/host.html:112 main/templates/main/overview.html:32
+#: main/templates/main/related_host_overview.html:31
+#: main/templates/main/related_host_overview.html:33
 #: main/templates/main/updater_hostconfig_overview.html:17
 msgid "IPv4"
 msgstr "IPv4"
 
-#: main/templates/main/host.html:107 main/templates/main/host.html:121
+#: main/templates/main/host.html:108 main/templates/main/host.html:122
 #, python-format
 msgid "Current %(type)s address from master nameserver"
 msgstr "Jelenlegi %(type)s cím a mester névszerverből"
 
-#: main/templates/main/host.html:109 main/templates/main/host.html:123
+#: main/templates/main/host.html:110 main/templates/main/host.html:124
 #, python-format
 msgid "Set new %(type)s address"
 msgstr "Új %(type)s cím beállítása"
 
-#: main/templates/main/host.html:111 main/templates/main/host.html:125
+#: main/templates/main/host.html:112 main/templates/main/host.html:126
 #, python-format
 msgid "Give new %(type)s address"
 msgstr "Új %(type)s cím megadása"
 
-#: main/templates/main/host.html:117 main/templates/main/host.html:131
+#: main/templates/main/host.html:118 main/templates/main/host.html:132
 #: main/templates/main/updater_hostconfig.html:33
 msgid "Delete"
 msgstr "Törlés"
 
-#: main/templates/main/host.html:121 main/templates/main/host.html:123
-#: main/templates/main/host.html:125 main/templates/main/overview.html:37
-#: main/templates/main/related_host_overview.html:32
-#: main/templates/main/related_host_overview.html:34
+#: main/templates/main/host.html:122 main/templates/main/host.html:124
+#: main/templates/main/host.html:126 main/templates/main/overview.html:37
+#: main/templates/main/related_host_overview.html:36
+#: main/templates/main/related_host_overview.html:38
 #: main/templates/main/updater_hostconfig_overview.html:18
 msgid "IPv6"
 msgstr "IPv6"
 
-#: main/templates/main/host.html:180
+#: main/templates/main/host.html:181
 msgid "Result Messages"
 msgstr "Eredmények"
 
-#: main/templates/main/host.html:185
+#: main/templates/main/host.html:186
 msgid "API Authentication Result Message"
 msgstr "API hitelesítés eredménye"
 
-#: main/templates/main/host.html:189
+#: main/templates/main/host.html:190
 msgid "Client Result Message"
 msgstr "Kliens üzenete"
 
-#: main/templates/main/host.html:193
+#: main/templates/main/host.html:194
 msgid "Server Result Message"
 msgstr "Szerver üzenete"
 
@@ -1548,19 +1548,19 @@ msgid "Add Host"
 msgstr "Hoszt hozzáadása"
 
 #: main/templates/main/overview.html:19
-#: main/templates/main/related_host_overview.html:21
+#: main/templates/main/related_host_overview.html:25
 #: main/templates/main/updater_hostconfig_overview.html:16
 msgid "Host"
 msgstr "Hoszt"
 
 #: main/templates/main/overview.html:21 main/templates/main/overview.html:107
-#: main/templates/main/related_host_overview.html:23
+#: main/templates/main/related_host_overview.html:27
 #: main/templates/main/updater_hostconfig_overview.html:19
 msgid "Comment"
 msgstr "Megjegyzés"
 
 #: main/templates/main/overview.html:24 main/templates/main/overview.html:105
-#: main/templates/main/related_host_overview.html:25
+#: main/templates/main/related_host_overview.html:29
 msgid "Available"
 msgstr "Elérhető"
 
@@ -1573,8 +1573,8 @@ msgid "C / S"
 msgstr "C / S"
 
 #: main/templates/main/overview.html:32 main/templates/main/overview.html:37
-#: main/templates/main/related_host_overview.html:27
-#: main/templates/main/related_host_overview.html:32
+#: main/templates/main/related_host_overview.html:31
+#: main/templates/main/related_host_overview.html:36
 #, python-format
 msgid "%(type)s Address"
 msgstr "%(type)s cím"
@@ -1679,17 +1679,21 @@ msgstr "Kapcsolódó hosztok"
 msgid "Add related host"
 msgstr "Kapcsolódó hoszt hozzáadása"
 
-#: main/templates/main/related_host_overview.html:15
+#: main/templates/main/related_host_overview.html:13
+msgid "Update DNS"
+msgstr "DNS frissítése"
+
+#: main/templates/main/related_host_overview.html:19
 msgid "Main host:"
 msgstr "Fő hoszt:"
 
-#: main/templates/main/related_host_overview.html:29
-#: main/templates/main/related_host_overview.html:34
+#: main/templates/main/related_host_overview.html:33
+#: main/templates/main/related_host_overview.html:38
 #, python-format
 msgid "%(type)s interface ID"
 msgstr "%(type)s interfész azonosító"
 
-#: main/templates/main/related_host_overview.html:58
+#: main/templates/main/related_host_overview.html:62
 msgid "No related hosts yet."
 msgstr "Még nincs kapcsolódó hoszt."
 
@@ -2054,6 +2058,10 @@ msgstr "francia"
 #: settings/base.py:444
 msgid "Italian"
 msgstr "olasz"
+
+#: settings/base.py:445
+msgid "Hungarian"
+msgstr "magyar"
 
 #: templates/base.html:39
 msgid "Home"
