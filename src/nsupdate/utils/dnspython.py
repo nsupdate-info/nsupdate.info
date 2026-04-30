@@ -133,4 +133,4 @@ def make_nameserver(protocol, ip, port):
         case "doq":
             return dns.nameserver.DoQNameserver(ip, port)
         case _:
-            raise dns.exception.SyntaxError(f"invalid protocol {protocol}")
+            raise ValueError(f"invalid protocol {protocol}")
