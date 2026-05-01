@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Peter Horvath <horvath.akos.peter@gmail.com>, 2026
 msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-29 00:43+0200\n"
+"POT-Creation-Date: 2026-05-01 22:24+0200\n"
 "PO-Revision-Date: 2014-07-14 15:19+0000\n"
 "Last-Translator: Peter Horvath <horvath.akos.peter@gmail.com>, 2026\n"
-"Language-Team: Hungarian (http://app.transifex.com/thomaswaldmann/nsupdateinfo/language/hu/)\n"
+"Language-Team: Hungarian (http://app.transifex.com/thomaswaldmann/"
+"nsupdateinfo/language/hu/)\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: accounts/models.py:20
@@ -46,7 +47,9 @@ msgstr "Fiók törlése"
 msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You cannot undelete your data."
-msgstr "Biztosan törölnéd a felhasználói fiókodat, annak minden adatával együtt? Ez egy nem visszavonható művelet."
+msgstr ""
+"Biztosan törölnéd a felhasználói fiókodat, annak minden adatával együtt? Ez "
+"egy nem visszavonható művelet."
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:15
@@ -92,7 +95,10 @@ msgid ""
 "If you'd like to stop using this service and delete this user profile and "
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
-msgstr "Ha felhagynál a szolgáltatás használatával és törölnéd ezt a fiókot annak minden adatával együtt (különösen az összes hosztoddal és doméneddel), akkor itt megteheted."
+msgstr ""
+"Ha felhagynál a szolgáltatás használatával és törölnéd ezt a fiókot annak "
+"minden adatával együtt (különösen az összes hosztoddal és doméneddel), akkor "
+"itt megteheted."
 
 #: accounts/templates/accounts/user_settings_account.html:56
 msgid "Delete User Profile"
@@ -103,7 +109,7 @@ msgid "Profile settings"
 msgstr "Fiók beállításai"
 
 #: accounts/templates/accounts/user_settings_profile.html:9
-#: templates/base.html:65
+#: templates/base.html:66
 msgid "Profile"
 msgstr "Fiók"
 
@@ -129,12 +135,14 @@ msgstr "Az aktiválás sikerült, köszönjük!"
 #: accounts/templates/registration/activation_complete.html:7
 msgid ""
 "You may now login using the username and password you set at registration."
-msgstr "Most már beléphetsz a regisztrációnál megadott felhasználónévvel és jelszóval."
+msgstr ""
+"Most már beléphetsz a regisztrációnál megadott felhasználónévvel és "
+"jelszóval."
 
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html:26
-#: login/templates/password_reset_complete.html:8 templates/base.html:60
+#: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
 msgstr "Belépés"
 
@@ -145,7 +153,8 @@ msgstr "Húha"
 #: accounts/templates/registration/activate.html:13
 msgid ""
 "It seems that your activation key is invalid. Please check the URL again."
-msgstr "Az aktivációs kulcsod érvénytelennek tűnik. Kérlek ellenőrizd az URL-t."
+msgstr ""
+"Az aktivációs kulcsod érvénytelennek tűnik. Kérlek ellenőrizd az URL-t."
 
 #: accounts/templates/registration/registration_closed.html:3
 msgid "Registration closed"
@@ -160,7 +169,9 @@ msgstr "Új fiókok regisztrációja le van zárva."
 msgid ""
 "Registration is currently only possible by contacting the admin "
 "(%(SERVICE_CONTACT)s). "
-msgstr "Pillanatnyilag csak az adminisztrátorral kapcsolatba lépve lehet regisztrálni (%(SERVICE_CONTACT)s). "
+msgstr ""
+"Pillanatnyilag csak az adminisztrátorral kapcsolatba lépve lehet "
+"regisztrálni (%(SERVICE_CONTACT)s). "
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
@@ -171,9 +182,10 @@ msgid "An activation email has been sent."
 msgstr "Kiküldtünk egy aktivációs levelet."
 
 #: accounts/templates/registration/registration_complete.html:7
-msgid ""
-"Please check your email and click on the link to activate your account."
-msgstr "Vizsgáld meg az e-mailedet, és kattints benne a linkre, hogy aktiváljuk a fiókodat."
+msgid "Please check your email and click on the link to activate your account."
+msgstr ""
+"Vizsgáld meg az e-mailedet, és kattints benne a linkre, hogy aktiváljuk a "
+"fiókodat."
 
 #: accounts/templates/registration/registration_form.html:3
 msgid "Register for an account"
@@ -206,7 +218,9 @@ msgid ""
 "<b>Note:</b> if that doesn't work, the service administrator did not set up "
 "the test account yet or discontinued offering it. In that case, you can "
 "still just register a new account."
-msgstr "<b>Megjegyzés:</b> ha ez nem működik, akkor a szolgáltatás adminisztrátora még vagy már nem állított be tesztfiókot. Regisztrálj rendes fiókot."
+msgstr ""
+"<b>Megjegyzés:</b> ha ez nem működik, akkor a szolgáltatás adminisztrátora "
+"még vagy már nem állított be tesztfiókot. Regisztrálj rendes fiókot."
 
 #: accounts/templates/registration/registration_form.html:26
 msgid "test account is <b>only</b> for testing"
@@ -216,13 +230,17 @@ msgstr "tesztfiók <b>csak</b> kipróbálásra"
 msgid ""
 "Any data (hosts, domains, ...) entered using the test account might be "
 "removed at any time and without prior notice."
-msgstr "A tesztfiókba beírt minden adat (hosztok, domének, ...) bármikor, figyelmeztetés nélkül törölhető."
+msgstr ""
+"A tesztfiókba beírt minden adat (hosztok, domének, ...) bármikor, "
+"figyelmeztetés nélkül törölhető."
 
 #: accounts/templates/registration/registration_form.html:34
 msgid ""
 "So if you'd like your stuff to stay, please register for a regular account "
 "after finishing your initial evaluation."
-msgstr "Ha azt szeretnéd, hogy megmaradjanak a dolgait, akkor regisztrálj egy rendes fiókot, miután kipróbáltad a rendszert."
+msgstr ""
+"Ha azt szeretnéd, hogy megmaradjanak a dolgait, akkor regisztrálj egy rendes "
+"fiókot, miután kipróbáltad a rendszert."
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
@@ -230,11 +248,15 @@ msgstr "Új fiók regisztrációja"
 
 #: accounts/templates/registration/registration_form.html:43
 msgid ""
-"Username: should be related to your <em>person or organisation</em> (not: to"
-" the host(s) you want to register).<br> Email address: must be a "
-"<em>working</em> one, we'll send you an activation email there.<br> "
-"Password: please use a sane one, we trust you."
-msgstr "Felhasználónév: <em>veled vagy a szervezeteddel</em> álljon kapcsolatban (és ne a regisztrálandó hoszt(ok)kal).<br> E-mail cím: <em>működőnek</em>kell lennie, oda fogjuk küldeni az aktivációs levelet.<br> Jelszó: kérjük, értelmeset használj, bízunk benned."
+"Username: should be related to your <em>person or organisation</em> (not: to "
+"the host(s) you want to register).<br> Email address: must be a <em>working</"
+"em> one, we'll send you an activation email there.<br> Password: please use "
+"a sane one, we trust you."
+msgstr ""
+"Felhasználónév: <em>veled vagy a szervezeteddel</em> álljon kapcsolatban (és "
+"ne a regisztrálandó hoszt(ok)kal).<br> E-mail cím: <em>működőnek</em>kell "
+"lennie, oda fogjuk küldeni az aktivációs levelet.<br> Jelszó: kérjük, "
+"értelmeset használj, bízunk benned."
 
 #: accounts/templates/registration/registration_form.html:56
 msgid "Send activation email"
@@ -272,7 +294,7 @@ msgstr "Távoli belépés nem engedélyezett."
 msgid "Please login with a local account."
 msgstr "Kérjük, helyi fiókkal lépj be."
 
-#: login/templates/logout.html:3 templates/base.html:75
+#: login/templates/logout.html:3 templates/base.html:76
 msgid "Log out"
 msgstr "Kilépés"
 
@@ -293,7 +315,9 @@ msgstr "Jelszó visszaállítása"
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr "Elfelejtetted a jelszavad? Add meg az e-mail címed, és megírjuk egy levélben, hogyan állíthatsz be újat."
+msgstr ""
+"Elfelejtetted a jelszavad? Add meg az e-mail címed, és megírjuk egy "
+"levélben, hogyan állíthatsz be újat."
 
 #: login/templates/password_reset.html:17
 msgid "Reset my password"
@@ -316,7 +340,9 @@ msgstr "Add meg az új jelszót"
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "Kérjük, kétszer írd be az új jelszavad, mert innét tudjuk, hogy jól írtad-e be."
+msgstr ""
+"Kérjük, kétszer írd be az új jelszavad, mert innét tudjuk, hogy jól írtad-e "
+"be."
 
 #: login/templates/password_reset_confirm.html:21
 msgid "Password reset unsuccessful"
@@ -326,7 +352,9 @@ msgstr "Sikertelen jelszóvisszaállítás"
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "A jelszóvisszaállító link érvénytelen, valószínűleg már felhasználtad. Kérjük, kezdeményezz egy új jelszóvisszaállítást."
+msgstr ""
+"A jelszóvisszaállító link érvénytelen, valószínűleg már felhasználtad. "
+"Kérjük, kezdeményezz egy új jelszóvisszaállítást."
 
 #: login/templates/password_reset_done.html:3
 #: login/templates/password_reset_done.html:6
@@ -337,13 +365,17 @@ msgstr "Sikeres jelszóvisszaállítás"
 msgid ""
 "We've emailed you instructions for setting your password. You should be "
 "receiving them shortly."
-msgstr "Megírtuk egy levélben, hogyan állíthatod be a jelszavad. Rövidesen meg kell kapjad."
+msgstr ""
+"Megírtuk egy levélben, hogyan állíthatod be a jelszavad. Rövidesen meg kell "
+"kapjad."
 
 #: login/templates/password_reset_done.html:8
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr "Ha nem kapsz e-mail-t, kérlek ellenőrizd, hogy jól írtad-e itt be azt az e-mail címed, amivel itt regisztráltál, és nézd meg a spam mappádat."
+msgstr ""
+"Ha nem kapsz e-mail-t, kérlek ellenőrizd, hogy jól írtad-e itt be azt az e-"
+"mail címed, amivel itt regisztráltál, és nézd meg a spam mappádat."
 
 #: main/forms.py:54 main/forms.py:71
 msgid "Enter a valid secret in base64 format."
@@ -354,7 +386,10 @@ msgstr "Érvényes titkot adj meg, base64 formátumban."
 msgid ""
 "Failed to add/delete host connectivity-test.%(domain)s, check your DNS "
 "server configuration. This is a requirement for setting the available flag."
-msgstr "A hoszt connectivity-test.%(domain)s, hozzáadása/törlése nem sikerült. Ellenőrizd a DNS szervered beállításait. Ez az \"elérhető\" gomb beállításához szükséges."
+msgstr ""
+"A hoszt connectivity-test.%(domain)s, hozzáadása/törlése nem sikerült. "
+"Ellenőrizd a DNS szervered beállításait. Ez az \"elérhető\" gomb "
+"beállításához szükséges."
 
 #: main/forms.py:91
 msgid "Domain must be available to be public."
@@ -422,7 +457,8 @@ msgstr "Névszerver IP (elsődleges)"
 
 #: main/models.py:95
 msgid "IP where the dynamic DNS updates for this zone will be sent to"
-msgstr "IP-cím, ahova a zónához tartozó dinamikus DNS változtatások lesznek küldve"
+msgstr ""
+"IP-cím, ahova a zónához tartozó dinamikus DNS változtatások lesznek küldve"
 
 #: main/models.py:97
 msgid "nameserver IP (secondary)"
@@ -446,7 +482,8 @@ msgstr "névszerver frissítés kódolási algoritmusa"
 
 #: main/models.py:110
 msgid "HMAC_SHA512 is fine for bind9 (you can change this later, if needed)"
-msgstr "HMAC_SHA512 teljesen oké bind9-hez (később szükség esetén megváltoztatható)"
+msgstr ""
+"HMAC_SHA512 teljesen oké bind9-hez (később szükség esetén megváltoztatható)"
 
 #: main/models.py:112
 msgid "public"
@@ -456,7 +493,9 @@ msgstr "nyilvános"
 msgid ""
 "Check to allow any user to add dynamic hosts to this zone - if not checked, "
 "we'll only allow the owner to add hosts"
-msgstr "Állítsd be, ha bárkinek megengeded, hogy dinamikus hosztokat adjon ehhez a zónához - ha nincs beállítva, akkor csak a tulajdonos adhat hozzá új hosztot"
+msgstr ""
+"Állítsd be, ha bárkinek megengeded, hogy dinamikus hosztokat adjon ehhez a "
+"zónához - ha nincs beállítva, akkor csak a tulajdonos adhat hozzá új hosztot"
 
 #: main/models.py:119 main/models.py:183 main/models.py:404
 msgid "available"
@@ -466,7 +505,9 @@ msgstr "elérhető"
 msgid ""
 "Check if nameserver is available/reachable - if not checked, we'll pause "
 "querying/updating this nameserver for a while"
-msgstr "Állítsd be, ha a névszerver elérhető-e - ha nem, akkor egy ideig nem küldünk neki lekéréseket vagy változtatásokat"
+msgstr ""
+"Állítsd be, ha a névszerver elérhető-e - ha nem, akkor egy ideig nem küldünk "
+"neki lekéréseket vagy változtatásokat"
 
 #: main/models.py:124 main/models.py:174 main/models.py:389 main/models.py:457
 #: main/models.py:503
@@ -477,7 +518,9 @@ msgstr "megjegyzés"
 msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will also be publicly shown."
-msgstr "Tetszőleges megjegyzés a doménedhez. Ha a doméned publikus, akkor nyilvánosan látható lesz."
+msgstr ""
+"Tetszőleges megjegyzés a doménedhez. Ha a doméned publikus, akkor "
+"nyilvánosan látható lesz."
 
 #: main/models.py:151 main/models.py:168
 msgid "domain"
@@ -504,7 +547,9 @@ msgstr "Bármi megjegyzés a hosztodról, ki-mi-hol."
 msgid ""
 "Check if host is available/in use - if not checked, we won't accept updates "
 "for this host"
-msgstr "Állítsd be, ha a hoszt elérhető és használatban van - ha nincs beállítva, akkor nem fogadunk ehhez a hoszthoz változtatásokat"
+msgstr ""
+"Állítsd be, ha a hoszt elérhető és használatban van - ha nincs beállítva, "
+"akkor nem fogadunk ehhez a hoszthoz változtatásokat"
 
 #: main/models.py:188
 msgid "netmask IPv4"
@@ -530,7 +575,9 @@ msgstr "helytelen használat"
 msgid ""
 "Checked if we think you abuse the service - you may uncheck this AFTER "
 "fixing all issues on your side"
-msgstr "Akkor van beállítva, ha szerintünk helytelenül használod a szolgáltatást - kikapcsolhatod, de csak MIUTÁN minden problémát megoldottál a te oldaladon"
+msgstr ""
+"Akkor van beállítva, ha szerintünk helytelenül használod a szolgáltatást - "
+"kikapcsolhatod, de csak MIUTÁN minden problémát megoldottál a te oldaladon"
 
 #: main/models.py:210
 msgid "abuse blocked"
@@ -624,7 +671,9 @@ msgstr "IPv4 interfész azonosító"
 msgid ""
 "The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set "
 "record."
-msgstr "A hoszt IPv4 interfészének azonosítója, IPv4 formátumban. Ha üres, akkor nincs IPv4 cím."
+msgstr ""
+"A hoszt IPv4 interfészének azonosítója, IPv4 formátumban. Ha üres, akkor "
+"nincs IPv4 cím."
 
 #: main/models.py:399
 msgid "interface ID IPv6"
@@ -634,7 +683,9 @@ msgstr "IPv6 interfész azonosító"
 msgid ""
 "The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set "
 "record."
-msgstr "A hoszt IPv6 interfészének azonosítója, IPv6 formátumban. Ha üres, akkor nincs IPv6 cím."
+msgstr ""
+"A hoszt IPv6 interfészének azonosítója, IPv6 formátumban. Ha üres, akkor "
+"nincs IPv6 cím."
 
 #: main/models.py:413
 msgid "main host"
@@ -678,7 +729,9 @@ msgstr "biztonságos"
 
 #: main/models.py:473
 msgid "Use https / TLS to contact the Update Server?"
-msgstr "Használjunk-e https-t vagy TLS-t a változtatást végző szerverhez kapcsolódáshoz?"
+msgstr ""
+"Használjunk-e https-t vagy TLS-t a változtatást végző szerverhez "
+"kapcsolódáshoz?"
 
 #: main/models.py:476
 msgid "accept IPv4"
@@ -714,7 +767,9 @@ msgstr "Tetszőleges megjegyzés a hosztról abban a szolgáltatásban"
 
 #: main/models.py:512
 msgid "The name/id for that service (used for http basic auth)"
-msgstr "A szolgáltatás neve vagy azonosítója (egyszerű http hitelesítéshez használjuk)"
+msgstr ""
+"A szolgáltatás neve vagy azonosítója (egyszerű http hitelesítéshez "
+"használjuk)"
 
 #: main/models.py:514
 msgid "password"
@@ -722,7 +777,8 @@ msgstr "jelszó"
 
 #: main/models.py:516
 msgid "The password/secret for that service (used for http basic auth)"
-msgstr "Jelszó vagy titok a szolgáltatáshoz (egyszerű http hitelesítéshez használjuk)"
+msgstr ""
+"Jelszó vagy titok a szolgáltatáshoz (egyszerű http hitelesítéshez használjuk)"
 
 #: main/models.py:519
 msgid "give IPv4"
@@ -759,14 +815,19 @@ msgid ""
 "You usually need it so your router (or other dyndns2-compatible client) can "
 "update a hostname, so you don't need to know or find out your current IP "
 "address."
-msgstr "Általában ahhoz van rá szükség, hogy a routered (vagy más, dyndns2-kompatibilis kliens) beállíthassa a hosztnevedet, így nem kell tudnod a jelenlegi IP-címed."
+msgstr ""
+"Általában ahhoz van rá szükség, hogy a routered (vagy más, dyndns2-"
+"kompatibilis kliens) beállíthassa a hosztnevedet, így nem kell tudnod a "
+"jelenlegi IP-címed."
 
 #: main/templates/main/about.html:28
 #, python-format
 msgid ""
 "%(WWW_HOST)s is <b>simple, usable, free, friendly, secure and respects your "
 "privacy</b>."
-msgstr "A %(WWW_HOST)s <b>egyszerű, felhasználóbarát, szabad, biztonságos és tiszteletben tartja az adataidat</b>."
+msgstr ""
+"A %(WWW_HOST)s <b>egyszerű, felhasználóbarát, szabad, biztonságos és "
+"tiszteletben tartja az adataidat</b>."
 
 #: main/templates/main/about.html:38
 msgid "Why another one?"
@@ -786,7 +847,9 @@ msgstr "idegesíti a felhasználóit reklámmal vagy spammal"
 
 #: main/templates/main/about.html:47
 msgid "cancelling hosts or accounts after a short period of non-usage"
-msgstr "szünteti meg a hosztokat vagy fiókokat akár már egy rövid nem-használat után is"
+msgstr ""
+"szünteti meg a hosztokat vagy fiókokat akár már egy rövid nem-használat után "
+"is"
 
 #: main/templates/main/about.html:49
 msgid ""
@@ -808,14 +871,21 @@ msgid ""
 "docs in new window\" target=\"_blank\" rel=\"noopener\">documentation</a> "
 "&mdash; there might be some interesting stuff for you in it that is not "
 "visible or obvious on the user interface."
-msgstr "Emellett, részletes <a href=\"http://nsupdateinfo.readthedocs.org/\" title=\"Open docs in new window\" target=\"_blank\" rel=\"noopener\">dokumentációnk</a> is van &mdash; itt találhatsz az ezen a felhasználói felületen nem látható, vagy nem nyilvánvaló dolgokat is."
+msgstr ""
+"Emellett, részletes <a href=\"http://nsupdateinfo.readthedocs.org/\" "
+"title=\"Open docs in new window\" target=\"_blank\" "
+"rel=\"noopener\">dokumentációnk</a> is van &mdash; itt találhatsz az ezen a "
+"felhasználói felületen nem látható, vagy nem nyilvánvaló dolgokat is."
 
 #: main/templates/main/about.html:76
 msgid ""
 "If you are interested in the software project, have a look at the <a "
 "href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info "
 "project on GitHub</a>."
-msgstr "Ha érdekel ez a szoftver projekt, kukkants rá az <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info projektre a GitHub-on</a>."
+msgstr ""
+"Ha érdekel ez a szoftver projekt, kukkants rá az <a href=\"https://"
+"github.com/nsupdate-info/nsupdate.info\">nsupdate.info projektre a GitHub-"
+"on</a>."
 
 #: main/templates/main/about.html:89
 msgid "Fair use of the service"
@@ -844,7 +914,9 @@ msgstr "Ne hozz létre egy raklap felhasználót vagy hosztot."
 #: main/templates/main/about.html:100
 msgid ""
 "Don't use the service for any illegal or otherwise questionable purpose."
-msgstr "Ne használd a szolgáltatást semmiféle illegális vagy problémás, megkérdőjelezhető célra."
+msgstr ""
+"Ne használd a szolgáltatást semmiféle illegális vagy problémás, "
+"megkérdőjelezhető célra."
 
 #: main/templates/main/about.html:101
 msgid "Don't spam us via email."
@@ -854,7 +926,10 @@ msgstr "Ne spammolj minket e-mail-ben."
 msgid ""
 "We reserve the right to remove any account or hostname(s) that are related "
 "to unfair use of the service - at any time and without prior notice."
-msgstr "Fenntartjuk a jogot bármelyik fiók vagy hoszt(ok) törlésére, ha az a szolgáltatást tisztességtelenül használja - bármikor és figyelmeztetés nélkül."
+msgstr ""
+"Fenntartjuk a jogot bármelyik fiók vagy hoszt(ok) törlésére, ha az a "
+"szolgáltatást tisztességtelenül használja - bármikor és figyelmeztetés "
+"nélkül."
 
 #: main/templates/main/about.html:115
 msgid "No warranties"
@@ -876,7 +951,9 @@ msgstr "Kapcsolat az üzemeltetéshez"
 msgid ""
 "Before contacting us via email, please read the docs, they exist for a "
 "reason."
-msgstr "Mielőtt e-mail-t írsz, kérjük olvasd el a dokumentációt, nem ok nélkül van ott."
+msgstr ""
+"Mielőtt e-mail-t írsz, kérjük olvasd el a dokumentációt, nem ok nélkül van "
+"ott."
 
 #: main/templates/main/about.html:139
 msgid "Software Project Contact"
@@ -884,9 +961,11 @@ msgstr "Kapcsolat a fejlesztéshez"
 
 #: main/templates/main/about.html:141
 msgid ""
-"Visit the <a href=\"https://github.com/nsupdate-"
-"info/nsupdate.info\">nsupdate.info project on GitHub</a> to:"
-msgstr "Látogasd meg az <a href=\"https://github.com/nsupdate-info/nsupdate.info\">nsupdate.info projektet a GitHub-on</a>:"
+"Visit the <a href=\"https://github.com/nsupdate-info/"
+"nsupdate.info\">nsupdate.info project on GitHub</a> to:"
+msgstr ""
+"Látogasd meg az <a href=\"https://github.com/nsupdate-info/"
+"nsupdate.info\">nsupdate.info projektet a GitHub-on</a>:"
 
 #: main/templates/main/about.html:147
 msgid "file issues on the issue tracker for bugs, ideas, patches."
@@ -914,55 +993,68 @@ msgstr "Domén szerkesztése"
 msgid ""
 "You can't change the domain name. If you want to have another domain name, "
 "you have to delete this domain and create a new one."
-msgstr "A domén neve nem változtatható meg. Egy új doménnévhez töröld ezt a domént és hozz létre egy újat."
+msgstr ""
+"A domén neve nem változtatható meg. Egy új doménnévhez töröld ezt a domént "
+"és hozz létre egy újat."
 
 #: main/templates/main/domain.html:19
 msgid ""
 "Please note that update algorithm and update secret need to match. Just "
 "create a new secret after submitting this form with a changed update "
 "algorithm."
-msgstr "Kérjük ügyelj rá, hogy a változtatási algoritmus és a változtatás titkának egyeznie kell. A formula elküldése után csak hozz létre egy új titkot."
+msgstr ""
+"Kérjük ügyelj rá, hogy a változtatási algoritmus és a változtatás titkának "
+"egyeznie kell. A formula elküldése után csak hozz létre egy új titkot."
 
 #: main/templates/main/domain.html:29 main/templates/main/host.html:20
-#: main/templates/main/host.html:116 main/templates/main/host.html:130
+#: main/templates/main/host.html:115 main/templates/main/host.html:129
 #: main/templates/main/related_host.html:20
 #: main/templates/main/updater_hostconfig.html:20
 msgid "Update"
 msgstr "Frissítés"
 
-#: main/templates/main/domain.html:39 main/templates/main/domain.html:56
-#: main/templates/main/host.html:42 main/templates/main/host.html:59
+#: main/templates/main/domain.html:39 main/templates/main/domain.html:55
+#: main/templates/main/host.html:42 main/templates/main/host.html:58
 msgid "Show Configuration"
 msgstr "Konfiguráció megjelenítése"
 
 #: main/templates/main/domain.html:43
 msgid ""
-"We'll generate a ready-to-use configuration for your name server, filled out"
-" with all values (including a new secret)."
-msgstr "Létre fogunk hozni egy új, azonnal használató névszerver konfigurációt, kitöltve minden szükséges értékkel (beleértve az új titkot is)."
+"We'll generate a ready-to-use configuration for your name server, filled out "
+"with all values (including a new secret)."
+msgstr ""
+"Létre fogunk hozni egy új, azonnal használató névszerver konfigurációt, "
+"kitöltve minden szükséges értékkel (beleértve az új titkot is)."
 
 #: main/templates/main/domain.html:49
 msgid ""
 "We'll create a new shared secret - if you had one before, it will become "
 "invalid. You have to use the new secret in your name server configuration."
-msgstr "Létrehozunk egy új közös titkot - ha volt már, az érvénytelenné válik. A DNS konfigurációdban az új titkot kell majd használnod."
+msgstr ""
+"Létrehozunk egy új közös titkot - ha volt már, az érvénytelenné válik. A DNS "
+"konfigurációdban az új titkot kell majd használnod."
 
-#: main/templates/main/domain.html:62 main/templates/main/domain.html:69
+#: main/templates/main/domain.html:61 main/templates/main/domain.html:68
 msgid "Delete Domain"
 msgstr "Domén törlése"
 
-#: main/templates/main/domain.html:66
+#: main/templates/main/domain.html:65
 msgid ""
 "Deleting a domain cannot be undone. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
-msgstr "A domén törlése nem vonható vissza. Ha mégis újra kell, akkor létre kell majd hoznod, egy új közös titokkal együtt."
+msgstr ""
+"A domén törlése nem vonható vissza. Ha mégis újra kell, akkor létre kell "
+"majd hoznod, egy új közös titokkal együtt."
 
 #: main/templates/main/domain_add.html:7
 msgid ""
 "This feature is for advanced users only! To use this feature, you need "
-"control over at least one nameserver which is able to accept dynamic updates"
-" (RFC 2136)."
-msgstr "Ez a funkció csak gyakorlott felhasználóknak van! A használatához egy olyan névszerverre van szükséged, amelyik képes dinamikus frissítések fogadására és végrehajtására (RFC 2136 alapján)."
+"control over at least one nameserver which is able to accept dynamic updates "
+"(RFC 2136)."
+msgstr ""
+"Ez a funkció csak gyakorlott felhasználóknak van! A használatához egy olyan "
+"névszerverre van szükséged, amelyik képes dinamikus frissítések fogadására "
+"és végrehajtására (RFC 2136 alapján)."
 
 #: main/templates/main/domain_add.html:13
 msgid "Add a new Domain"
@@ -984,21 +1076,28 @@ msgstr "Segítség"
 msgid ""
 "Here you can add new domains (zones) which you control (and this is only "
 "useful if you have your own zone which you can update automatically)."
-msgstr "Itt adhatsz meg az ellenőrzésed alatt álló új doméneket (zónákat). Csak akkor hasznos, ha van egy saját zónád (amit automatikusan változtatgathatsz)."
+msgstr ""
+"Itt adhatsz meg az ellenőrzésed alatt álló új doméneket (zónákat). Csak "
+"akkor hasznos, ha van egy saját zónád (amit automatikusan változtatgathatsz)."
 
 #: main/templates/main/domain_add.html:35
 msgid ""
 "You need to be able to configure the primary master nameserver of the zone "
 "so it accepts dynamic updates (via RFC 2136 \"dynamic update\" protocol) if "
 "the correct update secret is presented."
-msgstr "Be kell állítanod a zóna elsődleges mester névszerverénél, hogy fogadjon dinamikus változtatásokat (az RFC 2136 \"dinamikus változtatások\" protokollja szerint), ha a jelenlegi változtatási titok be van állítva."
+msgstr ""
+"Be kell állítanod a zóna elsődleges mester névszerverénél, hogy fogadjon "
+"dinamikus változtatásokat (az RFC 2136 \"dinamikus változtatások\" "
+"protokollja szerint), ha a jelenlegi változtatási titok be van állítva."
 
 #: main/templates/main/domain_add.html:43
 #, python-format
 msgid ""
 "If you create a new zone, you are strongly advised to consider submitting "
 "your zone to the <a href=\"%(psl_url)s\">%(psl_text)s</a>."
-msgstr "Ha új zónát hozol létre, erősen javasoljuk a zóna elküldését ide: <a href=\"%(psl_url)s\">%(psl_text)s</a>."
+msgstr ""
+"Ha új zónát hozol létre, erősen javasoljuk a zóna elküldését ide: <a "
+"href=\"%(psl_url)s\">%(psl_text)s</a>."
 
 #: main/templates/main/domain_add.html:49
 msgid "We'll show you configuration examples after you add a domain."
@@ -1012,7 +1111,10 @@ msgstr "Névszerver közös titok létrehozva"
 msgid ""
 "New nameserver shared secret generated for you. Every time you visit this "
 "page a new secret will be generated and the old one becomes invalid."
-msgstr "Létrehoztunk a számodra egy új névszerver közös titkot. Minden alkalommal, valahányszor erre a lapra lépsz, egy újat hozunk létre, és a régi érvénytelenné válik."
+msgstr ""
+"Létrehoztunk a számodra egy új névszerver közös titkot. Minden alkalommal, "
+"valahányszor erre a lapra lépsz, egy újat hozunk létre, és a régi "
+"érvénytelenné válik."
 
 #: main/templates/main/generate_ns_secret.html:11
 msgid "Algorithm:"
@@ -1025,7 +1127,9 @@ msgstr "Titok:"
 
 #: main/templates/main/generate_ns_secret.html:21
 msgid "How to configure your bind9 nameserver to accept dynamic DNS updates?"
-msgstr "Hogyan állítsd be a bind9 névszerveredet a dinamikus DNS változtatások fogadására?"
+msgstr ""
+"Hogyan állítsd be a bind9 névszerveredet a dinamikus DNS változtatások "
+"fogadására?"
 
 #: main/templates/main/generate_secret.html:9
 msgid "Host Secret Generated"
@@ -1036,7 +1140,10 @@ msgid ""
 "New secret generated for you. We store it hashed, so save it now, or you "
 "have to generate a new one again. Every time you visit this page a new "
 "secret will be generated and the old one becomes invalid."
-msgstr "Új titkot hoztunk létre a számodra. Rejtjelezve tároljuk, ezért mentsd el most, vagy később újat kell majd létrehoznod. Valahányszor erre a lapra lépsz, egy új titok jön létre, és a régi érvénytelenné válik."
+msgstr ""
+"Új titkot hoztunk létre a számodra. Rejtjelezve tároljuk, ezért mentsd el "
+"most, vagy később újat kell majd létrehoznod. Valahányszor erre a lapra "
+"lépsz, egy új titok jön létre, és a régi érvénytelenné válik."
 
 #: main/templates/main/generate_secret.html:24
 msgid "How to configure automated dynamic DNS updates?"
@@ -1081,7 +1188,8 @@ msgstr "Lenyűgöző kód"
 #: main/templates/main/home.html:47
 msgid ""
 "Empowered by Python and Django,<br> we love to write clean and secure code."
-msgstr "Python és Django alapon.<br> Szeretjük a tiszta és biztonságos megoldásokat."
+msgstr ""
+"Python és Django alapon.<br> Szeretjük a tiszta és biztonságos megoldásokat."
 
 #: main/templates/main/host.html:14
 msgid "Edit Host"
@@ -1093,115 +1201,129 @@ msgstr "Hoszt törlése"
 
 #: main/templates/main/host.html:31
 msgid ""
-"Deleting a host cannot be undone. If you need it back, you'll have to add it"
-" again and configure a new update secret."
-msgstr "A hoszt törlése nem vonható vissza. Ha mégis újra kell, újra létre kell majd hoznod, egy új titokkal együtt."
+"Deleting a host cannot be undone. If you need it back, you'll have to add it "
+"again and configure a new update secret."
+msgstr ""
+"A hoszt törlése nem vonható vissza. Ha mégis újra kell, újra létre kell majd "
+"hoznod, egy új titokkal együtt."
 
 #: main/templates/main/host.html:46
 msgid ""
-"We'll generate a ready-to-use configuration for your router / update client,"
-" filled out with all values (including a new secret)."
-msgstr "Létre fogunk hozni egy új, azonnal használható konfigurációt a routeredhez vagy a frissítő kliensedhez, kitöltve minden szükséges adattal (az új titkot is beleértve)."
+"We'll generate a ready-to-use configuration for your router / update client, "
+"filled out with all values (including a new secret)."
+msgstr ""
+"Létre fogunk hozni egy új, azonnal használható konfigurációt a routeredhez "
+"vagy a frissítő kliensedhez, kitöltve minden szükséges adattal (az új titkot "
+"is beleértve)."
 
 #: main/templates/main/host.html:52
 msgid ""
 "We'll create a new secret - if you had one before, it will become invalid. "
 "You have to use the new secret in your router / update client configuration."
-msgstr "Új titkot hozunk létre - ha már van egy, az érvénytelenné válik. Az új titkot kell majd használnod a router-edben, vagy a változtatásokat végző kliensed beállításaiban."
+msgstr ""
+"Új titkot hozunk létre - ha már van egy, az érvénytelenné válik. Az új "
+"titkot kell majd használnod a router-edben, vagy a változtatásokat végző "
+"kliensed beállításaiban."
 
-#: main/templates/main/host.html:66
+#: main/templates/main/host.html:65
 msgid "Related Hosts"
 msgstr "Kapcsolódó hosztok"
 
-#: main/templates/main/host.html:70
+#: main/templates/main/host.html:69
 msgid ""
-"We can update additional host records (for other hosts in same network) when"
-" we receive an update for this host."
-msgstr "További hoszt rekordokat változtathatunk meg (más hosztokhoz ugyanazon a hálózaton), ha ehhez a hoszthoz egy változtatás érkezik."
+"We can update additional host records (for other hosts in same network) when "
+"we receive an update for this host."
+msgstr ""
+"További hoszt rekordokat változtathatunk meg (más hosztokhoz ugyanazon a "
+"hálózaton), ha ehhez a hoszthoz egy változtatás érkezik."
 
-#: main/templates/main/host.html:76
+#: main/templates/main/host.html:75
 msgid "Configure related Hosts"
 msgstr "Kapcsolódó hosztok beállítása"
 
-#: main/templates/main/host.html:83
+#: main/templates/main/host.html:82
 msgid "Update other Services"
 msgstr "Más szolgáltatások beállítása"
 
-#: main/templates/main/host.html:86
+#: main/templates/main/host.html:85
 msgid ""
 "We can send updates to other services when we receive an update from you."
-msgstr "Küldhetünk változtatásokat más szolgáltatásokhoz is, amennyiben tőled egy változtatás érkezik."
+msgstr ""
+"Küldhetünk változtatásokat más szolgáltatásokhoz is, amennyiben tőled egy "
+"változtatás érkezik."
 
-#: main/templates/main/host.html:88
+#: main/templates/main/host.html:87
 msgid "Configure Updaters"
 msgstr "Frissítők beállítása"
 
-#: main/templates/main/host.html:96
+#: main/templates/main/host.html:95
 msgid "Update Nameserver Records"
 msgstr "Névszerver rekordok megváltoztatása"
 
-#: main/templates/main/host.html:100
+#: main/templates/main/host.html:99
 msgid ""
-"Usually you configure your router to follow the dyndns2 protocol. But if you"
-" know what you are doing, and you want to update manually, you can do it "
-"here."
-msgstr "Általában a routeredet a dyndns2 protokoll használatára állítsd be. De ha tudod mit teszel, és kézzel szeretnéd beállítani, akkor itt megteheted."
+"Usually you configure your router to follow the dyndns2 protocol. But if you "
+"know what you are doing, and you want to update manually, you can do it here."
+msgstr ""
+"Általában a routeredet a dyndns2 protokoll használatára állítsd be. De ha "
+"tudod mit teszel, és kézzel szeretnéd beállítani, akkor itt megteheted."
 
-#: main/templates/main/host.html:105
+#: main/templates/main/host.html:104
 msgid ""
 "We populated the input fields for the new addresses with your currently "
 "detected remote addresses."
-msgstr "Az új címekhez az input mezőket a jelenleg detektált címedhez állítottuk be."
+msgstr ""
+"Az új címekhez az input mezőket a jelenleg detektált címedhez állítottuk be."
 
-#: main/templates/main/host.html:108 main/templates/main/host.html:110
-#: main/templates/main/host.html:112 main/templates/main/overview.html:32
-#: main/templates/main/related_host_overview.html:31
-#: main/templates/main/related_host_overview.html:33
+#: main/templates/main/host.html:107 main/templates/main/host.html:109
+#: main/templates/main/host.html:111 main/templates/main/overview.html:32
+#: main/templates/main/related_host_overview.html:27
+#: main/templates/main/related_host_overview.html:29
 #: main/templates/main/updater_hostconfig_overview.html:17
 msgid "IPv4"
 msgstr "IPv4"
 
-#: main/templates/main/host.html:108 main/templates/main/host.html:122
+#: main/templates/main/host.html:107 main/templates/main/host.html:121
 #, python-format
 msgid "Current %(type)s address from master nameserver"
 msgstr "Jelenlegi %(type)s cím a mester névszerverből"
 
-#: main/templates/main/host.html:110 main/templates/main/host.html:124
+#: main/templates/main/host.html:109 main/templates/main/host.html:123
 #, python-format
 msgid "Set new %(type)s address"
 msgstr "Új %(type)s cím beállítása"
 
-#: main/templates/main/host.html:112 main/templates/main/host.html:126
+#: main/templates/main/host.html:111 main/templates/main/host.html:125
 #, python-format
 msgid "Give new %(type)s address"
 msgstr "Új %(type)s cím megadása"
 
-#: main/templates/main/host.html:118 main/templates/main/host.html:132
+#: main/templates/main/host.html:117 main/templates/main/host.html:131
 #: main/templates/main/updater_hostconfig.html:33
 msgid "Delete"
 msgstr "Törlés"
 
-#: main/templates/main/host.html:122 main/templates/main/host.html:124
-#: main/templates/main/host.html:126 main/templates/main/overview.html:37
-#: main/templates/main/related_host_overview.html:36
-#: main/templates/main/related_host_overview.html:38
+#: main/templates/main/host.html:121 main/templates/main/host.html:123
+#: main/templates/main/host.html:125 main/templates/main/overview.html:37
+#: main/templates/main/related_host_overview.html:32
+#: main/templates/main/related_host_overview.html:34
 #: main/templates/main/updater_hostconfig_overview.html:18
 msgid "IPv6"
 msgstr "IPv6"
 
-#: main/templates/main/host.html:181
+#: main/templates/main/host.html:180
 msgid "Result Messages"
 msgstr "Eredmények"
 
-#: main/templates/main/host.html:186
+#: main/templates/main/host.html:185
 msgid "API Authentication Result Message"
 msgstr "API hitelesítés eredménye"
 
-#: main/templates/main/host.html:190
+#: main/templates/main/host.html:189
 msgid "Client Result Message"
 msgstr "Kliens üzenete"
 
-#: main/templates/main/host.html:194
+#: main/templates/main/host.html:193
 msgid "Server Result Message"
 msgstr "Szerver üzenete"
 
@@ -1225,17 +1347,24 @@ msgid ""
 "compatible updates to us when your IP changes. Routers usually have some "
 "built-in software that does this, but you can also use some software on "
 "another system (like a PC or server)."
-msgstr "Egyik gépeden be kell állítanod, hogy a külső IP-címed megváltoztatása esetén dyndns2-kompatibilis üzenetet küldjön. A routereknek általában van erre szolgáló beépített funkciója, de használhatsz ilyet más rendszeren is (pl. egy PC-n vagy egy szerveren)."
+msgstr ""
+"Egyik gépeden be kell állítanod, hogy a külső IP-címed megváltoztatása "
+"esetén dyndns2-kompatibilis üzenetet küldjön. A routereknek általában van "
+"erre szolgáló beépített funkciója, de használhatsz ilyet más rendszeren is "
+"(pl. egy PC-n vagy egy szerveren)."
 
 #: main/templates/main/host_add.html:32
 msgid ""
 "Just make sure your update client either is customizable well enough or has "
 "specific support for our service."
-msgstr "Győződj meg róla, hogy a dinamikus DNS frissítő kliensed támogatja a szolgáltatásunkat, vagy beállítható hozzá."
+msgstr ""
+"Győződj meg róla, hogy a dinamikus DNS frissítő kliensed támogatja a "
+"szolgáltatásunkat, vagy beállítható hozzá."
 
 #: main/templates/main/host_add.html:38
 msgid "We'll show you configuration examples after you add a host."
-msgstr "A hoszt létrehozása után konfigurációs példákat fogunk mutatni a számodra."
+msgstr ""
+"A hoszt létrehozása után konfigurációs példákat fogunk mutatni a számodra."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:3
 msgid "General"
@@ -1250,14 +1379,19 @@ msgid ""
 "Usually, you should configure one system on your network to update the DNS. "
 "This can be either your router or a host on your network and it will run "
 "some software called the update client."
-msgstr "Általában a hálózatod egyik rendszerén be kell állítsd a DNS változtatási funkciót. Ez lehet a routered, vagy egy olyan hoszt a hálózatodon, amin az névszerver beállító kliens - \"update client\" - szoftver fut."
+msgstr ""
+"Általában a hálózatod egyik rendszerén be kell állítsd a DNS változtatási "
+"funkciót. Ez lehet a routered, vagy egy olyan hoszt a hálózatodon, amin az "
+"névszerver beállító kliens - \"update client\" - szoftver fut."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:29
 msgid ""
 "We have some specific configuration hints for some devices and update "
 "clients, please see the tabs above. If you don't find yours there, use the "
 "generic hints below."
-msgstr "Néhány készülékhez és beállító klienshez külön tanácsaink is vannak, lásd a lenti tabokat. Ha a te készüléked nincs ott, az általános tanácsokat nézd."
+msgstr ""
+"Néhány készülékhez és beállító klienshez külön tanácsaink is vannak, lásd a "
+"lenti tabokat. Ha a te készüléked nincs ott, az általános tanácsokat nézd."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:35
 msgid ""
@@ -1266,15 +1400,25 @@ msgid ""
 "connection to transfer your data (including your update secret). Depending "
 "on your update client (router firmware or PC software) <em>and</em> the "
 "specific nsupdate.info-based service, https might be not supported. So, if "
-"it does not work, you have the choice of using a different update client "
-"and/or a different service, or transmitting your data using an unencrypted "
+"it does not work, you have the choice of using a different update client and/"
+"or a different service, or transmitting your data using an unencrypted "
 "connection (using http: instead of https:)."
-msgstr "<b>Fontos megjegyzés a biztonságról és a kompatibilitásról</b>: Módosítási címeknél, mi mindig a https (és nem a http) címet adjuk meg, mivel ez rejtjelezett adatkapcsolaton küldi át az adataidat (a változtatási titkodat is). Egyes routereknél vagy beállítóklienseknél (ami lehet router firmware vagy PC szoftver) <em>és</em> egyes nsupdate.info alapú szolgáltatásoknál, a https nem feltétlenül támogatott. Ezért, ha nem működik, használj egy másik beállítóklienst vagy szolgáltatást, vagy az adataid rejtjelezetlen adatkapcsolaton keresztül mennek át (https helyett http-t alkalmazva)."
+msgstr ""
+"<b>Fontos megjegyzés a biztonságról és a kompatibilitásról</b>: Módosítási "
+"címeknél, mi mindig a https (és nem a http) címet adjuk meg, mivel ez "
+"rejtjelezett adatkapcsolaton küldi át az adataidat (a változtatási titkodat "
+"is). Egyes routereknél vagy beállítóklienseknél (ami lehet router firmware "
+"vagy PC szoftver) <em>és</em> egyes nsupdate.info alapú szolgáltatásoknál, a "
+"https nem feltétlenül támogatott. Ezért, ha nem működik, használj egy másik "
+"beállítóklienst vagy szolgáltatást, vagy az adataid rejtjelezetlen "
+"adatkapcsolaton keresztül mennek át (https helyett http-t alkalmazva)."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:48
 msgid ""
 "Your update client needs to access the following URLs to update the DNS:"
-msgstr "Beállító kliensednek a DNS megváltoztatásához az alábbi URL-hez kell tudnia hozzáférni:"
+msgstr ""
+"Beállító kliensednek a DNS megváltoztatásához az alábbi URL-hez kell tudnia "
+"hozzáférni:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:50
 msgid "For IPv4 updates:"
@@ -1288,7 +1432,9 @@ msgstr "IPv6 változtatásokhoz:"
 msgid ""
 "The IPs will be determined automatically using the remote address our "
 "service is seeing (see below for more details)."
-msgstr "Az IP címeket automatikusan állítjuk be, a szolgáltatásunk által látott külső címek alapján (részletekért lásd lentebb)."
+msgstr ""
+"Az IP címeket automatikusan állítjuk be, a szolgáltatásunk által látott "
+"külső címek alapján (részletekért lásd lentebb)."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:64
 msgid "Your update client has to do the following steps:"
@@ -1317,9 +1463,10 @@ msgstr "a jelenlegi IPv4 vagy IPv6 címed megállapításához"
 #: main/templates/main/includes/tabbed_router_configuration.html:74
 #: main/templates/main/includes/tabbed_router_configuration.html:396
 msgid ""
-"Important: Do not send an update if your IP did not change since last "
-"update!"
-msgstr "Fontos: ne küldj változtatást, ha az IP-címed nem változott az utolsó változtatás óta!"
+"Important: Do not send an update if your IP did not change since last update!"
+msgstr ""
+"Fontos: ne küldj változtatást, ha az IP-címed nem változott az utolsó "
+"változtatás óta!"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:76
 msgid "Do HTTP Basic Auth with:"
@@ -1346,11 +1493,15 @@ msgid ""
 "myip=127.0.0.1 or myip=::1  (by default, we autodetect the IP. If the "
 "autodetected IP is not the one you want to put into DNS, you need to give "
 "the wanted one explicitly using myip=...)"
-msgstr "myip=127.0.0.1 vagy myip=::1  (alapesetben mi detektáljuk az IP címet. Ha az automatikusan detektált IP nem az, amit a DNS-be be szeretnél jegyezni, meg kell azt adnod a myip=... argumentummal)"
+msgstr ""
+"myip=127.0.0.1 vagy myip=::1  (alapesetben mi detektáljuk az IP címet. Ha az "
+"automatikusan detektált IP nem az, amit a DNS-be be szeretnél jegyezni, meg "
+"kell azt adnod a myip=... argumentummal)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:96
 msgid "(if not given: autodetect from http basic auth)"
-msgstr "(ha nincs megadva: automatikusan detektáljuk a http basic hitelesítésből)"
+msgstr ""
+"(ha nincs megadva: automatikusan detektáljuk a http basic hitelesítésből)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:99
 msgid "The response status and content will be:"
@@ -1366,7 +1517,8 @@ msgstr "IP elfogadva, de nem változott az utolsó változtatás óta"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:103
 msgid "Incorrect authentication or no http basic auth header received"
-msgstr "Sikertelen hitelesítés, vagy nem kaptunk http basic hitelesítési fejlécet"
+msgstr ""
+"Sikertelen hitelesítés, vagy nem kaptunk http basic hitelesítési fejlécet"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:109
 msgid "and maybe others:"
@@ -1407,7 +1559,9 @@ msgstr "Dinamikus DNS változtatás kényszerítése"
 msgid ""
 "If you want to force a dynamic update for testing purposes, you can do it "
 "like this:"
-msgstr "Amennyiben tesztelési célokra ki szeretnél kényszeríteni egy DNS változtatást, azt így teheted meg:"
+msgstr ""
+"Amennyiben tesztelési célokra ki szeretnél kényszeríteni egy DNS "
+"változtatást, azt így teheted meg:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:133
 msgid "disable dynamic DNS, apply"
@@ -1421,7 +1575,9 @@ msgstr "Dinamikus DNS bekapcsolása, alkalmaz"
 msgid ""
 "(now the Fritz!Box sends an update, it might be \"good\" or \"nochg\" "
 "depending on whether we already have that IP in DNS)"
-msgstr "(most a Fritz!Box üzenetet küld, ami \"good\" vagy \"nochg\" lehet attól függően, hogy már ez az IP van-e a DNS-ben beállítva)"
+msgstr ""
+"(most a Fritz!Box üzenetet küld, ami \"good\" vagy \"nochg\" lehet attól "
+"függően, hogy már ez az IP van-e a DNS-ben beállítva)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:139
 #: main/templates/main/includes/tabbed_router_configuration.html:277
@@ -1450,7 +1606,12 @@ msgid ""
 "(default: daily at 01:01). You can tweak this by editing /etc/crontab from "
 "where it invokes /etc/rc.dyndns.update - but be careful: do not invoke it "
 "too frequently and consider that this applies to all your DDNS updaters."
-msgstr "Jegyezd meg: ha a pfSense WAN interfészen nem a te nyilvános IP-címed van és így nem veszi észre annak megváltozását, a változtatás késhet (alapesetben naponta 01:01-ig). Ezt beállíthatod a /etc/crontab szerkesztésével, ahol a /etc/rc.dyndns.update hívódik meg. De légy óvatos: ne állítsd be túl gyakorira, mivel ez minden DDNS beállítódra vonatkozik."
+msgstr ""
+"Jegyezd meg: ha a pfSense WAN interfészen nem a te nyilvános IP-címed van és "
+"így nem veszi észre annak megváltozását, a változtatás késhet (alapesetben "
+"naponta 01:01-ig). Ezt beállíthatod a /etc/crontab szerkesztésével, ahol a /"
+"etc/rc.dyndns.update hívódik meg. De légy óvatos: ne állítsd be túl "
+"gyakorira, mivel ez minden DDNS beállítódra vonatkozik."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:358
 msgid "(do not select this)"
@@ -1474,7 +1635,10 @@ msgid ""
 "These URLs invoke the built-in update client, which is intended for "
 "temporary and ad hoc scenarios only. It periodically checks your IP and "
 "updates DNS if it changes."
-msgstr "Ezek az URL-ek a beépített beállítóklienst hívják meg, ami csak ideiglenes helyzetekre szolgál. Ez rendszeresen megvizsgálja az IP-det és változtatás esetén frissíti a DNS-ben."
+msgstr ""
+"Ezek az URL-ek a beépített beállítóklienst hívják meg, ami csak ideiglenes "
+"helyzetekre szolgál. Ez rendszeresen megvizsgálja az IP-det és változtatás "
+"esetén frissíti a DNS-ben."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:391
 #: main/templates/main/includes/tabbed_router_configuration.html:405
@@ -1502,7 +1666,9 @@ msgstr "URL-ek böngésző vagy más http kliensszoftver használatára"
 msgid ""
 "Interactive - will ask for username (give your hostname) and password (give "
 "your secret):"
-msgstr "Interaktív - meg fogja kérdezni a felhasználói nevedet (itt a hosztneved add meg) és a jelszavad (itt pedig a titkodat)"
+msgstr ""
+"Interaktív - meg fogja kérdezni a felhasználói nevedet (itt a hosztneved add "
+"meg) és a jelszavad (itt pedig a titkodat)"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:409
 msgid "Giving the http basic auth username and password in the URL:"
@@ -1537,7 +1703,9 @@ msgstr "az adott hosztnévhez beállított titok"
 msgid ""
 "IP addresses: we use the v4 and v6 localhost addresses in the examples, but "
 "of course you need to use your real public IP instead of that."
-msgstr "IP címek: mi a példákban a v4 és v6 localhost címeket használjuk, de neked természetesen a nyilvános IP címedet kell használnod."
+msgstr ""
+"IP címek: mi a példákban a v4 és v6 localhost címeket használjuk, de neked "
+"természetesen a nyilvános IP címedet kell használnod."
 
 #: main/templates/main/overview.html:10
 msgid "Your Hosts"
@@ -1548,19 +1716,19 @@ msgid "Add Host"
 msgstr "Hoszt hozzáadása"
 
 #: main/templates/main/overview.html:19
-#: main/templates/main/related_host_overview.html:25
+#: main/templates/main/related_host_overview.html:21
 #: main/templates/main/updater_hostconfig_overview.html:16
 msgid "Host"
 msgstr "Hoszt"
 
 #: main/templates/main/overview.html:21 main/templates/main/overview.html:107
-#: main/templates/main/related_host_overview.html:27
+#: main/templates/main/related_host_overview.html:23
 #: main/templates/main/updater_hostconfig_overview.html:19
 msgid "Comment"
 msgstr "Megjegyzés"
 
 #: main/templates/main/overview.html:24 main/templates/main/overview.html:105
-#: main/templates/main/related_host_overview.html:29
+#: main/templates/main/related_host_overview.html:25
 msgid "Available"
 msgstr "Elérhető"
 
@@ -1573,8 +1741,8 @@ msgid "C / S"
 msgstr "C / S"
 
 #: main/templates/main/overview.html:32 main/templates/main/overview.html:37
-#: main/templates/main/related_host_overview.html:31
-#: main/templates/main/related_host_overview.html:36
+#: main/templates/main/related_host_overview.html:27
+#: main/templates/main/related_host_overview.html:32
 #, python-format
 msgid "%(type)s Address"
 msgstr "%(type)s cím"
@@ -1652,7 +1820,9 @@ msgstr "Kapcsolódó hoszt törlése"
 msgid ""
 "Deleting a related host cannot be undone. If you need it back, you'll have "
 "to add it again."
-msgstr "A kapcsolódó hoszt törlése nem állítható vissza. Ha mégis újra kell, újra létre kell majd hoznod."
+msgstr ""
+"A kapcsolódó hoszt törlése nem állítható vissza. Ha mégis újra kell, újra "
+"létre kell majd hoznod."
 
 #: main/templates/main/related_host.html:45
 #: main/templates/main/related_host_add.html:28
@@ -1661,7 +1831,11 @@ msgid ""
 "address from it. To compute your related host's IPs, we just add the "
 "interface ID to the network address. Then we update the DNS records for the "
 "related host with these addresses."
-msgstr "Ha a fő hosztodtól egy változtatást kapunk, abból meghatározzuk a hálózati címet. A kapcsolódó hosztjaid IP-címének meghatározásához az interfész azonosítót a hálózati címhez adjuk, majd pedig a kapcsolódó hoszt DNS rekordját ezekre a címekre frissítjük."
+msgstr ""
+"Ha a fő hosztodtól egy változtatást kapunk, abból meghatározzuk a hálózati "
+"címet. A kapcsolódó hosztjaid IP-címének meghatározásához az interfész "
+"azonosítót a hálózati címhez adjuk, majd pedig a kapcsolódó hoszt DNS "
+"rekordját ezekre a címekre frissítjük."
 
 #: main/templates/main/related_host_add.html:9
 msgid "Create a new related host"
@@ -1669,7 +1843,8 @@ msgstr "Új kapcsolódó hoszt létrehozása"
 
 #: main/templates/main/related_host_add.html:26
 msgid "Here you can add related hosts (e.g. other machines on same LAN)."
-msgstr "Itt adhatsz meg kapcsolódó hosztokat (pl. más gépeket ugyanazon a LAN-on)."
+msgstr ""
+"Itt adhatsz meg kapcsolódó hosztokat (pl. más gépeket ugyanazon a LAN-on)."
 
 #: main/templates/main/related_host_overview.html:9
 msgid "Related hosts"
@@ -1679,21 +1854,17 @@ msgstr "Kapcsolódó hosztok"
 msgid "Add related host"
 msgstr "Kapcsolódó hoszt hozzáadása"
 
-#: main/templates/main/related_host_overview.html:13
-msgid "Update DNS"
-msgstr "DNS frissítése"
-
-#: main/templates/main/related_host_overview.html:19
+#: main/templates/main/related_host_overview.html:15
 msgid "Main host:"
 msgstr "Fő hoszt:"
 
-#: main/templates/main/related_host_overview.html:33
-#: main/templates/main/related_host_overview.html:38
+#: main/templates/main/related_host_overview.html:29
+#: main/templates/main/related_host_overview.html:34
 #, python-format
 msgid "%(type)s interface ID"
 msgstr "%(type)s interfész azonosító"
 
-#: main/templates/main/related_host_overview.html:62
+#: main/templates/main/related_host_overview.html:58
 msgid "No related hosts yet."
 msgstr "Még nincs kapcsolódó hoszt."
 
@@ -1763,7 +1934,9 @@ msgstr "Böngésző alapú beállító"
 msgid ""
 "Host %(hostname)s will get automatically updated as long as you keep this "
 "window open."
-msgstr "A %(hostname)s hoszt automatikusan beállítódik mindaddig, amíg nyitva tartod ezt az ablakot."
+msgstr ""
+"A %(hostname)s hoszt automatikusan beállítódik mindaddig, amíg nyitva tartod "
+"ezt az ablakot."
 
 #: main/templates/main/update.html:14
 msgid "The browser-based updater only works if JavaScript is enabled."
@@ -1793,7 +1966,9 @@ msgstr "Beállító konfigurációjának törlése"
 msgid ""
 "Deleting an updater configuration cannot be undone. If you need it back, "
 "you'll have to add it again."
-msgstr "A beállító konfigurációjának törlése nem visszavonható művelet. Ha egyszer mégis újra kell, újra létre kell majd hoznod."
+msgstr ""
+"A beállító konfigurációjának törlése nem visszavonható művelet. Ha egyszer "
+"mégis újra kell, újra létre kell majd hoznod."
 
 #: main/templates/main/updater_hostconfig.html:45
 #, python-format
@@ -1804,14 +1979,19 @@ msgstr "Itt szerkesztheted a \"%(servicename)s\" beállító konfigurációját.
 msgid ""
 "The values you need here are the same ones as you would usually enter in "
 "your router or update client."
-msgstr "Itt ugyanazokra az értékekre van szükséged, mint amiket általában a router-edbe vagy a beállító kliensedben is használnál."
+msgstr ""
+"Itt ugyanazokra az értékekre van szükséged, mint amiket általában a router-"
+"edbe vagy a beállító kliensedben is használnál."
 
 #: main/templates/main/updater_hostconfig.html:55
 #, python-format
 msgid ""
 "You get these values after registering with the \"%(object.service.name)s\" "
 "service and (likely) configuring that service to accept updates."
-msgstr "Ezeket az értékeket úgy kaphatod meg, hogy regisztrálsz a \"%(object.service.name)s\" szolgáltatlásra és (valószínűleg) beállítod azt a szolgáltatást a változtatások elfogadására."
+msgstr ""
+"Ezeket az értékeket úgy kaphatod meg, hogy regisztrálsz a "
+"\"%(object.service.name)s\" szolgáltatlásra és (valószínűleg) beállítod azt "
+"a szolgáltatást a változtatások elfogadására."
 
 #: main/templates/main/updater_hostconfig_overview.html:9
 msgid "Your updater configurations for other services"
@@ -1837,29 +2017,37 @@ msgstr "Új beállító konfiguráció létrehozása"
 
 #: main/templates/main/updater_hostconfig_overview.html:61
 msgid ""
-"Here you can add new configurations for 3rd party services you would like to"
-" get updated."
-msgstr "Itt adhatsz meg új konfigurációt azokhoz a 3rdparty azaz tőlünk független szolgáltatásokhoz, amelyeket szintén be szeretnél tudni állítani."
+"Here you can add new configurations for 3rd party services you would like to "
+"get updated."
+msgstr ""
+"Itt adhatsz meg új konfigurációt azokhoz a 3rdparty azaz tőlünk független "
+"szolgáltatásokhoz, amelyeket szintén be szeretnél tudni állítani."
 
 #: main/templates/main/updater_hostconfig_overview.html:63
 msgid "We will send an update to them each time you update your host with us."
-msgstr "Oda is küldeni fogunk egy változtatást minden alkalommal, amikor te is update-eled a hosztodat nálunk."
+msgstr ""
+"Oda is küldeni fogunk egy változtatást minden alkalommal, amikor te is "
+"update-eled a hosztodat nálunk."
 
 #: management/commands/domains.py:16
 #, python-format
 msgid ""
 "Your domain: %(domain)s (comment: %(comment)s)\n"
 "\n"
-"Issue: The nameserver of the domain is not reachable and was set to not available\n"
+"Issue: The nameserver of the domain is not reachable and was set to not "
+"available\n"
 "       (and also to not public, in case it was public).\n"
 "\n"
 "Explanation:\n"
-"You created the domain on our service and entered a primary nameserver IP for it.\n"
-"We tried to query that nameserver but it either was not reachable or it did not\n"
+"You created the domain on our service and entered a primary nameserver IP "
+"for it.\n"
+"We tried to query that nameserver but it either was not reachable or it did "
+"not\n"
 "answer queries for this domain.\n"
 "\n"
 "Resolution:\n"
-"If you really want that domain to work and you really control that nameserver:\n"
+"If you really want that domain to work and you really control that "
+"nameserver:\n"
 "\n"
 "1. fix the nameserver so it responds to queries for this domain\n"
 "2. make sure the nameserver is reachable from us\n"
@@ -1871,7 +2059,34 @@ msgid ""
 "Alternatively, if you do not use the domain with our service, delete the\n"
 "domain entry, so it is removed from our database. This will also remove all\n"
 "hosts that were added to this domain (if any).\n"
-msgstr "Doméned: %(domain)s (megjegyzés: %(comment)s)\n\nProbléma: A domén névszervere nem érhető el és nem volt elérhetőnek beállítva (és nem is nyilvános, ha annak volt beállítva)\n\nMagyarázat:\nLétrehoztad a domént a szolgáltatásunkon és megadtad hozzá az elsődleges névszervert.\nMegpróbáltuk lekérni azt a névszervert, de vagy nem volt elérhető, vagy nem válaszolt az adott doménhez tartozó lekéréseinkre.\n\nMegoldás:\nAmennyiben tényleg szeretnéd, hogy működjön ez a domén és tényleg ellenőrzésed alatt áll az a névszerver:\n\n1. javítsd meg a névszert, hogy válaszoljon az adott doménhez tartozó lekéréseinkre\n2. bizonyosodj meg róla, hogy a névszerver elérhető a számunkra\n3. bizonyosodj meg róla, hogy elfogad dinamikus változtatásokat a doménhez tartozó hosztokra\n4. bizonyosodj meg róla, hogy szolgáltatásban beállított titkot használja\n5. állítsd a domént \"elérhető\"-re a szolgáltatásban\n6. ellenőrzid, hogy a \"nyilvános\" gomb helyes-e\n\nAlternatívaképp, ha nem használod a domént a mi szolgáltatásunkkal, akkor töröld a domén bejegyzését, így töröljük az adatbázisunkból. Ez egyúttal minden, a doménhez tartozó hosztot is törölni fog (ha volt).\n"
+msgstr ""
+"Doméned: %(domain)s (megjegyzés: %(comment)s)\n"
+"\n"
+"Probléma: A domén névszervere nem érhető el és nem volt elérhetőnek "
+"beállítva (és nem is nyilvános, ha annak volt beállítva)\n"
+"\n"
+"Magyarázat:\n"
+"Létrehoztad a domént a szolgáltatásunkon és megadtad hozzá az elsődleges "
+"névszervert.\n"
+"Megpróbáltuk lekérni azt a névszervert, de vagy nem volt elérhető, vagy nem "
+"válaszolt az adott doménhez tartozó lekéréseinkre.\n"
+"\n"
+"Megoldás:\n"
+"Amennyiben tényleg szeretnéd, hogy működjön ez a domén és tényleg "
+"ellenőrzésed alatt áll az a névszerver:\n"
+"\n"
+"1. javítsd meg a névszert, hogy válaszoljon az adott doménhez tartozó "
+"lekéréseinkre\n"
+"2. bizonyosodj meg róla, hogy a névszerver elérhető a számunkra\n"
+"3. bizonyosodj meg róla, hogy elfogad dinamikus változtatásokat a doménhez "
+"tartozó hosztokra\n"
+"4. bizonyosodj meg róla, hogy szolgáltatásban beállított titkot használja\n"
+"5. állítsd a domént \"elérhető\"-re a szolgáltatásban\n"
+"6. ellenőrzid, hogy a \"nyilvános\" gomb helyes-e\n"
+"\n"
+"Alternatívaképp, ha nem használod a domént a mi szolgáltatásunkkal, akkor "
+"töröld a domén bejegyzését, így töröljük az adatbázisunkból. Ez egyúttal "
+"minden, a doménhez tartozó hosztot is törölni fog (ha volt).\n"
 
 #: management/commands/domains.py:43
 #, python-format
@@ -1886,7 +2101,9 @@ msgstr "A domén %%(domain)s nem érhető el, de %(hosts)d hoszt tartozik hozzá
 #: management/commands/domains.py:45
 #, python-format
 msgid "Domain %(domain)s is not available and has no hosts -> deleted domain."
-msgstr "A %(domain)s domén nem érhető el és nem tartozik hozzá hoszt -> domén törölve."
+msgstr ""
+"A %(domain)s domén nem érhető el és nem tartozik hozzá hoszt -> domén "
+"törölve."
 
 #: management/commands/domains.py:129
 #, python-format
@@ -1904,7 +2121,8 @@ msgid ""
 "The abuse flag usually gets set if your update client sends way too many\n"
 "updates although your IP address did not change.\n"
 "\n"
-"Your update client sent %(faults_count)d faulty updates since we last checked.\n"
+"Your update client sent %(faults_count)d faulty updates since we last "
+"checked.\n"
 "We have reset the faults counter to 0 now, but we are rejecting updates\n"
 "for this host until you resolve the issue.\n"
 "\n"
@@ -1926,7 +2144,42 @@ msgid ""
 "  a valid, well-behaved dyndns2-compatible update client\n"
 "- if you already used such a software and you ran into this problem,\n"
 "  complain to whoever wrote it about it sending nochg updates\n"
-msgstr "A hosztod: %(fqdn)s (megjegyzés: %(comment)s)\n\nProbléma: a visszaélés gomb be lett állítva.\n\nMagyarázat:\nA visszaélés gombot általában akkor állítjuk be, ha a kliensed messze túl sok változtatást küld, miközben az IP-címed nem is változott.\n\nA beállítókliensed %(faults_count)d hibás változtatást küldött, mióta utoljára megvizsgáltuk.\n\nA hibaszámlálót visszaállítottuk 0-ra, de nem fogadunk el további változtatásokat a kliensedtől, mielőtt a problémát meg nem oldottad.\n\nMegoldás:\nEzt könnyen megteheted a saját magadnak.\n1. javítsd meg vagy cseréld ki a beállítóklienst a hoszton - nem kell változtatásokat küldenie, amennyibe az IP-címed nem változott.\n2. nézd meg a szolgáltatás webes felületét és kapcsold ki a \"visszaélés\" gombot ezen a hoszton\n\nMegjegyzés:\n- ezt általában rosszul viselkedő vagy hibás frissítőkliens csinálja (a PC-den / szervereden vagy routereden / tűzfaladon)\n- a dyndns2 szabvány világosan meghatározza, hogy indokolatlan változtatások küldése visszaélésnek minősül\n- a saját rendszeresen is sokkal több erőforrást használsz, mint indokolt volna\n- Linuxon és haszonló operációs rendszereken a ddclient szoftvert használhatod - mi copy-paste-elhető konfigurációs segítséget nyújtunk hozzá a webes felületen\n- ha valami másra van szükséged, akkor jól viselkedő dyndns2-kompatibilis beállítókienst használj\n- amennyiben ilyen szoftvert használsz és problémákba ütközöl, jelezd az szoftver karbantartóinál, hogy túl sok változtatást küld\n"
+msgstr ""
+"A hosztod: %(fqdn)s (megjegyzés: %(comment)s)\n"
+"\n"
+"Probléma: a visszaélés gomb be lett állítva.\n"
+"\n"
+"Magyarázat:\n"
+"A visszaélés gombot általában akkor állítjuk be, ha a kliensed messze túl "
+"sok változtatást küld, miközben az IP-címed nem is változott.\n"
+"\n"
+"A beállítókliensed %(faults_count)d hibás változtatást küldött, mióta "
+"utoljára megvizsgáltuk.\n"
+"\n"
+"A hibaszámlálót visszaállítottuk 0-ra, de nem fogadunk el további "
+"változtatásokat a kliensedtől, mielőtt a problémát meg nem oldottad.\n"
+"\n"
+"Megoldás:\n"
+"Ezt könnyen megteheted a saját magadnak.\n"
+"1. javítsd meg vagy cseréld ki a beállítóklienst a hoszton - nem kell "
+"változtatásokat küldenie, amennyibe az IP-címed nem változott.\n"
+"2. nézd meg a szolgáltatás webes felületét és kapcsold ki a \"visszaélés\" "
+"gombot ezen a hoszton\n"
+"\n"
+"Megjegyzés:\n"
+"- ezt általában rosszul viselkedő vagy hibás frissítőkliens csinálja (a PC-"
+"den / szervereden vagy routereden / tűzfaladon)\n"
+"- a dyndns2 szabvány világosan meghatározza, hogy indokolatlan változtatások "
+"küldése visszaélésnek minősül\n"
+"- a saját rendszeresen is sokkal több erőforrást használsz, mint indokolt "
+"volna\n"
+"- Linuxon és haszonló operációs rendszereken a ddclient szoftvert "
+"használhatod - mi copy-paste-elhető konfigurációs segítséget nyújtunk hozzá "
+"a webes felületen\n"
+"- ha valami másra van szükséged, akkor jól viselkedő dyndns2-kompatibilis "
+"beállítókienst használj\n"
+"- amennyiben ilyen szoftvert használsz és problémákba ütközöl, jelezd az "
+"szoftver karbantartóinál, hogy túl sok változtatást küld\n"
 
 #: management/commands/faults.py:150
 #, python-format
@@ -1938,21 +2191,27 @@ msgstr "Probléma a %(fqdn)shosztoddal"
 msgid ""
 "%(host)s has not seen IP updates for a long time; staleness: %(staleness)d "
 "-> please fix!"
-msgstr "A %(host)s hoszt már régóta nem küldött IP változtatást; elhagyott:  %(staleness)d -> kérlek javítsd ki!"
+msgstr ""
+"A %(host)s hoszt már régóta nem küldött IP változtatást; elhagyott:  "
+"%(staleness)d -> kérlek javítsd ki!"
 
 #: management/commands/hosts.py:25
 #, python-format
 msgid ""
 "%(host)s IP has still not been updated, staleness: %(staleness)d -> made "
 "host unavailable."
-msgstr "A %(host)s IP még mindig nem változott meg, elhagyott: %(staleness)d -> hoszt elérhetetlenre állítva."
+msgstr ""
+"A %(host)s IP még mindig nem változott meg, elhagyott: %(staleness)d -> "
+"hoszt elérhetetlenre állítva."
 
 #: management/commands/hosts.py:26
 #, python-format
 msgid ""
 "%(host)s IP has still not been updated, staleness: %(staleness)d -> deleted "
 "host."
-msgstr "A %(host)s IP még mindig nem változott meg, elhagyott: %(staleness)d -> hoszt törölve."
+msgstr ""
+"A %(host)s IP még mindig nem változott meg, elhagyott: %(staleness)d -> "
+"hoszt törölve."
 
 #: management/commands/hosts.py:28
 #, python-format
@@ -1960,14 +2219,18 @@ msgid ""
 "Your host: %(host)s (comment: %(comment)s)\n"
 "\n"
 "Issue: "
-msgstr "A hosztod: %(host)s (megjegyzés: %(comment)s)\n\nProbléma:"
+msgstr ""
+"A hosztod: %(host)s (megjegyzés: %(comment)s)\n"
+"\n"
+"Probléma:"
 
 #: management/commands/hosts.py:34
 msgid ""
 "\n"
 "\n"
 "Explanation:\n"
-"You created the host on our service, but it has not been updated for a very long time.\n"
+"You created the host on our service, but it has not been updated for a very "
+"long time.\n"
 "\n"
 "That might be because:\n"
 "* You don't use the host/service anymore, but forgot to delete the host.\n"
@@ -1979,12 +2242,14 @@ msgid ""
 "accumulate unused hosts in our database, so please help resolve this issue.\n"
 "\n"
 "We will send some notifications like this to remind you to resolve this.\n"
-"If you do not react and resolve this, your host will first be made unavailable\n"
+"If you do not react and resolve this, your host will first be made "
+"unavailable\n"
 "and later it will be deleted.\n"
 "\n"
 "Resolution:\n"
 "* If you still use the host:\n"
-"  - If your host was switched to unavailable, you first need to manually set\n"
+"  - If your host was switched to unavailable, you first need to manually "
+"set\n"
 "    it to available again (via the web interface).\n"
 "  - Send an update for it (you can do that via the web interface or by just\n"
 "    accessing the update URL or by forcing your update software to send an\n"
@@ -1992,23 +2257,73 @@ msgid ""
 "* If you do not use the host anymore, please delete it from the service.\n"
 "\n"
 "Hint: To avoid this issue for static or mostly static IP hosts, consider\n"
-"sending one unconditional update every month. Some DynDNS2-compatible updaters\n"
+"sending one unconditional update every month. Some DynDNS2-compatible "
+"updaters\n"
 "can do that, too.\n"
-msgstr "\n\nMagyarázat:\nLétrehoztad a hosztot a szolgáltatásunkban, de már nagyon régóta nem lett beállítva.\n\nEz a következők miatt lehet:\n* Nem használod többé a hosztot vagy szolgáltatást, de elfelejtetted törölni.\n* A hoszt IP-címe soha nem változott meg, így nem volt szükség beállítása.\n* Hitelesítési adataid tévesek a hoszt beállításához, ezért a beállítás nem tudott megtörténni.\n* A beállító kliensed rosszul működik és nem küldi ki a változtatásokat.\n\nNekünk nincs lehetőségünk rá, hogy tudjuk az okot. Kérjük értsd meg, hogy nem szeretnénk, hogy használatlan hosztok gyűljenek fel az adatbázisunkban, így kérlek segíts megoldani ezt a problémát.\n\nKi fogunk küldeni néhány jelzést, hogy emlékeztessünk ennek a problémának a megoldására.\n\nA megoldás:\n* Ha továbbra is használod a hosztot:\n  - Ha a hosztod elérhetetlenre váltott, először ezt kell helyrehoznod. Állítsd újra elérhetőre (a webes felületen keresztül).\n  - Küldj rá egy változtatást (ezt is megteheted a webes felületen, vagypedig a beállítási URL címének elérésével, vagypedig ha ráveszed a beállítószoftvered egy változtatás kiküldésére). Ebben az esetben elfogadható, ha a változtatás ugyanarra az IP-címre történik.\n* Ha már nem használod a hosztot, akkor kérjük töröld a szolgáltatásunkból.\n\nTanács: ha havonta akár csak egyetlen update-et küldesz a statikus, vagy csak igen ritkán változó IP-című hosztokhoz, az már elég ennek a problémának az elkerülésére. Néhány DynDNS2-kompatibilis beállítókliensnek kifejezetten ez a funkciója is megvan.\n"
+msgstr ""
+"\n"
+"\n"
+"Magyarázat:\n"
+"Létrehoztad a hosztot a szolgáltatásunkban, de már nagyon régóta nem lett "
+"beállítva.\n"
+"\n"
+"Ez a következők miatt lehet:\n"
+"* Nem használod többé a hosztot vagy szolgáltatást, de elfelejtetted "
+"törölni.\n"
+"* A hoszt IP-címe soha nem változott meg, így nem volt szükség beállítása.\n"
+"* Hitelesítési adataid tévesek a hoszt beállításához, ezért a beállítás nem "
+"tudott megtörténni.\n"
+"* A beállító kliensed rosszul működik és nem küldi ki a változtatásokat.\n"
+"\n"
+"Nekünk nincs lehetőségünk rá, hogy tudjuk az okot. Kérjük értsd meg, hogy "
+"nem szeretnénk, hogy használatlan hosztok gyűljenek fel az adatbázisunkban, "
+"így kérlek segíts megoldani ezt a problémát.\n"
+"\n"
+"Ki fogunk küldeni néhány jelzést, hogy emlékeztessünk ennek a problémának a "
+"megoldására.\n"
+"\n"
+"A megoldás:\n"
+"* Ha továbbra is használod a hosztot:\n"
+"  - Ha a hosztod elérhetetlenre váltott, először ezt kell helyrehoznod. "
+"Állítsd újra elérhetőre (a webes felületen keresztül).\n"
+"  - Küldj rá egy változtatást (ezt is megteheted a webes felületen, "
+"vagypedig a beállítási URL címének elérésével, vagypedig ha ráveszed a "
+"beállítószoftvered egy változtatás kiküldésére). Ebben az esetben "
+"elfogadható, ha a változtatás ugyanarra az IP-címre történik.\n"
+"* Ha már nem használod a hosztot, akkor kérjük töröld a szolgáltatásunkból.\n"
+"\n"
+"Tanács: ha havonta akár csak egyetlen update-et küldesz a statikus, vagy "
+"csak igen ritkán változó IP-című hosztokhoz, az már elég ennek a problémának "
+"az elkerülésére. Néhány DynDNS2-kompatibilis beállítókliensnek kifejezetten "
+"ez a funkciója is megvan.\n"
 
 #: management/commands/hosts.py:66
 msgid ""
 "\n"
 "\n"
 "Explanation:\n"
-"You created the host on our service, but it has not been updated for a very long time.\n"
+"You created the host on our service, but it has not been updated for a very "
+"long time.\n"
 "\n"
-"We sent you some email notifications about this, but you never reacted to them.\n"
+"We sent you some email notifications about this, but you never reacted to "
+"them.\n"
 "Thus, we assume that you do not need the host anymore and have DELETED it.\n"
 "\n"
 "Feel free to re-create it on our service in case you need it again at some\n"
 "time.\n"
-msgstr "\n\nMagyarázat:\nLétrehoztad a hosztot a szolgáltatásunkon, de már nagyon régóta nem lett megváltoztatva..\n\nKiküldtünk néhány jelzést email-ben, de sohasem reagáltál rájuk.\nÍgy azt feltételezzük, hogy nincs már szükséged a hosztra többé, ezért TÖRÖLTÜK.\n\nHa később mégis szükséged van rá, szabadon létrehozhatod újra a szolgáltatásunkban.\n"
+msgstr ""
+"\n"
+"\n"
+"Magyarázat:\n"
+"Létrehoztad a hosztot a szolgáltatásunkon, de már nagyon régóta nem lett "
+"megváltoztatva..\n"
+"\n"
+"Kiküldtünk néhány jelzést email-ben, de sohasem reagáltál rájuk.\n"
+"Így azt feltételezzük, hogy nincs már szükséged a hosztra többé, ezért "
+"TÖRÖLTÜK.\n"
+"\n"
+"Ha később mégis szükséged van rá, szabadon létrehozhatod újra a "
+"szolgáltatásunkban.\n"
 
 #: management/commands/hosts.py:159
 #, python-format
@@ -2020,7 +2335,9 @@ msgstr "Probléma a %(host)s hosztoddal"
 msgid ""
 "%%(user)r hasn't logged in for %(age)fy, has no hosts and no domains -> "
 "deleted user."
-msgstr "%%(user)r nem lépett be már %(age)f éve, nincs se hosztja, se doménje -> törölve."
+msgstr ""
+"%%(user)r nem lépett be már %(age)f éve, nincs se hosztja, se doménje -> "
+"törölve."
 
 #: management/commands/users.py:21
 #, python-format
@@ -2032,7 +2349,9 @@ msgstr "%%(user)r megtartva, van hosztja. kor: %(age)fév, hoszt: %(hosts)d."
 msgid ""
 "%%(user)r kept, has domains. age: %(age)fy, hosts: %(hosts)d, domains: "
 "%(domains)d."
-msgstr "%%(user)r megtartva, van doménje. Kor: %(age)fév, hoszt: %(hosts)d, domén: %(domains)d."
+msgstr ""
+"%%(user)r megtartva, van doménje. Kor: %(age)fév, hoszt: %(hosts)d, domén: "
+"%(domains)d."
 
 #: management/commands/users.py:23
 #, python-format
@@ -2063,58 +2382,64 @@ msgstr "olasz"
 msgid "Hungarian"
 msgstr "magyar"
 
-#: templates/base.html:39
+#: templates/base.html:40
 msgid "Home"
 msgstr "Címlap"
 
-#: templates/base.html:43
+#: templates/base.html:44
 msgid "Overview"
 msgstr "Áttekintés"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Status"
 msgstr "Állapot"
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "About"
 msgstr "Rólunk"
 
-#: templates/base.html:54
+#: templates/base.html:55
 msgid "Documentation"
 msgstr "Dokumentáció"
 
-#: templates/base.html:59
+#: templates/base.html:60
 msgid "Sign up"
 msgstr "Feliratkozás"
 
-#: templates/base.html:66
+#: templates/base.html:67
 msgid "Password change"
 msgstr "Jelszóváltás"
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "Admin interface"
 msgstr "Admin felület"
 
-#: templates/base.html:107
+#: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "(http) kapcsolatod rejtjelezetlen és ezért nem biztonságos."
 
-#: templates/base.html:109
+#: templates/base.html:110
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
-msgstr "Kérjük a <a href=\"https://%(WWW_HOST)s/\">biztonságos https oldalunkat</a>használd."
+msgstr ""
+"Kérjük a <a href=\"https://%(WWW_HOST)s/\">biztonságos https oldalunkat</"
+"a>használd."
 
-#: templates/base.html:114
+#: templates/base.html:115
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site, expect malfunctions on the http site."
-msgstr "Néhány szükséges cookie-nk csak a biztonságos https oldalon működik, ezért hibák várhatóak a http oldalon."
+msgstr ""
+"Néhány szükséges cookie-nk csak a biztonságos https oldalon működik, ezért "
+"hibák várhatóak a http oldalon."
 
-#: templates/base.html:124
+#: templates/base.html:125
 msgid ""
-"Some functionality on this site requires that you have JavaScript enabled in"
-" your browser."
-msgstr "Az oldal néhány funkciója csak a böngésződben bekapcsolt és engedélyezett JavaScript-tel működik."
+"Some functionality on this site requires that you have JavaScript enabled in "
+"your browser."
+msgstr ""
+"Az oldal néhány funkciója csak a böngésződben bekapcsolt és engedélyezett "
+"JavaScript-tel működik."
 
 #: templates/includes/base_footer.html:3
 msgid "Powered by nsupdate.info"
@@ -2127,3 +2452,6 @@ msgstr "Szabályos HTML"
 #: templates/includes/base_footer.html:7
 msgid "Valid CSS"
 msgstr "Szabályos CSS"
+
+#~ msgid "Update DNS"
+#~ msgstr "DNS frissítése"
