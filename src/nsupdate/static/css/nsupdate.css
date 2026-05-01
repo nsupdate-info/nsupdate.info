@@ -18,7 +18,7 @@ html[data-bs-theme="dark"] {
     --alternate-gradient1: #a855f7;
     --alternate-gradient2: #6366d1;
     --ip-color: #38bdf8;
-    --footer-background: rgba(15, 23, 42, 0.8);
+    --footer-background-color: rgba(15, 23, 42, 0.8);
     --footer-link-color: #f8fafc;
     --footer-link-hover-color: #8b5cf6;
     --btn-primary-gradient1: #8b5cf6;
@@ -43,9 +43,14 @@ html[data-bs-theme="dark"] {
 }
 
 html[data-bs-theme="light"] {
+    /*
     --primary-glow: rgba(156, 153, 14, 0.4);
     --secondary-glow: rgba(87, 170, 8, 0.4);
     --bg-color: #f0e8d5;
+    */
+    --primary-glow: rgba(156, 153, 14, 0.1);
+    --secondary-glow: rgba(87, 170, 8, 0.1);
+    --bg-color: #f8f4ea;
     --surface-color: rgba(225, 214, 196, 0.7);
     --surface-border: rgba(0, 0, 0, 0.1);
     --text-primary: #070503;
@@ -62,7 +67,7 @@ html[data-bs-theme="light"] {
     --alternate-gradient1: #67aa08;
     --alternate-gradient2: #9c990e;
     --ip-color: #c74207;
-    --footer-background: rgba(15, 23, 42, 0.8);
+    --footer-background-color: rgba(15, 23, 42, 0.8);
     --footer-link-color: #f8fafc;
     --footer-link-hover-color: #8b5cf6;
     --btn-primary-gradient1: #74a309;
@@ -201,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: linear-gradient(135deg, var(--jumbotron-gradient1), var(--jumbotron-gradient2);
+    background: linear-gradient(135deg, var(--jumbotron-gradient1), var(--jumbotron-gradient2));
 }
 
 .jumbotron-replacement:hover {
@@ -243,7 +248,7 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(10px);
     border-top: 1px solid var(--surface-border);
     color: var(--text-secondary);
-    background: var(--footer-background);
+    background-color: var(--footer-background-color);
 }
 
 .footer a {
@@ -318,7 +323,7 @@ h1, h2, h3, h4, h5, h6 {
 .alert-warning {
     background: var(--alert-warning-background);
     border: 1px solid var(--alert-warning-border-color);
-    color: var(--alert-warning-text-color):
+    color: var(--alert-warning-text-color);
 }
 
 .alert-success {
