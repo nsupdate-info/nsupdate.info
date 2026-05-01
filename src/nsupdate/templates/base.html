@@ -1,6 +1,6 @@
 {% load static i18n django_bootstrap5 %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="{% with nsupdate_theme=request.COOKIES.nsupdate_theme|default:'dark' %}{{ nsupdate_theme }}{% endwith %}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +76,9 @@
                                 </div>
                             </li>
                         {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link"><i class="fa-solid fa-circle-half-stroke nsupdate_dark_mode_toggler"></i></a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="navbarLangDropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-language fa-fw"></i> {{ LANGUAGE_CODE }}</a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarLangDropdown">
