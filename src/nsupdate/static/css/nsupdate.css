@@ -419,6 +419,10 @@ html[data-bs-theme="light"] .alert-info {
     color: #3e667e;
 }
 
+a.nav-link {
+  cursor: pointer;
+}
+
 a {
     color: var(--accent-color);
     text-decoration: none;
@@ -426,7 +430,7 @@ a {
 }
 
 a:hover {
-    /* color: #a855f7; */
+    color: #a855f7;
     text-decoration: underline;
 }
 

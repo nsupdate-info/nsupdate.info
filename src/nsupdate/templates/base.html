@@ -1,6 +1,6 @@
 {% load static i18n django_bootstrap5 %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="{% with nsupdate_theme=request.COOKIES.nsupdate_theme|default:'dark' %}{{ nsupdate_theme }}{% endwith %}">
+<html lang="en" data-bs-theme="{{ request.COOKIES.nsupdate_theme|default:'dark' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
