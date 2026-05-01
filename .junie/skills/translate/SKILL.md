@@ -25,6 +25,7 @@ Use this skill when asked to translate.
 - **After any edits to a `.po` file**, always validate and compile it:
   1. Validate: `msgfmt --check-format -o /dev/null <path/to/file.po>`
   2. Compile: `msgfmt -o <path/to/file.mo> <path/to/file.po>` (output `.mo` in the same directory as the `.po` file)
+  3. Validate the compiled `.mo` file: `msgunfmt <path/to/file.mo> | msgfmt --check-format -o /dev/null -`
 
 ### Quality:
 - Prefer natural, fluent translations over literal word-for-word translations.
