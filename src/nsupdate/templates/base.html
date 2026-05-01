@@ -1,6 +1,7 @@
 {% load static i18n django_bootstrap5 %}
+{% get_current_language as current_language %}
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="{{ request.COOKIES.nsupdate_theme|default:'dark' }}">
+<html lang="{{ current_language }}" data-bs-theme="{{ request.COOKIES.nsupdate_theme|default:'dark' }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">

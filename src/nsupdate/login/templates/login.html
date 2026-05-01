@@ -37,7 +37,7 @@
             <div class="btn-toolbar" role="toolbar">
                 {% for backend in backends.backends %}
                     <div class="btn-group">
-                        <a class="btn btn-secondary" role="button" href="{% url 'social:begin' backend %}">
+                        <a class="btn btn-primary" role="button" href="{% url 'social:begin' backend %}">
                             <i class="fa fa-sign-in-alt fa-fw"></i> {{ backend }}
                         </a>
                     </div>
