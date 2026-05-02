@@ -7,14 +7,10 @@
   };
 
   function toggle_dark_mode() {
-    var htmlNode = document.documentElement;
-    if (htmlNode.getAttribute("data-bs-theme") === "dark") {
-      htmlNode.setAttribute("data-bs-theme", "light");
-      Cookies.set('nsupdate_theme', 'light', theme_cookie_params);
-    } else {
-      htmlNode.setAttribute("data-bs-theme", "dark");
-      Cookies.set('nsupdate_theme', 'dark', theme_cookie_params);
-    }
+    var html_node = document.documentElement;
+    var next_theme = (html_node.getAttribute("data-bs-theme") === "dark") ? "light" : "dark";
+    html_node.setAttribute("data-bs-theme", next_theme);
+    Cookies.set('nsupdate_theme', next_theme, theme_cookie_params);
   }
 
   function init_toggler() {

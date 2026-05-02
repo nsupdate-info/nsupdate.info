@@ -43,13 +43,8 @@ html[data-bs-theme="dark"] {
 }
 
 html[data-bs-theme="light"] {
-    /*
-    --primary-glow: rgba(156, 153, 14, 0.4);
-    --secondary-glow: rgba(87, 170, 8, 0.4);
-    --bg-color: #f0e8d5;
-    */
-    --primary-glow: rgba(156, 153, 14, 0.1);
-    --secondary-glow: rgba(87, 170, 8, 0.1);
+    --primary-glow: rgba(156, 153, 14, 0.3);
+    --secondary-glow: rgba(87, 170, 8, 0.3);
     --bg-color: #f8f4ea;
     --surface-color: rgba(225, 214, 196, 0.7);
     --surface-border: rgba(0, 0, 0, 0.1);
@@ -193,7 +188,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropdown-item:hover {
-    color: var(--dropdown-item-hover-color);
+    color: var(--dropdown-menu-hover-color);
 }
 
 /* Jumbotron Replacement */
@@ -305,6 +300,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary:hover {
     transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--btn-primary-hover-shadow-gradient1), var(--btn-primary-hover-shadow-gradient2));
+    box-shadow: 0 6px 20px var(--btn-primary-hover-shadow);
 }
 
 /* Alerts */
