@@ -286,3 +286,7 @@ body, p, li, td, th {
 .table-striped>tbody>tr:nth-of-type(odd)>* {
     color: var(--text-primary);
 }
+
+.btn-group {
+    margin: 0.1em;
+}
