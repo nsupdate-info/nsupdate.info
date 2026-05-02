@@ -258,11 +258,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Icons & Features Grid */
 .fa-3x {
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    color: transparent;
     margin-bottom: 1rem;
     transition: transform 0.3s ease;
-    background: linear-gradient(135deg, var(--alternate-gradient1), var(--alternate-gradient2));
+    background-image: linear-gradient(135deg, var(--alternate-gradient1), var(--alternate-gradient2));
 }
 
 .col-sm-4:hover .fa-3x {
