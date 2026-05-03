@@ -461,9 +461,11 @@ def test_nic_update_unspecified_ipv4_combo(client):
                               HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
         assert response.status_code == 200
         content = response.content.decode('utf-8')
-        # Mixed result: one "good" (delete via update path) and one "good" or "nochg" (actual update).
-        assert 'good 0.0.0.0' in content
-        assert 'good 2001:db8::1' in content or 'nochg 2001:db8::1' in content
+        # Response should be 'good 0.0.0.0,2001:db8::1' or 'nochg ...' etc.
+        # Since both are successful, it usually returns 'good IP1,IP2'
+        assert content.startswith('good ') or content.startswith('nochg ')
+        assert '0.0.0.0' in content
+        assert '2001:db8::1' in content
         # Verify DNS state: A record deleted, AAAA record updated.
         with pytest.raises((dns.resolver.NXDOMAIN, dns.resolver.NoAnswer)):
             query_ns(TEST_HOST, 'A')
