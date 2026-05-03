@@ -342,6 +342,7 @@ def get_ns_info(fqdn):
         # zone update secret use case
         domain = fqdn.domain
         d = Domain.objects.get(name=domain)
+    logger.warning(vars(d))
     if not d.available:
         if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
             # if there are troubles with a nameserver, we set available=False
