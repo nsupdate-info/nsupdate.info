@@ -20,6 +20,7 @@ TEST_SECRET2 = "somethingelse"
 RELATED_HOST_NAME = 'rh'
 TEST_HOST_RELATED = FQDN(RELATED_HOST_NAME + '.' + TEST_HOST.host, TEST_HOST.domain)
 NAMESERVER_IP = "127.0.0.1"
+NAMESERVER_PORT = 9053
 NAMESERVER2_IP = NAMESERVER_IP  # use same server as tests query shortly after update, too quick for secondary
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
 # no problem, you can ONLY update the TESTDOMAIN with this secret, nothing else:
