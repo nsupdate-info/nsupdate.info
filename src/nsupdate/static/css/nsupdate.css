@@ -7,6 +7,7 @@ html[data-bs-theme="dark"] {
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --accent-color: #8b5cf6;
+    /* intentionally identical, so it looks better */
     --navbar-background: rgba(240, 232, 213, 0.8);
     --veryweak-anti-shadow: rgba(255, 255, 255, 0.05);
     --weak-anti-shadow: rgba(255, 255, 255, 0.2);
@@ -45,12 +46,13 @@ html[data-bs-theme="dark"] {
 html[data-bs-theme="light"] {
     --primary-glow: rgba(156, 153, 14, 0.05);
     --secondary-glow: rgba(87, 170, 8, 0.05);
-    --bg-color: #fefda;
+    --bg-color: #fefdfa;
     --surface-color: rgba(225, 214, 196, 0.1);
     --surface-border: rgba(0, 0, 0, 0.1);
     --text-primary: #070503;
     --text-secondary: #6b5c47;
     --accent-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+    /* intentionally identical, so it looks better */
     --navbar-background: rgba(240, 232, 213, 0.8);
     --veryweak-anti-shadow: rgba(0, 0, 0, 0.05);
     --weak-anti-shadow: rgba(0, 0, 0, 0.2);
@@ -65,8 +67,9 @@ html[data-bs-theme="light"] {
     --footer-background-color: rgba(221, 221, 221, 1);
     --footer-link-color: rgb(13, 110, 253);
     --footer-link-hover-color: rgb(10, 88, 202);
-    --btn-primary-gradient1: #74a30910;
-    --btn-primary-gradient2: #9c990e10;
+    /* alpha is intentionally low - almost background-color will be seen */
+    --btn-primary-gradient1: #74a30920;
+    --btn-primary-gradient2: #9c990e20;
     --btn-primary-shadow: rgba(99, 102, 241, 0.4);
     --btn-primary-hover-shadow-gradient1: #83c51210;
     --btn-primary-hover-shadow-gradient2: #b0b91a10;
@@ -188,7 +191,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .dropdown-item:hover {
-    color: var(--dropdown-menu-hover-color);
+    background-color: var(--dropdown-menu-hover-color);
+    color: var(--text-primary);
 }
 
 /* Jumbotron Replacement */
