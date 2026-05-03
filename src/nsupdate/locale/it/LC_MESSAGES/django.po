@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-21 17:58+0200\n"
+"POT-Creation-Date: 2026-05-01 22:24+0200\n"
 "PO-Revision-Date: 2014-07-14 15:19+0000\n"
 "Last-Translator: ykmm <ykmm@mediacom.it>, 2014\n"
 "Language-Team: Italian (http://app.transifex.com/thomaswaldmann/nsupdateinfo/"
@@ -26,23 +26,23 @@ msgstr ""
 
 #: accounts/models.py:20
 msgid "user"
-msgstr ""
+msgstr "utente"
 
 #: accounts/models.py:23
 msgid "language"
-msgstr ""
+msgstr "lingua"
 
 #: accounts/models.py:29
 msgid "user profile"
-msgstr ""
+msgstr "profilo utente"
 
 #: accounts/models.py:30
 msgid "user profiles"
-msgstr ""
+msgstr "profili utente"
 
 #: accounts/registration_form.py:75
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Inserisci un indirizzo email valido."
 
 #: accounts/templates/accounts/delete_user.html:7
 msgid "Delete your User Account"
@@ -53,6 +53,8 @@ msgid ""
 "Are you sure you want to delete your user account and all your data on this "
 "service? You cannot undelete your data."
 msgstr ""
+"Sei sicuro di voler cancellare il tuo account utente e tutti i tuoi dati su "
+"questo servizio? Non è possibile recuperare i dati cancellati."
 
 #: accounts/templates/accounts/delete_user.html:16
 #: main/templates/main/delete_object.html:15
@@ -61,11 +63,11 @@ msgstr "Conferma"
 
 #: accounts/templates/accounts/user_settings_account.html:4
 msgid "Account settings"
-msgstr ""
+msgstr "Impostazioni account"
 
 #: accounts/templates/accounts/user_settings_account.html:9
 msgid "Change password"
-msgstr ""
+msgstr "Cambia la password"
 
 #: accounts/templates/accounts/user_settings_account.html:17
 #: login/templates/password_reset_confirm.html:14
@@ -79,7 +81,7 @@ msgstr "Password dimenticata?"
 
 #: accounts/templates/accounts/user_settings_account.html:25
 msgid "Social Auth"
-msgstr ""
+msgstr "Social Auth"
 
 #: accounts/templates/accounts/user_settings_account.html:28
 msgid "Associate with remote Account"
@@ -91,7 +93,7 @@ msgstr "Dissocia da Account remoto"
 
 #: accounts/templates/accounts/user_settings_account.html:47
 msgid "Delete account"
-msgstr ""
+msgstr "Cancella account"
 
 #: accounts/templates/accounts/user_settings_account.html:50
 msgid ""
@@ -99,6 +101,9 @@ msgid ""
 "all your data (especially all hosts and all domains created by this user), "
 "you can do it here."
 msgstr ""
+"Se desideri smettere di usare questo servizio e cancellare questo profilo "
+"utente e tutti i tuoi dati (in particolare tutti gli host e tutti i domini "
+"creati da questo utente), puoi farlo qui."
 
 #: accounts/templates/accounts/user_settings_account.html:56
 msgid "Delete User Profile"
@@ -106,10 +111,10 @@ msgstr "Cancella Profilo Utente"
 
 #: accounts/templates/accounts/user_settings_profile.html:4
 msgid "Profile settings"
-msgstr ""
+msgstr "Impostazioni profilo"
 
 #: accounts/templates/accounts/user_settings_profile.html:9
-#: templates/base.html:65
+#: templates/base.html:66
 msgid "Profile"
 msgstr "Profilo"
 
@@ -142,7 +147,7 @@ msgstr ""
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html:26
-#: login/templates/password_reset_complete.html:8 templates/base.html:60
+#: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
 msgstr "Log in"
 
@@ -154,14 +159,16 @@ msgstr "Ops"
 msgid ""
 "It seems that your activation key is invalid. Please check the URL again."
 msgstr ""
+"Sembra che la tua chiave di attivazione non sia valida. Per favore controlla "
+"di nuovo l'URL."
 
 #: accounts/templates/registration/registration_closed.html:3
 msgid "Registration closed"
-msgstr ""
+msgstr "Registrazione chiusa"
 
 #: accounts/templates/registration/registration_closed.html:6
 msgid "The account registration is closed."
-msgstr ""
+msgstr "La registrazione degli account è chiusa."
 
 #: accounts/templates/registration/registration_closed.html:7
 #, python-format
@@ -169,6 +176,8 @@ msgid ""
 "Registration is currently only possible by contacting the admin "
 "(%(SERVICE_CONTACT)s). "
 msgstr ""
+"La registrazione è attualmente possibile solo contattando l'amministratore "
+"(%(SERVICE_CONTACT)s). "
 
 #: accounts/templates/registration/registration_complete.html:3
 msgid "Activation email sent"
@@ -237,6 +246,8 @@ msgid ""
 "So if you'd like your stuff to stay, please register for a regular account "
 "after finishing your initial evaluation."
 msgstr ""
+"Quindi, se vuoi che i tuoi dati restino, registrati per un account regolare "
+"dopo aver terminato la tua valutazione iniziale."
 
 #: accounts/templates/registration/registration_form.html:41
 msgid "Register new account"
@@ -249,6 +260,10 @@ msgid ""
 "em> one, we'll send you an activation email there.<br> Password: please use "
 "a sane one, we trust you."
 msgstr ""
+"Nome utente: dovrebbe essere legato alla tua <em>persona o organizzazione</"
+"em> (non: all'host che vuoi registrare).<br> Indirizzo email: deve essere un "
+"indirizzo <em>funzionante</em>, ti invieremo un'email di attivazione.<br> "
+"Password: per favore usane una sensata, ci fidiamo di te."
 
 #: accounts/templates/registration/registration_form.html:56
 msgid "Send activation email"
@@ -256,7 +271,7 @@ msgstr "Invio dell'email di attivazione."
 
 #: accounts/views.py:70
 msgid "Your password was changed!"
-msgstr ""
+msgstr "La tua password è stata cambiata!"
 
 #: login/templates/login.html:8
 msgid "Login with a local Account"
@@ -280,13 +295,13 @@ msgstr "Esegui la login con un Account remoto"
 
 #: login/templates/login.html:48
 msgid "No remote account logins enabled."
-msgstr ""
+msgstr "Nessun login da account remoto abilitato."
 
 #: login/templates/login.html:49
 msgid "Please login with a local account."
-msgstr ""
+msgstr "Esegui la login con un account locale."
 
-#: login/templates/logout.html:3 templates/base.html:75
+#: login/templates/logout.html:3 templates/base.html:76
 msgid "Log out"
 msgstr "Disconnessione"
 
@@ -373,7 +388,7 @@ msgstr ""
 
 #: main/forms.py:54 main/forms.py:71
 msgid "Enter a valid secret in base64 format."
-msgstr ""
+msgstr "Inserisci una chiave segreta valida in formato base64."
 
 #: main/forms.py:83
 #, python-format
@@ -381,30 +396,33 @@ msgid ""
 "Failed to add/delete host connectivity-test.%(domain)s, check your DNS "
 "server configuration. This is a requirement for setting the available flag."
 msgstr ""
+"Impossibile aggiungere/cancellare l'host connectivity-test.%(domain)s, "
+"controlla la configurazione del tuo server DNS. Questo è un requisito per "
+"impostare il flag di disponibilità."
 
 #: main/forms.py:91
 msgid "Domain must be available to be public."
-msgstr ""
+msgstr "Il dominio deve essere disponibile per essere pubblico."
 
 #: main/hashers.py:50
 msgid "algorithm"
-msgstr ""
+msgstr "algoritmo"
 
 #: main/hashers.py:51
 msgid "salt"
-msgstr ""
+msgstr "salt"
 
 #: main/hashers.py:52
 msgid "hash"
-msgstr ""
+msgstr "hash"
 
 #: main/models.py:41
 msgid "name regex"
-msgstr ""
+msgstr "regex del nome"
 
 #: main/models.py:44
 msgid "Blacklisted domain. Evaluated as a regex (search)."
-msgstr ""
+msgstr "Dominio nella lista nera. Valutato come regex (ricerca)."
 
 #: main/models.py:46 main/models.py:130 main/models.py:250 main/models.py:479
 #: main/models.py:528
@@ -436,7 +454,7 @@ msgstr "nome"
 
 #: main/models.py:89
 msgid "Invalid domain name"
-msgstr ""
+msgstr "Nome di dominio non valido"
 
 #: main/models.py:91
 msgid "Name of the zone where dynamic hosts may get added"
@@ -514,6 +532,8 @@ msgid ""
 "Some arbitrary comment about your domain. If your domain is public, the "
 "comment will also be publicly shown."
 msgstr ""
+"Un commento arbitrario sul tuo dominio. Se il tuo dominio è pubblico, il "
+"commento sarà visibile pubblicamente."
 
 #: main/models.py:151 main/models.py:168
 msgid "domain"
@@ -535,6 +555,8 @@ msgstr "aggiorna segreto"
 msgid ""
 "Some arbitrary comment about your host, e.g. who / what / where this host is"
 msgstr ""
+"Un commento arbitrario sul tuo host, ad es. chi / cosa / dove si trova "
+"questo host"
 
 #: main/models.py:185 main/models.py:406
 msgid ""
@@ -634,11 +656,11 @@ msgstr "TLS aggiornamento IPv6"
 
 #: main/models.py:247
 msgid "staleness"
-msgstr ""
+msgstr "inattività"
 
 #: main/models.py:248
 msgid "staleness notification time"
-msgstr ""
+msgstr "orario di notifica inattività"
 
 #: main/models.py:262 main/models.py:526
 msgid "host"
@@ -650,7 +672,7 @@ msgstr "hosts"
 
 #: main/models.py:293
 msgid "error"
-msgstr ""
+msgstr "errore"
 
 #: main/models.py:387
 msgid "The name of a host in same network as your main host."
@@ -665,6 +687,8 @@ msgid ""
 "The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set "
 "record."
 msgstr ""
+"L'ID interfaccia IPv4 di questo host. Usa la notazione IPv4. Vuoto = non "
+"impostare il record."
 
 #: main/models.py:399
 msgid "interface ID IPv6"
@@ -675,6 +699,8 @@ msgid ""
 "The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set "
 "record."
 msgstr ""
+"L'ID interfaccia IPv6 di questo host. Usa la notazione IPv6. Vuoto = non "
+"impostare il record."
 
 #: main/models.py:413
 msgid "main host"
@@ -839,6 +865,8 @@ msgid ""
 "making the few free features almost undiscoverable between a ton of "
 "commercial-only features"
 msgstr ""
+"rendendo le poche funzionalità gratuite quasi introvabili tra una marea di "
+"funzionalità solo commerciali"
 
 #: main/templates/main/about.html:60
 msgid "How is it?"
@@ -857,6 +885,10 @@ msgid ""
 "&mdash; there might be some interesting stuff for you in it that is not "
 "visible or obvious on the user interface."
 msgstr ""
+"Inoltre, abbiamo la <a href=\"http://nsupdateinfo.readthedocs.org/\" "
+"title=\"Apri la documentazione in una nuova finestra\" target=\"_blank\" "
+"rel=\"noopener\">documentazione</a> &mdash; potrebbe contenere informazioni "
+"interessanti per te che non sono visibili o ovvie nell'interfaccia utente."
 
 #: main/templates/main/about.html:76
 msgid ""
@@ -900,7 +932,7 @@ msgstr "Non utilizzarlo per scopi illegali o discutibili."
 
 #: main/templates/main/about.html:101
 msgid "Don't spam us via email."
-msgstr ""
+msgstr "Non inviarci spam via email."
 
 #: main/templates/main/about.html:104
 msgid ""
@@ -933,6 +965,8 @@ msgid ""
 "Before contacting us via email, please read the docs, they exist for a "
 "reason."
 msgstr ""
+"Prima di contattarci via email, leggi la documentazione, esiste per un "
+"motivo."
 
 #: main/templates/main/about.html:139
 msgid "Software Project Contact"
@@ -1024,6 +1058,9 @@ msgid ""
 "Deleting a domain cannot be undone. If you need it back, you'll have to add "
 "it again and configure a new shared secret."
 msgstr ""
+"La cancellazione di un dominio non può essere annullata. Se ne hai bisogno "
+"di nuovo, dovrai aggiungerlo nuovamente e configurare una nuova chiave "
+"segreta condivisa."
 
 #: main/templates/main/domain_add.html:7
 msgid ""
@@ -1031,6 +1068,9 @@ msgid ""
 "control over at least one nameserver which is able to accept dynamic updates "
 "(RFC 2136)."
 msgstr ""
+"Questa funzionalità è solo per utenti avanzati! Per usarla, devi avere il "
+"controllo di almeno un nameserver in grado di accettare aggiornamenti "
+"dinamici (RFC 2136)."
 
 #: main/templates/main/domain_add.html:13
 msgid "Add a new Domain"
@@ -1053,6 +1093,8 @@ msgid ""
 "Here you can add new domains (zones) which you control (and this is only "
 "useful if you have your own zone which you can update automatically)."
 msgstr ""
+"Qui puoi aggiungere nuovi domini (zone) che controlli (e questo è utile solo "
+"se hai una tua zona che puoi aggiornare automaticamente)."
 
 #: main/templates/main/domain_add.html:35
 msgid ""
@@ -1070,6 +1112,8 @@ msgid ""
 "If you create a new zone, you are strongly advised to consider submitting "
 "your zone to the <a href=\"%(psl_url)s\">%(psl_text)s</a>."
 msgstr ""
+"Se crei una nuova zona, ti consigliamo vivamente di considerare l'invio "
+"della tua zona alla <a href=\"%(psl_url)s\">%(psl_text)s</a>."
 
 #: main/templates/main/domain_add.html:49
 msgid "We'll show you configuration examples after you add a domain."
@@ -1086,6 +1130,9 @@ msgid ""
 "New nameserver shared secret generated for you. Every time you visit this "
 "page a new secret will be generated and the old one becomes invalid."
 msgstr ""
+"Nuova chiave segreta condivisa del nameserver generata per te. Ogni volta "
+"che visiti questa pagina verrà generata una nuova chiave segreta e quella "
+"vecchia diventerà non valida."
 
 #: main/templates/main/generate_ns_secret.html:11
 msgid "Algorithm:"
@@ -1112,6 +1159,10 @@ msgid ""
 "have to generate a new one again. Every time you visit this page a new "
 "secret will be generated and the old one becomes invalid."
 msgstr ""
+"Nuova chiave segreta generata per te. La memorizziamo come hash, quindi "
+"salvala ora, oppure dovrai generarne una nuova. Ogni volta che visiti questa "
+"pagina verrà generata una nuova chiave segreta e quella vecchia diventerà "
+"non valida."
 
 #: main/templates/main/generate_secret.html:24
 msgid "How to configure automated dynamic DNS updates?"
@@ -1172,6 +1223,9 @@ msgid ""
 "Deleting a host cannot be undone. If you need it back, you'll have to add it "
 "again and configure a new update secret."
 msgstr ""
+"La cancellazione di un host non può essere annullata. Se ne hai bisogno di "
+"nuovo, dovrai aggiungerlo nuovamente e configurare una nuova chiave segreta "
+"di update."
 
 #: main/templates/main/host.html:46
 msgid ""
@@ -1316,6 +1370,10 @@ msgid ""
 "built-in software that does this, but you can also use some software on "
 "another system (like a PC or server)."
 msgstr ""
+"Devi essere in grado di configurare una delle tue macchine in modo che invii "
+"aggiornamenti compatibili con dyndns2 quando il tuo IP cambia. I router di "
+"solito hanno un software integrato che lo fa, ma puoi anche usare un "
+"software su un altro sistema (come un PC o un server)."
 
 #: main/templates/main/host_add.html:32
 msgid ""
@@ -1511,11 +1569,11 @@ msgstr "Se hai IPv4 e IPv6"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:127
 msgid "Set Update URL to the following:"
-msgstr ""
+msgstr "Imposta l'URL di aggiornamento come segue:"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:129
 msgid "Please also check our documentation about related hosts."
-msgstr ""
+msgstr "Consulta anche la nostra documentazione sugli host associati."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:130
 msgid "Forcing a dynamic DNS update"
@@ -1563,7 +1621,7 @@ msgstr "ddclient è un demone di aggiornamento dyndns popolare per Linux."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:248
 msgid "Enter the following data (and click ADD afterwards):"
-msgstr ""
+msgstr "Inserisci i seguenti dati (e clicca AGGIUNGI dopo):"
 
 #: main/templates/main/includes/tabbed_router_configuration.html:346
 msgid ""
@@ -1603,6 +1661,9 @@ msgid ""
 "temporary and ad hoc scenarios only. It periodically checks your IP and "
 "updates DNS if it changes."
 msgstr ""
+"Questi URL invocano il client di aggiornamento integrato, che è pensato solo "
+"per scenari temporanei e ad hoc. Controlla periodicamente il tuo IP e "
+"aggiorna il DNS se cambia."
 
 #: main/templates/main/includes/tabbed_router_configuration.html:391
 #: main/templates/main/includes/tabbed_router_configuration.html:405
@@ -1725,19 +1786,19 @@ msgstr "Abuso"
 
 #: main/templates/main/overview.html:58 main/templates/main/overview.html:71
 msgid "none"
-msgstr ""
+msgstr "nessuno"
 
 #: main/templates/main/overview.html:63 main/templates/main/overview.html:76
 msgid "no"
-msgstr ""
+msgstr "no"
 
 #: main/templates/main/overview.html:64 main/templates/main/overview.html:77
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: main/templates/main/overview.html:66 main/templates/main/overview.html:79
 msgid "unknown"
-msgstr ""
+msgstr "sconosciuto"
 
 #: main/templates/main/overview.html:85
 msgid "No hosts yet."
@@ -1785,6 +1846,8 @@ msgid ""
 "Deleting a related host cannot be undone. If you need it back, you'll have "
 "to add it again."
 msgstr ""
+"La cancellazione di un host associato non può essere annullata. Se ne hai "
+"bisogno di nuovo, dovrai aggiungerlo nuovamente."
 
 #: main/templates/main/related_host.html:45
 #: main/templates/main/related_host_add.html:28
@@ -1903,7 +1966,7 @@ msgstr ""
 
 #: main/templates/main/update.html:14
 msgid "The browser-based updater only works if JavaScript is enabled."
-msgstr ""
+msgstr "L'updater basato su browser funziona solo se JavaScript è abilitato."
 
 #: main/templates/main/update.html:17
 msgid "Updater Status"
@@ -1930,6 +1993,8 @@ msgid ""
 "Deleting an updater configuration cannot be undone. If you need it back, "
 "you'll have to add it again."
 msgstr ""
+"La cancellazione di una configurazione dell'updater non può essere "
+"annullata. Se ne hai bisogno di nuovo, dovrai aggiungerla nuovamente."
 
 #: main/templates/main/updater_hostconfig.html:45
 #, python-format
@@ -1982,6 +2047,8 @@ msgid ""
 "Here you can add new configurations for 3rd party services you would like to "
 "get updated."
 msgstr ""
+"Qui puoi aggiungere nuove configurazioni per servizi di terze parti che "
+"desideri aggiornare."
 
 #: main/templates/main/updater_hostconfig_overview.html:63
 msgid "We will send an update to them each time you update your host with us."
@@ -2019,26 +2086,57 @@ msgid ""
 "domain entry, so it is removed from our database. This will also remove all\n"
 "hosts that were added to this domain (if any).\n"
 msgstr ""
+"Il tuo dominio: %(domain)s (commento: %(comment)s)\n"
+"\n"
+"Problema: Il nameserver del dominio non è raggiungibile ed è stato impostato "
+"come non disponibile\n"
+"       (e anche come non pubblico, nel caso fosse pubblico).\n"
+"\n"
+"Spiegazione:\n"
+"Hai creato il dominio sul nostro servizio e hai inserito un IP del "
+"nameserver primario.\n"
+"Abbiamo provato a interrogare quel nameserver ma non era raggiungibile "
+"oppure non ha\n"
+"risposto alle query per questo dominio.\n"
+"\n"
+"Risoluzione:\n"
+"Se vuoi davvero che quel dominio funzioni e controlli davvero quel "
+"nameserver:\n"
+"\n"
+"1. correggi il nameserver in modo che risponda alle query per questo "
+"dominio\n"
+"2. assicurati che il nameserver sia raggiungibile da noi\n"
+"3. assicurati che accetti aggiornamenti dinamici per gli host in questo "
+"dominio\n"
+"4. assicurati che usi la stessa chiave segreta configurata sul servizio\n"
+"5. imposta il dominio come \"disponibile\" sul servizio\n"
+"6. verifica che il flag \"pubblico\" sia corretto\n"
+"\n"
+"In alternativa, se non usi il dominio con il nostro servizio, cancella la "
+"voce del dominio, in modo che venga rimossa dal nostro database. Questo "
+"rimuoverà anche tutti\n"
+"gli host che sono stati aggiunti a questo dominio (se presenti).\n"
 
 #: management/commands/domains.py:43
 #, python-format
 msgid "Domain %(domain)s is available."
-msgstr ""
+msgstr "Il dominio %(domain)s è disponibile."
 
 #: management/commands/domains.py:44
 #, python-format
 msgid "Domain %%(domain)s is not available, but has %(hosts)d hosts."
-msgstr ""
+msgstr "Il dominio %%(domain)s non è disponibile, ma ha %(hosts)d host."
 
 #: management/commands/domains.py:45
 #, python-format
 msgid "Domain %(domain)s is not available and has no hosts -> deleted domain."
 msgstr ""
+"Il dominio %(domain)s non è disponibile e non ha host -> dominio cancellato."
 
 #: management/commands/domains.py:129
 #, python-format
 msgid "Issue with your domain %(domain)s"
-msgstr ""
+msgstr "Problema con il tuo dominio %(domain)s"
 
 #: management/commands/faults.py:14
 #, python-format
@@ -2075,11 +2173,51 @@ msgid ""
 "- if you already used such a software and you ran into this problem,\n"
 "  complain to whoever wrote it about it sending nochg updates\n"
 msgstr ""
+"Il tuo host: %(fqdn)s (commento: %(comment)s)\n"
+"\n"
+"Problema: Il flag di abuso per il tuo host è stato impostato.\n"
+"\n"
+"Spiegazione:\n"
+"Il flag di abuso viene solitamente impostato se il tuo client di "
+"aggiornamento invia troppi\n"
+"aggiornamenti anche se il tuo indirizzo IP non è cambiato.\n"
+"\n"
+"Il tuo client di aggiornamento ha inviato %(faults_count)d aggiornamenti "
+"errati dall'ultimo controllo.\n"
+"Abbiamo azzerato il contatore degli errori, ma stiamo rifiutando gli "
+"aggiornamenti\n"
+"per questo host finché non risolvi il problema.\n"
+"\n"
+"Risoluzione:\n"
+"Puoi farlo facilmente da solo:\n"
+"1. correggi o sostituisci il client di aggiornamento su questo host - non "
+"deve inviare\n"
+"   aggiornamenti se l'IP non è cambiato\n"
+"2. visita l'interfaccia web del servizio e rimuovi il flag di abuso per "
+"questo host\n"
+"\n"
+"Note:\n"
+"- questo è solitamente causato da un client di aggiornamento "
+"malfunzionante / difettoso\n"
+"  (sul tuo PC / server o router / firewall)\n"
+"- lo standard dyndns2 afferma esplicitamente che l'invio frequente di\n"
+"  aggiornamenti nochg è considerato abuso del servizio\n"
+"- stai usando molte più risorse sul servizio di quelle realmente necessarie\n"
+"- per Linux e sistemi operativi simili, puoi usare il software ddclient - "
+"forniamo\n"
+"  aiuto alla configurazione pronto da copiare e incollare sulla nostra "
+"interfaccia web\n"
+"- se hai bisogno di qualcos'altro, usa qualsiasi cosa che possa essere "
+"considerata\n"
+"  un client di aggiornamento compatibile con dyndns2 valido e ben "
+"funzionante\n"
+"- se usavi già un software del genere e hai riscontrato questo problema,\n"
+"  segnala a chi lo ha scritto che invia aggiornamenti nochg\n"
 
 #: management/commands/faults.py:150
 #, python-format
 msgid "Issue with your host %(fqdn)s"
-msgstr ""
+msgstr "Problema con il tuo host %(fqdn)s"
 
 #: management/commands/hosts.py:24
 #, python-format
@@ -2087,6 +2225,8 @@ msgid ""
 "%(host)s has not seen IP updates for a long time; staleness: %(staleness)d "
 "-> please fix!"
 msgstr ""
+"%(host)s non ha ricevuto aggiornamenti IP da molto tempo; inattività: "
+"%(staleness)d -> per favore intervieni!"
 
 #: management/commands/hosts.py:25
 #, python-format
@@ -2094,6 +2234,8 @@ msgid ""
 "%(host)s IP has still not been updated, staleness: %(staleness)d -> made "
 "host unavailable."
 msgstr ""
+"L'IP di %(host)s non è ancora stato aggiornato, inattività: %(staleness)d -> "
+"host reso indisponibile."
 
 #: management/commands/hosts.py:26
 #, python-format
@@ -2101,6 +2243,8 @@ msgid ""
 "%(host)s IP has still not been updated, staleness: %(staleness)d -> deleted "
 "host."
 msgstr ""
+"L'IP di %(host)s non è ancora stato aggiornato, inattività: %(staleness)d -> "
+"host cancellato."
 
 #: management/commands/hosts.py:28
 #, python-format
@@ -2109,6 +2253,9 @@ msgid ""
 "\n"
 "Issue: "
 msgstr ""
+"Il tuo host: %(host)s (commento: %(comment)s)\n"
+"\n"
+"Problema: "
 
 #: management/commands/hosts.py:34
 msgid ""
@@ -2147,6 +2294,48 @@ msgid ""
 "updaters\n"
 "can do that, too.\n"
 msgstr ""
+"\n"
+"\n"
+"Spiegazione:\n"
+"Hai creato l'host sul nostro servizio, ma non è stato aggiornato da molto "
+"tempo.\n"
+"\n"
+"Questo potrebbe essere perché:\n"
+"* Non usi più l'host/servizio, ma hai dimenticato di cancellare l'host.\n"
+"* L'IP dell'host non è mai cambiato e quindi non ha richiesto un "
+"aggiornamento.\n"
+"* Le tue credenziali di aggiornamento sono errate e quindi gli aggiornamenti "
+"non funzionano.\n"
+"* Il tuo updater non funziona correttamente e non invia aggiornamenti.\n"
+"\n"
+"Non possiamo conoscere il motivo. Ma ti preghiamo di capire che non "
+"vogliamo\n"
+"accumulare host inutilizzati nel nostro database, quindi aiutaci a risolvere "
+"questo problema.\n"
+"\n"
+"Invieremo alcune notifiche come questa per ricordarti di risolvere il "
+"problema.\n"
+"Se non reagisci e non risolvi, il tuo host verrà prima reso indisponibile\n"
+"e successivamente verrà cancellato.\n"
+"\n"
+"Risoluzione:\n"
+"* Se usi ancora l'host:\n"
+"  - Se il tuo host è stato impostato come indisponibile, devi prima "
+"reimpostarlo\n"
+"    manualmente come disponibile (tramite l'interfaccia web).\n"
+"  - Invia un aggiornamento (puoi farlo tramite l'interfaccia web o "
+"semplicemente\n"
+"    accedendo all'URL di aggiornamento o forzando il tuo software di "
+"aggiornamento a inviare un\n"
+"    aggiornamento). Un aggiornamento con lo stesso IP è accettabile in "
+"questo caso.\n"
+"* Se non usi più l'host, cancellalo dal servizio.\n"
+"\n"
+"Suggerimento: Per evitare questo problema con host con IP statico o "
+"prevalentemente statico, considera\n"
+"di inviare un aggiornamento incondizionato ogni mese. Anche alcuni updater "
+"compatibili con DynDNS2\n"
+"possono farlo.\n"
 
 #: management/commands/hosts.py:66
 msgid ""
@@ -2163,11 +2352,25 @@ msgid ""
 "Feel free to re-create it on our service in case you need it again at some\n"
 "time.\n"
 msgstr ""
+"\n"
+"\n"
+"Spiegazione:\n"
+"Hai creato l'host sul nostro servizio, ma non è stato aggiornato da molto "
+"tempo.\n"
+"\n"
+"Ti abbiamo inviato alcune notifiche email a riguardo, ma non hai mai "
+"reagito.\n"
+"Pertanto, presumiamo che non hai più bisogno dell'host e lo abbiamo "
+"CANCELLATO.\n"
+"\n"
+"Sentiti libero di ricrearlo sul nostro servizio nel caso ne avessi bisogno "
+"di nuovo in\n"
+"futuro.\n"
 
 #: management/commands/hosts.py:159
 #, python-format
 msgid "Issue with your host %(host)s"
-msgstr ""
+msgstr "Problema con il tuo host %(host)s"
 
 #: management/commands/users.py:20
 #, python-format
@@ -2175,11 +2378,13 @@ msgid ""
 "%%(user)r hasn't logged in for %(age)fy, has no hosts and no domains -> "
 "deleted user."
 msgstr ""
+"%%(user)r non ha effettuato il login da %(age)fy, non ha host e nessun "
+"dominio -> utente cancellato."
 
 #: management/commands/users.py:21
 #, python-format
 msgid "%%(user)r kept, has hosts. age: %(age)fy, hosts: %(hosts)d."
-msgstr ""
+msgstr "%%(user)r mantenuto, ha host. età: %(age)fy, host: %(hosts)d."
 
 #: management/commands/users.py:22
 #, python-format
@@ -2187,11 +2392,13 @@ msgid ""
 "%%(user)r kept, has domains. age: %(age)fy, hosts: %(hosts)d, domains: "
 "%(domains)d."
 msgstr ""
+"%%(user)r mantenuto, ha domini. età: %(age)fy, host: %(hosts)d, domini: "
+"%(domains)d."
 
 #: management/commands/users.py:23
 #, python-format
 msgid "%(user)r kept, was used recently."
-msgstr ""
+msgstr "%(user)r mantenuto, è stato usato di recente."
 
 #: settings/base.py:440 utils/_tests/test_mail.py:16
 msgid "English"
@@ -2203,7 +2410,7 @@ msgstr "Tedesco"
 
 #: settings/base.py:442
 msgid "Greek"
-msgstr ""
+msgstr "Greco"
 
 #: settings/base.py:443
 msgid "French"
@@ -2213,56 +2420,62 @@ msgstr "Francese"
 msgid "Italian"
 msgstr "Italiano"
 
-#: templates/base.html:39
+#: settings/base.py:445
+msgid "Hungarian"
+msgstr "Ungherese"
+
+#: templates/base.html:40
 msgid "Home"
 msgstr "Home"
 
-#: templates/base.html:43
+#: templates/base.html:44
 msgid "Overview"
 msgstr "Vista d'insieme"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Status"
 msgstr "Stato"
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "About"
 msgstr "A proposito"
 
-#: templates/base.html:54
+#: templates/base.html:55
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: templates/base.html:59
+#: templates/base.html:60
 msgid "Sign up"
 msgstr "Registrati"
 
-#: templates/base.html:66
+#: templates/base.html:67
 msgid "Password change"
 msgstr "Cambio password"
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "Admin interface"
 msgstr "Interfaccia amministrativa"
 
-#: templates/base.html:107
+#: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "La tua connessione (http) non è crittografata e pertanto è insicura."
 
-#: templates/base.html:109
+#: templates/base.html:110
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
 msgstr ""
 "Per cortesia, utilizza il nostro<a href=\"https://%(WWW_HOST)s/\">sito https "
 "sicuro</a>."
 
-#: templates/base.html:114
+#: templates/base.html:115
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site, expect malfunctions on the http site."
 msgstr ""
+"Almeno alcuni dei cookie necessari funzioneranno solo sul sito sicuro https, "
+"aspettati malfunzionamenti sul sito http."
 
-#: templates/base.html:124
+#: templates/base.html:125
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in "
 "your browser."

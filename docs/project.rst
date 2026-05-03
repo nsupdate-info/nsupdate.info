@@ -53,6 +53,22 @@ Translations update workflow
     cd ../..
     tx push -s -t
 
+Using Junie AI for translations
+-------------------------------
+
+We have a "translate" Junie AI agent skill now, see `.junie/skills/translate/`:
+
+- SKILL.md has the skill description
+- glossaries/ sub-directory helps with consistency
+
+You can use it like that:
+
+"Use the translate skill to translate the missing strings for de (german)."
+
+We are aware that AI translations might not always be perfect, but often a
+human translator is not available.
+
+Human translators are welcome to help us improving the glossaries and translations!
 
 Contributing
 ============
