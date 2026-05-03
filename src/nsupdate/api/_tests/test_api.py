@@ -5,12 +5,13 @@ Tests for the API package.
 import pytest
 
 import base64
+import dns.resolver
 from netaddr import IPSet, IPAddress
 
 from django.urls import reverse
 
 from nsupdate.main.dnstools import query_ns, FQDN
-from nsupdate.main.models import Domain
+from nsupdate.main.models import Domain, Host
 from nsupdate.api.views import basic_authenticate
 
 from nsupdate.conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
@@ -360,3 +361,113 @@ def test_nic_delete_multiple_ips(client):
     if content == 'dnserr':
         pytest.skip("DNS server not available in test environment")
     assert content == 'deleted A,AAAA'
+
+
+def test_nic_update_unspecified_ipv4_deletes(client):
+    """Sending myip=0.0.0.0 via /nic/update should delete the A record (not create a useless one).
+    This tests the unspecified-address check with single_ip=True (netmask /32)."""
+    host = Host.objects.get(name=TEST_HOST.host)
+    orig_netmask = host.netmask_ipv4
+    host.netmask_ipv4 = 32  # single_ip=True, so the network-prefix check is bypassed
+    host.save()
+    try:
+        # First, create an A record.
+        response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                              HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        assert content.startswith('good ') or content.startswith('nochg ')
+        # Verify the A record exists in DNS.
+        assert query_ns(TEST_HOST, 'A') == '1.2.3.4'
+        # Now send the unspecified address — should delete the A record.
+        response = client.get(reverse('nic_update') + '?myip=0.0.0.0',
+                              HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        # The record is deleted via the update path, so the response is 'good 0.0.0.0'
+        # (because _delete=False in the response logic).
+        assert content == 'good 0.0.0.0'
+        # Verify the A record was actually deleted from DNS.
+        with pytest.raises((dns.resolver.NXDOMAIN, dns.resolver.NoAnswer)):
+            query_ns(TEST_HOST, 'A')
+    finally:
+        host.netmask_ipv4 = orig_netmask
+        host.save()
+
+
+def test_nic_update_unspecified_ipv6_deletes(client):
+    """Sending myip=:: via /nic/update should delete the AAAA record (not create a useless one).
+    This tests the unspecified-address check with single_ip=True (netmask /128)."""
+    host = Host.objects.get(name=TEST_HOST.host)
+    orig_netmask = host.netmask_ipv6
+    host.netmask_ipv6 = 128  # single_ip=True, so the network-prefix check is bypassed
+    host.save()
+    try:
+        # First, create an AAAA record.
+        response = client.get(reverse('nic_update') + '?myip=2000::1',
+                              HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        assert content.startswith('good ') or content.startswith('nochg ')
+        # Verify the AAAA record exists in DNS.
+        assert query_ns(TEST_HOST, 'AAAA') == '2000::1'
+        # Now send the unspecified address — should delete the AAAA record.
+        response = client.get(reverse('nic_update') + '?myip=::',
+                              HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        assert content == 'good ::'
+        # Verify the AAAA record was actually deleted from DNS.
+        with pytest.raises((dns.resolver.NXDOMAIN, dns.resolver.NoAnswer)):
+            query_ns(TEST_HOST, 'AAAA')
+    finally:
+        host.netmask_ipv6 = orig_netmask
+        host.save()
+
+
+def test_nic_update_unspecified_ipv4_with_subnet_deletes(client):
+    """Sending myip=0.0.0.0 via /nic/update with a non-/32 netmask should also delete.
+    In this case, 0.0.0.0 is caught by the existing network-prefix check (not the new
+    unspecified-address check), but the end result is the same: deletion."""
+    # The test host already has netmask_ipv4=29, so single_ip=False.
+    # 0.0.0.0 is the network address of 0.0.0.0/29, so is_network=True.
+    # First, create an A record.
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    assert content.startswith('good ') or content.startswith('nochg ')
+    # Verify the A record exists in DNS.
+    assert query_ns(TEST_HOST, 'A') == '1.2.3.4'
+    # Now send 0.0.0.0 — should delete via the network-prefix check.
+    response = client.get(reverse('nic_update') + '?myip=0.0.0.0',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    content = response.content.decode('utf-8')
+    assert content == 'good 0.0.0.0'
+    # Verify the A record was actually deleted from DNS.
+    with pytest.raises((dns.resolver.NXDOMAIN, dns.resolver.NoAnswer)):
+        query_ns(TEST_HOST, 'A')
+
+
+def test_nic_update_unspecified_ipv4_combo(client):
+    """Sending myip=0.0.0.0,2001:db8::1 should delete the A record and update the AAAA record."""
+    host = Host.objects.get(name=TEST_HOST.host)
+    orig_netmask = host.netmask_ipv4
+    host.netmask_ipv4 = 32
+    host.save()
+    try:
+        response = client.get(reverse('nic_update') + '?myip=0.0.0.0,2001:db8::1',
+                              HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+        assert response.status_code == 200
+        content = response.content.decode('utf-8')
+        # Mixed result: one "good" (delete via update path) and one "good" or "nochg" (actual update).
+        assert 'good 0.0.0.0' in content
+        assert 'good 2001:db8::1' in content or 'nochg 2001:db8::1' in content
+        # Verify DNS state: A record deleted, AAAA record updated.
+        with pytest.raises((dns.resolver.NXDOMAIN, dns.resolver.NoAnswer)):
+            query_ns(TEST_HOST, 'A')
+        assert query_ns(TEST_HOST, 'AAAA') == '2001:db8::1'
+    finally:
+        host.netmask_ipv4 = orig_netmask
+        host.save()
