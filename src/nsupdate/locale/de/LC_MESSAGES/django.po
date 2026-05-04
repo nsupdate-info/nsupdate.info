@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nsupdate.info\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-21 17:58+0200\n"
+"POT-Creation-Date: 2026-05-01 22:24+0200\n"
 "PO-Revision-Date: 2014-07-14 15:19+0000\n"
 "Last-Translator: TW <tw@waldmann-edv.de>, 2014,2026\n"
 "Language-Team: German (http://app.transifex.com/thomaswaldmann/nsupdateinfo/"
@@ -114,7 +114,7 @@ msgid "Profile settings"
 msgstr "Profil-Einstellungen"
 
 #: accounts/templates/accounts/user_settings_profile.html:9
-#: templates/base.html:65
+#: templates/base.html:66
 msgid "Profile"
 msgstr "Profil"
 
@@ -147,7 +147,7 @@ msgstr ""
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html:26
-#: login/templates/password_reset_complete.html:8 templates/base.html:60
+#: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
 msgstr "Anmelden"
 
@@ -303,7 +303,7 @@ msgstr "Keine Remote-Anmeldungen eingeschaltet."
 msgid "Please login with a local account."
 msgstr "Bitte mit einem lokalen Konto anmelden."
 
-#: login/templates/logout.html:3 templates/base.html:75
+#: login/templates/logout.html:3 templates/base.html:76
 msgid "Log out"
 msgstr "Abmelden"
 
@@ -2093,6 +2093,36 @@ msgid ""
 "domain entry, so it is removed from our database. This will also remove all\n"
 "hosts that were added to this domain (if any).\n"
 msgstr ""
+"Deine Domain: %(domain)s (Kommentar: %(comment)s)\n"
+"\n"
+"Problem: Der Nameserver der Domain ist nicht erreichbar und wurde auf\n"
+"         nicht verfügbar gesetzt (und auch auf nicht öffentlich, falls er\n"
+"         öffentlich war).\n"
+"\n"
+"Erklärung:\n"
+"Du hast die Domain bei unserem Service angelegt und eine primäre\n"
+"Nameserver-IP dafür eingetragen. Wir haben versucht, diesen Nameserver\n"
+"abzufragen, aber er war entweder nicht erreichbar oder hat keine\n"
+"Anfragen für diese Domain beantwortet.\n"
+"\n"
+"Lösung:\n"
+"Wenn Du wirklich möchtest, dass diese Domain funktioniert und Du diesen\n"
+"Nameserver wirklich kontrollierst:\n"
+"\n"
+"1. Repariere den Nameserver, damit er Anfragen für diese Domain beantwortet\n"
+"2. Stelle sicher, dass der Nameserver von uns aus erreichbar ist\n"
+"3. Stelle sicher, dass er dynamische Updates für Hosts in dieser Domain "
+"akzeptiert\n"
+"4. Stelle sicher, dass er dasselbe Secret verwendet, das beim Service "
+"konfiguriert ist\n"
+"5. Setze die Domain beim Service auf \"verfügbar\"\n"
+"6. Prüfe, ob das \"öffentlich\"-Flag korrekt ist\n"
+"\n"
+"Alternativ, wenn Du die Domain nicht mit unserem Service nutzt, lösche den\n"
+"Domain-Eintrag, damit er aus unserer Datenbank entfernt wird. Dadurch "
+"werden\n"
+"auch alle Hosts entfernt, die zu dieser Domain hinzugefügt wurden (falls "
+"vorhanden).\n"
 
 #: management/commands/domains.py:43
 #, python-format
@@ -2150,6 +2180,42 @@ msgid ""
 "- if you already used such a software and you ran into this problem,\n"
 "  complain to whoever wrote it about it sending nochg updates\n"
 msgstr ""
+"Dein Host: %(fqdn)s (Kommentar: %(comment)s)\n"
+"\n"
+"Problem: Das Abuse-Flag für Deinen Host wurde gesetzt.\n"
+"\n"
+"Erklärung:\n"
+"Das Abuse-Flag wird normalerweise gesetzt, wenn Dein Update-Client viel zu\n"
+"viele Updates sendet, obwohl sich Deine IP-Adresse nicht geändert hat.\n"
+"\n"
+"Dein Update-Client hat %(faults_count)d fehlerhafte Updates gesendet, seit "
+"wir\n"
+"zuletzt geprüft haben. Wir haben den Fehlerzähler jetzt auf 0 "
+"zurückgesetzt,\n"
+"aber wir lehnen Updates für diesen Host ab, bis Du das Problem behoben "
+"hast.\n"
+"\n"
+"Lösung:\n"
+"Du kannst das ganz einfach selbst beheben:\n"
+"1. Repariere oder ersetze den Update-Client auf diesem Host – er darf keine\n"
+"   Updates senden, wenn sich die IP nicht geändert hat\n"
+"2. Besuche die Web-Oberfläche des Service und entferne das Abuse-Flag für\n"
+"   diesen Host\n"
+"\n"
+"Hinweise:\n"
+"- Dies wird normalerweise durch einen fehlerhaften Update-Client verursacht\n"
+"  (auf Deinem PC / Server oder Router / Firewall)\n"
+"- Der dyndns2-Standard besagt ausdrücklich, dass häufiges Senden von\n"
+"  nochg-Updates als Missbrauch des Service gilt\n"
+"- Du verbrauchst dadurch viel mehr Ressourcen beim Service als nötig\n"
+"- Für Linux und ähnliche Betriebssysteme kannst Du die Software ddclient\n"
+"  verwenden – wir bieten auf unserer Web-Oberfläche eine fertige\n"
+"  Konfigurationshilfe zum Kopieren an\n"
+"- Wenn Du etwas anderes brauchst, verwende einen beliebigen gültigen,\n"
+"  wohlerzogenen dyndns2-kompatiblen Update-Client\n"
+"- Wenn Du bereits eine solche Software verwendet hast und dieses Problem\n"
+"  aufgetreten ist, beschwere Dich beim Entwickler darüber, dass sie\n"
+"  nochg-Updates sendet\n"
 
 #: management/commands/faults.py:150
 #, python-format
@@ -2231,6 +2297,41 @@ msgid ""
 "updaters\n"
 "can do that, too.\n"
 msgstr ""
+"\n"
+"\n"
+"Erklärung:\n"
+"Du hast den Host bei unserem Service angelegt, aber er wurde sehr lange\n"
+"nicht aktualisiert.\n"
+"\n"
+"Das kann folgende Gründe haben:\n"
+"* Du nutzt den Host/Service nicht mehr, hast aber vergessen, den Host zu "
+"löschen.\n"
+"* Die Host-IP hat sich nie geändert und erforderte daher kein Update.\n"
+"* Deine Update-Zugangsdaten sind falsch und Updates funktionieren daher "
+"nicht.\n"
+"* Dein Updater funktioniert nicht richtig und sendet keine Updates.\n"
+"\n"
+"Wir können den Grund nicht kennen. Aber bitte verstehe, dass wir keine\n"
+"ungenutzten Hosts in unserer Datenbank ansammeln möchten, also hilf bitte\n"
+"bei der Lösung dieses Problems.\n"
+"\n"
+"Wir werden einige Benachrichtigungen wie diese senden, um Dich an die\n"
+"Lösung zu erinnern. Wenn Du nicht reagierst und das Problem nicht behebst,\n"
+"wird Dein Host zuerst auf nicht verfügbar gesetzt und später gelöscht.\n"
+"\n"
+"Lösung:\n"
+"* Wenn Du den Host noch nutzt:\n"
+"  - Wenn Dein Host auf nicht verfügbar gesetzt wurde, musst Du ihn zuerst\n"
+"    manuell wieder auf verfügbar setzen (über die Web-Oberfläche).\n"
+"  - Sende ein Update dafür (das kannst Du über die Web-Oberfläche tun oder\n"
+"    indem Du einfach die Update-URL aufrufst oder Deine Update-Software\n"
+"    zwingst, ein Update zu senden). Ein Update mit derselben IP ist in\n"
+"    diesem Fall akzeptabel.\n"
+"* Wenn Du den Host nicht mehr nutzt, lösche ihn bitte vom Service.\n"
+"\n"
+"Tipp: Um dieses Problem bei statischen oder überwiegend statischen IP-Hosts\n"
+"zu vermeiden, sende einmal im Monat ein unbedingtes Update. Einige\n"
+"DynDNS2-kompatible Updater können das ebenfalls.\n"
 
 #: management/commands/hosts.py:66
 msgid ""
@@ -2247,6 +2348,18 @@ msgid ""
 "Feel free to re-create it on our service in case you need it again at some\n"
 "time.\n"
 msgstr ""
+"\n"
+"\n"
+"Erklärung:\n"
+"Du hast den Host bei unserem Service angelegt, aber er wurde sehr lange\n"
+"nicht aktualisiert.\n"
+"\n"
+"Wir haben Dir einige E-Mail-Benachrichtigungen dazu geschickt, aber Du hast\n"
+"nie darauf reagiert. Daher gehen wir davon aus, dass Du den Host nicht mehr\n"
+"benötigst, und haben ihn GELÖSCHT.\n"
+"\n"
+"Du kannst ihn jederzeit bei unserem Service neu anlegen, falls Du ihn\n"
+"wieder benötigst.\n"
 
 #: management/commands/hosts.py:159
 #, python-format
@@ -2301,50 +2414,54 @@ msgstr "Französisch"
 msgid "Italian"
 msgstr "Italienisch"
 
-#: templates/base.html:39
+#: settings/base.py:445
+msgid "Hungarian"
+msgstr "Ungarisch"
+
+#: templates/base.html:40
 msgid "Home"
 msgstr "Startseite"
 
-#: templates/base.html:43
+#: templates/base.html:44
 msgid "Overview"
 msgstr "Übersicht"
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Status"
 msgstr "Status"
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "About"
 msgstr "Über"
 
-#: templates/base.html:54
+#: templates/base.html:55
 msgid "Documentation"
 msgstr "Dokumentation (en)"
 
-#: templates/base.html:59
+#: templates/base.html:60
 msgid "Sign up"
 msgstr "Neues Konto"
 
-#: templates/base.html:66
+#: templates/base.html:67
 msgid "Password change"
 msgstr "Passwort ändern"
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "Admin interface"
 msgstr "Administration"
 
-#: templates/base.html:107
+#: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr "Deine (http-)Verbindung ist unverschlüsselt und deshalb unsicher."
 
-#: templates/base.html:109
+#: templates/base.html:110
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
 msgstr ""
 "Bitte benutze unsere <a href=\"https://%(WWW_HOST)s/\">sichere https-Seite</"
 "a>."
 
-#: templates/base.html:114
+#: templates/base.html:115
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site, expect malfunctions on the http site."
@@ -2352,7 +2469,7 @@ msgstr ""
 "Zumindest einige der benötigten Cookies funktionieren nur auf der sicheren "
 "https-Seite, auf der http-Seite sind Fehlfunktionen zu erwarten."
 
-#: templates/base.html:124
+#: templates/base.html:125
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in "
 "your browser."

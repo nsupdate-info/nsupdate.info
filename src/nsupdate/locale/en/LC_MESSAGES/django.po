@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-21 16:20+0200\n"
+"POT-Creation-Date: 2026-05-01 22:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgid "Profile settings"
 msgstr ""
 
 #: accounts/templates/accounts/user_settings_profile.html:9
-#: templates/base.html:65
+#: templates/base.html:66
 msgid "Profile"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 #: accounts/templates/registration/activate.html:10
 #: accounts/templates/registration/activation_complete.html:8
 #: login/templates/login.html:3 login/templates/login.html:26
-#: login/templates/password_reset_complete.html:8 templates/base.html:60
+#: login/templates/password_reset_complete.html:8 templates/base.html:61
 msgid "Log in"
 msgstr ""
 
@@ -270,7 +270,7 @@ msgstr ""
 msgid "Please login with a local account."
 msgstr ""
 
-#: login/templates/logout.html:3 templates/base.html:75
+#: login/templates/logout.html:3 templates/base.html:76
 msgid "Log out"
 msgstr ""
 
@@ -2062,54 +2062,58 @@ msgstr ""
 msgid "Italian"
 msgstr ""
 
-#: templates/base.html:39
+#: settings/base.py:445
+msgid "Hungarian"
+msgstr ""
+
+#: templates/base.html:40
 msgid "Home"
 msgstr ""
 
-#: templates/base.html:43
+#: templates/base.html:44
 msgid "Overview"
 msgstr ""
 
-#: templates/base.html:46
+#: templates/base.html:47
 msgid "Status"
 msgstr ""
 
-#: templates/base.html:50
+#: templates/base.html:51
 msgid "About"
 msgstr ""
 
-#: templates/base.html:54
+#: templates/base.html:55
 msgid "Documentation"
 msgstr ""
 
-#: templates/base.html:59
+#: templates/base.html:60
 msgid "Sign up"
 msgstr ""
 
-#: templates/base.html:66
+#: templates/base.html:67
 msgid "Password change"
 msgstr ""
 
-#: templates/base.html:69
+#: templates/base.html:70
 msgid "Admin interface"
 msgstr ""
 
-#: templates/base.html:107
+#: templates/base.html:108
 msgid "Your (http) connection is unencrypted and thus insecure."
 msgstr ""
 
-#: templates/base.html:109
+#: templates/base.html:110
 #, python-format
 msgid "Please use our <a href=\"https://%(WWW_HOST)s/\">secure https site</a>."
 msgstr ""
 
-#: templates/base.html:114
+#: templates/base.html:115
 msgid ""
 "At least some of the required cookies will only work on the secure https "
 "site, expect malfunctions on the http site."
 msgstr ""
 
-#: templates/base.html:124
+#: templates/base.html:125
 msgid ""
 "Some functionality on this site requires that you have JavaScript enabled in "
 "your browser."
