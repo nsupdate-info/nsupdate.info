@@ -8,6 +8,14 @@ migrations for that version). For upgrading and migration help, please see
 the docs that match the version you are upgrading to.
 
 
+Next Release
+------------
+
+New Features:
+
+- Update requests: delete records when an all-zero address is provided, #698
+
+
 Release 0.13.0 (2026-04-21)
 ---------------------------
 
