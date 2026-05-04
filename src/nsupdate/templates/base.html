@@ -1,7 +1,7 @@
 {% load static i18n django_bootstrap5 %}
 {% get_current_language as current_language %}
 <!DOCTYPE html>
-<html lang="{{ current_language }}" data-bs-theme="{{ request.COOKIES.nsupdate_theme|default:'dark' }}">
+<html lang="{{ current_language }}" data-bs-theme="{{ nsupdate_theme }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +54,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="http://nsupdateinfo.readthedocs.org/"
-                               class="nav-link" title="Open docs in new window" target="_blank" rel="noopener"><i class="fa fa-eye fa-fw"></i> {% trans "Documentation" %}</a>
+                               class="nav-link" title="Open docs in new window" target="_blank" rel="noopener">
+                              <i class="fa fa-eye fa-fw"></i> {% trans "Documentation" %}
+                            </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -80,8 +82,8 @@
                             </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" role="button" tabindex="0" aria-label="Toggle dark mode">
-                                <i class="fa-solid fa-circle-half-stroke nsupdate_dark_mode_toggler"></i>
+                            <a class="nav-link nsupdate_dark_mode_toggler" role="button" tabindex="0" aria-label="Toggle dark mode">
+                                <i class="fa-solid fa-circle-half-stroke"></i>
                             </a>
                         </li>
                         <li class="nav-item dropdown">

@@ -1,4 +1,5 @@
-html[data-bs-theme="dark"] {
+/* for dark theme (default), light theme overrides below */
+:root {
     --primary-glow: rgba(99, 102, 241, 0.4);
     --secondary-glow: rgba(168, 85, 247, 0.4);
     --bg-color: #0f172a;
@@ -6,9 +7,11 @@ html[data-bs-theme="dark"] {
     --surface-border: rgba(255, 255, 255, 0.1);
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
-    --accent-color: #8b5cf6;
-    /* intentionally identical, so it looks better */
-    --navbar-background: rgba(240, 232, 213, 0.8);
+    --navbar-background: rgba(15, 23, 42, 0.8); /* intentionally identical, so it looks better */
+    --link-color: #8b5cf6;
+    --link-hover-color: #a855f7;
+    --nav-link-color: #fff6;
+    --nav-link-hover-color: #fffc;
     --veryweak-anti-shadow: rgba(255, 255, 255, 0.05);
     --weak-anti-shadow: rgba(255, 255, 255, 0.2);
     --weak-shadow: rgba(0, 0, 0, 0.2);
@@ -25,9 +28,9 @@ html[data-bs-theme="dark"] {
     --btn-primary-gradient1: #8b5cf6;
     --btn-primary-gradient2: #6366f1;
     --btn-primary-shadow: rgba(99, 102, 241, 0.4);
-    --btn-primary-hover-shadow-gradient1: #7c3aed;
-    --btn-primary-hover-shadow-gradient2: #4f46e5;
-    --btn-primary-hover-shadow: rgba(99, 102, 241, 0.6);
+    --btn-primary-hover-gradient1: #7c3aed;
+    --btn-primary-hover-gradient2: #4f46e5;
+    --btn-primary-hover: rgba(99, 102, 241, 0.6);
     --alert-danger-background: rgba(239, 68, 68, 0.3);
     --alert-danger-border: rgba(239, 68, 68, 0.2);
     --alert-danger-text-color: #fca5a5;
@@ -40,20 +43,21 @@ html[data-bs-theme="dark"] {
     --alert-info-background: rgba(56, 189, 248, 0.3);
     --alert-info-border-color: rgba(56, 189, 248, 0.2);
     --alert-info-text-color: #7dd3fc;
-    --link-hover-color: #a855f7;
 }
 
 html[data-bs-theme="light"] {
     --primary-glow: rgba(156, 153, 14, 0.05);
     --secondary-glow: rgba(87, 170, 8, 0.05);
     --bg-color: #fefdfa;
-    --surface-color: rgba(225, 214, 196, 0.1);
+    --surface-color: rgba(248, 245, 241, 0.7);
     --surface-border: rgba(0, 0, 0, 0.1);
     --text-primary: #070503;
     --text-secondary: #6b5c47;
-    --accent-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
-    /* intentionally identical, so it looks better */
-    --navbar-background: rgba(240, 232, 213, 0.8);
+    --navbar-background: rgba(15, 23, 42, 0.8); /* intentionally identical, so it looks better */
+    --link-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+    --link-hover-color: #a855f7;
+    --nav-link-color: #fff6;
+    --nav-link-hover-color: #fffc;
     --veryweak-anti-shadow: rgba(0, 0, 0, 0.05);
     --weak-anti-shadow: rgba(0, 0, 0, 0.2);
     --weak-shadow: rgba(255, 255, 255, 0.2);
@@ -67,13 +71,12 @@ html[data-bs-theme="light"] {
     --footer-background-color: rgba(221, 221, 221, 1);
     --footer-link-color: rgb(13, 110, 253);
     --footer-link-hover-color: rgb(10, 88, 202);
-    /* alpha is intentionally low - almost background-color will be seen */
-    --btn-primary-gradient1: #74a30920;
+    --btn-primary-gradient1: #74a30920; /* alpha is intentionally low - almost background-color will be seen */
     --btn-primary-gradient2: #9c990e20;
     --btn-primary-shadow: rgba(99, 102, 241, 0.4);
-    --btn-primary-hover-shadow-gradient1: #83c51210;
-    --btn-primary-hover-shadow-gradient2: #b0b91a10;
-    --btn-primary-hover-shadow: rgba(99, 102, 241, 0.6);
+    --btn-primary-hover-gradient1: #83c51210;
+    --btn-primary-hover-gradient2: #b0b91a10;
+    --btn-primary-hover: rgba(99, 102, 241, 0.6);
     --alert-danger-background: rgba(239, 68, 68, 0.3);
     --alert-danger-border: rgba(239, 68, 68, 0.2);
     --alert-danger-text-color: #785252;
@@ -86,7 +89,6 @@ html[data-bs-theme="light"] {
     --alert-info-background: rgba(56, 189, 248, 0.3);
     --alert-info-border-color: rgba(56, 189, 248, 0.2);
     --alert-info-text-color: #3e667e;
-    --link-hover-color: #a855f7;
 }
 
 body {
@@ -148,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     transition: all 0.3s ease;
-    background-color: var(--navbar-background);
+    background-color: var(--navbar-background) !important; /* required to override bootstrap's "important" */
 }
 
 .navbar-brand {
@@ -173,8 +175,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-link:hover {
-    color: #fff !important;
+    color: var(--navbar-link-hover-color);
     text-shadow: 0 0 8px var(--weak-anti-shadow);
+    text-decoration: underline;
 }
 
 .dropdown-menu {
@@ -306,8 +309,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    background-image: linear-gradient(135deg, var(--btn-primary-hover-shadow-gradient1), var(--btn-primary-hover-shadow-gradient2));
-    box-shadow: 0 6px 20px var(--btn-primary-hover-shadow);
+    background-image: linear-gradient(135deg, var(--btn-primary-hover-gradient1), var(--btn-primary-hover-gradient2));
+    box-shadow: 0 6px 20px var(--btn-primary-shadow);
 }
 
 /* Alerts */
@@ -341,18 +344,23 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--alert-info-text-color);
 }
 
-a.nav-link {
-  cursor: pointer;
-}
-
 a {
-    color: var(--accent-color);
+    color: var(--link-color);
     text-decoration: none;
     transition: color 0.2s;
 }
 
 a:hover {
     color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+a.nav-link {
+    cursor: pointer;
+}
+
+a.nav-link:hover {
+    color: var(--nav-link-hover-color);
     text-decoration: underline;
 }
 
@@ -375,5 +383,5 @@ body, p, li, td, th {
 }
 
 .btn-group {
-    margin: 0.1em;
+    margin: 0.2em;
 }
