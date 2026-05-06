@@ -511,11 +511,10 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.info(msg)
         host.register_client_result(msg, fault=False)
+        _update_related_hosts(host, kind, ipaddr, secure, logger)
         if _delete:
-            # XXX unclear what to do for "other services" we relay updates to
             return 'deleted %s' % rdtype
         else:  # update
-            _update_related_hosts(host, kind, ipaddr, secure, logger)
             return 'good %s' % ipaddr
 
 
@@ -555,11 +554,15 @@ def _update_related_host(related_host, kind, ipaddr, logger, secure):
         if kind == 'ipv4':
             ifid = related_host.interface_id_ipv4
             netmask = host.netmask_ipv4
+            _delete = (ipaddr == '0.0.0.0')
         else:  # kind == 'ipv6':
             ifid = related_host.interface_id_ipv6
             netmask = host.netmask_ipv6
+            _delete = (ipaddr == '::')
         ifid = ifid.strip() if ifid else ifid
-        _delete = not ifid  # leave ifid empty if you don't want this rh record
+        if not ifid:
+            # leave ifid empty if you don't want this rh record
+            _delete = True
         try:
             rh_fqdn = FQDN(related_host.name + '.' + fqdn.host, fqdn.domain)
             if not _delete:
