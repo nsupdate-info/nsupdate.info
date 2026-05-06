@@ -1,0 +1,51 @@
+from nsupdate.settings.prod import *
+
+SECRET_KEY='S3CR3T'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '/config/nsupdate.sqlite',               # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',             # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': ''              # Set to empty string for default.
+    }
+}
+
+TIME_ZONE='Europe/Rome'
+
+BASEDOMAIN='dyn.example.com'
+# Create A records for www, ipv4, ipv6 and BASEDOMAIN. 
+# Also setup SSL certs for these SANs on the reverse proxy.
+WWW_HOST = 'www.' + BASEDOMAIN  # a host with a ipv4 and a ipv6 address
+WWW_IPV4_HOST = 'ipv4.' + BASEDOMAIN  # a host with ONLY a ipv4 address
+WWW_IPV6_HOST = 'ipv6.' + BASEDOMAIN  # a host with ONLY a ipv6 address
+ALLOWED_HOSTS = [WWW_HOST, WWW_IPV4_HOST, WWW_IPV6_HOST]
+
+DEBUG=False
+
+MIDDLEWARE = MIDDLEWARE + ('xff.middleware.XForwardedForMiddleware',)
+MIDDLEWARE = MIDDLEWARE + ('whitenoise.middleware.WhiteNoiseMiddleware',)
+
+# The WhiteNoise middleware should be placed directly after the Django 
+# SecurityMiddleware (if you are using it) and before all other middleware
+# BUT it WORKS even if it's the last one ...
+#MIDDLEWARE = (
+#    'django.middleware.security.SecurityMiddleware',
+#    'whitenoise.middleware.WhiteNoiseMiddleware',
+#    'xff.middleware.XForwardedForMiddleware',
+#    'django.middleware.common.CommonMiddleware',
+#    'django.contrib.sessions.middleware.SessionMiddleware',
+#    'django.middleware.locale.LocaleMiddleware',
+#    'django.middleware.csrf.CsrfViewMiddleware',
+#    'django_referrer_policy.middleware.ReferrerPolicyMiddleware',
+#    'django.contrib.auth.middleware.AuthenticationMiddleware',
+#    'django.contrib.messages.middleware.MessageMiddleware',
+#    'social_django.middleware.SocialAuthExceptionMiddleware',
+#    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#)
+#
+STATIC_ROOT='/nsupdate/static'
+XFF_TRUSTED_PROXY_DEPTH=1
