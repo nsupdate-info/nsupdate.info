@@ -515,70 +515,80 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
             # XXX unclear what to do for "other services" we relay updates to
             return 'deleted %s' % rdtype
         else:  # update
-            _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
+            _update_related_hosts(host, kind, ipaddr, secure, logger)
             return 'good %s' % ipaddr
 
 
-def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
+def _update_related_hosts(host, kind, ipaddr, secure, logger):
     """after updating the host in dns, do related other updates"""
     # update related hosts
-    rdtype = 'A' if kind == 'ipv4' else 'AAAA'
     for rh in host.relatedhosts.all():
-        if rh.available:
-            if kind == 'ipv4':
-                ifid = rh.interface_id_ipv4
-                netmask = host.netmask_ipv4
-            else:  # kind == 'ipv6':
-                ifid = rh.interface_id_ipv6
-                netmask = host.netmask_ipv6
-            ifid = ifid.strip() if ifid else ifid
-            _delete = not ifid  # leave ifid empty if you don't want this rh record
-            try:
-                rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
-                if not _delete:
-                    ifid = IPAddress(ifid)
-                    network = IPNetwork("%s/%d" % (ipaddr, netmask))
-                    rh_ipaddr = str(IPAddress(network.network) + int(ifid))
-            except (IndexError, AddrFormatError, ValueError) as e:
-                logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
-            else:
-                if not _delete:
-                    logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
-                else:
-                    logger.info("deleting related host %s" % (rh_fqdn, ))
-                try:
-                    if not _delete:
-                        update(rh_fqdn, rh_ipaddr)
-                    else:
-                        delete(rh_fqdn, rdtype)
-                except SameIpError:
-                    msg = '%s - related hosts no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
-                    logger.warning(msg)
-                    host.register_client_result(msg, fault=True)
-                except (DnsUpdateError, NameServerNotAvailable) as e:
-                    msg = str(e)
-                    if not _delete:
-                        msg = '%s - related hosts update that resulted in a dns error [%s], ip: %s tls: %r' % (
-                            rh_fqdn, msg, rh_ipaddr, secure)
-                    else:
-                        msg = '%s - related hosts deletion that resulted in a dns error [%s], tls: %r' % (
-                            rh_fqdn, msg, secure)
-                    logger.error(msg)
-                    host.register_server_result(msg, fault=True)
+        _update_related_host(rh, kind, ipaddr, logger, secure)
 
     # now check if there are other services we shall relay updates to:
     for hc in host.serviceupdaterhostconfigs.all():
-        if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
-            or
-            kind == 'ipv6' and hc.give_ipv6 and hc.service.accept_ipv6):
-            kwargs = dict(
-                name=hc.name, password=hc.password,
-                hostname=hc.hostname, myip=ipaddr,
-                server=hc.service.server, path=hc.service.path, secure=hc.service.secure,
-            )
+        _update_service_updater_host(hc, kind, ipaddr, logger)
+
+
+def _update_service_updater_host(host_config, kind, ipaddr, logger):
+    if (kind == 'ipv4' and host_config.give_ipv4 and host_config.service.accept_ipv4
+        or
+        kind == 'ipv6' and host_config.give_ipv6 and host_config.service.accept_ipv6):
+        kwargs = dict(
+            name=host_config.name, password=host_config.password,
+            hostname=host_config.hostname, myip=ipaddr,
+            server=host_config.service.server, path=host_config.service.path, secure=host_config.service.secure,
+        )
+        try:
+            ddns_client.dyndns2_update(**kwargs)
+        except Exception:
+            # we never want to crash here
+            kwargs.pop('password')
+            logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
+
+
+def _update_related_host(related_host, kind, ipaddr, logger, secure):
+    host = related_host.main_host
+    fqdn = host.get_fqdn()
+    rdtype = 'A' if kind == 'ipv4' else 'AAAA'
+    if related_host.available:
+        if kind == 'ipv4':
+            ifid = related_host.interface_id_ipv4
+            netmask = host.netmask_ipv4
+        else:  # kind == 'ipv6':
+            ifid = related_host.interface_id_ipv6
+            netmask = host.netmask_ipv6
+        ifid = ifid.strip() if ifid else ifid
+        _delete = not ifid  # leave ifid empty if you don't want this rh record
+        try:
+            rh_fqdn = FQDN(related_host.name + '.' + fqdn.host, fqdn.domain)
+            if not _delete:
+                ifid = IPAddress(ifid)
+                network = IPNetwork("%s/%d" % (ipaddr, netmask))
+                rh_ipaddr = str(IPAddress(network.network) + int(ifid))
+        except (IndexError, AddrFormatError, ValueError) as e:
+            logger.warning("trouble computing address of related host %s [%s]" % (related_host, e))
+        else:
+            if not _delete:
+                logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
+            else:
+                logger.info("deleting related host %s" % (rh_fqdn,))
             try:
-                ddns_client.dyndns2_update(**kwargs)
-            except Exception:
-                # we never want to crash here
-                kwargs.pop('password')
-                logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
+                if not _delete:
+                    update(rh_fqdn, rh_ipaddr)
+                else:
+                    delete(rh_fqdn, rdtype)
+            except SameIpError:
+                msg = '%s - related hosts no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
+                logger.warning(msg)
+                host.register_client_result(msg, fault=True)
+            except (DnsUpdateError, NameServerNotAvailable) as e:
+                msg = str(e)
+                if not _delete:
+                    msg = '%s - related hosts update that resulted in a dns error [%s], ip: %s tls: %r' % (
+                        rh_fqdn, msg, rh_ipaddr, secure)
+                else:
+                    msg = '%s - related hosts deletion that resulted in a dns error [%s], tls: %r' % (
+                        rh_fqdn, msg, secure)
+                logger.error(msg)
+                host.register_server_result(msg, fault=True)
