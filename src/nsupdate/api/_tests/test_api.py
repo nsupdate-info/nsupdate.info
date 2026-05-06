@@ -1,10 +1,11 @@
 """
 Tests for the API package.
 """
-
+import dns.resolver
 import pytest
 
 import base64
+
 from netaddr import IPSet, IPAddress
 
 from django.urls import reverse
@@ -193,6 +194,18 @@ def test_nic_update_authorized_update_other_services(client):
     assert query_ns(TEST_HOST_OTHER, 'A') == '2.3.4.5'
 
 
+@pytest.mark.requires_sequential
+def test_nic_delete_authorized_update_other_services(client):
+    response = client.get(reverse('nic_update') + '?myip=1.2.3.4',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST_OTHER, 'A') == '1.2.3.4'
+    response = client.get(reverse('nic_delete') + '?myip=0.0.0.0',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST_OTHER, 'A') == '0.0.0.0'
+
+
 def test_nic_update_authorized_badagent(client, settings):
     settings.BAD_AGENTS = ['foo', 'bad_agent', 'bar', ]
     response = client.get(reverse('nic_update'),
@@ -284,6 +297,40 @@ def test_nic_delete_authorized(client):
     assert response.content == b'deleted AAAA'
 
 
+def test_nic_delete_authorized_also_deletes_related_hosts(client):
+    # setup host v4
+    response = client.get(reverse('nic_update') + '?myip=%s' % ('1.2.3.4', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'A') == '1.2.3.4'
+    assert query_ns(TEST_HOST_RELATED, 'A') == '1.2.3.1'  # 1.2.3.4/29 + 0.0.0.1
+
+    # setup host v6
+    response = client.get(reverse('nic_update') + '?myip=%s' % ('2001::1', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'AAAA') == '2001::1'
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2001::1'  # 2001::3/64 + ::1
+
+    # delete host v4
+    response = client.get(reverse('nic_delete') + '?myip=%s' % ('0.0.0.0', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    with pytest.raises(dns.resolver.NoAnswer):
+        assert query_ns(TEST_HOST, 'A') is None, "did not delete related-host A record"
+    with pytest.raises(dns.resolver.NoAnswer):
+        assert query_ns(TEST_HOST_RELATED, 'A') is None, "did not delete related-host A record"
+
+    # delete host v6
+    response = client.get(reverse('nic_delete') + '?myip=%s' % ('::', ),
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST, 'AAAA') is None, "did not delete main-host AAAA record"
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST_RELATED, 'AAAA') is None, "did not delete related-host AAAA record"
+
+
 def test_nic_delete_session(client):
     client.login(username=USERNAME, password=PASSWORD)
     response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
@@ -296,6 +343,35 @@ def test_nic_delete_session(client):
     response = client.get(reverse('nic_delete_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '::'))
     assert response.status_code == 200
     assert response.content == b'deleted AAAA'
+
+
+def test_nic_delete_session_also_deletes_related_hosts(client):
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '1.2.3.4'))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'A') == '1.2.3.4'
+    assert query_ns(TEST_HOST_RELATED, 'A') == '1.2.3.1'  # 1.2.3.4/29 + 0.0.0.1
+
+    response = client.get(reverse('nic_update_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '2080::1:1'))
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'AAAA') == '2080::1:1'
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2080::1'  # 2080::1:1/64 + ::1
+
+    response = client.get(reverse('nic_delete_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '0.0.0.0'))
+    assert response.status_code == 200
+    assert response.content == b'deleted A'
+    with pytest.raises(dns.resolver.NoAnswer):
+        assert query_ns(TEST_HOST, 'A') is None, "did not delete related-host A record"
+    with pytest.raises(dns.resolver.NoAnswer):
+        assert query_ns(TEST_HOST_RELATED, 'A') is None, "did not delete related-host A record"
+
+    response = client.get(reverse('nic_delete_authorized') + '?hostname=%s&myip=%s' % (TEST_HOST, '::'))
+    assert response.status_code == 200
+    assert response.content == b'deleted AAAA'
+    with pytest.raises(dns.resolver.NXDOMAIN):  # this was the last record, so now the domain is fully gone
+        assert query_ns(TEST_HOST, 'AAAA') is None, "did not delete main-host AAAA record"
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST_RELATED, 'AAAA') is None, "did not delete related-host AAAA record"
 
 
 def test_detect_ip_invalid_session(client):
