@@ -1,25 +1,25 @@
 """
 Models for hosts, domains, and service updaters.
 """
-
+import base64
+import logging
 import re
 import secrets
 import time
-import base64
 
-import dns.resolver
 import dns.message
-
-from django.db import models
+import dns.resolver
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from django.conf import settings
+from django.db import models
 from django.db.models.signals import pre_delete, post_save
-from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 from . import dnstools
+from ..utils.dns_updater import update_related_host
 
 RESULT_MSG_LEN = 255
 
@@ -445,7 +445,22 @@ class RelatedHost(models.Model):
         return self.get_ip('ipv6')
 
 
+def post_save_related_host(sender, **kwargs):
+    logger = logging.getLogger("post_save_related_host")
+    related_host = kwargs['instance']
+    logger.debug("post_save_related_host sender={} instance={} main_host={}", sender, related_host, related_host.main_host)
+
+    main_host_ipv4 = related_host.main_host.get_ipv4()
+    main_host_ipv6 = related_host.main_host.get_ipv6()
+    if main_host_ipv4:
+        update_related_host(related_host, "ipv4", main_host_ipv4, logger, "internal")
+
+    if main_host_ipv6:
+        update_related_host(related_host, "ipv6", main_host_ipv6, logger, "internal")
+
+
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
+post_save.connect(post_save_related_host, sender=RelatedHost)
 
 
 class ServiceUpdater(models.Model):
