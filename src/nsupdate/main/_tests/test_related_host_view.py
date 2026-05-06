@@ -193,3 +193,47 @@ def test_delete_related_host_interface_id_updates_dns(client):
         assert query_ns(TEST_HOST_RELATED, 'A') is None
     with pytest.raises(dns.resolver.NXDOMAIN):
         assert query_ns(TEST_HOST_RELATED, 'AAAA') is None
+
+
+invalid_interface_ids_ipv4 = [
+    ('1'),
+    ('1.1'),
+    ('1.1.1'),
+    # 1.1.1.1 is ok
+    ('1.1.1.1.1'),
+    ('foo'),
+    ('1.1.1.1/32'),
+    ('::1'),
+]
+
+invalid_interface_ids_ipv6 = [
+    ('1'),
+    ('1.1.1.1'),
+    ('1::1::1'),
+    ('foo'),
+    ('::1/64'),
+]
+
+
+@pytest.mark.parametrize("interface_id_ipv4", invalid_interface_ids_ipv4)
+def test_update_related_host_invalid_interface_id_v4_fails(client, interface_id_ipv4):
+    main_host = Host.objects.filter(name=TEST_HOST.host)[0]
+    related_host = RelatedHost.objects.filter(main_host=main_host, name=RELATED_HOST_NAME)[0]
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.post(reverse('related_host_view', args=[main_host.id, related_host.id]), data={
+        'interface_id_ipv4': interface_id_ipv4,
+    })
+    assert response.status_code == HTTPStatus.OK
+    assert 'is not a valid interface-id for IPv4' in response.text
+
+
+@pytest.mark.parametrize("interface_id_ipv6", invalid_interface_ids_ipv6)
+def test_update_related_host_invalid_interface_id_v6_fails(client, interface_id_ipv6):
+    main_host = Host.objects.filter(name=TEST_HOST.host)[0]
+    related_host = RelatedHost.objects.filter(main_host=main_host, name=RELATED_HOST_NAME)[0]
+    client.login(username=USERNAME, password=PASSWORD)
+    response = client.post(reverse('related_host_view', args=[main_host.id, related_host.id]), data={
+        'interface_id_ipv6': interface_id_ipv6,
+    })
+    assert response.status_code == HTTPStatus.OK
+    assert 'is not a valid interface-id for IPv6' in response.text
