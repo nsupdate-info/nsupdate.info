@@ -420,6 +420,30 @@ def test_nic_update_multiple_ips(client):
     assert content == f'good {v4_new}\nnochg {v6}'
 
 
+def test_nic_update_multiple_ips_updates_related_hosts(client):
+    v4 = '1.2.3.4'
+    v6 = '2001:db8::10'
+    response = client.get(reverse('nic_update') + f'?myip={v4},{v6}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'A') == '1.2.3.4'
+    assert query_ns(TEST_HOST, 'AAAA') == '2001:db8::10'
+    assert query_ns(TEST_HOST_RELATED, 'A') == '1.2.3.1'
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2001:db8::1'
+
+    v4 = '4.3.2.1'
+    v6 = '2001:8db::10'
+    response = client.get(reverse('nic_update') + f'?myip={v4},{v6}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+
+    assert response.status_code == 200
+    assert query_ns(TEST_HOST, 'A') == '4.3.2.1'
+    assert query_ns(TEST_HOST, 'AAAA') == '2001:8db::10'
+    assert query_ns(TEST_HOST_RELATED, 'A') == '4.3.2.1'
+    assert query_ns(TEST_HOST_RELATED, 'AAAA') == '2001:8db::1'
+
+
 def test_nic_delete_multiple_ips(client):
     # Test with multiple IPs (v4 and v6) for deletion
     v4 = '1.2.3.4'
@@ -436,3 +460,26 @@ def test_nic_delete_multiple_ips(client):
     if content == 'dnserr':
         pytest.skip("DNS server not available in test environment")
     assert content == 'deleted A,AAAA'
+
+
+def test_nic_delete_multiple_ips_deletes_related_hosts(client):
+    v4 = '4.3.2.1'
+    v6 = '2001:8db::10'
+    response = client.get(reverse('nic_update') + f'?myip={v4},{v6}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+
+    assert response.status_code == 200
+
+    v4 = '0.0.0.0'
+    v6 = '::'
+    response = client.get(reverse('nic_delete') + f'?myip={v4},{v6}',
+                          HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    assert response.status_code == 200
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST, 'A') is None
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST, 'AAAA') is None
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST_RELATED, 'A') is None
+    with pytest.raises(dns.resolver.NXDOMAIN):
+        assert query_ns(TEST_HOST_RELATED, 'AAAA') is None
