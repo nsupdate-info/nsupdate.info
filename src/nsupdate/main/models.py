@@ -1,25 +1,26 @@
 """
 Models for hosts, domains, and service updaters.
 """
-
+import base64
+import logging
 import re
 import secrets
 import time
-import base64
 
-import dns.resolver
 import dns.message
-
-from django.db import models
+import dns.resolver
+from django.conf import settings
+from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
-from django.conf import settings
+from django.db import models
 from django.db.models.signals import pre_delete, post_save
-from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+from netaddr import IPAddress, AddrFormatError
 
 from . import dnstools
+from ..utils.dns_updater import update_related_host
 
 RESULT_MSG_LEN = 255
 
@@ -373,6 +374,30 @@ def post_save_host(sender, **kwargs):
 post_save.connect(post_save_host, sender=Host)
 
 
+def validate_interface_id_v4(value):
+    validate_interface_id(value, 4)
+
+
+def validate_interface_id_v6(value):
+    validate_interface_id(value, 6)
+
+
+def validate_interface_id(value, version):
+    try:
+        ip_address = IPAddress(value)
+        if ip_address.version != version:
+            raise ValidationError(
+                _("%(value)s is not a valid interface-id for IPv%(v)s"),
+                params={"value": value, "v": version},
+            )
+
+    except (IndexError, AddrFormatError, ValueError):
+        raise ValidationError(
+            _("%(value)s is not a valid interface-id for IPv%(v)s"),
+            params={"value": value, "v": version},
+        )
+
+
 class RelatedHost(models.Model):
     # host addr = network_of_main_host + interface_id
     name = models.CharField(
@@ -394,12 +419,14 @@ class RelatedHost(models.Model):
         _("interface ID IPv4"),
         default='', blank=True, null=True,
         max_length=16,
-        help_text=_("The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set record."))
+        help_text=_("The IPv4 interface ID of this host. Use IPv4 notation. Empty = do not set record."),
+        validators=[validate_interface_id_v4])
     interface_id_ipv6 = models.CharField(
         _("interface ID IPv6"),
         default='', blank=True, null=True,
         max_length=40,
-        help_text=_("The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set record."))
+        help_text=_("The IPv6 interface ID of this host. Use IPv6 notation. Empty = do not set record."),
+        validators=[validate_interface_id_v6])
     available = models.BooleanField(
         _("available"),
         default=True,
@@ -445,7 +472,22 @@ class RelatedHost(models.Model):
         return self.get_ip('ipv6')
 
 
+def post_save_related_host(sender, **kwargs):
+    logger = logging.getLogger("post_save_related_host")
+    related_host = kwargs['instance']
+    logger.debug("post_save_related_host sender={} instance={} main_host={}", sender, related_host, related_host.main_host)
+
+    main_host_ipv4 = related_host.main_host.get_ipv4()
+    main_host_ipv6 = related_host.main_host.get_ipv6()
+    if main_host_ipv4:
+        update_related_host(related_host, "ipv4", main_host_ipv4, logger, "internal")
+
+    if main_host_ipv6:
+        update_related_host(related_host, "ipv6", main_host_ipv6, logger, "internal")
+
+
 pre_delete.connect(pre_delete_host, sender=RelatedHost)
+post_save.connect(post_save_related_host, sender=RelatedHost)
 
 
 class ServiceUpdater(models.Model):

@@ -4,15 +4,15 @@ Views for the (usually non-interactive, automated) web API.
 """
 
 import logging
+
+from ..utils.dns_updater import strip_ip, update_or_delete
+
 logger = logging.getLogger(__name__)
 
 import json
 import base64
 import binascii
 from importlib import import_module
-
-from netaddr import IPAddress, IPNetwork
-from netaddr.core import AddrFormatError
 
 from django.http import HttpResponse
 from django.conf import settings
@@ -21,10 +21,9 @@ from django.contrib.auth.hashers import verify_password
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from ..utils import log, ddns_client
+from ..utils import log
 from ..main.models import Host
-from ..main.dnstools import (FQDN, update, delete, check_ip, put_ip_into_session,
-                             SameIpError, DnsUpdateError, NameServerNotAvailable)
+from ..main.dnstools import (check_ip, put_ip_into_session)
 from ..main.iptools import normalize_ip
 from .utils import get_session_key_from_token
 
@@ -99,7 +98,7 @@ class AjaxGetIps(View):
             ipv6=request.session.get('ipv6', ''),
             ipv6_rdns=request.session.get('ipv6_rdns', ''),
         )
-        logger.debug("ajax_get_ips response: %r" % (response, ))
+        logger.debug("ajax_get_ips response: %r" % (response,))
         return HttpResponse(json.dumps(response), content_type='application/json')
 
 
@@ -112,7 +111,7 @@ def basic_challenge(realm, content='Authorization Required'):
     :return: HttpResponse object
     """
     response = Response(content)
-    response['WWW-Authenticate'] = 'Basic realm="%s"' % (realm, )
+    response['WWW-Authenticate'] = 'Basic realm="%s"' % (realm,)
     response.status_code = 401
     return response
 
@@ -157,7 +156,7 @@ def check_api_auth(username, password, logger=None):
         host = Host.get_by_fqdn(fqdn)
     except ValueError:
         # logging this at debug level because otherwise it fills our logs...
-        logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn, ))
+        logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn,))
         return None
     if host is not None:
         ok, must_update = verify_password(password, host.update_secret, preferred='weakargon2')
@@ -166,13 +165,13 @@ def check_api_auth(username, password, logger=None):
             host.generate_secret(password)
 
         success_msg = ('failure', 'success')[ok]
-        msg = "api authentication %s. [hostname: %s (given in basic auth)]" % (success_msg, fqdn, )
+        msg = "api authentication %s. [hostname: %s (given in basic auth)]" % (success_msg, fqdn,)
         host.register_api_auth_result(msg, fault=not ok)
         if ok:
             return host
         # in case this fills our logs and we never see valid credentials, we can just kill
         # the DB entry and this will fail earlier and get logged at debug level, see above.
-        logger.warning('%s - received bad credentials (password does not match)' % (fqdn, ))
+        logger.warning('%s - received bad credentials (password does not match)' % (fqdn,))
     return None
 
 
@@ -192,16 +191,6 @@ def check_session_auth(user, hostname):
     # we have specifically looked for a host of the logged in user,
     # we either have one now and return it, or we have None and return that.
     return host
-
-
-def _strip_ip(ipaddr):
-    """strip away spaces and trailing /xx prefix length / netmask"""
-    ipaddr = str(ipaddr).strip()
-    if '/' in ipaddr:
-        # there is a trailing /xx prefix length / netmask - get rid of it.
-        # by doing this we support myip=<ip6lanprefix> of FritzBox.
-        ipaddr = ipaddr.rsplit('/')[0]
-    return ipaddr
 
 
 def _make_response(results):
@@ -275,11 +264,11 @@ class NicUpdateView(View):
         auth = request.headers.get('authorization')
         if auth is None:
             # logging this at debug level because otherwise it fills our logs...
-            logger.debug('%s - received no auth' % (hostname, ))
+            logger.debug('%s - received no auth' % (hostname,))
             return basic_challenge("authenticate to update DNS", 'badauth')
         creds = basic_authenticate(auth)
         if not creds:
-            logger.debug('%s - received malformed auth header' % (hostname, ))
+            logger.debug('%s - received malformed auth header' % (hostname,))
             return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = creds
         if '.' not in username:  # username MUST be the fqdn
@@ -322,7 +311,7 @@ class NicUpdateView(View):
             # usually it will be 1 (v4 or v6) or 2 (v4 and v6) addresses.
             ipaddrs = []
             for ip in ipaddr.split(','):
-                ip = _strip_ip(ip)
+                ip = strip_ip(ip)
                 try:
                     check_ip(ip)
                     ipaddrs.append(ip)
@@ -332,7 +321,7 @@ class NicUpdateView(View):
                 # if none of the given IPs are valid, we update to the remote_addr
                 ipaddrs = [remote_addr, ]
         secure = request.is_secure()
-        results = [_update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
+        results = [update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
         return _make_response(results)
 
 
@@ -379,7 +368,7 @@ class AuthorizedNicUpdateView(View):
             return Response('nohost')
         host = check_session_auth(request.user, hostname)
         if host is None:
-            logger.warning('%s - is not owned by user: %s' % (hostname, request.user.username, ))
+            logger.warning('%s - is not owned by user: %s' % (hostname, request.user.username,))
             return Response('nohost')
         logger.info("authenticated by session as user %s, creator of host %s" % (request.user.username, hostname))
         # note: we do not check the user agent here as this is interactive
@@ -394,7 +383,7 @@ class AuthorizedNicUpdateView(View):
             # usually it will be 1 (v4 or v6) or 2 (v4 and v6) addresses.
             ipaddrs = []
             for ip in ipaddr.split(','):
-                ip = _strip_ip(ip)
+                ip = strip_ip(ip)
                 try:
                     check_ip(ip)
                     ipaddrs.append(ip)
@@ -403,7 +392,7 @@ class AuthorizedNicUpdateView(View):
             if not ipaddrs:
                 ipaddrs = [remote_addr, ]
         secure = request.is_secure()
-        results = [_update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
+        results = [update_or_delete(host, ip, secure, logger=logger, _delete=delete) for ip in ipaddrs]
         return _make_response(results)
 
 
@@ -418,167 +407,3 @@ class AuthorizedNicDeleteView(AuthorizedNicUpdateView):
         :return: HttpResponse object
         """
         return super(AuthorizedNicDeleteView, self).get(request, logger=logger, delete=delete)
-
-
-def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
-    """
-    common code shared by the 2 update/delete views
-
-    :param host: host object
-    :param ipaddr: ip addr (v4 or v6)
-    :param secure: True if we use TLS/https
-    :param logger: a logger object
-    :param _delete: True for delete, False for update
-    :return: dyndns2 response string
-    """
-    mode = ('update', 'delete')[_delete]  # only use this for logging
-    # we are doing abuse / available checks rather late, so the client might
-    # get more specific responses (like 'badagent' or 'notfqdn') by earlier
-    # checks. it also avoids some code duplication if done here:
-    fqdn = host.get_fqdn()
-    if host.abuse or host.abuse_blocked:
-        msg = '%s - received %s for host with abuse / abuse_blocked flag set' % (fqdn, mode, )
-        logger.warning(msg)
-        host.register_client_result(msg, fault=False)
-        return 'abuse'
-    if not host.available:
-        # not available is like it doesn't exist
-        msg = '%s - received %s for unavailable host' % (fqdn, mode, )
-        logger.warning(msg)
-        host.register_client_result(msg, fault=False)
-        return 'nohost'
-    try:
-        ipaddr = _strip_ip(ipaddr)
-        kind = check_ip(ipaddr, ('ipv4', 'ipv6'))
-        rdtype = 'A' if kind == 'ipv4' else 'AAAA'
-        IPNetwork(ipaddr)  # raise AddrFormatError here if there is an issue with ipaddr, see #394
-    except (ValueError, UnicodeError, AddrFormatError):
-        # invalid ip address string
-        # some people manage to even give a non-ascii string instead of an ip addr
-        msg = '%s - received bad ip address: %r' % (fqdn, ipaddr)
-        logger.warning(msg)
-        host.register_client_result(msg, fault=True)
-        return 'dnserr'  # there should be a better response code for this
-
-    # If we receive an update request with an address that has only the network prefix,
-    # but the interface id is all-zero, we will NOT update DNS with a useless A or AAAA record,
-    # but rather delete any A or AAAA record we already might have, see issue #648.
-    if not _delete:
-        if kind == 'ipv4':
-            netmask = host.netmask_ipv4
-            single_ip = netmask == 32  # the usual case for home routers
-        elif kind == 'ipv6':
-            netmask = host.netmask_ipv6
-            single_ip = netmask == 128  # rather theoretical case, but who knows...
-        else:
-            raise ValueError('unknown ip address kind: %s' % kind)
-        # we do not want to update A/AAAA records with network addresses:
-        is_network = not single_ip and IPNetwork("%s/%d" % (ipaddr, netmask)).network == IPAddress(ipaddr)
-        if is_network:
-            logger.info('%s - received %s for host %s, but address has only network prefix, deleting instead' % (fqdn, mode, ipaddr, ))
-    else:
-        is_network = False
-
-    if not _delete and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
-        msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
-        logger.warning(msg)
-        host.abuse = True
-        host.abuse_blocked = True
-        host.register_client_result(msg, fault=True)
-        return 'abuse'
-    host.poke(kind, secure)
-    try:
-        if _delete or is_network:
-            delete(fqdn, rdtype)
-        else:
-            update(fqdn, ipaddr)
-    except SameIpError:
-        msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
-        logger.warning(msg)
-        host.register_client_result(msg, fault=True)
-        return 'nochg %s' % ipaddr
-    except (DnsUpdateError, NameServerNotAvailable) as e:
-        msg = str(e)
-        msg = '%s - received %s that resulted in a dns error [%s], ip: %s tls: %r' % (
-            fqdn, mode, msg, ipaddr, secure)
-        logger.error(msg)
-        host.register_server_result(msg, fault=True)
-        return 'dnserr'
-    else:
-        if _delete:
-            msg = '%s - received delete for record %s, tls: %r' % (fqdn, rdtype, secure)
-        else:
-            msg = '%s - received good update -> ip: %s tls: %r' % (fqdn, ipaddr, secure)
-        logger.info(msg)
-        host.register_client_result(msg, fault=False)
-        if _delete:
-            # XXX unclear what to do for "other services" we relay updates to
-            return 'deleted %s' % rdtype
-        else:  # update
-            _on_update_success(host, fqdn, kind, ipaddr, secure, logger)
-            return 'good %s' % ipaddr
-
-
-def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
-    """after updating the host in dns, do related other updates"""
-    # update related hosts
-    rdtype = 'A' if kind == 'ipv4' else 'AAAA'
-    for rh in host.relatedhosts.all():
-        if rh.available:
-            if kind == 'ipv4':
-                ifid = rh.interface_id_ipv4
-                netmask = host.netmask_ipv4
-            else:  # kind == 'ipv6':
-                ifid = rh.interface_id_ipv6
-                netmask = host.netmask_ipv6
-            ifid = ifid.strip() if ifid else ifid
-            _delete = not ifid  # leave ifid empty if you don't want this rh record
-            try:
-                rh_fqdn = FQDN(rh.name + '.' + fqdn.host, fqdn.domain)
-                if not _delete:
-                    ifid = IPAddress(ifid)
-                    network = IPNetwork("%s/%d" % (ipaddr, netmask))
-                    rh_ipaddr = str(IPAddress(network.network) + int(ifid))
-            except (IndexError, AddrFormatError, ValueError) as e:
-                logger.warning("trouble computing address of related host %s [%s]" % (rh, e))
-            else:
-                if not _delete:
-                    logger.info("updating related host %s -> %s" % (rh_fqdn, rh_ipaddr))
-                else:
-                    logger.info("deleting related host %s" % (rh_fqdn, ))
-                try:
-                    if not _delete:
-                        update(rh_fqdn, rh_ipaddr)
-                    else:
-                        delete(rh_fqdn, rdtype)
-                except SameIpError:
-                    msg = '%s - related hosts no-change update, ip: %s tls: %r' % (rh_fqdn, rh_ipaddr, secure)
-                    logger.warning(msg)
-                    host.register_client_result(msg, fault=True)
-                except (DnsUpdateError, NameServerNotAvailable) as e:
-                    msg = str(e)
-                    if not _delete:
-                        msg = '%s - related hosts update that resulted in a dns error [%s], ip: %s tls: %r' % (
-                            rh_fqdn, msg, rh_ipaddr, secure)
-                    else:
-                        msg = '%s - related hosts deletion that resulted in a dns error [%s], tls: %r' % (
-                            rh_fqdn, msg, secure)
-                    logger.error(msg)
-                    host.register_server_result(msg, fault=True)
-
-    # now check if there are other services we shall relay updates to:
-    for hc in host.serviceupdaterhostconfigs.all():
-        if (kind == 'ipv4' and hc.give_ipv4 and hc.service.accept_ipv4
-            or
-            kind == 'ipv6' and hc.give_ipv6 and hc.service.accept_ipv6):
-            kwargs = dict(
-                name=hc.name, password=hc.password,
-                hostname=hc.hostname, myip=ipaddr,
-                server=hc.service.server, path=hc.service.path, secure=hc.service.secure,
-            )
-            try:
-                ddns_client.dyndns2_update(**kwargs)
-            except Exception:
-                # we never want to crash here
-                kwargs.pop('password')
-                logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
