@@ -1,5 +1,4 @@
 (function dark_mode_toggler(){
-
   // we do not set up secure cookie - we trust you, you know when to use it on http
   var theme_cookie_params = {
     expires: 366,
@@ -21,6 +20,6 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', init_toggler);
+  document.addEventListener('DOMContentLoaded', init_toggler, {once: true});
 
 })();

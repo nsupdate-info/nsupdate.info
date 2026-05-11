@@ -62,8 +62,8 @@ html[data-bs-theme="light"] {
     --dropdown-menu-hover-color: rgba(0, 0, 0, 0.1);
     --jumbotron-gradient1: rgba(225, 214, 194, 0.4);
     --jumbotron-gradient2: rgba(240, 232, 213, 0.45);
-    --alternate-gradient1: #67aa08;
-    --alternate-gradient2: #9c990e;
+    --alternate-gradient1: #4c2a7b;
+    --alternate-gradient2: #6366f1;
     --ip-color: #c74207;
     --footer-background-color: rgba(221, 221, 221, 1);
     --footer-link-color: rgb(13, 110, 253);
