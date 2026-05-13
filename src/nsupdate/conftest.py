@@ -2,13 +2,9 @@
 configuration for the (py.test based) tests
 """
 
-import os
 import pytest
-
 from random import randint
-
 from nsupdate.main.dnstools import FQDN
-
 from django.conf import settings
 
 # this is to create a Domain entries in the database, so they can be used for unit tests:
@@ -37,15 +33,13 @@ SERVER = 'ipv4.' + BASEDOMAIN
 SECURE = False  # Do not use TLS for these tests.
 
 
-# Values above can locally be overridden by a test_override.py right beside this conftest.py .
+# Values above can locally be overridden by a local_test_settings.py in the PYTHONPATH .
 # This file is gitignored, similarly to local_settings.py . For example, by running test with a different BASE_DOMAIN,
-# enter a line "BASE_DOMAIN=your.alternate.domain" into test_override.py .
+# enter a line "BASE_DOMAIN=your.alternate.domain" into local_test_settings.py . This file can be anywhere in the PYTHONPATH.
 
-test_override_path = os.path.join(os.path.dirname(__file__), "test_override.py")
-
-if os.path.exists(test_override_path):
-    from .test_override import *
-else:
+try:
+    from local_test_settings import *
+except ImportError:
     pass
 
 

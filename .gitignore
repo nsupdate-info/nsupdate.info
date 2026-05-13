@@ -2,7 +2,7 @@
 *.pot
 *.pyc
 local_settings.py
-test_override.py
+local_test_settings.py
 .coverage
 .cache/
 .tox/
