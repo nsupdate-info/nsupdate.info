@@ -3,11 +3,8 @@ configuration for the (py.test based) tests
 """
 
 import pytest
-
 from random import randint
-
 from nsupdate.main.dnstools import FQDN
-
 from django.conf import settings
 
 # this is to create a Domain entries in the database, so they can be used for unit tests:
@@ -35,8 +32,18 @@ _PASSWORD = 'yUTvxjRwNu'  # no problem, is only used for this unit test
 SERVER = 'ipv4.' + BASEDOMAIN
 SECURE = False  # Do not use TLS for these tests.
 
-from django.utils.translation import activate
 
+# Values above can locally be overridden by a local_test_settings.py in the PYTHONPATH .
+# This file is gitignored, similarly to local_settings.py . For example, by running test with a different BASE_DOMAIN,
+# enter a line "BASE_DOMAIN=your.alternate.domain" into local_test_settings.py . This file can be anywhere in the PYTHONPATH.
+
+try:
+    from local_test_settings import *
+except ImportError:
+    pass
+
+
+from django.utils.translation import activate
 from nsupdate.main.dnstools import update_ns, FQDN
 
 
