@@ -15,6 +15,9 @@ from nsupdate.api.views import basic_authenticate
 
 from nsupdate.conftest import TESTDOMAIN, TEST_HOST, TEST_HOST_RELATED, TEST_HOST2, TEST_SECRET
 
+import logging
+logger = logging.getLogger(__name__)
+
 USERNAME = 'test'
 PASSWORD = 'pass'
 
@@ -110,6 +113,7 @@ def test_nic_update_authorized(client):
     assert response.status_code == 200
     # We don't care whether it is nochg or good, but it should be one of them.
     content = response.content.decode('utf-8')
+    logger.debug(content)
     assert content.startswith('good ') or content.startswith('nochg ')
 
 
@@ -162,6 +166,7 @@ def test_nic_update_authorized_myip_v6(client):
     response = client.get(reverse('nic_update') + '?myip=2000::3',
                           HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
     assert response.status_code == 200
+    # assert TEST_HOST == TEST_SECRET
     # Must be nochg (was same IP).
     assert response.content == b'nochg 2000::3'
     # Now check if it updated the IPv6 related hosts also:
@@ -180,6 +185,10 @@ def test_nic_update_authorized_update_other_services(client):
     assert response.status_code == 200
     # Must be good (was different IP).
     assert response.content == b'good 1.2.3.4'
+    #response = client.get(reverse('nic_update') + '?myip=1.2.3.4&hostname=' + str(TEST_HOST_OTHER),
+    #                      HTTP_AUTHORIZATION=make_basic_auth_header(TEST_HOST, TEST_SECRET))
+    #assert response.content.startswith(b"good ") or response.content.startswith(b"nochg")
+
     # XXX The test below cannot run in parallel (like on GitHub) if updating the same
     # "other service" target host.
     # Now check if it updated the other service also:

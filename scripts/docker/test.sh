@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-cd /tmp && named -g -u named -c /etc/bind/named.conf.local &
+cd /tmp && named -g -u bind -c /etc/bind/named.conf.local &
 
 cd /app
 pip install -e .
