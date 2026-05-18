@@ -432,6 +432,8 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     :return: dyndns2 response string
     """
     mode = ('update', 'delete')[_delete]  # only use this for logging
+    logger.info("_update_or_delete: host: %s, ipaddr: %s, secure: %s, logger: %s, _delete: %s"
+                % (host, ipaddr, str(secure), str(logger), str(_delete)) )
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
@@ -460,6 +462,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=True)
         return 'dnserr'  # there should be a better response code for this
 
+    logger.info("here I am #1")
     # If we receive an update request with an address that has only the network prefix,
     # but the interface id is all-zero, we will NOT update DNS with a useless A or AAAA record,
     # but rather delete any A or AAAA record we already might have, see issue #648.
@@ -479,6 +482,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     else:
         is_network = False
 
+    logger.info("here I am #2")
     if not _delete and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
@@ -487,11 +491,14 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=True)
         return 'abuse'
     host.poke(kind, secure)
+    logger.info("here I am #3")
     try:
+        logger.info("delete: %s, is_network: %s" % (str(_delete), str(is_network)) )
         if _delete or is_network:
             delete(fqdn, rdtype)
         else:
             update(fqdn, ipaddr)
+        logger.info("here I am #4")
     except SameIpError:
         msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.warning(msg)

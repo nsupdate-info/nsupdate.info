@@ -37,8 +37,11 @@ import dns.update
 import dns.tsig
 import dns.tsigkeyring
 import dns.exception
+import dns.rdatatype
 
 from django.utils.timezone import now
+
+from nsupdate.utils.dnspython import make_nameserver
 
 
 class FQDN(namedtuple('FQDN', ['host', 'domain'])):
@@ -104,30 +107,46 @@ def check_ip(ipaddr, keys=('ipv4', 'ipv6')):
     return keys[af == dns.inet.AF_INET6]
 
 
-def check_domain(domain, nameserver_ip):
-    fqdn = FQDN(host="connectivity-test", domain=domain)
+def check_domain(domain_name, domain_data):
+    fqdn = FQDN(host="connectivity-test", domain=domain_name)
 
     from .models import Domain
-    d = Domain.objects.get(name=domain)
+    domain = Domain.objects.get(name=domain_name)
     # temporarily update domain to allow add/update/deletes
-    domain_available_state = d.available
-    domain_nameserver_ip = d.nameserver_ip
-    d.available = True
-    d.nameserver_ip = nameserver_ip
-    d.save()
+    domain_available_state = domain.available
+    domain_nameserver_protocol = domain.nameserver_protocol
+    domain_nameserver_ip = domain.nameserver_ip
+    domain_nameserver_port = domain.nameserver_port
+    domain_nameserver2_protocol = domain.nameserver2_protocol
+    domain_nameserver2_ip = domain.nameserver2_ip
+    domain_nameserver2_port = domain.nameserver2_port
+    domain.available = True
+    domain.nameserver_protocol = domain_data["nameserver_protocol"]
+    domain.nameserver_ip = domain_data["nameserver_ip"]
+    domain.nameserver_port = domain_data["nameserver_port"]
+    domain.nameserver2_protocol = domain_data["nameserver2_protocol"]
+    domain.nameserver2_ip = domain_data["nameserver2_ip"]
+    domain.nameserver2_port = domain_data["nameserver2_port"]
+    domain.save()
 
     try:
         # add host connectivity-test.<domain> with a random IP. See add()
         add(fqdn, socket.inet_ntoa(struct.pack('>I', random.randint(1, 0xffffffff))))
 
     except (dns.exception.DNSException, DnsUpdateError) as e:
+        logger.debug("DNS error, raising upward: " + str(e))
         raise NameServerNotAvailable(str(e))
 
     finally:
         # reset domain
-        d.available = domain_available_state
-        d.nameserver_ip = domain_nameserver_ip
-        d.save()
+        domain.available = domain_available_state
+        domain.nameserver_protocol = domain_nameserver_protocol
+        domain.nameserver_ip = domain_nameserver_ip
+        domain.nameserver_port = domain_nameserver_port
+        domain.nameserver2_protocol = domain_nameserver2_protocol
+        domain.nameserver2_ip = domain_nameserver2_ip
+        domain.nameserver2_port = domain_nameserver2_port
+        domain.save()
 
 
 def add(fqdn, ipaddr, ttl=60):
@@ -144,6 +163,7 @@ def add(fqdn, ipaddr, ttl=60):
     """
     assert isinstance(fqdn, FQDN)
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
+    logger.debug("add %s" % str(fqdn))
     try:
         current_ipaddr = query_ns(fqdn, rdtype)
         # check if ip really changed
@@ -206,12 +226,15 @@ def update(fqdn, ipaddr, ttl=60):
     :raises: ValueError if ipaddr is no valid ip address string
     """
     assert isinstance(fqdn, FQDN)
+    logger.info("XX2 update %s: %s" % (str(fqdn), str(ipaddr)))
     rdtype = check_ip(ipaddr, keys=('A', 'AAAA'))
     try:
         current_ipaddr = query_ns(fqdn, rdtype)
+        logger.info("XX2 current ip: %s" % str(current_ipaddr))
         # check if ip really changed
         ok = ipaddr != current_ipaddr
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer):
+        logger.info("XX2 update: nxdomain or noanswer")
         # no dns entry yet, ok
         ok = True
     except (dns.resolver.Timeout, dns.resolver.NoNameservers) as e:  # OSError (socket.error) also?
@@ -229,6 +252,22 @@ def update(fqdn, ipaddr, ttl=60):
         raise SameIpError
 
 
+def extract_response(response, rdtype):
+    results = []
+    seen = set()
+    if response is None:
+        return []
+    logger.debug("response: %s" % str(response))
+    for rrset in getattr(response, "answer", []):
+        logger.debug("rrset: %s" % str(rrset))
+        logger.debug("rrset.rdtype: %s, rdtype: %s" % (dns.rdatatype.to_text(rrset.rdtype), str(rdtype)))
+        if dns.rdatatype.to_text(rrset.rdtype) == str(rdtype):
+            for item in rrset.items:
+                results.append(item.to_text())
+    logger.warning("results: %s" % str(results))
+    return results
+
+
 def query_ns(fqdn, rdtype, prefer_primary=False):
     """
     query a dns name from our DNS server(s)
@@ -242,33 +281,43 @@ def query_ns(fqdn, rdtype, prefer_primary=False):
     :raises: see dns.resolver.Resolver.resolve
     """
     assert isinstance(fqdn, FQDN)
+    logger.debug(f"query_ns: fqdn={fqdn} rdtype={rdtype} prefer_primary={prefer_primary}")
     nameserver, nameserver2, origin = get_ns_info(fqdn)[0:3]
-    resolver = dns.resolver.Resolver(configure=False)
+    logger.debug(f"query_ns: ns={nameserver} ns2={nameserver2} origin={origin} fqdn={fqdn}")
     # we do not configure it from resolv.conf, but patch in the values we
     # want into the documented attributes:
-    resolver.nameservers = [nameserver, ]
+    nameservers = [nameserver, ]
     if nameserver2:
         pos = 1 if prefer_primary else 0
-        resolver.nameservers.insert(pos, nameserver2)
-    # we must put the root zone into the search list, so that if a fqdn without "."
-    # at the end comes in, it will append "." (and not the service server's domain).
-    resolver.search = [dns.name.root, ]
-    resolver.lifetime = RESOLVER_TIMEOUT
-    # as we query directly the (authoritative) master dns, we do not desire
-    # recursion. But: RD (recursion desired) is the internal default for flags
-    # (used if flags = None is given). Thus, we explicitly give flags (all off):
-    resolver.flags = 0
-    try:
-        answer = resolver.resolve(str(fqdn), rdtype, search=True)
-        ip = str(list(answer)[0])
-        logger.debug("query: %s answer: %s" % (fqdn, ip))
-        return ip
-    except (dns.resolver.Timeout, dns.resolver.LifetimeTimeout,
-            dns.resolver.NoNameservers, dns.message.UnknownTSIGKey) as e:  # OSError (socket.error) also?
-        logger.warning("error when querying for name '%s' in zone '%s' with rdtype '%s' [%s]." % (
-                       fqdn.host, origin, rdtype, str(e)))
-        set_ns_availability(origin, False)
-        raise
+        nameservers.insert(pos, nameserver2)
+    logger.debug(nameservers)
+    # we must end fqdn with "." (to prevent ending it with the default service server's domain).
+    fqdn_str = str(fqdn)
+    if not fqdn_str.endswith("."):
+        fqdn_str += "."
+    query = dns.message.make_query(fqdn_str, rdtype)
+
+    # here explicitly no-recursion is asked
+    query.flags &= dns.flags.RD
+
+    for idx, ns in enumerate(nameservers):
+        is_last = idx == len(nameservers) - 1
+        try:
+            logger.debug(f"ns: {ns}")
+            response = ns.query(query, RESOLVER_TIMEOUT)
+            logger.debug("response: %s" % str(response))
+            results = extract_response(response, rdtype)
+            if len(results) == 0:
+                raise dns.resolver.NXDOMAIN(fqdn_str)
+            result = str(results[0])
+            return result
+        except (dns.exception.DNSException, OSError, EOFError) as e:
+            logger.debug("error when querying for name '%s' in zone '%s' with rdtype '%s' [%s]." % (
+                         fqdn.host, origin, rdtype, str(e)))
+            if is_last:
+                if not isinstance(e, dns.resolver.NXDOMAIN):
+                    set_ns_availability(origin, False)
+                raise
 
 
 def rev_lookup(ipaddr):
@@ -316,6 +365,7 @@ def get_ns_info(fqdn):
     """
     assert isinstance(fqdn, FQDN)
     from .models import Domain
+    logger.info("here I am #6")
     try:
         # first we check if we have an entry for the fqdn
         # single-host update secret use case
@@ -327,6 +377,7 @@ def get_ns_info(fqdn):
         # zone update secret use case
         domain = fqdn.domain
         d = Domain.objects.get(name=domain)
+    logger.info("here I am #7. availability: %s" % str(d.available))
     if not d.available:
         if d.last_update + timedelta(seconds=UNAVAILABLE_RETRY) > now():
             # if there are troubles with a nameserver, we set available=False
@@ -337,8 +388,11 @@ def get_ns_info(fqdn):
             # retry timeout is over, set it available again
             set_ns_availability(domain, True)
     algorithm = getattr(dns.tsig, d.nameserver_update_algorithm)
-    return (d.nameserver_ip, d.nameserver2_ip, fqdn.domain, domain, fqdn.host, domain,
-            d.nameserver_update_secret, algorithm)
+    logger.info("here I am #8")
+    ns1 = make_nameserver(d.nameserver_protocol, d.nameserver_ip, d.nameserver_port)
+    ns2 = make_nameserver(d.nameserver2_protocol, d.nameserver2_ip, d.nameserver2_port)
+    return (ns1, ns2, fqdn.domain, domain, fqdn.host,
+            d.nameserver_update_key_name, d.nameserver_update_secret, algorithm)
 
 
 def dns_update_error(domain, exc, error):
@@ -359,9 +413,11 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     :return: dns response
     :raises: DnsUpdateError, Timeout
     """
+    logger.info("here I am #5")
     assert isinstance(fqdn, FQDN)
     assert action in ['add', 'del', 'upd', ]
     nameserver, nameserver2, origin, domain, name, keyname, key, algo = get_ns_info(fqdn)
+    logger.info("update_ns: (%s,%s,%s)" % (keyname, key, algo))
     try:
         keyring = dns.tsigkeyring.from_text({keyname: key})
     except (UnicodeError, binascii.Error) as e:
@@ -377,10 +433,19 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
     elif action == 'upd':
         assert ipaddr is not None
         upd.replace(name, ttl, rdtype, ipaddr)
-    logger.debug("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" % (
-                 action, name, origin, rdtype, ipaddr))
+    logger.debug("performing %s for name %s and origin %s with rdtype %s and ipaddr %s" %
+                 (action, name, origin, rdtype, ipaddr))
+    """
+    if name.startswith("rh."):
+        try:
+            1 / 0
+        except Exception as e:
+            logger.exception("here I am #9")
+            raise
+    """
+
     try:
-        response = dns.query.tcp(upd, nameserver, timeout=UPDATE_TIMEOUT)
+        response = nameserver.query(upd, timeout=UPDATE_TIMEOUT)
         rcode = response.rcode()
         if rcode != dns.rcode.NOERROR:
             rcode_text = dns.rcode.to_text(rcode)
@@ -388,13 +453,13 @@ def update_ns(fqdn, rdtype='A', ipaddr=None, action='upd', ttl=60):
                            rcode_text, action, name, origin, rdtype, ipaddr))
             raise DnsUpdateError(rcode_text)
         return response
-    # TODO simplify exception handling when https://github.com/rthalley/dnspython/pull/85 is merged/released
-    except OSError as e:  # was: socket.error (deprecated)
+    except OSError as e:
         dns_update_error(domain, e, f"OSError [{e}] - zone: {origin}")
     except EOFError as e:
         dns_update_error(domain, e, f"EOFError [{e}] - zone: {origin}")
     except dns.exception.Timeout as e:
-        dns_update_error(domain, e, f"timeout when performing {action} for name {name} and origin {origin} with rdtype {rdtype} and ipaddr {ipaddr}")
+        dns_update_error(domain, e,
+                         f"timeout when performing {action} for name {name} and origin {origin} with rdtype {rdtype} and ipaddr {ipaddr}")
     except dns.tsig.PeerBadSignature as e:
         dns_update_error(domain, e, f"PeerBadSignature - shared secret mismatch? zone: {origin}")
     except dns.tsig.PeerBadKey as e:
