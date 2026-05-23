@@ -1,0 +1,27 @@
+from nsupdate.settings.{{getenv "BUILD"}} import *
+
+STATIC_ROOT='/static'
+MEDIA_ROOT='/upload'
+
+SECRET_KEY = '{{ getenv "SECRET_KEY" }}'
+BASEDOMAIN = '{{ getenv "BASEDOMAIN" }}'
+WWW_HOST='{{ getenv "BASEDOMAIN" }}'
+
+REGISTRATION_OPEN = False
+
+SERVICE_CONTACT = '{{ getenv "SERVICE_CONTACT" }}'
+
+ALLOWED_HOSTS=['localhost', '127.0.0.1', '[::1]', '{{ getenv "BASEDOMAIN" }}']
+
+{{ if getenv "DB_NAME"}}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '{{getenv "DB_NAME"}}',  # database name
+        'USER': '{{getenv "DB_USER"}}',
+        'PASSWORD': '{{getenv "DB_PASS"}}',
+        'HOST': '{{getenv "DB_HOST"}}',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'PORT': '{{getenv "DB_PORT"}}'  # Set to empty string for default.
+    }
+}
+{{end}}
