@@ -16,8 +16,13 @@ TEST_HOST2 = FQDN('test%db' % randint(1, 1000000), TESTDOMAIN)
 TEST_SECRET2 = "somethingelse"
 RELATED_HOST_NAME = 'rh'
 TEST_HOST_RELATED = FQDN(RELATED_HOST_NAME + '.' + TEST_HOST.host, TEST_HOST.domain)
+NAMESERVER_PROTOCOL = "tcp"
 NAMESERVER_IP = "127.0.0.1"
+NAMESERVER_PORT = 53
+NAMESERVER2_PROTOCOL = "tcp"
 NAMESERVER2_IP = NAMESERVER_IP  # use same server as tests query shortly after update, too quick for secondary
+NAMESERVER2_PORT = 53
+NAMESERVER_UPDATE_KEY_NAME = TESTDOMAIN
 NAMESERVER_UPDATE_ALGORITHM = "HMAC_SHA512"
 # no problem, you can ONLY update the TESTDOMAIN with this secret, nothing else:
 NAMESERVER_UPDATE_SECRET = "YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=="
@@ -27,11 +32,18 @@ USERNAME = 'test'
 USERNAME2 = 'test2'
 PASSWORD = 'pass'
 
-HOSTNAME = 'nsupdate-ddns-client-unittest.' + BASEDOMAIN
-_PASSWORD = 'yUTvxjRwNu'  # no problem, is only used for this unit test
-SERVER = 'ipv4.' + BASEDOMAIN
-SECURE = False  # Do not use TLS for these tests.
+TEST_HOST_OTHER = 'nsupdate-ddns-client-unittest'
 
+SERVICEUPDATER_PASSWORD = 'yUTvxjRwNu'  # no problem, it is only used for this unit test
+SERVICEUPDATER_SERVER = 'ipv4.' + BASEDOMAIN
+SERVICEUPDATER_PORT = 80
+SERVICEUPDATER_SECURE = False  # Do not use TLS for these tests.
+
+DOH_SERVER = "127.0.0.1"
+DOH_PORT = 443
+
+DOT_SERVER = "127.0.0.1"
+DOT_PORT = 853
 
 # Values above can locally be overridden by a local_test_settings.py in the PYTHONPATH .
 # This file is gitignored, similarly to local_settings.py . For example, by running test with a different BASE_DOMAIN,
@@ -45,6 +57,8 @@ except ImportError:
 
 from django.utils.translation import activate
 from nsupdate.main.dnstools import update_ns, FQDN
+
+TEST_HOST_OTHER_FQDN = FQDN(TEST_HOST_OTHER, BASEDOMAIN)
 
 
 @pytest.fixture(scope="function")
@@ -73,6 +87,7 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     """
     from django.contrib.auth import get_user_model
     from nsupdate.main.models import Host, RelatedHost, Domain, ServiceUpdater, ServiceUpdaterHostConfig
+
     user_model = get_user_model()
     # create a fresh test user
     u = user_model.objects.create_user(USERNAME, settings.DEFAULT_FROM_EMAIL, PASSWORD)
@@ -83,7 +98,12 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     dt = Domain.objects.create(
         name=TESTDOMAIN,  # special: test-domain update secret!
         nameserver_ip=NAMESERVER_IP,
+        nameserver_protocol=NAMESERVER_PROTOCOL,
+        nameserver_port=NAMESERVER_PORT,
+        nameserver2_protocol=NAMESERVER2_PROTOCOL,
         nameserver2_ip=NAMESERVER2_IP,
+        nameserver2_port=NAMESERVER2_PORT,
+        nameserver_update_key_name=NAMESERVER_UPDATE_KEY_NAME,
         nameserver_update_algorithm=NAMESERVER_UPDATE_ALGORITHM,
         nameserver_update_secret=NAMESERVER_UPDATE_SECRET,
         public=NAMESERVER_PUBLIC,
@@ -112,16 +132,17 @@ def db_init(db):  # note: db is a predefined fixture and required here to have t
     # "update other service" ddns_client feature
     s = ServiceUpdater.objects.create(
         name='nsupdate',
-        server=SERVER,
-        secure=SECURE,
+        server=SERVICEUPDATER_SERVER,
+        port=SERVICEUPDATER_PORT,
+        secure=SERVICEUPDATER_SECURE,
         accept_ipv4=True,
         accept_ipv6=False,
         created_by=u,
     )
     ServiceUpdaterHostConfig.objects.create(
         hostname=None,  # not needed for nsupdate.info, see below
-        name=HOSTNAME,
-        password=_PASSWORD,
+        name=str(TEST_HOST_OTHER_FQDN),
+        password=SERVICEUPDATER_PASSWORD,
         service=s,
         host=h,
         give_ipv4=True,

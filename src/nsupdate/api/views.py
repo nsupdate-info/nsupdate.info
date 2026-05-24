@@ -153,12 +153,14 @@ def check_api_auth(username, password, logger=None):
     :return: Host object if authenticated, None otherwise.
     """
     fqdn = username
+    logger.warning("CHECK_API_AUTH: fqdn: %s" % fqdn)
     try:
         host = Host.get_by_fqdn(fqdn)
     except ValueError:
         # logging this at debug level because otherwise it fills our logs...
         logger.debug('%s - received bad credentials (auth username == dyndns hostname not in our hosts DB)' % (fqdn, ))
         return None
+    logger.warning("CHECK_API_AUTH: host: %s" % host)
     if host is not None:
         ok, must_update = verify_password(password, host.update_secret, preferred='weakargon2')
         if ok and must_update:
@@ -172,7 +174,7 @@ def check_api_auth(username, password, logger=None):
             return host
         # in case this fills our logs and we never see valid credentials, we can just kill
         # the DB entry and this will fail earlier and get logged at debug level, see above.
-        logger.warning('%s - received bad credentials (password does not match)' % (fqdn, ))
+        logger.warning('%s - received bad credentials (password does not match: %s given, update secret: %s)' % (fqdn, password, host.update_secret))
     return None
 
 
@@ -275,20 +277,23 @@ class NicUpdateView(View):
         auth = request.headers.get('authorization')
         if auth is None:
             # logging this at debug level because otherwise it fills our logs...
-            logger.debug('%s - received no auth' % (hostname, ))
+            logger.warning('%s - received no auth' % (hostname, ))  # TODO: later back to debug
             return basic_challenge("authenticate to update DNS", 'badauth')
         creds = basic_authenticate(auth)
         if not creds:
-            logger.debug('%s - received malformed auth header' % (hostname, ))
+            logger.warning('%s - received malformed auth header' % (hostname, ))
             return basic_challenge("authenticate to update DNS", 'badauth')
         username, password = creds
+        logger.warning("CREDS: user: %s, password: %s, header: %s" % (username, password, auth))
         if '.' not in username:  # username MUST be the fqdn
             # specifically point to configuration errors on client side
+            logger.warning('NOTFQDN: %s' % username)
             return Response('notfqdn')
         if username in settings.BAD_HOSTS:
             return Response('abuse', status=403)
         host = check_api_auth(username, password)
         if host is None:
+            logger.warning("BADAUTH - no host")
             return basic_challenge("authenticate to update DNS", 'badauth')
         logger.info("authenticated by update secret for host %s" % username)
         if hostname is None:
@@ -432,6 +437,8 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     :return: dyndns2 response string
     """
     mode = ('update', 'delete')[_delete]  # only use this for logging
+    logger.info("_update_or_delete: host: %s, ipaddr: %s, secure: %s, logger: %s, _delete: %s"
+                % (host, ipaddr, str(secure), str(logger), str(_delete)))
     # we are doing abuse / available checks rather late, so the client might
     # get more specific responses (like 'badagent' or 'notfqdn') by earlier
     # checks. it also avoids some code duplication if done here:
@@ -460,6 +467,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=True)
         return 'dnserr'  # there should be a better response code for this
 
+    logger.info("here I am #1")
     # If we receive an update request with an address that has only the network prefix,
     # but the interface id is all-zero, we will NOT update DNS with a useless A or AAAA record,
     # but rather delete any A or AAAA record we already might have, see issue #648.
@@ -479,6 +487,7 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
     else:
         is_network = False
 
+    logger.info("here I am #2")
     if not _delete and IPAddress(ipaddr) in settings.BAD_IPS_HOST:
         msg = '%s - received %s to blacklisted ip address: %r' % (fqdn, mode, ipaddr)
         logger.warning(msg)
@@ -487,11 +496,14 @@ def _update_or_delete(host, ipaddr, secure=False, logger=None, _delete=False):
         host.register_client_result(msg, fault=True)
         return 'abuse'
     host.poke(kind, secure)
+    logger.info("here I am #3")
     try:
+        logger.info("delete: %s, is_network: %s" % (str(_delete), str(is_network)))
         if _delete or is_network:
             delete(fqdn, rdtype)
         else:
             update(fqdn, ipaddr)
+        logger.info("here I am #4")
     except SameIpError:
         msg = '%s - received no-change update, ip: %s tls: %r' % (fqdn, ipaddr, secure)
         logger.warning(msg)
@@ -523,7 +535,9 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
     """after updating the host in dns, do related other updates"""
     # update related hosts
     rdtype = 'A' if kind == 'ipv4' else 'AAAA'
+    logger.warning("RELATED_HOSTS HERE")
     for rh in host.relatedhosts.all():
+        logger.warning("RELATED_HOST: " + str(rh))
         if rh.available:
             if kind == 'ipv4':
                 ifid = rh.interface_id_ipv4
@@ -573,12 +587,14 @@ def _on_update_success(host, fqdn, kind, ipaddr, secure, logger):
             kind == 'ipv6' and hc.give_ipv6 and hc.service.accept_ipv6):
             kwargs = dict(
                 name=hc.name, password=hc.password,
-                hostname=hc.hostname, myip=ipaddr,
+                hostname=hc.hostname, port=hc.service.port, myip=ipaddr,
                 server=hc.service.server, path=hc.service.path, secure=hc.service.secure,
             )
             try:
+                logger.warning("DYNDNS2_UPDATE: %s" % kwargs)
                 ddns_client.dyndns2_update(**kwargs)
             except Exception:
                 # we never want to crash here
                 kwargs.pop('password')
                 logger.exception("the dyndns2 updater raised an exception [%r]" % kwargs)
+            logger.warning("DYNDNS2_UPDATE END")

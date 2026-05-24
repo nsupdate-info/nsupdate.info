@@ -9,6 +9,10 @@ import dns.update
 import dns.tsigkeyring
 import dns.tsig
 
+from nsupdate.conftest import DOH_SERVER, DOH_PORT, BASEDOMAIN, NAMESERVER_UPDATE_SECRET, NAMESERVER_UPDATE_ALGORITHM, NAMESERVER_UPDATE_KEY_NAME
+
+url = f'https://{DOH_SERVER}:{DOH_PORT}/dns-query'
+
 
 def get_ssl_context():
     # For a self-signed cert, we create a context that doesn't verify.
@@ -20,8 +24,6 @@ def get_ssl_context():
 
 def test_doh_query():
     # BIND is configured to listen on 127.0.0.1 port 443 with DoH at /dns-query
-    server = '127.0.0.1'
-    url = 'https://127.0.0.1/dns-query'
     qname = dns.name.from_text('nsupdate.info')
     query = dns.message.make_query(qname, dns.rdatatype.SOA)
 
@@ -37,13 +39,11 @@ def test_doh_query():
 
 
 def test_doh_update():
-    url = 'https://127.0.0.1/dns-query'
-    origin = 'nsupdate.info'
-    keyname = 'nsupdate.info.'
-    secret = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
-    algo = dns.tsig.HMAC_SHA512
+    origin = BASEDOMAIN
+    keyname = NAMESERVER_UPDATE_KEY_NAME
+    algo = getattr(dns.tsig, NAMESERVER_UPDATE_ALGORITHM)
 
-    keyring = dns.tsigkeyring.from_text({keyname: secret})
+    keyring = dns.tsigkeyring.from_text({keyname: NAMESERVER_UPDATE_SECRET})
     ctx = get_ssl_context()
 
     # 1. Add a record

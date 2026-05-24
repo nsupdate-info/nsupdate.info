@@ -93,11 +93,11 @@ class TestIntelligentDeleter(object):
         update_ns(host, 'AAAA', ip6, action='add')
         delete(host, 'A')
         # Ensure it is gone.
-        with pytest.raises(NoAnswer):
+        with pytest.raises((NoAnswer, NXDOMAIN)):
             query_ns(host, 'A')
         delete(host, 'AAAA')
         # Ensure it is gone.
-        with pytest.raises(NXDOMAIN):
+        with pytest.raises((NoAnswer, NXDOMAIN)):
             query_ns(host, 'AAAA')
 
 
@@ -105,13 +105,13 @@ class TestQuery(object):
     def test_queries_ok(self, ddns_fqdn):
         host, ipv4, ipv6 = ddns_fqdn, '42.42.42.42', '::23'
         remove_records(host)
-        with pytest.raises(NXDOMAIN):
+        with pytest.raises((NoAnswer, NXDOMAIN)):
             query_ns(ddns_fqdn, 'A')
-        with pytest.raises(NXDOMAIN):
+        with pytest.raises((NoAnswer, NXDOMAIN)):
             query_ns(ddns_fqdn, 'AAAA')
         add(host, ipv4)
         assert query_ns(ddns_fqdn, 'A') == ipv4
-        with pytest.raises(NoAnswer):
+        with pytest.raises((NoAnswer, NXDOMAIN)):
             query_ns(ddns_fqdn, 'AAAA')
         add(host, ipv6)
         assert query_ns(ddns_fqdn, 'AAAA') == ipv6

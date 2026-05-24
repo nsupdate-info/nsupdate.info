@@ -10,6 +10,9 @@ import dns.tsigkeyring
 import dns.tsig
 
 
+from nsupdate.conftest import DOT_SERVER, DOT_PORT, BASEDOMAIN, NAMESERVER_UPDATE_SECRET, NAMESERVER_UPDATE_ALGORITHM, NAMESERVER_UPDATE_KEY_NAME
+
+
 def get_ssl_context():
     # For a self-signed cert, we create a context that doesn't verify.
     ctx = ssl.create_default_context()
@@ -24,15 +27,13 @@ def test_dot_query():
     # Since it's self-signed and for "localhost", we can skip verification for this test
     # or just use a context that doesn't verify.
 
-    server = '127.0.0.1'
-    port = 853
     qname = dns.name.from_text('nsupdate.info')
     query = dns.message.make_query(qname, dns.rdatatype.SOA)
 
     ctx = get_ssl_context()
 
     try:
-        response = dns.query.tls(query, server, port=port, ssl_context=ctx, timeout=5)
+        response = dns.query.tls(query, DOT_SERVER, port=DOT_PORT, ssl_context=ctx, timeout=5)
         assert response.rcode() == dns.rcode.NOERROR
         assert len(response.answer) > 0
         print("DoT query successful")
@@ -41,12 +42,10 @@ def test_dot_query():
 
 
 def test_dot_update():
-    server = '127.0.0.1'
-    port = 853
-    origin = 'nsupdate.info'
-    keyname = 'nsupdate.info.'
-    secret = 'YWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYQ=='
-    algo = dns.tsig.HMAC_SHA512
+    origin = BASEDOMAIN
+    keyname = NAMESERVER_UPDATE_KEY_NAME
+    secret = NAMESERVER_UPDATE_SECRET
+    algo = getattr(dns.tsig, NAMESERVER_UPDATE_ALGORITHM)
 
     keyring = dns.tsigkeyring.from_text({keyname: secret})
     ctx = get_ssl_context()
@@ -56,7 +55,7 @@ def test_dot_update():
     upd.add('connectivity-test', 60, 'A', '127.0.0.2')
 
     try:
-        response = dns.query.tls(upd, server, port=port, ssl_context=ctx, timeout=5)
+        response = dns.query.tls(upd, DOT_SERVER, port=DOT_PORT, ssl_context=ctx, timeout=5)
         assert response.rcode() == dns.rcode.NOERROR
         print("DoT update (add) successful")
     except Exception as e:
@@ -66,7 +65,7 @@ def test_dot_update():
     qname = dns.name.from_text('connectivity-test.nsupdate.info')
     query = dns.message.make_query(qname, 'A')
     try:
-        response = dns.query.tls(query, server, port=port, ssl_context=ctx, timeout=5)
+        response = dns.query.tls(query, DOT_SERVER, port=DOT_PORT, ssl_context=ctx, timeout=5)
         assert response.rcode() == dns.rcode.NOERROR
         assert any(rr.address == '127.0.0.2' for rrset in response.answer for rr in rrset)
         print("DoT query (verification) successful")
@@ -78,7 +77,7 @@ def test_dot_update():
     upd.delete('connectivity-test', 'A')
 
     try:
-        response = dns.query.tls(upd, server, port=port, ssl_context=ctx, timeout=5)
+        response = dns.query.tls(upd, DOT_SERVER, port=DOT_PORT, ssl_context=ctx, timeout=5)
         assert response.rcode() == dns.rcode.NOERROR
         print("DoT update (delete) successful")
     except Exception as e:
