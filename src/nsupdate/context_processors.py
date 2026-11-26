@@ -30,6 +30,10 @@ def add_settings(request):
     if not request.session.get('ipv4') or not request.session.get('ipv6'):
         if request.session.session_key:
             context['detectip_token'] = generate_detectip_token(request.session.session_key)
+    if "nsupdate_theme" in request.COOKIES and request.COOKIES["nsupdate_theme"] == "light":
+        context['nsupdate_theme'] = 'light'
+    else:
+        context['nsupdate_theme'] = 'dark'
     return context
 
 
